@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const Practice = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return (
+    <div>
+      <h1>this is Practice</h1>
+    </div>
+  );
 };
 
 export default Practice;
