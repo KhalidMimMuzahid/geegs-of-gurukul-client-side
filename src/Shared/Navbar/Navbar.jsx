@@ -1,19 +1,21 @@
 import React from "react";
 import { Collapse } from "flowbite";
+import logo from '../../assets/logo/logo.svg'
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="https://flowbite.com/" class="flex items-center">
+        <Link class="flex items-center">
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
+            src={logo}
             class="h-8 mr-3"
             alt="Flowbite Logo"
           />
-          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+          {/* <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             Flowbite
-          </span>
-        </a>
+          </span> */}
+        </Link>
         <div class="flex items-center md:order-2">
           <button
             type="button"
@@ -26,7 +28,7 @@ const Navbar = () => {
             <span class="sr-only">Open user menu</span>
             <img
               class="w-8 h-8 rounded-full"
-              src="/docs/images/people/profile-picture-3.jpg"
+              src='https://randomuser.me/api/portraits/women/63.jpg'
               alt="user photo"
             />
           </button>
