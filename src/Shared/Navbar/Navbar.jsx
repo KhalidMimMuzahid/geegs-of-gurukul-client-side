@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { Drawer } from "flowbite";
 import { Collapse } from "flowbite";
 import logo from "../../assets/logo/logo.svg";
 import bookmark from "../../assets/svg/bookmark.svg";
@@ -6,7 +7,10 @@ import anounce from "../../assets/svg/announcement.svg";
 import leaderboard from "../../assets/svg/leader-board.svg";
 import logout from "../../assets/svg/logout.svg";
 import { Link } from "react-router-dom";
+import { UIContext } from "../../contexts/UIProvider/UIProvider";
 const Navbar = () => {
+  const { dashboardDrawer, setDashboardDrawer, p, setP } =
+    useContext(UIContext);
   return (
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
       <div class=" flex flex-wrap items-center justify-between mx-auto p-4">
@@ -21,14 +25,14 @@ const Navbar = () => {
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             type="button"
             onClick={() => {
-              // drawer.show();
+              // dashboardDrawer.show();
             }}
             data-drawer-target="drawer-disabled-backdrop"
             data-drawer-show="drawer-disabled-backdrop"
             data-drawer-backdrop="false"
             aria-controls="drawer-disabled-backdrop"
           >
-            Show drawer without backdrop
+            Show drawer without backdrop {p}
           </button>
         </div>
         <div class="flex items-center md:order-2">
