@@ -1,6 +1,10 @@
 import React from "react";
 import { Collapse } from "flowbite";
 import logo from '../../assets/logo/logo.svg'
+import bookmark from '../../assets/svg/bookmark.svg'
+import anounce from '../../assets/svg/announcement.svg'
+import leaderboard from '../../assets/svg/leader-board.svg'
+import logout from '../../assets/svg/logout.svg'
 import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
@@ -29,55 +33,66 @@ const Navbar = () => {
             <img
               class="w-8 h-8 rounded-full"
               src='https://randomuser.me/api/portraits/women/63.jpg'
-              alt="user photo"
+              alt="userphoto"
             />
           </button>
           {/* <!-- Dropdown menu --> */}
           <div
-            class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+            class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600"
             id="user-dropdown"
           >
-            <div class="px-4 py-3">
-              <span class="block text-sm text-gray-900 dark:text-white">
-                Bonnie Green
-              </span>
-              <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                name@flowbite.com
-              </span>
+            <div class="px-12 py-12 flex items-center justify-center gap-2">
+              <div>
+                <img width='76px' height='76px'  src='https://randomuser.me/api/portraits/women/63.jpg' alt="" className="rounded-full border-4 border-green-500" />
+              </div>
+              <div>
+                <h4 className="text-xl font-poppins">Shamima Akter</h4>
+                <p className="font-poppins">ID : N/A</p>
+                <button type="button" class="text-white font-poppins bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-400 dark:hover:bg-green-500 focus:outline-none dark:focus:ring-green-400 ml-8">View Profile</button>
+              </div>
             </div>
-            <ul class="py-2" aria-labelledby="user-menu-button">
+            <ul class="py-2 font-poppins mx-16 gap-4 items-center justify-center my-2" aria-labelledby="user-menu-button">
               <li>
-                <a
-                  href="#"
+                <Link to='/'
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
-                  Dashboard
-                </a>
+                  <div className="flex gap-4 items-center justify-start my-2">
+                    <img src={bookmark} alt="" />
+                    <span>Bookmark</span>
+                  </div>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link to='/'
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
-                  Settings
-                </a>
+                  <div className="flex gap-4 items-center justify-start my-2">
+                    <img src={leaderboard} alt="" />
+                    <span>Bookmark</span>
+                  </div>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link to='/'
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
-                  Earnings
-                </a>
+                  <div className="flex gap-4 items-center justify-start my-2">
+                    <img src={anounce} alt="" />
+                    <span>Bookmark</span>
+                  </div>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link to='/'
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
-                  Sign out
-                </a>
+                  <div className="flex gap-2 items-center justify-start my-2">
+                    <img src={logout} alt="" />
+                    <span>Bookmark</span>
+                  </div>
+                </Link>
               </li>
+              
             </ul>
           </div>
           <button
@@ -110,7 +125,7 @@ const Navbar = () => {
           <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li className ='font-poppins'>
               <a
-                href="#"
+                href="/"
                 class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
                 aria-current="page"
               >
@@ -119,7 +134,7 @@ const Navbar = () => {
             </li>
             <li className ='font-poppins'>
               <a
-                href="#"
+                href="/"
                 class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 Courses
@@ -127,7 +142,7 @@ const Navbar = () => {
             </li>
             <li className ='font-poppins'>
               <a
-                href="#"
+                href="/"
                 class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 Learn
@@ -135,7 +150,7 @@ const Navbar = () => {
             </li>
             <li className ='font-poppins'>
               <a
-                href="#"
+                href="/"
                 class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 Dashboard
