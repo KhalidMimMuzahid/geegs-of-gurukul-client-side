@@ -1,75 +1,88 @@
-import React, { useState } from "react";
-import control from "../../assets/logo/control.png";
+import style from "./dashboard.module.css";
+
+import { useState } from "react";
+import control from "../../assets/dashBoardIcon/control.png";
+import logo from "../../assets/dashBoardIcon/logo.png";
+import test from "../../assets/dashBoardIcon/test.png";
+import analysis from "../../assets/dashBoardIcon/analysis.png";
+import practice from "../../assets/dashBoardIcon/practice.png";
+import adminPannel from "../../assets/dashBoardIcon/amin.png";
+import { Link, Outlet } from "react-router-dom";
 const DashBoard = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
-    { title: "Dashboard", src: "Chart_fill" },
-    { title: "Inbox", src: "Chat" },
-    { title: "Accounts", src: "User", gap: true },
-    { title: "Schedule ", src: "Calendar" },
-    { title: "Search", src: "Search" },
-    { title: "Analytics", src: "Chart" },
-    { title: "Files ", src: "Folder", gap: true },
-    { title: "Setting", src: "Setting" },
+    { title: "Test", src: test, link: "/dashboard/assessment" },
+    { title: "Analysis", src: analysis, link: "/dashboard/analysis" },
+    { title: "Practice", src: practice, link: "/dashboard/practice" },
+    {
+      title: "Admin-Pannel",
+      src: adminPannel,
+      link: "/dashboard/admin-pannel",
+    },
   ];
+
   return (
-    <div>
-      <div className="flex">
-        <div
-          className={` ${
-            open ? "w-72" : "w-20 "
-          } bg-dark-purple h-screen p-5  pt-8 relative duration-300`}
-        >
-          <img
-            src={control}
-            className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
+    <div className="flex">
+      <div
+        className={` ${open ? "w-72" : "w-20 "} bg-gray-200 ${
+          style.dashboardHeight
+        } h-screen p-5  pt-8 relative duration-300 `}
+      >
+        {/* <img
+          src={control}
+          className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
            border-2 rounded-full  ${!open && "rotate-180"}`}
-            onClick={() => setOpen(!open)}
+          onClick={() => setOpen(!open)}
+          alt=""
+        /> */}
+        <div className="flex gap-x-4 items-center">
+          <img
+            src={logo}
+            className={`cursor-pointer duration-500 ${
+              open && "rotate-[360deg]"
+            }`}
+            alt=""
           />
-          <div className="flex gap-x-4 items-center">
-            <img
-              src="../../assets/logo/logo copy.png"
-              className={`cursor-pointer duration-500 ${
-                open && "rotate-[360deg]"
-              }`}
-            />
-            {/* <button
-              className={`cursor-pointer duration-500 ${
-                open && "rotate-[360deg]"
-              }`}
-            ></button> */}
-            <h1
-              className={`text-white origin-left font-medium text-xl duration-200 ${
-                !open && "scale-0"
-              }`}
-            >
-              Designer
-            </h1>
-          </div>
-          <ul className="pt-6">
-            {Menus.map((Menu, index) => (
-              <li
-                className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
-              ${Menu.gap ? "mt-9" : "mt-2"} ${
-                  index === 0 && "bg-light-white"
-                } `}
+          <h1
+            className={`text-gray-700 font-poppins origin-left font-medium text-xl duration-200 ${
+              !open && "scale-0"
+            }`}
+          >
+            Dashboard
+          </h1>
+        </div>
+        <ul className="pt-6 font-poppins">
+          {Menus.map((Menu, index) => (
+            <li key={index}>
+              <Link
+                to={Menu?.link}
+                className={`flex  rounded-md p-2 cursor-pointer hover:bg-slate-300 text-gray-600 text-sm items-center gap-x-4 
+              ${"mt-2"} ${"bg-slate-300"} `}
               >
-                <img src={`./src/assets/${Menu.src}.png`} />
+                <img src={Menu.src} alt="" className="w-[25px]" />
                 <span
                   className={`${!open && "hidden"} origin-left duration-200`}
                 >
                   {Menu.title}
                 </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="h-screen flex-1 p-7">
-          <h1 className="text-2xl font-semibold ">Home Page</h1>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="h-screen  p-7">
+        <img
+          src={control}
+          className={`relative cursor-pointer left-[-48px] top-[-28px] w-[35px] border-dark-purple
+           border-2 rounded-full  ${!open && "rotate-180"}`}
+          onClick={() => setOpen(!open)}
+          alt=""
+        />
+        <div>
+          <Outlet />
         </div>
       </div>
     </div>
   );
 };
-
 export default DashBoard;
