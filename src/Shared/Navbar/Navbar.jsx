@@ -1,25 +1,36 @@
 import React from "react";
 import { Collapse } from "flowbite";
-import logo from '../../assets/logo/logo.svg'
-import bookmark from '../../assets/svg/bookmark.svg'
-import anounce from '../../assets/svg/announcement.svg'
-import leaderboard from '../../assets/svg/leader-board.svg'
-import logout from '../../assets/svg/logout.svg'
+import logo from "../../assets/logo/logo.svg";
+import bookmark from "../../assets/svg/bookmark.svg";
+import anounce from "../../assets/svg/announcement.svg";
+import leaderboard from "../../assets/svg/leader-board.svg";
+import logout from "../../assets/svg/logout.svg";
 import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
-      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div class=" flex flex-wrap items-center justify-between mx-auto p-4">
         <Link class="flex items-center">
-          <img
-            src={logo}
-            class="h-8 mr-3"
-            alt="Flowbite Logo"
-          />
+          <img src={logo} class="h-8 mr-3" alt="Flowbite Logo" />
           {/* <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             Flowbite
           </span> */}
         </Link>
+        <div class="text-center">
+          <button
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            type="button"
+            onClick={() => {
+              // drawer.show();
+            }}
+            data-drawer-target="drawer-disabled-backdrop"
+            data-drawer-show="drawer-disabled-backdrop"
+            data-drawer-backdrop="false"
+            aria-controls="drawer-disabled-backdrop"
+          >
+            Show drawer without backdrop
+          </button>
+        </div>
         <div class="flex items-center md:order-2">
           <button
             type="button"
@@ -32,7 +43,7 @@ const Navbar = () => {
             <span class="sr-only">Open user menu</span>
             <img
               class="w-8 h-8 rounded-full"
-              src='https://randomuser.me/api/portraits/women/63.jpg'
+              src="https://randomuser.me/api/portraits/women/63.jpg"
               alt="userphoto"
             />
           </button>
@@ -43,17 +54,34 @@ const Navbar = () => {
           >
             <div class="px-12 py-12 flex items-center justify-center gap-2">
               <div>
-                <img width='76px' height='76px'  src='https://randomuser.me/api/portraits/women/63.jpg' alt="" className="rounded-full border-4 border-green-500" />
+                <img
+                  width="76px"
+                  height="76px"
+                  src="https://randomuser.me/api/portraits/women/63.jpg"
+                  alt=""
+                  className="rounded-full border-4 border-green-500"
+                />
               </div>
               <div>
                 <h4 className="text-xl font-poppins">Shamima Akter</h4>
                 <p className="font-poppins">ID : N/A</p>
-                <button type="button" class="text-white font-poppins bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-400 dark:hover:bg-green-500 focus:outline-none dark:focus:ring-green-400 ml-8">View Profile</button>
+                <Link to="/profile/my-profile">
+                  <button
+                    type="button"
+                    class="text-white font-poppins bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-400 dark:hover:bg-green-500 focus:outline-none dark:focus:ring-green-400 ml-8"
+                  >
+                    View Profile
+                  </button>
+                </Link>
               </div>
             </div>
-            <ul class="py-2 font-poppins mx-16 gap-4 items-center justify-center my-2" aria-labelledby="user-menu-button">
+            <ul
+              class="py-2 font-poppins mx-16 gap-4 items-center justify-center my-2"
+              aria-labelledby="user-menu-button"
+            >
               <li>
-                <Link to='/'
+                <Link
+                  to="/profile/bookmark"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   <div className="flex gap-4 items-center justify-start my-2">
@@ -63,36 +91,35 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to='/'
+                <Link
+                  to="/profile/leaderboard"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   <div className="flex gap-4 items-center justify-start my-2">
                     <img src={leaderboard} alt="" />
-                    <span>Bookmark</span>
+                    <span>Leader Board</span>
                   </div>
                 </Link>
               </li>
               <li>
-                <Link to='/'
+                <Link
+                  to="/profile/announcement"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   <div className="flex gap-4 items-center justify-start my-2">
                     <img src={anounce} alt="" />
-                    <span>Bookmark</span>
+                    <span>Announcement</span>
                   </div>
                 </Link>
               </li>
               <li>
-                <Link to='/'
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
+                <button class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                   <div className="flex gap-2 items-center justify-start my-2">
                     <img src={logout} alt="" />
-                    <span>Bookmark</span>
+                    <span>Sign Out</span>
                   </div>
-                </Link>
+                </button>
               </li>
-              
             </ul>
           </div>
           <button
@@ -123,38 +150,38 @@ const Navbar = () => {
           id="mobile-menu-2"
         >
           <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li className ='font-poppins'>
-              <a
-                href="/"
+            <li className="font-poppins">
+              <Link
+                to="/"
                 class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
                 aria-current="page"
               >
                 Home
-              </a>
+              </Link>
             </li>
-            <li className ='font-poppins'>
-              <a
-                href="/"
+            <li className="font-poppins">
+              <Link
+                to="/courses"
                 class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 Courses
-              </a>
+              </Link>
             </li>
-            <li className ='font-poppins'>
+            {/* <li className="font-poppins">
               <a
                 href="/"
                 class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 Learn
               </a>
-            </li>
-            <li className ='font-poppins'>
-              <a
-                href="/"
+            </li> */}
+            <li className="font-poppins">
+              <Link
+                to="/dashboard"
                 class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 Dashboard
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
