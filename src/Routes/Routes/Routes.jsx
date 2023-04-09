@@ -8,6 +8,7 @@ import CSV from "../../Pages/DashBoard/AdminPannel/CSV/CSV";
 import Users from "../../Pages/DashBoard/AdminPannel/Users/Users";
 import Analysis from "../../Pages/DashBoard/Analysis/Analysis";
 import Assesments from "../../Pages/DashBoard/Assesments/Assesments";
+import Default from "../../Pages/DashBoard/Assesments/Default/Default";
 import OnProcessinAssesments from "../../Pages/DashBoard/Assesments/OnProcessinAssesments/OnProcessinAssesments";
 import DashBoard from "../../Pages/DashBoard/DashBoard";
 import Practice from "../../Pages/DashBoard/Practice/Practice";
@@ -46,10 +47,10 @@ const router = createBrowserRouter([
         path: "/career",
         element: <Career />,
       },
-      {
-        path: "/learn",
-        element: <Learn />,
-      },
+      // {
+      //   path: "/learn",
+      //   element: <Learn />,
+      // },
       {
         path: "/dashboard",
         element: <DashBoard />,
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
             path: "/dashboard/assessment",
             element: <Assesments />,
             children: [
+              {
+                path: "/dashboard/assessment",
+                element: <Default />,
+              },
               {
                 path: "/dashboard/assessment/on-processing",
                 element: <OnProcessinAssesments />,
