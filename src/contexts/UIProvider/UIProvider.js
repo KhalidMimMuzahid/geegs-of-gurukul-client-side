@@ -1,11 +1,10 @@
 import React, { createContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export const UIContext = createContext();
-const UIProvider = ({ children }) => {
-  const [dashboardDrawer, setDashboardDrawer] = useState({});
-  const [p, setP] = useState(0);
 
-  const info = { dashboardDrawer, setDashboardDrawer, p, setP };
+const UIProvider = ({ children }) => {
+  const info = {};
   return <UIContext.Provider value={info}>{children}</UIContext.Provider>;
 };
 

@@ -1,9 +1,10 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 
 const Assesments = () => {
   return (
     <div>
-      <h1>this is assessment</h1>
+      <Outlet />
     </div>
   );
 };

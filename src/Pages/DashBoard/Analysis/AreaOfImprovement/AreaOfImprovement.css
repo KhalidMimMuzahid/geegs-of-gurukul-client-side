@@ -1,0 +1,19 @@
+
+.areaOfImprovement-bar{
+    width: 160px;
+    height: 160px;
+}
+
+
+.areaOfImprovement-bar .CircularProgressbar .CircularProgressbar-path {
+    stroke: #BC2723;
+    stroke-linecap: unset;
+}
+
+.areaOfImprovement-bar .CircularProgressbar .CircularProgressbar-text {
+    fill: #333333;
+    /* font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px; */
+}

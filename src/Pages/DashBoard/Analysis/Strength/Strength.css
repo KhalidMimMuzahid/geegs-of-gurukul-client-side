@@ -1,0 +1,41 @@
+.streangth-container{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.streangth-container h4{
+   margin-bottom: 70px;
+    
+}
+.circular-bar{
+    width: 160px;
+    height: 160px;
+}
+
+/* .circular-bar p {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 16px;
+    text-align: center;
+} */
+
+
+
+.circular-bar .CircularProgressbar .CircularProgressbar-path {
+    stroke: #56A661;
+    stroke-linecap: unset;
+}
+
+.circular-bar .CircularProgressbar .CircularProgressbar-text {
+    fill: #333333;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.circular-bar .CircularProgressbar .CircularProgressbar-trail {
+    stroke: #E2E2E2;
+}

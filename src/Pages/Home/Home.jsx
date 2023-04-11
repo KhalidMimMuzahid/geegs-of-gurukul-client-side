@@ -1,9 +1,10 @@
 import React from "react";
+import PreQuestionire from "./PreQuestionire/PreQuestionire";
 
 const Home = () => {
   return (
-    <div>
-      <p className="font-poppins">This Is Home Page</p>
+    <div className="">
+      <PreQuestionire />
     </div>
   );
 };
