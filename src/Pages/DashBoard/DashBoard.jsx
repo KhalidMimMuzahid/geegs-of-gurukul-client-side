@@ -30,7 +30,7 @@ const DashBoard = () => {
   });
 
   return (
-    <div className="flex w-full">
+    <div className='flex w-full'>
       <div
         className={`${!open && "hidden"} md:block ${open ? "w-72" : "w-20 "}  ${
           open && "border-r-4"
@@ -45,13 +45,13 @@ const DashBoard = () => {
           onClick={() => setOpen(!open)}
           alt=""
         /> */}
-        <div className="flex gap-x-4 items-center">
+        <div className='flex gap-x-4 items-center'>
           <img
             src={logo}
             className={`cursor-pointer duration-500 ${
               open && "rotate-[360deg]"
             }`}
-            alt=""
+            alt=''
           />
           <h1
             className={`text-gray-700 font-poppins origin-left font-medium text-xl duration-200 ${
@@ -61,7 +61,7 @@ const DashBoard = () => {
             Dashboard
           </h1>
         </div>
-        <ul className="pt-6 font-poppins">
+        <ul className='pt-6 font-poppins'>
           {Menus.map((Menu, index) => (
             <li key={index}>
               <Link
@@ -73,7 +73,7 @@ const DashBoard = () => {
                     : "bg-slate-100"
                 } `}
               >
-                <img src={Menu.src} alt="" className="w-[25px]" />
+                <img src={Menu.src} alt='' className='w-[25px]' />
                 <span
                   className={`${
                     !open && "hidden"
@@ -86,7 +86,7 @@ const DashBoard = () => {
           ))}
         </ul>
       </div>
-      <div className="h-screen grow  relative">
+      <div className='h-screen grow  relative'>
         <div>
           <img
             src={control}
@@ -95,7 +95,7 @@ const DashBoard = () => {
             } md:left-[-19px] top-[0px] w-[35px] border-dark-purple
            border-2 rounded-full  ${!open && "rotate-180"} z-[1001]`}
             onClick={() => setOpen(!open)}
-            alt=""
+            alt=''
           />
         </div>
         <div className={`relative top-[-35px] `}>
