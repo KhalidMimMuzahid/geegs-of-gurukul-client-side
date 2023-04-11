@@ -126,7 +126,7 @@ const AssesmentList = () => {
                   {courses.map((course, i) => (
                     <tr key={i}>
                       <td class='p-2 whitespace-nowrap'>
-                        <div class='flex items-center'>{i++}</div>
+                        <div class='flex items-center'>{i+1}</div>
                       </td>
                       <td class='p-2 whitespace-nowrap'>
                         {course?.CourseName}
