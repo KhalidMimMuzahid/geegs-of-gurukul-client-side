@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PreQuestionire from "./PreQuestionire/PreQuestionire";
 import { useForm } from "react-hook-form";
 const Home = () => {
   const [shouldShowSelectError, setShouldShowSelectError] = useState(false);

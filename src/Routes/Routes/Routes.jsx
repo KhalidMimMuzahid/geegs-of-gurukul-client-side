@@ -14,7 +14,7 @@ import DashBoard from "../../Pages/DashBoard/DashBoard";
 import Practice from "../../Pages/DashBoard/Practice/Practice";
 import Error from "../../Pages/Error/Error";
 import Home from "../../Pages/Home/Home";
-import Learn from "../../Pages/Learn/Learn";
+// import Learn from "../../Pages/Learn/Learn";
 import Announcement from "../../Pages/Profile/Announcement/Announcement";
 import Bookmark from "../../Pages/Profile/Bookmark/Bookmark";
 import LeaderBoard from "../../Pages/Profile/LeaderBoard/LeaderBoard";
