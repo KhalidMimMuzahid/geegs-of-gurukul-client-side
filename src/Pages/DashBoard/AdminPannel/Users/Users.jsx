@@ -82,12 +82,12 @@ const Users = () => {
       </form>
 
       <div class='flex flex-col justify-center h-full'>
-        <div class='w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200'>
+        <div class='w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200'>
           <header class='px-5 py-4 border-b border-gray-100'>
             <h2 class='font-semibold font-poppins text-gray-800'>Users</h2>
           </header>
           <div class='p-3'>
-            <div class='overflow-x-auto'>
+            <div class='overflow-x-scroll'>
               <table class='table-auto w-full font-poppins font-medium overflow-x-auto'>
                 <thead class='text-xs font-semibold uppercase text-gray-400 bg-gray-50'>
                   <tr>
@@ -124,7 +124,7 @@ const Users = () => {
                       <td class='p-2 whitespace-nowrap'>{profile?.name}</td>
                       <td class='p-2 whitespace-nowrap'>{profile?.email}</td>
                       <td class='p-2 whitespace-nowrap flex gap-2'>
-                        <div class=' w-32 mx-auto'>
+                        <div class=' w-38 mx-auto flex'>
                           <select
                             id='Roles'
                             class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
@@ -134,6 +134,7 @@ const Users = () => {
                             <option value='CA'>Instructor</option>
                             <option value='FR'>Student</option>
                           </select>
+                          <button className="px-2 py-2 rounded-full">✅</button>
                         </div>
                       </td>
                     </tr>
