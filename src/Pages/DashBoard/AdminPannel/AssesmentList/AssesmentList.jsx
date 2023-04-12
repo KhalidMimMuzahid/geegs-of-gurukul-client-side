@@ -149,7 +149,7 @@ const AssesmentList = () => {
                       <td class='p-2 whitespace-nowrap'>{course?.Topic}</td>
                       <td class='p-2 whitespace-nowrap'>{course?.Topic}</td>
                       <td class='p-2 whitespace-nowrap flex gap-2'>
-                        <div class='mx-auto flex gap-2'>
+                        <div class='mx-auto flex-col md:flex gap-2'>
                         <button
                           type='button'
                           className='px-1 py-1 rounded-full bg-red-200'
