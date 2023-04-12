@@ -81,13 +81,13 @@ const Users = () => {
         </div>
       </form>
 
-      <div class='flex flex-col justify-center h-full'>
+      <div class='flex flex-col justify-center h-full mx-auto'>
         <div class='w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200'>
           <header class='px-5 py-4 border-b border-gray-100'>
             <h2 class='font-semibold font-poppins text-gray-800'>Users</h2>
           </header>
           <div class='p-3'>
-            <div class='overflow-x-scroll'>
+            <div class='max-w-[90vw] overflow-x-scroll'>
               <table class='table-auto w-full font-poppins font-medium overflow-x-auto'>
                 <thead class='text-xs font-semibold uppercase text-gray-400 bg-gray-50'>
                   <tr>

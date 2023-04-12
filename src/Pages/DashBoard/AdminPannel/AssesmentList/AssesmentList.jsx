@@ -110,101 +110,96 @@ const AssesmentList = () => {
         </form>
       </div>
       {/* Table */}
-      {/* <div
-        style={{
-          maxWidth: `${windowSize - 200}px`,
-          width: `${windowSize - 200}px`,
-          overflowX: "scroll",
-        }}
-        class={`w-[400px] md:w-[750px] `}
-      >
-        <table
-          style={{ minWidth: `800px` }}
-          class=' border-r-slate-950 table-auto'
-        >
-          <thead>
-            <tr>
-              <th class='px-4 py-2'>Field 1</th>
-              <th class='px-4 py-2'>Field 2</th>
-              <th class='px-4 py-2'>Field 3</th>
-              <th class='px-4 py-2'>Field 4</th>
-              <th class='px-4 py-2'>Field 5</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class='bg-gray-100'>
-              <td class='border px-4 py-2'>Data 1</td>
-              <td class='border px-4 py-2'>Data 2</td>
-              <td class='border px-4 py-2'>Data 3</td>
-              <td class='border px-4 py-2'>Data 4</td>
-              <td class='border px-4 py-2'>Data 5</td>
-            </tr>
-            <tr>
-              <td class='border px-4 py-2'>Data 1</td>
-              <td class='border px-4 py-2'>Data 2</td>
-              <td class='border px-4 py-2'>Data 3</td>
-              <td class='border px-4 py-2'>Data 4</td>
-              <td class='border px-4 py-2'>Data 5</td>
-            </tr>
-            <tr class='bg-gray-100'>
-              <td class='border px-4 py-2'>Data 1</td>
-              <td class='border px-4 py-2'>Data 2</td>
-              <td class='border px-4 py-2'>Data 3</td>
-              <td class='border px-4 py-2'>Data 4</td>
-              <td class='border px-4 py-2'>Data 5</td>
-            </tr>
-            <!-- Add more rows here -->
-          </tbody>
-        </table>
-      </div> */}
-      <div className="">
-      <div class='grid grid-cols-5 gap-0 overflow-x-auto w-full font-poppins p-5'>
-        <div class='bg-gray-100 px-4 py-2 w-full font-semibold'>SL No.</div>
-        <div class='bg-gray-100 px-4 py-2 w-full font-semibold'>
-          Assesment Name
-        </div>
-        <div class='bg-gray-100 px-4 py-2 w-full font-semibold'>Topic</div>
-        <div class='bg-gray-100 px-4 py-2 w-full font-semibold'>Batch No</div>
-        <div class='bg-gray-100 px-4 py-2 w-full font-semibold'>Action</div>
+      <div class='flex flex-col justify-center h-full mx-auto'>
+        <div class='w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200'>
+          <header class='px-5 py-4 border-b border-gray-100'>
+            <h2 class='font-semibold font-poppins text-gray-800'>Assesments</h2>
+          </header>
+          <div class='p-3'>
+            <div class='max-w-[90vw] overflow-x-scroll'>
+              <table class='table-auto w-full font-poppins font-medium overflow-x-auto'>
+                <thead class='text-xs font-semibold uppercase text-gray-400 bg-gray-50'>
+                  <tr>
+                    <th class='p-2 whitespace-nowrap'>
+                      <div class='font-semibold text-left'>SL No:</div>
+                    </th>
+                    <th class='p-2 whitespace-nowrap'>
+                      <div class='font-semibold text-left'>Assesment Name</div>
+                    </th>
+                    <th class='p-2 whitespace-nowrap'>
+                      <div class='font-semibold text-left'>Topic</div>
+                    </th>
+                    <th class='p-2 whitespace-nowrap'>
+                      <div class='font-semibold text-center'>Batch No</div>
+                    </th>
+                    <th class='p-2 whitespace-nowrap'>
+                      <div class='font-semibold text-center'>Action</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class='text-sm divide-y divide-gray-100'>
+                  {courses.map((course, i) => (
+                    <tr key={i}>
+                      <td class='p-2 whitespace-nowrap'>
+                        <div class='flex items-center'>{i + 1}</div>
+                      </td>
+                      <td class='p-2 whitespace-nowrap'>
+                        {course?.CourseName}
+                      </td>
+                      <td class='p-2 whitespace-nowrap'>{course?.Topic}</td>
+                      <td class='p-2 whitespace-nowrap'>{course?.Topic}</td>
+                      <td class='p-2 whitespace-nowrap flex gap-2'>
+                        <div class='mx-auto flex gap-2'>
+                        <button
+                          type='button'
+                          className='px-1 py-1 rounded-full bg-red-200'
+                        >
+                          {/* svg */}
+                          <img
+                            height='15px'
+                            width='15px'
+                            src={deleteIcon}
+                            alt=''
+                          />
+                        </button>
+                        <button
+                          type='button'
+                          className='px-1 py-1 rounded-full bg-sky-100'
+                        >
+                          {/* svg */}
+                          <img
+                            height='15px'
+                            width='15px'
+                            src={editIcon}
+                            alt=''
+                          />
+                        </button>
 
-        {courses.map((c, i) => (
-          <>
-            <div class='bg-white px-4 py-2 '>{i + 1}</div>
-            <div class='bg-white px-4 py-2 '>{c?.CourseName}</div>
-            <div class='bg-white px-4 py-2 '>{c?.Topic}</div>
-            <div class='bg-white px-4 py-2 '>{c?.BatchNo}</div>
-            <div class='bg-white px-4 py-2 '>
-              <button
-                type='button'
-                className='px-1 py-1 rounded-full bg-red-200'
-              >
-                {/* svg */}
-                <img height='15px' width='15px' src={deleteIcon} alt='' />
-              </button>
-              <button
-                type='button'
-                className='px-1 py-1 rounded-full bg-sky-100'
-              >
-                {/* svg */}
-                <img height='15px' width='15px' src={editIcon} alt='' />
-              </button>
-
-              <button
-                data-modal-target='staticModal'
-                data-modal-toggle='staticModal'
-                class='px-1 py-1 rounded-full bg-green-100'
-                type='button'
-              >
-                {/* svg */}
-                <img height='15px' width='15px' src={copyIcon} alt='' />
-              </button>
+                        <button
+                          data-modal-target='staticModal'
+                          data-modal-toggle='staticModal'
+                          class='px-1 py-1 rounded-full bg-green-100'
+                          type='button'
+                        >
+                          {/* svg */}
+                          <img
+                            height='15px'
+                            width='15px'
+                            src={copyIcon}
+                            alt=''
+                          />
+                        </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          </>
-        ))}
-
-        {/* <!-- Add more rows as needed --> */}
+          </div>
+        </div>
       </div>
-      </div>
+      
       {/* Table */}
 
       {/* <!-- Main modal --> */}
