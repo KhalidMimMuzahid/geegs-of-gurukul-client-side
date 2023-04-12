@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./AssesmentList.css";
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
-import copyIcon from "../../../../assets/icons/copy.svg"
+import copyIcon from "../../../../assets/icons/copy.svg";
 import { Modal } from "flowbite";
+
 const AssesmentList = () => {
   const $targetEl = document.getElementById("staticModal");
+  // const [windowSize, setWindowSize] = useState();
   const options = {
     placement: "bottom-right",
     backdrop: "dynamic",
@@ -56,7 +58,21 @@ const AssesmentList = () => {
       BatchNo: 6789,
     },
   ];
+  // useEffect(() => {
+  //   const width = window.screen.width;
+  //   setWindowSize(width);
+  // });
+  // useEffect(() => {
+  //   const handleWindowResize = () => {
+  //     setWindowSize(window.innerWidth);
+  //   };
+  //   console.log("windowSize: ", windowSize);
+  //   window.addEventListener("resize", handleWindowResize);
 
+  //   return () => {
+  //     window.removeEventListener("resize", handleWindowResize);
+  //   };
+  // });
   return (
     <div className='mt-5'>
       {/* filtering form */}
@@ -93,95 +109,104 @@ const AssesmentList = () => {
           </div>
         </form>
       </div>
-      <div class='flex flex-col justify-center h-full'>
-        <div class='w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200'>
-          <header class='px-5 py-4 border-b border-gray-100'>
-            <h2 class='font-semibold font-poppins text-gray-800'>
-              Asessment list
-            </h2>
-          </header>
-          <div class='p-3'>
-            <div class='overflow-x-auto'>
-              <table class='table-auto w-full font-poppins font-medium'>
-                <thead class='text-xs font-semibold uppercase text-gray-400 bg-gray-50'>
-                  <tr>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>SL No:</div>
-                    </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>Assesment Name</div>
-                    </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>Topic</div>
-                    </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-center'>Batch No</div>
-                    </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-center'>Action</div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody class='text-sm divide-y divide-gray-100'>
-                  {courses.map((course, i) => (
-                    <tr key={i}>
-                      <td class='p-2 whitespace-nowrap'>
-                        <div class='flex items-center'>{i+1}</div>
-                      </td>
-                      <td class='p-2 whitespace-nowrap'>
-                        {course?.CourseName}
-                      </td>
-                      <td class='p-2 whitespace-nowrap'>{course?.BatchNo}</td>
-                      <td class='p-2 whitespace-nowrap'>{course?.Topic}</td>
-                      <td class='p-2 whitespace-nowrap flex gap-2'>
-                        <button
-                          type='button'
-                          className='px-1 py-1 rounded-full bg-red-200'
-                        >
-                          {/* svg */}
-                          <img
-                            height='15px'
-                            width='15px'
-                            src={deleteIcon}
-                            alt=''
-                          />
-                        </button>
-                        <button
-                          type='button'
-                          className='px-1 py-1 rounded-full bg-sky-100'
-                        >
-                          {/* svg */}
-                          <img
-                            height='15px'
-                            width='15px'
-                            src={editIcon}
-                            alt=''
-                          />
-                        </button>
-
-                        <button
-                          data-modal-target='staticModal'
-                          data-modal-toggle='staticModal'
-                          class='px-1 py-1 rounded-full bg-green-100'
-                          type='button'
-                        >
-                          {/* svg */}
-                          <img
-                            height='15px'
-                            width='15px'
-                            src={copyIcon}
-                            alt=''
-                          />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+      {/* Table */}
+      {/* <div
+        style={{
+          maxWidth: `${windowSize - 200}px`,
+          width: `${windowSize - 200}px`,
+          overflowX: "scroll",
+        }}
+        class={`w-[400px] md:w-[750px] `}
+      >
+        <table
+          style={{ minWidth: `800px` }}
+          class=' border-r-slate-950 table-auto'
+        >
+          <thead>
+            <tr>
+              <th class='px-4 py-2'>Field 1</th>
+              <th class='px-4 py-2'>Field 2</th>
+              <th class='px-4 py-2'>Field 3</th>
+              <th class='px-4 py-2'>Field 4</th>
+              <th class='px-4 py-2'>Field 5</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class='bg-gray-100'>
+              <td class='border px-4 py-2'>Data 1</td>
+              <td class='border px-4 py-2'>Data 2</td>
+              <td class='border px-4 py-2'>Data 3</td>
+              <td class='border px-4 py-2'>Data 4</td>
+              <td class='border px-4 py-2'>Data 5</td>
+            </tr>
+            <tr>
+              <td class='border px-4 py-2'>Data 1</td>
+              <td class='border px-4 py-2'>Data 2</td>
+              <td class='border px-4 py-2'>Data 3</td>
+              <td class='border px-4 py-2'>Data 4</td>
+              <td class='border px-4 py-2'>Data 5</td>
+            </tr>
+            <tr class='bg-gray-100'>
+              <td class='border px-4 py-2'>Data 1</td>
+              <td class='border px-4 py-2'>Data 2</td>
+              <td class='border px-4 py-2'>Data 3</td>
+              <td class='border px-4 py-2'>Data 4</td>
+              <td class='border px-4 py-2'>Data 5</td>
+            </tr>
+            <!-- Add more rows here -->
+          </tbody>
+        </table>
+      </div> */}
+      <div className="">
+      <div class='grid grid-cols-5 gap-0 overflow-x-auto w-full font-poppins p-5'>
+        <div class='bg-gray-100 px-4 py-2 w-full font-semibold'>SL No.</div>
+        <div class='bg-gray-100 px-4 py-2 w-full font-semibold'>
+          Assesment Name
         </div>
+        <div class='bg-gray-100 px-4 py-2 w-full font-semibold'>Topic</div>
+        <div class='bg-gray-100 px-4 py-2 w-full font-semibold'>Batch No</div>
+        <div class='bg-gray-100 px-4 py-2 w-full font-semibold'>Action</div>
+
+        {courses.map((c, i) => (
+          <>
+            <div class='bg-white px-4 py-2 '>{i + 1}</div>
+            <div class='bg-white px-4 py-2 '>{c?.CourseName}</div>
+            <div class='bg-white px-4 py-2 '>{c?.Topic}</div>
+            <div class='bg-white px-4 py-2 '>{c?.BatchNo}</div>
+            <div class='bg-white px-4 py-2 '>
+              <button
+                type='button'
+                className='px-1 py-1 rounded-full bg-red-200'
+              >
+                {/* svg */}
+                <img height='15px' width='15px' src={deleteIcon} alt='' />
+              </button>
+              <button
+                type='button'
+                className='px-1 py-1 rounded-full bg-sky-100'
+              >
+                {/* svg */}
+                <img height='15px' width='15px' src={editIcon} alt='' />
+              </button>
+
+              <button
+                data-modal-target='staticModal'
+                data-modal-toggle='staticModal'
+                class='px-1 py-1 rounded-full bg-green-100'
+                type='button'
+              >
+                {/* svg */}
+                <img height='15px' width='15px' src={copyIcon} alt='' />
+              </button>
+            </div>
+          </>
+        ))}
+
+        {/* <!-- Add more rows as needed --> */}
       </div>
+      </div>
+      {/* Table */}
+
       {/* <!-- Main modal --> */}
       <div
         id='staticModal'
@@ -219,48 +244,48 @@ const AssesmentList = () => {
             </div>
             {/* <!-- Modal body --> */}
             <form class='p-6 space-y-6'>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-            <div className=''>
-              <input
-                type='text'
-                className='form-control w-full rounded-lg'
-                placeholder='Assesment name'
-                aria-label='Assesment name'
-              />
-            </div>
-            <div className=''>
-              <input
-                type='text'
-                className='form-control w-full rounded-lg'
-                placeholder='Assesment Topic'
-                aria-label='Assesment Topic'
-              />
-            </div>
-            <div className=''>
-              <input
-                type='text'
-                className='form-control w-full rounded-lg'
-                placeholder='Batch ID'
-                aria-label='Batch ID'
-              />
-            </div>
-            <div className=''>
-              <input
-                type='text'
-                className='form-control w-full rounded-lg'
-                placeholder='Schedule at'
-                aria-label='Schedule at'
-              />
-            </div>
-            <div className=''>
-              <input
-                type='text'
-                className='form-control w-full rounded-lg'
-                placeholder='Duration'
-                aria-label='Duration'
-              />
-            </div>
-          </div>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                <div className=''>
+                  <input
+                    type='text'
+                    className='form-control w-full rounded-lg'
+                    placeholder='Assesment name'
+                    aria-label='Assesment name'
+                  />
+                </div>
+                <div className=''>
+                  <input
+                    type='text'
+                    className='form-control w-full rounded-lg'
+                    placeholder='Assesment Topic'
+                    aria-label='Assesment Topic'
+                  />
+                </div>
+                <div className=''>
+                  <input
+                    type='text'
+                    className='form-control w-full rounded-lg'
+                    placeholder='Batch ID'
+                    aria-label='Batch ID'
+                  />
+                </div>
+                <div className=''>
+                  <input
+                    type='text'
+                    className='form-control w-full rounded-lg'
+                    placeholder='Schedule at'
+                    aria-label='Schedule at'
+                  />
+                </div>
+                <div className=''>
+                  <input
+                    type='text'
+                    className='form-control w-full rounded-lg'
+                    placeholder='Duration'
+                    aria-label='Duration'
+                  />
+                </div>
+              </div>
             </form>
             {/* <!-- Modal footer --> */}
             <div class='flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600'>

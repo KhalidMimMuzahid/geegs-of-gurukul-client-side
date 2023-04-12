@@ -1,7 +1,7 @@
-
-.assesmentList button{
+.assesmentList button {
     margin-top: 40px;
 }
+
 .assesmentList input {
     width: 100%;
     border: 1px solid #CECECE;
@@ -11,3 +11,7 @@
     margin-bottom: 16px;
     outline: none;
 }
+
+/* .overflowX{
+    overflow: auto;
+} */
