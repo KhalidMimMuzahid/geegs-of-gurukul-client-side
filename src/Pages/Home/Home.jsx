@@ -1,6 +1,7 @@
 import React from "react";
 import PreQuestionire from "./PreQuestionire/PreQuestionire";
 import LectureScedule from "./LectureScedule/LectureScedule";
+import OverallProgress from "./OverallProgress/OverallProgress";
 
 
 const Home = () => {
@@ -8,7 +9,8 @@ const Home = () => {
     <div className="">
       {/* <PreQuestionire /> */}
       <LectureScedule/>
-      <LectureScedule/>
+      <LectureScedule />
+      <OverallProgress/>
     </div>
   );
 };
