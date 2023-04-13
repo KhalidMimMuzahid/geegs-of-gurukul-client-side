@@ -35,7 +35,7 @@ const Header = () => {
 
   // console.log("location: ", location);
   return (
-    <Disclosure as="nav" className="bg-green-300">
+    <Disclosure as="nav" className="">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -47,10 +47,10 @@ const Header = () => {
                       <Link
                         key={item.name}
                         to={item.link}
-                        className={`${
+                        className={` px-2 py-1 rounded-lg text-black ${
                           currentPath === item.link
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-900 hover:bg-gray-700 hover:text-white"
+                            ? "bg-green-500 "
+                            : " hover:bg-green-300 bg-green-200"
                         } `}
                         aria-current={item.current ? "page" : undefined}
                       >
