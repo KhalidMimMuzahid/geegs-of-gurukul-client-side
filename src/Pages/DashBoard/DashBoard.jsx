@@ -15,7 +15,7 @@ const DashBoard = () => {
     { title: "Analysis", src: analysis, link: "/dashboard/analysis" },
     { title: "Practice", src: practice, link: "/dashboard/practice" },
     {
-      title: "AdminPannel",
+      title: "Admin",
       src: adminPannel,
       link: "/dashboard/admin-pannel",
     },
@@ -30,10 +30,10 @@ const DashBoard = () => {
   });
 
   return (
-    <div className='flex w-full'>
+    <div className="flex w-full">
       <div
         className={`${!open && "hidden"} md:block ${open ? "w-72" : "w-20 "}  ${
-          open && "border-r-4"
+          open && "border-r-4 border-r-green-600 bg-green-50"
         } ${
           style.dashboardHeight
         } h-screen p-5  pt-8 md:relative absolute duration-300 z-[1000] `}
@@ -45,13 +45,14 @@ const DashBoard = () => {
           onClick={() => setOpen(!open)}
           alt=""
         /> */}
-        <div className='flex gap-x-4 items-center'>
+        <div className="flex gap-x-4 items-center ">
           <img
+            style={{ width: "40px", height: "40px" }}
             src={logo}
-            className={`cursor-pointer duration-500 ${
+            className={`cursor-pointer   duration-500 ${
               open && "rotate-[360deg]"
             }`}
-            alt=''
+            alt=""
           />
           <h1
             className={`text-gray-700 font-poppins origin-left font-medium text-xl duration-200 ${
@@ -61,19 +62,19 @@ const DashBoard = () => {
             Dashboard
           </h1>
         </div>
-        <ul className='pt-6 font-poppins'>
+        <ul className="pt-6 font-poppins">
           {Menus.map((Menu, index) => (
             <li key={index}>
               <Link
                 to={Menu?.link}
-                className={`flex  rounded-md p-2 cursor-pointer hover:bg-slate-300 text-gray-600 text-sm items-center gap-x-4 
+                className={`flex  rounded-md p-2 cursor-pointer hover:bg-green-300 text-black text-sm items-center gap-x-4 
               ${"mt-2"} ${
                   currentPath.startsWith(Menu?.link)
-                    ? "bg-slate-400"
-                    : "bg-slate-100"
+                    ? "bg-green-500"
+                    : "bg-green-200"
                 } `}
               >
-                <img src={Menu.src} alt='' className='w-[25px]' />
+                <img src={Menu.src} alt="" className="w-[25px]" />
                 <span
                   className={`${
                     !open && "hidden"
@@ -86,7 +87,7 @@ const DashBoard = () => {
           ))}
         </ul>
       </div>
-      <div className='h-screen grow  relative'>
+      <div className="h-screen grow  relative">
         <div>
           <img
             src={control}
@@ -95,7 +96,7 @@ const DashBoard = () => {
             } md:left-[-19px] top-[0px] w-[35px] border-dark-purple
            border-2 rounded-full  ${!open && "rotate-180"} z-[1001]`}
             onClick={() => setOpen(!open)}
-            alt=''
+            alt=""
           />
         </div>
         <div className={`relative top-[-35px] `}>

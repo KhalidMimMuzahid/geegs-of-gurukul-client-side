@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Drawer } from "flowbite";
 import { Collapse } from "flowbite";
-import logo from "../../assets/logo/logo.svg";
+import logo from "../../assets/logo/gog-full-logo.png";
 import bookmark from "../../assets/svg/bookmark.svg";
 import anounce from "../../assets/svg/announcement.svg";
 import leaderboard from "../../assets/svg/leader-board.svg";
@@ -18,7 +18,7 @@ const Navbar = () => {
     return handleWindowResize();
   });
   return (
-    <nav className="bg-green-400 border-gray-200 dark:bg-green-900">
+    <nav className="bg-green-100 shadow-green-700 shadow-md border-gray-900 dark:bg-green-900">
       <div className=" flex flex-wrap items-center justify-between mx-auto p-4">
         <Link className="flex items-center">
           <img src={logo} className="h-8 mr-3" alt="Flowbite Logo" />
@@ -146,8 +146,8 @@ const Navbar = () => {
             <li className="font-poppins">
               <Link
                 to="/"
-                className={`${
-                  currentPath === "/" ? "bg-black text-white" : "bg-none "
+                className={`text-black ${
+                  currentPath === "/" ? "bg-green-500 " : "bg-none "
                 } block py-1 pl-3 pr-4   rounded    px-3 `}
                 aria-current="page"
               >
@@ -157,9 +157,9 @@ const Navbar = () => {
             <li className="font-poppins">
               <Link
                 to="/courses"
-                className={`${
+                className={`text-black ${
                   currentPath.startsWith("/courses")
-                    ? "bg-black text-white"
+                    ? "bg-green-500 "
                     : "bg-none "
                 } block py-1 pl-3 pr-4   rounded    px-3 `}
               >
@@ -177,10 +177,8 @@ const Navbar = () => {
             <li className="font-poppins">
               <Link
                 to="/dashboard"
-                className={`${
-                  currentPath === "/dashboard"
-                    ? "bg-black text-white"
-                    : "bg-none "
+                className={` text-black ${
+                  currentPath === "/dashboard" ? "bg-green-500  " : "bg-none "
                 } block py-1 pl-3 pr-4   rounded    px-3 `}
               >
                 Dashboard

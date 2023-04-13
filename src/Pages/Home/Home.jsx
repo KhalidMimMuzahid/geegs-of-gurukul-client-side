@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import LectureScedule from "./LectureScedule/LectureScedule";
 const Home = () => {
   const [shouldShowSelectError, setShouldShowSelectError] = useState(false);
   const [selectError, setSelectError] = useState({
@@ -70,7 +71,7 @@ const Home = () => {
       </div>
       <form
         action=""
-        className="w-[400px] mx-auto"
+        className="w-[500px] mx-auto"
         onSubmit={handleSubmit(handleUserDetails)}
       >
         {/* gate date of birth from user  */}
@@ -530,13 +531,18 @@ const Home = () => {
 
         {/* here is thee submit button  */}
         <button
-          className="button bg-black text-white text-xl px-4 py-2 w-full"
+          className="button bg-green-400 hover:bg-green-500 font-bold text-black text-xl px-4 py-2 w-full"
           type="submit"
           onClick={() => setShouldShowSelectError(true)}
         >
           Submit
         </button>
       </form>
+
+      <div>
+        <LectureScedule />
+        <LectureScedule />
+      </div>
     </div>
   );
 };
