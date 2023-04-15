@@ -1,7 +1,7 @@
 import React from 'react';
 import Chart from "react-apexcharts"
 
-const DoughnutChart = () => {
+const QuizChart = () => {
     return (
         <React.Fragment>
             <div>
@@ -10,12 +10,12 @@ const DoughnutChart = () => {
                     height={400}
                     type='donut'
                     series={[
-                        20,20,20,20,20
+                        20,20,20
                     ]}
                     options={{
-                        labels: ['Assesment Mark', 'Lecture', 'Assignment', 'Quiz', 'Remaining'],
+                        labels: ['Total Quiz', 'Complete Quiz', 'Incomplete Qui4'],
                         title: {
-                            text:'Health Check'
+                            
                         },
                         plotOptions: {
                             pie: {
@@ -37,4 +37,4 @@ const DoughnutChart = () => {
     );
 };
 
-export default DoughnutChart;
+export default QuizChart;
