@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import LectureScedule from "./LectureScedule/LectureScedule";
+import DoughnutChart from "../../Components/DoughnutChart/DoughnutChart";
 const Home = () => {
   const [shouldShowSelectError, setShouldShowSelectError] = useState(false);
   const [selectError, setSelectError] = useState({
@@ -542,6 +543,9 @@ const Home = () => {
       <div>
         <LectureScedule />
         <LectureScedule />
+        <div className="container w-4/5 mx-auto">
+        <DoughnutChart/>
+        </div>
       </div>
     </div>
   );
