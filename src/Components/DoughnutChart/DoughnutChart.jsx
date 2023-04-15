@@ -15,7 +15,7 @@ const DoughnutChart = () => {
                     options={{
                         labels: ['Assesment Mark', 'Lecture', 'Assignment', 'Quiz', 'Remaining'],
                         title: {
-                            text:'Health Check'
+                            
                         },
                         plotOptions: {
                             pie: {
