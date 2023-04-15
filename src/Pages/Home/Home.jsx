@@ -546,7 +546,7 @@ const Home = () => {
         <LectureScedule />
         <LectureScedule />
       </div>
-      <div>
+      <div className="flex justify-between">
         <DoughnutChart />
         <QuizChart />
         <AttendanceChart />
