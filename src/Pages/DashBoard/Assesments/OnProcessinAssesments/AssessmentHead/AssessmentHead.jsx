@@ -8,11 +8,9 @@ const AssessmentHead = ({
   selectedQuestion,
   setSelectedQuestion,
   seenQuestionId,
-  checkedQuestionId,
   setIsMarkedQuestionId,
   isMarkedQuestionId,
   selectTheSelectedQuestionIndexWithIndex,
-  setcheckedQuestionId,
   setChosenAnswers,
   chosenAnswers,
 }) => {
@@ -30,7 +28,6 @@ const AssessmentHead = ({
     });
   };
   const handleMarkQuestion = () => {
-    // setcheckedQuestionId start here
     const isAlreadyInisMarkedQuestionIdArray = isMarkedQuestionId.find(
       (_id) => _id === selectedQuestion?._id
     );
@@ -47,7 +44,6 @@ const AssessmentHead = ({
       );
       setIsMarkedQuestionId(newSetIsMarkedQuestionId);
     }
-    // setcheckedQuestionId end here setChosenAnswers
   };
   useEffect(() => {
     const isAlreadyInisMarkedQuestionIdArray = isMarkedQuestionId.find(
@@ -66,7 +62,7 @@ const AssessmentHead = ({
       <div className="flex justify-center items-center mt-3">
         <CountdownCircleTimer
           isPlaying
-          duration={25 * 30}
+          duration={assessment?.duration * 60}
           colors="#4cb08f"
           strokeWidth="16"
           onUpdate={(remainingTime) => children(remainingTime)}
@@ -99,7 +95,9 @@ const AssessmentHead = ({
       <div class="w-full my-4 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
         <div
           class="bg-green-400 h-2.5 rounded-full"
-          style={{ width: "45%" }}
+          style={{
+            width: `${(chosenAnswers?.length / questions?.length) * 100}%`,
+          }}
         ></div>
       </div>
       <div className={`${style?.resultBtn} mt-4 flex justify-center gap-4 `}>

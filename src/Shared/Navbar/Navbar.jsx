@@ -12,10 +12,10 @@ const Navbar = () => {
   const [currentPath, setCurrrentPath] = useState("");
   useLocation();
   useEffect(() => {
-    const handleWindowResize = () => {
+    const handleLocationChange = () => {
       setCurrrentPath(window.location.pathname);
     };
-    return handleWindowResize();
+    return handleLocationChange();
   });
   return (
     <nav className="bg-green-100 shadow-green-700 shadow-md border-gray-900 dark:bg-green-900">

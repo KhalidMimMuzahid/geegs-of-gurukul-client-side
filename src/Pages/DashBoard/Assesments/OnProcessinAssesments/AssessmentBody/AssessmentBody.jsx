@@ -6,8 +6,6 @@ const AssessmentBody = ({
   selectedQuestion,
   setSelectedQuestion,
   setSeenQuestionId,
-  setcheckedQuestionId,
-  checkedQuestionId,
   chosenAnswers,
   setChosenAnswers,
   // shouldShuffle,
@@ -28,9 +26,7 @@ const AssessmentBody = ({
             selectedQuestionIndex={selectedQuestionIndex}
             chosenAnswers={chosenAnswers}
             setChosenAnswers={setChosenAnswers}
-            setcheckedQuestionId={setcheckedQuestionId}
             setSeenQuestionId={setSeenQuestionId}
-            checkedQuestionId={checkedQuestionId}
           />
         </div>
         <div className=" w-full flex justify-center mt-2 lg:mt-4">
