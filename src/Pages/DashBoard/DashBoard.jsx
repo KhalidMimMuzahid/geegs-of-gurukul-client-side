@@ -21,17 +21,29 @@ const DashBoard = () => {
     },
   ];
   const [currentPath, setCurrrentPath] = useState("");
+  const [shouldHiddenNav, setShouldHiddenNav] = useState(false);
+
   useLocation();
   useEffect(() => {
-    const handleWindowResize = () => {
+    const handleLocationChange = () => {
       setCurrrentPath(window.location.pathname);
     };
-    return handleWindowResize();
+    return handleLocationChange();
   });
 
+  useEffect(() => {
+    // console.log("currentPath: ", currentPath);
+    if (currentPath.startsWith("/dashboard/assessment/on-processing")) {
+      setShouldHiddenNav(true);
+    } else {
+      setShouldHiddenNav(false);
+    }
+  }, [currentPath]);
+
   return (
-    <div className="flex w-full">
+    <div className="flex w-full h-full">
       <div
+        style={{ display: `${shouldHiddenNav ? "none" : "block"}` }}
         className={`${!open && "hidden"} md:block ${open ? "w-72" : "w-20 "}  ${
           open && "border-r-4 border-r-green-600 bg-green-50"
         } ${
@@ -87,8 +99,9 @@ const DashBoard = () => {
           ))}
         </ul>
       </div>
-      <div className="h-screen grow  relative">
-        <div>
+      {/* h-screen  */}
+      <div className="grow    relative">
+        <div style={{ display: `${shouldHiddenNav ? "none" : "block"}` }}>
           <img
             src={control}
             className={`relative cursor-pointer  ${
@@ -99,7 +112,7 @@ const DashBoard = () => {
             alt=""
           />
         </div>
-        <div className={`relative top-[-35px] `}>
+        <div className={`relative top-[-35px] h-full `}>
           <Outlet />
         </div>
       </div>

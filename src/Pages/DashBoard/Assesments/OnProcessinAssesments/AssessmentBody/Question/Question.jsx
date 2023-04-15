@@ -7,9 +7,7 @@ const Question = ({
   selectedQuestionIndex,
   chosenAnswers,
   setChosenAnswers,
-  setcheckedQuestionId,
   setSeenQuestionId,
-  checkedQuestionId,
 }) => {
   const [choices, setChoices] = useState([]);
   const [isMultipleChoice, setIsMultipleChoice] = useState(false);
@@ -20,17 +18,7 @@ const Question = ({
   const choseAnswerChange = (e, key) => {
     if (!isMultipleChoice) {
       // todo  : for radio
-      // setcheckedQuestionId start here
-      const isAlreadyInCheckedQuestionIdArray = checkedQuestionId.find(
-        (_id) => _id === selectedQuestion?._id
-      );
-      if (!isAlreadyInCheckedQuestionIdArray) {
-        setcheckedQuestionId((prev) => {
-          const newcheckedQuestionId = [...prev, selectedQuestion?._id];
-          return newcheckedQuestionId;
-        });
-      }
-      // setcheckedQuestionId end here
+
       const isSelected = e.target.value;
       console.log("key: ", key, "\nisSelected: ", isSelected);
       setChosenAnswers((prevChosenAnswers) => {
@@ -88,18 +76,6 @@ const Question = ({
         );
 
         if (isAlreadyChecked === -1) {
-          // setcheckedQuestionId start here
-          const isAlreadyInCheckedQuestionIdArray = checkedQuestionId.find(
-            (_id) => _id === selectedQuestion?._id
-          );
-          if (!isAlreadyInCheckedQuestionIdArray) {
-            setcheckedQuestionId((prev) => {
-              const newcheckedQuestionId = [...prev, selectedQuestion?._id];
-              return newcheckedQuestionId;
-            });
-          }
-          // setcheckedQuestionId end here
-
           // todo for first time option checked
           // console.log("first checked");
           const newChosenAnswerForThisQues = {
@@ -128,21 +104,6 @@ const Question = ({
                 if (isChecked) {
                   // to do for this will now checked
                   // to do : push for this chosenOptionArray
-                  // setcheckedQuestionId start here
-                  const isAlreadyInCheckedQuestionIdArray =
-                    checkedQuestionId.find(
-                      (_id) => _id === selectedQuestion?._id
-                    );
-                  if (!isAlreadyInCheckedQuestionIdArray) {
-                    setcheckedQuestionId((prev) => {
-                      const newcheckedQuestionId = [
-                        ...prev,
-                        selectedQuestion?._id,
-                      ];
-                      return newcheckedQuestionId;
-                    });
-                  }
-                  // setcheckedQuestionId end here
 
                   const newChosenAnswerForThisQues = {
                     ...prevChosenAnswerForThisQues,
@@ -161,36 +122,12 @@ const Question = ({
                   const newPrevChosenOptions =
                     newChosenAnswerForThisQues?.chosenOptions;
                   if (newPrevChosenOptions?.length > 1) {
-                    // setcheckedQuestionId start here
-                    const isAlreadyInCheckedQuestionIdArray =
-                      checkedQuestionId.find(
-                        (_id) => _id === selectedQuestion?._id
-                      );
-                    if (!isAlreadyInCheckedQuestionIdArray) {
-                      setcheckedQuestionId((prev) => {
-                        const newcheckedQuestionId = [
-                          ...prev,
-                          selectedQuestion?._id,
-                        ];
-                        return newcheckedQuestionId;
-                      });
-                    }
-                    // setcheckedQuestionId end here
-
                     const newChosenOptions = newPrevChosenOptions.filter(
                       (eachOption) => eachOption !== key
                     );
                     newChosenAnswerForThisQues.chosenOptions = newChosenOptions;
                     return newChosenAnswerForThisQues;
                   } else {
-                    // setcheckedQuestionId start here
-                    const newcheckedQuestionId = checkedQuestionId?.filter(
-                      (_id) => _id !== selectedQuestion?._id
-                    );
-
-                    setcheckedQuestionId(newcheckedQuestionId);
-                    // setcheckedQuestionId end here
-
                     return null;
                   }
                 }
@@ -208,10 +145,8 @@ const Question = ({
         }
       });
     }
-    console.log("checkedQuestionId: ", checkedQuestionId);
   };
   useEffect(() => {
-    console.log("checkedQuestionId: ", checkedQuestionId);
     setChoices(selectedQuestion?.optionObject?.choices);
 
     if (selectedQuestion?.optionObject?.answers?.length > 1) {

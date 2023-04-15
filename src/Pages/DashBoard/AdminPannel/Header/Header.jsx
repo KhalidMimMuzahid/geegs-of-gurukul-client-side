@@ -27,10 +27,10 @@ const Header = () => {
   const [currentPath, setCurrrentPath] = useState("");
   useLocation();
   useEffect(() => {
-    const handleWindowResize = () => {
+    const handleLocationChange = () => {
       setCurrrentPath(window.location.pathname);
     };
-    return handleWindowResize();
+    return handleLocationChange();
   });
 
   // console.log("location: ", location);

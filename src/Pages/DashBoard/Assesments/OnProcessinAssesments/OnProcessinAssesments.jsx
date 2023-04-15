@@ -9,12 +9,15 @@ const OnProcessinAssesments = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
   const [seenQuestionId, setSeenQuestionId] = useState([]);
-  const [checkedQuestionId, setcheckedQuestionId] = useState([]);
   const [isMarkedQuestionId, setIsMarkedQuestionId] = useState([]);
   const [chosenAnswers, setChosenAnswers] = useState([]);
   // const [remainingTime, setRemainingTime] = useState(0);       we need it later
-  // const [submitModalIsOpen, setSubmitModalIsOpen] = useState(false);     we need it laater
-
+  const [submitModalIsOpen, setSubmitModalIsOpen] = useState(false);
+  const [
+    shouldShowMouseOutsideErrorModal,
+    setShouldShowMouseOutsideErrorModal,
+  ] = useState(false);
+  const [countGoOutSideOfThisTab, setCountGoOutSideOfThisTab] = useState(0);
   const shuffle = (array) => {
     array.sort(() => Math.random() - 0.5);
     return array;
@@ -33,7 +36,83 @@ const OnProcessinAssesments = () => {
   const selectTheSelectedQuestionIndexWithIndex = (index) => {
     setSelectedQuestionIndex(index);
   };
+  const handleQuizSubmit = () => {
+    const newChosenAnswers = [];
+    let totalCorrectAnswer = 0;
+    chosenAnswers?.forEach((eachChosen) => {
+      const thisQuestion = questions?.find(
+        (eachQuestion) => eachQuestion?._id === eachChosen?.questionId
+      );
+      const answers = thisQuestion?.optionObject?.answers;
+      const chosenOptions = eachChosen?.chosenOptions;
+      if (answers?.length !== chosenOptions?.length) {
+        // skip for this question, because it is wrong answer
 
+        const newEachChosen = { ...eachChosen };
+        newEachChosen.isCorrect = false;
+        newChosenAnswers.push(newEachChosen);
+      } else {
+        let isCorrect = true;
+        chosenOptions?.forEach((eachOption) => {
+          const isAvailable = answers?.find(
+            (eachAnswer) => eachAnswer === eachOption
+          );
+          if (!isAvailable) {
+            isCorrect = false;
+          }
+        });
+        if (isCorrect) {
+          ++totalCorrectAnswer;
+
+          const newEachChosen = { ...eachChosen };
+          newEachChosen.isCorrect = true;
+          newChosenAnswers.push(newEachChosen);
+        } else {
+          // skip for this question, because it is wrong answer
+          const newEachChosen = { ...eachChosen };
+          newEachChosen.isCorrect = false;
+          newChosenAnswers.push(newEachChosen);
+        }
+      }
+    });
+    // console.log("\ntotalCorrectAnswer: ", totalCorrectAnswer);
+    console.log("\nnewChosenAnswers: ", newChosenAnswers);
+
+    const assessmentId = assessment?._id;
+    const studentEmail = "currentUser?.email";
+    const startedAt = "start time";
+    const finishedAt = "finished time";
+    const enabledNegativeMarking = assessment?.enabledNegativeMarking;
+    const negativeMark = assessment?.negativeMark;
+    const attemptOn = chosenAnswers?.length;
+    const correct = totalCorrectAnswer;
+    const wrong = chosenAnswers?.length - totalCorrectAnswer;
+    const skipped = questions?.length - chosenAnswers?.length;
+    let totalMark = 0;
+    if (assessment?.enabledNegativeMarking) {
+      totalMark = correct * 1 - wrong * negativeMark;
+    } else {
+      totalMark = correct * 1;
+    }
+    const assessmentsResponse = {
+      _id: "providedbymongodb",
+      assessmentId,
+      studentEmail,
+      startedAt,
+      finishedAt,
+      enabledNegativeMarking,
+      negativeMark,
+      totalMark,
+      aboutResponse: {
+        attemptOn,
+        correct,
+        wrong,
+        skipped,
+        chosenAnswers: newChosenAnswers,
+      },
+    };
+    console.log(" assessmentsResponse: ", assessmentsResponse);
+  };
   // useEffect(() => {
   //   fetch(
   //     `http://localhost:5000/getAssessment?_id=${"here should be object id"}`
@@ -50,10 +129,11 @@ const OnProcessinAssesments = () => {
   //       }
   //     });
   // }, []);
+
   const data = {
     assessmentName: "for new comers",
     batchId: "FSWD-001",
-    duration: "10",
+    duration: 10,
     scheduledAt: "12/12/23",
     topicName: "Javascript",
     createdAt: "12/12/23",
@@ -62,7 +142,7 @@ const OnProcessinAssesments = () => {
     _id: "642ef65ea8cb9b3eb52cd09e",
     enabledNegativeMarking: true,
     negativeMark: 0.25,
-    shouldShuffle: true,
+    shouldShuffle: false,
     shouldShowAnswer: true,
     isOptional: false,
     totalQuestions: 10,
@@ -147,7 +227,7 @@ const OnProcessinAssesments = () => {
       {
         difficultyLevel: "Easy",
         marks: "1",
-        questionName: "What is the value of the following expression: 9",
+        questionName: "What is the value of the following expression: 8",
         topicName: "Javascript",
         _id: "642edf9523ru675926c69l",
         optionObject: {
@@ -222,8 +302,37 @@ const OnProcessinAssesments = () => {
       }
     }
   }, [selectedQuestionIndex, questions, seenQuestionId]);
+
+  // const concernedElement = document.getElementById("click-text");
+
+  // window.addEventListener("mousedown", (event) => {
+  //   if (document.getElementById("click-text")?.contains(event?.target)) {
+  //     console.log("Clicked Inside");
+  //   } else {
+  //     console.log("Clicked Outside / Elsewhere");
+  //     setShouldShowMouseOutsideErrorModal((prev) => {
+  //       if (!prev) {
+  //         return true;
+  //       }
+  //     });
+  //   }
+  // });
+
+  // window.addEventListener("blur", function () {
+  //   setShouldShowMouseOutsideErrorModal((prev) => {
+  //     if (!prev) {
+  //       // setCountGoOutSideOfThisTab((prev) => ++prev);
+  //       console.log("xxxx");
+  //       return true;
+  //     }
+  //   });
+  // });
+
+  // window.addEventListener("focus", function () {
+  //   document.title = "i am in";
+  // });
   return (
-    <div className="px-2">
+    <div className="px-2  h-full mt-10 md:mt-16">
       <div>
         <div className="grid grid-cols-12 gap-1 lg:gap-6">
           <div className="col-span-12 lg:col-span-4">
@@ -233,13 +342,11 @@ const OnProcessinAssesments = () => {
               selectedQuestion={selectedQuestion}
               setSelectedQuestion={setSelectedQuestion}
               seenQuestionId={seenQuestionId}
-              checkedQuestionId={checkedQuestionId}
               setIsMarkedQuestionId={setIsMarkedQuestionId}
               isMarkedQuestionId={isMarkedQuestionId}
               selectTheSelectedQuestionIndexWithIndex={
                 selectTheSelectedQuestionIndexWithIndex
               }
-              setcheckedQuestionId={setcheckedQuestionId}
               setChosenAnswers={setChosenAnswers}
               chosenAnswers={chosenAnswers}
             />
@@ -250,8 +357,6 @@ const OnProcessinAssesments = () => {
               selectedQuestion={selectedQuestion}
               setSelectedQuestion={setSelectedQuestion}
               setSeenQuestionId={setSeenQuestionId}
-              setcheckedQuestionId={setcheckedQuestionId}
-              checkedQuestionId={checkedQuestionId}
               setChosenAnswers={setChosenAnswers}
               selectedQuestionIndex={selectedQuestionIndex}
               setSelectedQuestionIndex={setSelectedQuestionIndex}
@@ -263,7 +368,120 @@ const OnProcessinAssesments = () => {
             />
           </div>
         </div>
+        <div>
+          <h1
+            className="px-4 py-2 bg-green-400 text-bl
+        "
+            onClick={() => setSubmitModalIsOpen(true)}
+            // onClick={handleQuizSubmit}
+          >
+            Submit
+          </h1>
+        </div>
       </div>
+
+      {submitModalIsOpen && (
+        <>
+          {/* <h1>sddfddfvfdffdfdfd</h1> */}
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
+            <div className="relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
+              {/*content*/}
+              <div className="flex flex-col px-2 gap-2   h-full">
+                <div>
+                  {/* header */}
+                  Submitting now ?
+                </div>
+                <div className="px-2">
+                  <div className="border-slate-300 rounded-lg border-2 "></div>
+                </div>
+
+                <div className=" grow">
+                  <h1>
+                    You have answer {chosenAnswers?.length} out of{" "}
+                    {totalQuestions}
+                  </h1>
+                  <h1>
+                    You have seen {seenQuestionId?.length} out of{" "}
+                    {totalQuestions}
+                  </h1>
+                  <h1>You have marked {isMarkedQuestionId?.length}</h1>
+                  {/* remainingTime */}
+                  <h1>you have completed on remainingTime</h1>
+                  <h1>
+                    You have skipped {questions?.length - chosenAnswers?.length}{" "}
+                    out of {totalQuestions}
+                  </h1>
+                </div>
+
+                <div className="px-2">
+                  <div className="border-slate-300 rounded-lg border-2 "></div>
+                </div>
+
+                <div>
+                  {/* footer */}
+                  <div className="flex justify-between gap-4">
+                    <span
+                      onClick={handleQuizSubmit}
+                      className="grow  font-semibold text-center py-1 bg-green-300 hover:cursor-pointer hover:bg-green-400 rounded-lg "
+                    >
+                      Submit Now
+                    </span>
+                    <span
+                      onClick={() => setSubmitModalIsOpen(false)}
+                      className="grow font-semibold text-center py-1 bg-red-300 bg- hover:cursor-pointer hover:bg-red-400 rounded-lg "
+                    >
+                      Submit Later
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0  z-[20000] bg-black"></div>
+        </>
+      )}
+      {shouldShowMouseOutsideErrorModal && (
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
+            <div className="relative px-2 py-2 w-[380px]  bg-white rounded-lg shadow-2xl">
+              {/*content*/}
+              <div>
+                <div className="text-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="red"
+                    className="w-12 h-12 inline "
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+                    />
+                  </svg>
+                </div>
+                <h1 className="text-red-600 text-center font-bold text-lg">
+                  you can not go outside of this tab. <br />
+                  <span className="text-md text-sm">
+                    Otherwise, we are going to{" "}
+                    <span className=" font-extrabold text-xl">kill</span> your
+                    browser.
+                  </span>
+                </h1>
+                <span
+                  onClick={() => setShouldShowMouseOutsideErrorModal(false)}
+                  className="w-full block font-bold text-center py-2 my-2 bg-red-500 bg- hover:cursor-pointer hover:bg-red-600 rounded-lg"
+                >
+                  Ok, I undderstand.
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0  z-[20000] bg-black"></div>
+        </>
+      )}
     </div>
   );
 };
