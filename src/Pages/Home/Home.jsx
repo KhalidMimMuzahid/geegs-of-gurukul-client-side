@@ -4,8 +4,10 @@ import LectureScedule from "./LectureScedule/LectureScedule";
 import DoughnutChart from "../../Components/DoughnutChart/DoughnutChart";
 import QuizChart from "../../Components/QuizChart/QuizChart";
 import AttendanceChart from "../../Components/AttendanceChart/AttendanceChart";
+import styles from "./preassessment.module.css";
 const Home = () => {
   const [shouldShowSelectError, setShouldShowSelectError] = useState(false);
+
   const [selectError, setSelectError] = useState({
     currentJobTitle: "select your occupation",
     grade: "select your grade",
@@ -15,7 +17,11 @@ const Home = () => {
   });
   const [currentlyStuying, setCurrentlyStuying] = useState("");
   const [workAs, setWorkAs] = useState("");
+  const [collageNames, setCollageName] = useState([]);
+  const [searchKeyResults, setSearchKeyResults] = useState([]);
+  const [queryKey, setQueryKey] = useState("");
 
+  const [searchKey, setSearchKey] = useState("");
   const {
     register,
     handleSubmit,
@@ -63,13 +69,52 @@ const Home = () => {
     return () => subscription.unsubscribe();
   });
   const handleUserDetails = (data) => {};
+  useEffect(() => {
+    fetch("collageNames.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setCollageName(data);
+      });
+  }, []);
+  useEffect(() => {
+    if (searchKey.length) {
+      const targetCollages = collageNames.filter((eachCollage) => {
+        const searchKeyLowerCases = searchKey.toLowerCase();
 
+        const eachCollageLowerCase = eachCollage.toLowerCase();
+        return eachCollageLowerCase.includes(searchKeyLowerCases);
+      });
+
+      if (targetCollages.length > 500) {
+        targetCollages.length = 500;
+        setSearchKeyResults(targetCollages);
+      } else {
+        setSearchKeyResults(targetCollages);
+      }
+      console.log("targetCollages: ", targetCollages);
+    } else {
+      // TODO: if there have no searchkey then i should take all medicienes form database
+      setSearchKeyResults([]);
+    }
+  }, [searchKey]);
+  const handleOnBlur = () => {
+    setTimeout(function () {
+      setSearchKeyResults([]);
+      setSearchKey("");
+    }, 200);
+  };
+  const handleMedicineClick = (coLLageName) => {
+    let collageInputElement = document.getElementById("coLLageName");
+    collageInputElement.value = coLLageName;
+
+    setSearchKeyResults([]);
+  };
   return (
     <div className="">
       {/* show te user greetings  */}
       <div>
         <h1 className="font-semibold my-8 text-2xl text-center">
-          Hi Khalid,Welcome to Geegs of Gurukul
+          Hi Khalid,Welcome to Geeks of Gurukul
         </h1>
       </div>
       <form
@@ -78,7 +123,7 @@ const Home = () => {
         onSubmit={handleSubmit(handleUserDetails)}
       >
         {/* gate date of birth from user  */}
-        <div className="flex justify-between items-center my-2">
+        {/* <div className="flex justify-between items-center my-2">
           <label htmlFor="date-of-birth" className="font-semibold">
             Date of Birth:
           </label>
@@ -91,7 +136,7 @@ const Home = () => {
             id="date-of-birth"
             className="grow ml-2 h-8 rounded-md"
           />
-        </div>
+        </div> */}
         {/* indepth to go the next question  */}
         <div>
           {/* get data for they are currently studying or not  */}
@@ -309,28 +354,60 @@ const Home = () => {
             }`}
           >
             <div>
-              <label className="block font-semibold" htmlFor="coLLageName">
-                collage Name
-              </label>
-              <input
-                {...register("coLLageName", {
-                  required: { value: true, message: "put your coLLage name" },
-                  pattern: {
-                    value: /^[A-Za-z -]+$/,
-                    message: "retype your school name",
-                  },
-                })}
-                type="text"
-                id="coLLageName"
-                className="block h-8 rounded-md w-full"
-              />
-              {errors?.coLLageName && (
-                <p role="alert" className="text-red-500 font-bold">
-                  {/* Name is required */}
-                  {errors?.coLLageName?.message}
-                </p>
+              <div>
+                <label className="block font-semibold" htmlFor="coLLageName">
+                  collage Name
+                </label>
+
+                <input
+                  {...register("coLLageName", {
+                    required: { value: true, message: "put your coLLage name" },
+                    pattern: {
+                      value: /^[A-Za-z -]+$/,
+                      message: "retype your school name",
+                    },
+                  })}
+                  onChange={(e) => setSearchKey(e.target.value)}
+                  onBlur={handleOnBlur}
+                  onFocus={(e) => setSearchKey(e.target.value)}
+                  name="coLLageName"
+                  type="search"
+                  id="coLLageName"
+                  className="block w-full  h-8 rounded-md px-2     focus:ring-green-400 focus:border-green-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Search"
+                  required
+                />
+
+                {errors?.coLLageName && (
+                  <p role="alert" className="text-red-500 font-bold">
+                    {/* Name is required */}
+                    {errors?.coLLageName?.message}
+                  </p>
+                )}
+              </div>
+
+              {searchKeyResults?.length !== 0 && (
+                <div className=" absolute w-full pr-2 md:max-w-md lg:max-w-lg mx-auto   h-full max-h-80 overflow-y-auto  z-20  flex flex-col items-center">
+                  <div className="bg-green-200 border-green-400 w-full border-4  border-t-0 ">
+                    {/* px should be zero after 450 width  */}
+                    {/* ${styles.textsearchresponsive} */}
+                    <ul className={`  w-full    `}>
+                      {searchKeyResults.map((eachResult, i) => (
+                        <li
+                          onClick={() => handleMedicineClick(eachResult)}
+                          // onClick={() => console.log("xxxxxxxxxx")}
+                          key={i}
+                          className="block w-full bg-primary text-black font-bold px-4 py-1 hover:bg-green-300 hover:cursor-pointer"
+                        >
+                          {eachResult}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               )}
             </div>
+
             {/* <div>
             <label htmlFor="latestDegree">latestDegree</label>
             <input type="text" id="latestDegree" />
@@ -541,12 +618,13 @@ const Home = () => {
           Submit
         </button>
       </form>
-
       <div>
         <LectureScedule />
         <LectureScedule />
       </div>
-      <div className="flex justify-between">
+
+      <div className="w-4/5 mx-auto grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-5">
+
         <DoughnutChart />
         <QuizChart />
         <AttendanceChart />

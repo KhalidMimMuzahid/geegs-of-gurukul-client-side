@@ -181,7 +181,7 @@ const CSV = () => {
       }
     });
     if (!isError) {
-      // console.log(allQuestions);
+      console.log(allQuestions);
       const withNonDuplicateQuestions = removeDuplicateQuestions(allQuestions);
       // console.log("withNonDuplicateQuestions: ", withNonDuplicateQuestions);
       fetch("http://localhost:5000/add-csv-data", {
@@ -246,9 +246,9 @@ const handleClick = () => {
 };
 
   return (
-    <div className='container mt-4'>
+    <div className="container mt-4">
       <form>
-        <div className='d-flex flex-row gap-3'>
+        <div className="d-flex flex-row gap-3">
           {/* <input
             type={"file"}
             id={"csvFileInput"}
@@ -256,32 +256,32 @@ const handleClick = () => {
             onChange={handleOnChange}
           /> */}
 
-          <div class='max-w-2xl mx-auto'>
-            <div class='flex items-center justify-center w-full'>
+          <div class="max-w-2xl mx-auto">
+            <div class="flex items-center justify-center w-full">
               <label
-                for='csvFileInput'
-                class='flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600'
+                for="csvFileInput"
+                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
               >
-                <div class='flex flex-col items-center justify-center pt-5 pb-6'>
+                <div class="flex flex-col items-center justify-center pt-5 pb-6">
                   <svg
-                    class='w-10 h-10 mb-3 text-gray-400'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                    xmlns='http://www.w3.org/2000/svg'
+                    class="w-10 h-10 mb-3 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
-                      stroke-width='2'
-                      d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12'
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                     ></path>
                   </svg>
-                  <p class='mb-2 text-sm text-gray-500 dark:text-gray-400'>
-                    <span class='font-semibold'>Click to upload</span> or drag
+                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span class="font-semibold">Click to upload</span> or drag
                     and drop
                   </p>
-                  <p class='text-xs text-gray-500 dark:text-gray-400'>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">
                     File Supported : CSV
                   </p>
                 </div>
@@ -290,10 +290,11 @@ const handleClick = () => {
                   type={"file"}
                   accept={".csv"}
                   onChange={handleOnChange}
-                  className='hidden'
+                  className="hidden"
                 />
               </label>
             </div>
+
             <div className=" ltems-center justify-center my-6 gap-4">
               <div className=" text-center">
 
@@ -315,11 +316,14 @@ const handleClick = () => {
                   <h1 className="">Error</h1>
                   <h5 className='' ref={htmlElement}>{error?.message}</h5>
                   <button className="copy-btu" onClick={handleClick}>Copy</button>
+
                 </div>
               )}
               {error && error?.errorType === "formatError" && (
                 <div>
+
                   <h5 className='text-danger fw-bold mt-3'>{error?.message}</h5>
+
                   <div>Detection with AI: according to row-column pairs</div>
 
                   {errorInRowColumnPairs?.length !== 0 &&
