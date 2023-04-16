@@ -11,9 +11,11 @@ const AddAssesment = () => {
     handleSubmit,
     watch,
     formState: { errors },
-    reset
+    reset,
   } = useForm();
-  const onSubmit = data => {console.log(data)};
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   const [question, setQuestion] = useState([]);
   const [assessmentMainInfo, setAssessmentMainInfo] = useState({});
   const [searchParameteres, setSearchParameteres] = useState({});
@@ -112,11 +114,20 @@ const AddAssesment = () => {
                     type='text'
                     // required
                     name='assessmentName'
-                    {...register("assessmentName",{ required: "Assesment Name is required" })}
-                    aria-invalid={errors.assessmentName ? "true" : "false"} 
+                    {...register("assessmentName", {
+                      required: "Assesment Name is required",
+                    })}
+                    aria-invalid={errors.assessmentName ? "true" : "false"}
                     // onChange={handleInputChange}
                   />
-                   {errors.assessmentName && <p role="alert" className='text-red-500 font-poppins font-medium'>{errors.assessmentName?.message}</p>}
+                  {errors.assessmentName && (
+                    <p
+                      role='alert'
+                      className='text-red-500 font-poppins font-medium'
+                    >
+                      {errors.assessmentName?.message}
+                    </p>
+                  )}
                 </div>
                 <div className='addAssessment'>
                   <label>Topic</label>
@@ -125,10 +136,19 @@ const AddAssesment = () => {
                     type='text'
                     name='topicName'
                     // onChange={handleInputChange}
-                    {...register('topicName', { required: "Topic Name is required" })}
+                    {...register("topicName", {
+                      required: "Topic Name is required",
+                    })}
                     aria-invalid={errors.topicName ? "true" : "false"}
                   />
-                   {errors.topicName && <p role="alert" className='text-red-500 font-poppins font-medium'>{errors.topicName?.message}</p>}
+                  {errors.topicName && (
+                    <p
+                      role='alert'
+                      className='text-red-500 font-poppins font-medium'
+                    >
+                      {errors.topicName?.message}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -140,25 +160,43 @@ const AddAssesment = () => {
                     type='text'
                     name='batchId'
                     // onChange={handleInputChange}
-                    {...register('batchId', { required: "Batch Id is required" })}
+                    {...register("batchId", {
+                      required: "Batch Id is required",
+                    })}
                     aria-invalid={errors.batchId ? "true" : "false"}
                   />
-                   {errors.batchId && <p role="alert" className='text-red-500 font-poppins font-medium'>{errors.scheduledAt?.message}</p>}
+                  {errors.batchId && (
+                    <p
+                      role='alert'
+                      className='text-red-500 font-poppins font-medium'
+                    >
+                      {errors.scheduledAt?.message}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                 <div className=''>
                   <div className='addAssessment'>
-                    <label htmlFor="scheduledAt">Scheduled At</label>
+                    <label htmlFor='scheduledAt'>Scheduled At</label>
                     <input
                       // required
                       type='datetime-local'
                       name='scheduledAt'
                       // onChange={handleInputChange}
-                      {...register('scheduledAt', { required: "Scedule Time is required" })}
+                      {...register("scheduledAt", {
+                        required: "Scedule Time is required",
+                      })}
                       aria-invalid={errors.scheduledAt ? "true" : "false"}
                     />
-                    {errors.scheduledAt && <p role="alert" className='text-red-500 font-poppins font-medium'>{errors.scheduledAt?.message}</p>}
+                    {errors.scheduledAt && (
+                      <p
+                        role='alert'
+                        className='text-red-500 font-poppins font-medium'
+                      >
+                        {errors.scheduledAt?.message}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className=''>
@@ -169,13 +207,123 @@ const AddAssesment = () => {
                       type='number'
                       name='duration'
                       // onChange={handleInputChange}
-                      {...register('duration', { required: "Duration is required" })}
+                      {...register("duration", {
+                        required: "Duration is required",
+                      })}
                       aria-invalid={errors.duration ? "true" : "false"}
                     />
-                    {errors.duration && <p role="alert" className='text-red-500 font-poppins font-medium'>{errors.duration?.message}</p>}
+                    {errors.duration && (
+                      <p
+                        role='alert'
+                        className='text-red-500 font-poppins font-medium'
+                      >
+                        {errors.duration?.message}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
+            </div>
+            {/* Toggle Inputs */}
+            <div className='w-full mx-auto my-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
+              {/* Toggle Inputs */}
+              <div>
+                <label
+                  for='EnableNegativeMarking'
+                  class='flex items-center cursor-pointer relative mb-4'
+                >
+                  <input
+                    type='checkbox'
+                    id='EnableNegativeMarking'
+                    name='EnableNegativeMarking'
+                    {...register("EnableNegativeMarking")}
+                    
+                    class='sr-only bg-green-500'
+                  />
+                  <div class='toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full'></div>
+                  <span class='ml-3 text-gray-900 text-sm font-medium'>
+                    Enable Negative Marking
+                  </span>
+                </label>
+              </div>
+              <div>
+                <label
+                  for='ShuffleQuestionsOptions'
+                  class='flex items-center cursor-pointer relative mb-4'
+                >
+                  <input
+                    type='checkbox'
+                    id='ShuffleQuestionsOptions'
+                    name='ShuffleQuestionsOptions'
+                    {...register("ShuffleQuestionsOptions")}
+                    class='sr-only'
+                  />
+                  <div class='toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full'></div>
+                  <span class='ml-3 text-gray-900 text-sm font-medium'>
+                    Shuffle Questions/Options
+                  </span>
+                </label>
+              </div>
+              <div>
+                <label
+                  for='ShowAnswers'
+                  class='flex items-center cursor-pointer relative mb-4'
+                >
+                  <input type='checkbox'
+                    id='ShowAnswers'
+                    name='ShowAnswers'
+                    {...register("ShowAnswers")}
+                    class='sr-only' />
+                  <div class='toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full'></div>
+                  <span class='ml-3 text-gray-900 text-sm font-medium'>
+                    Show Answers
+                  </span>
+                </label>
+              </div>
+              <div>
+                <label
+                  for='Optional'
+                  class='flex items-center cursor-pointer relative mb-4'
+                >
+                  <input type='checkbox'
+                    id='Optional'
+                    name='Optional'
+                    {...register("Optional")}
+                    class='sr-only' />
+                  <div class='toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full'></div>
+                  <span class='ml-3 text-gray-900 text-sm font-medium'>
+                    Optional
+                  </span>
+                </label>
+              </div>
+            </div>
+            {/* Text Area */}
+            <div class='w-full mx-auto my-10 font-poppins'>
+              <label
+                for='instructions'
+                class='block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400'
+              >
+                Instructions :
+              </label>
+              <textarea
+                id='instructions'
+                name='instructions'
+                {...register("instructions", {
+                  required: "Instruction must have to give",
+                })}
+                rows='4'
+                class='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                placeholder='Your message...'
+                aria-invalid={errors.instructions ? "true" : "false"}
+              ></textarea>
+              {errors.instructions && (
+                      <p
+                        role='alert'
+                        className='text-red-500 font-poppins font-medium'
+                      >
+                        {errors.instructions?.message}
+                      </p>
+                    )}
             </div>
             {/* <button type='submit'>submit</button> */}
             <button
@@ -238,25 +386,28 @@ const AddAssesment = () => {
                     </div>
                   </div>
                   <div className='col-md-4'>
-                  <div className='search-area'>
+                    <div className='search-area'>
+                      <button
+                        type='reset'
+                        onClick={() => setSearchParameteres({})}
+                        class='group relative h-12 w-32 overflow-hidden rounded-lg bg-white text-lg shadow'
+                      >
+                        <div class='absolute inset-0 w-3 bg-red-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
+                        <span class='relative text-black group-hover:text-white'>
+                          Clear
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                  <div className='col-md-4'>
                     <button
-                      type='reset'
-                      onClick={() => setSearchParameteres({})}
-                      class='group relative h-12 w-32 overflow-hidden rounded-lg bg-white text-lg shadow'
+                      type='submit'
+                      className='font-poppins flex bg-green-500 px-4 py-3 text-white rounded-lg hover:bg-green-400 transition-[500ms]'
                     >
-                      <div class='absolute inset-0 w-3 bg-red-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
-                      <span class='relative text-black group-hover:text-white'>
-                        Clear
-                      </span>
+                      <BiSearch size={24}></BiSearch>
+                      <span>Search</span>
                     </button>
                   </div>
-                </div>
-                <div className='col-md-4'>
-                <button type="submit" className="font-poppins flex bg-green-500 px-4 py-3 text-white rounded-lg hover:bg-green-400 transition-[500ms]">
-                      <BiSearch size={24}></BiSearch><span>Search</span>
-                    </button>
-                    
-                </div>
                 </div>
               </div>
             </div>
