@@ -1,5 +1,6 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import ReactPaginate from 'react-paginate';
+import './Users.css'
 const Users = () => {
   // dummy data
   let dummyData = [
@@ -40,6 +41,35 @@ const Users = () => {
       email: "emilyjones@example.com",
     },
   ];
+
+  const [itemOffset, setItemOffset] = useState(0);
+
+  const [items, setData] = useState([])
+  // const 
+  useEffect(() => {
+    fetch("/user.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+      });
+  }, [])
+
+  console.log(items);
+
+  const itemsPerPage = 6
+
+  const endOffset = itemOffset + itemsPerPage;
+
+  const currentItems = items.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(items.length / itemsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % items.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
   return (
     <div>
       <form>
@@ -109,7 +139,7 @@ const Users = () => {
                   </tr>
                 </thead>
                 <tbody class="text-sm divide-y divide-gray-100">
-                  {dummyData.map((profile, i) => (
+                  {currentItems.map((profile, i) => (
                     <tr key={i}>
                       <td class="p-2 whitespace-nowrap">
                         <div class="flex items-center">{i + 1}</div>
@@ -141,6 +171,24 @@ const Users = () => {
                   ))}
                 </tbody>
               </table>
+              {/* pagination */}
+
+              <div>
+                <div className="pagination">
+
+
+                  <ReactPaginate
+                    breakLabel="..."
+                    nextLabel=">"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    previousLabel="<"
+                    renderOnZeroPageCount={null}
+                    containerClassName='pagination-menu'
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

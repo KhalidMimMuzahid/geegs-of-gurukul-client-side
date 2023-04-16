@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 // import styles from "./csv.module.css";
 import { useState } from "react";
 import { useEffect } from "react";
+import './CSV.css'
 const CSV = () => {
   const [assessment, setAssessment] = useState();
   const [questions, setQuestions] = useState([]);
@@ -234,6 +235,16 @@ const CSV = () => {
       fileReader.readAsText(file);
     }
   };
+
+// copy error text 
+
+const htmlElement = useRef(null);
+
+const handleClick = () => {
+  const htmlText = htmlElement.current.innerHTML;
+  navigator.clipboard.writeText(htmlText);
+};
+
   return (
     <div className="container mt-4">
       <form>
@@ -283,29 +294,36 @@ const CSV = () => {
                 />
               </label>
             </div>
-            <div className="flex ltems-center justify-center my-6 gap-4">
-              {/* button */}
-              <button
-                type="button"
-                onClick={(e) => {
-                  handleOnSubmit(e);
-                }}
-                class="group rounded-2xl h-12 w-48 bg-green-500 font-bold text-lg text-white relative overflow-hidden"
-              >
-                Add
-                <div class="absolute duration-300 inset-0 w-full h-full transition-all scale-0 group-hover:scale-100 group-hover:bg-white/30 rounded-2xl"></div>
-              </button>
+
+            <div className=" ltems-center justify-center my-6 gap-4">
+              <div className=" text-center">
+
+                {/* button */}
+                <button
+                  type='button'
+                  onClick={(e) => {
+                    handleOnSubmit(e);
+                  }}
+                  class='group rounded-2xl h-12 w-48 bg-green-500 font-bold text-lg text-white relative overflow-hidden'
+                >
+                  Add
+                  <div class='absolute duration-300 inset-0 w-full h-full transition-all scale-0 group-hover:scale-100 group-hover:bg-white/30 rounded-2xl'></div>
+                </button>
+              </div>
               {/* Error code */}
               {error && error?.errorType === "invalidFile" && (
-                <div>
-                  <h5 className="text-red-600 mt-3 font-poppins font-medium">
-                    {error?.message}
-                  </h5>
+                <div className="message-error">
+                  <h1 className="">Error</h1>
+                  <h5 className='' ref={htmlElement}>{error?.message}</h5>
+                  <button className="copy-btu" onClick={handleClick}>Copy</button>
+
                 </div>
               )}
               {error && error?.errorType === "formatError" && (
                 <div>
-                  <h5 className="text-danger fw-bold mt-3">{error?.message}</h5>
+
+                  <h5 className='text-danger fw-bold mt-3'>{error?.message}</h5>
+
                   <div>Detection with AI: according to row-column pairs</div>
 
                   {errorInRowColumnPairs?.length !== 0 &&
@@ -320,6 +338,7 @@ const CSV = () => {
               )}
             </div>
           </div>
+
         </div>
         {/* errorType: "invalidFile", message: "please provide a valid file (csv
         file)", */}
