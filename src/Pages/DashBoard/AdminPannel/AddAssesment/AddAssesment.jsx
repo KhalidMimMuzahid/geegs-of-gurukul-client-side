@@ -12,6 +12,7 @@ const AddAssesment = () => {
     watch,
     formState: { errors },
   } = useForm();
+  const onSubmit = data => console.log(data);
   const [question, setQuestion] = useState([]);
   const [assessmentMainInfo, setAssessmentMainInfo] = useState({});
   const [searchParameteres, setSearchParameteres] = useState({});
@@ -101,26 +102,32 @@ const AddAssesment = () => {
     <div>
       <div className='assessment-area'>
         <div className='container'>
-          <form onSubmit={addAssesment}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className=' font-poppins font-medium'>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                 <div className='addAssessment'>
                   <label>Assessment Name</label>
                   <input
                     type='text'
-                    required
+                    // required
                     name='assessmentName'
-                    onChange={handleInputChange}
+                    {...register("assessmentName",{ required: "Assesment Name is required" })}
+                    aria-invalid={errors.assessmentName ? "true" : "false"} 
+                    // onChange={handleInputChange}
                   />
+                   {errors.assessmentName && <p role="alert" className='text-red-500 font-poppins font-medium'>{errors.assessmentName?.message}</p>}
                 </div>
                 <div className='addAssessment'>
                   <label>Topic</label>
                   <input
-                    required
+                    // required
                     type='text'
                     name='topicName'
-                    onChange={handleInputChange}
+                    // onChange={handleInputChange}
+                    {...register('topicName', { required: "Topic Name is required" })}
+                    aria-invalid={errors.topicName ? "true" : "false"}
                   />
+                   {errors.topicName && <p role="alert" className='text-red-500 font-poppins font-medium'>{errors.topicName?.message}</p>}
                 </div>
               </div>
 
@@ -128,11 +135,14 @@ const AddAssesment = () => {
                 <div className='addAssessment'>
                   <label>Batch Id</label>
                   <input
-                    required
+                    // required
                     type='text'
                     name='batchId'
-                    onChange={handleInputChange}
+                    // onChange={handleInputChange}
+                    {...register('batchId', { required: "Batch Id is required" })}
+                    aria-invalid={errors.batchId ? "true" : "false"}
                   />
+                   {errors.batchId && <p role="alert" className='text-red-500 font-poppins font-medium'>{errors.scheduledAt?.message}</p>}
                 </div>
               </div>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
@@ -140,22 +150,28 @@ const AddAssesment = () => {
                   <div className='addAssessment'>
                     <label>Scheduled At</label>
                     <input
-                      required
+                      // required
                       type='text'
                       name='scheduledAt'
-                      onChange={handleInputChange}
+                      // onChange={handleInputChange}
+                      {...register('scheduledAt', { required: "Scedule Time is required" })}
+                      aria-invalid={errors.scheduledAt ? "true" : "false"}
                     />
+                    {errors.scheduledAt && <p role="alert" className='text-red-500 font-poppins font-medium'>{errors.scheduledAt?.message}</p>}
                   </div>
                 </div>
                 <div className=''>
                   <div className='addAssessment'>
                     <label>Duration</label>
                     <input
-                      required
+                      // required
                       type='number'
                       name='duration'
-                      onChange={handleInputChange}
+                      // onChange={handleInputChange}
+                      {...register('duration', { required: "Duration is required" })}
+                      aria-invalid={errors.duration ? "true" : "false"}
                     />
+                    {errors.durascheduledAt && <p role="alert" className='text-red-500 font-poppins font-medium'>{errors.durascheduledAt?.message}</p>}
                   </div>
                 </div>
               </div>
