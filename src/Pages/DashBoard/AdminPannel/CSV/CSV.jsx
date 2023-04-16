@@ -180,7 +180,7 @@ const CSV = () => {
       }
     });
     if (!isError) {
-      // console.log(allQuestions);
+      console.log(allQuestions);
       const withNonDuplicateQuestions = removeDuplicateQuestions(allQuestions);
       // console.log("withNonDuplicateQuestions: ", withNonDuplicateQuestions);
       fetch("http://localhost:5000/add-csv-data", {
@@ -235,9 +235,9 @@ const CSV = () => {
     }
   };
   return (
-    <div className='container mt-4'>
+    <div className="container mt-4">
       <form>
-        <div className='d-flex flex-row gap-3'>
+        <div className="d-flex flex-row gap-3">
           {/* <input
             type={"file"}
             id={"csvFileInput"}
@@ -245,32 +245,32 @@ const CSV = () => {
             onChange={handleOnChange}
           /> */}
 
-          <div class='max-w-2xl mx-auto'>
-            <div class='flex items-center justify-center w-full'>
+          <div class="max-w-2xl mx-auto">
+            <div class="flex items-center justify-center w-full">
               <label
-                for='csvFileInput'
-                class='flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600'
+                for="csvFileInput"
+                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
               >
-                <div class='flex flex-col items-center justify-center pt-5 pb-6'>
+                <div class="flex flex-col items-center justify-center pt-5 pb-6">
                   <svg
-                    class='w-10 h-10 mb-3 text-gray-400'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                    xmlns='http://www.w3.org/2000/svg'
+                    class="w-10 h-10 mb-3 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
-                      stroke-width='2'
-                      d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12'
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                     ></path>
                   </svg>
-                  <p class='mb-2 text-sm text-gray-500 dark:text-gray-400'>
-                    <span class='font-semibold'>Click to upload</span> or drag
+                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span class="font-semibold">Click to upload</span> or drag
                     and drop
                   </p>
-                  <p class='text-xs text-gray-500 dark:text-gray-400'>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">
                     File Supported : CSV
                   </p>
                 </div>
@@ -279,46 +279,47 @@ const CSV = () => {
                   type={"file"}
                   accept={".csv"}
                   onChange={handleOnChange}
-                  className='hidden'
+                  className="hidden"
                 />
               </label>
             </div>
             <div className="flex ltems-center justify-center my-6 gap-4">
               {/* button */}
-            <button
-              type='button'
-              onClick={(e) => {
-                handleOnSubmit(e);
-              }}
-              class='group rounded-2xl h-12 w-48 bg-green-500 font-bold text-lg text-white relative overflow-hidden'
-            >
-              Add
-              <div class='absolute duration-300 inset-0 w-full h-full transition-all scale-0 group-hover:scale-100 group-hover:bg-white/30 rounded-2xl'></div>
+              <button
+                type="button"
+                onClick={(e) => {
+                  handleOnSubmit(e);
+                }}
+                class="group rounded-2xl h-12 w-48 bg-green-500 font-bold text-lg text-white relative overflow-hidden"
+              >
+                Add
+                <div class="absolute duration-300 inset-0 w-full h-full transition-all scale-0 group-hover:scale-100 group-hover:bg-white/30 rounded-2xl"></div>
               </button>
               {/* Error code */}
               {error && error?.errorType === "invalidFile" && (
-            <div>
-              <h5 className='text-red-600 mt-3 font-poppins font-medium'>{error?.message}</h5>
-            </div>
-          )}
-          {error && error?.errorType === "formatError" && (
-            <div>
-              <h5 className='text-danger fw-bold mt-3'>{error?.message}</h5>
-              <div>Detection with AI: according to row-column pairs</div>
+                <div>
+                  <h5 className="text-red-600 mt-3 font-poppins font-medium">
+                    {error?.message}
+                  </h5>
+                </div>
+              )}
+              {error && error?.errorType === "formatError" && (
+                <div>
+                  <h5 className="text-danger fw-bold mt-3">{error?.message}</h5>
+                  <div>Detection with AI: according to row-column pairs</div>
 
-              {errorInRowColumnPairs?.length !== 0 &&
-                errorInRowColumnPairs?.map((eachPairs) => (
-                  <div>
-                    <h1>
-                      row = {eachPairs?.row}, column = {eachPairs?.column}
-                    </h1>
-                  </div>
-                ))}
-            </div>
-          )}
+                  {errorInRowColumnPairs?.length !== 0 &&
+                    errorInRowColumnPairs?.map((eachPairs) => (
+                      <div>
+                        <h1>
+                          row = {eachPairs?.row}, column = {eachPairs?.column}
+                        </h1>
+                      </div>
+                    ))}
+                </div>
+              )}
             </div>
           </div>
-          
         </div>
         {/* errorType: "invalidFile", message: "please provide a valid file (csv
         file)", */}
