@@ -11,8 +11,9 @@ const AddAssesment = () => {
     handleSubmit,
     watch,
     formState: { errors },
+    reset
   } = useForm();
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => {console.log(data)};
   const [question, setQuestion] = useState([]);
   const [assessmentMainInfo, setAssessmentMainInfo] = useState({});
   const [searchParameteres, setSearchParameteres] = useState({});
@@ -171,7 +172,7 @@ const AddAssesment = () => {
                       {...register('duration', { required: "Duration is required" })}
                       aria-invalid={errors.duration ? "true" : "false"}
                     />
-                    {errors.durascheduledAt && <p role="alert" className='text-red-500 font-poppins font-medium'>{errors.durascheduledAt?.message}</p>}
+                    {errors.duration && <p role="alert" className='text-red-500 font-poppins font-medium'>{errors.duration?.message}</p>}
                   </div>
                 </div>
               </div>
