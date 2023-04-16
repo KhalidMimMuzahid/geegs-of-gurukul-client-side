@@ -618,7 +618,7 @@ const Home = () => {
           Submit
         </button>
       </form>
-      {/* <div>
+      <div>
         <LectureScedule />
         <LectureScedule />
       </div>
@@ -626,7 +626,7 @@ const Home = () => {
         <DoughnutChart />
         <QuizChart />
         <AttendanceChart />
-      </div> */}
+      </div>
     </div>
   );
 };
