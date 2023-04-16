@@ -546,7 +546,7 @@ const Home = () => {
         <LectureScedule />
         <LectureScedule />
       </div>
-      <div className="flex justify-between">
+      <div className="w-4/5 mx-auto grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-5">
         <DoughnutChart />
         <QuizChart />
         <AttendanceChart />
