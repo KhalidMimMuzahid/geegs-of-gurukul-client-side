@@ -149,10 +149,10 @@ const AddAssesment = () => {
               <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                 <div className=''>
                   <div className='addAssessment'>
-                    <label>Scheduled At</label>
+                    <label htmlFor="scheduledAt">Scheduled At</label>
                     <input
                       // required
-                      type='text'
+                      type='datetime-local'
                       name='scheduledAt'
                       // onChange={handleInputChange}
                       {...register('scheduledAt', { required: "Scedule Time is required" })}
