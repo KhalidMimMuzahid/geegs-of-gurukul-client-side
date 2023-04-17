@@ -18,6 +18,7 @@ const OnProcessinAssesments = () => {
     setShouldShowMouseOutsideErrorModal,
   ] = useState(false);
   const [countGoOutSideOfThisTab, setCountGoOutSideOfThisTab] = useState(0);
+
   const shuffle = (array) => {
     array.sort(() => Math.random() - 0.5);
     return array;
@@ -76,7 +77,7 @@ const OnProcessinAssesments = () => {
       }
     });
     // console.log("\ntotalCorrectAnswer: ", totalCorrectAnswer);
-    console.log("\nnewChosenAnswers: ", newChosenAnswers);
+    // console.log("\nnewChosenAnswers: ", newChosenAnswers);
 
     const assessmentId = assessment?._id;
     const studentEmail = "currentUser?.email";
@@ -112,6 +113,57 @@ const OnProcessinAssesments = () => {
       },
     };
     console.log(" assessmentsResponse: ", assessmentsResponse);
+    const topics = [];
+    // setTopicNames
+    const topicNames = questions?.map((eachQuestion) => {
+      const topicName = eachQuestion?.topicName;
+      const topicNameLowerCase = topicName.toLowerCase();
+      return topicNameLowerCase;
+    });
+    const uniqueTopicNames = [...new Set(topicNames)];
+    uniqueTopicNames?.forEach((eachTopic) => {
+      const totalTopicForThis = questions?.filter((eachQuestion) => {
+        const topicName = eachQuestion?.topicName;
+        const topicNameLowerCase = topicName.toLowerCase();
+        return topicNameLowerCase === eachTopic;
+      });
+      const totalCorrectForThis =
+        assessmentsResponse?.aboutResponse?.chosenAnswers.filter(
+          (eachChosen) => {
+            if (eachChosen?.isCorrect) {
+              const thisQuestion = questions.find((eachQuestion) => {
+                return eachQuestion?._id === eachChosen?.questionId;
+              });
+              return thisQuestion?.topicName.toLowerCase() === eachTopic;
+            } else {
+              return false;
+            }
+          }
+        );
+
+      const totalCorrect = totalCorrectForThis?.length;
+      topics.push({
+        topicName: eachTopic,
+        totalCorrect,
+        totalQuestions: totalTopicForThis?.length,
+      });
+    });
+    // console.log("topics: ", topics);
+    const successRate = topics?.map((eachTopic) => {
+      const newEachTopic = { ...eachTopic };
+      const { totalCorrect, totalQuestions } = eachTopic;
+      const successRate = (totalCorrect / totalQuestions) * 100;
+      newEachTopic.successRate = successRate;
+      return newEachTopic;
+    });
+    // console.log("successRate: ", successRate);
+    const response = { ...assessmentsResponse };
+    const aboutResponse = assessmentsResponse?.aboutResponse;
+    const newAboutResponse = { ...aboutResponse };
+    newAboutResponse.successRate = successRate;
+    response.aboutResponse = newAboutResponse;
+    console.log("response: ", response);
+    // TODO: we have sen this response to mongodb database
   };
   // useEffect(() => {
   //   fetch(
@@ -152,7 +204,19 @@ const OnProcessinAssesments = () => {
         marks: "1",
         questionName: "What is the value of the following expression: 1",
         topicName: "Javascript",
-        _id: "642edf9597c375926cd69f",
+        _id: "642edf9597gf5926cd69f",
+        optionObject: {
+          answers: ["b"],
+          choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
+        },
+      },
+
+      {
+        difficultyLevel: "Easy",
+        marks: "1",
+        questionName: "What is the value of the following expression: 1",
+        topicName: "php",
+        _id: "642edfgffb5326cd69f",
         optionObject: {
           answers: ["b"],
           choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
@@ -161,9 +225,88 @@ const OnProcessinAssesments = () => {
       {
         difficultyLevel: "Easy",
         marks: "1",
+        questionName: "What is the value of the following expression: 1",
+        topicName: "php",
+        _id: "642eff75hhfgf4669f",
+        optionObject: {
+          answers: ["b"],
+          choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
+        },
+      },
+      {
+        difficultyLevel: "Easy",
+        marks: "1",
+        questionName: "What is the value of the following expression: 1",
+        topicName: "socketIo",
+        _id: "4345ff5hhfgf4669f",
+        optionObject: {
+          answers: ["b"],
+          choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
+        },
+      },
+      {
+        difficultyLevel: "Easy",
+        marks: "1",
+        questionName: "What is the value of the following expression: 1",
+        topicName: "react",
+        _id: "43t45844kfdf5gf454ff",
+        optionObject: {
+          answers: ["b"],
+          choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
+        },
+      },
+      {
+        difficultyLevel: "Easy",
+        marks: "1",
+        questionName: "What is the value of the following expression: 1",
+        topicName: "nodeJs",
+        _id: "xxsgf643ttgf443443",
+        optionObject: {
+          answers: ["b"],
+          choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
+        },
+      },
+      {
+        difficultyLevel: "Easy",
+        marks: "1",
+        questionName: "What is the value of the following expression: 1",
+        topicName: "react",
+        _id: "xxsxsddrjjyufyhty654",
+        optionObject: {
+          answers: ["b"],
+          choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
+        },
+      },
+      {
+        difficultyLevel: "Easy",
+        marks: "1",
+        questionName: "What is the value of the following expression: 1",
+        topicName: "socketIo",
+        _id: "49453hfju5874nhdfft",
+        optionObject: {
+          answers: ["b"],
+          choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
+        },
+      },
+
+      {
+        difficultyLevel: "Easy",
+        marks: "1",
+        questionName: "What is the value of the following expression: 1",
+        topicName: "php",
+        _id: "642efgfdfsdfjhhg669f",
+        optionObject: {
+          answers: ["b"],
+          choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
+        },
+      },
+
+      {
+        difficultyLevel: "Easy",
+        marks: "1",
         questionName: "What is the value of the following expression: 2",
-        topicName: "Javascript",
-        _id: "642edf997c375d926cd69g",
+        topicName: "Python",
+        _id: "642edf997c375d926454gfg",
         optionObject: {
           answers: ["b", "a"],
           choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
@@ -173,8 +316,8 @@ const OnProcessinAssesments = () => {
         difficultyLevel: "Easy",
         marks: "1",
         questionName: "What is the value of the following expression: 3",
-        topicName: "Javascript",
-        _id: "642edf9297c75d926cd69h",
+        topicName: "java",
+        _id: "642edf9297c75d94gfffd69h",
         optionObject: {
           answers: ["c"],
           choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
@@ -185,7 +328,7 @@ const OnProcessinAssesments = () => {
         marks: "1",
         questionName: "What is the value of the following expression: 4",
         topicName: "Javascript",
-        _id: "642edf92i7ck5d926cd69h",
+        _id: "642edf92i7cgff5926cd69h",
         optionObject: {
           answers: ["c"],
           choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
@@ -195,8 +338,8 @@ const OnProcessinAssesments = () => {
         difficultyLevel: "Easy",
         marks: "1",
         questionName: "What is the value of the following expression: 5",
-        topicName: "Javascript",
-        _id: "642edf95297375d26cd69j",
+        topicName: "Python",
+        _id: "642edf952973gfgf55d26cd69j",
         optionObject: {
           answers: ["d", "c"],
           choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
@@ -206,8 +349,8 @@ const OnProcessinAssesments = () => {
         difficultyLevel: "Easy",
         marks: "1",
         questionName: "What is the value of the following expression: 6",
-        topicName: "Javascript",
-        _id: "642edf95297c375d9cd69k",
+        topicName: "java",
+        _id: "642edf95295453gf5d9cd69k",
         optionObject: {
           answers: ["b", "d"],
           choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
@@ -218,7 +361,7 @@ const OnProcessinAssesments = () => {
         marks: "1",
         questionName: "What is the value of the following expression: 7",
         topicName: "Javascript",
-        _id: "642edf95297c375926c69l",
+        _id: "642edf95297c375f554c69l",
         optionObject: {
           answers: ["b"],
           choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
@@ -228,8 +371,8 @@ const OnProcessinAssesments = () => {
         difficultyLevel: "Easy",
         marks: "1",
         questionName: "What is the value of the following expression: 8",
-        topicName: "Javascript",
-        _id: "642edf9523ru675926c69l",
+        topicName: "Python",
+        _id: "642edf9523ru675gff569l",
         optionObject: {
           answers: ["b"],
           choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
@@ -239,8 +382,8 @@ const OnProcessinAssesments = () => {
         difficultyLevel: "Easy",
         marks: "1",
         questionName: "What is the value of the following expression: 9",
-        topicName: "Javascript",
-        _id: "642ef95297c375d26cd69m",
+        topicName: "java",
+        _id: "642ef9fbfg545gd26cd69m",
         optionObject: {
           answers: ["a"],
           choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
@@ -251,9 +394,42 @@ const OnProcessinAssesments = () => {
         marks: "1",
         questionName: "What is the value of the following expression: 10",
         topicName: "Javascript",
-        _id: "642edf9529c35d926d69u",
+        _id: "642edfff545t926d69u",
         optionObject: {
           answers: ["a", "c"],
+          choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
+        },
+      },
+      {
+        difficultyLevel: "Easy",
+        marks: "1",
+        questionName: "What is the value of the following expression: 10",
+        topicName: "Javascript",
+        _id: "642edf95296gff334d69u",
+        optionObject: {
+          answers: ["a", "c"],
+          choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
+        },
+      },
+      {
+        difficultyLevel: "Easy",
+        marks: "1",
+        questionName: "What is the value of the following expression: 10",
+        topicName: "c++",
+        _id: "642edfdf545fd426d69u",
+        optionObject: {
+          answers: ["a", "d"],
+          choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
+        },
+      },
+      {
+        difficultyLevel: "Easy",
+        marks: "1",
+        questionName: "What is the value of the following expression: 10",
+        topicName: "dotnet",
+        _id: "642edf95h763hd569u",
+        optionObject: {
+          answers: ["b", "c"],
           choices: [{ a: "10" }, { b: "25" }, { c: "7" }, { d: "30" }],
         },
       },
