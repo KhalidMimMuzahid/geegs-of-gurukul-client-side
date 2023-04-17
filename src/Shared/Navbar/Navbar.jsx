@@ -18,7 +18,7 @@ const Navbar = () => {
     return handleLocationChange();
   });
   return (
-    <nav className="bg-green-100 shadow-green-700 shadow-md border-gray-900 dark:bg-green-900">
+    <nav className="bg-white shadow-green-700 shadow-md border-gray-900 dark:bg-green-900 rounded-lg">
       <div className=" flex flex-wrap items-center justify-between mx-auto p-4">
         <Link className="flex items-center">
           <img src={logo} className="h-8 mr-3" alt="Flowbite Logo" />
@@ -147,7 +147,9 @@ const Navbar = () => {
               <Link
                 to="/"
                 className={`text-black ${
-                  currentPath === "/" ? "bg-green-500 " : "bg-none "
+                  currentPath === "/"
+                    ? "bg-white shadow-lg border border-slate-300 shadow-slate-500"
+                    : "bg-white border border-slate-300"
                 } block py-1 pl-3 pr-4   rounded    px-3 `}
                 aria-current="page"
               >
@@ -156,14 +158,14 @@ const Navbar = () => {
             </li>
             <li className="font-poppins">
               <Link
-                to="/courses"
+                to="/my-courses"
                 className={`text-black ${
-                  currentPath.startsWith("/courses")
-                    ? "bg-green-500 "
-                    : "bg-none "
+                  currentPath.startsWith("/my-courses")
+                    ? "bg-white shadow-lg border border-slate-300 shadow-slate-500"
+                    : "bg-white border border-slate-300"
                 } block py-1 pl-3 pr-4   rounded    px-3 `}
               >
-                Courses
+                My Courses
               </Link>
             </li>
             {/* <li className="font-poppins">
@@ -178,7 +180,9 @@ const Navbar = () => {
               <Link
                 to="/dashboard"
                 className={` text-black ${
-                  currentPath === "/dashboard" ? "bg-green-500  " : "bg-none "
+                  currentPath.startsWith("/dashboard")
+                    ? "bg-white shadow-lg border border-slate-300 shadow-slate-500"
+                    : "bg-white border border-slate-300"
                 } block py-1 pl-3 pr-4   rounded    px-3 `}
               >
                 Dashboard

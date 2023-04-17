@@ -23,12 +23,17 @@ const Main = () => {
     }
   }, [currentPath]);
   return (
-    <div className="container max-w-[1440px] mx-auto">
-      <div style={{ display: `${shouldHiddenNav ? "none" : "block"}` }}>
-        <Navbar />
-      </div>
+    <div
+      className="h-screen overflow-y-hidden "
+      style={{ backgroundColor: "#C4F0CE" }}
+    >
+      <div className="flex flex-col gap-4 container max-w-[1440px] mx-auto">
+        <div style={{ display: `${shouldHiddenNav ? "none" : "block"}` }}>
+          <Navbar />
+        </div>
 
-      <Outlet />
+        <Outlet />
+      </div>
     </div>
   );
 };
