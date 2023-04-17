@@ -41,11 +41,15 @@ const DashBoard = () => {
   }, [currentPath]);
 
   return (
-    <div className="flex w-full h-full">
+    <div className="flex gap-4 w-full h-full">
       <div
-        style={{ display: `${shouldHiddenNav ? "none" : "block"}` }}
-        className={`${!open && "hidden"} md:block ${open ? "w-72" : "w-20 "}  ${
-          open && "border-r-4 border-r-green-600 bg-green-50"
+        style={{
+          display: `${shouldHiddenNav ? "none" : "block"}`,
+          minWidth: `${open ? "200px" : "80px"}`,
+          maxWidth: `${open ? "200px" : "80px"}`,
+        }}
+        className={`${!open && "hidden"} md:block  ${
+          open && " bg-white rounded-md"
         } ${
           style.dashboardHeight
         } h-screen p-5  pt-8 md:relative absolute duration-300 z-[1000] `}
@@ -82,8 +86,8 @@ const DashBoard = () => {
                 className={`flex  rounded-md p-2 cursor-pointer hover:bg-green-300 text-black text-sm items-center gap-x-4 
               ${"mt-2"} ${
                   currentPath.startsWith(Menu?.link)
-                    ? "bg-green-500"
-                    : "bg-green-200"
+                    ? "bg-white shadow-lg border border-slate-300 shadow-slate-500"
+                    : "bg-white border border-slate-300"
                 } `}
               >
                 <img src={Menu.src} alt="" className="w-[25px]" />
@@ -105,14 +109,16 @@ const DashBoard = () => {
           <img
             src={control}
             className={`relative cursor-pointer  ${
-              open ? "left-[270px]" : "left-[-15px] top-[14px]"
-            } md:left-[-19px] top-[0px] w-[35px] border-dark-purple
+              open ? "left-[180px]" : "left-[-15px] top-[14px]"
+            } md:left-[-35px] top-[-3px] w-[35px] border-dark-purple
            border-2 rounded-full  ${!open && "rotate-180"} z-[1001]`}
             onClick={() => setOpen(!open)}
             alt=""
           />
         </div>
-        <div className={`relative top-[-35px] h-full `}>
+        <div
+          className={`relative top-[-35px]  ${style.dashboardHeight} bg-white rounded-md overflow-y-scroll`}
+        >
           <Outlet />
         </div>
       </div>

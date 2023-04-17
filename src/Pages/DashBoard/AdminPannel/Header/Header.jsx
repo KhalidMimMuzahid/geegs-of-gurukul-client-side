@@ -16,6 +16,11 @@ const navigation = [
     link: "/dashboard/admin-pannel/upload-csv",
     current: false,
   },
+  {
+    name: "Add Lectures",
+    link: "/dashboard/admin-pannel/add-lectures",
+    current: false,
+  },
   { name: "Users", link: "/dashboard/admin-pannel/users", current: false },
 ];
 

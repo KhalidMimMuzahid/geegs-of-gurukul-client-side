@@ -1,6 +1,6 @@
 import Main from "../../Layouts/Main/Main";
 import Career from "../../Pages/Career/Career";
-import Courses from "../../Pages/Courses/Courses";
+import MyCourses from "../../Pages/MyCourses/MyCourses";
 import AddAssesment from "../../Pages/DashBoard/AdminPannel/AddAssesment/AddAssesment";
 import AdminPannel from "../../Pages/DashBoard/AdminPannel/AdminPannel";
 import AssesmentList from "../../Pages/DashBoard/AdminPannel/AssesmentList/AssesmentList";
@@ -26,6 +26,9 @@ import ChangePassword from "../../Pages/Profile/MyProfile/Settings/ChangePasswor
 import EditProfile from "../../Pages/Profile/MyProfile/Settings/EditProfile/EditProfile";
 import Settings from "../../Pages/Profile/MyProfile/Settings/Settings";
 import Profile from "../../Pages/Profile/Profile";
+import AllCourses from "../../Pages/MyCourses/AllCourses/AllCourses";
+import SpecificCourse from "../../Pages/MyCourses/SpecificCourse/SpecificCourse";
+import AddLectures from "../../Pages/DashBoard/AdminPannel/AddLectures/AddLectures";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -40,8 +43,12 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/courses",
-        element: <Courses />,
+        path: "/my-courses",
+        element: <MyCourses />,
+        children: [
+          { path: "/my-courses", element: <AllCourses /> },
+          { path: "/my-courses/specific-course", element: <SpecificCourse /> },
+        ],
       },
       {
         path: "/career",
@@ -92,6 +99,10 @@ const router = createBrowserRouter([
               {
                 path: "/dashboard/admin-pannel/assesment-list",
                 element: <AssesmentList />,
+              },
+              {
+                path: "/dashboard/admin-pannel//add-lectures",
+                element: <AddLectures />,
               },
               {
                 path: "/dashboard/admin-pannel/upload-csv",

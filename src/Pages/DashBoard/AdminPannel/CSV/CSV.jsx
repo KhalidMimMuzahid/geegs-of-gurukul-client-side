@@ -2,12 +2,13 @@ import React, { useRef } from "react";
 // import styles from "./csv.module.css";
 import { useState } from "react";
 import { useEffect } from "react";
-import './CSV.css'
+import "./CSV.css";
 const CSV = () => {
   const [assessment, setAssessment] = useState();
   const [questions, setQuestions] = useState([]);
   const [error, setError] = useState(null);
   const [errorInRowColumnPairs, setErrorInRowColumnPairs] = useState([]);
+  const [isCopied, setIsCopied] = useState(false);
   //   {
   //     _id: "givenByThe_MongoDB",
   //     assessmentName: "random_Topics",
@@ -214,6 +215,7 @@ const CSV = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    setIsCopied(false);
     setError(null);
     setErrorInRowColumnPairs([]);
     // console.log("file: ", file);
@@ -236,14 +238,15 @@ const CSV = () => {
     }
   };
 
-// copy error text 
+  // copy error text
 
-const htmlElement = useRef(null);
+  const htmlElement = useRef(null);
 
-const handleClick = () => {
-  const htmlText = htmlElement.current.innerHTML;
-  navigator.clipboard.writeText(htmlText);
-};
+  const handleClick = () => {
+    const htmlText = htmlElement.current.innerHTML;
+    navigator.clipboard.writeText(htmlText);
+    setIsCopied(true);
+  };
 
   return (
     <div className="container mt-4">
@@ -297,48 +300,49 @@ const handleClick = () => {
 
             <div className=" ltems-center justify-center my-6 gap-4">
               <div className=" text-center">
-
                 {/* button */}
                 <button
-                  type='button'
+                  type="button"
                   onClick={(e) => {
                     handleOnSubmit(e);
                   }}
-                  class='group rounded-2xl h-12 w-48 bg-green-500 font-bold text-lg text-white relative overflow-hidden'
+                  class="group rounded-2xl h-12 w-48 bg-green-500 font-bold text-lg text-white relative overflow-hidden"
                 >
                   Add
-                  <div class='absolute duration-300 inset-0 w-full h-full transition-all scale-0 group-hover:scale-100 group-hover:bg-white/30 rounded-2xl'></div>
+                  <div class="absolute duration-300 inset-0 w-full h-full transition-all scale-0 group-hover:scale-100 group-hover:bg-white/30 rounded-2xl"></div>
                 </button>
               </div>
               {/* Error code */}
-              {error && error?.errorType === "invalidFile" && (
-                <div className="message-error">
-                  <h1 className="">Error</h1>
-                  <h5 className='' ref={htmlElement}>{error?.message}</h5>
-                  <button className="copy-btu" onClick={handleClick}>Copy</button>
-
-                </div>
-              )}
-              {error && error?.errorType === "formatError" && (
+              {error && (
                 <div>
-
-                  <h5 className='text-danger fw-bold mt-3'>{error?.message}</h5>
-
-                  <div>Detection with AI: according to row-column pairs</div>
-
-                  {errorInRowColumnPairs?.length !== 0 &&
-                    errorInRowColumnPairs?.map((eachPairs) => (
-                      <div>
-                        <h1>
-                          row = {eachPairs?.row}, column = {eachPairs?.column}
-                        </h1>
-                      </div>
-                    ))}
+                  {error?.errorType === "invalidFile" && (
+                    <div className="message-error">
+                      <h1 className="">Error</h1>
+                      <h5 className="" ref={htmlElement}>
+                        {error?.message}
+                      </h5>
+                      <span className="copy-btu" onClick={handleClick}>
+                        {isCopied ? "Copied" : "Copy"}
+                      </span>
+                    </div>
+                  )}
+                  {error?.errorType === "formatError" && (
+                    <div>
+                      {errorInRowColumnPairs?.length !== 0 &&
+                        errorInRowColumnPairs?.map((eachPairs) => (
+                          <div>
+                            <h1 onClick={handleClick}>
+                              row = {eachPairs?.row}, column ={" "}
+                              {eachPairs?.column}
+                            </h1>
+                          </div>
+                        ))}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
           </div>
-
         </div>
         {/* errorType: "invalidFile", message: "please provide a valid file (csv
         file)", */}
