@@ -237,7 +237,6 @@ const AddAssesment = () => {
                     id='EnableNegativeMarking'
                     name='EnableNegativeMarking'
                     {...register("EnableNegativeMarking")}
-                    
                     class='sr-only bg-green-500'
                   />
                   <div class='toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full'></div>
@@ -269,11 +268,13 @@ const AddAssesment = () => {
                   for='ShowAnswers'
                   class='flex items-center cursor-pointer relative mb-4'
                 >
-                  <input type='checkbox'
+                  <input
+                    type='checkbox'
                     id='ShowAnswers'
                     name='ShowAnswers'
                     {...register("ShowAnswers")}
-                    class='sr-only' />
+                    class='sr-only'
+                  />
                   <div class='toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full'></div>
                   <span class='ml-3 text-gray-900 text-sm font-medium'>
                     Show Answers
@@ -285,11 +286,13 @@ const AddAssesment = () => {
                   for='Optional'
                   class='flex items-center cursor-pointer relative mb-4'
                 >
-                  <input type='checkbox'
+                  <input
+                    type='checkbox'
                     id='Optional'
                     name='Optional'
                     {...register("Optional")}
-                    class='sr-only' />
+                    class='sr-only'
+                  />
                   <div class='toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full'></div>
                   <span class='ml-3 text-gray-900 text-sm font-medium'>
                     Optional
@@ -317,13 +320,13 @@ const AddAssesment = () => {
                 aria-invalid={errors.instructions ? "true" : "false"}
               ></textarea>
               {errors.instructions && (
-                      <p
-                        role='alert'
-                        className='text-red-500 font-poppins font-medium'
-                      >
-                        {errors.instructions?.message}
-                      </p>
-                    )}
+                <p
+                  role='alert'
+                  className='text-red-500 font-poppins font-medium'
+                >
+                  {errors.instructions?.message}
+                </p>
+              )}
             </div>
             {/* <button type='submit'>submit</button> */}
             <button
