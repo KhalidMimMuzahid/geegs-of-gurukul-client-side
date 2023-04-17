@@ -25,7 +25,7 @@ function OverAll() {
 
   return (
     <section
-      className='p-1 space-y-1 my-8  rounded-xl grid-cols-1 md:grid-cols-2 lg:grid-cols-2 md:gap-4 sm:space-y-0'
+      className=' w-96 p-1 space-y-1 my-8  rounded-xl grid-cols-1 md:grid-cols-2 lg:grid-cols-2 md:gap-4 sm:space-y-0'
       x-data='{currentSkill: currentSkill}'
     >
       <h4 className="text-2xl font-poppins font-medium">Overall</h4>
