@@ -1,0 +1,105 @@
+.assessment-area {
+    padding: 19px 40px;
+    cursor: pointer;
+}
+
+.addLecture p {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: #000000;
+    opacity: 0.8;
+    margin-bottom: 4px;
+}
+
+.addLecture input {
+    width: 100%;
+    border: 1px solid #CECECE;
+    border-radius: 5px;
+    font-size: 17px;
+    padding: 10px 20px;
+    margin-bottom: 16px;
+    outline: none;
+}
+
+.search-area input {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    width: 100%;
+    padding: 10px 20px;
+    text-align: center;
+    outline: none;
+    border: 1px solid #CECECE;
+    border-radius: 5px;
+    opacity: 0.8;
+}
+
+.search-area {
+    position: relative;
+    margin-top: 10px;
+}
+
+.search-area svg {
+    position: absolute;
+    top: 15px;
+    left: 11px;
+}
+
+.search-area select {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    width: 100%;
+    padding: 10px 20px;
+    text-align: center;
+    outline: none;
+    border: 1px solid #CECECE;
+    border-radius: 5px;
+    opacity: 0.8;
+}
+
+.display-show {
+    border: 1.5px solid #b9b9b9;
+    margin-top: 26px;
+    position: relative;
+}
+
+.title-part h2 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 25px 0;
+    text-align: center;
+}
+
+.title-part {
+    position: relative;
+}
+
+.display-show:after {
+    position: absolute;
+    top: 69px;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    content: '';
+    background: #b9b9b9;
+}
+
+.part-question {
+    border-left: 1px solid #000;
+    height: 100%;
+}
+
+.part-question h3 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 10px;
+}
