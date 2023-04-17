@@ -1,10 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import style from '../../AllCourses/allCourse.module.css'
 
 const EachLecture = ({ lecture }) => {
   return (
-    <div>
-      <h1>{lecture?.lectureName}</h1>
-    </div>
+    
+        <Link className={`${style.li} `}>
+          <h3><span className="bold">Name : </span>  {lecture?.lectureName}</h3>
+          <h3> <span className="bold">Instructor : </span> {lecture?.instructor}</h3>
+          <h3><span className="bold"> Time : </span> {lecture?.time}</h3>
+        </Link>
+       
+   
   );
 };
 

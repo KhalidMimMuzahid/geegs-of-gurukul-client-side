@@ -1,0 +1,88 @@
+.contain {
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+.singleCourse img {
+    width: 266px;
+    border-radius: 10px;
+}
+
+.singleCourse {
+    gap: 20px;
+    border: 1px solid;
+    padding: 12px;
+    border-radius: 9px;
+    align-items: center;
+    background-color: #fff;
+}
+
+.singleCourse:hover{
+    transform: scale(1.1);
+    transition: .3s ease;
+}
+
+.textCourse h2 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.textCourse span {
+    border-radius: 12px;
+    margin-top: 15px;
+    color: #039e05;
+    font-weight: 800;
+}
+
+.li {
+    background: #86DE5D;
+    padding: 14px 21px;
+    border-radius: 5px;
+    color: #fff;
+    display: flex;
+    font-weight: 500;
+    font-size: 17px;
+    transition: .3s;
+    margin-bottom: 30px;
+    justify-content: space-between;
+}
+
+.li:hover {
+    background: yellowgreen;
+    color: #000;
+}
+
+.contain-lecture{
+    max-width: 500px ;
+    margin: auto;
+}
+
+
+
+.titleCourse h1 {
+    font-size: 40px;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin: 16px 0;
+    text-align: center;
+}
+
+
+@media (min-width: 76px) and (max-width: 767.98px) { 
+    .singleCourse img {
+        margin: 12px auto;
+    }
+
+    .singleCourse{
+        text-align: center;
+    }
+
+    .li{
+        display: block;
+        text-align: center;
+    }
+
+    .titleCourse h1{
+        font-size: 30px;
+    }
+ }
