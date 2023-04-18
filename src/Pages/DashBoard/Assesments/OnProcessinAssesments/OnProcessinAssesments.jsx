@@ -82,7 +82,7 @@ const OnProcessinAssesments = () => {
 
     const assessmentId = assessment?._id;
     const studentEmail = "currentUser?.email";
-    const takeTimeToFinish = "duration the took";
+    const takenTimeToFinish = "duration the took";
     // const finishedAt = "finished time";
     const enabledNegativeMarking = assessment?.enabledNegativeMarking;
 
@@ -101,6 +101,7 @@ const OnProcessinAssesments = () => {
       assessmentId,
       studentEmail,
       startedAt,
+      takenTimeToFinish,
       enabledNegativeMarking,
       totalMark,
       aboutResponse: {
@@ -188,10 +189,11 @@ const OnProcessinAssesments = () => {
     assessmentName: "for new comers",
     batchId: "FSWD-001",
     duration: 10,
-    scheduledAt: "12/12/23",
     topicName: "Javascript",
     createdAt: "12/12/23",
     updatedAt: "12/12/23",
+    scheduledAt: "12/12/23",
+    closedAt: "12/12/23",
     insttruction: "if any instruction then show",
     _id: "642ef65ea8cb9b3eb52cd09e",
     enabledNegativeMarking: true,
@@ -510,7 +512,7 @@ const OnProcessinAssesments = () => {
   //   document.title = "i am in";
   // });
   return (
-    <div className="px-2  h-full mt-10 md:mt-16">
+    <div className="px-2 h-full mt-10 md:mt-16">
       <div>
         <div className="grid grid-cols-12 gap-1 lg:gap-6">
           <div className="col-span-12 lg:col-span-4">
