@@ -33,9 +33,9 @@ const Analysis = () => {
       {/* <Ratings /> */}
       <Strength />
       <AreaOfImprovement />
-      <StackedColumnsChart data={data} />
+      {/* <StackedColumnsChart data={data} /> */}
       <Recomandation />
-      <LeaderBoard />
+      {/* <LeaderBoard /> */}
     </div>
   );
 };
