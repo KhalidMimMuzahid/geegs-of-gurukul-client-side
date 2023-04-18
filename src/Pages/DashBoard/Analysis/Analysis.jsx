@@ -27,10 +27,10 @@ const Analysis = () => {
   return (
     <div className="p-16">
       <ProfileInfo />
-      <button className='px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins'>Review Answer</button>
+      {/* <button className='px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins'>Review Answer</button> */}
       <OverView />
-      <OverAll />
-      <Ratings />
+      {/* <OverAll /> */}
+      {/* <Ratings /> */}
       <Strength />
       <AreaOfImprovement />
       <StackedColumnsChart data={data} />
