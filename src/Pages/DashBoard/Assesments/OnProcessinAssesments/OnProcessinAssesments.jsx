@@ -170,7 +170,7 @@ const OnProcessinAssesments = () => {
     // else  => have to improve
     localStorage.setItem("response", JSON.stringify(response));
     setSubmitModalIsOpen(false);
-    navigate("/dashboard/assessment/on-processing");
+    navigate("/dashboard/analysis");
   };
   // useEffect(() => {
   //   fetch(
