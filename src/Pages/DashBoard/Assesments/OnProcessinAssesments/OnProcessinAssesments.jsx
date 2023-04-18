@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AssessmentHead from "./AssessmentHead/AssessmentHead";
 import AssessmentBody from "./AssessmentBody/AssessmentBody";
+import moment from "moment";
 
 const OnProcessinAssesments = () => {
   const [assessment, setAssessment] = useState({});
@@ -18,7 +19,7 @@ const OnProcessinAssesments = () => {
     setShouldShowMouseOutsideErrorModal,
   ] = useState(false);
   const [countGoOutSideOfThisTab, setCountGoOutSideOfThisTab] = useState(0);
-
+  const startedAt = moment().format();
   const shuffle = (array) => {
     array.sort(() => Math.random() - 0.5);
     return array;
@@ -81,17 +82,17 @@ const OnProcessinAssesments = () => {
 
     const assessmentId = assessment?._id;
     const studentEmail = "currentUser?.email";
-    const startedAt = "start time";
-    const finishedAt = "finished time";
+    const takeTimeToFinish = "duration the took";
+    // const finishedAt = "finished time";
     const enabledNegativeMarking = assessment?.enabledNegativeMarking;
-    const negativeMark = assessment?.negativeMark;
+
     const attemptOn = chosenAnswers?.length;
     const correct = totalCorrectAnswer;
     const wrong = chosenAnswers?.length - totalCorrectAnswer;
     const skipped = questions?.length - chosenAnswers?.length;
     let totalMark = 0;
     if (assessment?.enabledNegativeMarking) {
-      totalMark = correct * 1 - wrong * negativeMark;
+      totalMark = correct * 1 - wrong * 0.25;
     } else {
       totalMark = correct * 1;
     }
@@ -100,9 +101,7 @@ const OnProcessinAssesments = () => {
       assessmentId,
       studentEmail,
       startedAt,
-      finishedAt,
       enabledNegativeMarking,
-      negativeMark,
       totalMark,
       aboutResponse: {
         attemptOn,
@@ -164,6 +163,9 @@ const OnProcessinAssesments = () => {
     response.aboutResponse = newAboutResponse;
     console.log("response: ", response);
     // TODO: we have sen this response to mongodb database
+    // if successrat > 80 => strength include topic name === successrate and also time management
+    // if successrat > 50 => average
+    // else  => have to improve
   };
   // useEffect(() => {
   //   fetch(
