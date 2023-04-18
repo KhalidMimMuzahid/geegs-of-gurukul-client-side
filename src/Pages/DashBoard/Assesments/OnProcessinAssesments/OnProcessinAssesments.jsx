@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import AssessmentHead from "./AssessmentHead/AssessmentHead";
 import AssessmentBody from "./AssessmentBody/AssessmentBody";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 const OnProcessinAssesments = () => {
   const [assessment, setAssessment] = useState({});
@@ -12,13 +13,14 @@ const OnProcessinAssesments = () => {
   const [seenQuestionId, setSeenQuestionId] = useState([]);
   const [isMarkedQuestionId, setIsMarkedQuestionId] = useState([]);
   const [chosenAnswers, setChosenAnswers] = useState([]);
-  // const [remainingTime, setRemainingTime] = useState(0);       we need it later
+  const [takenTimeToFinish, setTakenTimeToFinish] = useState(0);
   const [submitModalIsOpen, setSubmitModalIsOpen] = useState(false);
   const [
     shouldShowMouseOutsideErrorModal,
     setShouldShowMouseOutsideErrorModal,
   ] = useState(false);
   const [countGoOutSideOfThisTab, setCountGoOutSideOfThisTab] = useState(0);
+  const navigate = useNavigate();
   const startedAt = moment().format();
   const shuffle = (array) => {
     array.sort(() => Math.random() - 0.5);
@@ -82,8 +84,7 @@ const OnProcessinAssesments = () => {
 
     const assessmentId = assessment?._id;
     const studentEmail = "currentUser?.email";
-    const takenTimeToFinish = "duration the took";
-    // const finishedAt = "finished time";
+
     const enabledNegativeMarking = assessment?.enabledNegativeMarking;
 
     const attemptOn = chosenAnswers?.length;
@@ -167,6 +168,8 @@ const OnProcessinAssesments = () => {
     // if successrat > 80 => strength include topic name === successrate and also time management
     // if successrat > 50 => average
     // else  => have to improve
+    localStorage.setItem("response", JSON.stringify(response));
+    navigate("/dashboard/assessment/on-processing");
   };
   // useEffect(() => {
   //   fetch(
@@ -529,6 +532,7 @@ const OnProcessinAssesments = () => {
               }
               setChosenAnswers={setChosenAnswers}
               chosenAnswers={chosenAnswers}
+              setTakenTimeToFinish={setTakenTimeToFinish}
             />
           </div>
           <div className="col-span-12 lg:col-span-8 mt-2 lg:mt-12">
