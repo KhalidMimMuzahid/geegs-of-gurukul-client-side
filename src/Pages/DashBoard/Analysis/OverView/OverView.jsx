@@ -2,20 +2,25 @@ import React from "react";
 
 const OverView = () => {
   return (
-    <div className='mt-20'>
-      <h4 className='font-poppins text-2xl font-medium mb-8'>Overview</h4>
-      <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-        {/* card-1 */}
-        <div className='w-52 h-32 bg-green-200 font-poppins font-medium text-center p-4 shadow-lg rounded-lg'>
-          <p>Rating</p>
-          <p>Above Average</p>
-        </div>
-        {/* card-2 */}
-        <div className='w-52 h-32 bg-green-200 font-poppins font-medium text-center p-4 shadow-lg rounded-lg'>
-          <p className=''>Score</p>
-          <p>85%</p>
-        </div>
+    // parent
+    <div className="mt-24">
+      <h4 className="text-2xl font-poppins font-medium">Overview</h4>
+      <div className='flex flex-col md:flex-row justify-between border border-1 border-[#D4D4D4] rounded-lg'>
+        <div className="flex flex-col items-center p-12">
+          <h4 className="text-2xl font-poppins">Above Average</h4>
+          <p className="font-poppins font-medium">Rating</p>
       </div>
+      <div className="h-16 border border-1 my-auto"></div>
+        <div className="flex flex-col items-center p-12">
+          <h4 className="text-2xl font-poppins">85%</h4>
+          <p className="font-poppins font-medium">Percentile</p>
+      </div>
+      <div className="h-16 border border-1 my-auto"></div>
+        <div className="flex flex-col items-center p-12">
+          <h4 className="text-2xl font-poppins">80</h4>
+          <p className="font-poppins font-medium">Overall rank</p>
+      </div>
+    </div>
     </div>
   );
 };

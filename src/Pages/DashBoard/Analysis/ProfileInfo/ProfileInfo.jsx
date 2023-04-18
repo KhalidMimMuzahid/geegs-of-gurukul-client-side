@@ -3,7 +3,7 @@ import './ProfileInfo.css'
 const ProfileInfo = () => {
     
     return (
-        <div className='container'>
+        <div className='container flex flex-col md:flex-row  md:justify-between'>
             {/* left */}
             <div className='flex items-center gap-4'>
                 <div className=''>
@@ -16,10 +16,10 @@ const ProfileInfo = () => {
                 </div>
             </div>
             {/* Right */}
-            {/* <div>
+            <div>
                 <h6 className='font-poppins font-semibold'>Math Assessment Test</h6>
                 <span className='font-poppins ml-28'>20 min</span>
-            </div> */}
+            </div>
         </div>
     );
 };
