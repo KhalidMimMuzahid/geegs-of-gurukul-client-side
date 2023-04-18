@@ -169,7 +169,8 @@ const OnProcessinAssesments = () => {
     // if successrat > 50 => average
     // else  => have to improve
     localStorage.setItem("response", JSON.stringify(response));
-    navigate("/dashboard/assessment/on-processing");
+    setSubmitModalIsOpen(false);
+    navigate("/dashboard/analysis");
   };
   // useEffect(() => {
   //   fetch(
