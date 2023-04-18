@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import style from "../onProcessinAssesments.module.css";
 import EachQuesNo from "./EachQuesNo/EachQuesNo";
+import Timer from "./Timer/Timer";
 const AssessmentHead = ({
+  setTakenTimeToFinish,
   assessment,
   questions,
   selectedQuestion,
@@ -15,9 +17,17 @@ const AssessmentHead = ({
   chosenAnswers,
 }) => {
   const [isMarke, setIsMark] = useState(true);
-  const [remainingTime, setRemainingTime] = useState(25 * 60);
+  const [extraTime, setExtraTime] = useState(0);
+  // const [remainingTime, setRemainingTime] = useState(25 * 60);
+  const handleIncrisingExtraTime = () => {};
   const children = (remainingTime) => {
-    setRemainingTime(remainingTime);
+    if (remainingTime > 0) {
+      setTakenTimeToFinish(assessment?.duration * 60 - remainingTime);
+    } else {
+      setInterval(() => {
+        setTakenTimeToFinish((prev) => ++prev);
+      }, 1000);
+    }
   };
   const handleResetQuestion = () => {
     setChosenAnswers((prev) => {
@@ -67,8 +77,27 @@ const AssessmentHead = ({
           strokeWidth="16"
           onUpdate={(remainingTime) => children(remainingTime)}
         >
-          {({ remainingTime }) => remainingTime}
+          {({ remainingTime }) => {
+            if (remainingTime > 0) {
+              const minutesLeft = Math.floor(remainingTime / 60);
+              const secondsRemainder = remainingTime % 60;
+              // const firstPart = `${minutesLeft < 10 ? 0${minutesLeft} : ${minutesLeft}}`
+              const firstPart = `${
+                minutesLeft < 10 ? `0${minutesLeft}` : minutesLeft
+              }`;
+              const secondPart = `${
+                secondsRemainder < 10
+                  ? `0${secondsRemainder}`
+                  : secondsRemainder
+              }`;
+              return `${firstPart} : ${secondPart}`;
+            } else {
+              return "Time Over";
+            }
+          }}
         </CountdownCircleTimer>
+
+        {/* <Timer /> */}
       </div>
       {/* 2nd portion */}
       <div className="my-4">
