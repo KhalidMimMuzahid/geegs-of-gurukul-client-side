@@ -41,7 +41,7 @@ const DashBoard = () => {
   }, [currentPath]);
 
   return (
-    <div className="flex gap-4 w-full h-full">
+    <div className="flex  gap-4 w-full h-full ">
       <div
         style={{
           display: `${shouldHiddenNav ? "none" : "block"}`,
@@ -104,7 +104,7 @@ const DashBoard = () => {
         </ul>
       </div>
       {/* h-screen  */}
-      <div className="grow    relative">
+      <div className="grow    relative h-full">
         <div style={{ display: `${shouldHiddenNav ? "none" : "block"}` }}>
           <img
             src={control}
@@ -117,7 +117,7 @@ const DashBoard = () => {
           />
         </div>
         <div
-          className={`relative top-[-35px]  ${style.dashboardHeight} bg-white rounded-md overflow-y-scroll`}
+          className={`relative top-[-35px]  ${style.dashboardHeight} bg-white rounded-md overflow-y-auto `}
         >
           <Outlet />
         </div>
