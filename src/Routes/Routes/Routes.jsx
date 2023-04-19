@@ -24,13 +24,16 @@ import Settings from "../../Pages/Profile/MyProfile/Settings/Settings";
 import Profile from "../../Pages/Profile/Profile";
 import AddLectures from "../../Pages/DashBoard/AdminPannel/AddLectures/AddLectures";
 import Home from "../../Pages/DashBoard/Home/Home";
-import MyCourses from "../../Pages/DashBoard/MyCourses/MyCourses";
-import AllCourses from "../../Pages/DashBoard/MyCourses/AllCourses/AllCourses";
-import SpecificCourse from "../../Pages/DashBoard/MyCourses/SpecificCourse/SpecificCourse";
+
 import Announcement from "../../Pages/Announcement/Announcement";
 import Bookmark from "../../Pages/Bookmark/Bookmark";
 import LecturesList from "../../Pages/DashBoard/AdminPannel/LecturesList/LecturesList";
 import AddAssignment from "../../Pages/DashBoard/AdminPannel/AddAssignment/AddAssignment";
+import Courses from "../../Pages/DashBoard/MyCourses/Courses/Courses";
+import MyCourses from "../../Pages/DashBoard/MyCourses/MyCourses";
+import SpecificCourse from "../../Pages/DashBoard/MyCourses/SpecificCourse/SpecificCourse";
+import SpecificLecture from "../../Pages/DashBoard/MyCourses/SpecificLecture/SpecificLecture";
+import SpecificModule from "../../Pages/DashBoard/MyCourses/SpecificModule/SpecificModule";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -74,10 +77,18 @@ const router = createBrowserRouter([
             path: "/dashboard/courses",
             element: <MyCourses />,
             children: [
-              { path: "/dashboard/courses", element: <AllCourses /> },
+              { path: "/dashboard/courses", element: <Courses /> },
               {
-                path: "/dashboard/courses/specific-course",
+                path: "/dashboard/courses/course",
                 element: <SpecificCourse />,
+              },
+              {
+                path: "/dashboard/courses/lecture",
+                element: <SpecificLecture />,
+              },
+              {
+                path: "/dashboard/courses/module",
+                element: <SpecificModule />,
               },
             ],
           },
