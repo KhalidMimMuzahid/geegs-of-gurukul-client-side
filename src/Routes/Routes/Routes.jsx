@@ -1,6 +1,5 @@
 import Main from "../../Layouts/Main/Main";
 import Career from "../../Pages/Career/Career";
-import MyCourses from "../../Pages/MyCourses/MyCourses";
 import AddAssesment from "../../Pages/DashBoard/AdminPannel/AddAssesment/AddAssesment";
 import AdminPannel from "../../Pages/DashBoard/AdminPannel/AdminPannel";
 import AssesmentList from "../../Pages/DashBoard/AdminPannel/AssesmentList/AssesmentList";
@@ -13,10 +12,7 @@ import OnProcessinAssesments from "../../Pages/DashBoard/Assesments/OnProcessinA
 import DashBoard from "../../Pages/DashBoard/DashBoard";
 import Practice from "../../Pages/DashBoard/Practice/Practice";
 import Error from "../../Pages/Error/Error";
-import Home from "../../Pages/Home/Home";
 // import Learn from "../../Pages/Learn/Learn";
-import Announcement from "../../Pages/Profile/Announcement/Announcement";
-import Bookmark from "../../Pages/Profile/Bookmark/Bookmark";
 import LeaderBoard from "../../Pages/Profile/LeaderBoard/LeaderBoard";
 import Certification from "../../Pages/Profile/MyProfile/Certification/Certification";
 import Education from "../../Pages/Profile/MyProfile/Education/Education";
@@ -26,9 +22,13 @@ import ChangePassword from "../../Pages/Profile/MyProfile/Settings/ChangePasswor
 import EditProfile from "../../Pages/Profile/MyProfile/Settings/EditProfile/EditProfile";
 import Settings from "../../Pages/Profile/MyProfile/Settings/Settings";
 import Profile from "../../Pages/Profile/Profile";
-import AllCourses from "../../Pages/MyCourses/AllCourses/AllCourses";
-import SpecificCourse from "../../Pages/MyCourses/SpecificCourse/SpecificCourse";
 import AddLectures from "../../Pages/DashBoard/AdminPannel/AddLectures/AddLectures";
+import Home from "../../Pages/DashBoard/Home/Home";
+import MyCourses from "../../Pages/DashBoard/MyCourses/MyCourses";
+import AllCourses from "../../Pages/DashBoard/MyCourses/AllCourses/AllCourses";
+import SpecificCourse from "../../Pages/DashBoard/MyCourses/SpecificCourse/SpecificCourse";
+import Announcement from "../../Pages/Announcement/Announcement";
+import Bookmark from "../../Pages/Bookmark/Bookmark";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -40,31 +40,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/my-courses",
-        element: <MyCourses />,
-        children: [
-          { path: "/my-courses", element: <AllCourses /> },
-          { path: "/my-courses/specific-course", element: <SpecificCourse /> },
-        ],
-      },
-      {
-        path: "/career",
-        element: <Career />,
-      },
-      // {
-      //   path: "/learn",
-      //   element: <Learn />,
-      // },
-      {
-        path: "/dashboard",
         element: <DashBoard />,
         children: [
           {
-            path: "/dashboard",
-            element: <Default />,
+            path: "/",
+            element: <Home />,
           },
           {
             path: "/dashboard/assessment",
@@ -87,6 +67,17 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/practice",
             element: <Practice />,
+          },
+          {
+            path: "/dashboard/courses",
+            element: <MyCourses />,
+            children: [
+              { path: "/dashboard/courses", element: <AllCourses /> },
+              {
+                path: "/dashboard/courses/specific-course",
+                element: <SpecificCourse />,
+              },
+            ],
           },
           {
             path: "/dashboard/admin-pannel",
@@ -116,6 +107,32 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "/announcement",
+        element: <Announcement />,
+      },
+      {
+        path: "/bookmark",
+        element: <Bookmark />,
+      },
+
+      // {
+      //   path: "/my-courses",
+      //   element: <MyCourses />,
+      //   children: [
+      //     { path: "/my-courses", element: <AllCourses /> },
+      //     { path: "/my-courses/specific-course", element: <SpecificCourse /> },
+      //   ],
+      // },
+      {
+        path: "/career",
+        element: <Career />,
+      },
+      // {
+      //   path: "/learn",
+      //   element: <Learn />,
+      // },
+
       {
         path: "/profile",
         element: <Profile />,
@@ -152,14 +169,7 @@ const router = createBrowserRouter([
               },
             ],
           },
-          {
-            path: "/profile/announcement",
-            element: <Announcement />,
-          },
-          {
-            path: "/profile/bookmark",
-            element: <Bookmark />,
-          },
+
           {
             path: "/profile/leaderboard",
             element: <LeaderBoard />,

@@ -11,9 +11,11 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 const DashBoard = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
+    { title: "Home", src: test, link: "/" },
     { title: "Test", src: test, link: "/dashboard/assessment" },
     { title: "Analysis", src: analysis, link: "/dashboard/analysis" },
     { title: "Practice", src: practice, link: "/dashboard/practice" },
+    { title: "Courses", src: practice, link: "/dashboard/courses" },
     {
       title: "Admin",
       src: adminPannel,
