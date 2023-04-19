@@ -29,6 +29,8 @@ import AllCourses from "../../Pages/DashBoard/MyCourses/AllCourses/AllCourses";
 import SpecificCourse from "../../Pages/DashBoard/MyCourses/SpecificCourse/SpecificCourse";
 import Announcement from "../../Pages/Announcement/Announcement";
 import Bookmark from "../../Pages/Bookmark/Bookmark";
+import LecturesList from "../../Pages/DashBoard/AdminPannel/LecturesList/LecturesList";
+import AddAssignment from "../../Pages/DashBoard/AdminPannel/AddAssignment/AddAssignment";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -102,6 +104,14 @@ const router = createBrowserRouter([
               {
                 path: "/dashboard/admin-pannel/users",
                 element: <Users />,
+              },
+              {
+                path: "/dashboard/admin-pannel/lectures-list",
+                element: <LecturesList />,
+              },
+              {
+                path: "/dashboard/admin-pannel/add-assignment",
+                element: <AddAssignment />,
               },
             ],
           },

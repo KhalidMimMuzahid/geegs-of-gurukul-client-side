@@ -73,12 +73,12 @@ const Analysis = () => {
       {/* <OverAll /> */}
       {/* <Ratings /> */}
       <div>{strength?.length > 0 && <Strength strength={strength} />}</div>
+      <div>{average?.length > 0 && <Average average={average} />}</div>
       <div>
         {haveToImprove?.length > 0 && (
           <AreaOfImprovement haveToImprove={haveToImprove} />
         )}
       </div>
-      <div>{average?.length > 0 && <Average average={average} />}</div>
 
       {/* <AreaOfImprovement /> */}
       {/* <StackedColumnsChart data={data} /> */}

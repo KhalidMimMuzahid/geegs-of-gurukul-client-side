@@ -21,6 +21,16 @@ const navigation = [
     link: "/dashboard/admin-pannel/add-lectures",
     current: false,
   },
+  {
+    name: "Lectures List",
+    link: "/dashboard/admin-pannel/lectures-list",
+    current: false,
+  },
+  {
+    name: "Add Assignment",
+    link: "/dashboard/admin-pannel/add-assignment",
+    current: false,
+  },
   { name: "Users", link: "/dashboard/admin-pannel/users", current: false },
 ];
 

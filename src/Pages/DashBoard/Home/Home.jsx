@@ -35,7 +35,7 @@ const Home = () => {
 
       {/* <button onClick={time}>xxxxxxxxxxxx</button> */}
 
-      {true && (
+      {false && (
         <>
           {/* <h1>sddfddfvfdffdfdfd</h1> */}
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
