@@ -120,10 +120,10 @@ const AssesmentList = () => {
                       <td class="p-2 whitespace-nowrap">{course?.Topic}</td>
                       <td class="p-2 whitespace-nowrap">{course?.Topic}</td>
                       <td class="p-2 whitespace-nowrap flex gap-2">
-                        <div class="mx-auto flex-col md:flex gap-2">
+                        <div class="mx-auto flex w-[100px] gap-2">
                           <button
                             type="button"
-                            className="px-1 py-1 rounded-full bg-red-200"
+                            className="px-1 py-1"
                           >
                             {/* svg */}
                             <img
@@ -135,7 +135,7 @@ const AssesmentList = () => {
                           </button>
                           <button
                             type="button"
-                            className="px-1 py-1 rounded-full bg-sky-100"
+                            className="px-1 py-1 "
                           >
                             {/* svg */}
                             <img
@@ -149,7 +149,7 @@ const AssesmentList = () => {
                           <button
                             data-modal-target="staticModal"
                             data-modal-toggle="staticModal"
-                            class="px-1 py-1 rounded-full bg-green-100"
+                            class="px-1 py-1"
                             type="button"
                           >
                             {/* svg */}
