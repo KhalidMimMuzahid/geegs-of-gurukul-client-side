@@ -7,8 +7,8 @@ import Strength from "./Strength/Strength";
 import AreaOfImprovement from "./AreaOfImprovement/AreaOfImprovement";
 import Recomandation from "./Recomandation/Recomandation";
 import LeaderBoard from "./LeaderBoard/LeaderBoard";
-import StackedColumnsChart from "../../../Components/StackedColumnsChart/StackedColumnsChart";
 import Average from "./Average/Average";
+import StackedColumnChat from "./StackedColumnChat/StackedColumnChat";
 
 const Analysis = () => {
   const [response, setResponse] = useState({});
@@ -45,20 +45,7 @@ const Analysis = () => {
     console.log("average: ", average);
     console.log("haveToImprove: ", haveToImprove);
   };
-  const data = [
-    {
-      name: "Correct",
-      data: [20, 30, 40],
-    },
-    {
-      name: "Incorrect",
-      data: [30, 40, 50],
-    },
-    {
-      name: "Not Attempt",
-      data: [10, 20, 30],
-    },
-  ];
+
   return (
     <div className="p-16">
       <ProfileInfo />
@@ -79,13 +66,11 @@ const Analysis = () => {
           <AreaOfImprovement haveToImprove={haveToImprove} />
         )}
       </div>
-
       {/* <AreaOfImprovement /> */}
       {/* <StackedColumnsChart data={data} /> */}
+      <StackedColumnChat />
       {/* <Recomandation /> */}
       {/* <LeaderBoard /> */}
-
-      <h1 onClick={xxx}>xxxxxxxxxxxxxxx</h1>
     </div>
   );
 };
