@@ -1,14 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import courseimg from "../../../../assets/imga/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-gra-130247647.jpg";
-import style from "./allCourse.module.css";
+import style from "./course.module.css";
 
-const AllCourses = () => {
+const Courses = () => {
   return (
     <div>
       <h1>all courses should be here here</h1>
       <div>
         <div className={`${style.contain}`}>
+          {/* we hav to use each courses  */}
           <div className="grid md:grid-cols-1 lg:grid-cols-2  gap-5 pt-4 px-5">
             <Link to={""} className={`md:flex ${style.singleCourse}`}>
               <img src={courseimg} alt="" />
@@ -54,10 +55,10 @@ const AllCourses = () => {
         </div>
       </div>
       <div>
-        <Link to="/my-courses/specific-course">go to specific course page</Link>
+        <Link to="/dashboard/courses/course">go to specific course page</Link>
       </div>
     </div>
   );
 };
 
-export default AllCourses;
+export default Courses;
