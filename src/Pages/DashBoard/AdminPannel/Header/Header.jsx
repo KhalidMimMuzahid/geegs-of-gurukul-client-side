@@ -53,7 +53,7 @@ const Header = () => {
     <Disclosure as="nav" className="">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 font-poppins">
             <div className="relative flex h-16 items-center justify-end sm:justify-between ">
               <div className="hidden  sm:flex grow items-center justify-end sm:items-stretch ">
                 <div className="hidden sm:ml-6 sm:block justify-end">
@@ -64,7 +64,7 @@ const Header = () => {
                         to={item.link}
                         className={` px-2 py-1 rounded-lg text-black ${
                           currentPath === item.link
-                            ? "bg-green-500 "
+                            ? "bg-green-500 text-white "
                             : " hover:bg-green-300 bg-green-200"
                         } `}
                         aria-current={item.current ? "page" : undefined}

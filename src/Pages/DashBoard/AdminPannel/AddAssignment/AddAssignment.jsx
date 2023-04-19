@@ -34,7 +34,7 @@ function AddAssignment() {
           <textarea
             id='textArea'
             {...register("textArea")}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            className='shadow appearance-none border rounded w-full py-1 px-2 h-28 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           ></textarea>
         </div>
         <div className='mb-6'>
