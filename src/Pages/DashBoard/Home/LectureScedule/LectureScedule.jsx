@@ -1,5 +1,5 @@
 import React from "react";
-import zoom from "../../../assets/icons/zoom.png";
+import zoom from "../../../../assets/icons/zoom.png";
 const LectureScedule = () => {
   return (
     <div>

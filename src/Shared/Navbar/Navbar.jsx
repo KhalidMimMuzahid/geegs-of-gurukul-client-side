@@ -20,11 +20,11 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-green-700 shadow-md border-gray-900 dark:bg-green-900 rounded-lg">
       <div className=" flex flex-wrap items-center justify-between mx-auto p-4">
-        <Link className="flex items-center">
+        <Link to="/" className="flex items-center">
           <img src={logo} className="h-8 mr-3" alt="Flowbite Logo" />
         </Link>
 
-        <div className="flex items-center md:order-2">
+        <div className=" flex items-center md:order-2">
           <button
             type="button"
             className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
@@ -42,10 +42,10 @@ const Navbar = () => {
           </button>
           {/* <!-- Dropdown menu --> */}
           <div
-            className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600"
+            className="z-50  w-[300px]  hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600"
             id="user-dropdown"
           >
-            <div className="px-12 py-12 flex items-center justify-center gap-2">
+            <div className="px-2 py-8 flex items-center justify-around gap-2">
               <div>
                 <img
                   width="76px"
@@ -55,13 +55,12 @@ const Navbar = () => {
                   className="rounded-full border-4 border-green-500"
                 />
               </div>
-              <div>
+              <div className="flex flex-col justify-between items-start">
                 <h4 className="text-xl font-poppins">Shamima Akter</h4>
-                <p className="font-poppins">ID : N/A</p>
                 <Link to="/profile/my-profile">
                   <button
                     type="button"
-                    className="text-white font-poppins bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-400 dark:hover:bg-green-500 focus:outline-none dark:focus:ring-green-400 ml-8"
+                    className="text-white  font-poppins bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-400 dark:hover:bg-green-500 focus:outline-none dark:focus:ring-green-400 ml-8"
                   >
                     View Profile
                   </button>
@@ -72,17 +71,6 @@ const Navbar = () => {
               className="py-2 font-poppins mx-16 gap-4 items-center justify-center my-2"
               aria-labelledby="user-menu-button"
             >
-              <li>
-                <Link
-                  to="/profile/bookmark"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  <div className="flex gap-4 items-center justify-start my-2">
-                    <img src={bookmark} alt="" />
-                    <span>Bookmark</span>
-                  </div>
-                </Link>
-              </li>
               <li>
                 <Link
                   to="/profile/leaderboard"
@@ -96,15 +84,16 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to="/profile/announcement"
+                  to="#"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   <div className="flex gap-4 items-center justify-start my-2">
-                    <img src={anounce} alt="" />
-                    <span>Announcement</span>
+                    <img src={leaderboard} alt="" />
+                    <span>Ticket</span>
                   </div>
                 </Link>
               </li>
+
               <li>
                 <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                   <div className="flex gap-2 items-center justify-start my-2">
@@ -145,47 +134,26 @@ const Navbar = () => {
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li className="font-poppins">
               <Link
-                to="/"
+                to="/announcement"
                 className={`text-black ${
-                  currentPath === "/"
+                  currentPath.startsWith("/announcement")
                     ? "bg-white shadow-lg border border-slate-300 shadow-slate-500"
                     : "bg-white border border-slate-300"
                 } block py-1 pl-3 pr-4   rounded    px-3 `}
-                aria-current="page"
               >
-                Home
+                Announcement
               </Link>
             </li>
             <li className="font-poppins">
               <Link
-                to="/my-courses"
+                to="/bookmark"
                 className={`text-black ${
-                  currentPath.startsWith("/my-courses")
+                  currentPath.startsWith("/bookmark")
                     ? "bg-white shadow-lg border border-slate-300 shadow-slate-500"
                     : "bg-white border border-slate-300"
                 } block py-1 pl-3 pr-4   rounded    px-3 `}
               >
-                My Courses
-              </Link>
-            </li>
-            {/* <li className="font-poppins">
-              <a
-                href="/"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Learn
-              </a>
-            </li> */}
-            <li className="font-poppins">
-              <Link
-                to="/dashboard"
-                className={` text-black ${
-                  currentPath.startsWith("/dashboard")
-                    ? "bg-white shadow-lg border border-slate-300 shadow-slate-500"
-                    : "bg-white border border-slate-300"
-                } block py-1 pl-3 pr-4   rounded    px-3 `}
-              >
-                Dashboard
+                Bookmark
               </Link>
             </li>
           </ul>
