@@ -4,9 +4,7 @@ import ProgressbarCir from "../../../../Components/ProgressbarCir/ProgressbarCir
 const Average = ({ average }) => {
   return (
     <div className="block">
-      <h4 className="font-poppins text-2xl font-bold ">
-        Area to improvement :
-      </h4>
+      <h4 className="font-poppins text-2xl font-bold ">Average :</h4>
       <div className="container">
         <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 gap-4 justify-center items-center w-full">
           {average?.map((eachAverage, i) => (
