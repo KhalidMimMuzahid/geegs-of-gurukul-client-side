@@ -1,42 +1,38 @@
 import React from "react";
-import ReactApexChart from "react-apexcharts";
-
+import Chart from "react-apexcharts";
 const PieChart = ({ details }) => {
   const series = details?.map((each) => parseInt(Object?.values(each)));
   const labels = details?.map((each) => Object?.keys(each));
 
   var options = {
-    chart: {
-      width: 380,
-      type: "pie",
-      stacked: true,
-      stackType: "100",
-    },
     labels: labels,
-    responsive: [
-      {
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200,
-          },
-          legend: {
-            position: "bottom",
+    title: {},
+    plotOptions: {
+      pie: {
+        donut: {
+          labels: {
+            show: true,
+            total: {
+              show: true,
+              fontSize: 15,
+            },
           },
         },
       },
-    ],
+    },
   };
 
   return (
     <div className="my-8">
-      <h4 className="font-poppins text-xl font-bold "> Pie Chart</h4>
-      <ReactApexChart
-        options={options}
+      {/* <h4 className="font-poppins text-xl font-bold "> Pie Chart</h4> */}
+
+      <Chart
+        width={400}
+        height={400}
+        type="donut"
         series={series}
-        type="pie"
-        height={350}
-      />
+        options={options}
+      ></Chart>
     </div>
   );
 };
