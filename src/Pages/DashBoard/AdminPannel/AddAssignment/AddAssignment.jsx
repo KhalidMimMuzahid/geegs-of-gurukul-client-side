@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 function AddAssignment() {
   const { register, handleSubmit } = useForm();
+  const [text, setText] = useState("");
 
   const onSubmit = (data) => {
     console.log(data);
@@ -35,8 +39,18 @@ function AddAssignment() {
             id='textArea'
             {...register("textArea")}
             className='shadow appearance-none border rounded w-full py-1 px-2 h-28 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            value={text}
+            onChange={(e) => setText(e.target.value)}
           ></textarea>
+          <h3>Output:</h3>
+          <div className="w-full h-40 mx-auto bg-white rounded-md overflow-x-auto overflow-y-auto">
+            <ReactMarkdown
+              children={text}
+              remarkPlugins={[remarkGfm]}
+            ></ReactMarkdown>
+          </div>
         </div>
+
         <div className='mb-6'>
           <div class='max-w-2xl mx-auto'>
             <label
