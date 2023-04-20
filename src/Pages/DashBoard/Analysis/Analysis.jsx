@@ -96,17 +96,21 @@ const Analysis = () => {
         />
       </div>
       <div>
-        <PieChart
-          details={[
-            { correct: aboutResponse?.correct },
-            { wrong: aboutResponse?.wrong },
-            { skipped: aboutResponse?.skipped },
-            { skipped: aboutResponse?.skipped },
-          ]}
-        />
-      </div>
-      <div>
-        <SpiderChart topicsDetails={aboutResponse?.topicsDetails} />
+        <h1 className="text-xl font-bold">details Chart</h1>
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-around">
+          <div className="lg:relative top-[20px] justify-self-center">
+            <PieChart
+              details={[
+                { skipped: aboutResponse?.skipped },
+                { correct: aboutResponse?.correct },
+                { wrong: aboutResponse?.wrong },
+              ]}
+            />
+          </div>
+          <div className="  justify-self-center">
+            <SpiderChart topicsDetails={aboutResponse?.topicsDetails} />
+          </div>
+        </div>
       </div>
 
       {/* <Recomandation /> */}
