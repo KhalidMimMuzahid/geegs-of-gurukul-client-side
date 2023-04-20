@@ -123,12 +123,12 @@ const OnProcessinAssesments = () => {
     });
     const uniqueTopicNames = [...new Set(topicNames)];
     uniqueTopicNames?.forEach((eachTopic) => {
-      const totalTopicForThis = questions?.filter((eachQuestion) => {
+      const totalQuestionsForThisTopic = questions?.filter((eachQuestion) => {
         const topicName = eachQuestion?.topicName;
         const topicNameLowerCase = topicName.toLowerCase();
         return topicNameLowerCase === eachTopic;
       });
-      const totalCorrectForThis =
+      const totalCorrectForThisTopic =
         assessmentsResponse?.aboutResponse?.chosenAnswers.filter(
           (eachChosen) => {
             if (eachChosen?.isCorrect) {
@@ -141,27 +141,40 @@ const OnProcessinAssesments = () => {
             }
           }
         );
+      const totalCorrect = totalCorrectForThisTopic?.length;
 
-      const totalCorrect = totalCorrectForThis?.length;
+      const totalAttemptForThisTopic =
+        assessmentsResponse?.aboutResponse?.chosenAnswers.filter(
+          (eachChosen) => {
+            const thisQuestion = questions.find((eachQuestion) => {
+              return eachQuestion?._id === eachChosen?.questionId;
+            });
+            return thisQuestion?.topicName.toLowerCase() === eachTopic;
+          }
+        );
+
+      const totalAttempt = totalAttemptForThisTopic?.length;
+
       topics.push({
         topicName: eachTopic,
         totalCorrect,
-        totalQuestions: totalTopicForThis?.length,
+        totalAttempt,
+        totalQuestions: totalQuestionsForThisTopic?.length,
       });
     });
     // console.log("topics: ", topics);
-    const successRate = topics?.map((eachTopic) => {
+    const topicsDetails = topics?.map((eachTopic) => {
       const newEachTopic = { ...eachTopic };
       const { totalCorrect, totalQuestions } = eachTopic;
-      const successRate = (totalCorrect / totalQuestions) * 100;
-      newEachTopic.successRate = successRate;
+      const abilityRate = (totalCorrect / totalQuestions) * 100;
+      newEachTopic.abilityRate = abilityRate;
       return newEachTopic;
     });
     // console.log("successRate: ", successRate);
     const response = { ...assessmentsResponse };
     const aboutResponse = assessmentsResponse?.aboutResponse;
     const newAboutResponse = { ...aboutResponse };
-    newAboutResponse.successRate = successRate;
+    newAboutResponse.topicsDetails = topicsDetails;
     response.aboutResponse = newAboutResponse;
     console.log("response: ", response);
     // TODO: we have sen this response to mongodb database
