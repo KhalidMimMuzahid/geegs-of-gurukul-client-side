@@ -7,6 +7,7 @@ function AddAssignment() {
   const { register, handleSubmit } = useForm();
   const [text, setText] = useState("");
   const [preview, setPreview] = useState(false);
+  const [instructions, setInstructions] = useState(false);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -34,7 +35,10 @@ function AddAssignment() {
             htmlFor='textArea'
             className='block text-gray-700 font-bold mb-2'
           >
-            Text Area
+            <div className="flex items-center justify-between">
+            <p>Notes:</p>
+            <p onClick={()=>setInstructions(true)} className="hover:text-sky-500 hover:cursor-pointer">Instructions</p>
+            </div>
           </label>
           <textarea
             id='textArea'
@@ -49,27 +53,46 @@ function AddAssignment() {
           >
             Preview
           </button>
-          {/* <div className="w-full h-40 mx-auto bg-white rounded-md overflow-x-auto overflow-y-auto">
-            <ReactMarkdown
-              children={text}
-              remarkPlugins={[remarkGfm]}
-            ></ReactMarkdown>
-          </div> */}
+          {/* For Preview only */}
           {preview && (
             <>
-              
               <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none'>
                 <div className='relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl'>
-                <button onClick={()=>setPreview(false)} className="absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full">❌</button>
-                  <h3 className="text-2xl font-poppins font-medium mt-1">Preview:</h3>
+                  <button
+                    onClick={() => setPreview(false)}
+                    className='absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full'
+                  >
+                    ❌
+                  </button>
+                  <h3 className='text-2xl font-poppins font-medium mt-1'>
+                    Preview:
+                  </h3>
                   <div className=' mt-6 w-full h-4/5 p-4 mx-auto bg-white border border-green-400 rounded-md overflow-x-auto overflow-y-auto'>
                     <ReactMarkdown
                       children={text}
                       remarkPlugins={[remarkGfm]}
                     ></ReactMarkdown>
                   </div>
-                  <button type="submit" className=" px-2 py-2 bg-green-500 rounded-md text-white font-poppins float-right mt-3">Submit</button>
-                   
+                </div>
+              </div>
+              <div className='opacity-25 fixed inset-0  z-[20000] bg-black'></div>
+            </>
+          )}
+          {/* For Instructions to teachers to write markdown */}
+          {instructions && (
+            <>
+              <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none'>
+                <div className='relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl'>
+                  <button
+                    onClick={() => setInstructions(false)}
+                    className='absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full'
+                  >
+                    ❌
+                  </button>
+                  <h3 className='text-2xl font-poppins font-medium mt-1'>
+                    Instructions:
+                  </h3>
+                  <iframe title="markdown instructions" src="https://padomi.id.lv/PRG/par__/Markdown-Cheat-Sheet.pdf" width="100%" height="500px"></iframe>
                 </div>
               </div>
               <div className='opacity-25 fixed inset-0  z-[20000] bg-black'></div>
