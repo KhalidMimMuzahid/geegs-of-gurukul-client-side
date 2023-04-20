@@ -1,7 +1,7 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
-const StackedColumnChat = () => {
+const StackedColumnChat = ({ categories, correct, wrong, notAttempt }) => {
   const options = {
     chart: {
       type: "bar",
@@ -22,16 +22,7 @@ const StackedColumnChat = () => {
       },
     ],
     xaxis: {
-      categories: [
-        "2011 Q1",
-        "2011 Q2",
-        "2011 Q3",
-        "2011 Q4",
-        "2012 Q1",
-        "2012 Q2",
-        "2012 Q3",
-        "2012 Q4",
-      ],
+      categories,
     },
     fill: {
       opacity: 1,
@@ -44,20 +35,23 @@ const StackedColumnChat = () => {
   };
   const series = [
     {
-      name: "PRODUCT A",
-      data: [44, 55, 41, 67, 22, 43, 21, 49],
+      name: "notAttempt",
+      data: notAttempt,
     },
     {
-      name: "PRODUCT B",
-      data: [13, 23, 20, 8, 13, 27, 33, 12],
+      name: "correct",
+      data: correct,
     },
     {
-      name: "PRODUCT C",
-      data: [11, 17, 15, 15, 21, 14, 15, 13],
+      name: "wrong",
+      data: wrong,
     },
   ];
   return (
-    <div>
+    <div className="my-8">
+      <h4 className="font-poppins text-xl font-bold ">
+        Topics v/s (correct, wrong & not attempt)
+      </h4>
       <ReactApexChart
         options={options}
         series={series}
