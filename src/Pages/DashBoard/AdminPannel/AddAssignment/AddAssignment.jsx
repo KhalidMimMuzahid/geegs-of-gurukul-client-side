@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 function AddAssignment() {
   const { register, handleSubmit } = useForm();
   const [text, setText] = useState("");
+  const [preview, setPreview] = useState(false);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -42,13 +43,38 @@ function AddAssignment() {
             value={text}
             onChange={(e) => setText(e.target.value)}
           ></textarea>
-          <h3>Output:</h3>
-          <div className="w-full h-40 mx-auto bg-white rounded-md overflow-x-auto overflow-y-auto">
+          <button
+            onClick={() => setPreview(true)}
+            className='font-poppins font-medium text-white px-4 py-2 bg-green-400 hover:bg-green-500 rounded-md'
+          >
+            Preview
+          </button>
+          {/* <div className="w-full h-40 mx-auto bg-white rounded-md overflow-x-auto overflow-y-auto">
             <ReactMarkdown
               children={text}
               remarkPlugins={[remarkGfm]}
             ></ReactMarkdown>
-          </div>
+          </div> */}
+          {preview && (
+            <>
+              
+              <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none'>
+                <div className='relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl'>
+                <button onClick={()=>setPreview(false)} className="absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full">❌</button>
+                  <h3 className="text-2xl font-poppins font-medium mt-1">Preview:</h3>
+                  <div className=' mt-6 w-full h-4/5 p-4 mx-auto bg-white border border-green-400 rounded-md overflow-x-auto overflow-y-auto'>
+                    <ReactMarkdown
+                      children={text}
+                      remarkPlugins={[remarkGfm]}
+                    ></ReactMarkdown>
+                  </div>
+                  <button type="submit" className=" px-2 py-2 bg-green-500 rounded-md text-white font-poppins float-right mt-3">Submit</button>
+                   
+                </div>
+              </div>
+              <div className='opacity-25 fixed inset-0  z-[20000] bg-black'></div>
+            </>
+          )}
         </div>
 
         <div className='mb-6'>
