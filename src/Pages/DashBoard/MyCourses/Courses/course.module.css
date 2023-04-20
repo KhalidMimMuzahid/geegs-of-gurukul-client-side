@@ -67,6 +67,78 @@
     text-align: center;
 }
 
+.buttonLeft {
+    position: absolute;
+    bottom: 17px;
+    left: 0;
+    width: 100%;
+}
+
+.buttonLeft buttom {
+    font-size: 25px;
+}
+
+.buttonLeft button {
+    font-size: 20px;
+    color: #fff;
+    margin: 0 6px;
+}
+
+
+
+.textVideo h2 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    margin-bottom: 75px;
+    margin-top: 18px;
+}
+
+.textVideo {
+    padding-left: 20px;
+}
+
+.textVideo p {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15.75px;
+    line-height: 35px;
+}
+
+.videoSitting {
+    position: absolute;
+    bottom: 58px;
+    left: 139px;
+    background: #fff;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+button.sittingBtu {
+    position: absolute;
+    bottom: 37px;
+    left: 198px;
+    color: #fff;
+}
+
+.vitcalEuual {
+    transform: rotate(90deg);
+}
+
+
+button.volume input {
+    display: none;
+    
+}
+button.volume{
+    display:flex
+}
+
+
+button.volume:hover input {
+    display: block;
+}
 
 @media (min-width: 76px) and (max-width: 767.98px) { 
     .singleCourse img {
