@@ -33,7 +33,7 @@ const Navbar = () => {
             data-dropdown-toggle="user-dropdown"
             data-dropdown-placement="bottom"
           >
-            <span className="sr-only">Open user menu</span>
+            <span className="sr-only">Openx user menu</span>
             <img
               className="w-8 h-8 rounded-full"
               src="https://randomuser.me/api/portraits/women/63.jpg"
