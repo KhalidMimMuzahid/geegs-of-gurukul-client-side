@@ -529,9 +529,9 @@ const OnProcessinAssesments = () => {
   //   document.title = "i am in";
   // });
   return (
-    <div className="px-2 h-full mt-10 md:mt-16">
+    <div className="px-2 h-full relative  mt-10 md:mt-16">
       <div>
-        <div className="grid grid-cols-12 gap-1 lg:gap-6">
+        <div className="grid grid-cols-12 gap-1 lg:gap-16">
           <div className="col-span-12 lg:col-span-4">
             <AssessmentHead
               assessment={assessment}
@@ -549,7 +549,7 @@ const OnProcessinAssesments = () => {
               setTakenTimeToFinish={setTakenTimeToFinish}
             />
           </div>
-          <div className="col-span-12 lg:col-span-8 mt-2 lg:mt-12">
+          <div className="col-span-12 lg:col-span-8 mt-2 ">
             <AssessmentBody
               // shouldShuffle={assessment?.shouldShuffle}
               selectedQuestion={selectedQuestion}
@@ -563,18 +563,9 @@ const OnProcessinAssesments = () => {
               }
               totalQuestions={totalQuestions}
               chosenAnswers={chosenAnswers}
+              setSubmitModalIsOpen={setSubmitModalIsOpen}
             />
           </div>
-        </div>
-        <div>
-          <h1
-            className="px-4 py-2 bg-green-400 text-bl
-        "
-            onClick={() => setSubmitModalIsOpen(true)}
-            // onClick={handleQuizSubmit}
-          >
-            Submit
-          </h1>
         </div>
       </div>
 

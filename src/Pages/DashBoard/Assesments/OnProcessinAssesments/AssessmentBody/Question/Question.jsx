@@ -158,40 +158,37 @@ const Question = ({
   }, [selectedQuestion]);
   return (
     <div>
-      <div className="flex justify-between  px-2 md:px-4">
-        <div className="flex flex-col">
+      <div className="  px-2 md:px-4 mb-10">
+        <h1 className="text-xl font-bold text-center mb-6 ">
+          Topic: {selectedQuestion?.topicName}
+        </h1>
+        <div className="flex justify-between">
           <h1 className="text-lg  font-semibold">
             Question No: {selectedQuestionIndex + 1}
           </h1>
           <h1 className="text-lg  font-semibold">
-            Mark: {selectedQuestion?.marks}
-          </h1>
-        </div>
-        <div className="flex flex-col">
-          <h1 className="text-lg  font-semibold">
             difficulty Level : {selectedQuestion?.difficultyLevel}
-          </h1>
-          <h1 className="text-lg  font-semibold">
-            Topic: {selectedQuestion?.topicName}
           </h1>
         </div>
       </div>
 
-      <h1 className="text-xl px-3 font-semibold mt-2">
+      <h1 className="text-xl px-3 font-semibold mt-4 mb-6">
         {selectedQuestion?.questionName}
       </h1>
-      <form className={`${style?.quesChoices}`}>
-        {choices?.map((eachChoice, i) => (
-          <EachChoice
-            key={i}
-            eachChoice={eachChoice}
-            isMultipleChoice={isMultipleChoice}
-            choseAnswerChange={choseAnswerChange}
-            chosenAnswers={chosenAnswers}
-            selectedQuestion={selectedQuestion}
-          />
-        ))}
-      </form>
+      <div className="relative left-[25px] ">
+        <form className={` ${style?.quesChoices}`}>
+          {choices?.map((eachChoice, i) => (
+            <EachChoice
+              key={i}
+              eachChoice={eachChoice}
+              isMultipleChoice={isMultipleChoice}
+              choseAnswerChange={choseAnswerChange}
+              chosenAnswers={chosenAnswers}
+              selectedQuestion={selectedQuestion}
+            />
+          ))}
+        </form>
+      </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const Assesments = () => {
   return (
-    <div className=" h-full">
+    <div className="relative ">
       <Outlet />
     </div>
   );
