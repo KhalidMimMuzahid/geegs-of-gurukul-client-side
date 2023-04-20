@@ -24,7 +24,7 @@ const Main = () => {
   }, [currentPath]);
   return (
     <div
-      className="h-screen overflow-y-hidden "
+      className="h-screen overflow-y-hidden"
       style={{ backgroundColor: "#C4F0CE" }}
     >
       <div className="flex flex-col gap-4 container max-w-[1440px] mx-auto">

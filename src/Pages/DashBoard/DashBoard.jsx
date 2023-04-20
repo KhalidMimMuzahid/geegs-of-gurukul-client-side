@@ -43,7 +43,7 @@ const DashBoard = () => {
   }, [currentPath]);
 
   return (
-    <div className="flex  gap-4 w-full h-full ">
+    <div className="flex  gap-4 w-full h-screen">
       <div
         style={{
           display: `${shouldHiddenNav ? "none" : "block"}`,
@@ -119,7 +119,11 @@ const DashBoard = () => {
           />
         </div>
         <div
-          className={`relative top-[-35px]  ${style.dashboardHeight} bg-white rounded-md overflow-y-auto `}
+          className={`relative ${
+            shouldHiddenNav
+              ? "top-[50px] rounded-2xl px-1 sm:px-2 md:px-4 lg:px-8"
+              : "top-[-35px] rounded-lg"
+          }  ${style.dashboardHeight}  bg-white  overflow-y-auto `}
         >
           <Outlet />
         </div>

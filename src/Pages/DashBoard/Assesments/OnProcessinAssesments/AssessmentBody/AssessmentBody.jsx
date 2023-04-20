@@ -13,6 +13,7 @@ const AssessmentBody = ({
   setSelectedQuestionIndex,
   changeSelectedQuestionIndexOneByOne,
   totalQuestions,
+  setSubmitModalIsOpen,
 }) => {
   // console.log("shouldShuffle: ", shouldShuffle);
   return (
@@ -37,6 +38,7 @@ const AssessmentBody = ({
               changeSelectedQuestionIndexOneByOne
             }
             totalQuestions={totalQuestions}
+            setSubmitModalIsOpen={setSubmitModalIsOpen}
           />
         </div>
       </div>
