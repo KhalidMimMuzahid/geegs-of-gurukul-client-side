@@ -68,12 +68,13 @@ const AssessmentHead = ({
   return (
     <div>
       {/* 1st portion */}
-      <h3 className="text-black font-bold text-3xl ml-4">Time Left</h3>
+      {/* <h3 className="text-black font-bold text-3xl ml-4">Time Left</h3>  */}
       <div className="flex justify-center items-center mt-3">
         <CountdownCircleTimer
           isPlaying
           duration={assessment?.duration * 60}
-          colors="#4cb08f"
+          colors={["#3DC86F", "#b9ff78", "#ffff78", "#ff6d24", "#FF0000"]}
+          colorsTime={[300, 270, 240, 210, 0]}
           strokeWidth="16"
           onUpdate={(remainingTime) => children(remainingTime)}
         >
@@ -100,7 +101,7 @@ const AssessmentHead = ({
         {/* <Timer /> */}
       </div>
       {/* 2nd portion */}
-      <div className="my-4 lg:my-12  rounded-lg shadow-lg border-2 p-4">
+      <div className="my-2 lg:my-4  rounded-lg shadow-lg border-2 p-4">
         <div className="flex gap-2 flex-wrap justify-center items-center">
           {questions?.map((eachQues, index) => (
             <EachQuesNo
@@ -121,7 +122,7 @@ const AssessmentHead = ({
       </div>
       {/* progress bar */}
 
-      <div class="w-full my-4 lg:my-8 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+      <div class="w-full my-2 lg:my-4 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
         <div
           class="bg-green-400 h-2.5 rounded-full"
           style={{

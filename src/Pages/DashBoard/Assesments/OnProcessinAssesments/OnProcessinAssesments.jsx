@@ -30,11 +30,14 @@ const OnProcessinAssesments = () => {
   const changeSelectedQuestionIndexOneByOne = (direction) => {
     if (direction === +1) {
       // move forward
-
-      setSelectedQuestionIndex((prev) => prev + 1);
+      if (selectedQuestionIndex + 1 !== totalQuestions) {
+        setSelectedQuestionIndex((prev) => prev + 1);
+      }
     } else if (direction === -1) {
       // move backword
-      setSelectedQuestionIndex((prev) => prev - 1);
+      if (selectedQuestionIndex !== 0) {
+        setSelectedQuestionIndex((prev) => prev - 1);
+      }
     }
   };
   const selectTheSelectedQuestionIndexWithIndex = (index) => {
@@ -529,148 +532,176 @@ const OnProcessinAssesments = () => {
   //   document.title = "i am in";
   // });
   return (
-    <div className="px-2 h-full relative  mt-10 md:mt-16">
-      <div>
-        <div className="grid grid-cols-12 gap-1 lg:gap-16">
-          <div className="col-span-12 lg:col-span-4">
-            <AssessmentHead
-              assessment={assessment}
-              questions={questions}
-              selectedQuestion={selectedQuestion}
-              setSelectedQuestion={setSelectedQuestion}
-              seenQuestionId={seenQuestionId}
-              setIsMarkedQuestionId={setIsMarkedQuestionId}
-              isMarkedQuestionId={isMarkedQuestionId}
-              selectTheSelectedQuestionIndexWithIndex={
-                selectTheSelectedQuestionIndexWithIndex
-              }
-              setChosenAnswers={setChosenAnswers}
-              chosenAnswers={chosenAnswers}
-              setTakenTimeToFinish={setTakenTimeToFinish}
-            />
-          </div>
-          <div className="col-span-12 lg:col-span-8 mt-2 ">
-            <AssessmentBody
-              // shouldShuffle={assessment?.shouldShuffle}
-              selectedQuestion={selectedQuestion}
-              setSelectedQuestion={setSelectedQuestion}
-              setSeenQuestionId={setSeenQuestionId}
-              setChosenAnswers={setChosenAnswers}
-              selectedQuestionIndex={selectedQuestionIndex}
-              setSelectedQuestionIndex={setSelectedQuestionIndex}
-              changeSelectedQuestionIndexOneByOne={
-                changeSelectedQuestionIndexOneByOne
-              }
-              totalQuestions={totalQuestions}
-              chosenAnswers={chosenAnswers}
-              setSubmitModalIsOpen={setSubmitModalIsOpen}
-            />
+    <div className="container max-w-[1440px] mx-auto py-2 lg:py-4 xl:py-8 ">
+      <div className=" h-full relative  ">
+        <div className=" rounded-3xl shadow-lg shadow-slate-700  py-4 lg:px-8 lg:py-8 px-4">
+          <div className="grid grid-cols-12 gap-1 lg:gap-16">
+            <div className="col-span-12 lg:col-span-4">
+              <AssessmentHead
+                assessment={assessment}
+                questions={questions}
+                selectedQuestion={selectedQuestion}
+                setSelectedQuestion={setSelectedQuestion}
+                seenQuestionId={seenQuestionId}
+                setIsMarkedQuestionId={setIsMarkedQuestionId}
+                isMarkedQuestionId={isMarkedQuestionId}
+                selectTheSelectedQuestionIndexWithIndex={
+                  selectTheSelectedQuestionIndexWithIndex
+                }
+                setChosenAnswers={setChosenAnswers}
+                chosenAnswers={chosenAnswers}
+                setTakenTimeToFinish={setTakenTimeToFinish}
+              />
+            </div>
+            <div className="col-span-12 lg:col-span-8 mt-2 ">
+              <AssessmentBody
+                // shouldShuffle={assessment?.shouldShuffle}
+                selectedQuestion={selectedQuestion}
+                setSelectedQuestion={setSelectedQuestion}
+                setSeenQuestionId={setSeenQuestionId}
+                setChosenAnswers={setChosenAnswers}
+                selectedQuestionIndex={selectedQuestionIndex}
+                setSelectedQuestionIndex={setSelectedQuestionIndex}
+                changeSelectedQuestionIndexOneByOne={
+                  changeSelectedQuestionIndexOneByOne
+                }
+                totalQuestions={totalQuestions}
+                chosenAnswers={chosenAnswers}
+                setSubmitModalIsOpen={setSubmitModalIsOpen}
+              />
+            </div>
           </div>
         </div>
-      </div>
 
-      {submitModalIsOpen && (
-        <>
-          {/* <h1>sddfddfvfdffdfdfd</h1> */}
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
-            <div className="relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
-              {/*content*/}
-              <div className="flex flex-col px-2 gap-2   h-full">
-                <div>
-                  {/* header */}
-                  Submitting now ?
-                </div>
-                <div className="px-2">
-                  <div className="border-slate-300 rounded-lg border-2 "></div>
-                </div>
+        {submitModalIsOpen && (
+          <>
+            {/* <h1>sddfddfvfdffdfdfd</h1> */}
+            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
+              <div className="relative w-[360px] h-[320px] sm:w-[400px] md:w-[500px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
+                {/*content*/}
+                <div className="flex flex-col px-8 gap-2   h-full ">
+                  <div>
+                    {/* header */}
+                    <h1 className="text-center text-lg font-bold">
+                      Test Summery
+                    </h1>
+                  </div>
+                  {/* <div className="px-2">
+                    <div className="border-slate-300 rounded-lg border-2 "></div>
+                  </div> */}
 
-                <div className=" grow">
-                  <h1>
-                    You have answer {chosenAnswers?.length} out of{" "}
-                    {totalQuestions}
-                  </h1>
-                  <h1>
-                    You have seen {seenQuestionId?.length} out of{" "}
-                    {totalQuestions}
-                  </h1>
-                  <h1>You have marked {isMarkedQuestionId?.length}</h1>
-                  {/* remainingTime */}
-                  <h1>you have completed on remainingTime</h1>
-                  <h1>
-                    You have skipped {questions?.length - chosenAnswers?.length}{" "}
-                    out of {totalQuestions}
-                  </h1>
-                </div>
+                  <div className=" grow">
+                    <div className="flex justify-between px-4">
+                      <span> No of Question</span>
+                      <span> {totalQuestions}</span>
+                    </div>
+                    <div className=" my-1">
+                      <div className="border-slate-300 rounded-lg border "></div>
+                    </div>
 
-                <div className="px-2">
-                  <div className="border-slate-300 rounded-lg border-2 "></div>
-                </div>
+                    <div className="flex justify-between px-4">
+                      <span>Answered</span>
+                      <span>{chosenAnswers?.length}</span>
+                    </div>
+                    <div className="my-1">
+                      <div className="border-slate-300 rounded-lg border "></div>
+                    </div>
+                    <div className="flex justify-between px-4">
+                      <span>Marked</span>
+                      <span>{isMarkedQuestionId?.length}</span>
+                    </div>
+                    <div className=" my-1">
+                      <div className="border-slate-300 rounded-lg border "></div>
+                    </div>
+                    <div className="flex justify-between px-4">
+                      <span>Not Visited</span>
+                      <span>{totalQuestions - seenQuestionId?.length}</span>
+                    </div>
+                    <div className=" my-1">
+                      <div className="border-slate-300 rounded-lg border "></div>
+                    </div>
+                    <div className="flex justify-between px-4">
+                      <span>Skipped</span>
+                      <span>{questions?.length - chosenAnswers?.length}</span>
+                    </div>
+                    <div className=" my-1">
+                      <div className="border-slate-300 rounded-lg border "></div>
+                    </div>
+                    <div className="flex justify-between px-4">
+                      <span>takenTimeToFinish</span>
+                      <span>{takenTimeToFinish} s</span>
+                    </div>
+                  </div>
 
-                <div>
-                  {/* footer */}
-                  <div className="flex justify-between gap-4">
-                    <span
-                      onClick={handleQuizSubmit}
-                      className="grow  font-semibold text-center py-1 bg-green-300 hover:cursor-pointer hover:bg-green-400 rounded-lg "
-                    >
-                      Submit Now
-                    </span>
-                    <span
-                      onClick={() => setSubmitModalIsOpen(false)}
-                      className="grow font-semibold text-center py-1 bg-red-300 bg- hover:cursor-pointer hover:bg-red-400 rounded-lg "
-                    >
-                      Submit Later
-                    </span>
+                  <div>
+                    {/* footer */}
+                    <div className="flex justify-between items-center">
+                      <span>do you want to submit the answers?</span>
+                      <div className="flex justify-end gap-4">
+                        <span
+                          onClick={() => setSubmitModalIsOpen(false)}
+                          className="grow  font-semibold text-center  border px-2 py-1  hover:cursor-pointer hover:bg-gray-200 rounded-lg "
+                        >
+                          No
+                        </span>
+                        <span
+                          onClick={handleQuizSubmit}
+                          className="grow font-semibold text-center px-2 py-1  bg-green-400  hover:cursor-pointer hover:bg-green-500 rounded-lg "
+                        >
+                          Yes
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="opacity-25 fixed inset-0  z-[20000] bg-black"></div>
-        </>
-      )}
-      {shouldShowMouseOutsideErrorModal && (
-        <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
-            <div className="relative px-2 py-2 w-[380px]  bg-white rounded-lg shadow-2xl">
-              {/*content*/}
-              <div>
-                <div className="text-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="red"
-                    className="w-12 h-12 inline "
+            <div className="opacity-25 fixed inset-0  z-[20000] bg-black"></div>
+          </>
+        )}
+        {shouldShowMouseOutsideErrorModal && (
+          <>
+            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
+              <div className="relative px-2 py-2 w-[380px]  bg-white rounded-lg shadow-2xl">
+                {/*content*/}
+                <div>
+                  <div className="text-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="red"
+                      className="w-12 h-12 inline "
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+                      />
+                    </svg>
+                  </div>
+                  <h1 className="text-red-600 text-center font-bold text-lg">
+                    you can not go outside of this tab. <br />
+                    <span className="text-md text-sm">
+                      Otherwise, we are going to{" "}
+                      <span className=" font-extrabold text-xl">kill</span> your
+                      browser.
+                    </span>
+                  </h1>
+                  <span
+                    onClick={() => setShouldShowMouseOutsideErrorModal(false)}
+                    className="w-full block font-bold text-center py-2 my-2 bg-red-500 bg- hover:cursor-pointer hover:bg-red-600 rounded-lg"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
-                    />
-                  </svg>
-                </div>
-                <h1 className="text-red-600 text-center font-bold text-lg">
-                  you can not go outside of this tab. <br />
-                  <span className="text-md text-sm">
-                    Otherwise, we are going to{" "}
-                    <span className=" font-extrabold text-xl">kill</span> your
-                    browser.
+                    Ok, I undderstand.
                   </span>
-                </h1>
-                <span
-                  onClick={() => setShouldShowMouseOutsideErrorModal(false)}
-                  className="w-full block font-bold text-center py-2 my-2 bg-red-500 bg- hover:cursor-pointer hover:bg-red-600 rounded-lg"
-                >
-                  Ok, I undderstand.
-                </span>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="opacity-25 fixed inset-0  z-[20000] bg-black"></div>
-        </>
-      )}
+            <div className="opacity-25 fixed inset-0  z-[20000] bg-black"></div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

@@ -25,7 +25,7 @@ const Main = () => {
   return (
     <div
       className="h-screen overflow-y-hidden"
-      style={{ backgroundColor: "#C4F0CE" }}
+      style={{ backgroundColor: "#FFF" }}
     >
       <div className="flex flex-col gap-4 container max-w-[1440px] mx-auto">
         <div style={{ display: `${shouldHiddenNav ? "none" : "block"}` }}>
