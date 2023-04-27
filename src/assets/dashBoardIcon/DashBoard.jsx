@@ -19,7 +19,6 @@ import Practice5 from "../../assets/dashBoardIcon/g5.svg";
 import Admin6 from "../../assets/dashBoardIcon/g6.svg";
 
 import { Link, Outlet, useLocation } from "react-router-dom";
-import EachLink from "./EachLink";
 const DashBoard = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
@@ -71,7 +70,7 @@ const DashBoard = () => {
   }, [currentPath]);
 
   return (
-    <div className="flex  gap-4 w-full h-screen">
+    <div className="flex  gap-4 w-full ">
       <div
         style={{
           display: `${shouldHiddenNav ? "none" : "block"}`,
@@ -82,7 +81,7 @@ const DashBoard = () => {
           open && " bg-white rounded-md"
         } ${
           style.dashboardHeight
-        } h-screen  border-0 md:border-2 p-5  pt-8 md:relative absolute duration-300 z-[1000] `}
+        } h-screen border-2 p-5  pt-8 md:relative absolute duration-300 z-[1000] `}
       >
         {/* <img
           src={control}
@@ -110,17 +109,42 @@ const DashBoard = () => {
         </div>
         <ul className="pt-6 font-poppins">
           {Menus.map((Menu, index) => (
-            <EachLink
-              key={index}
-              currentPath={currentPath}
-              Menu={Menu}
-              open={open}
-            />
+            <li key={index}>
+              <Link
+                to={Menu?.link}
+                className={`flex ${
+                  style.menuHover
+                }  rounded-md p-2 cursor-pointer hover:bg-white  text-black text-sm items-center gap-x-4 
+              ${"mt-2"} ${
+                  currentPath.startsWith(Menu?.link)
+                    ? "bg-white shadow-lg  shadow-[#00000040]"
+                    : "bg-white "
+                } `}
+              >
+                <img
+                  src={Menu.src}
+                  alt=""
+                  className={`w-[25px] ${style.img1}`}
+                />
+                <img
+                  src={Menu.hover}
+                  alt=""
+                  className={`w-[25px] hidden  ${style.img2} `}
+                />
+                <span
+                  className={`${
+                    !open && "hidden"
+                  } origin-left font-bold duration-200`}
+                >
+                  {Menu.title}
+                </span>
+              </Link>
+            </li>
           ))}
         </ul>
       </div>
       {/* h-screen  */}
-      <div className="grow    relative h-full">
+      <div className="grow  relative h-full">
         <div style={{ display: `${shouldHiddenNav ? "none" : "block"}` }}>
           <img
             src={control}

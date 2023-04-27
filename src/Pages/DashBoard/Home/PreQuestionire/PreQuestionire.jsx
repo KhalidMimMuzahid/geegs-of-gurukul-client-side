@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
+import school from "../../../../assets/Testimg/school.png";
+import collage from "../../../../assets/Testimg/collage.png";
+import student from "../../../../assets/Testimg/studentyeYes.svg";
+import studentNo from "../../../../assets/Testimg/studentNo.svg";
+import looking from "../../../../assets/Testimg/lookingjob.png";
+import job from "../../../../assets/Testimg/working.png";
+import style from "./PreQuestionire.module.css";
 const PreQuestionire = () => {
   const [shouldShowSelectError, setShouldShowSelectError] = useState(false);
 
@@ -103,80 +109,74 @@ const PreQuestionire = () => {
 
     setSearchKeyResults([]);
   };
+
+  console.log(workAs);
   return (
     <form
       action=""
       onSubmit={handleSubmit(handleUserDetails)}
-      className="flex flex-col px-2 gap-2   h-full"
+      className={`${style.assesstestA}`}
     >
       <div>
         {/* header */}
-        <h1 className="font-bold text-xl">welcome khalid ?</h1>
-      </div>
-      <div className="px-2">
-        <div className="border-slate-300 rounded-lg border-2 "></div>
+        <h1 className={`text-center md:text-left ${style.nameAss}`}>
+          welcome khalid ?
+        </h1>
       </div>
 
       <div className=" grow">
         <div>
           {/* show te user greetings  */}
 
-          <div className="w-[500px] mx-auto">
-            {/* gate date of birth from user  */}
-            <div className="flex justify-between items-center my-2">
-              <label htmlFor="date-of-birth" className="font-semibold">
-                Date of Birth:
-              </label>
-              <input
-                // {...register("date", {
-                //   required: { value: true, message: "pick your birth date" },
-                // })}
-                type="date"
-                name=""
-                id="date-of-birth"
-                className="grow ml-2 h-8 rounded-md"
-              />
-            </div>
+          <div className="w-[280px]  sm:w-[300px] md:w-[500px] lg-[600px] mx-auto">
             {/* indepth to go the next question  */}
             <div>
               {/* get data for they are currently studying or not  */}
               <div className="my-2">
-                <label className="font-semibold">
+                <label className={`text-center mb-5 ${style.titleSub}`}>
                   Are you Currently Studying ?
                 </label>
-                <div className="flex justify-between">
-                  <div className="flex items-center">
-                    <input
-                      {...register("isStudying", {
-                        required: {
-                          value: true,
-                          message: "select one of them",
-                        },
-                      })}
-                      type="radio"
-                      id="isStudying"
-                      name="isStudying"
-                      value="true"
-                    />
+                <div className=" md:flex md:justify-between">
+                  <div
+                    className={`${
+                      currentlyStuying === "true" && "shadow-md"
+                    } md:flex md:items-center`}
+                  >
                     <label htmlFor="isStudying" className="ml-2">
-                      Yes, I am studying
+                      <input
+                        {...register("isStudying", {
+                          required: {
+                            value: true,
+                            message: "select one of them",
+                          },
+                        })}
+                        type="radio"
+                        id="isStudying"
+                        name="isStudying"
+                        value="true"
+                      />
+                      <img src={student} className="md:mx-0 mx-auto" alt="" />
                     </label>
                   </div>
-                  <div className="flex items-center">
-                    <input
-                      {...register("isStudying", {
-                        required: {
-                          value: true,
-                          message: "select one of them",
-                        },
-                      })}
-                      type="radio"
-                      id="isNotStudying"
-                      name="isStudying"
-                      value="false"
-                    />
+                  <div
+                    className={`${
+                      currentlyStuying === "false" && "shadow-md"
+                    } md:flex md:items-center`}
+                  >
                     <label htmlFor="isNotStudying" className="ml-2">
-                      No, I am not studying
+                      <input
+                        {...register("isStudying", {
+                          required: {
+                            value: true,
+                            message: "select one of them",
+                          },
+                        })}
+                        type="radio"
+                        id="isNotStudying"
+                        name="isStudying"
+                        value="false"
+                      />
+                      <img className="md:mx-0 mx-auto" src={studentNo} alt="" />
                     </label>
                   </div>
                 </div>
@@ -193,43 +193,53 @@ const PreQuestionire = () => {
 
                 <div
                   className={` my-2  ${
-                    currentlyStuying === "true" ? "block" : "hidden"
+                    currentlyStuying === "true" ? "block " : "hidden"
                   }`}
                 >
-                  <label className="font-semibold">Are you currently ?</label>
-                  <div className="flex justify-between">
-                    <div className="flex items-center ">
-                      <input
-                        {...register("workAs", {
-                          required: {
-                            value: true,
-                            message: "select one of them",
-                          },
-                        })}
-                        type="radio"
-                        id="schoolStudent"
-                        name="workAs"
-                        value="schoolStudent"
-                      />
+                  <label className={`${style.titleSub} text-center mb-5`}>
+                    Are you currently ?
+                  </label>
+                  <div className="md:flex md:justify-between">
+                    <div
+                      className={`md:flex md:items-center ${
+                        workAs === "schoolStudent" && "shadow-md"
+                      } `}
+                    >
                       <label htmlFor="schoolStudent" className="ml-2">
-                        in School
+                        <input
+                          {...register("workAs", {
+                            required: {
+                              value: true,
+                              message: "select one of them",
+                            },
+                          })}
+                          type="radio"
+                          id="schoolStudent"
+                          name="workAs"
+                          value="schoolStudent"
+                        />
+                        <img className="md:mx-0 mx-auto" src={school} alt="" />
                       </label>
                     </div>
-                    <div className="flex items-center">
-                      <input
-                        {...register("workAs", {
-                          required: {
-                            value: true,
-                            message: "select one of them",
-                          },
-                        })}
-                        type="radio"
-                        id="collageStudent"
-                        name="workAs"
-                        value="collageStudent"
-                      />
+                    <div
+                      className={`md:flex md:items-center ${
+                        workAs === "collageStudent" && "shadow-md"
+                      } `}
+                    >
                       <label htmlFor="collageStudent" className="ml-2">
-                        in Collage
+                        <input
+                          {...register("workAs", {
+                            required: {
+                              value: true,
+                              message: "select one of them",
+                            },
+                          })}
+                          type="radio"
+                          id="collageStudent"
+                          name="workAs"
+                          value="collageStudent"
+                        />
+                        <img className="md:mx-0 mx-auto" src={collage} alt="" />
                       </label>
                     </div>
                   </div>
@@ -247,41 +257,51 @@ const PreQuestionire = () => {
                     currentlyStuying === "false" ? "block" : "hidden"
                   }`}
                 >
-                  <label className="font-semibold">Are you currently?</label>
+                  <label className={` ${style.titleSub} text-center mb-5`}>
+                    Are you currently?
+                  </label>
 
-                  <div className="flex justify-between">
-                    <div className="flex items-center ">
-                      <input
-                        {...register("workAs", {
-                          required: {
-                            value: true,
-                            message: "select one of them",
-                          },
-                        })}
-                        type="radio"
-                        id="jobSeeker"
-                        name="workAs"
-                        value="jobSeeker"
-                      />
+                  <div className="md:flex md:justify-between">
+                    <div
+                      className={`md:flex md:items-center ${
+                        workAs === "jobSeeker" && "shadow-md"
+                      } `}
+                    >
                       <label htmlFor="jobSeeker" className="ml-2">
-                        looking for a job
+                        <input
+                          {...register("workAs", {
+                            required: {
+                              value: true,
+                              message: "select one of them",
+                            },
+                          })}
+                          type="radio"
+                          id="jobSeeker"
+                          name="workAs"
+                          value="jobSeeker"
+                        />
+                        <img className="md:mx-0 mx-auto" src={looking} alt="" />
                       </label>
                     </div>
-                    <div className="flex items-center ">
-                      <input
-                        {...register("workAs", {
-                          required: {
-                            value: true,
-                            message: "select one of them",
-                          },
-                        })}
-                        type="radio"
-                        id="jobHolder"
-                        name="workAs"
-                        value="jobHolder"
-                      />
+                    <div
+                      className={`md:flex md:items-center ${
+                        workAs === "jobHolder" && "shadow-md"
+                      } `}
+                    >
                       <label htmlFor="jobHolder" className="ml-2">
-                        currently working
+                        <input
+                          {...register("workAs", {
+                            required: {
+                              value: true,
+                              message: "select one of them",
+                            },
+                          })}
+                          type="radio"
+                          id="jobHolder"
+                          name="workAs"
+                          value="jobHolder"
+                        />
+                        <img className="md:mx-0 mx-auto" src={job} alt="" />
                       </label>
                     </div>
                   </div>
@@ -296,18 +316,18 @@ const PreQuestionire = () => {
 
               {/* if currently studying and school sudent then go for school name and grade */}
               <div
-                className={`${
+                className={` ${style.textpart} ${
                   workAs === "schoolStudent" && currentlyStuying === "true"
                     ? "block"
                     : "hidden"
                 }`}
               >
-                <div className="my-2">
-                  <label className="block font-semibold" htmlFor="schoolName">
+                <div className="my-2 mb-5 ">
+                  <label className="titleSub" htmlFor="schoolName">
                     School Name
                   </label>
                   <input
-                    className="block h-8 rounded-md w-full"
+                    className="block h-8 rounded-md md:w-full"
                     {...register("schoolName", {
                       required: {
                         value: true,
@@ -330,9 +350,9 @@ const PreQuestionire = () => {
                     </p>
                   )}
                 </div>
-                <div className="block my-2 ">
-                  <div className="flex justify-between items-center">
-                    <label className="block font-semibold" htmlFor="grade">
+                <div className="block my-2 mb-5">
+                  <div className="">
+                    <label className="titleSub" htmlFor="grade">
                       Select your grade
                     </label>
                     <select
@@ -342,7 +362,7 @@ const PreQuestionire = () => {
                       name="grade"
                       id="grade"
                       defaultValue="any"
-                      className="block grow h-8 py-0 rounded-md ml-2"
+                      className="block md:w-full grow h-8 py-0 rounded-md ml-2"
                     >
                       <option value="any" disabled>
                         Grade ?
@@ -367,7 +387,7 @@ const PreQuestionire = () => {
               {/* if currently studying and collage student or  (currently not studying and looking for job) or (optional => (currently not studying and already in working)) then go for collage Name , latest degree and graduation year */}
 
               <div
-                className={`${
+                className={`${style.textpart} ${
                   (workAs === "collageStudent" &&
                     currentlyStuying === "true") ||
                   (workAs === "jobSeeker" && currentlyStuying === "false")
@@ -375,13 +395,13 @@ const PreQuestionire = () => {
                     : "hidden"
                 }`}
               >
-                <div>
-                  <div>
+                <div className=" relative ">
+                  <div className=" mb-5">
                     <label
-                      className="block font-semibold"
+                      className={`${style.titleSub}`}
                       htmlFor="coLLageName"
                     >
-                      collage Name
+                      Collage Name
                     </label>
 
                     <input
@@ -401,7 +421,7 @@ const PreQuestionire = () => {
                       name="coLLageName"
                       type="search"
                       id="coLLageName"
-                      className="block w-full  h-8 rounded-md px-2 focus:ring-green-400 focus:border-green-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="block md:w-full  h-8 rounded-md px-2 focus:ring-green-400 focus:border-green-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Search"
                     />
 
@@ -414,7 +434,7 @@ const PreQuestionire = () => {
                   </div>
 
                   {searchKeyResults?.length !== 0 && (
-                    <div className=" absolute w-full pr-2 md:max-w-md lg:max-w-lg mx-auto   h-full max-h-80 overflow-y-auto  z-20  flex flex-col items-center">
+                    <div className=" absolute w-full pr-2 md:max-w-md lg:max-w-lg mx-auto   max-h-80 overflow-y-auto  z-20  flex flex-col items-center">
                       <div className="bg-white border-green-400 w-full border-4  border-t-0 ">
                         {/* px should be zero after 450 width  */}
                         {/* ${styles.textsearchresponsive} */}
@@ -439,10 +459,10 @@ const PreQuestionire = () => {
                   <label htmlFor="latestDegree">latestDegree</label>
                   <input type="text" id="latestDegree" />
                 </div> */}
-                <div className="my-2">
-                  <div className="flex justify-between items-center">
+                <div className="my-2 mb-5">
+                  <div className="">
                     <label
-                      className="block font-semibold"
+                      className={`${style.titleSub}`}
                       htmlFor="latestDegree"
                     >
                       Select your latest degree
@@ -457,7 +477,7 @@ const PreQuestionire = () => {
                       name="latestDegree"
                       id="latestDegree"
                       defaultValue="any"
-                      className="block grow h-8 rounded-md ml-2 py-0"
+                      className="block md:w-full grow h-8 rounded-md ml-2 py-0"
                     >
                       <option value="any" disabled>
                         latest Degree ?
@@ -475,10 +495,10 @@ const PreQuestionire = () => {
                     </p>
                   )}
                 </div>
-                <div className="my-2">
-                  <div className="flex justify-between items-center">
+                <div className="my-2  mb-5">
+                  <div className="">
                     <label
-                      className="block font-semibold"
+                      className={`${style.titleSub}`}
                       htmlFor="graduationYear"
                     >
                       Select your graduation year
@@ -493,7 +513,7 @@ const PreQuestionire = () => {
                       name="graduationYear"
                       id="graduationYear"
                       defaultValue="any"
-                      className="block grow h-8 rounded-md ml-2 py-0"
+                      className="block grow md:w-full h-8 rounded-md ml-2 py-0"
                     >
                       <option value="any" disabled>
                         graduation Year ?
@@ -524,14 +544,14 @@ const PreQuestionire = () => {
 
               {/* if currently not studying and already in working then n go for ( optional ==> (collage Name , latest degree aand graduation year)) company name, works of experience, occption  */}
               <div
-                className={`${
+                className={`${style.textpart} ${
                   workAs === "jobHolder" && currentlyStuying === "false"
                     ? "block"
                     : "hidden"
                 }`}
               >
-                <div className="my-2">
-                  <label className="block font-semibold" htmlFor="companyName">
+                <div className="my-2  mb-5">
+                  <label className={`${style.titleSub}`} htmlFor="companyName">
                     company Name
                   </label>
                   <input
@@ -548,7 +568,7 @@ const PreQuestionire = () => {
                     type="text"
                     name="companyName"
                     id="companyName"
-                    className="block w-full h-8 rounded-md "
+                    className="block md:w-full h-8 rounded-md "
                   />
                   {errors?.companyName && (
                     <p role="alert" className="text-red-500 font-bold">
@@ -557,10 +577,10 @@ const PreQuestionire = () => {
                     </p>
                   )}
                 </div>
-                <div className="my-2">
-                  <div className="flex justify-center items-center">
+                <div className="my-2 mb-5">
+                  <div className="">
                     <label
-                      className="block font-semibold"
+                      className={`${style.titleSub}`}
                       htmlFor="yearsOfExperience"
                     >
                       Select your experience
@@ -575,7 +595,7 @@ const PreQuestionire = () => {
                       name="yearsOfExperience"
                       id="yearsOfExperience"
                       defaultValue="any"
-                      className="block h-8 grow rounded-md ml-2 py-0"
+                      className="block md:w-full h-8 grow rounded-md ml-2 py-0"
                     >
                       <option value="any" disabled>
                         years Of Experience ?
@@ -602,10 +622,10 @@ const PreQuestionire = () => {
                     </p>
                   )}
                 </div>
-                <div className="my-2">
-                  <div className="flex justify-between items-center">
+                <div className="my-2 mb-5">
+                  <div className="">
                     <label
-                      className="block font-semibold"
+                      className={`${style.titleSub}`}
                       htmlFor="currentJobTitle"
                     >
                       Select your job title
@@ -620,7 +640,7 @@ const PreQuestionire = () => {
                       name="currentJobTitle"
                       id="currentJobTitle"
                       defaultValue="any"
-                      className="block grow h-8 rounded-md ml-2 py-0"
+                      className="block md:w-full grow h-8 rounded-md ml-2 py-0"
                     >
                       <option value="any" disabled>
                         Occupation ?
@@ -654,7 +674,7 @@ const PreQuestionire = () => {
         {/* footer */}
         {/* here is thee submit button  */}
         <button
-          className="button bg-green-400 hover:bg-green-500 rounded-md font-bold text-black text-xl px-4 py-2 w-full"
+          className="button bg-green-300 hover:bg-green-400 rounded-md font-bold text-black text-xl px-4 py-2 w-full"
           type="submit"
           onClick={() => setShouldShowSelectError(true)}
         >

@@ -3,7 +3,10 @@ import { Drawer } from "flowbite";
 import { Collapse } from "flowbite";
 import logo from "../../assets/logo/gog-full-logo.png";
 import bookmark from "../../assets/svg/bookmark.svg";
-import anounce from "../../assets/svg/announcement.svg";
+import anouncement from "../../assets/svg/announcement.svg";
+import iconHeader1 from "../../assets/icons/announcement.svg";
+// import bookmark from '../../assets/icons/bookmark.svg'
+import help from "../../assets/icons/help.svg";
 import leaderboard from "../../assets/svg/leader-board.svg";
 import logout from "../../assets/svg/logout.svg";
 import { Link, useLocation } from "react-router-dom";
@@ -128,7 +131,7 @@ const Navbar = () => {
           </button>
         </div>
         <div
-          className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+          className="items-center grow   justify-end hidden w-full md:flex md:w-auto md:order-1"
           id="mobile-menu-2"
         >
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
@@ -137,11 +140,11 @@ const Navbar = () => {
                 to="/announcement"
                 className={`text-black ${
                   currentPath.startsWith("/announcement")
-                    ? "bg-white shadow-lg border border-slate-300 shadow-slate-500"
-                    : "bg-white border border-slate-300"
-                } block py-1 pl-3 pr-4   rounded    px-3 `}
+                    ? "bg-white shadow-lg  shadow-slate-500"
+                    : "bg-white"
+                } block py-0    rounded    px-2 `}
               >
-                Announcement
+                <img src={anouncement} alt="" className="w-[30px]" />
               </Link>
             </li>
             <li className="font-poppins">
@@ -149,11 +152,23 @@ const Navbar = () => {
                 to="/bookmark"
                 className={`text-black ${
                   currentPath.startsWith("/bookmark")
-                    ? "bg-white shadow-lg border border-slate-300 shadow-slate-500"
-                    : "bg-white border border-slate-300"
-                } block py-1 pl-3 pr-4   rounded    px-3 `}
+                    ? "bg-white shadow-lg  shadow-slate-500"
+                    : "bg-white "
+                } block py-0   rounded    px-2 `}
               >
-                Bookmark
+                <img src={bookmark} alt="" className="w-[30px]" />
+              </Link>
+            </li>
+            <li className="font-poppins">
+              <Link
+                to="/help"
+                className={`text-black ${
+                  currentPath.startsWith("/help")
+                    ? "bg-white shadow-lg  shadow-slate-500"
+                    : "bg-white "
+                } block py-0  md:mr-4 mr-0  rounded    px-2 `}
+              >
+                <img src={help} alt="" className="w-[30px]" />
               </Link>
             </li>
           </ul>

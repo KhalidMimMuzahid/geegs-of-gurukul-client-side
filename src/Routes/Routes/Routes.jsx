@@ -51,6 +51,7 @@ const router = createBrowserRouter([
             path: "/",
             element: <Home />,
           },
+
           {
             path: "/dashboard/assessment",
             element: <Assesments />,
@@ -59,10 +60,10 @@ const router = createBrowserRouter([
                 path: "/dashboard/assessment",
                 element: <Default />,
               },
-              {
-                path: "/dashboard/assessment/on-processing",
-                element: <OnProcessinAssesments />,
-              },
+              // {
+              //   path: "/dashboard/assessment/on-processing",
+              //   element: <OnProcessinAssesments />,
+              // },
             ],
           },
           {
@@ -198,6 +199,10 @@ const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: "/on-processing",
+    element: <OnProcessinAssesments />,
   },
 ]);
 
