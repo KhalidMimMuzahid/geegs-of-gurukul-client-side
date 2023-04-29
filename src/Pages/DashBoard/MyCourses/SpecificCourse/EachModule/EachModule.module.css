@@ -1,0 +1,47 @@
+
+.timeCurs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    background: #F7F7F7;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    padding: 20px 30px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.timeCurs h3 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 28px;
+}
+
+.timeCurs a {
+    background: #E8E8E8;
+    border-radius: 11px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    padding: 9px 41px;
+    font-size: 16px;
+}
+
+h2.upcomming {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-size: 21.9429px;
+    margin-top: 40px;
+}
+
+.timeCurs a.activezoom{
+    background: #49B3FF;
+    color: #fff;
+}

@@ -8,7 +8,7 @@ const EachLink = ({ currentPath, Menu, open }) => {
         to={Menu?.link}
         className={`flex ${
           style.menuHover
-        }  rounded-md p-2 cursor-pointer text-black text-sm items-center gap-x-4 
+        }  rounded-md p-2 my-6 cursor-pointer text-black text-sm items-center gap-x-4 
               ${"mt-2"} ${
           //   currentPath.startsWith(Menu?.link)
           (
@@ -16,7 +16,7 @@ const EachLink = ({ currentPath, Menu, open }) => {
               ? currentPath === "/"
               : currentPath.startsWith(Menu?.link)
           )
-            ? "bg-white font-bold text-green-600 shadow-md border border-slate-300 shadow-slate-500"
+            ? `bg-white shadow-md border ${style.actives} border-slate-300 shadow-slate-500`
             : "bg-white "
         } `}
       >
@@ -37,7 +37,7 @@ const EachLink = ({ currentPath, Menu, open }) => {
         />
 
         <span
-          className={`${!open && "hidden"} origin-left font-bold duration-200`}
+          className={`${!open && "hidden"} origin-left duration-200`}
         >
           {Menu.title}
         </span>

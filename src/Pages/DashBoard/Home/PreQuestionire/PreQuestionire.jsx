@@ -120,7 +120,7 @@ const PreQuestionire = () => {
       <div>
         {/* header */}
         <h1 className={`text-center md:text-left ${style.nameAss}`}>
-          welcome khalid ?
+          Hi khalid !
         </h1>
       </div>
 
@@ -155,7 +155,7 @@ const PreQuestionire = () => {
                         name="isStudying"
                         value="true"
                       />
-                      <img src={student} className="md:mx-0 mx-auto" alt="" />
+                      <img src={student} className="md:mx-0 mx-auto w-28" alt="" />
                     </label>
                   </div>
                   <div
@@ -176,7 +176,7 @@ const PreQuestionire = () => {
                         name="isStudying"
                         value="false"
                       />
-                      <img className="md:mx-0 mx-auto" src={studentNo} alt="" />
+                      <img className="md:mx-0 mx-auto w-28" src={studentNo} alt="" />
                     </label>
                   </div>
                 </div>
@@ -218,7 +218,7 @@ const PreQuestionire = () => {
                           name="workAs"
                           value="schoolStudent"
                         />
-                        <img className="md:mx-0 mx-auto" src={school} alt="" />
+                        <img className="md:mx-0 mx-auto w-28" src={school} alt="" />
                       </label>
                     </div>
                     <div
@@ -239,7 +239,7 @@ const PreQuestionire = () => {
                           name="workAs"
                           value="collageStudent"
                         />
-                        <img className="md:mx-0 mx-auto" src={collage} alt="" />
+                        <img className="md:mx-0 mx-auto w-28" src={collage} alt="" />
                       </label>
                     </div>
                   </div>
@@ -280,7 +280,7 @@ const PreQuestionire = () => {
                           name="workAs"
                           value="jobSeeker"
                         />
-                        <img className="md:mx-0 mx-auto" src={looking} alt="" />
+                        <img className="md:mx-0 mx-auto w-28" src={looking} alt="" />
                       </label>
                     </div>
                     <div
@@ -301,7 +301,7 @@ const PreQuestionire = () => {
                           name="workAs"
                           value="jobHolder"
                         />
-                        <img className="md:mx-0 mx-auto" src={job} alt="" />
+                        <img className="md:mx-0 mx-auto w-28" src={job} alt="" />
                       </label>
                     </div>
                   </div>
@@ -323,7 +323,7 @@ const PreQuestionire = () => {
                 }`}
               >
                 <div className="my-2 mb-5 ">
-                  <label className="titleSub" htmlFor="schoolName">
+                  <label className={`${style.titleSub}`} htmlFor="schoolName">
                     School Name
                   </label>
                   <input
@@ -352,7 +352,7 @@ const PreQuestionire = () => {
                 </div>
                 <div className="block my-2 mb-5">
                   <div className="">
-                    <label className="titleSub" htmlFor="grade">
+                    <label className={`${style.titleSub}`} htmlFor="grade">
                       Select your grade
                     </label>
                     <select
@@ -480,7 +480,7 @@ const PreQuestionire = () => {
                       className="block md:w-full grow h-8 rounded-md ml-2 py-0"
                     >
                       <option value="any" disabled>
-                        latest Degree ?
+                        Latest Degree ?
                       </option>
                       <option value="BTech">BTech</option>
                       <option value="BSC">BSC</option>
@@ -516,7 +516,7 @@ const PreQuestionire = () => {
                       className="block grow md:w-full h-8 rounded-md ml-2 py-0"
                     >
                       <option value="any" disabled>
-                        graduation Year ?
+                        Graduation Year ?
                       </option>
                       <option value={2015}>2015</option>
                       <option value={2016}>2016</option>
@@ -552,7 +552,7 @@ const PreQuestionire = () => {
               >
                 <div className="my-2  mb-5">
                   <label className={`${style.titleSub}`} htmlFor="companyName">
-                    company Name
+                    Company Name
                   </label>
                   <input
                     {...register("companyName", {
@@ -598,7 +598,7 @@ const PreQuestionire = () => {
                       className="block md:w-full h-8 grow rounded-md ml-2 py-0"
                     >
                       <option value="any" disabled>
-                        years Of Experience ?
+                        Years Of Experience ?
                       </option>
                       <option value={1}>One</option>
                       <option value={2}>Two</option>
@@ -646,7 +646,7 @@ const PreQuestionire = () => {
                         Occupation ?
                       </option>
                       <option value="full stack developer">
-                        full stack developer
+                        Full stack developer
                       </option>
                       <option value="Sr. full stack developer">
                         Sr. full stack developer
@@ -674,7 +674,8 @@ const PreQuestionire = () => {
         {/* footer */}
         {/* here is thee submit button  */}
         <button
-          className="button bg-green-300 hover:bg-green-400 rounded-md font-bold text-black text-xl px-4 py-2 w-full"
+        style={{background:'#53A871'}}
+          className="button  hover:bg-green-400 rounded-md font-bold text-white text-xl px-4 py-2 w-full"
           type="submit"
           onClick={() => setShouldShowSelectError(true)}
         >

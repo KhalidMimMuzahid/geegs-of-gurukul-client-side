@@ -1,25 +1,35 @@
-.contain {
-    max-width: 1200px;
-    margin: 30px auto;
-}
-
 .singleCourse img {
-    width: 266px;
-    border-radius: 10px;
+    /* width: 100px; */
+    border-top-right-radius: 32px;
+    border-top-left-radius: 32px;
 }
 
 .singleCourse {
-    gap: 20px;
-    border: 1px solid;
-    padding: 12px;
-    border-radius: 9px;
-    align-items: center;
-    background-color: #fff;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 32px;
+    text-align: center;
 }
 
-.singleCourse:hover{
-    transform: scale(1.1);
-    transition: .3s ease;
+.singleCourse h2 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 28px 0;
+}
+
+.singleCourse a {
+    background: #45C958;
+    border-radius: 11px;
+    padding: 10px 22px;
+    display: inline-block;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 17px;
+    color: #fff;
 }
 
 .textCourse h2 {

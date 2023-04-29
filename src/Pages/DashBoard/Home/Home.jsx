@@ -8,6 +8,8 @@ import moment from "moment/moment";
 import AttendanceChart from "../../../Components/AttendanceChart/AttendanceChart";
 import DoughnutChart from "../../../Components/DoughnutChart/DoughnutChart";
 import QuizChart from "../../../Components/QuizChart/QuizChart";
+import style from './preassessment.module.css'
+import { Link } from "react-router-dom";
 const Home = () => {
   // const nowString = moment().format();
   // const time = () => {
@@ -22,7 +24,21 @@ const Home = () => {
   // };
   return (
     <div className="">
-      <div>
+      <div className="mt-9">
+        <div className={`${style.testrea}`}>
+          <div className={`${style.testBox}`}>
+            <h3>Hi Rahul Let's begin!</h3>
+            <p>
+              Welcome to the assessment test! This test is designed to evaluate
+              your skills and knowledge
+            </p>
+          </div>
+          <div className={`${style.testBtu}`}>
+            <Link to={"/dashboard/assessment/on-processing"}>Begin Test</Link>
+          </div>
+        </div>
+      </div>
+      {/* <div>
         <LectureScedule />
         <LectureScedule />
       </div>
@@ -30,13 +46,13 @@ const Home = () => {
         <DoughnutChart />
         <QuizChart />
         <AttendanceChart />
-      </div>
+      </div> */}
       {/* <button onClick={time}>xxxxxxxxxxxx</button> */}
-      {false && (
+      {true && (
         <>
           {/* <h1>sddfddfvfdffdfdfd</h1> */}
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
-            <div className="relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
+            <div className="relative w-[360px]  sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
               {/*content*/}
 
               <PreQuestionire />
