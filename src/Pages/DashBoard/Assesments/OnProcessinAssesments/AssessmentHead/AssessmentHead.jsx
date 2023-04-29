@@ -69,7 +69,7 @@ const AssessmentHead = ({
     <div>
       {/* 1st portion */}
       {/* <h3 className="text-black font-bold text-3xl ml-4">Time Left</h3>  */}
-      <div className="flex justify-center items-center mt-3">
+      <div className="flex justify-center items-center mt-3 font-poppins font-semibold text-[22px] text-[#4BA25D]">
         <CountdownCircleTimer
           isPlaying
           duration={assessment?.duration * 60}

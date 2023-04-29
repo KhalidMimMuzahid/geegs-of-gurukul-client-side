@@ -532,7 +532,7 @@ const OnProcessinAssesments = () => {
   //   document.title = "i am in";
   // });
   return (
-    <div className="container max-w-[1440px] mx-auto py-2 lg:py-4 xl:py-8 ">
+    <div className="container max-w-[1440px] mx-auto py-2 lg:py-4 xl:py-8 font-poppins">
       <div className=" h-full relative  ">
         <div className=" rounded-3xl shadow-lg shadow-slate-700  py-4 lg:px-8 lg:py-8 px-4">
           <div className="grid grid-cols-12 gap-1 lg:gap-16">
