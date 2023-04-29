@@ -134,14 +134,14 @@ const AssessmentHead = ({
         <button
           onClick={handleMarkQuestion}
           type="button"
-          className="grow font-bold  bg-gray-300 hover:bg-green-400"
+          className="grow font-normal  bg-gray-300 hover:bg-green-400"
         >
           {isMarke ? "Un Mark" : "Mark"}
         </button>
         <button
           onClick={handleResetQuestion}
           type="button"
-          className="grow font-bold bg-gray-300 hover:bg-green-400"
+          className="grow font-normal bg-gray-300 hover:bg-green-400"
         >
           Reset
         </button>
