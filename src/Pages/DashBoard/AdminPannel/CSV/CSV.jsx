@@ -9,6 +9,10 @@ const CSV = () => {
   const [error, setError] = useState(null);
   const [errorInRowColumnPairs, setErrorInRowColumnPairs] = useState([]);
   const [isCopied, setIsCopied] = useState(false);
+  useEffect(() => {
+    console.log("error: ", error);
+    console.log("errorInRowColumnPairs: ", errorInRowColumnPairs);
+  });
   //   {
   //     _id: "givenByThe_MongoDB",
   //     assessmentName: "random_Topics",
@@ -93,13 +97,13 @@ const CSV = () => {
           // console.log("tempOtherParametere: ", tempOtherParametereArray);
           const topicName = tempOtherParametereArray[0];
           const difficultyLevel = tempOtherParametereArray[1];
-          const marks = tempOtherParametereArray[2];
+          const subTopic = tempOtherParametereArray[2];
           const newQuestion = {
             questionName: question,
             optionObject,
             topicName,
             difficultyLevel,
-            marks,
+            subTopic,
           };
           pushCount += 1;
           allQuestions.push(newQuestion);
@@ -145,13 +149,13 @@ const CSV = () => {
           // console.log("tempOtherParametere: ", tempOtherParametereArray);
           const topicName = tempOtherParametereArray[0];
           const difficultyLevel = tempOtherParametereArray[1];
-          const marks = tempOtherParametereArray[2];
+          const subTopic = tempOtherParametereArray[2];
           const newQuestion = {
             questionName: question,
             optionObject,
             topicName,
             difficultyLevel,
-            marks,
+            subTopic,
           };
           allQuestions.push(newQuestion);
           const newQuestions = [...questions, newQuestion];
@@ -181,10 +185,12 @@ const CSV = () => {
       } finally {
       }
     });
+    console.log("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
     if (!isError) {
       console.log(allQuestions);
       const withNonDuplicateQuestions = removeDuplicateQuestions(allQuestions);
-      // console.log("withNonDuplicateQuestions: ", withNonDuplicateQuestions);
+      console.log("withNonDuplicateQuestions: ", withNonDuplicateQuestions);
+
       fetch("http://localhost:5000/add-csv-data", {
         method: "POST",
         headers: {
@@ -330,11 +336,15 @@ const CSV = () => {
                     <div>
                       {errorInRowColumnPairs?.length !== 0 &&
                         errorInRowColumnPairs?.map((eachPairs) => (
-                          <div>
-                            <h1 onClick={handleClick}>
+                          <div className="message-error">
+                            <h1 className="">Error</h1>
+                            <h1 ref={htmlElement} onClick={handleClick}>
                               row = {eachPairs?.row}, column ={" "}
                               {eachPairs?.column}
                             </h1>
+                            <span className="copy-btu" onClick={handleClick}>
+                              {isCopied ? "Copied" : "Copy"}
+                            </span>
                           </div>
                         ))}
                     </div>
