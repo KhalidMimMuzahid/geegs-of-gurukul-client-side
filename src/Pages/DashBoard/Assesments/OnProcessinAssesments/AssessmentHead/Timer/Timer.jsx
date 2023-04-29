@@ -45,7 +45,7 @@ function Timer() {
         </svg>
       </div>
       <div
-        className="absolute inset-0 flex justify-center items-center font-bold text-2xl text-gray-700"
+        className="absolute inset-0 flex justify-center items-center"
         style={{
           position: "absolute",
           top: "50%",
@@ -53,8 +53,8 @@ function Timer() {
           transform: "translate(-50%, -50%)",
         }}
       >
-        {minutesLeft < 10 ? `0${minutesLeft}` : minutesLeft}:
-        {secondsRemainder < 10 ? `0${secondsRemainder}` : secondsRemainder}
+        <span className="font-poppins font-semibold text-[22px]">{minutesLeft < 10 ? `0${minutesLeft}` : minutesLeft}:
+        {secondsRemainder < 10 ? `0${secondsRemainder}` : secondsRemainder}</span>
       </div>
     </div>
   );

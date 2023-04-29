@@ -159,20 +159,20 @@ const Question = ({
   return (
     <div>
       <div className="  px-2 md:px-4 mb-10">
-        <h1 className="text-xl font-bold text-center mb-6 ">
+        <h1 className="text-[22px] font-medium text-center mb-6 ">
           Topic: {selectedQuestion?.topicName}
         </h1>
         <div className="flex justify-between">
-          <h1 className="text-lg  font-semibold">
+          <h1 className="text-lg  font-normal">
             Question No: {selectedQuestionIndex + 1}
           </h1>
-          <h1 className="text-lg  font-semibold">
-            difficulty Level : {selectedQuestion?.difficultyLevel}
+          <h1 className="text-lg  font-normal">
+            Difficulty Level : {selectedQuestion?.difficultyLevel}
           </h1>
         </div>
       </div>
 
-      <h1 className="text-xl px-3 font-semibold mt-4 mb-6">
+      <h1 className="text-[18px] px-3 font-normal mt-4 mb-6">
         {selectedQuestion?.questionName}
       </h1>
       <div className="relative left-[25px] ">
