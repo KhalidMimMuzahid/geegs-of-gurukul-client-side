@@ -646,7 +646,7 @@ const OnProcessinAssesments = () => {
                         </span>
                         <span
                           onClick={handleQuizSubmit}
-                          className="grow font-semibold text-center px-2 py-1  bg-green-400  hover:cursor-pointer hover:bg-green-500 rounded-lg "
+                          className="grow font-semibold text-center px-2 py-1  bg-[#53A871]  hover:cursor-pointer hover:bg-[#48a167] rounded-lg text-white "
                         >
                           Yes
                         </span>
