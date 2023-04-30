@@ -50,6 +50,7 @@ const Home = () => {
         <AttendanceChart />
       </div> */}
       {/* <button onClick={time}>xxxxxxxxxxxx</button> */}
+
       {newComerUser && (
         <>
           {/* <h1>sddfddfvfdffdfdfd</h1> */}
