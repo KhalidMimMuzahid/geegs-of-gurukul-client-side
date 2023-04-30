@@ -176,22 +176,22 @@ const AssessmentHead = ({
               <div className=' mt-6 w-full h-4/5 p-4 mx-auto bg-white border border-green-400 rounded-md overflow-x-auto overflow-y-auto'>
                 {/* content */}
                 <div>
-              <h3 className="text-base font-medium my-3">
+              <h3 className="text-base font-normal my-3">
                 Time allocated for this examination is 30 mins
               </h3>
-              <h3 className="text-base font-medium mt-3">
+              <h3 className="text-base font-normal mt-3">
                 This paper consists of 1 section (11 questions)
               </h3>
               <p className="font-poppins"> (11 questions - 33 marks)</p>
-              <h3 className="text-base font-medium my-3">
+              <h3 className="text-base font-normal my-3">
                 When the timer (at top right) reaches zero, the examination will
                 end by itself.
               </h3>
-              <h3 className="text-base font-medium my-3">
+              <h3 className="text-base font-normal my-3">
                 Positive and Negetive marks assosiacted with the questions are
                 displayed at top-right.
               </h3>
-              <h3 className="text-base font-medium my-3">
+              <h3 className="text-base font-normal my-3">
                 Colour-Scheme for question navigation-panel:
               </h3>
 
@@ -223,12 +223,13 @@ const AssessmentHead = ({
                 <p>You have answered the question, but marked it for review</p>
               </div>
 
-              <h3 className="text-base font-medium my-3">
+              <h3 className="text-base font-normal font-poppins my-3">
                 The Marked status for a question simply indicates that you would
                 like to look at that question again. If a question is answered
                 and marked, answer for that question will be considered in
                 evaluation.
-              </h3>
+                  </h3>
+                  <h3 className="font-poppins text-base">Quant: Progreession and Series</h3>
                 </div>
                 <div className="text-right ">
                 
