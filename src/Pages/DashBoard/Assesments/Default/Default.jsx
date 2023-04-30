@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import time from '../../../../assets/TestIcons/time.svg'
+import question from '../../../../assets/TestIcons/question.svg'
 
 const Default = () => {
   const assesments = [
@@ -67,11 +69,11 @@ const Default = () => {
                 {assesment?.assesmentName}
               </h5>
             </a>
-            <p class="mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
-               {assesment?.questions} Questions
+            <p class="flex gap-2 items-center mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
+             <img src={question} alt="" />  {assesment?.questions} Questions
             </p>
-            <p class="mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
-               {assesment?.time} Mins
+            <p class="flex gap-2 items-center mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
+              <img src={time} alt="" /> {assesment?.time} Mins
             </p>
             
             <Link
