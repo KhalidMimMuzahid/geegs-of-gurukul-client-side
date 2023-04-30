@@ -21,7 +21,7 @@ const Navbar = () => {
     return handleLocationChange();
   });
   return (
-    <nav className="bg-white shadow-green-700 shadow-md border-gray-900 dark:bg-green-900 rounded-lg">
+    <nav className="bg-white  shadow-md border-gray-900 dark:bg-green-900 rounded-lg">
       <div className=" flex flex-wrap items-center justify-between mx-auto p-4">
         <Link to="/" className="flex items-center">
           <img src={logo} className="h-8 mr-3" alt="Flowbite Logo" />

@@ -6,57 +6,37 @@ import style from "./course.module.css";
 const Courses = () => {
   return (
     <div>
-      <h1>all courses should be here here</h1>
       <div>
         <div className={`${style.contain}`}>
           {/* we hav to use each courses  */}
-          <div className="grid md:grid-cols-1 lg:grid-cols-2  gap-5 pt-4 px-5">
-            <Link to={""} className={`md:flex ${style.singleCourse}`}>
+          <div className={`${style.contain}`}>
+          {/* we hav to use each courses  */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5 pt-4 px-5">
+            <div className= {`${style.singleCourse}`}>
               <img src={courseimg} alt="" />
-              <div className={`${style.textCourse}`}>
-                <h2>Html</h2>
-                <span>Resaul</span>
-                <p>
-                  <b className="bold text-black">Video : </b> 12{" "}
-                </p>
-              </div>
-            </Link>
-            <Link to={""} className={`md:flex ${style.singleCourse}`}>
+              <h2>Css</h2>
+              <Link to={'/dashboard/courses/course'}>Start Learn</Link>
+            </div>
+            <div className={`${style.singleCourse}`}>
               <img src={courseimg} alt="" />
-              <div className={`${style.textCourse}`}>
-                <h2>Html</h2>
-                <span>Resaul</span>
-                <p>
-                  <b className="bold text-black">Video : </b> 12{" "}
-                </p>
-              </div>
-            </Link>
-            <Link to={""} className={`md:flex ${style.singleCourse}`}>
+              <h2>Css</h2>
+              <Link to={'/dashboard/courses/course'}>Start Learn</Link>
+            </div>
+            <div className={`${style.singleCourse}`}>
               <img src={courseimg} alt="" />
-              <div className={`${style.textCourse}`}>
-                <h2>Html</h2>
-                <span>Resaul</span>
-                <p>
-                  <b className="bold text-black">Video : </b> 12{" "}
-                </p>
-              </div>
-            </Link>
-            <Link to={""} className={`md:flex ${style.singleCourse}`}>
+              <h2>Css</h2>
+              <Link to={'/dashboard/courses/course'}>Start Learn</Link>
+            </div>
+            <div className={`${style.singleCourse}`}>
               <img src={courseimg} alt="" />
-              <div className={`${style.textCourse}`}>
-                <h2>Html</h2>
-                <span>Resaul</span>
-                <p>
-                  <b className="bold text-black">Video : </b> 12{" "}
-                </p>
-              </div>
-            </Link>
+              <h2>Css</h2>
+              <Link to={'/dashboard/courses/course'}>Start Learn</Link>
+            </div>
           </div>
         </div>
+        </div>
       </div>
-      <div>
-        <Link to="/dashboard/courses/course">go to specific course page</Link>
-      </div>
+      
     </div>
   );
 };
