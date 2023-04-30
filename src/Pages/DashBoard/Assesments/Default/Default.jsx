@@ -45,11 +45,11 @@ const Default = () => {
     },
   ];
   return (
-    <div className="grid grid-cols-1 md:grid-col-2 lg:grid-cols-3 gap-5 pt-4 px-5">
+    <div className="w-4/5 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-4 px-5">
       {assesments?.map((assesment, i) => (
         <div
           key={i}
-          class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          class="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
           <a href="#">
             <img class="rounded-t-lg" src={assesment.images} alt="" />
