@@ -8,8 +8,9 @@ import moment from "moment/moment";
 import AttendanceChart from "../../../Components/AttendanceChart/AttendanceChart";
 import DoughnutChart from "../../../Components/DoughnutChart/DoughnutChart";
 import QuizChart from "../../../Components/QuizChart/QuizChart";
-import style from './preassessment.module.css'
+import style from "./preassessment.module.css";
 import { Link } from "react-router-dom";
+
 const Home = () => {
   // const nowString = moment().format();
   // const time = () => {
@@ -22,6 +23,7 @@ const Home = () => {
   //   const zzzz = nowStringvv - nowString;
   //   console.log("zzzz: ", zzzz);
   // };
+  const [newComerUser, setNewComerUser] = useState(false);
   return (
     <div className="">
       <div className="mt-9">
@@ -34,7 +36,7 @@ const Home = () => {
             </p>
           </div>
           <div className={`${style.testBtu}`}>
-            <Link to={"/dashboard/assessment/on-processing"}>Begin Test</Link>
+            <Link onClick={() => setNewComerUser(true)}>Begin Test</Link>
           </div>
         </div>
       </div>
@@ -48,7 +50,7 @@ const Home = () => {
         <AttendanceChart />
       </div> */}
       {/* <button onClick={time}>xxxxxxxxxxxx</button> */}
-      {true && (
+      {newComerUser && (
         <>
           {/* <h1>sddfddfvfdffdfdfd</h1> */}
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
