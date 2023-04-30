@@ -4,45 +4,54 @@ import { Link } from "react-router-dom";
 const Default = () => {
   const assesments = [
     {
-      assesmentName: "School Kids",
-      topic: "trigonmitry",
-      durtion: "10",
-      totalQuestion: 10,
-      images:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcVkZtUJilsx2FeUwEUpp37MDl14OoloIIsQ&usqp=CAU",
+      assesmentName: "Topic Test (Algebra)",
+      questions: 25,
+      time:35
+      
     },
     {
-      assesmentName: "School Kids",
-      topic: "trigonmitry",
-      durtion: "10",
-      totalQuestion: 10,
-      images:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcVkZtUJilsx2FeUwEUpp37MDl14OoloIIsQ&usqp=CAU",
+      assesmentName: "Topic Test (Sequence and Series)",
+      questions: 25,
+      time:35
+      
     },
     {
-      assesmentName: "School Kids",
-      topic: "trigonmitry",
-      durtion: "10",
-      totalQuestion: 10,
-      images:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcVkZtUJilsx2FeUwEUpp37MDl14OoloIIsQ&usqp=CAU",
+      assesmentName: "Topic Test (Number System)",
+      questions: 25,
+      time:35
+      
     },
     {
-      assesmentName: "School Kids",
-      topic: "trigonmitry",
-      durtion: "10",
-      totalQuestion: 10,
-      images:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcVkZtUJilsx2FeUwEUpp37MDl14OoloIIsQ&usqp=CAU",
+      assesmentName: "Topic Test (Time and Work)",
+      questions: 25,
+      time:35
+      
     },
     {
-      assesmentName: "School Kids",
-      topic: "trigonmitry",
-      durtion: "10",
-      totalQuestion: 10,
-      images:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcVkZtUJilsx2FeUwEUpp37MDl14OoloIIsQ&usqp=CAU",
+      assesmentName: "Topic Test (Data Science)",
+      questions: 25,
+      time:35
+      
     },
+    {
+      assesmentName: "Topic Test (Binary)",
+      questions: 25,
+      time:35
+      
+    },
+    {
+      assesmentName: "Topic Test (JavaScript)",
+      questions: 25,
+      time:35
+      
+    },
+    {
+      assesmentName: "Topic Test (CSS)",
+      questions: 25,
+      time:35
+      
+    },
+    
   ];
   return (
     <div className="w-4/5 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-4 px-5">
@@ -51,27 +60,23 @@ const Default = () => {
           key={i}
           class="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
-          <a href="#">
-            <img class="rounded-t-lg" src={assesment.images} alt="" />
-          </a>
+          
           <div class="p-5">
             <a href="#">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              <h5 class="mb-2 text-lg font-medium tracking-tight text-gray-900 dark:text-white">
                 {assesment?.assesmentName}
               </h5>
             </a>
             <p class="mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
-              Topic : {assesment?.topic}
+               {assesment?.questions} Questions
             </p>
             <p class="mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
-              Duration : {assesment?.durtion}
+               {assesment?.time} Mins
             </p>
-            <p class="mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
-              Total Question : {assesment?.totalQuestion}
-            </p>
+            
             <Link
               to="/on-processing"
-              class="inline-flex items-center font-poppins px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              class="inline-flex items-center font-poppins px-3 py-2 text-sm font-medium text-center text-[#28282899] bg-[#e4e4e4] rounded-lg hover:bg-[#5fb370] hover:text-white focus:ring-4 focus:outline-none focus:ring-[#75AE80] dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Start
               <svg
