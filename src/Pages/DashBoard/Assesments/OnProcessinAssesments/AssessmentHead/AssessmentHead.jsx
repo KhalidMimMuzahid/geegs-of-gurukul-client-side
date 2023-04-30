@@ -68,8 +68,8 @@ const AssessmentHead = ({
     }
   }, [selectedQuestion, isMarke, isMarkedQuestionId]);
   // State for showing instruction modal
-  const [showInstructions, setShowInstructions] = useState(false);
-  const [isSelected, setIsSelected] = useState("instructions");
+  const [showInstructions, setShowInstructions] = useState(true);
+  
   return (
     <div>
       {/* 1st portion */}
