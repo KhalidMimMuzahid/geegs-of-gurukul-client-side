@@ -34,6 +34,7 @@ import MyCourses from "../../Pages/DashBoard/MyCourses/MyCourses";
 import SpecificCourse from "../../Pages/DashBoard/MyCourses/SpecificCourse/SpecificCourse";
 import SpecificLecture from "../../Pages/DashBoard/MyCourses/SpecificLecture/SpecificLecture";
 import SpecificModule from "../../Pages/DashBoard/MyCourses/SpecificModule/SpecificModule";
+import Help from "../../Pages/Help/Help";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -136,6 +137,10 @@ const router = createBrowserRouter([
       {
         path: "/bookmark",
         element: <Bookmark />,
+      },
+      {
+        path: "/help",
+        element: <Help />,
       },
 
       // {
