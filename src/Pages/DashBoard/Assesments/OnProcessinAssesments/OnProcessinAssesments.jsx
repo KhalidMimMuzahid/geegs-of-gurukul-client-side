@@ -3,6 +3,7 @@ import AssessmentHead from "./AssessmentHead/AssessmentHead";
 import AssessmentBody from "./AssessmentBody/AssessmentBody";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import rightArrow from "../../../../assets/icons/arrow-right.svg"
 
 const OnProcessinAssesments = () => {
   const [assessment, setAssessment] = useState({});
@@ -534,6 +535,24 @@ const OnProcessinAssesments = () => {
   return (
     <div className="container max-w-[1440px] mx-auto py-2 lg:py-4 xl:py-8 font-poppins">
       <div className=" h-full relative  ">
+        {/* mark-negetive */}
+        <div className="col-span-3 border-b border-gray-300">
+          <div className="flex justify-between items-center p-4 border border-b-2 bg-slate-100">
+            <div className="flex justify-center items-center gap-1">
+              <img className="w-6 h-5" src={rightArrow} alt="" />
+              <h1 className="font-bold">Single Correct</h1>
+            </div>
+            <div className="flex items-center">
+              <p className="text-[#4caf50] border border-gray-300 p-2 rounded-l-md">
+                + 3.00
+              </p>
+              <p className="text-[#db2020] border border-l-0 border-gray-300 p-2 rounded-r-md">
+                - 1.00
+              </p>
+            </div>
+            </div>
+          </div>
+        {/* mark-negetive */}
         <div className=" rounded-3xl shadow-lg shadow-slate-700  py-4 lg:px-8 lg:py-8 px-4">
           <div className="grid grid-cols-12 gap-1 lg:gap-16">
             <div className="col-span-12 lg:col-span-4">
@@ -554,6 +573,7 @@ const OnProcessinAssesments = () => {
                 totalQuestions={totalQuestions}
               />
             </div>
+            
             <div className="col-span-12 lg:col-span-8 mt-2 ">
               <AssessmentBody
                 // shouldShuffle={assessment?.shouldShuffle}
