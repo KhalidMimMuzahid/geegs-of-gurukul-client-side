@@ -35,6 +35,8 @@ import SpecificCourse from "../../Pages/DashBoard/MyCourses/SpecificCourse/Speci
 import SpecificLecture from "../../Pages/DashBoard/MyCourses/SpecificLecture/SpecificLecture";
 import SpecificModule from "../../Pages/DashBoard/MyCourses/SpecificModule/SpecificModule";
 import Help from "../../Pages/Help/Help";
+import SignIn from "../../Pages/SignIn/SignIn";
+import SignUp from "../../Pages/SignUp/SignUp";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -141,6 +143,14 @@ const router = createBrowserRouter([
       {
         path: "/help",
         element: <Help />,
+      },
+      {
+        path: "/sign-in",
+        element: <SignIn />,
+      },
+      {
+        path: "/sign-up",
+        element: <SignUp />,
       },
 
       // {
