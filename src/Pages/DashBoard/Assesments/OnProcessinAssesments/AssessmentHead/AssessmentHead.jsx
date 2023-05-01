@@ -70,7 +70,6 @@ const AssessmentHead = ({
   }, [selectedQuestion, isMarke, isMarkedQuestionId]);
   // State for showing instruction modal
   const [showInstructions, setShowInstructions] = useState(true);
-  
   return (
     <div>
       {/* 1st portion */}
@@ -164,14 +163,9 @@ const AssessmentHead = ({
       </button>
       {showInstructions && (
         <>
-          <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none'>
+          <div className='modal justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none'>
             <div className='relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl'>
-              <button
-                onClick={() => setShowInstructions(false)}
-                className='absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full'
-              >
-                ❌
-              </button>
+              
               <h3 className='text-2xl font-poppins font-medium mt-1'>
                 Instructions:
               </h3>
@@ -234,14 +228,14 @@ const AssessmentHead = ({
                 </div>
                 <div className="text-right ">
                 
-                <Link to='/start-test'>
-                <label
+                {/* <Link to='/start-test'> */}
+                <label onClick={() => setShowInstructions(false)}
                     // htmlFor="test-modal"
                     className="py-2 px-4 rounded-md font-semibold text-white text-md bg-[#088234b3] border-none cursor-pointer "
                   >
                     Begin Test
                   </label>
-                </Link>
+                {/* </Link> */}
                 
               </div>
                 {/* content */}

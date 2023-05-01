@@ -585,7 +585,7 @@ const OnProcessinAssesments = () => {
                   <div>
                     {/* header */}
                     <h1 className="text-center text-lg font-bold">
-                      Test Summery
+                      Test Summary
                     </h1>
                   </div>
                   {/* <div className="px-2">
@@ -630,7 +630,7 @@ const OnProcessinAssesments = () => {
                       <div className="border-slate-300 rounded-lg border "></div>
                     </div>
                     <div className="flex justify-between px-4">
-                      <span>takenTimeToFinish</span>
+                      <span>Taken time to fisinsh </span>
                       <span>{takenTimeToFinish} s</span>
                     </div>
                   </div>
