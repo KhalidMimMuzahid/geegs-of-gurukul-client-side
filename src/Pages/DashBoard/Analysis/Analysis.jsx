@@ -96,7 +96,7 @@ const Analysis = () => {
         />
       </div>
       <div>
-        <h1 className="text-xl font-bold">Topic-wise Analysis :</h1>
+        {/* <h1 className="text-xl font-bold">Topic-wise Analysis :</h1> */}
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-around">
           <div className="lg:relative top-[20px] justify-self-center">
             <PieChart
