@@ -467,26 +467,26 @@ const PreQuestionire = () => {
                     >
                       Select your latest degree
                     </label>
-                    <select
+                    <input
                       {...register("latestDegree", {
                         required: {
                           value: true,
-                          message: "select your latest degree",
+                          message: "mention your latest degree",
                         },
                       })}
                       name="latestDegree"
                       id="latestDegree"
-                      defaultValue="any"
-                      className="block md:w-full grow h-8 rounded-md ml-2 py-0"
+                      // defaultValue="any"
+                      className="block md:w-full border-black border-2 grow h-8 rounded-md ml-2 py-0"
                     >
-                      <option value="any" disabled>
+                      {/* <option value="any" disabled>
                         Latest Degree ?
                       </option>
                       <option value="BTech">BTech</option>
                       <option value="BSC">BSC</option>
                       <option value="BBA">BBA</option>
-                      <option value="MBA">MBA</option>
-                    </select>
+                      <option value="MBA">MBA</option> */}
+                    </input>
                   </div>
                   {shouldShowSelectError && selectError?.latestDegree && (
                     <p role="alert" className="text-red-500 font-bold">
