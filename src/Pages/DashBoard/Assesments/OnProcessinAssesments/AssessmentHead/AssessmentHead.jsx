@@ -17,6 +17,7 @@ const AssessmentHead = ({
   selectTheSelectedQuestionIndexWithIndex,
   setChosenAnswers,
   chosenAnswers,
+  totalQuestions
 }) => {
   const [isMarke, setIsMark] = useState(true);
   const [extraTime, setExtraTime] = useState(0);
@@ -77,7 +78,8 @@ const AssessmentHead = ({
       <div className='flex justify-center items-center mt-3 font-poppins font-semibold text-[22px] text-[#4BA25D]'>
         <CountdownCircleTimer
           isPlaying
-          duration={assessment?.duration * 60}
+          // duration={assessment?.duration * 60}
+          duration={totalQuestions *60}
           colors={["#3DC86F", "#b9ff78", "#ffff78", "#ff6d24", "#FF0000"]}
           colorsTime={[300, 270, 240, 210, 0]}
           strokeWidth='16'
@@ -177,15 +179,14 @@ const AssessmentHead = ({
                 {/* content */}
                 <div>
               <h3 className="text-base font-normal my-3">
-                Time allocated for this examination is 30 mins
+                {`Time allocated for this examination is ${totalQuestions*1} mins`}
               </h3>
               <h3 className="text-base font-normal mt-3">
-                This paper consists of 1 section (11 questions)
+                {`This paper consists of 1 section ${totalQuestions} questions`}
               </h3>
-              <p className="font-poppins"> (11 questions - 33 marks)</p>
+                  <p className="font-poppins">{ `(${totalQuestions} questions - ${totalQuestions*1} marks)`}</p>
               <h3 className="text-base font-normal my-3">
-                When the timer (at top right) reaches zero, the examination will
-                end by itself.
+                When the timer (at top right) reaches zero, your time is up but you still can continue with assesment. Extra Time will be counted.
               </h3>
               <h3 className="text-base font-normal my-3">
                 Positive and Negetive marks assosiacted with the questions are

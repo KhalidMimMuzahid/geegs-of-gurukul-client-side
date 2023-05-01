@@ -551,6 +551,7 @@ const OnProcessinAssesments = () => {
                 setChosenAnswers={setChosenAnswers}
                 chosenAnswers={chosenAnswers}
                 setTakenTimeToFinish={setTakenTimeToFinish}
+                totalQuestions={totalQuestions}
               />
             </div>
             <div className="col-span-12 lg:col-span-8 mt-2 ">
@@ -568,6 +569,7 @@ const OnProcessinAssesments = () => {
                 totalQuestions={totalQuestions}
                 chosenAnswers={chosenAnswers}
                 setSubmitModalIsOpen={setSubmitModalIsOpen}
+                
               />
             </div>
           </div>
