@@ -17,6 +17,7 @@ const AssessmentHead = ({
   selectTheSelectedQuestionIndexWithIndex,
   setChosenAnswers,
   chosenAnswers,
+  totalQuestions
 }) => {
   const [isMarke, setIsMark] = useState(true);
   const [extraTime, setExtraTime] = useState(0);
@@ -69,7 +70,6 @@ const AssessmentHead = ({
   }, [selectedQuestion, isMarke, isMarkedQuestionId]);
   // State for showing instruction modal
   const [showInstructions, setShowInstructions] = useState(true);
-  
   return (
     <div>
       {/* 1st portion */}
@@ -77,7 +77,8 @@ const AssessmentHead = ({
       <div className='flex justify-center items-center mt-3 font-poppins font-semibold text-[22px] text-[#4BA25D]'>
         <CountdownCircleTimer
           isPlaying
-          duration={assessment?.duration * 60}
+          // duration={assessment?.duration * 60}
+          duration={totalQuestions *60}
           colors={["#3DC86F", "#b9ff78", "#ffff78", "#ff6d24", "#FF0000"]}
           colorsTime={[300, 270, 240, 210, 0]}
           strokeWidth='16'
@@ -162,14 +163,9 @@ const AssessmentHead = ({
       </button>
       {showInstructions && (
         <>
-          <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none'>
+          <div onClick={()=>setShowInstructions(false)} className='modal justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none'>
             <div className='relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl'>
-              <button
-                onClick={() => setShowInstructions(false)}
-                className='absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full'
-              >
-                ❌
-              </button>
+              
               <h3 className='text-2xl font-poppins font-medium mt-1'>
                 Instructions:
               </h3>
@@ -177,15 +173,14 @@ const AssessmentHead = ({
                 {/* content */}
                 <div>
               <h3 className="text-base font-normal my-3">
-                Time allocated for this examination is 30 mins
+                {`Time allocated for this examination is ${totalQuestions*1} mins`}
               </h3>
               <h3 className="text-base font-normal mt-3">
-                This paper consists of 1 section (11 questions)
+                {`This paper consists of 1 section ${totalQuestions} questions`}
               </h3>
-              <p className="font-poppins"> (11 questions - 33 marks)</p>
+                  <p className="font-poppins">{ `(${totalQuestions} questions - ${totalQuestions*1} marks)`}</p>
               <h3 className="text-base font-normal my-3">
-                When the timer (at top right) reaches zero, the examination will
-                end by itself.
+                When the timer (at top right) reaches zero, your time is up but you still can continue with assesment. Extra Time will be counted.
               </h3>
               <h3 className="text-base font-normal my-3">
                 Positive and Negetive marks assosiacted with the questions are
@@ -233,14 +228,14 @@ const AssessmentHead = ({
                 </div>
                 <div className="text-right ">
                 
-                <Link to='/start-test'>
-                <label
+                {/* <Link to='/start-test'> */}
+                <label onClick={() => setShowInstructions(false)}
                     // htmlFor="test-modal"
                     className="py-2 px-4 rounded-md font-semibold text-white text-md bg-[#088234b3] border-none cursor-pointer "
                   >
                     Begin Test
                   </label>
-                </Link>
+                {/* </Link> */}
                 
               </div>
                 {/* content */}
