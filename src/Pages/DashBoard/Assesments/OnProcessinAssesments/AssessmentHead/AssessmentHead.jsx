@@ -163,7 +163,7 @@ const AssessmentHead = ({
       </button>
       {showInstructions && (
         <>
-          <div className='modal justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none'>
+          <div onClick={()=>setShowInstructions(false)} className='modal justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none'>
             <div className='relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl'>
               
               <h3 className='text-2xl font-poppins font-medium mt-1'>
