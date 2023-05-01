@@ -638,17 +638,17 @@ const OnProcessinAssesments = () => {
                   <div>
                     {/* footer */}
                     <div className="flex justify-between items-center">
-                      <span>do you want to submit the answers?</span>
+                      <span>Are you sure do you want to submit the answers?</span>
                       <div className="flex justify-end gap-4">
                         <span
                           onClick={() => setSubmitModalIsOpen(false)}
-                          className="grow  font-semibold text-center  border px-2 py-1  hover:cursor-pointer hover:bg-gray-200 rounded-lg "
+                          className="grow  font-semibold text-center text-[#28282899]  border px-2 py-1  hover:cursor-pointer hover:bg-gray-200 rounded-lg "
                         >
                           No
                         </span>
                         <span
                           onClick={handleQuizSubmit}
-                          className="grow font-semibold text-center px-2 py-1  bg-[#53A871]  hover:cursor-pointer hover:bg-[#48a167] rounded-lg text-white "
+                          className="grow font-semibold text-center px-2 py-1  bg-[#27DC69]  hover:cursor-pointer hover:bg-[#48a167] rounded-lg text-white "
                         >
                           Yes
                         </span>
