@@ -401,14 +401,14 @@ const PreQuestionire = () => {
                       className={`${style.titleSub}`}
                       htmlFor="coLLageName"
                     >
-                      Collage Name
+                      College name
                     </label>
 
                     <input
                       {...register("coLLageName", {
                         required: {
                           value: true,
-                          message: "put your coLLage name",
+                          message: "put your college name",
                         },
                         pattern: {
                           value: /^[A-Za-z -]+$/,
