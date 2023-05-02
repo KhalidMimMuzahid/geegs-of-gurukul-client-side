@@ -37,6 +37,8 @@ import SpecificModule from "../../Pages/DashBoard/MyCourses/SpecificModule/Speci
 import Help from "../../Pages/Help/Help";
 import SignIn from "../../Pages/SignIn/SignIn";
 import SignUp from "../../Pages/SignUp/SignUp";
+import AddBatch from "../../Pages/DashBoard/AdminPannel/AddBatch/AddBatch";
+import AddCourse from "../../Pages/DashBoard/AdminPannel/AddCourse/AddCourse";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -127,6 +129,14 @@ const router = createBrowserRouter([
               {
                 path: "/dashboard/admin-pannel/add-assignment",
                 element: <AddAssignment />,
+              },
+              {
+                path: "/dashboard/admin-pannel/add-course",
+                element: <AddCourse/>,
+              },
+              {
+                path: "/dashboard/admin-pannel/add-batch",
+                element: <AddBatch/>,
               },
             ],
           },
