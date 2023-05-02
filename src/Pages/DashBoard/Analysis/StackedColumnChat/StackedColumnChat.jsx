@@ -50,7 +50,7 @@ const StackedColumnChat = ({ categories, correct, wrong, notAttempt }) => {
   return (
     <div className="my-8">
       <h4 className="font-poppins text-xl font-bold ">
-        Topics v/s (correct, wrong & not attempt)
+        Topic-wise Analysis :
       </h4>
       <ReactApexChart
         options={options}
