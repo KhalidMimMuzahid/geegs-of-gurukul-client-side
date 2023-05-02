@@ -10,7 +10,10 @@ const AddCourse = () => {
     formState: { errors },
     reset,
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data)
+    reset();
+  };
   return (
     <div className='container p-8'>
       <form onSubmit={handleSubmit(onSubmit)}>
