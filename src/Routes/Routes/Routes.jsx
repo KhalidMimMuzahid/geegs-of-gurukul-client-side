@@ -111,7 +111,7 @@ const router = createBrowserRouter([
                 element: <AssesmentList />,
               },
               {
-                path: "/dashboard/admin-pannel//add-lectures",
+                path: "/dashboard/admin-pannel/add-lectures",
                 element: <AddLectures />,
               },
               {

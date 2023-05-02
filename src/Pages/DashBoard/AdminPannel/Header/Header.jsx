@@ -78,8 +78,8 @@ const Header = () => {
                         to={item.link}
                         className={` px-2 py-1 rounded-lg text-black ${
                           currentPath === item.link
-                            ? "bg-green-500 text-white "
-                            : " hover:bg-green-300 bg-green-200"
+                            ? "bg-[#3DC86F] text-white "
+                            : " hover:bg-[#68f19a] bg-[#96ffbd]"
                         } `}
                         aria-current={item.current ? "page" : undefined}
                       >
