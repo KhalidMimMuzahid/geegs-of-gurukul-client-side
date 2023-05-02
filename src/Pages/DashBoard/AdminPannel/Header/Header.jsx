@@ -31,7 +31,21 @@ const navigation = [
     link: "/dashboard/admin-pannel/add-assignment",
     current: false,
   },
-  { name: "Users", link: "/dashboard/admin-pannel/users", current: false },
+  {
+    name: "Add Course",
+    link: "/dashboard/admin-pannel/add-course",
+    current: false
+  },
+  {
+    name: "Add Batch",
+    link: "/dashboard/admin-pannel/add-batch",
+    current: false
+  },
+  {
+    name: "Users",
+    link: "/dashboard/admin-pannel/users",
+    current: false
+  },
 ];
 
 function classNames(...classes) {
