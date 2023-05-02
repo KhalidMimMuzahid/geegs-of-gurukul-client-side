@@ -31,12 +31,7 @@ const DashBoard = () => {
       link: "/dashboard/analysis",
       hover: analysis4,
     },
-    {
-      title: "Practice",
-      src: Practice,
-      link: "/dashboard/practice",
-      hover: Practice5,
-    },
+
     {
       title: "Courses",
       src: course,
