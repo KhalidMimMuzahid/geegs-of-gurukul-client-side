@@ -31,7 +31,21 @@ const navigation = [
     link: "/dashboard/admin-pannel/add-assignment",
     current: false,
   },
-  { name: "Users", link: "/dashboard/admin-pannel/users", current: false },
+  {
+    name: "Add Course",
+    link: "/dashboard/admin-pannel/add-course",
+    current: false
+  },
+  {
+    name: "Add Batch",
+    link: "/dashboard/admin-pannel/add-batch",
+    current: false
+  },
+  {
+    name: "Users",
+    link: "/dashboard/admin-pannel/users",
+    current: false
+  },
 ];
 
 function classNames(...classes) {
@@ -64,8 +78,8 @@ const Header = () => {
                         to={item.link}
                         className={` px-2 py-1 rounded-lg text-black ${
                           currentPath === item.link
-                            ? "bg-green-500 text-white "
-                            : " hover:bg-green-300 bg-green-200"
+                            ? "bg-[#3DC86F] text-white "
+                            : " hover:bg-[#68f19a] bg-[#96ffbd]"
                         } `}
                         aria-current={item.current ? "page" : undefined}
                       >
