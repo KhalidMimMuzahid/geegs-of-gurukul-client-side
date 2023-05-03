@@ -88,6 +88,33 @@ const AddCourse = () => {
               )}
             </div>
             {/* Course ID */}
+            {/* Program Name */}
+            <div className={style?.addLecture}>
+              <label htmlFor="programName">Program Name</label>
+              <select
+                name="programName"
+                {...register("programName", {
+                  required: "Program Name is required",
+                })}
+                aria-invalid={errors.programName ? "true" : "false"}
+                className="w-full border-2 border-green-400 rounded-xl"
+              >
+                <option value="">Choose a Program</option>
+                <option value="School-Champs">School-Champs</option>
+                <option value="Coding-Bees">Coding-Bees</option>
+                <option value="Engineering-Nerds">Engineering-Nerds</option>
+                <option value="Industrial-Courses">Industrial-Courses</option>
+              </select>
+              {errors.programName && (
+                <p
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
+                >
+                  {errors.programName?.message}
+                </p>
+              )}
+            </div>
+            {/* Program Name */}
             {/* Regular Price */}
             <div className={style?.addCourse}>
               <label htmlFor='regularPrice'>Regular Price(In Rupee)</label>

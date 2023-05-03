@@ -111,26 +111,6 @@ const AddBatch = () => {
               )}
             </div>
             {/* Started At */}
-            {/* isActive */}
-            <div className={style?.addBatch}>
-            <label
-                for="isActive"
-                class="flex items-center cursor-pointer relative mb-4"
-              >
-                <input
-                  type="checkbox"
-                  id="isActive"
-                  name="isActive"
-                  {...register("isActive")}
-                  class="sr-only"
-                />
-                <div class="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
-                <span class="ml-3 text-gray-900 text-sm font-medium">
-                  isActive
-                </span>
-              </label>
-            </div>
-            {/* isActive */}
           </div>
         </div>
         {/* Submit Button */}
