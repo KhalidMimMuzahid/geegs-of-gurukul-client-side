@@ -39,6 +39,9 @@ import SignIn from "../../Pages/SignIn/SignIn";
 import SignUp from "../../Pages/SignUp/SignUp";
 import AddBatch from "../../Pages/DashBoard/AdminPannel/AddBatch/AddBatch";
 import AddCourse from "../../Pages/DashBoard/AdminPannel/AddCourse/AddCourse";
+import BatchList from "../../Pages/DashBoard/AdminPannel/BatchList/BatchList";
+import CourseList from "../../Pages/DashBoard/AdminPannel/CourseList/CourseList";
+import AssignmentList from "../../Pages/DashBoard/AdminPannel/AssignmentList/AssignmentList";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -137,6 +140,18 @@ const router = createBrowserRouter([
               {
                 path: "/dashboard/admin-pannel/add-batch",
                 element: <AddBatch/>,
+              },
+              {
+                path: "/dashboard/admin-pannel/batch-list",
+                element: <BatchList/>,
+              },
+              {
+                path: "/dashboard/admin-pannel/course-list",
+                element: <CourseList/>,
+              },
+              {
+                path: "/dashboard/admin-pannel/assignment-list",
+                element: <AssignmentList/>,
               },
             ],
           },
