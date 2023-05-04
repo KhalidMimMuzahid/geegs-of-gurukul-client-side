@@ -5,6 +5,7 @@ import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
 const BatchList = () => {
   const [batches, setBatches] = useState([]);
+  const [shouldDelete,setShouldDelete] = useState(false)
   useEffect(() => {
     fetch('http://localhost:5000/batch-list')
       .then(res => res.json())
@@ -108,7 +109,7 @@ const BatchList = () => {
                           <button
                             type="button"
                             className="px-1 py-1 "
-                            onClick={()=>handelDeleteBatch(batch?._id)}
+                            onClick={()=>setShouldDelete(true)}
                           >
                             {/* svg */}
                             <img
@@ -145,6 +146,15 @@ const BatchList = () => {
                               alt=""
                             />
                           </button>
+                          {
+        shouldDelete && <div class="bg-slate-800 bg-opacity-50 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0">
+        <div class="bg-white px-16 py-14 rounded-md text-center">
+          <h1 class="text-xl mb-4 font-bold text-slate-500">Do you Want Delete</h1>
+          <button onClick={()=>setShouldDelete(false)} class="bg-red-500 px-4 py-2 rounded-md text-md text-white">Cancel</button>
+          <button onClick={()=>handelDeleteBatch(batch?._id) && setShouldDelete(false)} class="bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold">Ok</button>
+        </div>
+      </div>
+      }
                         </div>
                       </td>
                     </tr>
@@ -157,6 +167,7 @@ const BatchList = () => {
       </div>
 
       {/* Table */}
+      
     </div>
   )
 }

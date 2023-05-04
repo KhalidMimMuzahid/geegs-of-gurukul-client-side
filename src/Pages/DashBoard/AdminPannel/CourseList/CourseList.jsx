@@ -5,6 +5,7 @@ import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
 const CourseList = () => {
   const [courses, setCourses] = useState([]);
+  const [shouldDelete,setShouldDelete] = useState(false)
   useEffect(() => {
     fetch('http://localhost:5000/course-list')
       .then(res => res.json())
@@ -141,7 +142,7 @@ const CourseList = () => {
                           <button
                             type="button"
                             className="px-1 py-1 "
-                            onClick={()=>handelDeleteCourse(course?._id)}
+                            onClick={()=>setShouldDelete(true)}
                           >
                             {/* svg */}
                             <img
@@ -178,6 +179,15 @@ const CourseList = () => {
                               alt=""
                             />
                           </button>
+                          {
+        shouldDelete && <div class="bg-slate-800 bg-opacity-50 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0 z-1000">
+        <div class="bg-white px-16 py-14 rounded-md text-center">
+          <h1 class="text-xl mb-4 font-bold text-slate-500">Do you Want Delete</h1>
+          <button onClick={()=>setShouldDelete(false)} class="bg-red-500 px-4 py-2 rounded-md text-md text-white">Cancel</button>
+          <button onClick={()=>handelDeleteCourse(course?._id)&& setShouldDelete(false)} class="bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold">Ok</button>
+        </div>
+      </div>
+      }
                         </div>
                       </td>
                     </tr>
