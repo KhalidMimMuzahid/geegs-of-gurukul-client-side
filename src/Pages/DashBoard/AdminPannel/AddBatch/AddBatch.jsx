@@ -10,7 +10,25 @@ const AddBatch = () => {
         reset,
       } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    const batch = {
+      courseId: data?.courseId,
+      batchId: data?.batchId,
+      startedAt: data?.startedAt,
+      duration: data?.duration,
+      
+    }
+    
+    fetch('http://localhost:5000/add-batch', {
+      method: 'POST',
+      body: JSON.stringify(batch),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+    console.log(batch);
     reset();
   };
   return (
