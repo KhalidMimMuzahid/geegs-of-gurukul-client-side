@@ -1,28 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './courseList.module.css'
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
 const CourseList = () => {
-    const courses = [
-        {
-          CourseName: "Introduction to JavaScript",
-          Topic: "Variables and Data Types",
-          BatchNo: 1234,
-        },
-    
-        {
-          CourseName: "Machine Learning with Python",
-          Topic: "Regression Analysis",
-          BatchNo: 7890,
-        },
-        { CourseName: "iOS App Development", Topic: "UI Design", BatchNo: 1235 },
-        {
-          CourseName: "Android App Development",
-          Topic: "Intents and Activities",
-          BatchNo: 6789,
-        },
-      ];
+  const [courses, setCourses] = useState([]);
+  useEffect(() => {
+    fetch('http://localhost:5000/course-list')
+      .then(res => res.json())
+      .then(data => setCourses(data))
+  }, [courses]);
   return (
       <div>
           
@@ -61,7 +48,7 @@ const CourseList = () => {
       </div>
 
           {/* Table */}
-      <div class="flex flex-col justify-center h-full mx-auto">
+      <div class="flex flex-col justify-center h-full mx-auto text-center">
         <div class="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
           <header class="px-5 py-4 border-b border-gray-100">
             <h2 class="font-semibold font-poppins text-gray-800">Courses</h2>
@@ -100,17 +87,17 @@ const CourseList = () => {
                 <tbody class="text-sm divide-y divide-gray-100">
                   {courses.map((course, i) => (
                     <tr key={i}>
-                      <td class="p-2 whitespace-nowrap">
+                      <td class="p-2 whitespace-nowrap text-center">
                         <div class="flex items-center">{i + 1}</div>
                       </td>
-                      <td class="p-2 whitespace-nowrap">
-                        {course?.CourseName}
+                      <td class="p-2 whitespace-nowrap text-center">
+                        {course?.courseName}
                       </td>
-                      <td class="p-2 whitespace-nowrap">Course ID</td>
-                      <td class="p-2 whitespace-nowrap">Duration</td>
-                      <td class="p-2 whitespace-nowrap">Program Name</td>
-                      <td class="p-2 whitespace-nowrap">Price</td>
-                          <td class="p-2 whitespace-nowrap">
+                      <td class="p-2 whitespace-nowrap text-center">{course?.courseId}</td>
+                      <td class="p-2 whitespace-nowrap text-center">{course?.duration}</td>
+                      <td class="p-2 whitespace-nowrap text-center">{course?.programName}</td>
+                      <td class="p-2 whitespace-nowrap text-center">{course?.regularPrice}</td>
+                          <td class="p-2 whitespace-nowrap text-center">
                               {/* isActive */}
             <div className={style?.addBatch}>
             <label
