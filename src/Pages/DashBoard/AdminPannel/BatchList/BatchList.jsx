@@ -10,6 +10,24 @@ const BatchList = () => {
       .then(res => res.json())
       .then(data => setBatches(data))
   }, [batches]);
+
+  //delete a batch
+  const handelDeleteBatch = (id) => {
+    fetch(`http://localhost:5000/batch/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+}
   return (
     <div>
       {/* Search */}
@@ -90,6 +108,7 @@ const BatchList = () => {
                           <button
                             type="button"
                             className="px-1 py-1 "
+                            onClick={()=>handelDeleteBatch(batch?._id)}
                           >
                             {/* svg */}
                             <img

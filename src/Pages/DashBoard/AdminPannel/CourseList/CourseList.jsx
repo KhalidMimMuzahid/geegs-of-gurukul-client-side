@@ -10,6 +10,24 @@ const CourseList = () => {
       .then(res => res.json())
       .then(data => setCourses(data))
   }, [courses]);
+  //delete a course
+  const handelDeleteCourse = (id) => {
+    fetch(`http://localhost:5000/course/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+}
+  
   return (
       <div>
           
@@ -123,6 +141,7 @@ const CourseList = () => {
                           <button
                             type="button"
                             className="px-1 py-1 "
+                            onClick={()=>handelDeleteCourse(course?._id)}
                           >
                             {/* svg */}
                             <img
