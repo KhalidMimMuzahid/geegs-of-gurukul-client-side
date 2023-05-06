@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import "./CSV.css";
+import { toast } from "react-hot-toast";
 const CSV = () => {
   const [assessment, setAssessment] = useState();
   const [questions, setQuestions] = useState([]);
@@ -21,7 +22,7 @@ const CSV = () => {
   //   }
   const removeDuplicateQuestions = (allQuestions) => {
     let newArray = [];
-    console.log("allQuestions xxxxxxxxxx: ", allQuestions);
+    // console.log("allQuestions xxxxxxxxxx: ", allQuestions);
     allQuestions.forEach((eachQuesion) => {
       // console.log(
       //   "eachQuesion xxxxxxxxxxxxxxxxxxxxxxxxxxx",
@@ -47,6 +48,7 @@ const CSV = () => {
   //   console.log("questions: ", questions);
   // }, [questions]);
   const csvFileToObject = (string, fileName) => {
+    // console.log("xxxxxxxxxxxxxxxxxxxxxxxx");
     let noOfRow = 1;
     let pushCount = 0;
     let isError = false;
@@ -89,8 +91,21 @@ const CSV = () => {
           while (tempOptionObjectString.includes('""')) {
             tempOptionObjectString = tempOptionObjectString.replace('""', '"');
           }
-          const optionObject = JSON.parse(tempOptionObjectString);
-          // console.log("\noptionObject : ", optionObject);
+          const optionObjectTemp = JSON.parse(tempOptionObjectString);
+
+          const { answers, choices: choicesTemp } = optionObjectTemp;
+          //  optionObject;
+
+          const entriesValues = Object.entries(choicesTemp);
+          const choices = entriesValues?.map((each) => {
+            const eachOption = {};
+            const key = each[0];
+            const value = each[1];
+            eachOption[key] = value;
+            return eachOption;
+          });
+          const optionObject = { answers, choices };
+          console.log("\noptionObject : ", optionObject);
           let tempOtherParametereArray = eachRow
             ?.slice(eachRow.indexOf('}}",') + 4)
             .split(",");
@@ -123,12 +138,12 @@ const CSV = () => {
             question = tempQues;
           }
           if (noOfRow === 3) {
-            console.log(
-              "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\nrow = ",
-              noOfRow,
-              "\nquestion= ",
-              question
-            );
+            // console.log(
+            //   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\nrow = ",
+            //   noOfRow,
+            //   "\nquestion= ",
+            //   question
+            // );
           }
           // console.log("\n", question);
           let tempOptionObjectString = eachRow?.slice(
@@ -163,8 +178,8 @@ const CSV = () => {
         }
       } catch (err) {
         // if any error, Code throws the error
-        console.log(err);
-        console.log("row= ", noOfRow);
+        // console.log(err);
+        // console.log("row= ", noOfRow);
         const newErrorInRowColumnPairs = [...errorInRowColumnPairs];
         newErrorInRowColumnPairs.push({ row: noOfRow, column: "unknown" });
         setErrorInRowColumnPairs(newErrorInRowColumnPairs);
@@ -185,9 +200,9 @@ const CSV = () => {
       } finally {
       }
     });
-    console.log("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
+    // console.log("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
     if (!isError) {
-      console.log(allQuestions);
+      // console.log(allQuestions);
       const withNonDuplicateQuestions = removeDuplicateQuestions(allQuestions);
       console.log("withNonDuplicateQuestions: ", withNonDuplicateQuestions);
 
@@ -203,10 +218,10 @@ const CSV = () => {
           if (data?.acknowledged) {
             //   TODO:    show confirmationMessage
             //   clear all form and errors
-            window.alert("succesfully confirmed");
+            toast.success("succesfully confirmed");
           } else {
             //   TODO:    show error Message
-            window.alert("something went wrong");
+            toast.error("something went wrong");
           }
         });
       // setAssessment((prevAssessment) => {

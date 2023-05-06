@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./AddAssesment.css";
 import { BiSearch } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import EachAssesment from "./EachAssesment/EachAssesment";
 import moment from "moment/moment";
+import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
+import { toast } from "react-hot-toast";
 
 // import EachAssesment from "./EachAssesment/EachAssesment";
 const AddAssesment = () => {
+  const { user } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -27,24 +30,24 @@ const AddAssesment = () => {
       scheduledAt,
       shouldShowAnswer,
       shouldShuffle,
-      topicName,
+      categoryName,
     } = data;
     const actionsDetails = {
       isDeleted: false,
       creation: {
         createdAt: justNow,
-        creatorEmail: "khalidmimm@gmail.com",
+        creatorEmail: user?.email,
       },
       updation: {
         updatedAt: justNow,
-        updatorEmail: "khalidmimm@gmail.com",
+        updatorEmail: user?.email,
       },
     };
     const questions = [];
     const assessmentMainInfo = {
       assessmentName,
       batchId,
-      duration,
+      duration: parseInt(duration),
       enabledNegativeMarking,
       instruction,
       isOptional,
@@ -52,7 +55,7 @@ const AddAssesment = () => {
       actionsDetails,
       shouldShowAnswer,
       shouldShuffle,
-      topicName,
+      categoryName,
       questions,
     };
     console.log("assessment: ", assessmentMainInfo);
@@ -74,13 +77,13 @@ const AddAssesment = () => {
         console.log(data);
         if (data?.acknowledged) {
           // todo: is succesfully addded
-          window.alert("successfully added");
+          toast.success("successfully added");
           // setAssessmentMainInfo({});
           setAddedQuestion([]);
           // event.target.reset();
         } else {
           // todo: something went wrong
-          window.alert("can't be added");
+          toast.error("can't be added");
         }
       });
   };
@@ -198,23 +201,23 @@ const AddAssesment = () => {
                   )}
                 </div>
                 <div className="addAssessment">
-                  <label>Topic</label>
+                  <label>Category</label>
                   <input
                     // required
                     type="text"
-                    name="topicName"
+                    name="categoryName"
                     // onChange={handleInputChange}
-                    {...register("topicName", {
-                      required: "Topic Name is required",
+                    {...register("categoryName", {
+                      required: "Category Name is required",
                     })}
-                    aria-invalid={errors.topicName ? "true" : "false"}
+                    aria-invalid={errors.categoryName ? "true" : "false"}
                   />
-                  {errors.topicName && (
+                  {errors.categoryName && (
                     <p
                       role="alert"
                       className="text-red-500 font-poppins font-medium"
                     >
-                      {errors.topicName?.message}
+                      {errors.categoryName?.message}
                     </p>
                   )}
                 </div>
@@ -407,7 +410,10 @@ const AddAssesment = () => {
               </span>
             </button>
           </form>
-          <h4 className="text-center font-poppins font-medium my-5">
+          <h4
+            style={{ textAlign: "center" }}
+            className=" text-black font-poppins font-medium mt-5 text-xl"
+          >
             {addedQuestion?.length === 0
               ? "You have no question added"
               : `you have added ${addedQuestion?.length} ${

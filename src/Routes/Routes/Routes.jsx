@@ -35,13 +35,15 @@ import SpecificCourse from "../../Pages/DashBoard/MyCourses/SpecificCourse/Speci
 import SpecificLecture from "../../Pages/DashBoard/MyCourses/SpecificLecture/SpecificLecture";
 import SpecificModule from "../../Pages/DashBoard/MyCourses/SpecificModule/SpecificModule";
 import Help from "../../Pages/Help/Help";
-import SignIn from "../../Pages/SignIn/SignIn";
-import SignUp from "../../Pages/SignUp/SignUp";
 import AddBatch from "../../Pages/DashBoard/AdminPannel/AddBatch/AddBatch";
 import AddCourse from "../../Pages/DashBoard/AdminPannel/AddCourse/AddCourse";
 import BatchList from "../../Pages/DashBoard/AdminPannel/BatchList/BatchList";
 import CourseList from "../../Pages/DashBoard/AdminPannel/CourseList/CourseList";
 import AssignmentList from "../../Pages/DashBoard/AdminPannel/AssignmentList/AssignmentList";
+import PhoneSignUp from "../../Pages/phoneSignUp/PhoneSignUp";
+import Login from "../../Pages/login/Login";
+import SignUp from "../../Pages/signUp/SignUp";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -53,7 +55,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <DashBoard />,
+        element: (
+          <PrivateRoute>
+            <DashBoard />
+          </PrivateRoute>
+        ),
         children: [
           {
             path: "/",
@@ -135,23 +141,23 @@ const router = createBrowserRouter([
               },
               {
                 path: "/dashboard/admin-pannel/add-course",
-                element: <AddCourse/>,
+                element: <AddCourse />,
               },
               {
                 path: "/dashboard/admin-pannel/add-batch",
-                element: <AddBatch/>,
+                element: <AddBatch />,
               },
               {
                 path: "/dashboard/admin-pannel/batch-list",
-                element: <BatchList/>,
+                element: <BatchList />,
               },
               {
                 path: "/dashboard/admin-pannel/course-list",
-                element: <CourseList/>,
+                element: <CourseList />,
               },
               {
                 path: "/dashboard/admin-pannel/assignment-list",
-                element: <AssignmentList/>,
+                element: <AssignmentList />,
               },
             ],
           },
@@ -170,12 +176,16 @@ const router = createBrowserRouter([
         element: <Help />,
       },
       {
-        path: "/sign-in",
-        element: <SignIn />,
+        path: "/login",
+        element: <Login />,
       },
       {
-        path: "/sign-up",
+        path: "/signup",
         element: <SignUp />,
+      },
+      {
+        path: "/phone-sign-up",
+        element: <PhoneSignUp />,
       },
 
       // {
@@ -241,7 +251,9 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/on-processing",
+    path: "on-processing/:_id",
+    loader: async ({ params }) =>
+      fetch(`http://localhost:5000/assessment?_id=${params?._id}`),
     element: <OnProcessinAssesments />,
   },
 ]);

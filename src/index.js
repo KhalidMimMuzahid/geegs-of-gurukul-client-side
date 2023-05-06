@@ -5,15 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UIProvider, { UIContext } from "./contexts/UIProvider/UIProvider";
+import UserProvider from "./contexts/UserProvider/UserProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // Create a client
 const queryClient = new QueryClient();
 root.render(
   <QueryClientProvider client={queryClient}>
-    <UIProvider>
-      <App />
-    </UIProvider>
+    <UserProvider>
+      <UIProvider>
+        <App />
+      </UIProvider>
+    </UserProvider>
   </QueryClientProvider>
 );
 

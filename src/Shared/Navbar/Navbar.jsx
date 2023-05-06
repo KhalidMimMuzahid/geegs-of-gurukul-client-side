@@ -11,8 +11,11 @@ import leaderboard from "../../assets/svg/leader-board.svg";
 import logout from "../../assets/svg/logout.svg";
 import { Link, useLocation } from "react-router-dom";
 import { UIContext } from "../../contexts/UIProvider/UIProvider";
+import { AuthContext } from "../../contexts/UserProvider/UserProvider";
+import { toast } from "react-hot-toast";
 const Navbar = () => {
   const [currentPath, setCurrrentPath] = useState("");
+  const { user, logOut } = useContext(AuthContext);
   useLocation();
   useEffect(() => {
     const handleLocationChange = () => {
@@ -20,6 +23,13 @@ const Navbar = () => {
     };
     return handleLocationChange();
   });
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("Successfully logged out");
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <nav className="bg-white  shadow-md border-gray-900 dark:bg-green-900 rounded-lg">
       <div className=" flex flex-wrap items-center justify-between mx-auto p-4">
@@ -27,10 +37,17 @@ const Navbar = () => {
           <img src={logo} className="h-8 mr-3" alt="Flowbite Logo" />
         </Link>
 
-        <div className=" flex items-center md:order-2">
+        <div
+          className={`${
+            user?.email ? "flex" : "hidden"
+          }  items-center md:order-2`}
+        >
+          {/* {user?.email && ( */}
           <button
             type="button"
-            className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            className={`${
+              user?.email ? "flex" : "hidden"
+            } mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600`}
             id="user-menu-button"
             aria-expanded="false"
             data-dropdown-toggle="user-dropdown"
@@ -39,31 +56,40 @@ const Navbar = () => {
             <span className="sr-only">Openx user menu</span>
             <img
               className="w-8 h-8 rounded-full"
-              src="https://randomuser.me/api/portraits/women/63.jpg"
+              src={
+                user?.photoURL
+                  ? user?.photoURL
+                  : "https://i.ibb.co/jkbWws1/blank-profile-picture-973460-340.png"
+              }
               alt="userphoto"
             />
           </button>
+          {/* // )} */}
           {/* <!-- Dropdown menu --> */}
           <div
-            className="z-50  w-[300px]  hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600"
+            className="z-[1000000]  w-[300px] hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600"
             id="user-dropdown"
           >
-            <div className="px-2 py-8 flex items-center justify-around gap-2">
-              <div>
+            <div className="px-2 py-4 flex items-center justify-around gap-2 ">
+              <div className="">
                 <img
                   width="76px"
                   height="76px"
-                  src="https://randomuser.me/api/portraits/women/63.jpg"
+                  src={
+                    user?.photoURL
+                      ? user?.photoURL
+                      : "https://i.ibb.co/jkbWws1/blank-profile-picture-973460-340.png"
+                  }
                   alt=""
                   className="rounded-full border-4 border-green-500"
                 />
               </div>
-              <div className="flex flex-col justify-between items-start">
-                <h4 className="text-xl font-poppins">Shamima Akter</h4>
-                <Link to="/profile/my-profile">
+              <div className="flex grow flex-col justify-between  ">
+                <h4 className="text-xl ml-2 font-poppins">{user?.name}</h4>
+                <Link to="/profile/my-profile" className="w-full grow ">
                   <button
                     type="button"
-                    className="text-white  font-poppins bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-400 dark:hover:bg-green-500 focus:outline-none dark:focus:ring-green-400 ml-8"
+                    className="text-white w-full  font-poppins bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  mb-2 dark:bg-green-400 dark:hover:bg-green-500 focus:outline-none dark:focus:ring-green-400 "
                   >
                     View Profile
                   </button>
@@ -71,10 +97,10 @@ const Navbar = () => {
               </div>
             </div>
             <ul
-              className="py-2 font-poppins mx-16 gap-4 items-center justify-center my-2"
+              className="py-2  font-poppins mx-4 gap-4 items-center justify-center"
               aria-labelledby="user-menu-button"
             >
-              <li>
+              {/* <li>
                 <Link
                   to="/profile/leaderboard"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
@@ -84,22 +110,14 @@ const Navbar = () => {
                     <span>Leader Board</span>
                   </div>
                 </Link>
-              </li>
-              <li>
-                <Link
-                  to="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  <div className="flex gap-4 items-center justify-start my-2">
-                    <img src={leaderboard} alt="" />
-                    <span>Ticket</span>
-                  </div>
-                </Link>
-              </li>
+              </li> */}
 
-              <li>
-                <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                  <div className="flex gap-2 items-center justify-start my-2">
+              <li className=" flex justify-center">
+                <button
+                  onClick={handleLogOut}
+                  className="block  rounded-lg border-gray-600 shadow-md  w-full  text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
+                  <div className="flex px-4 py-2 gap-2  items-center justify-start ">
                     <img src={logout} alt="" />
                     <span>Sign Out</span>
                   </div>
@@ -130,6 +148,7 @@ const Navbar = () => {
             </svg>
           </button>
         </div>
+
         <div
           className="items-center grow   justify-end hidden w-full md:flex md:w-auto md:order-1"
           id="mobile-menu-2"

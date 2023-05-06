@@ -1,0 +1,43 @@
+
+.load {
+    display: flex;
+     
+      background-color: black;
+      overflow: hidden;
+      justify-content: center;
+      align-items: center;
+      padding-top: 100px;
+      padding-bottom: 20px;
+  }
+
+
+
+  .load .loader {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      border-radius: 50%;
+  }
+
+  .load div {
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+      box-sizing: border-box;
+      border-top: 0.2em solid #fff;
+      border-bottom: 0.2em solid #fff;
+      border-left: 0.2em solid chartreuse;
+      border-right: 0.2em solid coral;
+      animation: spin 10s infinite linear;
+  }
+  @keyframes spin {
+      0% {
+          transform: rotate(0deg);
+      }
+      50%{
+          transform: rotate(180deg);
+      }
+      100% {
+          transform: rotate(90deg);
+      }
+  }
