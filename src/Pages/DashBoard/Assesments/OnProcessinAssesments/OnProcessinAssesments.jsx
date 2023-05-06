@@ -544,10 +544,10 @@ const OnProcessinAssesments = () => {
             </div>
             <div className="flex items-center">
               <p className="text-[#4caf50] border border-gray-300 p-2 rounded-l-md">
-                + 3.00
+                + 1.00
               </p>
               <p className="text-[#db2020] border border-l-0 border-gray-300 p-2 rounded-r-md">
-                - 1.00
+                - 0.25
               </p>
             </div>
             </div>
