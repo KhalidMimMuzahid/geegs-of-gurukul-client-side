@@ -40,7 +40,7 @@ const MyProfile = () => {
   return (
     <div className="flex w-full">
       <div
-        className={`${!open && "hidden"} md:block ${open ? "w-72" : "w-20 "}  ${
+        className={`${!open && "hidden"} md:block ${open ? "w-20" : "w-20 "}  ${
           open && "border-r-4"
         } ${
           style.dashboardHeight

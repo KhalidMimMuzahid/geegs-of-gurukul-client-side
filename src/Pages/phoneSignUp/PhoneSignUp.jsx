@@ -4,7 +4,7 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { useContext } from "react";
-// import "./PhoneSignUp.css";
+import "./PhoneSignUp.css";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../contexts/UserProvider/UserProvider";
 import Loading from "../../Components/Loading/Loading";

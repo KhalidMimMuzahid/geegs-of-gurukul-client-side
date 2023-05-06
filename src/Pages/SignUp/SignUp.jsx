@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../contexts/UserProvider/UserProvider";
-// import "./SignUp.css";
+import "./SignUp.css";
 
 import {
   AiOutlineEyeInvisible,

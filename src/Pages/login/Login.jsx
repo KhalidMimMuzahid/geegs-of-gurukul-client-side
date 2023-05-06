@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-// import "./Login.css";
+import "./Login.css";
 
 import {
   AiFillFacebook,
