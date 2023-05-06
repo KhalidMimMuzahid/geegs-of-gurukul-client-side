@@ -28,6 +28,22 @@ const CourseList = () => {
       .then((data) => console.log(data))
       .catch((error) => console.error("Error:", error));
   };
+  //update a course
+  const handelUpdateCourse = (id) => {
+    fetch(`http://localhost:5000/course/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: 'John Smith',
+        email: 'john@example.com'
+      })
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
+  }
 
   return (
     <div>
