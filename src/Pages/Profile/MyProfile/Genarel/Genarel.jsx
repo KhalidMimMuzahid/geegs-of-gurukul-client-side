@@ -2,7 +2,7 @@ import React from "react";
 
 const Genarel = () => {
   return (
-    <div className="p-8 flex flex-col items-center gap-5 md:flex-row md:items-center w-4/5 rounded-md shadow-lg mx-auto">
+    <div className="p-8 flex flex-col items-center gap-8 md:gap-16 md:flex-row md:items-center w-4/5 rounded-md shadow-lg mx-auto">
       <div className="flex flex-col items-center gap-2">
         {/* image side */}
         <img className="w-36 rounded-full" src="https://randomuser.me/api/portraits/women/94.jpg" alt="" />
