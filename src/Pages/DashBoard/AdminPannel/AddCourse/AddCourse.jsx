@@ -10,8 +10,29 @@ const AddCourse = () => {
     formState: { errors },
     reset,
   } = useForm();
+  
   const onSubmit = (data) => {
-    console.log(data)
+    const course = {
+      courseName: data?.courseName,
+      courseId: data?.courseId,
+      duration: data?.duration,
+      programName: data.programName,
+      regularPrice: data?.regularPrice,
+      offerPrice: data?.offerPrice,
+      courseDetail: data?.offerPrice
+    }
+    
+    fetch('http://localhost:5000/add-course', {
+      method: 'POST',
+      body: JSON.stringify(course),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+    console.log(course)
     reset();
   };
   return (

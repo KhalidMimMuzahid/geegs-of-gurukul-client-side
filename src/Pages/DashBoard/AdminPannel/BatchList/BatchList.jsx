@@ -1,28 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './batchList.module.css'
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
 const BatchList = () => {
-  const courses = [
-    {
-      CourseName: "Introduction to JavaScript",
-      Topic: "Variables and Data Types",
-      BatchNo: 1234,
-    },
+  const [batches, setBatches] = useState([]);
+  const [shouldDelete,setShouldDelete] = useState(false)
+  useEffect(() => {
+    fetch('http://localhost:5000/batch-list')
+      .then(res => res.json())
+      .then(data => setBatches(data))
+  }, [batches]);
 
-    {
-      CourseName: "Machine Learning with Python",
-      Topic: "Regression Analysis",
-      BatchNo: 7890,
-    },
-    { CourseName: "iOS App Development", Topic: "UI Design", BatchNo: 1235 },
-    {
-      CourseName: "Android App Development",
-      Topic: "Intents and Activities",
-      BatchNo: 6789,
-    },
-  ];
+  //delete a batch
+  const handelDeleteBatch = (id) => {
+    fetch(`http://localhost:5000/batch/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+}
   return (
     <div>
       {/* Search */}
@@ -87,22 +93,23 @@ const BatchList = () => {
                   </tr>
                 </thead>
                 <tbody class="text-sm divide-y divide-gray-100">
-                  {courses.map((course, i) => (
+                  {batches.map((batch, i) => (
                     <tr key={i}>
                       <td class="p-2 whitespace-nowrap">
                         <div class="flex items-center">{i + 1}</div>
                       </td>
                       <td class="p-2 whitespace-nowrap">
-                        Course ID
+                        {batch?.courseId}
                       </td>
-                      <td class="p-2 whitespace-nowrap">Batch ID</td>
-                      <td class="p-2 whitespace-nowrap">Duration</td>
-                      <td class="p-2 whitespace-nowrap">Started Date</td>
+                      <td class="p-2 whitespace-nowrap">{batch?.batchId}</td>
+                      <td class="p-2 whitespace-nowrap">{batch?.duration}</td>
+                      <td class="p-2 whitespace-nowrap">{batch?.startedAt}</td>
                       <td class="p-2 whitespace-nowrap flex gap-2">
                         <div class="mx-auto flex w-[100px] gap-2">
                           <button
                             type="button"
                             className="px-1 py-1 "
+                            onClick={()=>setShouldDelete(true)}
                           >
                             {/* svg */}
                             <img
@@ -139,6 +146,15 @@ const BatchList = () => {
                               alt=""
                             />
                           </button>
+                          {
+        shouldDelete && <div class="bg-slate-800 bg-opacity-50 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0">
+        <div class="bg-white px-16 py-14 rounded-md text-center">
+          <h1 class="text-xl mb-4 font-bold text-slate-500">Do you Want Delete</h1>
+          <button onClick={()=>setShouldDelete(false)} class="bg-red-500 px-4 py-2 rounded-md text-md text-white">Cancel</button>
+          <button onClick={()=>handelDeleteBatch(batch?._id) && setShouldDelete(false)} class="bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold">Ok</button>
+        </div>
+      </div>
+      }
                         </div>
                       </td>
                     </tr>
@@ -151,6 +167,7 @@ const BatchList = () => {
       </div>
 
       {/* Table */}
+      
     </div>
   )
 }
