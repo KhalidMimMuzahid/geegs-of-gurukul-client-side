@@ -1,9 +1,12 @@
 import React from "react";
+import Header from "./Header/Header";
+import { Outlet } from "react-router-dom";
 
 const Settings = () => {
   return (
     <div>
-      <h1>this is Settings</h1>
+      <Header />
+      <Outlet/>
     </div>
   );
 };
