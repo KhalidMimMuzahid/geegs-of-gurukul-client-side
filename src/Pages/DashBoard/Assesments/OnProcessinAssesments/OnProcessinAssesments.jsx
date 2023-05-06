@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import AssessmentHead from "./AssessmentHead/AssessmentHead";
 import AssessmentBody from "./AssessmentBody/AssessmentBody";
 import moment from "moment";
-import { useNavigate } from "react-router-dom";
-import rightArrow from "../../../../assets/icons/arrow-right.svg"
+import { useLoaderData, useNavigate } from "react-router-dom";
+import rightArrow from "../../../../assets/icons/arrow-right.svg";
 
 const OnProcessinAssesments = () => {
   const [assessment, setAssessment] = useState({});
@@ -24,6 +24,7 @@ const OnProcessinAssesments = () => {
   const navigate = useNavigate();
   const startedAt = moment().format();
   const shuffle = (array) => {
+    console.log("arrayyyy: ", array);
     array.sort(() => Math.random() - 0.5);
     return array;
   };
@@ -206,7 +207,7 @@ const OnProcessinAssesments = () => {
   //     });
   // }, []);
 
-  const data = {
+  const datax = {
     assessmentName: "for new comers",
     batchId: "FSWD-001",
     duration: 10,
@@ -460,8 +461,11 @@ const OnProcessinAssesments = () => {
       },
     ],
   };
+  const data = useLoaderData();
+  // console.log("data2", data2);
   useEffect(() => {
     setAssessment(data);
+    console.log("testttttttttttttt", data);
     setTotalQuestions(data?.questions?.length);
     if (data?.shouldShuffle === false) {
       setQuestions(data?.questions);
@@ -550,8 +554,8 @@ const OnProcessinAssesments = () => {
                 - 1.00
               </p>
             </div>
-            </div>
           </div>
+        </div>
         {/* mark-negetive */}
         <div className=" rounded-3xl shadow-lg shadow-slate-700  py-4 lg:px-8 lg:py-8 px-4">
           <div className="grid grid-cols-12 gap-1 lg:gap-16">
@@ -573,7 +577,7 @@ const OnProcessinAssesments = () => {
                 totalQuestions={totalQuestions}
               />
             </div>
-            
+
             <div className="col-span-12 lg:col-span-8 mt-2 ">
               <AssessmentBody
                 // shouldShuffle={assessment?.shouldShuffle}
@@ -589,7 +593,6 @@ const OnProcessinAssesments = () => {
                 totalQuestions={totalQuestions}
                 chosenAnswers={chosenAnswers}
                 setSubmitModalIsOpen={setSubmitModalIsOpen}
-                
               />
             </div>
           </div>
@@ -658,7 +661,9 @@ const OnProcessinAssesments = () => {
                   <div>
                     {/* footer */}
                     <div className="flex justify-between items-center">
-                      <span>Are you sure do you want to submit the answers?</span>
+                      <span>
+                        Are you sure do you want to submit the answers?
+                      </span>
                       <div className="flex justify-end gap-4">
                         <span
                           onClick={() => setSubmitModalIsOpen(false)}

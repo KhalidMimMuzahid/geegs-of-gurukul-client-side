@@ -1,83 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import time from '../../../../assets/TestIcons/time.svg'
-import question from '../../../../assets/TestIcons/question.svg'
+import time from "../../../../assets/TestIcons/time.svg";
+import question from "../../../../assets/TestIcons/question.svg";
 
 const Default = () => {
-  const assesments = [
-    {
-      assesmentName: "Topic Test (Algebra)",
-      questions: 25,
-      time:35
-      
-    },
-    {
-      assesmentName: "Topic Test (Sequence and Series)",
-      questions: 25,
-      time:35
-      
-    },
-    {
-      assesmentName: "Topic Test (Number System)",
-      questions: 25,
-      time:35
-      
-    },
-    {
-      assesmentName: "Topic Test (Time and Work)",
-      questions: 25,
-      time:35
-      
-    },
-    {
-      assesmentName: "Topic Test (Data Science)",
-      questions: 25,
-      time:35
-      
-    },
-    {
-      assesmentName: "Topic Test (Binary)",
-      questions: 25,
-      time:35
-      
-    },
-    {
-      assesmentName: "Topic Test (JavaScript)",
-      questions: 25,
-      time:35
-      
-    },
-    {
-      assesmentName: "Topic Test (CSS)",
-      questions: 25,
-      time:35
-      
-    },
-    
-  ];
+  const [assessments, setAssessments] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/assessments")
+      .then((res) => res.json())
+      .then((assessments) => {
+        console.log("Assessments: ", assessments);
+        setAssessments(assessments);
+      });
+  }, []);
+
   return (
     <div className="w-4/5 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-4 px-5">
-      {assesments?.map((assesment, i) => (
+      {assessments?.map((assessment, i) => (
         <div
-          key={i}
+          key={assessment?._id}
           class="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
-          
           <div class="p-5">
             <a href="#">
               <h5 class="mb-2 text-lg font-medium tracking-tight text-gray-900 dark:text-white">
-                {assesment?.assesmentName}
+                {assessment?.assessmentName}
               </h5>
             </a>
             <p class="flex gap-2 items-center mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
-             <img src={question} alt="" />  {assesment?.questions} Questions
+              <img src={question} alt="" /> {assessment?.questions?.length}{" "}
+              Questions
             </p>
             <p class="flex gap-2 items-center mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
-              <img src={time} alt="" /> {assesment?.time} Mins
+              <img src={time} alt="" /> {assessment?.duration} Mins
             </p>
-            
+
             <Link
-              to="/on-processing"
+              to={`/on-processing/${assessment?._id}`}
               class="inline-flex items-center font-poppins px-3 py-2 text-sm font-medium text-center text-[#28282899] bg-[#e4e4e4] rounded-lg hover:bg-[#5fb370] hover:text-white focus:ring-4 focus:outline-none focus:ring-[#75AE80] dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Start

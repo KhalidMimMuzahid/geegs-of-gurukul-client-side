@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import style from "./dashboard.module.css";
+import { AuthContext } from "../../contexts/UserProvider/UserProvider";
 const EachLink = ({ currentPath, Menu, open }) => {
-  return (
+  const { user } = useContext(AuthContext);
+  const target = Menu?.title;
+  return user?.role === "student" && Menu?.title === "Admin" ? null : (
     <li>
       <Link
         to={Menu?.link}
         className={`flex ${
           style.menuHover
         }  rounded-md p-2 my-6 cursor-pointer text-black text-sm items-center gap-x-4 
-              ${"mt-2"} ${
+          ${"mt-2"} ${
           //   currentPath.startsWith(Menu?.link)
           (
             Menu?.link === "/"
@@ -36,9 +39,7 @@ const EachLink = ({ currentPath, Menu, open }) => {
           }`}
         />
 
-        <span
-          className={`${!open && "hidden"} origin-left duration-200`}
-        >
+        <span className={`${!open && "hidden"} origin-left duration-200`}>
           {Menu.title}
         </span>
       </Link>
