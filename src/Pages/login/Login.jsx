@@ -6,6 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 // import "./Login.css";
+import style from "./Login.module.css"
 
 import {
   AiFillFacebook,
@@ -236,12 +237,12 @@ const Login = () => {
   };
 
   return (
-    <div className="sing-up">
+    <div className={style.singup}>
       <div className="mt-4 mb-5 ">
-        <div className="form-class ">
-          <div className="col-md-12">
-            <div className="new-login-from">
-              <div className="title-sing">
+        <div className={style.formclass}>
+          <div className="md:w-full">
+            <div className={style.newloginfrom}>
+              <div className={style.titlesing}>
                 <Link to={`/signup?targetPath=${from}`}>Sign Up</Link>
                 <h2>
                   <Link to={`/login?targetPath=${from}`}>Sign in</Link>
@@ -280,10 +281,10 @@ const Login = () => {
                     </button>
                     </Link>
                 </div> */}
-                <p className="form-text">Continue with your accout </p>
+                <p className={style?.formText}>Continue with your accout </p>
                 <form onSubmit={handleSubmit(handleSignUp)}>
-                  <div className="from-box-sing">
-                    <div className="from-box-input">
+                  <div className={style?.formBoxSing}>
+                    <div className={style.fromboxinput}>
                       <input
                         type="email"
                         name="email"
@@ -296,7 +297,7 @@ const Login = () => {
                       <p className="text-red-500">{errors.email.message}</p>
                     )}
 
-                    <div className="from-box-input">
+                    <div className={style.fromboxinput}>
                       <input
                         type="password"
                         name="password"
@@ -309,10 +310,10 @@ const Login = () => {
                     )}
 
                     <Link to="/forget-pass">
-                      <p className=" form-text">Forget Your Password?</p>
+                      <p className={style?.formText}>Forget Your Password?</p>
                     </Link>
 
-                    <div className="sing-up-submit">
+                    <div className={style.singupsubmit}>
                       <button type="submit">SIGN IN</button>
                     </div>
                     {signUpError && (

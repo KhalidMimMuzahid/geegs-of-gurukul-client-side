@@ -2,12 +2,12 @@ body {
     font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
-.login-form {
+.loginform {
     background-color: #91d0cc;
     padding: 100px 0;
 }
 
-.sing-up {
+.singup {
     padding-top: 100px;
 }
 
@@ -26,7 +26,7 @@ body {
 }
 
 
-.sing-title {
+.singtitle {
     color: #fff;
     display: flex;
     padding: 224px 25px;
@@ -39,32 +39,32 @@ body {
 }
 
 
-.sing-title h2 {
+.singtitle h2 {
     font-size: 35px;
     font-weight: 900;
 }
 
-.sing-title .text-tran {
+.singtitle .texttran {
     color: transparent;
     -webkit-text-stroke: 1px #fff;
     padding-left: 2px;
 }
 
-.title-login.text-center p {
+.titlelogin.textcenter p {
     font-size: 25px;
     margin-bottom: 25px;
     font-weight: 400;
     color: #fff;
 }
 
-.title-login.text-center h2 {
+.titlelogin.textcenter h2 {
     font-size: 38px;
     font-weight: 700;
     color: #fff;
 }
 
-.input-form input,
-.input-form textarea {
+.inputform input,
+.inputform textarea {
     font-size: 16px;
     outline: none;
     color: #535353;
@@ -78,11 +78,11 @@ body {
     margin: 10px 0;
 }
 
-.pass-fild{
+.passfild{
     display: flex;
 }
 
-.pass-fild button {
+.passfild button {
     border: none;
     background: none;
     display: flex;
@@ -94,18 +94,18 @@ body {
     cursor: pointer;
 }
 
-.text-red-500-pass{
+.textred500pass{
     color: red !important;
     font-size: 1rem !important;
     margin-top: 10px;
 }
 
-.text-red-500{
+.textred500{
     color: red !important;
     
 }
 
-.apply-btn {
+.applybtn {
     margin-top: 10px;
     background-color: #4CA45A;
     border: none;
@@ -115,7 +115,7 @@ body {
     width: 100%;
 }
 
-.apply-btn:hover {
+.applybtn:hover {
     background-color: #2bbd44;
     ;
     color: white;
@@ -123,7 +123,7 @@ body {
 }
 
 
-.text-center {
+.textcenter {
     text-align: center !important;
     margin-top: 20px;
     color: white;
@@ -154,20 +154,20 @@ body {
     font-family: 'Jost', sans-serif;
 }
 
-.title-login.text-center p {
+.titlelogin.textcenter p {
     font-size: 25px;
     margin-bottom: 25px;
     font-weight: 400;
     color: #fff;
 }
 
-.title-login.text-center h2 {
+.titlelogin.textcenter h2 {
     font-size: 38px;
     font-weight: 700;
     color: #fff;
 }
 
-.input-form input {
+.inputform input {
     font-size: 16px;
     outline: none;
     color: #535353;
@@ -208,12 +208,12 @@ button.submit:hover {
     color: #4CA15D;
 }
 
-.social-login button:hover {
+.sociallogin button:hover {
     background: #ff8a00;
     color: #fff;
 }
 
-.social-login button {
+.sociallogin button {
     font-size: 13px;
     font-weight: 600;
     margin: 0 2px 5px 0;
@@ -226,7 +226,7 @@ button.submit:hover {
     box-shadow: 0 0 5px rgb(0 0 0 / 20%);
 }
 
-.social-login {
+.sociallogin {
     text-align: center;
 }
 
@@ -252,28 +252,28 @@ button.submit:hover {
     color: #fff;
 }
 
-.sing-title.login-p {
+.singtitle.loginp {
     padding: 208px 25px;
 }
 
 /* responsive */
 
 @media (max-width: 425.98px) {
-    .title-login.text-center h2 {
+    .titlelogin.textcenter h2 {
         font-size: 22px;
     }
 
 }
 
 @media (max-width: 991.98px) {
-    .sing-title {
+    .singtitle {
         display: none;
     }
 }
 
 
 @media (max-width: 1199.98px) {
-    .sing-title {
+    .singtitle {
         display: none;
     }
 }
@@ -284,7 +284,7 @@ button.submit:hover {
 
 /* new sing in */
 
-.new-login-from {
+.newloginfrom {
     width: 500px;
     margin: auto;
     background: #FFFFFF;
@@ -293,13 +293,13 @@ button.submit:hover {
     padding: 71px 85px;
 }
 
-.title-sing {
+.titlesing {
     display: flex;
     gap: 40px;
     justify-content: center;
 }
 
-.title-sing a {
+.titlesing a {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
@@ -309,17 +309,17 @@ button.submit:hover {
     text-decoration: none;
 }
 
-.title-sing a:hover{
+.titlesing a:hover{
     color: #000000;
 } 
 
-.title-sing h2 a {
+.titlesing h2 a {
     font-weight: 600;
     margin: 0;
 }
 
 
-.title-sing h2 {
+.titlesing h2 {
     border-bottom: 2px solid;
     color: #4BA15D;
     margin: 0;
@@ -330,60 +330,60 @@ button.submit:hover {
     margin-bottom: 32px;
 }
 
-button.google-Button {
+button.googleButton {
     border: none;
     background: no-repeat;
 }
 
-button.google-Button svg {
+button.googleButton svg {
     font-size: 48px;
 }
-button.btn-github{
+button.btngithub{
     background-color: #4b4c4d;
     border: #4b4c4d;
     color: white;
 }
-button.btn-github:hover{
+button.btngithub:hover{
     background-color: white;
     border: 1px solid #4b4c4d;
     color: #4b4c4d;
 }
-button.btn-github svg{
+button.btngithub svg{
     background-color: #4b4c4d;
     border: none;
     color: white;
     font-size: 20px;
 }
 
-button.btn-phone{
+button.btnphone{
     background-color: #4AA45E;
     border: #4AA45E;
     color: white;
 }
-button.btn-phone:hover{
+button.btnphone:hover{
     background-color: white;
     color: #4AA45E;
     border: 1px solid #4AA45E;
 }
 
-button.btn-fabecbook{
+button.btnfabecbook{
     background-color: #405A93;
     border: #405A93;
     color: white;
 }
-button.btn-fabecbook:hover{
+button.btnfabecbook:hover{
     background-color: white;
     color: #405A93;
     border: 1px solid #405A93;
 }
-button.btn-fabecbook svg{
+button.btnfabecbook svg{
     background-color: #405A93;
     border: none;
     color: white;
     font-size: 20px;
 }
 
-.google-sing-in p {
+.googlesingin p {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;
@@ -393,7 +393,7 @@ button.btn-fabecbook svg{
     margin-bottom: 16px;
 }
 
-.from-box-input input {
+.fromboxinput input {
     
     
     width: 100%;
@@ -407,14 +407,14 @@ button.btn-fabecbook svg{
     font-style: normal;
 }
 
-.from-box-input{
+.fromboxinput{
     margin-bottom: 16px;
     box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.1);
     background: white;
     border-radius: 5px;
 }
 
-.sing-up-submit button {
+.singupsubmit button {
     background: #4BA15D;
     /* 01 */
     box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.1);
@@ -432,7 +432,7 @@ button.btn-fabecbook svg{
 }
 
 @media (min-width: 120px) and (max-width: 499.98px) {
-    .new-login-from {
+    .newloginfrom {
         width: auto;
         padding: 10px;
     }

@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { Drawer } from "flowbite";
 import { Collapse } from "flowbite";
 import logo from "../../assets/logo/gog-full-logo.png";
-import bookmark from "../../assets/svg/bookmark.svg";
+// import bookmark from "../../assets/svg/bookmark.svg";
 import anouncement from "../../assets/svg/announcement.svg";
 import iconHeader1 from "../../assets/icons/announcement.svg";
-// import bookmark from '../../assets/icons/bookmark.svg'
+import bookmark from '../../assets/icons/bookmark.svg'
 import help from "../../assets/icons/help.svg";
 import leaderboard from "../../assets/svg/leader-board.svg";
 import logout from "../../assets/svg/logout.svg";

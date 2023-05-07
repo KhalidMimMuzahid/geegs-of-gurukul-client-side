@@ -18,7 +18,39 @@
       scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   } */
 }
+
 .dashboardHeight {
   /* height: calc(100vh- 5rem); */
   height: 90vh;
+}
+
+.menuHover:hover .img2 {
+  display: block;
+}
+
+.menuHover:hover .img1 {
+  display: none;
+}
+
+.menuHover:hover span {
+  color: #4ba25d;
+}
+
+.menuHover:hover {
+  box-shadow: -1px 4px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+}
+
+.menuHover{
+  font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 30px;
+
+color: #282828;
+}
+
+.actives span{
+  color: #4ba25d;
 }

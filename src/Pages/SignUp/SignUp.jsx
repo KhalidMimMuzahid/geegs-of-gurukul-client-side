@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../contexts/UserProvider/UserProvider";
 // import "./SignUp.css";
+import style from "./SignUp.module.css"
 
 import {
   AiOutlineEyeInvisible,
@@ -256,20 +257,20 @@ const SignUp = () => {
   };
 
   return (
-    <div className="sing-up">
+    <div className={style?.singup}>
       <div className="mt-4 mb-5 ">
-        <div className="form-class ">
+        <div className={style?.formclass}>
           {/* ----------------------------start resgistration from  =-----------------------------*/}
-          <div className="col-md-12">
-            <div className="new-login-from">
-              <div className="title-sing">
+          <div className="md:w-full">
+            <div className={style?.newloginfrom}>
+              <div className={style?.titlesing}>
                 <h2>
                   <Link to={`/signup?targetPath=${from}`}>Sign Up</Link>
                 </h2>
                 <Link to={`/login?targetPath=${from}`}>Sign in</Link>
               </div>
-              <div className="google-sing-in">
-                <div className="text-center googelIcon">
+              <div className={style.googlesingin}>
+                <div className={`${style.textcenter} ${style.googelIcon}`}>
                   <div className="border rounded-2xl bg-gray-300 my-2">
                     <button
                       className="flex py-2 justify-center  gap-4 items-center"
@@ -307,8 +308,8 @@ const SignUp = () => {
                   Or use your Email and Mobile Number for registration{" "}
                 </p>
                 <form onSubmit={handleSubmit(handleSignUp)}>
-                  <div className="from-box-sing">
-                    <div className="from-box-input">
+                  <div className={style.fromboxsing}>
+                    <div className={style.fromboxinput}>
                       <input
                         type="text"
                         name="name"
@@ -321,7 +322,7 @@ const SignUp = () => {
                     {errors.name && (
                       <p className="text-red-500">{errors.name.message}</p>
                     )}
-                    <div className="from-box-input">
+                    <div className={style.fromboxinput}>
                       <input
                         type="email"
                         name="email"
@@ -351,8 +352,8 @@ const SignUp = () => {
                     {/* {errors.phone && (
                       <p className="text-red-500">{errors.phone.message}</p>
                     )} */}
-                    <div className="from-box-input">
-                      <div className="pass-fild">
+                    <div className={style.fromboxinput}>
+                      <div className={style.passfild}>
                         <input
                           type={showPassword ? "text" : "password"}
                           name="password"
@@ -385,8 +386,8 @@ const SignUp = () => {
                     {errors.password && (
                       <p className="text-red-500">{errors.password.message}</p>
                     )}
-                    <div className="from-box-input">
-                      <div className="pass-fild">
+                    <div className={style.fromboxinput}>
+                      <div className={style.passfild}>
                         <input
                           type={showPassword ? "text" : "password"}
                           name="passwordConfirm"
@@ -412,7 +413,7 @@ const SignUp = () => {
                         {errors.passwordConfirm.message}
                       </p>
                     )}
-                    <div className="sing-up-submit">
+                    <div className={style.singupsubmit}>
                       <button type="submit">SIGN UP</button>
                     </div>
                     {signUpError && (
