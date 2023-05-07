@@ -5,7 +5,8 @@ import { toast } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import "./Login.css";
+// import "./Login.css";
+import style from "./Login.module.css"
 
 import {
   AiFillFacebook,
@@ -280,9 +281,9 @@ const Login = () => {
                     </button>
                     </Link>
                 </div> */}
-                <p className="form-text">Continue with your accout </p>
+                <p className={style?.formText}>Continue with your accout </p>
                 <form onSubmit={handleSubmit(handleSignUp)}>
-                  <div className="from-box-sing">
+                  <div className={style?.formBoxSing}>
                     <div className="from-box-input">
                       <input
                         type="email"
@@ -309,7 +310,7 @@ const Login = () => {
                     )}
 
                     <Link to="/forget-pass">
-                      <p className=" form-text">Forget Your Password?</p>
+                      <p className={style?.formText}>Forget Your Password?</p>
                     </Link>
 
                     <div className="sing-up-submit">
