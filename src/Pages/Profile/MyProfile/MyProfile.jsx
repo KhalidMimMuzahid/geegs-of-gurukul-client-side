@@ -1,44 +1,48 @@
 import style from "./profile.module.css";
 
 import { useEffect, useState } from "react";
-import control from "../../../assets/dashBoardIcon/control.png"
+import control from "../../../assets/dashBoardIcon/control.png";
 import logo from "../../../assets/dashBoardIcon/logo.png";
-import profile from "../../../assets/profileDashboard/black/profile.svg"
-import profileWhite from "../../../assets/profileDashboard/white/profile.svg"
-import education from "../../../assets/profileDashboard/black/education.svg"
-import educationWhite from "../../../assets/profileDashboard/white/education.svg"
-import certificate from "../../../assets/profileDashboard/black/certificate.svg"
-import setting from "../../../assets/profileDashboard/black/Setting.svg"
-import settingWhite from "../../../assets/profileDashboard/white/Setting.svg"
-import certificateWhite from "../../../assets/profileDashboard/white/education.svg"
-
+import profile from "../../../assets/profileDashboard/black/profile.svg";
+import profileWhite from "../../../assets/profileDashboard/white/profile.svg";
+import education from "../../../assets/profileDashboard/black/education.svg";
+import educationWhite from "../../../assets/profileDashboard/white/education.svg";
+import certificate from "../../../assets/profileDashboard/black/certificate.svg";
+import setting from "../../../assets/profileDashboard/black/Setting.svg";
+import settingWhite from "../../../assets/profileDashboard/white/Setting.svg";
+import certificateWhite from "../../../assets/profileDashboard/white/education.svg";
 
 import { Link, Outlet, useLocation } from "react-router-dom";
-import EachLink from "../../DashBoard/EachLink";
+import EachLink from "./EachLink/EachLink";
 // import EachLink from "./EachLink";
 const MyProfile = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
-       { title: "General", src: profile, link: "/profile/my-profile",hover:profileWhite },
-       {
-         title: "Education",
-         src: education,
-         link: "/profile/my-profile/education",
-         hover:educationWhite
-       },
-       {
-         title: "Certificate",
-         src: certificate,
-         link: "/profile/my-profile/certification",
-         hover:certificateWhite
-       },
-       {
-         title: "Settings",
-         src: setting,
-         link: "/profile/my-profile/settings",
-         hover:settingWhite
-       },
-     ];
+    {
+      title: "General",
+      src: profile,
+      link: "/profile/my-profile",
+      hover: profileWhite,
+    },
+    {
+      title: "Education",
+      src: education,
+      link: "/profile/my-profile/education",
+      hover: educationWhite,
+    },
+    {
+      title: "Certificate",
+      src: certificate,
+      link: "/profile/my-profile/certification",
+      hover: certificateWhite,
+    },
+    {
+      title: "Settings",
+      src: setting,
+      link: "/profile/my-profile/settings",
+      hover: settingWhite,
+    },
+  ];
   const [currentPath, setCurrrentPath] = useState("");
   const [shouldHiddenNav, setShouldHiddenNav] = useState(false);
 
