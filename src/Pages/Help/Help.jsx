@@ -24,14 +24,14 @@ const Help = () => {
         <div className='h-10 w-[0.5px] bg-black'></div>
 
         <button 
-          onClick={()=>setTicketStatus("Previews ticket")} className={`${ticketStatus === "Previews ticket" && "border-b-[3px] border-[#0ABD67]"}`}
+          onClick={()=>setTicketStatus("Previous ticket")} className={`${ticketStatus === "Previews ticket" && "border-b-[3px] border-[#0ABD67]"}`}
         >
-          Previews ticket
+          Previous ticket
         </button>
       </div>
 
       {
-        ticketStatus === "Previews ticket" && 
+        ticketStatus === "Previous ticket" && 
         <div 
           style={{ backgroundImage: `url(${ticket})` }} 
           className='flex flex-col justify-center items-center gap-y-8 h-full bg-center bg-no-repeat'
