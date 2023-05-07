@@ -17,3 +17,451 @@
   .buttonGoogleCustom {
     margin-top: 10px !important;
 }
+
+
+
+
+/* imported from signup.module.css */
+
+body {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+.loginform {
+  background-color: #91d0cc;
+  padding: 100px 0;
+}
+
+.singup {
+  padding-top: 100px;
+}
+
+.singForm {
+  padding: 60px;
+  border-radius: 5px;
+  background-image: linear-gradient(to bottom, #5ddd85, #0699263b);
+  max-width: 530px;
+  margin: 0 auto;
+  width: 100%;
+  font-family: 'Jost', sans-serif;
+}
+
+.fluid {
+  overflow: hidden;
+}
+
+
+.singtitle {
+  color: #fff;
+  display: flex;
+  padding: 224px 25px;
+  overflow: hidden;
+  background-image: linear-gradient(to bottom, #4b4b4b, #070707);
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  border-radius: 5px;
+}
+
+
+.singtitle h2 {
+  font-size: 35px;
+  font-weight: 900;
+}
+
+.singtitle .texttran {
+  color: transparent;
+  -webkit-text-stroke: 1px #fff;
+  padding-left: 2px;
+}
+
+.titlelogin.textcenter p {
+  font-size: 25px;
+  margin-bottom: 25px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.titlelogin.textcenter h2 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.inputform input,
+.inputform textarea {
+  font-size: 16px;
+  outline: none;
+  color: #535353;
+  border-radius: 3px;
+  border: 1px solid #fff;
+  background: #fff;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 6%);
+  float: left;
+  width: 100%;
+  padding: 13px 40px 11px 15px;
+  margin: 10px 0;
+}
+
+.passfild{
+  display: flex;
+}
+
+.passfild button {
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ponter {
+  cursor: pointer;
+}
+
+.textred500pass{
+  color: red !important;
+  font-size: 1rem !important;
+  margin-top: 10px;
+}
+
+.textred500{
+  color: red !important;
+  
+}
+
+.applybtn {
+  margin-top: 10px;
+  background-color: #4CA45A;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 10px;
+  width: 100%;
+}
+
+.applybtn:hover {
+  background-color: #2bbd44;
+  ;
+  color: white;
+
+}
+
+
+.textcenter {
+  text-align: center !important;
+  margin-top: 20px;
+  color: white;
+  font-weight: 700;
+  margin: 0;
+  /* text-shadow: 2px 2px 4px #969696; */
+
+}
+
+.googelIcon {
+  margin-bottom: 5px;
+
+}
+
+.googleSignUpButton {
+  background-color: transparent !important;
+  border: none !important;
+  font-size: 40px !important;
+}
+
+.singForm {
+  padding: 60px;
+  border-radius: 5px;
+  background-image: linear-gradient(to bottom, #5ddd85, #0699263b);
+  max-width: 530px;
+  margin: 0 auto;
+  width: 100%;
+  font-family: 'Jost', sans-serif;
+}
+
+.titlelogin.textcenter p {
+  font-size: 25px;
+  margin-bottom: 25px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.titlelogin.textcenter h2 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.inputform input {
+  font-size: 16px;
+  outline: none;
+  color: #535353;
+  border-radius: 3px;
+  border: 1px solid #fff;
+  background: #fff;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 6%);
+  float: left;
+  width: 100%;
+  padding: 13px 40px 11px 15px;
+  margin: 10px 0;
+}
+
+
+
+
+button.submit {
+  border: none;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  line-height: 46px;
+  z-index: 1;
+  transition: all .7s ease;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 400;
+  width: 100%;
+  margin-bottom: 15px;
+  background-image: linear-gradient(to bottom, #20c741, #4CA15D);
+}
+
+
+button.submit:hover {
+  border: 2px solid #4CA15D;
+  background: transparent;
+  color: #4CA15D;
+}
+
+.sociallogin button:hover {
+  background: #ff8a00;
+  color: #fff;
+}
+
+.sociallogin button {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 2px 5px 0;
+  height: 40px;
+  padding: 0 13px;
+  text-align: center;
+  text-decoration: none;
+  color: #4867aa;
+  background: #fff;
+  box-shadow: 0 0 5px rgb(0 0 0 / 20%);
+}
+
+.sociallogin {
+  text-align: center;
+}
+
+
+
+.forget {
+  text-align: center;
+  margin-bottom: 13px;
+  font-size: 16px;
+  color: white;
+  font-weight: 700;
+  font-family: 'Jost', sans-serif;
+  font-size: 16px;
+  text-shadow: 2px 2px 4px #969696;
+}
+
+.forget a {
+  text-decoration: none;
+  color: green;
+}
+
+.forget a:hover {
+  color: #fff;
+}
+
+.singtitle.loginp {
+  padding: 208px 25px;
+}
+
+/* responsive */
+
+@media (max-width: 425.98px) {
+  .titlelogin.textcenter h2 {
+      font-size: 22px;
+  }
+
+}
+
+@media (max-width: 991.98px) {
+  .singtitle {
+      display: none;
+  }
+}
+
+
+@media (max-width: 1199.98px) {
+  .singtitle {
+      display: none;
+  }
+}
+
+
+
+
+
+/* new sing in */
+
+.newloginfrom {
+  width: 500px;
+  margin: auto;
+  background: #FFFFFF;
+  box-shadow: -4px 0px 10px rgba(0, 0, 0, 0.1), 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 71px 85px;
+}
+
+.titlesing {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
+.titlesing a {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  text-transform: uppercase;
+  color: #000000;
+  text-decoration: none;
+}
+
+.titlesing a:hover{
+  color: #000000;
+} 
+
+.titlesing h2 a {
+  font-weight: 600;
+  margin: 0;
+}
+
+
+.titlesing h2 {
+  border-bottom: 2px solid;
+  color: #4BA15D;
+  margin: 0;
+}
+
+.googelIcon {
+  
+  margin-bottom: 32px;
+}
+
+button.googleButton {
+  border: none;
+  background: no-repeat;
+}
+
+button.googleButton svg {
+  font-size: 48px;
+}
+button.btngithub{
+  background-color: #4b4c4d;
+  border: #4b4c4d;
+  color: white;
+}
+button.btngithub:hover{
+  background-color: white;
+  border: 1px solid #4b4c4d;
+  color: #4b4c4d;
+}
+button.btngithub svg{
+  background-color: #4b4c4d;
+  border: none;
+  color: white;
+  font-size: 20px;
+}
+
+button.btnphone{
+  background-color: #4AA45E;
+  border: #4AA45E;
+  color: white;
+}
+button.btnphone:hover{
+  background-color: white;
+  color: #4AA45E;
+  border: 1px solid #4AA45E;
+}
+
+button.btnfabecbook{
+  background-color: #405A93;
+  border: #405A93;
+  color: white;
+}
+button.btnfabecbook:hover{
+  background-color: white;
+  color: #405A93;
+  border: 1px solid #405A93;
+}
+button.btnfabecbook svg{
+  background-color: #405A93;
+  border: none;
+  color: white;
+  font-size: 20px;
+}
+
+.googlesingin p {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.fromboxinput input {
+  
+  
+  width: 100%;
+  /* 01 */
+  
+  border-radius: 5px;
+  border: none;
+  padding: 10px 24px;
+  outline: none;
+  font-family: 'Poppins';
+  font-style: normal;
+}
+
+.fromboxinput{
+  margin-bottom: 16px;
+  box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.1);
+  background: white;
+  border-radius: 5px;
+}
+
+.singupsubmit button {
+  background: #4BA15D;
+  /* 01 */
+  box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  width: 100%;
+  border: none;
+  text-transform: uppercase;
+  color: #FCFCFC;
+  font-family: 'Poppins';
+  margin-top: 15px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 12px 0;
+}
+
+@media (min-width: 120px) and (max-width: 499.98px) {
+  .newloginfrom {
+      width: auto;
+      padding: 10px;
+  }
+
+ 
+
+}
