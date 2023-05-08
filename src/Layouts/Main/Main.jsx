@@ -27,13 +27,13 @@ const Main = () => {
       setShouldHiddenNav(false);
     }
   }, [currentPath]);
-  // if (loading) {
-  //   return (
-  //     <div>
-  //       <Loader />
-  //     </div>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+  }
   if (user?.justCreated && location?.pathname !== "/") {
     return <Navigate to="/" state={{ from: location }} replace></Navigate>;
   }
