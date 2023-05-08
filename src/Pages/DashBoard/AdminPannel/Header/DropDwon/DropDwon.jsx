@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function DropDown({ item,currentPath }) {
+function DropDown({ item, currentPath }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -22,10 +22,14 @@ function DropDown({ item,currentPath }) {
   return (
     <div className='relative'>
       <button
-        className='flex flex-col w-full md:flex-row md:inline-flex justify-center items-center space-x-2 border border-gray-300 rounded-md px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+        className={`${
+          currentPath?.startsWith(item?.parrentLink)
+            ? "bg-green-300 hover:bg-green-400"
+            : "bg-gray-50 hover:bg-green-200"
+        } flex flex-col w-full md:flex-row md:inline-flex justify-center items-center space-x-2 border border-gray-300 rounded-md px-4 py-2  text-sm font-medium text-gray-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span>{item?.name}</span>
+        <span className={``}>{item?.name}</span>
         <svg
           className='-mr-1 ml-2 h-5 w-5'
           xmlns='http://www.w3.org/2000/svg'
@@ -51,9 +55,16 @@ function DropDown({ item,currentPath }) {
           <div className='py-1 bg-[#c1fdb9]' role='none'>
             {item?.submenu.map((menu, i) => (
               <Link key={i} to={menu?.link}>
-                <p className={`px-2 py-2 font-poppins text-center ${currentPath === menu.link ? "bg-green-500 text-white" : "hover:bg-green-300 bg-green-200"}`}
-                aria-current={menu.current ? "page" : undefined}
-                >{menu?.name}</p>
+                <p
+                  className={`px-2 py-2 font-poppins text-center ${
+                    currentPath === menu.link
+                      ? "bg-green-500 text-white"
+                      : "hover:bg-green-300 bg-green-200"
+                  }`}
+                  aria-current={menu.current ? "page" : undefined}
+                >
+                  {menu?.name}
+                </p>
               </Link>
             ))}
           </div>

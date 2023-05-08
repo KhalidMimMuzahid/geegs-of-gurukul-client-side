@@ -8,95 +8,102 @@ import DropDown from "./DropDwon/DropDwon";
 const navigation = [
   {
     name: "Assessment",
+    parrentLink: "/dashboard/admin-pannel/assessment",
     submenu: [
       {
         name: "Add Assesment",
-        link: "/dashboard/admin-pannel",
+        link: "/dashboard/admin-pannel/assessment/add-assessment",
         current: true,
       },
       {
         name: "Assesment List",
-        link: "/dashboard/admin-pannel/assesment-list",
+        link: "/dashboard/admin-pannel/assessment/assesment-list",
         current: false,
       },
     ],
   },
   {
     name: "Questions",
+    parrentLink: "/dashboard/admin-pannel/question",
     submenu: [
       {
         name: "Add Question",
-        link: "/dashboard/admin-pannel/upload-csv",
+        link: "/dashboard/admin-pannel/question/upload-csv",
         current: false,
       },
     ],
   },
   {
     name: "Lectures",
+    parrentLink: "/dashboard/admin-pannel/lecture",
     submenu: [
       {
         name: "Add Lecture",
-        link: "/dashboard/admin-pannel/add-lectures",
+        link: "/dashboard/admin-pannel/lecture/add-lectures",
         current: false,
       },
       {
         name: "Lecture List",
-        link: "/dashboard/admin-pannel/lectures-list",
+        link: "/dashboard/admin-pannel/lecture/lectures-list",
         current: false,
       },
     ],
   },
   {
     name: "Assignments",
+    parrentLink: "/dashboard/admin-pannel/assignment",
     submenu: [
       {
         name: "Add Assignment",
-        link: "/dashboard/admin-pannel/add-assignment",
+        link: "/dashboard/admin-pannel/assignment/add-assignment",
         current: false,
       },
       {
         name: "Assignment List",
-        link: "/dashboard/admin-pannel/assignment-list",
+        link: "/dashboard/admin-pannel/assignment/assignment-list",
         current: false,
       },
     ],
   },
   {
     name: "Course",
+    parrentLink: "/dashboard/admin-pannel/course",
     submenu: [
       {
         name: "Add Course",
-        link: "/dashboard/admin-pannel/add-course",
+        link: "/dashboard/admin-pannel/course/add-course",
         current: false,
       },
       {
         name: "Course List",
-        link: "/dashboard/admin-pannel/course-list",
+        link: "/dashboard/admin-pannel/course/course-list",
         current: false,
       },
     ],
   },
   {
     name: "Batch",
+    parrentLink: "/dashboard/admin-pannel/batch",
     submenu: [
       {
         name: "Add Batch",
-        link: "/dashboard/admin-pannel/add-batch",
+        link: "/dashboard/admin-pannel/batch/add-batch",
         current: false,
       },
       {
         name: "Batch List",
-        link: "/dashboard/admin-pannel/batch-list",
+        link: "/dashboard/admin-pannel/batch/batch-list",
         current: false,
       },
     ],
   },
   {
     name: "User",
+    parrentLink: "/dashboard/admin-pannel/user",
     submenu: [
       {
         name: "Users",
-        link: "/dashboard/admin-pannel/users",
+        link: "/dashboard/admin-pannel/user/users",
         current: false,
       },
     ],
