@@ -26,13 +26,18 @@ const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [updateUser, setUpdateUser] = useState(null);
   useEffect(() => {
-    fetch(`http://localhost:5000/userinfo/${updateUser?.email}`)
-      .then((res) => res.json())
-      .then((user) => {
-        if (user?.email) {
-          setUser(user);
-        }
-      });
+    if (updateUser?.email) {
+      fetch(
+        `https://geeks-of-gurukul-server-side.vercel.app/userinfo/${updateUser?.email}`
+      )
+        .then((res) => res.json())
+        .then((user) => {
+          if (user?.email) {
+            setUser(user);
+          }
+        });
+    }
+    setLoading(false);
   }, [updateUser]);
   // for the auth user verify
   const [tempUser, setTempUser] = useState(null);
@@ -130,16 +135,18 @@ const UserProvider = ({ children }) => {
           .then((data) => {
             if (data?.isPhoneVerified) {
               setUpdateUser(currentUser);
+            } else {
+              setLoading(false);
             }
           });
         // setLoading(false)
       } else {
         setUser(null);
+        setLoading(false);
       }
       if (currentUser?.email) {
         setTempUser(currentUser);
       }
-      setLoading(false);
     });
     return () => unsubscribe();
   });
