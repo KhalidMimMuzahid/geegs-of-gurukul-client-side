@@ -24,7 +24,7 @@ const Default = () => {
           <div class="p-5">
             <a href="#">
               <h5 class="mb-2 text-lg font-medium tracking-tight text-gray-900 dark:text-white">
-                {assessment?.assessmentName}
+                {assessment?.assessmentName} ({assessment?.categoryName})
               </h5>
             </a>
             <p class="flex gap-2 items-center mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">

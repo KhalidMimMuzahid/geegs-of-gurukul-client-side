@@ -44,6 +44,7 @@ import PhoneSignUp from "../../Pages/phoneSignUp/PhoneSignUp";
 import Login from "../../Pages/login/Login";
 
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import AnalysisLists from "../../Pages/DashBoard/Analysis/AnalysisLists/AnalysisLists";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -82,6 +83,14 @@ const router = createBrowserRouter([
           },
           {
             path: "/dashboard/analysis",
+            element: <AnalysisLists />,
+          },
+          {
+            path: "/dashboard/analysis/specific/:_id",
+            loader: async ({ params }) =>
+              fetch(
+                `http://localhost:5000/assessment-response?_id=${params?._id}`
+              ),
             element: <Analysis />,
           },
           {
