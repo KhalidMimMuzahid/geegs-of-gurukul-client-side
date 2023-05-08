@@ -41,7 +41,7 @@ import CourseList from "../../Pages/DashBoard/AdminPannel/CourseList/CourseList"
 import AssignmentList from "../../Pages/DashBoard/AdminPannel/AssignmentList/AssignmentList";
 import PhoneSignUp from "../../Pages/phoneSignUp/PhoneSignUp";
 import Login from "../../Pages/login/Login";
-import SignUp from "../../Pages/signUp/SignUp";
+import SignUp from "../../Pages/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AnalysisLists from "../../Pages/DashBoard/Analysis/AnalysisLists/AnalysisLists";
 
@@ -119,51 +119,51 @@ const router = createBrowserRouter([
             element: <AdminPannel />,
             children: [
               {
-                path: "/dashboard/admin-pannel",
+                path: "/dashboard/admin-pannel/assessment/add-assessment",
                 element: <AddAssesment />,
               },
               {
-                path: "/dashboard/admin-pannel/assesment-list",
+                path:  "/dashboard/admin-pannel/assessment/assesment-list",
                 element: <AssesmentList />,
               },
               {
-                path: "/dashboard/admin-pannel/add-lectures",
+                path:  "/dashboard/admin-pannel/lecture/add-lectures",
                 element: <AddLectures />,
               },
               {
-                path: "/dashboard/admin-pannel/upload-csv",
+                path:  "/dashboard/admin-pannel/question/upload-csv",
                 element: <CSV />,
               },
               {
-                path: "/dashboard/admin-pannel/users",
+                path: "/dashboard/admin-pannel/user/users",
                 element: <Users />,
               },
               {
-                path: "/dashboard/admin-pannel/lectures-list",
+                path: "/dashboard/admin-pannel/lecture/lectures-list",
                 element: <LecturesList />,
               },
               {
-                path: "/dashboard/admin-pannel/add-assignment",
+                path:  "/dashboard/admin-pannel/assignment/add-assignment",
                 element: <AddAssignment />,
               },
               {
-                path: "/dashboard/admin-pannel/add-course",
+                path:  "/dashboard/admin-pannel/course/add-course",
                 element: <AddCourse />,
               },
               {
-                path: "/dashboard/admin-pannel/add-batch",
+                path:  "/dashboard/admin-pannel/batch/add-batch",
                 element: <AddBatch />,
               },
               {
-                path: "/dashboard/admin-pannel/batch-list",
+                path:"/dashboard/admin-pannel/batch/batch-list",
                 element: <BatchList />,
               },
               {
-                path: "/dashboard/admin-pannel/course-list",
+                path:  "/dashboard/admin-pannel/course/course-list",
                 element: <CourseList />,
               },
               {
-                path: "/dashboard/admin-pannel/assignment-list",
+                path:  "/dashboard/admin-pannel/assignment/assignment-list",
                 element: <AssignmentList />,
               },
             ],
