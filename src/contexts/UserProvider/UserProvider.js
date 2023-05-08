@@ -25,19 +25,22 @@ const auth = getAuth(app);
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [updateUser, setUpdateUser] = useState(null);
+  const [justCreatedUser, setJustCreatedUser] = useState(false);
   useEffect(() => {
     if (updateUser?.email) {
-      fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/userinfo/${updateUser?.email}`
-      )
+      fetch(`http://localhost:5000/userinfo/${updateUser?.email}`)
         .then((res) => res.json())
         .then((user) => {
           if (user?.email) {
             setUser(user);
+            setJustCreatedUser(user?.justCreated);
+            console.log("xxxxxxxxxxxxxxxxxxxxx");
+            setLoading(false);
+          } else {
+            setLoading(false);
           }
         });
     }
-    setLoading(false);
   }, [updateUser]);
   // for the auth user verify
   const [tempUser, setTempUser] = useState(null);
@@ -129,6 +132,7 @@ const UserProvider = ({ children }) => {
   // authe state chane monitor
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log("current:", currentUser);
       if (currentUser?.emailVerified && currentUser?.email) {
         isPhoneVerified(currentUser?.email)
           .then((res) => res.json())
@@ -139,7 +143,6 @@ const UserProvider = ({ children }) => {
               setLoading(false);
             }
           });
-        // setLoading(false)
       } else {
         setUser(null);
         setLoading(false);
@@ -170,6 +173,8 @@ const UserProvider = ({ children }) => {
     setUpRecaptha,
     verifyEmail,
     tempUser,
+    justCreatedUser,
+    setJustCreatedUser,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

@@ -81,6 +81,18 @@ const Login = () => {
             .then((data) => {
               if (data?.isPhoneVerified) {
                 navigate(from, { replace: true });
+
+                // if (user?.email) {
+                //   navigate(from, { replace: true });
+                // } else {
+                //   verifyEmail()
+                //     .then(() => {
+                //       navigate(`/?targetPath=${from}`);
+                //       // alert("Please, check your mail and verify & log in.");
+                //       verifyYourEmail()
+                //     })
+                //     .catch((error) => console.error(error));
+                // }
               } else {
                 navigate(`/phone-sign-up?targetPath=${from}`);
               }
@@ -172,60 +184,6 @@ const Login = () => {
       });
   };
 
-  // for facebook signin
-  const handleFaceboolSignin = () => {
-    setSignUPError("");
-    FaceboolSignin()
-      .then((result) => {
-        const user = result.user;
-        //console.log("Facebook user: ", user);
-        saveUser(user.displayName, user.email);
-        toast.success("Successfully logged in");
-        setLoading(false);
-        // checking the phone is verified or not
-        fetch(
-          `https://geeks-of-gurukul-server-side.vercel.app/userinfoforphone/${user.email}`
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            // setusername(data) ;
-            // setLoading(false)
-            console.log(data);
-            if (data.status === 200) {
-              navigate(from, { replace: true });
-            } else {
-              navigate(`/phone-sign-up?targetPath=${from}`);
-            }
-          });
-        // //navigate(from, { replace: true });
-        // navigate("/login/phone-sign-up");
-      })
-      .catch((error) => {
-        // console.error(error);
-        // console.log("error.messagessssssssss", error.message);
-        setSignUPError(
-          error.message === "Firebase: Error (auth/popup-closed-by-user)."
-            ? "Auth/Popup has been closed by you"
-            : error.message
-        );
-      });
-  };
-
-  // for GitHub signin
-  const handlegitHubSignin = () => {
-    gitHubSignin()
-      .then((result) => {
-        const user = result.user;
-        //console.log("GitHub User ", user);
-        //saveUser(user.displayName, user.email);
-        setLoading(false);
-        //toast.success("Successfully logged in");
-        //navigate(from, { replace: true });
-        navigate("/login/phone-sign-up");
-      })
-      .catch((error) => console.error(error));
-  };
-
   const saveUser = (userBasicDetails) => {
     fetch("https://geeks-of-gurukul-server-side.vercel.app/usersbasics", {
       method: "POST",
@@ -267,28 +225,7 @@ const Login = () => {
                     <span className="text-black">CONTINUE WITH GOOGLE</span>
                   </button>
                 </div>
-                <div className="border rounded-2xl bg-blue-500 my-2">
-                  <button
-                    className="flex py-2 justify-center  gap-4 items-center"
-                    onClick={handleFaceboolSignin}
-                    style={{ width: "100%", borderRadius: "30px" }}
-                  >
-                    <AiFillFacebook />
-                    <span className="text-black">CONTINUE WITH FACEBOOK</span>
-                  </button>
-                </div>
-                {/* <div className='button-google-custom'>
-                  <button className="btn-customize btn-github btn btn-outline" onClick={handlegitHubSignin} style={{ width: "100%", borderRadius: "30px" }}>
-                    <AiFillGithub /> <span>CONTINUE WITH GITHUB</span>
-                  </button>
-                </div> */}
-                {/* <div className='button-google-custom'>
-                    <Link to='phone-sign-up'>
-                    <button className="btn-customize btn-phone btn btn-outline"  style={{ width: "100%", borderRadius: "30px" }}>
-                      <AiOutlinePhone /> <span>CONTINUE WITH PHONE</span>
-                    </button>
-                    </Link>
-                </div> */}
+
                 <p className={style?.formText}>Continue with your accout </p>
                 <form onSubmit={handleSubmit(handleSignUp)}>
                   <div className={style?.formBoxSing}>
