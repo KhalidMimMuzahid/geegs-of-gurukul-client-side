@@ -182,79 +182,9 @@ const SignUp = () => {
                 role: "student",
               };
               toast.success("Successfully registered.");
-              saveUser(userBasicDetails);
+              saveUserForGoogle(userBasicDetails);
             }
           });
-        // saveUser(user.displayName, user.email);
-        //navigate(from, { replace: true });
-
-        // if (user?.phoneNumber) {
-        //   navigate(from, { replace: true });
-        // } else {
-        //   console.log("before")
-        //   // setLoading(true)
-        //   navigate(`/login/phone-sign-up?targetPath=${from}`);
-        // }
-        //console.log(user);
-        // saveUser(user.displayName, user.email);
-        // toast.success('Successfully logged in');
-        // setLoading(false)
-        // // checking the phone is verified or not
-        // fetch(`https://geeks-of-gurukul-server-side.vercel.app/userinfoforphone/${user.email}`)
-        // .then(res => res.json())
-        // .then(data =>{
-        //     // setusername(data) ;
-        //     // setLoading(false)
-        //     console.log(data);
-        //     if(data.status === 200) {
-        //       navigate(from, { replace: true });
-        //     } else{
-        //       navigate(`/login/phone-sign-up?targetPath=${from}`);
-        //     }
-        // } )
-
-        // //navigate(from, { replace: true });
-        // navigate("/login/phone-sign-up");
-      })
-      .catch((error) => {
-        // console.error(error);
-        // console.log("error.messagessssssssss", error.message);
-        setSignUPError(
-          error.message === "Firebase: Error (auth/popup-closed-by-user)."
-            ? "Auth/Popup has been closed by you"
-            : error.message
-        );
-      });
-  };
-
-  // // for GitHub signin
-  // const handlegitHubSignin = () =>{
-  //   gitHubSignin()
-  //   .then((result) => {
-  //     const user = result.user;
-  //     //console.log("GitHub User ", user);
-  //     //saveUser(user.displayName, user.email);
-  //     //toast.success("Successfully logged in");
-  //     setLoading(false)
-  //     navigate("/signup/phone-sign-up");
-  //     //navigate(from, { replace: true });
-  //   })
-  //   .catch((error) => console.error(error));
-  // }
-
-  // for facebook signin
-  const handleFaceboolSignin = () => {
-    setSignUPError("");
-    FaceboolSignin()
-      .then((result) => {
-        const user = result.user;
-        //console.log("Facebook user: ", user);
-        //saveUser(user.displayName, user.email);
-        //toast.success("Successfully logged in");
-        setLoading(false);
-        navigate(`/phone-sign-up?targetPath=${from}`);
-        //navigate("/signup/auto-name-fill");
-        //navigate(from, { replace: true });
       })
       .catch((error) => {
         // console.error(error);
@@ -294,6 +224,26 @@ const SignUp = () => {
         // navigate(`/phone-sign-up?targetPath=${from}`);
       });
   };
+  const saveUserForGoogle = (userBasicDetails) => {
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/usersbasics", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userBasicDetails),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log("save user", data);
+        //navigate('/');
+
+        // navigate(from, { replace: true });
+
+        // verifyYourEmail(`/phone-sign-up?targetPath=${from}`);
+
+        navigate(`/phone-sign-up?targetPath=${from}`);
+      });
+  };
 
   return (
     <div className={style?.singup}>
@@ -320,28 +270,6 @@ const SignUp = () => {
                       <span className="text-black">CONTINUE WITH GOOGLE</span>
                     </button>
                   </div>
-                  <div className="border rounded-2xl bg-blue-500 my-2">
-                    <button
-                      className="flex py-2 justify-center  gap-4 items-center"
-                      onClick={handleFaceboolSignin}
-                      style={{ width: "100%", borderRadius: "30px" }}
-                    >
-                      <AiFillFacebook />
-                      <span className="text-black">CONTINUE WITH FACEBOOK</span>
-                    </button>
-                  </div>
-                  {/* <div className='button-google-custom'>
-                    <button className="btn-customize btn-github btn btn-outline" onClick={handlegitHubSignin} style={{ width: "100%", borderRadius: "30px" }}>
-                      <AiFillGithub /> <span>CONTINUE WITH GITHUB</span>
-                    </button>
-                  </div> */}
-                  {/* <div className='button-google-custom'>
-                    <Link to='phone-sign-up'>
-                    <button className="btn-customize btn-phone btn btn-outline"  style={{ width: "100%", borderRadius: "30px" }}>
-                      <AiOutlinePhone /> <span>CONTINUE WITH PHONE</span>
-                    </button>
-                    </Link>
-                  </div> */}
                 </div>
                 <p style={{ marginTop: "-20px", fontSize: "12px" }}>
                   Or use your Email and Mobile Number for registration{" "}

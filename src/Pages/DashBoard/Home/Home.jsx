@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import LectureScedule from "./LectureScedule/LectureScedule";
 
@@ -9,9 +9,13 @@ import AttendanceChart from "../../../Components/AttendanceChart/AttendanceChart
 import DoughnutChart from "../../../Components/DoughnutChart/DoughnutChart";
 import QuizChart from "../../../Components/QuizChart/QuizChart";
 import style from "./preassessment.module.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { AuthContext } from "../../../contexts/UserProvider/UserProvider";
 
 const Home = () => {
+  const { justCreatedUser } = useContext(AuthContext);
+  console.log("justCreatedUser: ", justCreatedUser);
+
   // const nowString = moment().format();
   // const time = () => {
   //   // const nowString = moment().format();
@@ -23,7 +27,6 @@ const Home = () => {
   //   const zzzz = nowStringvv - nowString;
   //   console.log("zzzz: ", zzzz);
   // };
-  const [newComerUser, setNewComerUser] = useState(false);
   return (
     <div className="">
       <div className="mt-9">
@@ -36,7 +39,7 @@ const Home = () => {
             </p>
           </div>
           <div className={`${style.testBtu}`}>
-            <Link onClick={() => setNewComerUser(true)}>Begin Test</Link>
+            {/* <Link onClick={() => setNewComerUser(true)}>Begin Test</Link> */}
           </div>
         </div>
       </div>
@@ -51,7 +54,7 @@ const Home = () => {
       </div> */}
       {/* <button onClick={time}>xxxxxxxxxxxx</button> */}
 
-      {newComerUser && (
+      {justCreatedUser && (
         <>
           {/* <h1>sddfddfvfdffdfdfd</h1> */}
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">

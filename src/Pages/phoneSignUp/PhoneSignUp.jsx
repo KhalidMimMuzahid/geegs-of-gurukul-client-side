@@ -190,7 +190,6 @@ const PhoneSignUp = () => {
   if (loading) {
     return <div style={{ marginTop: "200px" }}>loading</div>;
   }
-
   return (
     <>
       <div className="col-md-12  mb-5 custom-mergin">
