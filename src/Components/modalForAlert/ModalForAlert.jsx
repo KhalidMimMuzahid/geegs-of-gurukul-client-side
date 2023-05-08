@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
+import { Link, useNavigate } from "react-router-dom";
 
 const customStyles = {
   content: {
@@ -17,6 +18,7 @@ const ModalForAlert = ({
   modalIsOpenTemp = false,
   isForEmailVerification = false,
   setModalForAlertCom,
+  link = "",
 }) => {
   let subtitle;
 
@@ -24,6 +26,7 @@ const ModalForAlert = ({
     // references are now sync'd and can be accessed.
     subtitle.style.color = "#f00";
   }
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -38,12 +41,14 @@ const ModalForAlert = ({
             Hello
           </h2>
           <h1 className="text-lg font-semibold">{alertMessage}</h1>
+
           {isForEmailVerification ? (
             <div className="w-full  justify-end">
               <button
                 className=" w-full flex justify-end"
                 onClick={() => {
                   setModalForAlertCom(null);
+                  link && navigate(link);
                 }}
               >
                 <a
@@ -57,14 +62,15 @@ const ModalForAlert = ({
             </div>
           ) : (
             <div className="w-full flex justify-end">
-              <button
+              <Link
+                to={link}
                 className="px-4 mt-2   py-1 rounded-lg text-right text-xl font-semibold   bg-green-300 hover:cursor-pointer hover:bg-green-400"
                 onClick={() => {
                   setModalForAlertCom(null);
                 }}
               >
                 Ok
-              </button>
+              </Link>
             </div>
           )}
         </div>

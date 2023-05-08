@@ -24,7 +24,6 @@ import Settings from "../../Pages/Profile/MyProfile/Settings/Settings";
 import Profile from "../../Pages/Profile/Profile";
 import AddLectures from "../../Pages/DashBoard/AdminPannel/AddLectures/AddLectures";
 import Home from "../../Pages/DashBoard/Home/Home";
-import SignUp from "../../Pages/SignUp/SignUp"
 import Announcement from "../../Pages/Announcement/Announcement";
 import Bookmark from "../../Pages/Bookmark/Bookmark";
 import LecturesList from "../../Pages/DashBoard/AdminPannel/LecturesList/LecturesList";
@@ -42,12 +41,11 @@ import CourseList from "../../Pages/DashBoard/AdminPannel/CourseList/CourseList"
 import AssignmentList from "../../Pages/DashBoard/AdminPannel/AssignmentList/AssignmentList";
 import PhoneSignUp from "../../Pages/phoneSignUp/PhoneSignUp";
 import Login from "../../Pages/login/Login";
-
+import SignUp from "../../Pages/signUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AnalysisLists from "../../Pages/DashBoard/Analysis/AnalysisLists/AnalysisLists";
 
 const { createBrowserRouter } = require("react-router-dom");
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -190,7 +188,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/signup",
-        element: <SignUp/>
+        element: <SignUp />,
       },
       {
         path: "/phone-sign-up",

@@ -4,8 +4,7 @@ import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../contexts/UserProvider/UserProvider";
-// import "./SignUp.css";
-import style from "./SignUp.module.css"
+import style from "./SignUp.module.css";
 
 import {
   AiOutlineEyeInvisible,
@@ -17,6 +16,7 @@ import {
 import moment from "moment";
 import checkAlreadyUser from "../../utilities/checkAlreadyUser/checkAlreadyUser";
 import isPhoneVerified from "../../utilities/isPhoneVerified/isPhoneVerified";
+import ModalForAlert from "../../Components/modalForAlert/ModalForAlert";
 
 const SignUp = () => {
   const {
@@ -49,8 +49,20 @@ const SignUp = () => {
   //console.log("search: ", search);
 
   // set the destination into from
+  const [ModalForAlertCom, setModalForAlertCom] = useState(null);
+  const verifyYourEmail = (link) => {
+    setModalForAlertCom(
+      <ModalForAlert
+        alertMessage={"Please, check your mail and verify & log in."}
+        modalIsOpenTemp={true}
+        isForEmailVerification={true}
+        setModalForAlertCom={setModalForAlertCom}
+        link={link}
+      />
+    );
+  };
 
-  const from = location.state?.from?.pathname || search?.slice(12) || "/login";
+  const from = location.state?.from?.pathname || search?.slice(12) || "/";
 
   // console.log("Fommmmmmmmmmmmmmmmmm", from);
 
@@ -96,7 +108,8 @@ const SignUp = () => {
                 //console.log("User basic detailsssssssssssssssssssssss",userBasicDetails)
 
                 saveUser(userBasicDetails);
-                alert("Please, check your mail and verify & log in.");
+                // alert("Please, check your mail and verify & log in.");
+                // verifyYourEmail()
               })
               .catch((error) => console.error(error));
           })
@@ -117,13 +130,19 @@ const SignUp = () => {
         // .catch((err) => console.log(err));
       })
       .catch((error) => {
-        console.log(error);
-        setSignUPError(error.message);
+        // console.log(error);
+        // console.log("error.messageeeeee", error.message);
+        setSignUPError(
+          error.message === "Firebase: Error (auth/email-already-in-use)."
+            ? "This Email is already in use"
+            : error.message
+        );
       });
   };
 
   // google sign in handle
   const handleGoogleSignIn = () => {
+    setSignUPError("");
     setLoading(true);
     googleSignIn()
       .then((result) => {
@@ -197,7 +216,15 @@ const SignUp = () => {
         // //navigate(from, { replace: true });
         // navigate("/login/phone-sign-up");
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        // console.error(error);
+        // console.log("error.messagessssssssss", error.message);
+        setSignUPError(
+          error.message === "Firebase: Error (auth/popup-closed-by-user)."
+            ? "Auth/Popup has been closed by you"
+            : error.message
+        );
+      });
   };
 
   // // for GitHub signin
@@ -217,6 +244,7 @@ const SignUp = () => {
 
   // for facebook signin
   const handleFaceboolSignin = () => {
+    setSignUPError("");
     FaceboolSignin()
       .then((result) => {
         const user = result.user;
@@ -228,7 +256,15 @@ const SignUp = () => {
         //navigate("/signup/auto-name-fill");
         //navigate(from, { replace: true });
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        // console.error(error);
+        // console.log("error.messagessssssssss", error.message);
+        setSignUPError(
+          error.message === "Firebase: Error (auth/popup-closed-by-user)."
+            ? "Auth/Popup has been closed by you"
+            : error.message
+        );
+      });
   };
 
   // email verification send
@@ -239,7 +275,7 @@ const SignUp = () => {
   };
 
   const saveUser = (userBasicDetails) => {
-    fetch("http://localhost:5000/usersbasics", {
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/usersbasics", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -252,7 +288,10 @@ const SignUp = () => {
         //navigate('/');
 
         // navigate(from, { replace: true });
-        navigate(`/phone-sign-up?targetPath=${from}`);
+
+        verifyYourEmail(`/phone-sign-up?targetPath=${from}`);
+
+        // navigate(`/phone-sign-up?targetPath=${from}`);
       });
   };
 
@@ -427,6 +466,7 @@ const SignUp = () => {
           {/* --------------------------end rgitration from---------------------  */}
         </div>
       </div>
+      {ModalForAlertCom}
     </div>
   );
 };

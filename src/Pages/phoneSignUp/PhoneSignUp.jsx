@@ -8,6 +8,8 @@ import "./PhoneSignUp.css";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../contexts/UserProvider/UserProvider";
 import Loading from "../../Components/Loading/Loading";
+import checkPhoneAlreadyInUsed from "../../utilities/checkPhoneAlreadyInUsed/checkPhoneAlreadyInUsed";
+import ModalForAlert from "../../Components/modalForAlert/ModalForAlert";
 
 const PhoneSignUp = () => {
   const [error, setError] = useState("");
@@ -16,6 +18,19 @@ const PhoneSignUp = () => {
   const [otp, setOtp] = useState("");
   const [result, setResult] = useState("");
   const [updateUserInfo, setUpdateUserInfo] = useState(null);
+  const [ModalForAlertCom, setModalForAlertCom] = useState(null);
+
+  const loginAgain = (link) => {
+    setModalForAlertCom(
+      <ModalForAlert
+        alertMessage={"You are successfully phone verified, login again."}
+        modalIsOpenTemp={true}
+        isForEmailVerification={false}
+        setModalForAlertCom={setModalForAlertCom}
+        link={link}
+      />
+    );
+  };
   const {
     setUpRecaptha,
     setLoading,
@@ -48,44 +63,52 @@ const PhoneSignUp = () => {
   const getOtp = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
+
     //console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", number, name);
     setNumberUser(number);
-    console.log("number: ", number);
     setError("");
+    console.log("numberxx: ", number);
+    checkPhoneAlreadyInUsed(number)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("data: ", data);
+        if (!data?.isNumberAlreadyExists) {
+          // those for the user namae update
+          const email = tempUser?.email;
+          const usersInfo = {
+            name,
+            email,
+            phoneNumber: number,
+          };
+          setUpdateUserInfo(usersInfo);
+          if (number === "" || number === undefined)
+            return setError("Please enter a valid phone number!");
+          // if (!tempUser?.phoneNumber) {
+          // if (true) {
 
-    // those for the user namae update
-    const email = tempUser?.email;
-    const usersInfo = {
-      name,
-      email,
-      phoneNumber: number,
-    };
-    setUpdateUserInfo(usersInfo);
-    if (number === "" || number === undefined)
-      return setError("Please enter a valid phone number!");
-    // if (!tempUser?.phoneNumber) {
-
-    // const getCapta = async () => {
-    try {
-      console.log("numberrrrrrrrrrrrrrrrrrrrrrrr", number);
-      const response = await setUpRecaptha(number);
-      console.log(
-        "responsesssssssssssssssssssssssssssssssssssssssssssss",
-        response
-      );
-      setResult(response);
-      console.log("auth: ", auth);
-      setFlag(true);
-      //console.log("This is the second of opt");
-    } catch (err) {
-      setError(err);
-      console.log("ERRorrrrrrrrrrrrrrrrrr", err);
-      // setError("Please, input a valid phone number");
-    }
-    // };
-    // getCapta();
-
-    return;
+          try {
+            const reCall = async () => {
+              console.log("numberrrrrrrrrrrrrrrrrrrrrrrr", number);
+              const response = await setUpRecaptha(number);
+              console.log(
+                "responsesssssssssssssssssssssssssssssssssssssssssssss",
+                response
+              );
+              setResult(response);
+              console.log("auth: ", auth);
+              setFlag(true);
+            };
+            reCall();
+            //console.log("This is the second of opt");
+          } catch (err) {
+            setError(err);
+            console.log("ERRorrrrrrrrrrrrrrrrrr", err);
+            // setError("Please, input a valid phone number");
+          }
+        } else {
+          setError(`${number} is already in used`);
+        }
+      });
   };
 
   const updateUser = () => {
@@ -98,7 +121,7 @@ const PhoneSignUp = () => {
 
     if (email && phoneNumber) {
       // xxxxxxxxxxxxxxxxxxxxxxx
-      fetch("http://localhost:5000/update-phone", {
+      fetch("https://geeks-of-gurukul-server-side.vercel.app/update-phone", {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -111,16 +134,17 @@ const PhoneSignUp = () => {
           if (data?.modifiedCount) {
             // navigate("/login");
             // navigate(`/login?targetPath=${from}`);
-            alert("you are successfully verified, login again.");
+            // alert("you are successfully verified, login again.")
+            loginAgain(`/login?targetPath=${from}`);
             //  return  <Navigate to='/login' state={{ from }} replace></Navigate>
-            navigate(`/login?targetPath=${from}`);
+            // navigate(`/login?targetPath=${from}`);
           } else {
-            alert("something went wrong, please login again");
+            toast.error("something went wrong, please login again");
           }
         });
     } else {
       // user need to re verify again
-      alert("something went wrong, please login again");
+      toast.error("something went wrong, please login again");
     }
   };
   const verifyOtp = async (e) => {
@@ -135,8 +159,7 @@ const PhoneSignUp = () => {
       updateUser();
       // console.log("auth: ", auth)
     } catch (err) {
-      console.log("errrorrrr: ", err);
-      setError(err);
+      setError("Plase, give correct OTP");
     }
   };
 
@@ -165,8 +188,9 @@ const PhoneSignUp = () => {
   };
 
   if (loading) {
-    return <div>loading</div>;
+    return <div style={{ marginTop: "200px" }}>loading</div>;
   }
+
   return (
     <>
       <div className="col-md-12  mb-5 custom-mergin">
@@ -198,7 +222,10 @@ const PhoneSignUp = () => {
             </div>
             <div className="button-right">
               &nbsp;
-              <button type="submit" className="btn">
+              <button
+                type="submit"
+                className="border rounded-lg px-4 py-1 bg-green-300 hover:cursor-pointer hover:bg-green-400"
+              >
                 Continue
               </button>
             </div>
@@ -228,6 +255,7 @@ const PhoneSignUp = () => {
             </div>
           </form>
         </div>
+        {ModalForAlertCom}
       </div>
     </>
   );

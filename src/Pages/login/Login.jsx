@@ -4,9 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
-// import "./Login.css";
-import style from "./Login.module.css"
+import style from "./Login.module.css";
 
 import {
   AiFillFacebook,
@@ -18,6 +16,7 @@ import moment from "moment/moment";
 import { AuthContext } from "../../contexts/UserProvider/UserProvider";
 import isPhoneVerified from "../../utilities/isPhoneVerified/isPhoneVerified";
 import checkAlreadyUser from "../../utilities/checkAlreadyUser/checkAlreadyUser";
+import ModalForAlert from "../../Components/modalForAlert/ModalForAlert";
 
 const Login = () => {
   const {
@@ -37,6 +36,17 @@ const Login = () => {
   const [signUpError, setSignUPError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
+  const [ModalForAlertCom, setModalForAlertCom] = useState(null);
+  const verifyYourEmail = () => {
+    setModalForAlertCom(
+      <ModalForAlert
+        alertMessage={"Please, check your mail and verify & log in."}
+        modalIsOpenTemp={true}
+        isForEmailVerification={true}
+        setModalForAlertCom={setModalForAlertCom}
+      />
+    );
+  };
 
   //console.log("Temp userrrrrrrrrrrrrrrrrrrr", tempUser);
 
@@ -54,7 +64,7 @@ const Login = () => {
   useEffect(() => {
     //console.log("userrrrrrrrrrrrrrrr", user);
     if (user?.email) {
-      toast.success("Successfully logged in.");
+      //toast.success("Successfully logged in. 0000000000000000000");
       navigate(from, { replace: true });
     }
   }, [user]);
@@ -70,33 +80,44 @@ const Login = () => {
             .then((res) => res.json())
             .then((data) => {
               if (data?.isPhoneVerified) {
-                if (user?.email) {
-                  navigate(from, { replace: true });
-                } else {
-                  verifyEmail()
-                    .then(() => {
-                      navigate(`/login?targetPath=${from}`);
-                      alert("Please, check your mail and verify & log in.");
-                    })
-                    .catch((error) => console.error(error));
-                }
+                navigate(from, { replace: true });
               } else {
                 navigate(`/phone-sign-up?targetPath=${from}`);
               }
             });
         } else {
-          alert("Please, verify your mail and login again ");
+          // alert("Please, verify your mail and login again ");
+
+          verifyEmail()
+            .then(() => {
+              // alert("Please, check your mail and verify & log in.");
+              verifyYourEmail();
+            })
+            .catch((error) => console.error(error));
+
+          // verifyYourEmail()
         }
       })
 
+      // this is the eerror cathch more check
+
       .catch((error) => {
         console.log(error);
-        setSignUPError(error.message);
+        console.log("error message", error.message);
+
+        setSignUPError(
+          error.message === "Firebase: Error (auth/wrong-password)."
+            ? "Please input valid password"
+            : error.message === "Firebase: Error (auth/user-not-found)."
+            ? "User not found"
+            : error.message
+        );
       });
   };
 
   // google sign in handle
   const handleGoogleSignIn = () => {
+    setSignUPError("");
     setLoading(true);
     googleSignIn()
       .then((result) => {
@@ -139,42 +160,21 @@ const Login = () => {
               saveUser(userBasicDetails);
             }
           });
-        // saveUser(user.displayName, user.email);
-        //navigate(from, { replace: true });
-
-        // if (user?.phoneNumber) {
-        //   navigate(from, { replace: true });
-        // } else {
-        //   console.log("before")
-        //   // setLoading(true)
-        //   navigate(`/login/phone-sign-up?targetPath=${from}`);
-        // }
-        //console.log(user);
-        // saveUser(user.displayName, user.email);
-        // toast.success('Successfully logged in');
-        // setLoading(false)
-        // // checking the phone is verified or not
-        // fetch(`https://geeks-of-gurukul-server-side.vercel.app/userinfoforphone/${user.email}`)
-        // .then(res => res.json())
-        // .then(data =>{
-        //     // setusername(data) ;
-        //     // setLoading(false)
-        //     console.log(data);
-        //     if(data.status === 200) {
-        //       navigate(from, { replace: true });
-        //     } else{
-        //       navigate(`/login/phone-sign-up?targetPath=${from}`);
-        //     }
-        // } )
-
-        // //navigate(from, { replace: true });
-        // navigate("/login/phone-sign-up");
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        // console.error(error);
+        // console.log("error.messagessssssssss", error.message);
+        setSignUPError(
+          error.message === "Firebase: Error (auth/popup-closed-by-user)."
+            ? "Auth/Popup has been closed by you"
+            : error.message
+        );
+      });
   };
 
   // for facebook signin
   const handleFaceboolSignin = () => {
+    setSignUPError("");
     FaceboolSignin()
       .then((result) => {
         const user = result.user;
@@ -200,7 +200,15 @@ const Login = () => {
         // //navigate(from, { replace: true });
         // navigate("/login/phone-sign-up");
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        // console.error(error);
+        // console.log("error.messagessssssssss", error.message);
+        setSignUPError(
+          error.message === "Firebase: Error (auth/popup-closed-by-user)."
+            ? "Auth/Popup has been closed by you"
+            : error.message
+        );
+      });
   };
 
   // for GitHub signin
@@ -219,7 +227,7 @@ const Login = () => {
   };
 
   const saveUser = (userBasicDetails) => {
-    fetch("http://localhost:5000/usersbasics", {
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/usersbasics", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -326,6 +334,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      {ModalForAlertCom}
     </div>
   );
 };
