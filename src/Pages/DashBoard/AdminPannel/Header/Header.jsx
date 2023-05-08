@@ -129,7 +129,7 @@ const Header = () => {
                   <div className='flex space-x-4'>
                     {navigation.map((item, i) => (
                       // dropdwon
-                      <DropDown key={i} item={item} />
+                      <DropDown key={i} item={item} currentPath={currentPath} />
                       // dropdwon
                     ))}
                   </div>
@@ -173,7 +173,7 @@ const Header = () => {
               ))} */}
               {navigation.map((item, i) => (
                 // dropdwon
-                <DropDown key={i} item={item}/>
+                <DropDown key={i} item={item} currentPath={currentPath} />
                 // dropdwon
               ))}
             </div>
