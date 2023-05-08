@@ -35,14 +35,14 @@ const Main = () => {
     );
   }
   if (user?.justCreated && location?.pathname !== "/") {
-    return <Navigate to="/" state={{ from: location }} replace></Navigate>;
+    return <Navigate to='/' state={{ from: location }} replace></Navigate>;
   }
   return (
     <div
-      className="h-screen overflow-y-hidden"
+      className='h-screen overflow-y-hidden'
       style={{ backgroundColor: "#FFF" }}
     >
-      <div className="flex flex-col gap-4 container max-w-[1440px] mx-auto">
+      <div className='flex flex-col gap-4 container max-w-[1440px] mx-auto'>
         <div
         // style={{ display: `${shouldHiddenNav ? "none" : "block"}` }}
         >
