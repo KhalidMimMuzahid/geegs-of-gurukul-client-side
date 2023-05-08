@@ -41,7 +41,7 @@ import CourseList from "../../Pages/DashBoard/AdminPannel/CourseList/CourseList"
 import AssignmentList from "../../Pages/DashBoard/AdminPannel/AssignmentList/AssignmentList";
 import PhoneSignUp from "../../Pages/phoneSignUp/PhoneSignUp";
 import Login from "../../Pages/login/Login";
-import SignUp from "../../Pages/signUp/SignUp";
+import SignUp from "../../Pages/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AnalysisLists from "../../Pages/DashBoard/Analysis/AnalysisLists/AnalysisLists";
 
