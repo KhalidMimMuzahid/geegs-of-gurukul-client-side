@@ -205,7 +205,7 @@ const CSV = () => {
       // console.log(allQuestions);
       const withNonDuplicateQuestions = removeDuplicateQuestions(allQuestions);
       console.log("withNonDuplicateQuestions: ", withNonDuplicateQuestions);
-
+      return;
       fetch("http://localhost:5000/add-csv-data", {
         method: "POST",
         headers: {

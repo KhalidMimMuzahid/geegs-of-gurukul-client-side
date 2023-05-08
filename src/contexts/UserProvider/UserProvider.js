@@ -24,7 +24,16 @@ const auth = getAuth(app);
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
+  const [updateUser, setUpdateUser] = useState(null);
+  useEffect(() => {
+    fetch(`http://localhost:5000/userinfo/${updateUser?.email}`)
+      .then((res) => res.json())
+      .then((user) => {
+        if (user?.email) {
+          setUser(user);
+        }
+      });
+  }, [updateUser]);
   // for the auth user verify
   const [tempUser, setTempUser] = useState(null);
 
@@ -115,34 +124,12 @@ const UserProvider = ({ children }) => {
   // authe state chane monitor
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("hitreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeed");
-
-      // setTempUser(null);
-
-      //     setUser(null);
-      // if(currentUser === null || currentUser.emailVerified) {
-      //     setUser(currentUser);
-      // }
-      console.log("auth.currentUser: ", auth.currentUser);
-      console.log("currentUser: ", currentUser);
-
-      // console.log("currentUser?.phoneNumber:  & currentUser?.emailVerified", currentUser?.phoneNumber, currentUser?.emailVerified);
-      // currentUser?.phoneNumber &&
       if (currentUser?.emailVerified && currentUser?.email) {
-        console.log("Current user: ", currentUser);
         isPhoneVerified(currentUser?.email)
           .then((res) => res.json())
           .then((data) => {
             if (data?.isPhoneVerified) {
-              console.log("currentUser?.email: ", currentUser?.email);
-              setUser(currentUser);
-              // fetch(`http://localhost:5000/userinfo/${currentUser?.email}`)
-              //   .then((res) => res.json())
-              //   .then((user) => {
-              //     if (user?.email) {
-              //       setUser(user);
-              //     }
-              //   });
+              setUpdateUser(currentUser);
             }
           });
         // setLoading(false)

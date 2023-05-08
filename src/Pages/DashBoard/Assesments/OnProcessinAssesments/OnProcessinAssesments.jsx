@@ -4,8 +4,12 @@ import AssessmentBody from "./AssessmentBody/AssessmentBody";
 import moment from "moment";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import rightArrow from "../../../../assets/icons/arrow-right.svg";
+import { useContext } from "react";
+import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
+import { toast } from "react-hot-toast";
 
 const OnProcessinAssesments = () => {
+  const { user } = useContext(AuthContext);
   const [assessment, setAssessment] = useState({});
   const [questions, setQuestions] = useState([]);
   const [totalQuestions, setTotalQuestions] = useState(0);
@@ -88,7 +92,7 @@ const OnProcessinAssesments = () => {
     // console.log("\nnewChosenAnswers: ", newChosenAnswers);
 
     const assessmentId = assessment?._id;
-    const studentEmail = "currentUser?.email";
+    const studentEmail = user?.email;
 
     const enabledNegativeMarking = assessment?.enabledNegativeMarking;
 
@@ -103,7 +107,6 @@ const OnProcessinAssesments = () => {
       totalMark = correct * 1;
     }
     const assessmentsResponse = {
-      _id: "providedbymongodb",
       assessmentId,
       studentEmail,
       startedAt,
@@ -118,7 +121,7 @@ const OnProcessinAssesments = () => {
         chosenAnswers: newChosenAnswers,
       },
     };
-    console.log(" assessmentsResponse: ", assessmentsResponse);
+    // console.log(" assessmentsResponse: ", assessmentsResponse);
     const topics = [];
     // setTopicNames
     const topicNames = questions?.map((eachQuestion) => {
@@ -187,8 +190,25 @@ const OnProcessinAssesments = () => {
     // if successrat > 50 => average
     // else  => have to improve
     localStorage.setItem("response", JSON.stringify(response));
-    setSubmitModalIsOpen(false);
-    navigate("/dashboard/analysis");
+    // console.log(":xxxxxxxxxxxxx");
+    fetch("http://localhost:5000/assessment-response", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(response),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log("data: ", data);
+
+        if (data?.acknowledged) {
+          setSubmitModalIsOpen(false);
+          navigate(`/dashboard/analysis/specific/${data?.insertedId}`);
+        } else {
+          toast.error("something went wrong, please try again");
+        }
+      });
   };
   // useEffect(() => {
   //   fetch(
