@@ -11,12 +11,12 @@ const navigation = [
     submenu: [
       {
         name: "Add Assesment",
-        link: "/dashboard/admin-pannel/add-assignment",
+        link: "/dashboard/admin-pannel",
         current: true,
       },
       {
         name: "Assesment List",
-        link: "/dashboard/admin-pannel/assignment-list",
+        link: "/dashboard/admin-pannel/assesment-list",
         current: false,
       },
     ],
