@@ -206,7 +206,7 @@ const CSV = () => {
       const withNonDuplicateQuestions = removeDuplicateQuestions(allQuestions);
       console.log("withNonDuplicateQuestions: ", withNonDuplicateQuestions);
       return;
-      fetch("http://localhost:5000/add-csv-data", {
+      fetch("https://geeks-of-gurukul-server-side.vercel.app/add-csv-data", {
         method: "POST",
         headers: {
           "content-type": "application/json",

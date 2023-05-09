@@ -6,7 +6,7 @@ import question from "../../../../assets/TestIcons/question.svg";
 const Default = () => {
   const [assessments, setAssessments] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/assessments")
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/assessments")
       .then((res) => res.json())
       .then((assessments) => {
         console.log("Assessments: ", assessments);

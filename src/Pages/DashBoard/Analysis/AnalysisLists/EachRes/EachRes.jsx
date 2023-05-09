@@ -8,7 +8,9 @@ const EachRes = ({ response }) => {
   console.log("response", response);
   const [assessment, setAssessment] = useState(null);
   useEffect(() => {
-    fetch(`http://localhost:5000/assessmentlabel?_id=${response?.assessmentId}`)
+    fetch(
+      `https://geeks-of-gurukul-server-side.vercel.app/assessmentlabel?_id=${response?.assessmentId}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log("data: ", data);

@@ -28,7 +28,9 @@ const UserProvider = ({ children }) => {
   const [justCreatedUser, setJustCreatedUser] = useState(false);
   useEffect(() => {
     if (updateUser?.email) {
-      fetch(`http://localhost:5000/userinfo/${updateUser?.email}`)
+      fetch(
+        `https://geeks-of-gurukul-server-side.vercel.app/userinfo/${updateUser?.email}`
+      )
         .then((res) => res.json())
         .then((user) => {
           if (user?.email) {

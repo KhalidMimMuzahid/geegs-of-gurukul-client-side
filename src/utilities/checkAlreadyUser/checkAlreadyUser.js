@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 
 const checkAlreadyUser = (email) => {
-    console.log("email: ", email)
+  console.log("email: ", email);
   return fetch(
-    `http://localhost:5000/checkuseralreadyindatabase?email=${email}`
+    `https://geeks-of-gurukul-server-side.vercel.app/checkuseralreadyindatabase?email=${email}`
   );
 };
 
