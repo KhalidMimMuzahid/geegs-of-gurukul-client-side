@@ -191,13 +191,16 @@ const OnProcessinAssesments = () => {
     // else  => have to improve
     localStorage.setItem("response", JSON.stringify(response));
     // console.log(":xxxxxxxxxxxxx");
-    fetch("http://localhost:5000/assessment-response", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(response),
-    })
+    fetch(
+      "https://geeks-of-gurukul-server-side.vercel.app/assessment-response",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(response),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         // console.log("data: ", data);
@@ -212,7 +215,7 @@ const OnProcessinAssesments = () => {
   };
   // useEffect(() => {
   //   fetch(
-  //     `http://localhost:5000/getAssessment?_id=${"here should be object id"}`
+  //     `https://geeks-of-gurukul-server-side.vercel.app/getAssessment?_id=${"here should be object id"}`
   //   )
   //     .then((res) => res.json())
   //     .then((data) => {

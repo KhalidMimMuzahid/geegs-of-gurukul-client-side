@@ -1,33 +1,32 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import style from './AddBatch.module.css'
+import style from "./AddBatch.module.css";
 const AddBatch = () => {
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-        reset,
-      } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    reset,
+  } = useForm();
   const onSubmit = (data) => {
     const batch = {
       courseId: data?.courseId,
       batchId: data?.batchId,
       startedAt: data?.startedAt,
       duration: data?.duration,
-      
-    }
-    
-    fetch('http://localhost:5000/add-batch', {
-      method: 'POST',
+    };
+
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/add-batch", {
+      method: "POST",
       body: JSON.stringify(batch),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json",
+      },
     })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
     console.log(batch);
     reset();
   };
@@ -88,7 +87,7 @@ const AddBatch = () => {
               <input
                 name="duration"
                 type="number"
-              placeholder="Duration in days"
+                placeholder="Duration in days"
                 {...register("duration", {
                   required: "Duration is required",
                 })}
@@ -105,7 +104,7 @@ const AddBatch = () => {
               )}
             </div>
             {/* Duration */}
-            
+
             {/* Started At */}
             <div className={style?.addBatch}>
               <label>Started At</label>

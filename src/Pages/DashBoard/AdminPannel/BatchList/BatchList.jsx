@@ -1,34 +1,34 @@
-import React, { useEffect, useState } from 'react'
-import style from './batchList.module.css'
+import React, { useEffect, useState } from "react";
+import style from "./batchList.module.css";
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
 const BatchList = () => {
   const [batches, setBatches] = useState([]);
-  const [shouldDelete,setShouldDelete] = useState(false)
+  const [shouldDelete, setShouldDelete] = useState(false);
   useEffect(() => {
-    fetch('http://localhost:5000/batch-list')
-      .then(res => res.json())
-      .then(data => setBatches(data))
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/batch-list")
+      .then((res) => res.json())
+      .then((data) => setBatches(data));
   }, [batches]);
 
   //delete a batch
   const handelDeleteBatch = (id) => {
-    fetch(`http://localhost:5000/batch/${id}`, {
-      method: 'DELETE',
+    fetch(`https://geeks-of-gurukul-server-side.vercel.app/batch/${id}`, {
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json",
+      },
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-}
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => console.log(data))
+      .catch((error) => console.error("Error:", error));
+  };
   return (
     <div>
       {/* Search */}
@@ -98,9 +98,7 @@ const BatchList = () => {
                       <td class="p-2 whitespace-nowrap">
                         <div class="flex items-center">{i + 1}</div>
                       </td>
-                      <td class="p-2 whitespace-nowrap">
-                        {batch?.courseId}
-                      </td>
+                      <td class="p-2 whitespace-nowrap">{batch?.courseId}</td>
                       <td class="p-2 whitespace-nowrap">{batch?.batchId}</td>
                       <td class="p-2 whitespace-nowrap">{batch?.duration}</td>
                       <td class="p-2 whitespace-nowrap">{batch?.startedAt}</td>
@@ -109,7 +107,7 @@ const BatchList = () => {
                           <button
                             type="button"
                             className="px-1 py-1 "
-                            onClick={()=>setShouldDelete(true)}
+                            onClick={() => setShouldDelete(true)}
                           >
                             {/* svg */}
                             <img
@@ -119,10 +117,7 @@ const BatchList = () => {
                               alt=""
                             />
                           </button>
-                          <button
-                            type="button"
-                            className="px-1 py-1"
-                          >
+                          <button type="button" className="px-1 py-1">
                             {/* svg */}
                             <img
                               height="15px"
@@ -146,15 +141,30 @@ const BatchList = () => {
                               alt=""
                             />
                           </button>
-                          {
-        shouldDelete && <div class="bg-slate-800 bg-opacity-50 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0">
-        <div class="bg-white px-16 py-14 rounded-md text-center">
-          <h1 class="text-xl mb-4 font-bold text-slate-500">Do you Want Delete</h1>
-          <button onClick={()=>setShouldDelete(false)} class="bg-red-500 px-4 py-2 rounded-md text-md text-white">Cancel</button>
-          <button onClick={()=>handelDeleteBatch(batch?._id) && setShouldDelete(false)} class="bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold">Ok</button>
-        </div>
-      </div>
-      }
+                          {shouldDelete && (
+                            <div class="bg-slate-800 bg-opacity-50 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0">
+                              <div class="bg-white px-16 py-14 rounded-md text-center">
+                                <h1 class="text-xl mb-4 font-bold text-slate-500">
+                                  Do you Want Delete
+                                </h1>
+                                <button
+                                  onClick={() => setShouldDelete(false)}
+                                  class="bg-red-500 px-4 py-2 rounded-md text-md text-white"
+                                >
+                                  Cancel
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    handelDeleteBatch(batch?._id) &&
+                                    setShouldDelete(false)
+                                  }
+                                  class="bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold"
+                                >
+                                  Ok
+                                </button>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </td>
                     </tr>
@@ -167,9 +177,8 @@ const BatchList = () => {
       </div>
 
       {/* Table */}
-      
     </div>
-  )
-}
+  );
+};
 
 export default BatchList;

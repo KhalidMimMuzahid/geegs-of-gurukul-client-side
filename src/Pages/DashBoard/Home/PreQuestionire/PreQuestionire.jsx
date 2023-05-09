@@ -15,6 +15,7 @@ const PreQuestionire = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location?.state?.from?.pathname || "/";
+  console.log("from from prequestioner: ", from);
   const [coLLageName, setCollageName] = useState("");
   const [shouldShowSelectError, setShouldShowSelectError] = useState(false);
 
@@ -124,7 +125,7 @@ const PreQuestionire = () => {
 
     const userDetails = { profession, email, address: "" };
     console.log("userDetails: ", userDetails);
-    fetch("http://localhost:5000/user-details", {
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/user-details", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -137,7 +138,7 @@ const PreQuestionire = () => {
 
         if (data?.acknowledged) {
           fetch(
-            `http://localhost:5000/just-created-false?email=${user?.email}`,
+            `https://geeks-of-gurukul-server-side.vercel.app/just-created-false?email=${user?.email}`,
             {
               method: "PUT",
             }

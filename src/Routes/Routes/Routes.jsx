@@ -87,7 +87,7 @@ const router = createBrowserRouter([
             path: "/dashboard/analysis/specific/:_id",
             loader: async ({ params }) =>
               fetch(
-                `http://localhost:5000/assessment-response?_id=${params?._id}`
+                `https://geeks-of-gurukul-server-side.vercel.app/assessment-response?_id=${params?._id}`
               ),
             element: <Analysis />,
           },
@@ -260,7 +260,9 @@ const router = createBrowserRouter([
   {
     path: "on-processing/:_id",
     loader: async ({ params }) =>
-      fetch(`http://localhost:5000/assessment?_id=${params?._id}`),
+      fetch(
+        `https://geeks-of-gurukul-server-side.vercel.app/assessment?_id=${params?._id}`
+      ),
     element: <OnProcessinAssesments />,
   },
 ]);

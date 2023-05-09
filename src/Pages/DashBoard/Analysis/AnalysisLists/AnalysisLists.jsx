@@ -6,7 +6,9 @@ const AnalysisLists = () => {
   const [responses, setResponses] = useState([]);
   const { user } = useContext(AuthContext);
   useEffect(() => {
-    fetch(`http://localhost:5000/assessment-responses?email=${user?.email}`)
+    fetch(
+      `https://geeks-of-gurukul-server-side.vercel.app/assessment-responses?email=${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log("data: ", data);
