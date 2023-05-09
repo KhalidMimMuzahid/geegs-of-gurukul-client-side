@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "./batchList.module.css";
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
+import { useQuery } from "@tanstack/react-query";
 const BatchList = () => {
-  const [batches, setBatches] = useState([]);
-  const [shouldDelete, setShouldDelete] = useState(false);
-  useEffect(() => {
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/batch-list")
-      .then((res) => res.json())
-      .then((data) => setBatches(data));
-  }, [batches]);
+
+const [shouldDelete, setShouldDelete] = useState(false);
+
+// Fetching Batches info from server
+const {data:batches,isLoading } = useQuery({
+  queryKey: ['userDetailse'],
+  queryFn: ()=>fetch(`https://geeks-of-gurukul-server-side.vercel.app/batch-list`)
+  .then((res) => res.json())
+})
+if (isLoading) {
+  return <div>loading...</div>
+}
+
 
   //delete a batch
   const handelDeleteBatch = (id) => {
