@@ -33,7 +33,7 @@ const Education = () => {
       .then((data) => {
         toast.success('Successfully updated data!')
         console.log(data)
-        navigate('/');
+        navigate('/profile/my-profile');
       })
       .catch((error) => console.error(error));
     console.log(updatedUser);
