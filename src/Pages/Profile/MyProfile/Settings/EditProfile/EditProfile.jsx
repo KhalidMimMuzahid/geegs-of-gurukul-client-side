@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../../../../../contexts/UserProvider/UserProvider";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
+// import { AuthContext } from "../../../../../contexts/UserProvider/UserProvider";
+// import { useNavigate } from "react-router-dom";
+// import { toast } from "react-hot-toast";
+// import { useQuery } from "@tanstack/react-query";
 
 const EditProfile = () => {
-  const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
+  // const { user } = useContext(AuthContext);
+  // const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -17,28 +17,29 @@ const EditProfile = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const updatedUser = {
-      firstName: data?.firstName,
-      lastName: data?.lastName,
-      email: data?.email,
-      address1: data?.address1,
-      address2: data?.address2,
-    }
-    fetch(`http://localhost:5000/user-detailse/${user?.email}`, {
-      method: "PUT",
-      body: JSON.stringify(updatedUser),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        toast.success('Successfully updated data!')
-        console.log(data)
-        navigate('/profile/my-profile');
-      })
-      .catch((error) => console.error(error));
-    console.log(updatedUser);
+    // const updatedUser = {
+    //   firstName: data?.firstName,
+    //   lastName: data?.lastName,
+    //   email: data?.email,
+    //   address1: data?.address1,
+    //   address2: data?.address2,
+    // }
+    // fetch(`http://localhost:5000/user-detailse/${user?.email}`, {
+    //   method: "PUT",
+    //   body: JSON.stringify(updatedUser),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     toast.success('Successfully updated data!')
+    //     console.log(data)
+    //     navigate('/profile/my-profile');
+    //   })
+    //   .catch((error) => console.error(error));
+    // console.log(updatedUser);
+    console.log(data)
     reset();
   };
 

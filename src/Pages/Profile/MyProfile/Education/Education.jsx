@@ -17,38 +17,39 @@ const Education = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const updatedUser = {
-      education: data?.yourEducation,
-      degree: data?.yourDegree,
-      institute: data?.institutionName
-    }
-    fetch(`http://localhost:5000/user-detailse/${user?.email}`, {
-      method: "PUT",
-      body: JSON.stringify(updatedUser),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        toast.success('Successfully updated data!')
-        console.log(data)
-        navigate('/profile/my-profile');
-      })
-      .catch((error) => console.error(error));
-    console.log(updatedUser);
+    // const updatedUser = {
+    //   education: data?.yourEducation,
+    //   degree: data?.yourDegree,
+    //   institute: data?.institutionName
+    // }
+    // fetch(`http://localhost:5000/user-detailse/${user?.email}`, {
+    //   method: "PUT",
+    //   body: JSON.stringify(updatedUser),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     toast.success('Successfully updated data!')
+    //     console.log(data)
+    //     navigate('/profile/my-profile');
+    //   })
+    //   .catch((error) => console.error(error));
+    // console.log(updatedUser);
+    console.log(data)
     reset();
   };
  
   // Showing User info from server
-  const {data:userDetail,isLoading } = useQuery({
-    queryKey: ['userDetailse'],
-    queryFn: ()=>fetch(`http://localhost:5000/user-detailse/${user?.email}`)
-    .then((res) => res.json())
-  })
-  if (isLoading) {
-    return <div>loading...</div>
-  }
+  // const {data:userDetail,isLoading } = useQuery({
+  //   queryKey: ['userDetailse'],
+  //   queryFn: ()=>fetch(`http://localhost:5000/user-detailse/${user?.email}`)
+  //   .then((res) => res.json())
+  // })
+  // if (isLoading) {
+  //   return <div>loading...</div>
+  // }
   // console.log(userDetail)
   return (
     <div className='p-8 font-poppins'>
@@ -68,7 +69,7 @@ const Education = () => {
               <input
                 type='text'
                 name='yourEducation'
-              placeholder={userDetail?.degree}
+              // placeholder={userDetail?.degree}
                 {...register("yourEducation", {
                   required: "This field is required",
                 })}
@@ -89,7 +90,7 @@ const Education = () => {
               <input
                 type='text'
                 name='yourDegree'
-                placeholder={userDetail?.education}
+                // placeholder={userDetail?.education}
                 {...register("yourDegree", {
                   required: "This field is required",
                 })}
@@ -110,7 +111,7 @@ const Education = () => {
               <input
                 type='text'
                 name='institutionName'
-                placeholder={userDetail?.institute}
+                // placeholder={userDetail?.institute}
                 {...register("institutionName", {
                   required: "This field is required",
                 })}

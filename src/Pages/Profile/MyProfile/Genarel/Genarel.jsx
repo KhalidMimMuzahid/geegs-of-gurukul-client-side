@@ -41,19 +41,19 @@ const Genarel = () => {
           <span>Email:</span>
           <span>{userDetail?.email}</span>
         </p>
-        <p className='m-2'>
+        {/* <p className='m-2'>
           <span>Address:</span>
           <span>Dinajpur, Rangpur, Bangladesh</span>
-        </p>
+        </p> */}
         <p className='m-2'>
           <span>Phone:</span>
           <span>{userDetail?.phoneNumber}</span>
         </p>
-        <p className='m-2'>
+        {/* <p className='m-2'>
           <span>Role:</span> 
           <span>{userDetail?.role}</span>
-        </p>
-        <p className='m-2'>
+        </p> */}
+        {/* <p className='m-2'>
           <span>Degree:</span> 
           <span>{userDetail?.degree}</span>
         </p>
@@ -64,7 +64,7 @@ const Genarel = () => {
         <p className='m-2'>
           <span>Institute:</span> 
           <span>{userDetail?.institute}</span>
-        </p>
+        </p> */}
       </div>
       {/* info side */}
     </div>
