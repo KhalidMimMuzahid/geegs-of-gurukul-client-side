@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import editIcon from "../../../../assets/profileIcon/editIcon.svg";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const Education = () => {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -11,7 +16,26 @@ const Education = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const updatedUser = {
+      education: data?.yourEducation,
+      degree: data?.yourDegree,
+      institute: data?.institutionName
+    }
+    fetch(`http://localhost:5000/user-detailse/${user?.email}`, {
+      method: "PUT",
+      body: JSON.stringify(updatedUser),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        toast.success('Successfully updated data!')
+        console.log(data)
+        navigate('/');
+      })
+      .catch((error) => console.error(error));
+    console.log(updatedUser);
     reset();
   };
   return (

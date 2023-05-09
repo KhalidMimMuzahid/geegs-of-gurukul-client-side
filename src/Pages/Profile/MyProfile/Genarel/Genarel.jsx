@@ -53,6 +53,18 @@ const Genarel = () => {
           <span>Role:</span> 
           <span>{userDetail?.role}</span>
         </p>
+        <p className='m-2'>
+          <span>Degree:</span> 
+          <span>{userDetail?.degree}</span>
+        </p>
+        <p className='m-2'>
+          <span>Education:</span> 
+          <span>{userDetail?.education}</span>
+        </p>
+        <p className='m-2'>
+          <span>Institute:</span> 
+          <span>{userDetail?.institute}</span>
+        </p>
       </div>
       {/* info side */}
     </div>
