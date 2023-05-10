@@ -266,14 +266,14 @@ const router = createBrowserRouter([
       ),
     element: <OnProcessinAssesments />,
   },
-  {
-    path: "/dashboard/analysis/specific/review/:_id",
-    loader: async ({ params }) =>
-      fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/assessment?_id=${params?._id}`
-      ),
-    element: <ReviewAnswer/>,
-  },
+  // {
+  //   path: "/dashboard/analysis/specific/review/:_id",
+  //   loader: async ({ params }) =>
+  //     fetch(
+  //       `https://geeks-of-gurukul-server-side.vercel.app/assessment?_id=${params?._id}`
+  //     ),
+  //   element: <ReviewAnswer/>,
+  // },
 ]);
 
 export default router;
