@@ -12,7 +12,7 @@ import StackedColumnChat from "./StackedColumnChat/StackedColumnChat";
 import PieChart from "./PieChart/PieChart";
 import SpiderChart from "./SpiderChart/SpiderChart";
 import Pdf from "react-to-pdf";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 const ref = React.createRef();
 
 const Analysis = () => {
@@ -85,7 +85,7 @@ const Analysis = () => {
       {/* <button className="px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins">
         Review Answer
       </button> */}
-      <button className='px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins'>Review Answer</button>
+      <Link to={`/dashboard/analysis/specific/review/${responseTemp?._id}`}><button className='px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins'>Review Answer</button></Link>
       <OverView aboutResponse={aboutResponse} totalMark={totalMark} />
       <div>{strength?.length > 0 && <Strength strength={strength} />}</div>
       <div>{average?.length > 0 && <Average average={average} />}</div>

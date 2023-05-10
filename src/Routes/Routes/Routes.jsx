@@ -44,6 +44,7 @@ import Login from "../../Pages/login/Login";
 import SignUp from "../../Pages/signUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AnalysisLists from "../../Pages/DashBoard/Analysis/AnalysisLists/AnalysisLists";
+import ReviewAnswer from "../../Pages/DashBoard/ReviewAnswer/ReviewAnswer";
 
 const { createBrowserRouter } = require("react-router-dom");
 const router = createBrowserRouter([
@@ -264,6 +265,14 @@ const router = createBrowserRouter([
         `https://geeks-of-gurukul-server-side.vercel.app/assessment?_id=${params?._id}`
       ),
     element: <OnProcessinAssesments />,
+  },
+  {
+    path: "/dashboard/analysis/specific/review/:_id",
+    loader: async ({ params }) =>
+      fetch(
+        `https://geeks-of-gurukul-server-side.vercel.app/assessment?_id=${params?._id}`
+      ),
+    element: <ReviewAnswer/>,
   },
 ]);
 
