@@ -85,7 +85,7 @@ const Analysis = () => {
       {/* <button className="px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins">
         Review Answer
       </button> */}
-      {/* <button className='px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins'>Review Answer</button> */}
+      <button className='px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins'>Review Answer</button>
       <OverView aboutResponse={aboutResponse} totalMark={totalMark} />
       <div>{strength?.length > 0 && <Strength strength={strength} />}</div>
       <div>{average?.length > 0 && <Average average={average} />}</div>

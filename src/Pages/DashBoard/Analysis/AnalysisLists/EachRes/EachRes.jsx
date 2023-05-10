@@ -41,7 +41,7 @@ const EachRes = ({ response }) => {
           to={`/dashboard/analysis/specific/${response?._id}`}
           class="inline-flex items-center font-poppins px-3 py-2 text-sm font-medium text-center text-[#28282899] bg-[#e4e4e4] rounded-lg hover:bg-[#5fb370] hover:text-white focus:ring-4 focus:outline-none focus:ring-[#75AE80] dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          Start
+          Show Report
           <svg
             aria-hidden="true"
             class="w-4 h-4 ml-2 -mr-1"
