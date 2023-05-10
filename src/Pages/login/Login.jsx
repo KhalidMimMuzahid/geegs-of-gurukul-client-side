@@ -215,14 +215,14 @@ const Login = () => {
                 </h2>
               </div>
               <div className="google-sing-in">
-                <div className="border rounded-2xl bg-gray-300 my-2">
+                <div className="">
                   <button
-                    className="flex py-2 justify-center  gap-4 items-center"
+                    className="flex py-2 justify-center  gap-4 items-center border border-black rounded-2xl my-2 bg-white hover:bg-black hover:text-white"
                     onClick={handleGoogleSignIn}
                     style={{ width: "100%", borderRadius: "30px" }}
                   >
                     <FcGoogle />
-                    <span className="text-black">CONTINUE WITH GOOGLE</span>
+                    <span>CONTINUE WITH GOOGLE</span>
                   </button>
                 </div>
 

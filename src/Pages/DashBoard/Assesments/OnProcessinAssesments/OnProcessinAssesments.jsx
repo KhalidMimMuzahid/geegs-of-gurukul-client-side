@@ -685,7 +685,7 @@ const OnProcessinAssesments = () => {
                     {/* footer */}
                     <div className="flex justify-between items-center">
                       <span>
-                        Are you sure do you want to submit the answers?
+                        Are you sure you want to submit the answers?
                       </span>
                       <div className="flex justify-end gap-4">
                         <span
