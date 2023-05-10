@@ -158,7 +158,7 @@ const Question = ({
   }, [selectedQuestion]);
   return (
     <div>
-      <div className="  px-2 md:px-4 mb-10">
+      <div className="  px-2 md:px-4 mb-5">
         <h1 className="text-[22px] font-medium text-center mb-6 ">
           Topic: {selectedQuestion?.topicName}
         </h1>
