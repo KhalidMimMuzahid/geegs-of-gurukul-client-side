@@ -226,7 +226,7 @@ const Login = () => {
                   </button>
                 </div>
 
-                <p className={style?.formText}>Continue with your accout </p>
+                <p className={`${style?.formText} font-poppins font-normal text-center`}>Continue with your accout </p>
                 <form onSubmit={handleSubmit(handleSignUp)}>
                   <div className={style?.formBoxSing}>
                     <div className={style.fromboxinput}>
@@ -255,7 +255,7 @@ const Login = () => {
                     )}
 
                     <Link to="/forget-pass">
-                      <p className={style?.formText}>Forget Your Password?</p>
+                      <p className={`${style?.formText} font-poppins font-normal text-center`}>Forget Your Password?</p>
                     </Link>
 
                     <div className={style.singupsubmit}>
