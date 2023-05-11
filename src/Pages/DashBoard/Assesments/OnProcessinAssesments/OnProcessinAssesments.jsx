@@ -560,11 +560,11 @@ const OnProcessinAssesments = () => {
   //   document.title = "i am in";
   // });
   return (
-    <div className="container max-w-[1440px] mx-auto py-2 lg:py-4 xl:py-8 font-poppins">
-      <div className=" h-full relative  ">
+    <div className=" max-w-[1440px] w-4/5 mx-auto py-0 lg:py-0 xl:py-0 font-poppins">
+      <div className=" relative">
         {/* mark-negetive */}
         <div className="col-span-3 border-b border-gray-300">
-          <div className="flex justify-between items-center p-4 border border-b-2 bg-slate-100">
+          <div className="flex justify-between items-center p-2 border border-b-2 bg-slate-100">
             <div className="flex justify-center items-center gap-1">
               <img className="w-6 h-5" src={rightArrow} alt="" />
               <h1 className="font-bold">Single Correct</h1>
@@ -580,7 +580,7 @@ const OnProcessinAssesments = () => {
           </div>
         </div>
         {/* mark-negetive */}
-        <div className=" rounded-3xl shadow-lg shadow-slate-700  py-4 lg:px-8 lg:py-8 px-4">
+        <div className=" rounded-2xl shadow-slate-700">
           <div className="grid grid-cols-12 gap-1 lg:gap-16">
             <div className="col-span-12 lg:col-span-4">
               <AssessmentHead
@@ -685,7 +685,7 @@ const OnProcessinAssesments = () => {
                     {/* footer */}
                     <div className="flex justify-between items-center">
                       <span>
-                        Are you sure do you want to submit the answers?
+                        Are you sure you want to submit the answers?
                       </span>
                       <div className="flex justify-end gap-4">
                         <span

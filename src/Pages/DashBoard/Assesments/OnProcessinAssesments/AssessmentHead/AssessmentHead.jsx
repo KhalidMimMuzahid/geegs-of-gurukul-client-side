@@ -107,7 +107,7 @@ const AssessmentHead = ({
         {/* <Timer /> */}
       </div>
       {/* 2nd portion */}
-      <div className="my-2 lg:my-4  rounded-lg shadow-lg border-2 p-4">
+      <div className="my-2 lg:my-4  rounded-lg shadow-lg border-2 p-2">
         <div className="flex gap-2 flex-wrap justify-center items-center">
           {questions?.map((eachQues, index) => (
             <EachQuesNo
@@ -128,7 +128,7 @@ const AssessmentHead = ({
       </div>
       {/* progress bar */}
 
-      <div class="w-full my-2 lg:my-12 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+      <div class="w-full my-2 lg:my-5 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
         <div
           class="bg-green-400 h-2.5 rounded-full"
           style={{
@@ -154,7 +154,7 @@ const AssessmentHead = ({
       </div>
       <button
         onClick={() => setShowInstructions(true)}
-        className="my-8 flex items-center gap-2"
+        className="my-3 flex items-center gap-2"
       >
         <span className="hover:underline">See Instructions</span>
         <span>

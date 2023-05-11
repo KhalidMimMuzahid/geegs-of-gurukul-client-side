@@ -260,16 +260,16 @@ const SignUp = () => {
               </div>
               <div className={style.googlesingin}>
                 <div className={`${style.textcenter} ${style.googelIcon}`}>
-                  <div className="border rounded-2xl bg-gray-300 my-2">
-                    <button
-                      className="flex py-2 justify-center  gap-4 items-center"
-                      onClick={handleGoogleSignIn}
-                      style={{ width: "100%", borderRadius: "30px" }}
-                    >
-                      <FcGoogle />
-                      <span className="text-black">CONTINUE WITH GOOGLE</span>
-                    </button>
-                  </div>
+                <div className="font-poppins font-normal">
+                  <button
+                    className="flex py-2 justify-center  gap-4 items-center border border-black rounded-2xl my-2 bg-white text-black hover:bg-black hover:text-white"
+                    onClick={handleGoogleSignIn}
+                    style={{ width: "100%", borderRadius: "30px" }}
+                  >
+                    <FcGoogle />
+                    <span>CONTINUE WITH GOOGLE</span>
+                  </button>
+                </div>
                 </div>
                 <p style={{ marginTop: "-20px", fontSize: "12px" }}>
                   Or use your Email and Mobile Number for registration{" "}

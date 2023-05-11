@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "./courseList.module.css";
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
+import { useQuery } from "@tanstack/react-query";
 const CourseList = () => {
-  const [courses, setCourses] = useState([]);
   const [shouldDelete, setShouldDelete] = useState(false);
-  useEffect(() => {
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/course-list")
-      .then((res) => res.json())
-      .then((data) => setCourses(data));
-  }, [courses]);
+
+  // Fetching Courses info from server
+const {data:courses,isLoading } = useQuery({
+  queryKey: ['userDetailse'],
+  queryFn: ()=>fetch(`https://geeks-of-gurukul-server-side.vercel.app/course-list`)
+  .then((res) => res.json())
+})
+if (isLoading) {
+  return <div>loading...</div>
+}
   //delete a course
   const handelDeleteCourse = (id) => {
     fetch(`https://geeks-of-gurukul-server-side.vercel.app/course/${id}`, {
