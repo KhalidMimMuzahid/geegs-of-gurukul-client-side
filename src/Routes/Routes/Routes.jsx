@@ -45,6 +45,8 @@ import SignUp from "../../Pages/signUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AnalysisLists from "../../Pages/DashBoard/Analysis/AnalysisLists/AnalysisLists";
 import ReviewAnswer from "../../Pages/DashBoard/ReviewAnswer/ReviewAnswer";
+import AddExercise from "../../Pages/DashBoard/AdminPannel/AddExercise/AddExercise";
+import ExerciseList from "../../Pages/DashBoard/AdminPannel/ExerciseList/ExerciseList";
 
 const { createBrowserRouter } = require("react-router-dom");
 const router = createBrowserRouter([
@@ -148,6 +150,10 @@ const router = createBrowserRouter([
                 element: <AddAssignment />,
               },
               {
+                path: "/dashboard/admin-pannel/assignment/add-exercise",
+                element: <AddExercise />,
+              },
+              {
                 path: "/dashboard/admin-pannel/course/add-course",
                 element: <AddCourse />,
               },
@@ -166,6 +172,10 @@ const router = createBrowserRouter([
               {
                 path: "/dashboard/admin-pannel/assignment/assignment-list",
                 element: <AssignmentList />,
+              },
+              {
+                path: "/dashboard/admin-pannel/assignment/exercise-list",
+                element: <ExerciseList />,
               },
             ],
           },
