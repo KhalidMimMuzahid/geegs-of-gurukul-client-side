@@ -40,7 +40,7 @@ const Actions = ({
       </div>
       <div className="w-full flex justify-end">
         <span
-          className={`${style?.submit} hover:cursor-pointer py-1 text-xl font-semibold text-white px-16 bg-[#53A871] rounded-xl hover:bg-[#5ab67a]`}
+          className={`${style?.submit} hover:cursor-pointer py-1 text-xl font-semibold text-white px-16 bg-[#53A871] rounded-xl hover:bg-[#5ab67a] my-5`}
           onClick={() => setSubmitModalIsOpen(true)}
         >
           Submit
