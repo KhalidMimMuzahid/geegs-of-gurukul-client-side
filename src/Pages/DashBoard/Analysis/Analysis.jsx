@@ -13,6 +13,7 @@ import PieChart from "./PieChart/PieChart";
 import SpiderChart from "./SpiderChart/SpiderChart";
 import Pdf from "react-to-pdf";
 import { Link, useLoaderData } from "react-router-dom";
+import { motion } from "framer-motion";
 const ref = React.createRef();
 
 const Analysis = () => {
@@ -21,7 +22,8 @@ const Analysis = () => {
   const [strength, setStrength] = useState([]);
   const [average, setAverage] = useState([]);
   const [haveToImprove, setHaveToImprove] = useState([]);
-
+  // for open Modal
+  const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [correct, setCorrect] = useState([]);
   const [wrong, setWrong] = useState([]);
@@ -85,7 +87,7 @@ const Analysis = () => {
       {/* <button className="px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins">
         Review Answer
       </button> */}
-     <button className='px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins'>Review Answer</button>
+     <button onClick={() => setOpen(true)} className='px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins'>Review Answer</button>
       <OverView aboutResponse={aboutResponse} totalMark={totalMark} />
       <div>{strength?.length > 0 && <Strength strength={strength} />}</div>
       <div>{average?.length > 0 && <Average average={average} />}</div>
@@ -138,6 +140,34 @@ const Analysis = () => {
 
       {/* <Recomandation /> */}
       {/* <LeaderBoard /> */}
+
+      {/* modal body */}
+
+      {open && (
+        // <!-- Modal HTML structure -->
+        <div className='fixed z-[1000000] inset-0 overflow-y-auto'>
+          <div className='flex items-center justify-center min-h-screen'>
+            <motion.div
+              animate={{
+                transform: "translateY(-170px)",
+                transitionDuration: 500,
+              }}
+              className='relative rounded-lg p-6 bg-white shadow-md transform transition-all duration-1000 w-[90vw] h-auto'
+            >
+              <h2 className='text-xl font-bold mb-4'>Review Answer</h2>
+              <div className='flex items-center justify-center p-12'></div>
+              <div className='absolute top-2 right-2'>
+                <button
+                  onClick={() => setOpen(false)}
+                  className='w-8 h-8 rounded-full bg-green-300 text-red-700 hover:bg-gray-400'
+                >
+                  X
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
