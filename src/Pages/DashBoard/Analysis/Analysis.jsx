@@ -152,7 +152,7 @@ const Analysis = () => {
                 transform: "translateY(-170px)",
                 transitionDuration: 500,
               }}
-              className='relative rounded-lg p-6 bg-white shadow-md transform transition-all duration-1000 w-[90vw] h-auto overflow-y-scroll'
+              className='relative rounded-lg p-6 bg-white shadow-md transform transition-all duration-1000 w-[90vw] max-h-[40vh] overflow-y-scroll'
             >
               <h2 className='text-xl font-bold mb-4'>Review Answer</h2>
               <div className='flex items-center justify-center p-12'></div>
