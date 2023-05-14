@@ -1,17 +1,101 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { toast } from 'react-hot-toast';
+import { AuthContext } from './../../../../contexts/UserProvider/UserProvider';
+import moment from "moment/moment";
+import { uploadFile } from "react-s3";
+window.Buffer = window.Buffer || require("buffer").Buffer;
+ const config = {
+  bucketName: "all-files-for-gog",
+  dirName: "assets/any-types",
+  region: "ap-south-1",
+  accessKeyId: process.env.REACT_APP_S3AccessKeyId,
+  secretAccessKey: process.env.REACT_APP_S3SecretAccessKey,
+}; 
 
 function AddAssignment() {
+  const {user} = useContext(AuthContext)
   const { register, handleSubmit } = useForm();
   const [text, setText] = useState("");
   const [preview, setPreview] = useState(false);
   const [instructions, setInstructions] = useState(false);
+  const [loading, setLoading] = useState(false)
+  const [uploadedFile, setUploadedFile] = useState('')
+  const [exercisesId, setExercisesId] = useState([])
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+
+
+  //file Input
+  const handelUpload = e =>{
+    // const file = e.target.value;
+    const file = e.target.fileInput[0]; 
+        uploadFile(file, config)
+        .then(fileData => {
+          console.log(fileData)
+          setUploadedFile(data.location)
+        })
+        .catch(err => { toast.error(err.message); setLoading(false)})  
+  }
+
+
+  const onSubmit = (data) => { 
+    setLoading(true) 
+    const justNow = moment().format();
+
+    fetch('exercises.json')
+          .then(res => res.json())
+          .then(exercises => { 
+            exercises.map(exercise =>{
+              setExercisesId([...exercisesId, exercise?._id])
+              console.log(exercisesId)
+            })
+          })
+          
+          const assignmentDetails ={
+            assignmentName: data?.assignmentName,
+            topic: data?.topic,
+            additions:{
+              instructions: data?.textArea,
+              files: uploadedFile,
+            },
+            type: data?.type,
+            exercises: exercisesId,
+            actionsDetails:{
+              isDeleted: false,
+              creation:{
+                createdAt: justNow,
+                creatorEmail:user?.email 
+              },
+
+              updation:{
+                updateAt: justNow,
+                updatorEmail: user?.email
+              }
+            }
+          }
+
+          fetch(`http://localhost:5000/assignmentDetails`,{
+            method: 'POST',
+            headers: {
+        
+                'content-type': 'application/json',
+        
+            },
+            body: JSON.stringify(assignmentDetails)
+          })
+          .then(res => res.json())
+          .then(data => {
+                    if (data.acknowledged) { 
+                        toast.success('Assignment Successfully Added')
+                        setLoading(false)
+                    }
+                })
+                .catch(error => { toast.error(error.message); setLoading(false) })
+  
+
+  }
 
   return (
     <div className='py-20 px-10 bg-green-300 w-2/3 mx-auto my-16 rounded-xl font-poppins'>
@@ -30,6 +114,25 @@ function AddAssignment() {
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
         </div>
+        <div className='mb-4'>
+          <label
+            htmlFor='topic'
+            className='block text-gray-700 font-bold mb-2'
+          >
+            Topic
+          </label>
+          <input
+            type='text'
+            id='topic'
+            {...register("topic")}
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          />
+        </div>
+
+        
+        
+        
+
         <div className='mb-4'>
           <label
             htmlFor='textArea'
@@ -99,7 +202,6 @@ function AddAssignment() {
             </>
           )}
         </div>
-
         <div className='mb-6'>
           <div class='max-w-2xl mx-auto'>
             <label
@@ -111,16 +213,38 @@ function AddAssignment() {
             <input
               class='block w-full text-sm text-green-400 border border-gray-300 rounded-lg cursor-pointer bg-green-50 focus:outline-none'
               id='file_input'
+              name='fileInput'
+              onChange={handelUpload}
               {...register("fileInput")}
               type='file'
             />
           </div>
         </div>
+        <div className='mb-4'>
+          <label
+            htmlFor='type'
+            className='block text-gray-700 font-bold mb-2'
+          >
+            Type
+          </label>
+          <select
+            id="type"
+            {...register("type")}
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            >
+              <option value="project">project</option>
+              <option value="evaluation">evaluation</option>
+              <option value="assignments">Assignments</option>
+            </select>
+        </div>
         <button
           type='submit'
+          
           className='w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-        >
-          Submit
+        >{
+          loading? 'Loading' : 'Submit'
+        }
+          
         </button>
       </form>
     </div>
