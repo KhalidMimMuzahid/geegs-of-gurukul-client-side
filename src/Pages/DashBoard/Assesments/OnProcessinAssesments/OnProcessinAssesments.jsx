@@ -189,7 +189,7 @@ const OnProcessinAssesments = () => {
     // if successrat > 80 => strength include topic name === successrate and also time management
     // if successrat > 50 => average
     // else  => have to improve
-    localStorage.setItem("response", JSON.stringify(response));
+    // localStorage.setItem("response", JSON.stringify(response));
     // console.log(":xxxxxxxxxxxxx");
     fetch(
       "https://geeks-of-gurukul-server-side.vercel.app/assessment-response",
