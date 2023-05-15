@@ -10,7 +10,7 @@ const ReviewAnswerModal = ({ isOpen, setIsOpen }) => {
             open={isOpen}
             onClose={setIsOpen}
             as="div"
-            className="fixed inset-0 z-[10000000] flex items-center justify-center overflow-y-auto"
+            className="fixed inset-0 z-[10000000] flex items-center justify-center overflow-hidden"
         >
             <div className="flex flex-col text-center">
                 <Dialog.Overlay />
@@ -32,7 +32,7 @@ const ReviewAnswerModal = ({ isOpen, setIsOpen }) => {
                         scale: 1,
                         transition: {
                             ease: "easeOut",
-                            duration: 0.15,
+                            duration: 2,
                         },
                     }}
                     exit={{
@@ -40,7 +40,7 @@ const ReviewAnswerModal = ({ isOpen, setIsOpen }) => {
                         scale: 0.75,
                         transition: {
                             ease: "easeIn",
-                            duration: 0.15,
+                            duration: 1,
                         },
                     }}
                 >
@@ -51,21 +51,21 @@ const ReviewAnswerModal = ({ isOpen, setIsOpen }) => {
                         &#8203;
                     </span>
 
-                    <div
-                        className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle min-w-xl sm:w-full h-[90vh]"
+                    <div style={{borderTopLeftRadius:'30px',borderTopRightRadius:'30px'}}
+                        className="inline-block align-bottom bg-white  text-left overflow-hidden shadow-xl transform transition-all h-[90vh] relative bottom-[-5vh] sm:bottom-[-5vh]"
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby="modal-headline"
                     >
-                        <div className="bg-white w-[95vw] h-[95vh]">
+                        <div className="bg-white w-[100vw] h-[95vh] max-w-[1440px]">
                             {/* content goes here */}
                         </div>
-                        <div className="absolute top-10 right-10">
+                        <div className="absolute top-2 right-2">
                             
                             <button
                                 type="button"
                                 tabIndex={0}
-                                className=" font-poppins w-12 h-12 bg-red-500 rounded-full hover:text-white hover:transition-500ms"
+                                className=" font-poppins w-8 h-8 bg-red-500 rounded-full hover:text-white hover:transition-500ms"
                                 onClick={() => setIsOpen(false)}
                             >
                                 X
