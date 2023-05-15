@@ -44,7 +44,6 @@ import Login from "../../Pages/login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AnalysisLists from "../../Pages/DashBoard/Analysis/AnalysisLists/AnalysisLists";
-import ReviewAnswer from "../../Pages/DashBoard/ReviewAnswer/ReviewAnswer";
 import AddExercise from "../../Pages/DashBoard/AdminPannel/AddExercise/AddExercise";
 import ExerciseList from "../../Pages/DashBoard/AdminPannel/ExerciseList/ExerciseList";
 
