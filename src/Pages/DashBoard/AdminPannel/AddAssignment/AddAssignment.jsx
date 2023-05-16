@@ -6,7 +6,6 @@ import { toast } from "react-hot-toast";
 import { AuthContext } from "./../../../../contexts/UserProvider/UserProvider";
 import moment from "moment/moment";
 import { uploadFile } from "react-s3";
-import { useQuery } from "@tanstack/react-query";
 import ExercisesModal from "./ExercisesModal";
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
@@ -28,39 +27,14 @@ function AddAssignment() {
   const [loading, setLoading] = useState(false);
   const [uploadedFile, setUploadedFile] = useState("");
   const [exercisesId, setExercisesId] = useState([]);
-  const [items, setItems] = useState([]);
-
-  const {
-    data: exercises = [],
-    refetch,
-    isLoading,
-  } = useQuery({
-    queryKey: [],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/exerciseSearch`);
-      const data = await res.json();
-
-      if (data.success) {
-        const result = exercises.data;
-        setItems(result);
-      } else {
-        toast.error(data.message);
-      }
-      console.log(data);
-      return data;
-    },
-  });
-
-  const handelAddExerciseId = (id) => {
-    setExercisesId([...exercisesId, id]);
-  };
 
   const onSubmit = (data) => {
     setLoading(true);
 
-    if (exercisesId.length === 0) {
+    if (exercisesId?.length === 0) {
       toast.error("Pleas Select Exercises");
       setLoading(false);
+      return;
     }
 
     const justNow = moment().format();
@@ -69,11 +43,11 @@ function AddAssignment() {
       console.log(file);
       uploadFile(file, config)
         .then((fileData) => {
-          setUploadedFile(fileData.location);
+          setUploadedFile(fileData?.location);
           console.log("fileData", fileData);
         })
         .catch((err) => {
-          toast.error(err.message);
+          toast.error(err?.message);
           setLoading(false);
         });
     }
@@ -126,22 +100,24 @@ function AddAssignment() {
       });
   };
 
-  if (isLoading && exercises.length === 0) {
-    return (
-      <div style={{ marginTop: "800px" }} className='text-center '>
-        <div className='spinner-grow text-center ' role='status'>
-          <span className='visually-hidden'>Loading...</span>
-        </div>
-      </div>
-    );
-  }
+  // if (isLoading && exercises?.length === 0) {
+  //   return (
+  //     <div style={{ marginTop: "800px" }} className='text-center '>
+  //       <div className='spinner-grow text-center ' role='status'>
+  //         <span className='visually-hidden'>Loading...</span>
+  //       </div>
+  //     </div>
+  //   );
+  // }
   return (
     <div className='py-20 px-10 bg-green-300 w-2/3 mx-auto my-16 rounded-xl font-poppins'>
-      <form onSubmit={handleSubmit(onSubmit)} className='max-w-lg mx-auto'>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className='max-w-lg mx-auto my-20'>
         <div className='mb-4'>
           <label
             htmlFor='assignmentName'
-            className='block text-gray-700 font-bold mb-2'>
+            className='block text-gray-700 font-bold mb-2 '>
             Assignment Name
           </label>
           <input
@@ -268,13 +244,6 @@ function AddAssignment() {
             className='font-poppins font-medium text-white px-4 py-2 bg-green-400 hover:bg-green-500 rounded-md'>
             Select Exercises
           </label>
-          {exercisesModal && (
-            <ExercisesModal
-              setExercisesModal={setExercisesModal}
-              handelAddExerciseId={handelAddExerciseId}
-              items={items}
-            />
-          )}
         </div>
 
         <button
@@ -283,6 +252,13 @@ function AddAssignment() {
           {loading ? "Loading" : "Submit"}
         </button>
       </form>
+      {exercisesModal && (
+        <ExercisesModal
+          setExercisesModal={setExercisesModal}
+          exercisesId={exercisesId}
+          setExercisesId={setExercisesId}
+        />
+      )}
     </div>
   );
 }
