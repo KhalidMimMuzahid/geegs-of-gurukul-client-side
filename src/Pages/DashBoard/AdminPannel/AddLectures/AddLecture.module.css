@@ -4,23 +4,23 @@
 } */
 
 .addLecture p {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    color: #000000;
-    opacity: 0.8;
-    margin-bottom: 4px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000000;
+  opacity: 0.8;
+  margin-bottom: 4px;
 }
 
 .addLecture input {
-    width: 100%;
-    border: 1px solid #CECECE;
-    border-radius: 5px;
-    font-size: 17px;
-    padding: 10px 20px;
-    margin-bottom: 16px;
-    outline: none;
+  width: 100%;
+  border: 1px solid #cecece;
+  border-radius: 5px;
+  font-size: 17px;
+  padding: 10px 20px;
+  margin-bottom: 16px;
+  outline: none;
 }
 
 /* .search-area input {
