@@ -50,6 +50,8 @@ import CreateCoupon from "../../Pages/DashBoard/AdminPannel/CreateCoupon/CreateC
 import CouponList from "../../Pages/DashBoard/AdminPannel/CouponList/CouponList";
 import AddModule from "../../Pages/DashBoard/AdminPannel/AddModule/AddModule";
 import ModuleList from "../../Pages/DashBoard/AdminPannel/ModuleList/ModuleList";
+import AddProgram from "../../Pages/DashBoard/AdminPannel/AddProgram/AddProgram";
+import ProgramList from "../../Pages/DashBoard/AdminPannel/ProgramList/ProgramList";
 
 const { createBrowserRouter } = require("react-router-dom");
 const router = createBrowserRouter([
@@ -182,19 +184,27 @@ const router = createBrowserRouter([
               },
               {
                 path: "/dashboard/admin-pannel/others/create-coupon",
-                element: <CreateCoupon/>,
+                element: <CreateCoupon />,
               },
               {
                 path: "/dashboard/admin-pannel/others/coupon-list",
-                element: <CouponList/>,
+                element: <CouponList />,
               },
               {
                 path: "/dashboard/admin-pannel/course/add-module",
-                element: <AddModule/>,
+                element: <AddModule />,
               },
               {
                 path: "/dashboard/admin-pannel/course/module-list",
-                element: <ModuleList/>,
+                element: <ModuleList />,
+              },
+              {
+                path: "/dashboard/admin-pannel/course/add-program",
+                element: <AddProgram />,
+              },
+              {
+                path: "/dashboard/admin-pannel/course/program-list",
+                element: <ProgramList />,
               },
             ],
           },
