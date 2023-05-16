@@ -21,7 +21,6 @@ const AddExercise = () => {
 
   const onSubmit = (data) => {
     const justNow = moment().format();
-    console.log("justNow: ", justNow);
     const outputData = {
       exerciseName: data.exerciseName,
       topic: data.topic,

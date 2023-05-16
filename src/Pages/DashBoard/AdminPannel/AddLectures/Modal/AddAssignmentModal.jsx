@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { BsXCircleFill } from "react-icons/bs";
 import Lecturetable from "../TableComponents/Lecturetable";
 import { assignmentData } from "../dummyData/dummyData";
 
-function AddAssignmentModal({ setSearch, assignments, setAssignments }) {
+function AddAssignmentModal({
+  setSearch,
+  assignments,
+  setAssignments,
+  selectedAssignments,
+  setSelectedAssignments,
+}) {
   const {
     register,
     handleSubmit,
@@ -31,7 +37,7 @@ function AddAssignmentModal({ setSearch, assignments, setAssignments }) {
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
-        <div className="relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
+        <div className="relative w-full h-[600px] sm:w-[500px] md:w-[750px] lg:w-[900px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-4 bg-white rounded-lg shadow-2xl">
           <div className="px-2 pt-2 flex w-full justify-between">
             <h4 className="font-semibold">Add assignments</h4>
             <button onClick={() => setSearch(false)}>
@@ -80,9 +86,13 @@ function AddAssignmentModal({ setSearch, assignments, setAssignments }) {
             </form>
           </div>
           {/* Contents */}
-
+          <p className="text-sm">Selected: {selectedAssignments.length}</p>
           {/* Table */}
-          <Lecturetable assignments={assignments} />
+          <Lecturetable
+            assignments={assignments}
+            setSelectedAssignments={setSelectedAssignments}
+            selectedAssignments={selectedAssignments}
+          />
         </div>
       </div>
       <div className="opacity-25 fixed inset-0  z-[20000] bg-black"></div>

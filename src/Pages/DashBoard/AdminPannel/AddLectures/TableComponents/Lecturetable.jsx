@@ -1,7 +1,11 @@
 import React from "react";
 import Row from "./Row";
 
-function Lecturetable({ assignments }) {
+function Lecturetable({
+  assignments,
+  selectedAssignments,
+  setSelectedAssignments,
+}) {
   return (
     <div className="flex flex-col w-full h-80">
       <div className="overflow-x-auto overflow-y-auto">
@@ -38,7 +42,12 @@ function Lecturetable({ assignments }) {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {assignments.map((assignment) => (
-                  <Row assignment={assignment} key={assignment._id} />
+                  <Row
+                    assignment={assignment}
+                    key={assignment._id}
+                    selectedAssignments={selectedAssignments}
+                    setSelectedAssignments={setSelectedAssignments}
+                  />
                 ))}
               </tbody>
             </table>

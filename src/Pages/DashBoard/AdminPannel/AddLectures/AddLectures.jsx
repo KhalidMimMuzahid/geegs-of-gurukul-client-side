@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import style from "./AddLecture.module.css";
 import AddAssignmentModal from "./Modal/AddAssignmentModal";
+import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
+import moment from "moment";
+
 const AddLectures = () => {
+  const { user } = useContext(AuthContext);
   const [assignments, setAssignments] = useState([]);
+  const [selectedAssignments, setSelectedAssignments] = useState([]);
   const {
     register,
     handleSubmit,
@@ -15,7 +20,42 @@ const AddLectures = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const justNow = moment().format();
+
+    const lectureData = {
+      courseId: data.courseName,
+      batchId: data.batchName,
+      startAt: data.scheduledAt,
+      endSAt: data.endsAt,
+      isOptional: data.optional,
+      lectureName: data.lectureName,
+      topic: data.topicName,
+      assignment: {
+        sheduledAt: data.scheduledAt,
+        deadLine: data.endsAt,
+        assignments_id: selectedAssignments,
+      },
+      lectureVideo: {
+        liveLink: data.zoomLink,
+        videoLink: data.videoInput
+      },
+      notes: data.notes,
+      additionalFiles: data.fileInput,
+
+      actionsDetails: {
+        isDeleted: false,
+        creation: {
+          createdAt: justNow,
+          creatorEmail: user.email,
+        },
+        updation: {
+          updatedAt: justNow,
+          updatorEmail: user.email,
+        },
+      },
+    };
+
+    console.log(lectureData);
   };
 
   const [text, setText] = useState("");
@@ -126,8 +166,8 @@ const AddLectures = () => {
               <label>Sceduled At</label>
               <input
                 type="datetime-local"
-                name="sceduledAt"
-                {...register("sceduledAt", {
+                name="scheduledAt"
+                {...register("scheduledAt", {
                   required: "Select A Date",
                 })}
                 aria-invalid={errors.sceduledAt ? "true" : "false"}
@@ -245,7 +285,7 @@ const AddLectures = () => {
         </div>
 
         {/* Text Area */}
-        <div className="w-full mx-auto my-10 font-poppins">
+        <div className="w-full mx-auto mt-10 mb-5 font-poppins">
           <label
             htmlFor="notes"
             className="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
@@ -254,14 +294,14 @@ const AddLectures = () => {
               <p>Notes:</p>
 
               <label
-                htmlFor="Optional"
+                htmlFor="optional"
                 className="flex items-center cursor-pointer relative mb-4"
               >
                 <input
                   type="checkbox"
-                  id="Optional"
-                  name="Optional"
-                  {...register("Optional")}
+                  id="optional"
+                  name="optional"
+                  {...register("optional")}
                   className="sr-only"
                 />
                 <div className="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
@@ -354,13 +394,18 @@ const AddLectures = () => {
         </div>
 
         {/* add assignment button */}
-        <button
-          type="button"
-          onClick={() => setSearch(true)}
-          className="px-2 py-2 bg-green-500 text-white font-poppins font-medium rounded-lg my-2"
-        >
-          + Add Assignments
-        </button>
+        <div className="flex justify-between align-center">
+          <button
+            type="button"
+            onClick={() => setSearch(true)}
+            className="px-2 py-2 bg-green-500 text-white font-poppins font-medium rounded-lg mb-3"
+          >
+            + Add Assignments
+          </button>
+          <p className="font-bold text-green-500">
+            Assignments selected: {selectedAssignments.length}
+          </p>
+        </div>
         {/* add assignment button */}
 
         {/* Submit Button */}
@@ -380,6 +425,8 @@ const AddLectures = () => {
           setSearch={setSearch}
           assignments={assignments}
           setAssignments={setAssignments}
+          selectedAssignments={selectedAssignments}
+          setSelectedAssignments={setSelectedAssignments}
         />
       )}
       {/* Add assignment modal */}

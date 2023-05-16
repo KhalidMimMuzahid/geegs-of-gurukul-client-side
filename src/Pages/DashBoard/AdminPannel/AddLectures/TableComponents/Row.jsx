@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
-function Row({ assignment }) {
+function Row({ assignment, selectedAssignments, setSelectedAssignments }) {
   const [add, setAdd] = useState(false);
 
   useEffect(() => {
-    return () => {
-      if(add){
-        console.log("added");
-      } else {
-        console.log("removed");
-      }
+    if (selectedAssignments.includes(assignment._id)) {
+      setAdd(true);
     }
-  }, [add]);
-  
+  }, []);
+
+  const handleChange = () => {
+    setAdd(!add);
+    if (add) {
+      const temp = selectedAssignments.filter(
+        (element) => element != assignment._id
+      );
+      setSelectedAssignments(temp);
+    } else {
+      setSelectedAssignments([...selectedAssignments, assignment._id]);
+    }
+  };
+
   return (
     <tr>
       <td className="px-6 py-3 whitespace-nowrap">
@@ -29,18 +37,13 @@ function Row({ assignment }) {
       <td className="px-6 py-3 whitespace-nowrap">
         <div className="text-sm text-gray-900">{assignment.topic}</div>
       </td>
-      {/* <td className="px-6 py-3 whitespace-nowrap">
-            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                Active
-            </span>
-        F</td> */}
       <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-500 flex align-center justify-center">
         <button type="button">
           <BsFillPlusCircleFill
-            color={add ? "#22c55e" : "grey"}
-            className={`${!add && 'rotate-45'} duration-200`}
+            color={add ? "red" : "#22c55e"}
+            className={`${add && "rotate-45"} duration-200`}
             size={20}
-            onClick={() => setAdd(!add)}
+            onClick={handleChange}
           />
         </button>
       </td>
