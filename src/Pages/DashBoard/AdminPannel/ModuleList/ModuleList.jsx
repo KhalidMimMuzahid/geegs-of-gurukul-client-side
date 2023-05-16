@@ -16,7 +16,8 @@ const ModuleList = () => {
   const onSubmit = (data) => {
     
     const programDetails = {
-      programName: data?.programName,
+      moduleName: data?.moduleName,
+      batchName: data?.batchName,
       
     };
     reset();
