@@ -49,7 +49,7 @@ const ModuleList = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-          <div class="w-full mx-auto my-10 font-poppins">
+          <div class="w-full mx-auto my-3 font-poppins">
           <label
             for="ModuleName"
             class="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
@@ -76,7 +76,7 @@ const ModuleList = () => {
             </p>
           )}
             </div>
-            <div class="w-full mx-auto my-10 font-poppins">
+            <div class="w-full mx-auto my-3 font-poppins">
           <label
             for="Batch Name"
             class="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"

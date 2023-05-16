@@ -48,7 +48,7 @@ const ProgramList = () => {
       <div className="container p-8">
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Text Area */}
-        <div class="w-full mx-auto my-10 font-poppins">
+        <div class="w-full mx-auto my-3 font-poppins">
           <label
             for="Course"
             class="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
