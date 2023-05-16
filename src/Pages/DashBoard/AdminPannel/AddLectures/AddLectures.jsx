@@ -23,8 +23,12 @@ const AddLectures = () => {
     const justNow = moment().format();
 
     const lectureData = {
-      courseId: data.courseName,
-      batchId: data.batchName,
+      courseId: "",
+      courseName: data.courseName,
+      batchId: "",
+      batchName: data.batchName,
+      programeId: "",
+      programName: data.programName,
       startAt: data.scheduledAt,
       endSAt: data.endsAt,
       isOptional: data.optional,
@@ -37,7 +41,10 @@ const AddLectures = () => {
       },
       lectureVideo: {
         liveLink: data.zoomLink,
-        videoLink: data.videoInput
+        videoLink: {
+          s3Hoster: "",
+          vimeoHoster: "",
+        },
       },
       notes: data.notes,
       additionalFiles: data.fileInput,
@@ -161,6 +168,32 @@ const AddLectures = () => {
               )}
             </div>
             {/* Course Name */}
+            {/* Programe Name */}
+            <div className={style?.addLecture}>
+              <label htmlFor="programName">Program Name</label>
+              <select
+                name="programName"
+                {...register("programName", {
+                  required: "Program Name is required",
+                })}
+                aria-invalid={errors.programName ? "true" : "false"}
+                className="w-full border-2 border-green-400 rounded-xl"
+              >
+                <option value="">Choose a Programe</option>
+                <option value="Program1">Program1</option>
+                <option value="Program2">Program2</option>
+                <option value="Program3">Program3</option>
+              </select>
+              {errors.programName && (
+                <p
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
+                >
+                  {errors.programName?.message}
+                </p>
+              )}
+            </div>
+            {/* Programe Name */}
             {/* Sceduled At */}
             <div className={style?.addLecture}>
               <label>Sceduled At</label>
@@ -203,6 +236,27 @@ const AddLectures = () => {
               )}
             </div>
             {/* Ends At */}
+            {/* Zoom Link */}
+            <div className={style?.addLecture}>
+              <label>Zoom Link</label>
+              <input
+                type="url"
+                name="zoomLink"
+                {...register("zoomLink", {
+                  required: "Provide Zoom Link",
+                })}
+                aria-invalid={errors.zoomLink ? "true" : "false"}
+              />
+              {errors.zoomLink && (
+                <p
+                  role="alert"
+                  className="text-red-500 font-poppins font-medium"
+                >
+                  {errors.zoomLink?.message}
+                </p>
+              )}
+            </div>
+            {/* Zoom Link */}
             {/* Attachment File */}
             <div className="w-full font-poppins">
               <label
@@ -231,27 +285,7 @@ const AddLectures = () => {
               )}
             </div>
             {/* Attachment File */}
-            {/* Zoom Link */}
-            <div className={style?.addLecture}>
-              <label>Zoom Link</label>
-              <input
-                type="url"
-                name="zoomLink"
-                {...register("zoomLink", {
-                  required: "Provide Zoom Link",
-                })}
-                aria-invalid={errors.zoomLink ? "true" : "false"}
-              />
-              {errors.zoomLink && (
-                <p
-                  role="alert"
-                  className="text-red-500 font-poppins font-medium"
-                >
-                  {errors.zoomLink?.message}
-                </p>
-              )}
-            </div>
-            {/* Zoom Link */}
+
             {/* Upload Video */}
             <div className="w-full font-poppins">
               <label
