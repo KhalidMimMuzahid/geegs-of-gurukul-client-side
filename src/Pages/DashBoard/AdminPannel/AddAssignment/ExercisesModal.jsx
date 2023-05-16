@@ -41,12 +41,14 @@ const ExercisesModal = ({ setExercisesModal, setExercisesId, exercisesId }) => {
       });
   };
 
+  // add exercise
   const handelToAddItem = (id) => {
     setExercisesId([...exercisesId, id]);
     setItems(items);
     // console.log(id);
   };
 
+  // remove exercise
   const handelToRemoveItem = (id) => {
     const frr = exercisesId?.filter((arr) => arr !== id);
     setExercisesId(frr);
