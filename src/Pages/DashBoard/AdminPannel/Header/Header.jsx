@@ -99,6 +99,16 @@ const navigation = [
         link: "/dashboard/admin-pannel/course/module-list",
         current: false,
       },
+      {
+        name: "Add Program",
+        link: "/dashboard/admin-pannel/course/add-program",
+        current: false,
+      },
+      {
+        name: "Program List",
+        link: "/dashboard/admin-pannel/course/program-list",
+        current: false,
+      },
     ],
   },
   {
@@ -142,7 +152,6 @@ const navigation = [
         link: "/dashboard/admin-pannel/others/coupon-list",
         current: false,
       },
-     
     ],
   },
 ];
