@@ -13,14 +13,23 @@ import PieChart from "./PieChart/PieChart";
 import SpiderChart from "./SpiderChart/SpiderChart";
 import Pdf from "react-to-pdf";
 import { Link, useLoaderData } from "react-router-dom";
+import { motion } from "framer-motion";
+import ReviewAnswerModal from "./ReviewAnswerModal/ReviewAnswerModal";
+import OpenModal from "./ReviewAnswerModal/OpenModal/OpenModal";
+// import ReviewAnswerModal from "./ReviewAnswerModal/ReviewAnswerModal";
 const ref = React.createRef();
 
 const Analysis = () => {
   const [response, setResponse] = useState({});
+  const [assessment, setAssessment] = useState({});
   const [aboutResponse, setAboutResponse] = useState({});
   const [strength, setStrength] = useState([]);
   const [average, setAverage] = useState([]);
   const [haveToImprove, setHaveToImprove] = useState([]);
+  // for open Modal
+  // const [open, setOpen] = useState(false);
+  // const openModal = () => setOpen(true);
+  // const closeModal = () => setOpen(false);
 
   const [categories, setCategories] = useState([]);
   const [correct, setCorrect] = useState([]);
@@ -28,6 +37,7 @@ const Analysis = () => {
   const [notAttempt, setNotAttempt] = useState([]);
   const responseTemp = useLoaderData();
   // setAboutResponse(response?.aboutResponse);
+  console.log("responseTemp: ", responseTemp);
 
   useEffect(() => {
     // const responseString = localStorage.getItem("response");
@@ -36,9 +46,15 @@ const Analysis = () => {
     // setResponse(responseParse);
     setResponse(responseTemp);
     setAboutResponse(responseTemp?.aboutResponse);
-
-    // console.log("responseParse: ", responseParse);
-    // console.log("aboutResponse: ", responseParse?.aboutResponse);
+    //
+    fetch(
+      `https://geeks-of-gurukul-server-side.vercel.app/assessment?_id=${responseTemp?.assessmentId}`
+    ).then((res) =>
+      res.json().then((data) => {
+        setAssessment(data);
+        console.log(data);
+      })
+    );
   }, [responseTemp]);
   const { startedAt, studentEmail, takenTimeToFinish, totalMark } = response;
   useEffect(() => {
@@ -80,12 +96,20 @@ const Analysis = () => {
   };
 
   return (
-    <div className="p-16">
+    <div className='p-16'>
       <ProfileInfo />
       {/* <button className="px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins">
         Review Answer
       </button> */}
-     <button className='px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins'>Review Answer</button>
+      {/* <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={ open ? closeModal : openModal}
+        className='px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins'
+      >
+        Review Answer open= {open? "true": "false"}
+      </motion.button> */}
+      <OpenModal/>
       <OverView aboutResponse={aboutResponse} totalMark={totalMark} />
       <div>{strength?.length > 0 && <Strength strength={strength} />}</div>
       <div>{average?.length > 0 && <Average average={average} />}</div>
@@ -101,7 +125,7 @@ const Analysis = () => {
             <div ref={ref}>
               <div>
                 <button
-                  className="px-2 py-2 bg-green-400 float-right font-poppins text-white"
+                  className='px-2 py-2 bg-green-400 float-right font-poppins text-white'
                   onClick={toPdf}
                 >
                   Download Report
@@ -115,8 +139,8 @@ const Analysis = () => {
               </div>
               <div>
                 {/* <h1 className="text-xl font-bold">Topic-wise Analysis :</h1> */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-around">
-                  <div className="lg:relative top-[20px] justify-self-center">
+                <div className='grid grid-cols-1 lg:grid-cols-2 items-center justify-around'>
+                  <div className='lg:relative top-[20px] justify-self-center'>
                     <PieChart
                       details={[
                         { skipped: aboutResponse?.skipped },
@@ -125,7 +149,7 @@ const Analysis = () => {
                       ]}
                     />
                   </div>
-                  <div className="  justify-self-center">
+                  <div className='  justify-self-center'>
                     <SpiderChart topicsDetails={aboutResponse?.topicsDetails} />
                   </div>
                 </div>
@@ -138,6 +162,18 @@ const Analysis = () => {
 
       {/* <Recomandation /> */}
       {/* <LeaderBoard /> */}
+
+      {/* modal body */}
+
+      {/* {open && (
+        // <!-- Modal HTML structure -->
+        <ReviewAnswerModal
+          aboutResponse={aboutResponse}
+          openModal={openModal}
+          closeModal={closeModal}
+          assessment={assessment}
+        />
+      )} */}
     </div>
   );
 };
