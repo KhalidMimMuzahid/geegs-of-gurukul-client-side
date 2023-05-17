@@ -1,10 +1,10 @@
-import React from "react";
-import style from "./ExerciseList.module.css";
-import { useForm } from "react-hook-form";
+import React from 'react'
+import { useForm } from 'react-hook-form';
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
-const ExerciseList = () => {
+
+const ModuleList = () => {
   const {
     register,
     handleSubmit,
@@ -14,9 +14,15 @@ const ExerciseList = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    
+    const programDetails = {
+      moduleName: data?.moduleName,
+      batchName: data?.batchName,
+      
+    };
     reset();
   };
+
   const courses = [
     {
       CourseName: "Introduction to JavaScript",
@@ -38,87 +44,84 @@ const ExerciseList = () => {
   ];
   return (
     <div>
-      {/* filtering form */}
-      <div className='container mt-5'>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='font-poppins font-medium p-5'>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-              <div className={style?.exerciseList}>
-                <label htmlFor='exerciseName'>Exercise Name</label>
-                <input
-                  type='text'
-                  name='exerciseName'
-                  {...register("exerciseName",
-                    // {
-                    // required: "Enter Exercise Name",
-                    // }
-                  )}
-                  aria-invalid={errors.exerciseName ? "true" : "false"}
-                />
-              </div>
-
-              {/* Batch Name */}
-              <div className={style?.exerciseList}>
-                <label htmlFor='batchName'>Topic</label>
-                <select
-                  name='topic'
-                  {...register("topic",
-                    // {
-                    // required: "Select your topic",
-                    // }
-                  )}
-                  aria-invalid={errors.topic ? "true" : "false"}
-                  className='w-full border-2 border-green-400 rounded-xl'
-                >
-                  <option value=''>Choose a Topic</option>
-                  <option value='Python'>Python</option>
-                  <option value='Data-Science'>Data-Science</option>
-                  <option value='Tools'>Tools</option>
-                </select>
-                {errors.topic && (
-                  <p
-                    className='text-red-500 font-poppins font-medium'
-                    role='alert'
-                  >
-                    {errors.topic?.message}
-                  </p>
+{/* Search Form */}
+<div className="container p-8">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+          <div class="w-full mx-auto my-3 font-poppins">
+          <label
+            for="ModuleName"
+            class="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
+          >
+            <div className="flex items-center justify-between">
+              <p>Module Name :</p>
+            </div>
+          </label>
+          <input
+            id="moduleName"
+            name="moduleName"
+                {...register("moduleName",
+              //     {
+              // required: "Module Name is required",
+              //     }
                 )}
-              </div>
-              {/* Batch Name */}
+            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+            placeholder="Write program name"
+            aria-invalid={errors.moduleName ? "true" : "false"}
+          ></input>
+          {errors.moduleName && (
+            <p role="alert" className="text-red-500 font-poppins font-medium">
+              {errors.moduleName?.message}
+            </p>
+          )}
             </div>
-
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-              <div className={style?.exerciseList}>
-                <p>Sub-Topic</p>
-                <input type='text' name='subTopic' 
-                  {...register("subTopic",
-                  //   {
-                  // required: "Sub topic",
-                  //   }
-                  )}
-                aria-invalid={errors.subTopic ? "true" : "false"}
-                />
-                
-              </div>
-
-              <div className=''>
-                <button
-                  type='submit'
-                  className='px-16 py-3 mt-7 text-white rounded-lg bg-green-500'
-                >
-                  Search
-                </button>
-              </div>
+            <div class="w-full mx-auto my-3 font-poppins">
+          <label
+            for="Batch Name"
+            class="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
+          >
+            <div className="flex items-center justify-between">
+              <p>Batch Name:</p>
             </div>
-          </div>
-        </form>
-      </div>
-      {/* filtering form */}
-      {/* Tables */}
+          </label>
+          <input
+            id="batchName"
+            name="batchName"
+            {...register("batchName", {
+              required: "Batch Name is required",
+            })}
+            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+            placeholder="Write program name"
+            aria-invalid={errors.batchName ? "true" : "false"}
+          ></input>
+          {errors.batchName && (
+            <p role="alert" className="text-red-500 font-poppins font-medium">
+              {errors.batchName?.message}
+            </p>
+          )}
+        </div>
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          class="group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow"
+        >
+          <div class="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
+          <span class="relative text-black group-hover:text-white font-poppins font-medium">
+            Search
+          </span>
+        </button>
+      </form>
+    </div>
+      {/* Search Form */}
+
+      {/* Table */}
       <div class="flex flex-col justify-center h-full mx-auto">
         <div class="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
           <header class="px-5 py-4 border-b border-gray-100">
-            <h2 class="font-semibold font-poppins text-gray-800">Exercises</h2>
+            <h2 class="font-semibold font-poppins text-gray-800">Programs</h2>
           </header>
           <div class="p-3">
             <div class="max-w-[90vw] overflow-x-scroll">
@@ -129,14 +132,12 @@ const ExerciseList = () => {
                       <div class="font-semibold text-left">SL No:</div>
                     </th>
                     <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">Exercise Name</div>
+                      <div class="font-semibold text-left">Module Name</div>
                     </th>
                     <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">Topic</div>
+                      <div class="font-semibold text-left">Batch Name</div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-center">Sub-Topic</div>
-                    </th>
+                   
                     <th class="p-2 whitespace-nowrap">
                       <div class="font-semibold text-center">Action</div>
                     </th>
@@ -151,8 +152,10 @@ const ExerciseList = () => {
                       <td class="p-2 whitespace-nowrap">
                         {course?.CourseName}
                       </td>
-                      <td class="p-2 whitespace-nowrap">{course?.Topic}</td>
-                      <td class="p-2 whitespace-nowrap">{course?.Topic}</td>
+                      <td class="p-2 whitespace-nowrap">
+                        {course?.CourseName}
+                      </td>
+                    
                       <td class="p-2 whitespace-nowrap flex gap-2">
                         <div class="mx-auto flex w-[100px] gap-2">
                           <button
@@ -204,9 +207,9 @@ const ExerciseList = () => {
           </div>
         </div>
       </div>
-      {/* Tables */}
+      {/* Table */}
     </div>
-  );
-};
+  )
+}
 
-export default ExerciseList;
+export default ModuleList

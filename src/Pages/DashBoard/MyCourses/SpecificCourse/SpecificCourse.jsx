@@ -121,6 +121,8 @@ const SpecificCourse = () => {
             <ContentDetails
               description={description}
               selectedLecture={selectedLecture}
+              contents = {contents}
+              setSelectedLecture = {setSelectedLecture}
             />
           </div>
           {/* course list section */}
@@ -162,16 +164,13 @@ const SpecificCourse = () => {
 
 export default SpecificCourse;
 
-{
-  /* <div className="grid grid-cols-1  gap-7 pt-4 px-5">
+{/* <div className="grid grid-cols-1  gap-7 pt-4 px-5">
           {modules?.map((module, i) => (
             <EachModule key={i} module={module} />
           ))}
-        </div> */
-}
+        </div> 
 
-{
-  /* <h2 className= {`${style.upcomming}`}>Upcomingggggggggggggggggggggggggggggg</h2>
+<h2 className= {`${style.upcomming}`}>Upcomingggggggggggggggggggggggggggggg</h2>
 
         <div className="grid grid-cols-1  gap-7 pt-4 px-5">
           <div className={`${style.timeCurs}`}>
@@ -187,12 +186,11 @@ export default SpecificCourse;
               Zoom
             </Link>
           </div>
-        </div> */
-}
+        </div> 
 
-// const modules = [
-//   { moduleName: "Html", Language: "English", videourl :"https://vimeo.com/tompeyrat/gaucho" },
-//   { moduleName: "Html", Language: "English", videourl :"https://vimeo.com/tompeyrat/gaucho" },
-//   { moduleName: "Html", Language: "English", videourl :"https://vimeo.com/tompeyrat/gaucho" },
-//   { moduleName: "Html", Language: "English", videourl :"https://vimeo.com/tompeyrat/gaucho" },
-// ];
+const modules = [
+  { moduleName: "Html", Language: "English", videourl :"https://vimeo.com/tompeyrat/gaucho" },
+  { moduleName: "Html", Language: "English", videourl :"https://vimeo.com/tompeyrat/gaucho" },
+  { moduleName: "Html", Language: "English", videourl :"https://vimeo.com/tompeyrat/gaucho" },
+  { moduleName: "Html", Language: "English", videourl :"https://vimeo.com/tompeyrat/gaucho" },
+]; */}

@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import style from "./AddLecture.module.css";
+import AddAssignmentModal from "./Modal/AddAssignmentModal";
+import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
+import moment from "moment";
+
 const AddLectures = () => {
+  const { user } = useContext(AuthContext);
+  const [assignments, setAssignments] = useState([]);
+  const [selectedAssignments, setSelectedAssignments] = useState([]);
   const {
     register,
     handleSubmit,
@@ -13,8 +20,51 @@ const AddLectures = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const justNow = moment().format();
+
+    const lectureData = {
+      courseId: "",
+      courseName: data.courseName,
+      batchId: "",
+      batchName: data.batchName,
+      programeId: "",
+      programName: data.programName,
+      startAt: data.scheduledAt,
+      endSAt: data.endsAt,
+      isOptional: data.optional,
+      lectureName: data.lectureName,
+      topic: data.topicName,
+      assignment: {
+        sheduledAt: data.scheduledAt,
+        deadLine: data.endsAt,
+        assignments_id: selectedAssignments,
+      },
+      lectureVideo: {
+        liveLink: data.zoomLink,
+        videoLink: {
+          s3Hoster: "",
+          vimeoHoster: "",
+        },
+      },
+      notes: data.notes,
+      additionalFiles: data.fileInput,
+
+      actionsDetails: {
+        isDeleted: false,
+        creation: {
+          createdAt: justNow,
+          creatorEmail: user.email,
+        },
+        updation: {
+          updatedAt: justNow,
+          updatorEmail: user.email,
+        },
+      },
+    };
+
+    console.log(lectureData);
   };
+
   const [text, setText] = useState("");
   const [preview, setPreview] = useState(false);
   const [instructions, setInstructions] = useState(false);
@@ -29,13 +79,11 @@ const AddLectures = () => {
               <label>Lecture Name</label>
               <input
                 type="text"
-                // required
                 name="lectureName"
                 {...register("lectureName", {
                   required: "Lecture Name is required",
                 })}
                 aria-invalid={errors.lectureName ? "true" : "false"}
-                // onChange={handleInputChange}
               />
               {errors.lectureName && (
                 <p
@@ -52,13 +100,11 @@ const AddLectures = () => {
               <label>Topic Name</label>
               <input
                 type="text"
-                // required
                 name="topicName"
                 {...register("topicName", {
                   required: "Topic Name is required",
                 })}
                 aria-invalid={errors.topicName ? "true" : "false"}
-                // onChange={handleInputChange}
               />
               {errors.topicName && (
                 <p
@@ -122,15 +168,39 @@ const AddLectures = () => {
               )}
             </div>
             {/* Course Name */}
+            {/* Programe Name */}
+            <div className={style?.addLecture}>
+              <label htmlFor="programName">Program Name</label>
+              <select
+                name="programName"
+                {...register("programName", {
+                  required: "Program Name is required",
+                })}
+                aria-invalid={errors.programName ? "true" : "false"}
+                className="w-full border-2 border-green-400 rounded-xl"
+              >
+                <option value="">Choose a Programe</option>
+                <option value="Program1">Program1</option>
+                <option value="Program2">Program2</option>
+                <option value="Program3">Program3</option>
+              </select>
+              {errors.programName && (
+                <p
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
+                >
+                  {errors.programName?.message}
+                </p>
+              )}
+            </div>
+            {/* Programe Name */}
             {/* Sceduled At */}
             <div className={style?.addLecture}>
               <label>Sceduled At</label>
               <input
-                // required
                 type="datetime-local"
-                name="sceduledAt"
-                // onChange={handleInputChange}
-                {...register("sceduledAt", {
+                name="scheduledAt"
+                {...register("scheduledAt", {
                   required: "Select A Date",
                 })}
                 aria-invalid={errors.sceduledAt ? "true" : "false"}
@@ -149,10 +219,8 @@ const AddLectures = () => {
             <div className={style?.addLecture}>
               <label>Ends At</label>
               <input
-                // required
                 type="datetime-local"
                 name="endsAt"
-                // onChange={handleInputChange}
                 {...register("endsAt", {
                   required: "Select A Date",
                 })}
@@ -168,16 +236,37 @@ const AddLectures = () => {
               )}
             </div>
             {/* Ends At */}
+            {/* Zoom Link */}
+            <div className={style?.addLecture}>
+              <label>Zoom Link</label>
+              <input
+                type="url"
+                name="zoomLink"
+                {...register("zoomLink", {
+                  required: "Provide Zoom Link",
+                })}
+                aria-invalid={errors.zoomLink ? "true" : "false"}
+              />
+              {errors.zoomLink && (
+                <p
+                  role="alert"
+                  className="text-red-500 font-poppins font-medium"
+                >
+                  {errors.zoomLink?.message}
+                </p>
+              )}
+            </div>
+            {/* Zoom Link */}
             {/* Attachment File */}
-            <div class="w-full font-poppins">
+            <div className="w-full font-poppins">
               <label
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                for="file_input"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                htmlFor="file_input"
               >
                 Upload file
               </label>
               <input
-                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                 id="fileInput"
                 name="fileInput"
                 type="file"
@@ -196,39 +285,17 @@ const AddLectures = () => {
               )}
             </div>
             {/* Attachment File */}
-            {/* Zoom Link */}
-            <div className={style?.addLecture}>
-              <label>Zoom Link</label>
-              <input
-                // required
-                type="url"
-                name="zoomLink"
-                // onChange={handleInputChange}
-                {...register("zoomLink", {
-                  required: "Provide Zoom Link",
-                })}
-                aria-invalid={errors.zoomLink ? "true" : "false"}
-              />
-              {errors.zoomLink && (
-                <p
-                  role="alert"
-                  className="text-red-500 font-poppins font-medium"
-                >
-                  {errors.zoomLink?.message}
-                </p>
-              )}
-            </div>
-            {/* Zoom Link */}
+
             {/* Upload Video */}
-            <div class="w-full font-poppins">
+            <div className="w-full font-poppins">
               <label
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                for="file_input"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                htmlFor="file_input"
               >
                 Upload Video
               </label>
               <input
-                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                 id="videoInput"
                 name="videoInput"
                 type="file"
@@ -252,27 +319,27 @@ const AddLectures = () => {
         </div>
 
         {/* Text Area */}
-        <div class="w-full mx-auto my-10 font-poppins">
+        <div className="w-full mx-auto mt-10 mb-5 font-poppins">
           <label
-            for="notes"
-            class="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
+            htmlFor="notes"
+            className="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
           >
             <div className="flex items-center justify-between">
               <p>Notes:</p>
 
               <label
-                for="Optional"
-                class="flex items-center cursor-pointer relative mb-4"
+                htmlFor="optional"
+                className="flex items-center cursor-pointer relative mb-4"
               >
                 <input
                   type="checkbox"
-                  id="Optional"
-                  name="Optional"
-                  {...register("Optional")}
-                  class="sr-only"
+                  id="optional"
+                  name="optional"
+                  {...register("optional")}
+                  className="sr-only"
                 />
-                <div class="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
-                <span class="ml-3 text-gray-900 text-sm font-medium">
+                <div className="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
+                <span className="ml-3 text-gray-900 text-sm font-medium">
                   Optional
                 </span>
               </label>
@@ -290,7 +357,7 @@ const AddLectures = () => {
             name="notes"
             {...register("notes")}
             rows="4"
-            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             placeholder="Your message..."
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -302,6 +369,7 @@ const AddLectures = () => {
             </p>
           )}
           <button
+            type="button"
             onClick={() => setPreview(true)}
             className="my-2 font-poppins font-medium text-white px-2 py-2 bg-green-400 hover:bg-green-500 rounded-md"
           >
@@ -358,83 +426,44 @@ const AddLectures = () => {
             </>
           )}
         </div>
-        {/* Search Lecture */}
-        <button
-          onClick={() => setSearch(true)}
-          className="px-2 py-2 bg-green-500 text-white font-poppins font-medium rounded-lg my-2"
-        >
-          + Add Attachments
-        </button>
-        {search && (
-          <>
-            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
-              <div className="relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
-                <button
-                  onClick={() => setSearch(false)}
-                  className="absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full"
-                >
-                  ❌
-                </button>
-                {/* Contents */}
-                <div class="w-full mx-auto my-20">
-                  <form>
-                    <label
-                      for="default-search"
-                      class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
-                    >
-                      Search
-                    </label>
-                    <div class="relative">
-                      <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                        <svg
-                          class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                          ></path>
-                        </svg>
-                      </div>
-                      <input
-                        type="search"
-                        id="default-search"
-                        class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                        placeholder="Search Assignments"
-                        required
-                      />
-                      <button
-                        type="submit"
-                        class="text-white absolute right-2.5 bottom-2.5 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                      >
-                        Search
-                      </button>
-                    </div>
-                  </form>
-                </div>
-                {/* Contents */}
-              </div>
-            </div>
-            <div className="opacity-25 fixed inset-0  z-[20000] bg-black"></div>
-          </>
-        )}
-        {/* Search Lecture */}
+
+        {/* add assignment button */}
+        <div className="flex justify-between align-center">
+          <button
+            type="button"
+            onClick={() => setSearch(true)}
+            className="px-2 py-2 bg-green-500 text-white font-poppins font-medium rounded-lg mb-3"
+          >
+            + Add Assignments
+          </button>
+          <p className="font-bold text-green-500">
+            Assignments selected: {selectedAssignments.length}
+          </p>
+        </div>
+        {/* add assignment button */}
+
         {/* Submit Button */}
         <button
           type="submit"
-          class="group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow"
+          className="group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow"
         >
-          <div class="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-          <span class="relative text-black group-hover:text-white font-poppins font-medium">
+          <div className="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
+          <span className="relative text-black group-hover:text-white font-poppins font-medium">
             Submit
           </span>
         </button>
       </form>
+      {/* Add assignment modal */}
+      {search && (
+        <AddAssignmentModal
+          setSearch={setSearch}
+          assignments={assignments}
+          setAssignments={setAssignments}
+          selectedAssignments={selectedAssignments}
+          setSelectedAssignments={setSelectedAssignments}
+        />
+      )}
+      {/* Add assignment modal */}
     </div>
   );
 };

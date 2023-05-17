@@ -6,7 +6,6 @@ import { toast } from "react-hot-toast";
 import { AuthContext } from "./../../../../contexts/UserProvider/UserProvider";
 import moment from "moment/moment";
 import { uploadFile } from "react-s3";
-import { useQuery } from "@tanstack/react-query";
 import ExercisesModal from "./ExercisesModal";
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
@@ -20,7 +19,12 @@ const config = {
 
 function AddAssignment() {
   const { user } = useContext(AuthContext);
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    reset,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const [text, setText] = useState("");
   const [preview, setPreview] = useState(false);
   const [instructions, setInstructions] = useState(false);
@@ -28,39 +32,14 @@ function AddAssignment() {
   const [loading, setLoading] = useState(false);
   const [uploadedFile, setUploadedFile] = useState("");
   const [exercisesId, setExercisesId] = useState([]);
-  const [items, setItems] = useState([]);
-
-  const {
-    data: exercises = [],
-    refetch,
-    isLoading,
-  } = useQuery({
-    queryKey: [],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/exerciseSearch`);
-      const data = await res.json();
-
-      if (data.success) {
-        const result = exercises.data;
-        setItems(result);
-      } else {
-        toast.error(data.message);
-      }
-      console.log(data);
-      return data;
-    },
-  });
-
-  const handelAddExerciseId = (id) => {
-    setExercisesId([...exercisesId, id]);
-  };
 
   const onSubmit = (data) => {
     setLoading(true);
 
-    if (exercisesId.length === 0) {
+    if (exercisesId?.length === 0) {
       toast.error("Pleas Select Exercises");
       setLoading(false);
+      return;
     }
 
     const justNow = moment().format();
@@ -69,11 +48,11 @@ function AddAssignment() {
       console.log(file);
       uploadFile(file, config)
         .then((fileData) => {
-          setUploadedFile(fileData.location);
+          setUploadedFile(fileData?.location);
           console.log("fileData", fileData);
         })
         .catch((err) => {
-          toast.error(err.message);
+          toast.error(err?.message);
           setLoading(false);
         });
     }
@@ -101,7 +80,7 @@ function AddAssignment() {
       },
     };
 
-    console.log(assignmentDetails);
+    console.log("assignmentDetails", assignmentDetails);
 
     fetch(`http://localhost:5000/assignmentDetails`, {
       method: "POST",
@@ -116,8 +95,10 @@ function AddAssignment() {
           toast.success(result.message);
           reset(data);
           setExercisesId([]);
+          setLoading(false);
         } else {
           toast.error(result.message);
+          setLoading(false);
         }
       })
       .catch((error) => {
@@ -126,30 +107,41 @@ function AddAssignment() {
       });
   };
 
-  if (isLoading && exercises.length === 0) {
-    return (
-      <div style={{ marginTop: "800px" }} className='text-center '>
-        <div className='spinner-grow text-center ' role='status'>
-          <span className='visually-hidden'>Loading...</span>
-        </div>
-      </div>
-    );
-  }
+  // if (isLoading && exercises?.length === 0) {
+  //   return (
+  //     <div style={{ marginTop: "800px" }} className='text-center '>
+  //       <div className='spinner-grow text-center ' role='status'>
+  //         <span className='visually-hidden'>Loading...</span>
+  //       </div>
+  //     </div>
+  //   );
+  // }
   return (
     <div className='py-20 px-10 bg-green-300 w-2/3 mx-auto my-16 rounded-xl font-poppins'>
-      <form onSubmit={handleSubmit(onSubmit)} className='max-w-lg mx-auto'>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className='max-w-lg mx-auto my-20'>
         <div className='mb-4'>
           <label
             htmlFor='assignmentName'
-            className='block text-gray-700 font-bold mb-2'>
+            className='block text-gray-700 font-bold mb-2 '>
             Assignment Name
           </label>
           <input
             type='text'
             id='assignmentName'
-            {...register("assignmentName")}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            {...register("assignmentName", {
+              required: "assignmentName in is required",
+            })}
+            className={`${
+              errors?.assignmentName && "border border-red-500"
+            }shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           />
+          {errors?.assignmentName && (
+            <p className=' text-red-400 mt-3'>
+              {errors?.assignmentName?.message}
+            </p>
+          )}
         </div>
         <div className='mb-4'>
           <label htmlFor='topic' className='block text-gray-700 font-bold mb-2'>
@@ -158,9 +150,14 @@ function AddAssignment() {
           <input
             type='text'
             id='topic'
-            {...register("topic")}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            {...register("topic", {
+              required: "Topic is required",
+            })}
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           />
+          {errors?.topic && (
+            <p className=' text-red-400 mt-3'>{errors?.topic.message}</p>
+          )}
         </div>
 
         <div className='mb-4'>
@@ -178,10 +175,17 @@ function AddAssignment() {
           </label>
           <textarea
             id='textArea'
-            {...register("textArea")}
+            {...register("textArea", {
+              required: "Instructions is required",
+            })}
             className='shadow appearance-none border rounded w-full py-1 px-2 h-28 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             value={text}
             onChange={(e) => setText(e.target.value)}></textarea>
+          {errors?.textArea && (
+            <p className=' text-red-400 mt-1 mb-2'>
+              {errors?.textArea.message}
+            </p>
+          )}
           <label
             onClick={() => setPreview(true)}
             className='font-poppins font-medium text-white px-4 py-2 bg-green-400 hover:bg-green-500 rounded-md'>
@@ -255,12 +259,17 @@ function AddAssignment() {
           </label>
           <select
             id='type'
-            {...register("type")}
-            className=' shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'>
+            {...register("type", {
+              required: "Type is required",
+            })}
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}>
             <option value='project'>project</option>
             <option value='evaluation'>evaluation</option>
             <option value='assignments'>Assignments</option>
           </select>
+          {errors?.topic && (
+            <p className=' text-red-400 my-1'>{errors?.topic.message}</p>
+          )}
         </div>
         <div className='mb-4'>
           <label
@@ -268,21 +277,26 @@ function AddAssignment() {
             className='font-poppins font-medium text-white px-4 py-2 bg-green-400 hover:bg-green-500 rounded-md'>
             Select Exercises
           </label>
-          {exercisesModal && (
-            <ExercisesModal
-              setExercisesModal={setExercisesModal}
-              handelAddExerciseId={handelAddExerciseId}
-              items={items}
-            />
-          )}
         </div>
 
         <button
           type='submit'
-          className='w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
-          {loading ? "Loading" : "Submit"}
+          disabled={loading}
+          className={`w-full ${
+            loading
+              ? "bg-green-400 cursor-not-allowed"
+              : "bg-green-500 hover:bg-green-700 cursor-pointer"
+          }  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}>
+          {loading ? "Submitting..." : "Submit"}
         </button>
       </form>
+      {exercisesModal && (
+        <ExercisesModal
+          setExercisesModal={setExercisesModal}
+          exercisesId={exercisesId}
+          setExercisesId={setExercisesId}
+        />
+      )}
     </div>
   );
 }

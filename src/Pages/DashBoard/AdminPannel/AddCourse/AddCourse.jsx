@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import style from "./AddCourse.module.css";
 
 const AddCourse = () => {
+  const [data, setData] = useState([]);
+  const [program, setProgram] = useState({});
+
+  useEffect(() => {
+    fetch("http://localhost:5000/all-program")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("data", data?.data);
+        setData(data?.data);
+      });
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -12,28 +24,30 @@ const AddCourse = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    console.log(program);
+
     const course = {
       courseName: data?.courseName,
       courseId: data?.courseId,
       duration: data?.duration,
-      programName: data.programName,
       regularPrice: data?.regularPrice,
       offerPrice: data?.offerPrice,
       courseDetail: data?.offerPrice,
+      program,
     };
 
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/add-course", {
-      method: "POST",
-      body: JSON.stringify(course),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error(error));
+    // fetch("https://geeks-of-gurukul-server-side.vercel.app/add-course", {
+    //   method: "POST",
+    //   body: JSON.stringify(course),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => console.log(data))
+    //   .catch((error) => console.error(error));
     console.log(course);
-    reset();
+    //reset();
   };
   return (
     <div className="container p-8">
@@ -120,11 +134,25 @@ const AddCourse = () => {
                 aria-invalid={errors.programName ? "true" : "false"}
                 className="w-full border-2 border-green-400 rounded-xl"
               >
-                <option value="">Choose a Program</option>
-                <option value="School-Champs">School-Champs</option>
-                <option value="Coding-Bees">Coding-Bees</option>
-                <option value="Engineering-Nerds">Engineering-Nerds</option>
-                <option value="Industrial-Courses">Industrial-Courses</option>
+                <option disabled value="">
+                  Choose a Program
+                </option>
+                {data?.length > 0 &&
+                  data?.map((each) => (
+                    <option
+                      key={each?._id}
+                      onChange={() => {
+                        // setProgram({
+                        //   program_id: each?._id,
+                        //   programName: each?.programName,
+                        // })
+                        console.log(each);
+                      }}
+                      value={each?.programName}
+                    >
+                      {each?.programName}
+                    </option>
+                  ))}
               </select>
               {errors.programName && (
                 <p

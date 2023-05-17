@@ -34,7 +34,7 @@ const AddExercise = () => {
   const onSubmit = (data) => {
     setLoading(true);
     const justNow = moment().format();
-    console.log("justNow: ", justNow);
+
 
     if (data?.file) {
       const file = data?.file[0];

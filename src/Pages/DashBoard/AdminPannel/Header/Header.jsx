@@ -89,6 +89,26 @@ const navigation = [
         link: "/dashboard/admin-pannel/course/course-list",
         current: false,
       },
+      {
+        name: "Add Module",
+        link: "/dashboard/admin-pannel/course/add-module",
+        current: false,
+      },
+      {
+        name: "Module List",
+        link: "/dashboard/admin-pannel/course/module-list",
+        current: false,
+      },
+      {
+        name: "Add Program",
+        link: "/dashboard/admin-pannel/course/add-program",
+        current: false,
+      },
+      {
+        name: "Program List",
+        link: "/dashboard/admin-pannel/course/program-list",
+        current: false,
+      },
     ],
   },
   {
@@ -114,6 +134,22 @@ const navigation = [
       {
         name: "Users",
         link: "/dashboard/admin-pannel/user/users",
+        current: false,
+      },
+    ],
+  },
+  {
+    name: "Others",
+    parrentLink: "/dashboard/admin-pannel/others",
+    submenu: [
+      {
+        name: "Create Coupon",
+        link: "/dashboard/admin-pannel/others/create-coupon",
+        current: false,
+      },
+      {
+        name: "Coupon List",
+        link: "/dashboard/admin-pannel/others/coupon-list",
         current: false,
       },
     ],
