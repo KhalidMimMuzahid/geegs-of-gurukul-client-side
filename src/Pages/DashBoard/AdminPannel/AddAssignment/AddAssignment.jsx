@@ -7,7 +7,6 @@ import { AuthContext } from "./../../../../contexts/UserProvider/UserProvider";
 import moment from "moment/moment";
 import { uploadFile } from "react-s3";
 import ExercisesModal from "./ExercisesModal";
-
 window.Buffer = window.Buffer || require("buffer").Buffer;
 const config = {
   bucketName: "all-files-for-gog",
@@ -16,7 +15,6 @@ const config = {
   accessKeyId: process.env.REACT_APP_S3AccessKeyId,
   secretAccessKey: process.env.REACT_APP_S3SecretAccessKey,
 };
-
 function AddAssignment() {
   const { user } = useContext(AuthContext);
   const {
@@ -32,16 +30,13 @@ function AddAssignment() {
   const [loading, setLoading] = useState(false);
   const [uploadedFile, setUploadedFile] = useState("");
   const [exercisesId, setExercisesId] = useState([]);
-
   const onSubmit = (data) => {
     setLoading(true);
-
     if (exercisesId?.length === 0) {
       toast.error("Please Select Exercises");
       setLoading(false);
       return;
     }
-
     const justNow = moment().format();
     if (data?.fileInput[0]) {
       const file = data?.fileInput[0];
@@ -56,7 +51,6 @@ function AddAssignment() {
           setLoading(false);
         });
     }
-
     const assignmentDetails = {
       assignmentName: data?.assignmentName,
       topic: data?.topic,
@@ -73,16 +67,13 @@ function AddAssignment() {
           createdAt: justNow,
           creatorEmail: user?.email,
         },
-
         updation: {
           updateAt: justNow,
           updatorEmail: user?.email,
         },
       },
     };
-
     console.log(assignmentDetails);
-
     fetch(`http://localhost:5000/assignmentDetails`, {
       method: "POST",
       headers: {
@@ -105,7 +96,6 @@ function AddAssignment() {
         setLoading(false);
       });
   };
-
   // if (isLoading && exercises?.length === 0) {
   //   return (
   //     <div style={{ marginTop: "800px" }} className='text-center '>
@@ -157,7 +147,6 @@ function AddAssignment() {
             </p>
           )}
         </div>
-
         <div className="mb-4">
           <label
             htmlFor="textArea"
@@ -195,7 +184,7 @@ function AddAssignment() {
                     onClick={() => setPreview(false)}
                     className="absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full"
                   >
-                    ❌
+                    :x:
                   </button>
                   <h3 className="text-2xl font-poppins font-medium mt-1">
                     Preview:
@@ -220,7 +209,7 @@ function AddAssignment() {
                     onClick={() => setInstructions(false)}
                     className="absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full"
                   >
-                    ❌
+                    :x:
                   </label>
                   <h3 className="text-2xl font-poppins font-medium mt-1">
                     Instructions:
@@ -277,7 +266,6 @@ function AddAssignment() {
           </button>
           <p>Selected exercises: {exercisesId.length}</p>
         </div>
-
         <button
           type="submit"
           className="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
@@ -295,5 +283,4 @@ function AddAssignment() {
     </div>
   );
 }
-
 export default AddAssignment;
