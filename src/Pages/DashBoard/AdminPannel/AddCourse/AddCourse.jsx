@@ -22,18 +22,18 @@ const AddCourse = () => {
       courseDetail: data?.offerPrice,
     };
 
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/add-course", {
-      method: "POST",
-      body: JSON.stringify(course),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error(error));
+    // fetch("https://geeks-of-gurukul-server-side.vercel.app/add-course", {
+    //   method: "POST",
+    //   body: JSON.stringify(course),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => console.log(data))
+    //   .catch((error) => console.error(error));
     console.log(course);
-    reset();
+    //reset();
   };
   return (
     <div className="container p-8">
