@@ -48,7 +48,7 @@ const ProgramList = () => {
       <div className="container p-8">
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Text Area */}
-        <div class="w-full mx-auto my-10 font-poppins">
+        <div class="w-full mx-auto my-3 font-poppins">
           <label
             for="Course"
             class="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
@@ -60,9 +60,11 @@ const ProgramList = () => {
           <input
             id="programName"
             name="programName"
-            {...register("programName", {
-              required: "Program Name is required",
-            })}
+              {...register("programName",
+              //   {
+              // required: "Program Name is required",
+              //   }
+              )}
             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             placeholder="Write program name"
             aria-invalid={errors.programName ? "true" : "false"}
