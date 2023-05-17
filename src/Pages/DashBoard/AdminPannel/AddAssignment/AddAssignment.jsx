@@ -32,7 +32,7 @@ function AddAssignment() {
     setLoading(true);
 
     if (exercisesId?.length === 0) {
-      toast.error("Pleas Select Exercises");
+      toast.error("Please Select Exercises");
       setLoading(false);
       return;
     }
@@ -55,11 +55,12 @@ function AddAssignment() {
     const assignmentDetails = {
       assignmentName: data?.assignmentName,
       topic: data?.topic,
+      score: 100,
       additions: {
         instructions: data?.textArea,
         files: uploadedFile,
       },
-      type: data?.type,
+      // type: data?.type,
       exercises: exercisesId,
       actionsDetails: {
         isDeleted: false,
@@ -233,7 +234,7 @@ function AddAssignment() {
             />
           </div>
         </div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="type" className="block text-gray-700 font-bold mb-2">
             Type
           </label>
@@ -246,14 +247,16 @@ function AddAssignment() {
             <option value="evaluation">evaluation</option>
             <option value="assignments">Assignments</option>
           </select>
-        </div>
-        <div className="mb-4">
-          <label
+        </div> */}
+        <div className="mb-4 flex justify-between items-center">
+          <button
+            type="button"
             onClick={() => setExercisesModal(true)}
             className="font-poppins font-medium text-white px-4 py-2 bg-green-400 hover:bg-green-500 rounded-md"
           >
             + Add Exercises
-          </label>
+          </button>
+          <p>Selected exercises: {exercisesId.length}</p>
         </div>
 
         <button

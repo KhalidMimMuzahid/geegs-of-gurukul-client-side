@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { BsXCircleFill } from "react-icons/bs";
 import { MdAdd } from "react-icons/md";
-import { BiMinus } from "react-icons/bi";
+import { BsFillPlusCircleFill } from "react-icons/bs";
 import TableLoader from "./Loader/TableLoader";
 
 const ExercisesModal = ({ setExercisesModal, setExercisesId, exercisesId }) => {
@@ -16,7 +16,7 @@ const ExercisesModal = ({ setExercisesModal, setExercisesId, exercisesId }) => {
 
   const onSubmit = (data) => {
     console.log("data :", data);
-    setLoading(true);
+    // setLoading(true);
     fetch(`http://localhost:5000/exerciseSearch`, {
       method: "GET",
       headers: {
@@ -105,7 +105,7 @@ const ExercisesModal = ({ setExercisesModal, setExercisesId, exercisesId }) => {
               >
                 <option value="project">project</option>
                 <option value="evaluation">evaluation</option>
-                <option value="assignments">Assignments</option>
+                {/* <option value="assignments">Assignments</option> */}
               </select>
               <button
                 type="submit"
@@ -199,21 +199,31 @@ const ExercisesModal = ({ setExercisesModal, setExercisesId, exercisesId }) => {
                               <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-500 flex align-center justify-center">
                                 {exercisesId?.includes(item?._id) ? (
                                   <button
+                                    type="button"
                                     onClick={() => {
                                       handelToRemoveItem(item?._id);
                                     }}
                                     className="px-3 rounded-lg py-2"
                                   >
-                                    <BiMinus className="text-xl hover:text-green-400" />
+                                    <BsFillPlusCircleFill
+                                      className="rotate-45 duration-200"
+                                      color="red"
+                                      size={17}
+                                    />
                                   </button>
                                 ) : (
                                   <button
+                                    type="button"
                                     onClick={() => {
                                       handelToAddItem(item?._id);
                                     }}
                                     className="px-3 rounded-lg py-2"
                                   >
-                                    <MdAdd className="text-xl hover:text-green-400" />
+                                    <BsFillPlusCircleFill
+                                      className="duration-200"
+                                      color="#22c55e"
+                                      size={17}
+                                    />
                                   </button>
                                 )}
                               </td>
