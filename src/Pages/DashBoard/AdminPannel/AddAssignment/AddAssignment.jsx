@@ -19,7 +19,12 @@ const config = {
 
 function AddAssignment() {
   const { user } = useContext(AuthContext);
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
   const [text, setText] = useState("");
   const [preview, setPreview] = useState(false);
   const [instructions, setInstructions] = useState(false);
@@ -123,9 +128,16 @@ function AddAssignment() {
           <input
             type="text"
             id="assignmentName"
-            {...register("assignmentName")}
+            {...register("assignmentName", {
+              required: "Assignment name in is required",
+            })}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
+          {errors.assignmentName && (
+            <p role="alert" className="text-red-500 font-poppins font-medium">
+              {errors.assignmentName?.message}
+            </p>
+          )}
         </div>
         <div className="mb-4">
           <label htmlFor="topic" className="block text-gray-700 font-bold mb-2">
@@ -134,9 +146,16 @@ function AddAssignment() {
           <input
             type="text"
             id="topic"
-            {...register("topic")}
+            {...register("topic", {
+              required: "Topic is required",
+            })}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
+          {errors.topic && (
+            <p role="alert" className="text-red-500 font-poppins font-medium">
+              {errors.topic?.message}
+            </p>
+          )}
         </div>
 
         <div className="mb-4">
