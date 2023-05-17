@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
+import { useQuery } from '@tanstack/react-query';
 
 
 const ProgramList = () => {
@@ -23,25 +24,17 @@ const ProgramList = () => {
     reset();
   };
 
-  const courses = [
-    {
-      CourseName: "Introduction to JavaScript",
-      Topic: "Variables and Data Types",
-      BatchNo: 1234,
-    },
-
-    {
-      CourseName: "Machine Learning with Python",
-      Topic: "Regression Analysis",
-      BatchNo: 7890,
-    },
-    { CourseName: "iOS App Development", Topic: "UI Design", BatchNo: 1235 },
-    {
-      CourseName: "Android App Development",
-      Topic: "Intents and Activities",
-      BatchNo: 6789,
-    },
-  ];
+ // Fetching Programs info from server
+const {data:programs,isLoading } = useQuery({
+  queryKey: ['userDetailse'],
+  queryFn: ()=>fetch(`http://localhost:5000/all-program`)
+  .then((res) => res.json())
+})
+  const Allprograms = programs?.data;
+  // console.log(Allprograms)
+if (isLoading) {
+  return <div>loading...</div>
+}
   return (
     <div>
       {/* Search Form */}
@@ -114,13 +107,13 @@ const ProgramList = () => {
                   </tr>
                 </thead>
                 <tbody class="text-sm divide-y divide-gray-100">
-                  {courses.map((course, i) => (
+                  {Allprograms.map((program, i) => (
                     <tr key={i}>
                       <td class="p-2 whitespace-nowrap">
                         <div class="flex items-center">{i + 1}</div>
                       </td>
                       <td class="p-2 whitespace-nowrap">
-                        {course?.CourseName}
+                        {program?.programName}
                       </td>
                     
                       <td class="p-2 whitespace-nowrap flex gap-2">
