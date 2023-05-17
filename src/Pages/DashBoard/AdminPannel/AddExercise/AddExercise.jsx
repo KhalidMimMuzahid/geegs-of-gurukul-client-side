@@ -36,7 +36,6 @@ const AddExercise = () => {
     setLoading(true);
     const justNow = moment().format();
 
-
     if (data?.file) {
       const file = data?.file[0];
       console.log(file);
@@ -114,18 +113,17 @@ const AddExercise = () => {
       body: JSON.stringify(outputData),
     })
       .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          toast.success(data.message);
+      .then((result) => {
+        if (result?.success) {
+          toast.success(result?.message);
           setLoading(false);
-          reset(result);
         } else {
-          toast.error(data.message);
+          toast.error(result?.message);
           setLoading(false);
         }
       })
       .catch((error) => {
-        toast.error(error.message);
+        toast.error(error?.message);
         setLoading(false);
       });
   };

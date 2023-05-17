@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsXCircleFill } from "react-icons/bs";
 import Lecturetable from "../TableComponents/Lecturetable";
-import { assignmentData } from "../dummyData/dummyData";
+import { toast } from "react-hot-toast";
 
 function AddAssignmentModal({
   setSearch,
   assignments,
   setAssignments,
-  selectedAssignments,
-  setSelectedAssignments,
+  assignmentId,
+  setAssignmentId,
 }) {
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -18,84 +19,85 @@ function AddAssignmentModal({
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-    const filteredAssignments = assignmentData.filter((obj) => {
-      if (data.assignmentId && obj._id !== data.assignmentId) {
-        return false;
-      }
-      if (data.assignmentName && obj.assignmentName !== data.assignmentName) {
-        return false;
-      }
-      if (data.topic && obj.topic !== data.topic) {
-        return false;
-      }
-      return true;
-    });
-    setAssignments(filteredAssignments);
+    setLoading(true);
+    fetch(`http://localhost:5000/searchAssignment`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        data: JSON.stringify(data),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result?.success) {
+          const data = result?.data;
+          console.log("first", data);
+          setAssignments(data);
+          setLoading(false);
+        } else {
+          toast.error(result?.message);
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        toast.error(err.message);
+        setLoading(false);
+      });
   };
 
   return (
     <>
-      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
-        <div className="relative w-full h-[600px] sm:w-[500px] md:w-[750px] lg:w-[900px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-4 bg-white rounded-lg shadow-2xl">
-          <div className="px-2 pt-2 flex w-full justify-between">
-            <h4 className="font-semibold">Add assignments</h4>
+      <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none'>
+        <div className='relative w-full h-[600px] sm:w-[500px] md:w-[750px] lg:w-[900px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-4 bg-white rounded-lg shadow-2xl'>
+          <div className='px-2 pt-2 flex w-full justify-between'>
+            <h4 className='font-semibold'>Add assignments</h4>
             <button onClick={() => setSearch(false)}>
-              <BsXCircleFill size={25} color="red" />
+              <BsXCircleFill size={25} color='red' />
             </button>
           </div>
           {/* Contents */}
-          <div className="w-full mx-auto my-6">
+          <div className='w-full mx-auto my-6'>
             <form
-              className="grid grid-cols-1 md:grid-cols-2 gap-2"
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <div className="relative">
+              className='grid grid-cols-1 md:grid-cols-2 gap-2'
+              onSubmit={handleSubmit(onSubmit)}>
+              <div className='relative'>
                 <input
-                  type="search"
-                  className="p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                  placeholder="Search by ID"
-                  name="assignmentId"
-                  {...register("assignmentId")}
-                />
-              </div>
-              <div className="relative">
-                <input
-                  type="search"
-                  className="p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                  placeholder="Search by name"
-                  name="assignmentName"
+                  type='search'
+                  className='p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+                  placeholder='Search by name'
+                  name='assignmentName'
                   {...register("assignmentName")}
                 />
               </div>
-              <div className="relative">
+              <div className='relative'>
                 <input
-                  type="search"
-                  className="p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                  placeholder="Search by topic"
-                  name="topic"
+                  type='search'
+                  className='p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+                  placeholder='Search by topic'
+                  name='topic'
                   {...register("topic")}
                 />
               </div>
               <button
-                type="submit"
-                className="bg-green-400 rounded-lg text-white hover:bg-green-500 py-1"
-              >
+                type='submit'
+                disabled={loading}
+                className='bg-green-400 rounded-lg text-white hover:bg-green-500 py-1'>
                 Search
               </button>
             </form>
           </div>
           {/* Contents */}
-          <p className="text-sm">Selected: {selectedAssignments.length}</p>
+          <p className='text-sm'>Selected: {assignmentId?.length}</p>
           {/* Table */}
           <Lecturetable
             assignments={assignments}
-            setSelectedAssignments={setSelectedAssignments}
-            selectedAssignments={selectedAssignments}
+            setAssignments={setAssignments}
+            assignmentId={assignmentId}
+            setAssignmentId={setAssignmentId}
           />
         </div>
       </div>
-      <div className="opacity-25 fixed inset-0  z-[20000] bg-black"></div>
+      <div className='opacity-25 fixed inset-0  z-[20000] bg-black'></div>
     </>
   );
 }
