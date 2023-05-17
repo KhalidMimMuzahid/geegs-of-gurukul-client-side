@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
 import { useQuery } from '@tanstack/react-query';
+import { toast } from 'react-hot-toast';
 
 
 const ProgramList = () => {
+  const [loading, setLoading] = useState(false)
+  const [items,setItems] = useState([])
   const {
     register,
     handleSubmit,
@@ -19,22 +22,46 @@ const ProgramList = () => {
     
     const programDetails = {
       programName: data?.programName,
-      
     };
+    fetch("http://localhost:5000/program-list", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        data: JSON.stringify(programDetails),
+      },
+      
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result?.success) {
+          setItems(result?.data)
+          setLoading(false);
+        } else {
+          toast.error(result?.message);
+          setLoading(false);
+        }
+        console.log("Server response:", result);
+        // Handle the server response
+      })
+      .catch(error => {
+        console.error("Error occurred while sending data to the server:", error);
+        // Handle the error
+      });
+    console.log(items)
     reset();
   };
 
  // Fetching Programs info from server
-const {data:programs,isLoading } = useQuery({
-  queryKey: ['userDetailse'],
-  queryFn: ()=>fetch(`http://localhost:5000/all-program`)
-  .then((res) => res.json())
-})
-  const Allprograms = programs?.data;
-  // console.log(Allprograms)
-if (isLoading) {
-  return <div>loading...</div>
-}
+// const {data:programs,isLoading } = useQuery({
+//   queryKey: ['userDetailse'],
+//   queryFn: ()=>fetch(`http://localhost:5000/all-program`)
+//   .then((res) => res.json())
+// })
+//   const Allprograms = programs?.data;
+//   // console.log(Allprograms)
+// if (isLoading) {
+//   return <div>loading...</div>
+// }
   return (
     <div>
       {/* Search Form */}
@@ -107,7 +134,7 @@ if (isLoading) {
                   </tr>
                 </thead>
                 <tbody class="text-sm divide-y divide-gray-100">
-                  {Allprograms.map((program, i) => (
+                  {items.map((program, i) => (
                     <tr key={i}>
                       <td class="p-2 whitespace-nowrap">
                         <div class="flex items-center">{i + 1}</div>
