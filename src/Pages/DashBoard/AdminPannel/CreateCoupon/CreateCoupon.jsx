@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 import { useForm } from "react-hook-form";
 import style from "./CreateCoupon.module.css";
@@ -6,7 +6,9 @@ import moment from "moment";
 import { toast } from "react-hot-toast";
 
 const CreateCoupon = () => {
-  const [generating,setGenerating] = useState(false)
+  const [generating, setGenerating] = useState(false);
+  const [couponInfo, setCouponInfo] = useState(null);
+  const [isCopied, setIsCopied] = useState(false);
   const generateKey = (charKey) => {
     if (charKey < 10) {
       return charKey;
@@ -216,7 +218,7 @@ const CreateCoupon = () => {
     let id = "";
     const discountAmount = parseInt(data.discount);
     // console.log(typeof discountAmount)
-    
+
     do {
       const charKey = Math.floor(Math.random() * 70);
       const char = generateKey(charKey);
@@ -241,8 +243,9 @@ const CreateCoupon = () => {
         },
       },
     };
-    console.log(couponDetails);
-
+    // console.log(couponDetails);
+    setCouponInfo(couponDetails);
+    console.log(couponInfo)
     fetch("http://localhost:5000/coupon-details", {
       method: "POST",
       body: JSON.stringify(couponDetails),
@@ -252,13 +255,25 @@ const CreateCoupon = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setGenerating(false)
+        setGenerating(false);
         console.log(data);
         toast.success("Coupon Created!");
       })
       .catch((error) => console.error(error));
     console.log(couponDetails);
     reset();
+  };
+
+  // copy preview text
+
+  const htmlElement = useRef(null);
+
+  const handleCopy = () => {
+    const htmlText = htmlElement.current.innerHTML;
+    navigator.clipboard.writeText(htmlText);
+    setIsCopied(true);
+    toast.success('Coppied!')
+    // setIsCopied(false)
   };
 
   return (
@@ -337,15 +352,35 @@ const CreateCoupon = () => {
             </div>
             {/* Expired At */}
           </div>
+          {/* Preview */}
+          <div className={style?.createCourse}>
+            <div className="flex items-center justify-between p-1"><label>Preview</label> <button onClick={handleCopy} className=" px-2 py-2 bg-green-400 text-white text-center">{isCopied ? "Copied" : "Copy"}</button></div>
+            <div class='w-full'>
+              <textarea class='border border-gray-300 rounded-lg p-1 w-full h-32 resize-none col-span-12 overflow-y-auto'
+                readOnly
+                ref={htmlElement}
+                defaultValue={`
+                Coupon Info :
+                  Coupon Label : ${couponInfo?.couponLabel},
+                  Coupon Code : ${couponInfo?.couponCode},
+                  Expire At : ${couponInfo?.expireAt},
+                  Discount : ${couponInfo?.expireAt},
+                  Creator Email : ${couponInfo?.actionsDetails?.creation?.creatorEmail}
+              `}>
+                
+              </textarea>
+            </div>
+          </div>
+          {/* Preview */}
         </div>
         {/* Submit Button */}
         <button
           type='submit'
-          class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow'
+          class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow my-3'
         >
           <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
           <span class='relative text-black group-hover:text-white font-poppins font-medium'>
-            {generating ?`Generating`:`Generate Coupon`}
+            {generating ? `Generating` : `Generate Coupon`}
           </span>
         </button>
       </form>
