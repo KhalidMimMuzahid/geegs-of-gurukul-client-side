@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
+import { useQuery } from '@tanstack/react-query';
+import { toast } from 'react-hot-toast';
 
 
 const ProgramList = () => {
+  const [loading, setLoading] = useState(false)
+  const [items,setItems] = useState([])
   const {
     register,
     handleSubmit,
@@ -18,30 +22,46 @@ const ProgramList = () => {
     
     const programDetails = {
       programName: data?.programName,
-      
     };
+    fetch("http://localhost:5000/program-list", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        data: JSON.stringify(programDetails),
+      },
+      
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result?.success) {
+          setItems(result?.data)
+          setLoading(false);
+        } else {
+          toast.error(result?.message);
+          setLoading(false);
+        }
+        console.log("Server response:", result);
+        // Handle the server response
+      })
+      .catch(error => {
+        console.error("Error occurred while sending data to the server:", error);
+        // Handle the error
+      });
+    console.log(items)
     reset();
   };
 
-  const courses = [
-    {
-      CourseName: "Introduction to JavaScript",
-      Topic: "Variables and Data Types",
-      BatchNo: 1234,
-    },
-
-    {
-      CourseName: "Machine Learning with Python",
-      Topic: "Regression Analysis",
-      BatchNo: 7890,
-    },
-    { CourseName: "iOS App Development", Topic: "UI Design", BatchNo: 1235 },
-    {
-      CourseName: "Android App Development",
-      Topic: "Intents and Activities",
-      BatchNo: 6789,
-    },
-  ];
+ // Fetching Programs info from server
+// const {data:programs,isLoading } = useQuery({
+//   queryKey: ['userDetailse'],
+//   queryFn: ()=>fetch(`http://localhost:5000/all-program`)
+//   .then((res) => res.json())
+// })
+//   const Allprograms = programs?.data;
+//   // console.log(Allprograms)
+// if (isLoading) {
+//   return <div>loading...</div>
+// }
   return (
     <div>
       {/* Search Form */}
@@ -114,13 +134,13 @@ const ProgramList = () => {
                   </tr>
                 </thead>
                 <tbody class="text-sm divide-y divide-gray-100">
-                  {courses.map((course, i) => (
+                  {items.map((program, i) => (
                     <tr key={i}>
                       <td class="p-2 whitespace-nowrap">
                         <div class="flex items-center">{i + 1}</div>
                       </td>
                       <td class="p-2 whitespace-nowrap">
-                        {course?.CourseName}
+                        {program?.programName}
                       </td>
                     
                       <td class="p-2 whitespace-nowrap flex gap-2">
