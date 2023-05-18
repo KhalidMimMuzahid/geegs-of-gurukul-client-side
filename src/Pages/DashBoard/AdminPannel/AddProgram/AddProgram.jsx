@@ -41,13 +41,13 @@ const AddProgram = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.success);
+        // console.log(data?.success);
         if (data.success) {
-          toast.success(data.message);
+          toast.success(data?.message);
+          reset();
         } else {
-          toast.error(data.message);
+          toast.error(data?.message);
         }
-        //reset();
       })
       .catch((error) => console.error(error));
   };
