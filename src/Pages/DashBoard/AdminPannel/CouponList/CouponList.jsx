@@ -17,7 +17,9 @@ const CouponList = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    setLoading(true);
     const couponDetails = {
+      couponLabel: data?.CouponLabel,
       creatorEmail: data?.creatorEmail,
       updaterEmail: data?.updaterEmail,
     };
@@ -58,7 +60,39 @@ const CouponList = () => {
       <div className="container p-8">
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Text Area */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div class="w-full mx-auto my-3 font-poppins">
+              <label
+                for="CouponLabel"
+                class="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
+              >
+                <div className="flex items-center justify-between">
+                  <p>Coupon Label:</p>
+                </div>
+              </label>
+              <input
+                id="CouponLabel"
+                name="CouponLabel"
+                type="text"
+                {...register(
+                  "CouponLabel"
+                  //   {
+                  // required: "Coupon Label is required",
+                  //   }
+                )}
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                placeholder="Enter coupon label"
+                aria-invalid={errors.CouponLabel ? "true" : "false"}
+              ></input>
+              {errors.CouponLabel && (
+                <p
+                  role="alert"
+                  className="text-red-500 font-poppins font-medium"
+                >
+                  {errors.CouponLabel?.message}
+                </p>
+              )}
+            </div>
             <div class="w-full mx-auto my-3 font-poppins">
               <label
                 for="creatorNmame"
@@ -132,7 +166,7 @@ const CouponList = () => {
           >
             <div class="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
             <span class="relative text-black group-hover:text-white font-poppins font-medium">
-              Search
+            {loading ?`Searching`:`Search Coupon`}
             </span>
           </button>
         </form>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 import { useForm } from "react-hook-form";
 import style from "./CreateCoupon.module.css";
@@ -6,6 +6,7 @@ import moment from "moment";
 import { toast } from "react-hot-toast";
 
 const CreateCoupon = () => {
+  const [generating,setGenerating] = useState(false)
   const generateKey = (charKey) => {
     if (charKey < 10) {
       return charKey;
@@ -199,7 +200,7 @@ const CreateCoupon = () => {
   };
 
   const { user } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
 
   const {
     register,
@@ -210,17 +211,22 @@ const CreateCoupon = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    setGenerating(true);
     const justNow = moment().format();
     let id = "";
+    const discountAmount = parseInt(data.discount);
+    // console.log(typeof discountAmount)
+    
     do {
       const charKey = Math.floor(Math.random() * 70);
       const char = generateKey(charKey);
       id = id.concat(char);
     } while (id?.length !== 20);
-    console.log("id: ", id);
+    // console.log("id: ", id);
     const couponDetails = {
+      couponLabel: data.couponLebel,
       couponCode: id,
-      discount: data?.discount,
+      discount: discountAmount,
       expireAt: data?.expiredAt,
 
       actionsDetails: {
@@ -246,6 +252,7 @@ const CreateCoupon = () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        setGenerating(false)
         console.log(data);
         toast.success("Coupon Created!");
       })
@@ -258,7 +265,30 @@ const CreateCoupon = () => {
     <div className='container p-8'>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className=' font-poppins font-medium'>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+            {/* Label */}
+            <div className={style?.createCourse}>
+              <label>Coupon Label</label>
+              <input
+                type='text'
+                // required
+                name='couponLebel'
+                {...register("couponLebel", {
+                  required: "Enter Coupon Name",
+                })}
+                aria-invalid={errors.couponLebel ? "true" : "false"}
+                // onChange={handleInputChange}
+              />
+              {errors.couponLebel && (
+                <p
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'
+                >
+                  {errors.couponLebel?.message}
+                </p>
+              )}
+            </div>
+            {/* Discount */}
             {/* Discount */}
             <div className={style?.createCourse}>
               <label>Discount</label>
@@ -315,7 +345,7 @@ const CreateCoupon = () => {
         >
           <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
           <span class='relative text-black group-hover:text-white font-poppins font-medium'>
-            Generaate Coupon
+            {generating ?`Generating`:`Generate Coupon`}
           </span>
         </button>
       </form>
