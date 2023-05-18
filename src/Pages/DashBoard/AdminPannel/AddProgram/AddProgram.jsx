@@ -3,6 +3,7 @@ import style from "./AddProgram.module.css";
 import { useForm } from "react-hook-form";
 import moment from "moment";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
+import { toast } from "react-hot-toast";
 
 const AddProgram = () => {
   const { user } = useContext(AuthContext);
@@ -31,6 +32,24 @@ const AddProgram = () => {
         },
       },
     };
+    fetch("http://localhost:5000/add-program", {
+      method: "POST",
+      body: JSON.stringify(programDetails),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.success);
+        if (data.success) {
+          toast.success(data.message);
+        } else {
+          toast.error(data.message);
+        }
+        //reset();
+      })
+      .catch((error) => console.error(error));
   };
 
   return (
