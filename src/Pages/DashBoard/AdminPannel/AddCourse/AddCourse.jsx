@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import style from "./AddCourse.module.css";
 import moment from "moment";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
+import { toast } from "react-hot-toast";
 
 const AddCourse = () => {
   const [data, setData] = useState([]);
@@ -47,11 +48,9 @@ const AddCourse = () => {
     const justNow = moment().format();
     const course = {
       courseName: data?.courseName,
-      courseId: data?.courseId,
-      duration: data?.duration,
-      regularPrice: data?.regularPrice,
-      offerPrice: data?.offerPrice,
-      courseDetail: data?.offerPrice,
+      duration: parseInt(data?.duration),
+      regularPrice: parseInt(data?.regularPrice),
+      currentBatch: "",
       program,
       actionsDetails: {
         isDeleted: false,
@@ -66,19 +65,24 @@ const AddCourse = () => {
         },
       },
     };
-
-    // fetch("https://geeks-of-gurukul-server-side.vercel.app/add-course", {
-    //   method: "POST",
-    //   body: JSON.stringify(course),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(data))
-    //   .catch((error) => console.error(error));
     console.log(course);
-    //reset();
+    fetch("http://localhost:5000/add-course", {
+      method: "POST",
+      body: JSON.stringify(course),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data?.success) {
+          toast.success(data?.message);
+          // reset();
+        } else {
+          toast.error(data?.message);
+        }
+      })
+      .catch((error) => console.error(error));
   };
   return (
     <div className="container p-8">
@@ -131,29 +135,7 @@ const AddCourse = () => {
               )}
             </div>
             {/* Duration */}
-            {/* CourseID */}
-            <div className={style?.addCourse}>
-              <label htmlFor="currentBatch">First Batch</label>
-              <input
-                type="text"
-                name="currentBatch"
-                {...register("currentBatch", {
-                  required: "current Batch is required",
-                })}
-                aria-invalid={errors.currentBatch ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
-              />
 
-              {errors?.currentBatch && (
-                <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
-                  {errors?.currentBatch?.message}
-                </p>
-              )}
-            </div>
-            {/* Course ID */}
             {/* Program Name */}
             <div className={style?.addLecture}>
               <label htmlFor="programName">Program Name</label>
