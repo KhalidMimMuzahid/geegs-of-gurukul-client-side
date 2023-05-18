@@ -356,7 +356,7 @@ const CreateCoupon = () => {
           <div className={style?.createCourse}>
             <div className="flex items-center justify-between p-1"><label>Preview</label> <button onClick={handleCopy} className=" px-2 py-2 bg-green-400 text-white text-center">{isCopied ? "Copied" : "Copy"}</button></div>
             <div class='w-full'>
-              <textarea class='border border-gray-300 rounded-lg p-1 w-full h-32 resize-none col-span-12 overflow-y-auto'
+              <textarea disabled class='border border-gray-300 rounded-lg p-1 w-full h-32 resize-none col-span-12 overflow-y-auto'
                 readOnly
                 ref={htmlElement}
                 defaultValue={`
