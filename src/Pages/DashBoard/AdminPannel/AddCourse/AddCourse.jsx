@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import style from "./AddCourse.module.css";
+import moment from "moment";
+import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
+import { toast } from "react-hot-toast";
 
 const AddCourse = () => {
+  const [data, setData] = useState([]);
+  const [program, setProgram] = useState({});
+  const { user } = useContext(AuthContext);
+  useEffect(() => {
+    fetch("http://localhost:5000/all-program")
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("data", data?.data);
+        setData(data?.data);
+      });
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -10,19 +25,48 @@ const AddCourse = () => {
     formState: { errors },
     reset,
   } = useForm();
-
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) => {
+      // console.log("value", value);
+      // console.log("\nname", name);
+      // console.log("\ntype", type);
+      if (name === "programName") {
+        data?.forEach((each) => {
+          if (each?._id === value?.programName) {
+            setProgram({
+              program_id: each?._id,
+              programName: each?.programName,
+            });
+            return;
+          }
+        });
+      }
+    });
+    return () => subscription.unsubscribe();
+  });
   const onSubmit = (data) => {
+    const justNow = moment().format();
     const course = {
       courseName: data?.courseName,
-      courseId: data?.courseId,
-      duration: data?.duration,
-      programName: data.programName,
-      regularPrice: data?.regularPrice,
-      offerPrice: data?.offerPrice,
-      courseDetail: data?.offerPrice,
-    };
+      duration: parseInt(data?.duration),
+      regularPrice: parseInt(data?.regularPrice),
+      currentBatch: "",
+      program,
+      actionsDetails: {
+        isDeleted: false,
+        creation: {
+          createdAt: justNow,
+          creatorEmail: user?.email,
+        },
 
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/add-course", {
+        updation: {
+          updateAt: justNow,
+          updatorEmail: user?.email,
+        },
+      },
+    };
+    console.log(course);
+    fetch("http://localhost:5000/add-course", {
       method: "POST",
       body: JSON.stringify(course),
       headers: {
@@ -30,10 +74,15 @@ const AddCourse = () => {
       },
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        if (data?.success) {
+          toast.success(data?.message);
+          // reset();
+        } else {
+          toast.error(data?.message);
+        }
+      })
       .catch((error) => console.error(error));
-    console.log(course);
-    reset();
   };
   return (
     <div className="container p-8">
@@ -65,7 +114,7 @@ const AddCourse = () => {
             {/*course Name */}
             {/* Duration */}
             <div className={style?.addCourse}>
-              <label htmlFor="duration">Duration</label>
+              <label htmlFor="duration">Duration in weeks</label>
               <input
                 type="number"
                 // required
@@ -86,29 +135,7 @@ const AddCourse = () => {
               )}
             </div>
             {/* Duration */}
-            {/* CourseID */}
-            <div className={style?.addCourse}>
-              <label htmlFor="courseId">Course ID</label>
-              <input
-                type="text"
-                name="courseId"
-                {...register("courseId", {
-                  required: "Course ID is required",
-                })}
-                aria-invalid={errors.courseId ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
-              />
 
-              {errors.courseId && (
-                <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
-                  {errors.courseId?.message}
-                </p>
-              )}
-            </div>
-            {/* Course ID */}
             {/* Program Name */}
             <div className={style?.addLecture}>
               <label htmlFor="programName">Program Name</label>
@@ -120,11 +147,15 @@ const AddCourse = () => {
                 aria-invalid={errors.programName ? "true" : "false"}
                 className="w-full border-2 border-green-400 rounded-xl"
               >
-                <option value="">Choose a Program</option>
-                <option value="School-Champs">School-Champs</option>
-                <option value="Coding-Bees">Coding-Bees</option>
-                <option value="Engineering-Nerds">Engineering-Nerds</option>
-                <option value="Industrial-Courses">Industrial-Courses</option>
+                <option disabled selected value="">
+                  Choose a Program
+                </option>
+                {data?.length > 0 &&
+                  data?.map((each) => (
+                    <option key={each?._id} value={each?._id}>
+                      {each?.programName}
+                    </option>
+                  ))}
               </select>
               {errors.programName && (
                 <p
@@ -158,55 +189,7 @@ const AddCourse = () => {
               )}
             </div>
             {/* Regular Price */}
-            {/* Offer Price */}
-            <div className={style?.addCourse}>
-              <label htmlFor="offerPrice">Offer Price(In Rupee)</label>
-              <input
-                type="number"
-                name="offerPrice"
-                {...register("offerPrice", {
-                  //   required: "Offer Price is required",
-                })}
-                aria-invalid={errors.offerPrice ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
-              />
-              {errors.offerPrice && (
-                <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
-                  {errors.offerPrice?.message}
-                </p>
-              )}
-            </div>
-            {/* Offer Price */}
           </div>
-        </div>
-
-        {/* Text Area */}
-        <div class="w-full mx-auto my-10 font-poppins">
-          <label
-            for="Course"
-            class="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
-          >
-            <div className="flex items-center justify-between">
-              <p>Course Detailse:</p>
-            </div>
-          </label>
-          <textarea
-            id="courseDetail"
-            name="courseDetail"
-            {...register("courseDetail")}
-            rows="4"
-            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-            placeholder="Write course detail here..."
-            aria-invalid={errors.courseDetail ? "true" : "false"}
-          ></textarea>
-          {errors.courseDetail && (
-            <p role="alert" className="text-red-500 font-poppins font-medium">
-              {errors.courseDetail?.message}
-            </p>
-          )}
         </div>
 
         {/* Submit Button */}
