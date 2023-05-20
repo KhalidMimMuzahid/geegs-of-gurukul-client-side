@@ -96,7 +96,7 @@ const Analysis = () => {
   };
 
   return (
-    <div className='p-16'>
+    <div className="p-16">
       <ProfileInfo />
       {/* <button className="px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins">
         Review Answer
@@ -109,7 +109,7 @@ const Analysis = () => {
       >
         Review Answer open= {open? "true": "false"}
       </motion.button> */}
-      <OpenModal/>
+      <OpenModal response={response} assessment={assessment} />
       <OverView aboutResponse={aboutResponse} totalMark={totalMark} />
       <div>{strength?.length > 0 && <Strength strength={strength} />}</div>
       <div>{average?.length > 0 && <Average average={average} />}</div>
@@ -125,7 +125,7 @@ const Analysis = () => {
             <div ref={ref}>
               <div>
                 <button
-                  className='px-2 py-2 bg-green-400 float-right font-poppins text-white'
+                  className="px-2 py-2 bg-green-400 float-right font-poppins text-white"
                   onClick={toPdf}
                 >
                   Download Report
@@ -139,8 +139,8 @@ const Analysis = () => {
               </div>
               <div>
                 {/* <h1 className="text-xl font-bold">Topic-wise Analysis :</h1> */}
-                <div className='grid grid-cols-1 lg:grid-cols-2 items-center justify-around'>
-                  <div className='lg:relative top-[20px] justify-self-center'>
+                <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-around">
+                  <div className="lg:relative top-[20px] justify-self-center">
                     <PieChart
                       details={[
                         { skipped: aboutResponse?.skipped },
@@ -149,7 +149,7 @@ const Analysis = () => {
                       ]}
                     />
                   </div>
-                  <div className='  justify-self-center'>
+                  <div className="  justify-self-center">
                     <SpiderChart topicsDetails={aboutResponse?.topicsDetails} />
                   </div>
                 </div>
