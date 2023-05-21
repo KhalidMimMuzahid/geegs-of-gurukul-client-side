@@ -3,11 +3,15 @@ import { useForm } from "react-hook-form";
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
-import { toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";import EditCoupon from "./EditCoupon/EditCoupon";
+;
+
 
 const CouponList = () => {
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState([]);
+  const [isEditable, setIsEditable] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -224,7 +228,9 @@ const CouponList = () => {
                               alt=""
                             />
                           </button>
-                          <button type="button" className="px-1 py-1">
+                          <button type="button"
+                            className="px-1 py-1"
+                          onClick={()=>setIsEditable(true)}>
                             {/* svg */}
                             <img
                               height="15px"
@@ -233,6 +239,9 @@ const CouponList = () => {
                               alt=""
                             />
                           </button>
+                          {
+                            isEditable && <EditCoupon isEditable={isEditable} setIsEditable={setIsEditable} coupon ={coupon} />
+                          }
 
                           <button
                             data-modal-target="staticModal"
