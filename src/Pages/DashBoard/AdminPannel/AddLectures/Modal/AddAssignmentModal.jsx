@@ -8,8 +8,8 @@ function AddAssignmentModal({
   setSearch,
   assignments,
   setAssignments,
-  assignmentId,
-  setAssignmentId,
+  selectedAssignment,
+  setSelectedAssignment,
 }) {
   const [loading, setLoading] = useState(false);
   const {
@@ -87,13 +87,13 @@ function AddAssignmentModal({
             </form>
           </div>
           {/* Contents */}
-          <p className='text-sm'>Selected: {assignmentId?.length}</p>
+          <p className='text-sm'>Selected: {selectedAssignment?.length}</p>
           {/* Table */}
           <Lecturetable
             assignments={assignments}
             setAssignments={setAssignments}
-            assignmentId={assignmentId}
-            setAssignmentId={setAssignmentId}
+            selectedAssignment={selectedAssignment}
+            setSelectedAssignment={setSelectedAssignment}
           />
         </div>
       </div>

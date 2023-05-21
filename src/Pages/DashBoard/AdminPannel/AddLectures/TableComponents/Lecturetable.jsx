@@ -4,8 +4,8 @@ import Row from "./Row";
 function Lecturetable({
   assignments,
   setAssignments,
-  assignmentId,
-  setAssignmentId,
+  selectedAssignment,
+  setSelectedAssignment,
 }) {
   return (
     <div className='flex flex-col w-full h-80'>
@@ -44,8 +44,8 @@ function Lecturetable({
                     setAssignments={setAssignments}
                     assignment={assignment}
                     key={assignment._id}
-                    assignmentId={assignmentId}
-                    setAssignmentId={setAssignmentId}
+                    selectedAssignment={selectedAssignment}
+                    setSelectedAssignment={setSelectedAssignment}
                   />
                 ))}
               </tbody>

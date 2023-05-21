@@ -8,6 +8,7 @@ import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 import moment from "moment";
 import { uploadFile } from "react-s3";
 import { toast } from "react-hot-toast";
+import { useSpring } from "framer-motion";
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 const config = {
@@ -21,7 +22,7 @@ const config = {
 const AddLectures = () => {
   const { user } = useContext(AuthContext);
   const [assignments, setAssignments] = useState([]);
-  const [assignmentId, setAssignmentId] = useState([]);
+  const [selectedAssignment, setSelectedAssignment] = useState([]);
   const [text, setText] = useState("");
   const [preview, setPreview] = useState(false);
   const [instructions, setInstructions] = useState(false);
@@ -60,7 +61,7 @@ const AddLectures = () => {
       assignment: {
         sheduledAt: data?.scheduledAt,
         deadLine: data?.endsAt,
-        assignments_id: assignmentId,
+        assignments_id: selectedAssignment,
       },
       lectureVideo: {
         liveLink: data?.zoomLink,
@@ -480,7 +481,7 @@ const AddLectures = () => {
             + Add Assignments
           </button>
           <p className='font-bold text-green-500'>
-            Assignments selected: {assignmentId?.length}
+            Assignments selected: {selectedAssignment?.length}
           </p>
         </div>
         {/* add assignment button */}
@@ -513,8 +514,8 @@ const AddLectures = () => {
           setSearch={setSearch}
           assignments={assignments}
           setAssignments={setAssignments}
-          assignmentId={assignmentId}
-          setAssignmentId={setAssignmentId}
+          selectedAssignment={selectedAssignment}
+          setSelectedAssignment={setSelectedAssignment}
         />
       )}
       {/* Add assignment modal */}

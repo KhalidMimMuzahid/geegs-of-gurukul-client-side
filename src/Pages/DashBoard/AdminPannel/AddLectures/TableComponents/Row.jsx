@@ -5,20 +5,25 @@ function Row({
   assignment,
   assignments,
   setAssignments,
-  assignmentId,
-  setAssignmentId,
+  selectedAssignment,
+  setSelectedAssignment,
 }) {
-  const handleAddId = (id) => {
-    setAssignmentId([...assignmentId, id]);
-    setAssignments(assignments);
-    console.log(assignmentId);
+  const handleAddId = (assignment_id, assignmentName) => {
+    setSelectedAssignment([
+      ...selectedAssignment,
+      { assignment_id, assignmentName },
+    ]);
+    // setAssignments(assignments);
+    // console.log(selectedAssignment);
   };
 
-  const handleRemoveId = (id) => {
-    const frr = assignmentId?.filter((arr) => arr !== id);
-    setAssignmentId(frr);
-    setAssignments(assignments);
-    console.log(assignmentId);
+  const handleRemoveId = (assignment_id) => {
+    const newAssignment = selectedAssignment.filter(
+      (each) => each?.assignment_id !== assignment_id
+    );
+    setSelectedAssignment(newAssignment);
+    // setAssignments(assignments);
+    // console.log(selectedAssignment);
   };
 
   return (
@@ -37,7 +42,10 @@ function Row({
         <div className='text-sm text-gray-900'>{assignment.topic}</div>
       </td>
       <td className='px-6 py-3 whitespace-nowrap text-sm text-gray-500 flex align-center justify-center'>
-        {assignmentId?.includes(assignment?._id) ? (
+        {selectedAssignment?.some(
+          (selectedAssignments) =>
+            selectedAssignments?.assignment_id === assignment?._id
+        ) ? (
           <button type='button'>
             <BsFillPlusCircleFill
               color={"red"}
@@ -51,7 +59,9 @@ function Row({
             <BsFillPlusCircleFill
               color={"#22c55e"}
               size={20}
-              onClick={() => handleAddId(assignment?._id)}
+              onClick={() =>
+                handleAddId(assignment?._id, assignment?.assignmentName)
+              }
             />
           </button>
         )}
