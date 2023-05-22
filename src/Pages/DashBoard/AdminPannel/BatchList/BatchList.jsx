@@ -55,7 +55,7 @@ const BatchList = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/all-program")
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -67,7 +67,7 @@ const BatchList = () => {
     if (program?.program_id) {
       setCourses([]);
       fetch(
-        `http://localhost:5000/all-courses-by-program?_id=${program?.program_id}`
+        `https://geeks-of-gurukul-server-side.vercel.app/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -82,7 +82,7 @@ const BatchList = () => {
     if (course?.course_id) {
       setCourses([]);
       fetch(
-        `http://localhost:5000/all-batches-by-course?_id=${course?.course_id}`
+        `https://geeks-of-gurukul-server-side.vercel.app/all-batches-by-course?_id=${course?.course_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -120,7 +120,8 @@ const BatchList = () => {
           className='w-20 h-20 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-green-600'
           viewBox='0 0 100 101'
           fill='none'
-          xmlns='http://www.w3.org/2000/svg'>
+          xmlns='http://www.w3.org/2000/svg'
+        >
           <path
             d='M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z'
             fill='currentColor'
@@ -150,7 +151,8 @@ const BatchList = () => {
               <div className=''>
                 <button
                   type='submit'
-                  className='px-16 py-3 w-full mt-7 text-white rounded-lg bg-green-500'>
+                  className='px-16 py-3 w-full mt-7 text-white rounded-lg bg-green-500'
+                >
                   Search
                 </button>
               </div>
@@ -205,7 +207,8 @@ const BatchList = () => {
                           <button
                             type='button'
                             className='px-1 py-1 '
-                            onClick={() => setShouldDelete(true)}>
+                            onClick={() => setShouldDelete(true)}
+                          >
                             {/* svg */}
                             <img
                               height='15px'
@@ -228,7 +231,8 @@ const BatchList = () => {
                             data-modal-target='staticModal'
                             data-modal-toggle='staticModal'
                             class='px-1 py-1 '
-                            type='button'>
+                            type='button'
+                          >
                             {/* svg */}
                             <img
                               height='15px'
@@ -245,7 +249,8 @@ const BatchList = () => {
                                 </h1>
                                 <button
                                   onClick={() => setShouldDelete(false)}
-                                  class='bg-red-500 px-4 py-2 rounded-md text-md text-white'>
+                                  class='bg-red-500 px-4 py-2 rounded-md text-md text-white'
+                                >
                                   Cancel
                                 </button>
                                 <button
@@ -253,7 +258,8 @@ const BatchList = () => {
                                     handelDeleteBatch(batch?._id) &&
                                     setShouldDelete(false)
                                   }
-                                  class='bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold'>
+                                  class='bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold'
+                                >
                                   Ok
                                 </button>
                               </div>
