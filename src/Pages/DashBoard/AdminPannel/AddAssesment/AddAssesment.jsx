@@ -523,15 +523,16 @@ const AddAssesment = () => {
                       </tr>
                     </thead>
                     <tbody class="text-sm divide-y divide-gray-100">
-                      {question?.map((eachQues, i) => (
-                        <EachAssesment
-                          eachQues={eachQues}
-                          key={eachQues?._id}
-                          i={i}
-                          addedQuestion={addedQuestion}
-                          setAddedQuestion={setAddedQuestion}
-                        />
-                      ))}
+                      {question?.length > 0 &&
+                        question?.map((eachQues, i) => (
+                          <EachAssesment
+                            eachQues={eachQues}
+                            key={eachQues?._id}
+                            i={i}
+                            addedQuestion={addedQuestion}
+                            setAddedQuestion={setAddedQuestion}
+                          />
+                        ))}
                     </tbody>
                   </table>
                 </div>
