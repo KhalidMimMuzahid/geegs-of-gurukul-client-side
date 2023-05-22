@@ -111,7 +111,7 @@ const Help = () => {
                   </div>
                   {/* Category Name */}
                   <div>
-                    <label htmlFor='categoryName'>Program Name</label>
+                    <label htmlFor='categoryName'>Category Name</label>
                     <select
                       name='categoryName'
                       {...register("categoryName", {
