@@ -92,6 +92,8 @@ const OnProcessinAssesments = () => {
     // console.log("\nnewChosenAnswers: ", newChosenAnswers);
 
     const assessmentId = assessment?._id;
+    const assessmentName = assessment?.assessmentName;
+
     const studentEmail = user?.email;
 
     const enabledNegativeMarking = assessment?.enabledNegativeMarking;
@@ -108,6 +110,7 @@ const OnProcessinAssesments = () => {
     }
     const assessmentsResponse = {
       assessmentId,
+      assessmentName,
       studentEmail,
       startedAt,
       takenTimeToFinish,
@@ -218,7 +221,7 @@ const OnProcessinAssesments = () => {
   // console.log("data2", data2);
   useEffect(() => {
     setAssessment(data);
-    console.log("testttttttttttttt", data);
+    // console.log("testttttttttttttt", data);
     setTotalQuestions(data?.questions?.length);
     if (data?.shouldShuffle === false) {
       setQuestions(data?.questions);
@@ -414,9 +417,7 @@ const OnProcessinAssesments = () => {
                   <div>
                     {/* footer */}
                     <div className="flex justify-between items-center">
-                      <span>
-                        Are you sure you want to submit the answers?
-                      </span>
+                      <span>Are you sure you want to submit the answers?</span>
                       <div className="flex justify-end gap-4">
                         <span
                           onClick={() => setSubmitModalIsOpen(false)}

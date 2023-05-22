@@ -2,18 +2,27 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import time from "../../../../assets/TestIcons/time.svg";
 import question from "../../../../assets/TestIcons/question.svg";
+import Loading from "../../../../Components/Loading/Loading";
 
 const Default = () => {
   const [assessments, setAssessments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     fetch("https://geeks-of-gurukul-server-side.vercel.app/assessments")
       .then((res) => res.json())
       .then((assessments) => {
         console.log("Assessments: ", assessments);
         setAssessments(assessments);
+        setIsLoading(false);
       });
   }, []);
-
+  if (isLoading) {
+    return (
+      <div className="h-[90vh] flex justify-center items-center">
+        <Loading type={"search"} />
+      </div>
+    );
+  }
   return (
     <div className="w-4/5 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-4 px-5">
       {assessments?.map((assessment, i) => (

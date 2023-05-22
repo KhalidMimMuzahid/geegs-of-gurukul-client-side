@@ -94,12 +94,12 @@ const AddAssesment = () => {
     useState({});
   const [addedQuestion, setAddedQuestion] = useState([]);
   useEffect(() => {
-    // console.log("searchParameteresForQueries: ", searchParameteresForQueries);
+    console.log("searchParameteresForQueries: ", searchParameteresForQueries);
     if (!searchParameteresForQueries) {
       // it should be not going to nex step
       // return
     }
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/get-questions", {
+    fetch("http://localhost:5000/get-questions", {
       headers: {
         "content-type": "application/json",
         searchparameteresforqueries: JSON.stringify(
@@ -109,7 +109,7 @@ const AddAssesment = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
+        console.log("data:   ", data);
         setQuestion(data);
       });
   }, [searchParameteresForQueries]);
