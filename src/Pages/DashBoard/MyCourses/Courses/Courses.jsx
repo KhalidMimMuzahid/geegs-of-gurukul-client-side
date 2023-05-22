@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./course.module.css";
 import { toast } from "react-hot-toast";
+import UnderConstruction from "../../../../Components/UnderConstruction/UnderConstruction";
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
@@ -99,6 +100,7 @@ const Courses = () => {
       </div>
     );
   }
+  return <UnderConstruction/>
 
   return (
     <div className='w-full'>
