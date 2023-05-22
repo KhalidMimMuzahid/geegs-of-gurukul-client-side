@@ -4,15 +4,15 @@ import style from "./dashboard.module.css";
 import { AuthContext } from "../../contexts/UserProvider/UserProvider";
 const EachLink = ({ currentPath, Menu, open }) => {
   const { user } = useContext(AuthContext);
-  const target = Menu?.title;
-  return user?.role === "student" && Menu?.title === "Admin" ? null : (
+
+  const link = (
     <li>
       <Link
         to={Menu?.link}
         className={`flex ${
           style.menuHover
         }  rounded-md p-2 my-6 cursor-pointer text-black text-sm items-center gap-x-4 
-          ${"mt-2"} ${
+      ${"mt-2"} ${
           //   currentPath.startsWith(Menu?.link)
           (
             Menu?.link === "/"
@@ -45,6 +45,12 @@ const EachLink = ({ currentPath, Menu, open }) => {
       </Link>
     </li>
   );
+  return Menu?.title === "Admin"
+    ? (user?.role === "admin" ||
+        user?.role === "super-admin" ||
+        user?.role === "instructor") &&
+        link
+    : link;
 };
 
 export default EachLink;

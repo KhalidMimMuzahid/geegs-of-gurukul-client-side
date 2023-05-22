@@ -125,8 +125,8 @@ const PreQuestionire = () => {
 
     const userDetails = { profession, email, address: "" };
     console.log("userDetails: ", userDetails);
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/user-details", {
-      method: "POST",
+    fetch("http://localhost:5000/user-details", {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
@@ -135,24 +135,29 @@ const PreQuestionire = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("user details updated: ", data);
+        console.log("just created false: ", data);
 
-        if (data?.acknowledged) {
-          fetch(
-            `https://geeks-of-gurukul-server-side.vercel.app/just-created-false?email=${user?.email}`,
-            {
-              method: "PUT",
-            }
-          )
-            .then((res) => res.json())
-            .then((data) => {
-              console.log("just created false: ", data);
-
-              if (data?.modifiedCount) {
-                setJustCreatedUser(false);
-                navigate(from);
-              }
-            });
+        if (data?.modifiedCount) {
+          setJustCreatedUser(false);
+          navigate(from);
         }
+        // if (data?.acknowledged) {
+        //   fetch(
+        //     `https://geeks-of-gurukul-server-side.vercel.app/just-created-false?email=${user?.email}`,
+        //     {
+        //       method: "PUT",
+        //     }
+        //   )
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //       console.log("just created false: ", data);
+
+        //       if (data?.modifiedCount) {
+        //         setJustCreatedUser(false);
+        //         navigate(from);
+        //       }
+        //     });
+        // }
       });
   };
   useEffect(() => {
