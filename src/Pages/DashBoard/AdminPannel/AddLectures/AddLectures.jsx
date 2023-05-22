@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -9,6 +9,7 @@ import moment from "moment";
 import { uploadFile } from "react-s3";
 import { toast } from "react-hot-toast";
 import { useSpring } from "framer-motion";
+import AddModuleModel from "./Modal/AddModuleModel";
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 const config = {
@@ -28,8 +29,18 @@ const AddLectures = () => {
   const [instructions, setInstructions] = useState(false);
   const [search, setSearch] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [fileUpload, setFileUpload] = useState("");
+  const [attachment, setAttachment] = useState("");
   const [videoUpload, setVideoUpload] = useState("");
+  const [data, setData] = useState([]);
+  const [courses, setCourses] = useState([]);
+  // const [selectedProgramId, setSelectedProgramId] = useState(null);
+  const [program, setProgram] = useState({});
+  const [course, setCourse] = useState({});
+  const [batch, setBatch] = useState({});
+  const [batches, setBatches] = useState([]);
+  const [addNewModule, setAddNewModule] = useState(false);
+  const [modules, setModules] = useState([]);
+  const [module, setModule] = useState([]);
 
   const {
     register,
@@ -39,20 +50,139 @@ const AddLectures = () => {
     reset,
   } = useForm();
 
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) => {
+      // console.log("value", value);
+      // console.log("\nname", name);
+      // console.log("\ntype", type);
+      if (name === "programName") {
+        data?.forEach((each) => {
+          if (each?._id === value?.programName) {
+            setProgram({
+              program_id: each?._id,
+              programName: each?.programName,
+            });
+            return;
+          }
+        });
+      }
+      if (name === "courseName") {
+        courses?.forEach((each) => {
+          if (each?._id === value?.courseName) {
+            setCourse({
+              course_id: each?._id,
+              courseName: each?.courseName,
+            });
+            return;
+          }
+        });
+      }
+      if (name === "batchName") {
+        batches?.forEach((each) => {
+          if (each?._id === value?.batchName) {
+            setBatch({
+              batch_id: each?._id,
+              batchName: each?.batchName,
+            });
+            return;
+          }
+        });
+      }
+
+      if (name === "moduleName") {
+        modules?.forEach((each) => {
+          if (each?._id === value?.moduleName) {
+            setModule({
+              module_id: each?._id,
+              moduleName: each?.moduleName,
+            });
+            return;
+          }
+        }); 
+      }
+
+      if (name === "moduleName" && value?.moduleName === "createNewModule") {
+        setAddNewModule(true);
+      }
+    });
+    return () => subscription.unsubscribe();
+  });
+
+  useEffect(() => {
+    fetch("http://localhost:5000/all-program")
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("data", data?.data);
+        setData(data?.data);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (program?.program_id) {
+      setCourses([]);
+      fetch(
+        `http://localhost:5000/all-courses-by-program?_id=${program?.program_id}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log("data", data?.data);
+          setCourses(data?.data);
+        });
+    }
+  }, [program?.program_id]);
+
+  //batch
+  useEffect(() => {
+    if (course?.course_id) {
+      setCourses([]);
+      fetch(
+        `http://localhost:5000/all-batches-by-course?_id=${course?.course_id}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log("data", data?.data);
+          setBatches(data?.data);
+        });
+    }
+  }, [course?.course_id]);
+
+  //module
+  useEffect(() => {
+    if (batch?.batch_id) {
+      setCourses([]);
+      fetch(`http://localhost:5000/all-modules-by-batch?_id=${batch?.batch_id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log("data", data?.data);
+          setModules(data?.data);
+        });
+    }
+  }, [batch?.batch_id]);
+
+  // console.log("course", course);
+  // console.log("program", program);
   const onSubmit = (data) => {
     setLoading(true);
+    if (selectedAssignment?.length === 0) {
+      toast.error("Please select an assignment");
+      setLoading(false);
+      return;
+    }
     const justNow = moment().format();
 
-    awsFileUpload(data?.fileInput, setFileUpload);
-    awsFileUpload(data?.videoInput, setVideoUpload);
+    if (data?.attachment) {
+      awsFileUpload(data?.attachment, setAttachment);
+    }
+    if (data?.videoInput) {
+      awsFileUpload(data?.videoInput, setVideoUpload);
+    }
 
     const lectureData = {
-      courseId: "",
-      courseName: data?.courseName,
-      batchId: "",
-      batchName: data?.batchName,
-      programeId: "",
-      programName: data?.programName,
+      program,
+      course,
+      batch,
+      module,
+      type: "lecture",
       startAt: data?.scheduledAt,
       endSAt: data?.endsAt,
       isOptional: data?.optional,
@@ -61,7 +191,7 @@ const AddLectures = () => {
       assignment: {
         sheduledAt: data?.scheduledAt,
         deadLine: data?.endsAt,
-        assignments_id: selectedAssignment,
+        assignments: selectedAssignment,
       },
       lectureVideo: {
         liveLink: data?.zoomLink,
@@ -74,7 +204,7 @@ const AddLectures = () => {
       additionalFiles: [
         {
           fileType: "",
-          link: fileUpload,
+          link: attachment,
         },
       ],
 
@@ -92,6 +222,7 @@ const AddLectures = () => {
     };
 
     console.log(lectureData);
+    setLoading(false);
 
     return;
 
@@ -125,7 +256,7 @@ const AddLectures = () => {
   const awsFileUpload = (filePath, setUploadedFilePath) => {
     if (filePath[0]) {
       const file = filePath[0];
-      console.log(file);
+      // console.log(file);
       uploadFile(file, config)
         .then((fileData) => {
           setUploadedFilePath(fileData?.location);
@@ -138,6 +269,7 @@ const AddLectures = () => {
     }
   };
 
+  console.log("addNewModule", addNewModule);
   return (
     <div className='container p-8'>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -184,29 +316,34 @@ const AddLectures = () => {
             </div>
             {/* Topic Name */}
             {/* Batch Name */}
+            {/* Program Name */}
             <div className={style?.addLecture}>
-              <label htmlFor='batchName'>Batch Name</label>
+              <label htmlFor='programName'>Program Name</label>
               <select
-                name='batchName'
-                {...register("batchName", {
-                  required: "Batch Name is required",
+                name='programName'
+                {...register("programName", {
+                  required: "Program Name is required",
                 })}
-                aria-invalid={errors.batchName ? "true" : "false"}
+                aria-invalid={errors.programName ? "true" : "false"}
                 className='w-full border-2 border-green-400 rounded-xl'>
-                <option value=''>Choose a Batch</option>
-                <option value='Batch-001'>Batch-001</option>
-                <option value='Batch-002'>Batch-002</option>
-                <option value='Batch-003'>Batch-003</option>
+                <option disabled selected value=''>
+                  Choose a Program
+                </option>
+                {data?.length > 0 &&
+                  data?.map((each) => (
+                    <option key={each?._id} value={each?._id}>
+                      {each?.programName}
+                    </option>
+                  ))}
               </select>
-              {errors.batchName && (
+              {errors.programName && (
                 <p
                   className='text-red-500 font-poppins font-medium'
                   role='alert'>
-                  {errors.batchName?.message}
+                  {errors.programName?.message}
                 </p>
               )}
             </div>
-            {/* Batch Name */}
             {/* Course Name */}
             <div className={style?.addLecture}>
               <label htmlFor='courseName'>Course Name</label>
@@ -217,10 +354,15 @@ const AddLectures = () => {
                 })}
                 aria-invalid={errors.courseName ? "true" : "false"}
                 className='w-full border-2 border-green-400 rounded-xl'>
-                <option value=''>Choose a Course</option>
-                <option value='Python'>Python</option>
-                <option value='DataScience'>Data Science</option>
-                <option value='CodingChamps'>Coding Champs</option>
+                <option disabled selected value=''>
+                  Choose a Course
+                </option>
+                {courses?.length > 0 &&
+                  courses?.map((each) => (
+                    <option key={each?._id} value={each?._id}>
+                      {each?.courseName}
+                    </option>
+                  ))}
               </select>
               {errors.courseName && (
                 <p
@@ -231,30 +373,67 @@ const AddLectures = () => {
               )}
             </div>
             {/* Course Name */}
-            {/* Programe Name */}
+            {/* batch Name */}
+
             <div className={style?.addLecture}>
-              <label htmlFor='programName'>Program Name</label>
+              <label htmlFor='batchName'>Batch Name</label>
               <select
-                name='programName'
-                {...register("programName", {
-                  required: "Program Name is required",
+                name='batchName'
+                {...register("batchName", {
+                  required: "batch Name is required",
                 })}
-                aria-invalid={errors.programName ? "true" : "false"}
+                aria-invalid={errors.batchName ? "true" : "false"}
                 className='w-full border-2 border-green-400 rounded-xl'>
-                <option value=''>Choose a Programe</option>
-                <option value='Program1'>Program1</option>
-                <option value='Program2'>Program2</option>
-                <option value='Program3'>Program3</option>
+                <option disabled selected value=''>
+                  Choose a Batch
+                </option>
+                {batches?.length > 0 &&
+                  batches?.map((each) => (
+                    <option key={each?._id} value={each?._id}>
+                      {each?.batchName}
+                    </option>
+                  ))}
               </select>
-              {errors.programName && (
+              {errors.batchName && (
                 <p
                   className='text-red-500 font-poppins font-medium'
                   role='alert'>
-                  {errors.programName?.message}
+                  {errors.batchName?.message}
                 </p>
               )}
             </div>
-            {/* Programe Name */}
+
+            {/* batch Name */}
+            {/* module name */}
+            <div className={style?.addLecture}>
+              <label htmlFor='moduleName'>Module Name</label>
+              <select
+                name='moduleName'
+                {...register("moduleName", {
+                  required: "Module Name is required",
+                })}
+                aria-invalid={errors.moduleName ? "true" : "false"}
+                className='w-full border-2 border-green-400 rounded-xl'>
+                <option disabled selected value=''>
+                  Choose a Module
+                </option>
+                {modules?.length > 0 &&
+                  modules?.map((each) => (
+                    <option key={each?._id} value={each?._id}>
+                      {each?.moduleName}
+                    </option>
+                  ))}
+                <option value='createNewModule'>Create New Module</option>
+              </select>
+              {errors.batchName && (
+                <p
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'>
+                  {errors.batchName?.message}
+                </p>
+              )}
+            </div>
+            {/* module name */}
             {/* Sceduled At */}
             <div className={style?.addLecture}>
               <label>Sceduled At</label>
@@ -319,24 +498,22 @@ const AddLectures = () => {
             <div className='w-full font-poppins'>
               <label
                 className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                htmlFor='file_input'>
-                Upload file
+                htmlFor='Attachment'>
+                Attachment
               </label>
               <input
                 className='block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
-                id='fileInput'
-                name='fileInput'
+                id='Attachment'
+                name='Attachment'
                 type='file'
-                {...register("fileInput", {
-                  required: "File is required",
-                })}
-                aria-invalid={errors.fileInput ? "true" : "false"}
+                {...register("attachment")}
+                aria-invalid={errors.attachment ? "true" : "false"}
               />
-              {errors.fileInput && (
+              {errors.attachment && (
                 <p
                   role='alert'
                   className='text-red-500 font-poppins font-medium'>
-                  {errors.fileInput?.message}
+                  {errors.attachment?.message}
                 </p>
               )}
             </div>
@@ -355,9 +532,7 @@ const AddLectures = () => {
                 name='videoInput'
                 type='file'
                 accept='.mp4'
-                {...register("videoInput", {
-                  required: "Add a video file",
-                })}
+                {...register("videoInput")}
                 aria-invalid={errors.videoInput ? "true" : "false"}
               />
               {errors.videoInput && (
@@ -495,16 +670,7 @@ const AddLectures = () => {
           } group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow`}>
           <div className='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
           <span className='relative text-black group-hover:text-white font-poppins font-medium'>
-            {loading ? (
-              <>
-                <svg
-                  class='animate-spin h-5 w-5 mr-3 ...'
-                  viewBox='0 0 24 24'></svg>
-                Processing...
-              </>
-            ) : (
-              "Submit"
-            )}
+            {loading ? "Submitting..." : "Submit"}
           </span>
         </button>
       </form>
@@ -519,6 +685,16 @@ const AddLectures = () => {
         />
       )}
       {/* Add assignment modal */}
+      {/* Add module modal */}
+      {addNewModule && (
+        <AddModuleModel
+          setAddNewModule={setAddNewModule}
+          program={program}
+          course={course}
+          batch={batch}
+        />
+      )}
+      {/* Add module modal */}
     </div>
   );
 };
