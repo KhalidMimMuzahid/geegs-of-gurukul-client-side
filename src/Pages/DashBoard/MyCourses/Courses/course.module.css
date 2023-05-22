@@ -1,170 +1,265 @@
 .singleCourse img {
-    /* width: 100px; */
-    border-top-right-radius: 32px;
-    border-top-left-radius: 32px;
+  /* width: 100px; */
+  border-top-right-radius: 32px;
+  border-top-left-radius: 32px;
 }
 
 .singleCourse {
-    background: #FFFFFF;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 32px;
-    text-align: center;
+  background: #ffffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 32px;
+  text-align: center;
 }
 
 .singleCourse h2 {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    padding: 28px 0;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 28px 0;
 }
 
 .singleCourse a {
-    background: #45C958;
-    border-radius: 11px;
-    padding: 10px 22px;
-    display: inline-block;
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    margin-bottom: 17px;
-    color: #fff;
+  background: #45c958;
+  border-radius: 11px;
+  padding: 10px 22px;
+  display: inline-block;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 17px;
+  color: #fff;
 }
 
 .textCourse h2 {
-    font-size: 30px;
-    font-weight: 700;
+  font-size: 30px;
+  font-weight: 700;
 }
 
 .textCourse span {
-    border-radius: 12px;
-    margin-top: 15px;
-    color: #039e05;
-    font-weight: 800;
+  border-radius: 12px;
+  margin-top: 15px;
+  color: #039e05;
+  font-weight: 800;
 }
 
 .li {
-    background: #86DE5D;
-    padding: 14px 21px;
-    border-radius: 5px;
-    color: #fff;
-    display: flex;
-    font-weight: 500;
-    font-size: 17px;
-    transition: .3s;
-    margin-bottom: 30px;
-    justify-content: space-between;
+  background: #86de5d;
+  padding: 14px 21px;
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  font-weight: 500;
+  font-size: 17px;
+  transition: 0.3s;
+  margin-bottom: 30px;
+  justify-content: space-between;
 }
 
 .li:hover {
-    background: yellowgreen;
-    color: #000;
+  background: yellowgreen;
+  color: #000;
 }
 
-.contain-lecture{
-    max-width: 500px ;
-    margin: auto;
+.contain-lecture {
+  max-width: 500px;
+  margin: auto;
 }
-
-
 
 .titleCourse h1 {
-    font-size: 40px;
-    text-transform: uppercase;
-    font-weight: 800;
-    margin: 16px 0;
-    text-align: center;
+  font-size: 40px;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin: 16px 0;
+  text-align: center;
 }
 
 .buttonLeft {
-    position: absolute;
-    bottom: 17px;
-    left: 0;
-    width: 100%;
+  position: absolute;
+  bottom: 17px;
+  left: 0;
+  width: 100%;
 }
 
 .buttonLeft buttom {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .buttonLeft button {
-    font-size: 20px;
-    color: #fff;
-    margin: 0 6px;
+  font-size: 20px;
+  color: #fff;
+  margin: 0 6px;
 }
 
-
-
 .textVideo h2 {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    margin-bottom: 75px;
-    margin-top: 18px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  margin-bottom: 75px;
+  margin-top: 18px;
 }
 
 .textVideo {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 .textVideo p {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 15.75px;
-    line-height: 35px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15.75px;
+  line-height: 35px;
 }
 
 .videoSitting {
-    position: absolute;
-    bottom: 58px;
-    left: 139px;
-    background: #fff;
-    padding: 12px;
-    border-radius: 10px;
+  position: absolute;
+  bottom: 58px;
+  left: 139px;
+  background: #fff;
+  padding: 12px;
+  border-radius: 10px;
 }
 
 button.sittingBtu {
-    position: absolute;
-    bottom: 37px;
-    left: 198px;
-    color: #fff;
+  position: absolute;
+  bottom: 37px;
+  left: 198px;
+  color: #fff;
 }
 
 .vitcalEuual {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
 }
-
 
 button.volume input {
-    display: none;
-    
+  display: none;
 }
-button.volume{
-    display:flex
+button.volume {
+  display: flex;
 }
-
 
 button.volume:hover input {
-    display: block;
+  display: block;
 }
 
-@media (min-width: 76px) and (max-width: 767.98px) { 
-    .singleCourse img {
-        margin: 12px auto;
-    }
+/* .drop { 
+  position: relative;
+  width: 350px;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 20px 20px 20px rgba(0, 0, 0, 0.05),
+    25px 35px 20px rgba(0, 0, 0, 0.05), 25px 30px 30px rgba(0, 0, 0, 0.05),
+    inset -20px -20px 25px rgba(255, 255, 255, 0.9);
+  transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -ms-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+} */
+.droop {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: inset 20px 20px 20px rgba(0, 0, 0, 0.05),
+    25px 35px 20px rgba(0, 0, 0, 0.05), 25px 30px 30px rgba(0, 0, 0, 0.05),
+    inset -20px -20px 25px rgba(255, 255, 255, 0.9);
+  transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -ms-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
 
-    .singleCourse{
-        text-align: center;
-    }
+/* .drop:nth-child(odd) {
+  border-radius: 57% 43% 43% 57% / 43% 43% 57% 57%;
+  -webkit-border-radius: 57% 43% 43% 57% / 43% 43% 57% 57%;
+  -moz-border-radius: 57% 43% 43% 57% / 43% 43% 57% 57%;
+  -ms-border-radius: 57% 43% 43% 57% / 43% 43% 57% 57%;
+  -o-border-radius: 57% 43% 43% 57% / 43% 43% 57% 57%;
+}
+.drop:nth-child(even) {
+  border-radius: 61% 39% 52% 48% / 44% 59% 41% 56%;
+  -webkit-border-radius: 61% 39% 52% 48% / 44% 59% 41% 56%;
+  -moz-border-radius: 61% 39% 52% 48% / 44% 59% 41% 56%;
+  -ms-border-radius: 61% 39% 52% 48% / 44% 59% 41% 56%;
+  -o-border-radius: 61% 39% 52% 48% / 44% 59% 41% 56%;
+} */
 
-    .li{
-        display: block;
-        text-align: center;
-    }
+/* .drop:hover {
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+} */
+/* .drop::before {
+  content: "";
+  position: absolute;
+  top: 50px;
+  left: 85px;
+  width: 35px;
+  height: 35px;
+  background: #fff;
+  opacity: 0.9;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+} */
 
-    .titleCourse h1{
-        font-size: 30px;
-    }
- }
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 15px;
+}
+
+.h2 {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  background-color: #eff0f4;
+  border-radius: 50%;
+  box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.1),
+    inset -2px -5px 10px rgba(255, 255, 255, 1),
+    15px 15px 10px rgba(0, 0, 0, 0.05), 15px 10px 15px rgba(0, 0, 0, 0.025);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+@media (min-width: 76px) and (max-width: 767.98px) {
+  .singleCourse img {
+    margin: 12px auto;
+  }
+
+  .singleCourse {
+    text-align: center;
+  }
+
+  .li {
+    display: block;
+    text-align: center;
+  }
+
+  .titleCourse h1 {
+    font-size: 30px;
+    /* color: ; */
+  }
+}

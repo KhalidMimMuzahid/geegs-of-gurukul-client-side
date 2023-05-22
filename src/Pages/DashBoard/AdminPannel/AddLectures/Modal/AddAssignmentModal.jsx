@@ -15,6 +15,7 @@ function AddAssignmentModal({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -33,6 +34,7 @@ function AddAssignmentModal({
           const data = result?.data;
           console.log("first", data);
           setAssignments(data);
+          reset();
           setLoading(false);
         } else {
           toast.error(result?.message);
