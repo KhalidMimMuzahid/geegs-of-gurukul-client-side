@@ -18,7 +18,7 @@ const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
   const onSubmit = (data) => {
     console.log("data :", data);
     // setLoading(true);
-    fetch(`http://localhost:5000/exerciseSearch`, {
+    fetch(`https://geeks-of-gurukul-server-side.vercel.app/exerciseSearch`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -68,7 +68,8 @@ const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
             <h3 className='font-semibold'>Add exercises</h3>
             <button
               onClick={() => setExercisesModal(false)}
-              className='hover:rotate-90 transition-all duration-500'>
+              className='hover:rotate-90 transition-all duration-500'
+            >
               <BsXCircleFill color='red' size={25} />
             </button>
           </div>
@@ -77,7 +78,8 @@ const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
             {/* form */}
             <form
               className='grid grid-cols-1 md:grid-cols-2 gap-2'
-              onSubmit={handleSubmit(onSubmit)}>
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <input
                 type='search'
                 {...register("exerciseName")}
@@ -105,7 +107,8 @@ const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
               <select
                 id='type'
                 {...register("type")}
-                className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'>
+                className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+              >
                 <option value='project'>project</option>
                 <option value='evaluation'>evaluation</option>
                 <option value='general'>General</option>
@@ -113,7 +116,8 @@ const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
               </select>
               <button
                 type='submit'
-                className='bg-green-400 rounded-lg text-white hover:bg-green-500 py-2 md:col-span-2'>
+                className='bg-green-400 rounded-lg text-white hover:bg-green-500 py-2 md:col-span-2'
+              >
                 {loading ? "Loading" : "Search"}
               </button>
             </form>
@@ -130,27 +134,32 @@ const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
                         <tr>
                           <th
                             scope='col'
-                            className='px-6 py-2 text-left text-xs font-medium text-gray-500 tracking-wider'>
+                            className='px-6 py-2 text-left text-xs font-medium text-gray-500 tracking-wider'
+                          >
                             Exercise Name
                           </th>
                           <th
                             scope='col'
-                            className='px-6 py-2 text-left text-xs font-medium text-gray-500 tracking-wider'>
+                            className='px-6 py-2 text-left text-xs font-medium text-gray-500 tracking-wider'
+                          >
                             Topic
                           </th>
                           <th
                             scope='col'
-                            className='px-6 py-2 text-left text-xs font-medium text-gray-500 tracking-wider'>
+                            className='px-6 py-2 text-left text-xs font-medium text-gray-500 tracking-wider'
+                          >
                             Sub Topic
                           </th>
                           <th
                             scope='col'
-                            className='px-6 py-2 text-left text-xs font-medium text-gray-500 tracking-wider'>
+                            className='px-6 py-2 text-left text-xs font-medium text-gray-500 tracking-wider'
+                          >
                             Type
                           </th>
                           <th
                             scope='col'
-                            className='px-6 py-2 text-left text-xs font-medium text-gray-500 tracking-wider'>
+                            className='px-6 py-2 text-left text-xs font-medium text-gray-500 tracking-wider'
+                          >
                             Add/remove
                           </th>
                         </tr>
@@ -163,28 +172,32 @@ const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
                             <tr key={index}>
                               <td
                                 scope='row'
-                                className='px-6 py-3 whitespace-nowrap'>
+                                className='px-6 py-3 whitespace-nowrap'
+                              >
                                 <div className='text-sm font-medium text-gray-900'>
                                   {item?.exerciseName}
                                 </div>
                               </td>
                               <td
                                 scope='row'
-                                className='px-6 py-3 whitespace-nowrap'>
+                                className='px-6 py-3 whitespace-nowrap'
+                              >
                                 <div className='text-sm font-medium text-gray-900'>
                                   {item?.topic}
                                 </div>
                               </td>
                               <td
                                 scope='row'
-                                className='px-6 py-3 whitespace-nowrap'>
+                                className='px-6 py-3 whitespace-nowrap'
+                              >
                                 <div className='text-sm font-medium text-gray-900'>
                                   {item?.subTopic}
                                 </div>
                               </td>
                               <td
                                 scope='row'
-                                className='px-6 py-3 whitespace-nowrap'>
+                                className='px-6 py-3 whitespace-nowrap'
+                              >
                                 <div className='text-sm font-medium text-gray-900'>
                                   {item?.type}
                                 </div>
@@ -200,7 +213,8 @@ const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
                                     onClick={() => {
                                       handelToRemoveItem(item?._id);
                                     }}
-                                    className='px-3 rounded-lg py-2'>
+                                    className='px-3 rounded-lg py-2'
+                                  >
                                     <BsFillPlusCircleFill
                                       className='rotate-45 duration-200'
                                       color='red'
@@ -216,7 +230,8 @@ const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
                                         item?.exerciseName
                                       );
                                     }}
-                                    className='px-3 rounded-lg py-2'>
+                                    className='px-3 rounded-lg py-2'
+                                  >
                                     <BsFillPlusCircleFill
                                       className='duration-200'
                                       color='#22c55e'

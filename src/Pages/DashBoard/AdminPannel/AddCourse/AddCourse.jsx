@@ -10,7 +10,7 @@ const AddCourse = () => {
   const [program, setProgram] = useState({});
   const { user } = useContext(AuthContext);
   useEffect(() => {
-    fetch("http://localhost:5000/all-program")
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -66,7 +66,7 @@ const AddCourse = () => {
       },
     };
     console.log(course);
-    fetch("http://localhost:5000/add-course", {
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/add-course", {
       method: "POST",
       body: JSON.stringify(course),
       headers: {
@@ -85,17 +85,17 @@ const AddCourse = () => {
       .catch((error) => console.error(error));
   };
   return (
-    <div className="container p-8">
+    <div className='container p-8'>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" font-poppins font-medium">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className=' font-poppins font-medium'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             {/* Course Name */}
             <div className={style?.addCourse}>
-              <label htmlFor="courseName">Course Name</label>
+              <label htmlFor='courseName'>Course Name</label>
               <input
-                type="text"
+                type='text'
                 // required
-                name="courseName"
+                name='courseName'
                 {...register("courseName", {
                   required: "Course Name is required",
                 })}
@@ -104,8 +104,8 @@ const AddCourse = () => {
               />
               {errors.courseName && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'
                 >
                   {errors.courseName?.message}
                 </p>
@@ -114,11 +114,11 @@ const AddCourse = () => {
             {/*course Name */}
             {/* Duration */}
             <div className={style?.addCourse}>
-              <label htmlFor="duration">Duration in weeks</label>
+              <label htmlFor='duration'>Duration in weeks</label>
               <input
-                type="number"
+                type='number'
                 // required
-                name="duration"
+                name='duration'
                 {...register("duration", {
                   required: "Duration is required",
                 })}
@@ -127,8 +127,8 @@ const AddCourse = () => {
               />
               {errors.duration && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'
                 >
                   {errors.duration?.message}
                 </p>
@@ -138,16 +138,16 @@ const AddCourse = () => {
 
             {/* Program Name */}
             <div className={style?.addLecture}>
-              <label htmlFor="programName">Program Name</label>
+              <label htmlFor='programName'>Program Name</label>
               <select
-                name="programName"
+                name='programName'
                 {...register("programName", {
                   required: "Program Name is required",
                 })}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
+                className='w-full border-2 border-green-400 rounded-xl'
               >
-                <option disabled selected value="">
+                <option disabled selected value=''>
                   Choose a Program
                 </option>
                 {data?.length > 0 &&
@@ -159,8 +159,8 @@ const AddCourse = () => {
               </select>
               {errors.programName && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'
                 >
                   {errors.programName?.message}
                 </p>
@@ -169,20 +169,20 @@ const AddCourse = () => {
             {/* Program Name */}
             {/* Regular Price */}
             <div className={style?.addCourse}>
-              <label htmlFor="regularPrice">Regular Price(In Rupee)</label>
+              <label htmlFor='regularPrice'>Regular Price(In Rupee)</label>
               <input
-                type="number"
-                name="regularPrice"
+                type='number'
+                name='regularPrice'
                 {...register("regularPrice", {
                   required: "Regular Price is required",
                 })}
                 aria-invalid={errors.regularPrice ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
+                className='w-full border-2 border-green-400 rounded-xl'
               />
               {errors.regularPrice && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'
                 >
                   {errors.regularPrice?.message}
                 </p>
@@ -194,11 +194,11 @@ const AddCourse = () => {
 
         {/* Submit Button */}
         <button
-          type="submit"
-          class="group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow"
+          type='submit'
+          class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow'
         >
-          <div class="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-          <span class="relative text-black group-hover:text-white font-poppins font-medium">
+          <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
+          <span class='relative text-black group-hover:text-white font-poppins font-medium'>
             Submit
           </span>
         </button>

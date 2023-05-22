@@ -54,7 +54,7 @@ const Courses = () => {
 
   useEffect(() => {
     setLoading(true);
-    // fetch(`http://localhost:5000/allCourses`)
+    // fetch(`https://geeks-of-gurukul-server-side.vercel.app/allCourses`)
     //   .then((res) => res.json())
     //   .then((result) => {
     //     // console.log("result", result);
@@ -85,7 +85,8 @@ const Courses = () => {
           className='w-20 h-20 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-green-600'
           viewBox='0 0 100 101'
           fill='none'
-          xmlns='http://www.w3.org/2000/svg'>
+          xmlns='http://www.w3.org/2000/svg'
+        >
           <path
             d='M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z'
             fill='currentColor'
@@ -126,10 +127,12 @@ const Courses = () => {
           courses?.map((course) => (
             <div
               key={course?._id}
-              className={`${style.droop} w-[350px] sm:w-[400px] md:w-[450px]`}>
+              className={`${style.droop} w-[350px] sm:w-[400px] md:w-[450px]`}
+            >
               <div className={`${style.content} p-6`}>
                 <h2
-                  className={`text-xl sm:text-2xl md:text-3xl text-green-400 font-semibold`}>
+                  className={`text-xl sm:text-2xl md:text-3xl text-green-400 font-semibold`}
+                >
                   {course?.courseName}
                 </h2>
                 <p className='text-lg font-medium'>
@@ -142,7 +145,8 @@ const Courses = () => {
                 </p>
                 <Link
                   to={"/dashboard/courses/course"}
-                  className='relative px-[25px] py-[10px] bg-green-400 text-white font-poppins font-medium rounded-3xl shadow-md hover:bg-green-400/90'>
+                  className='relative px-[25px] py-[10px] bg-green-400 text-white font-poppins font-medium rounded-3xl shadow-md hover:bg-green-400/90'
+                >
                   Start Learn
                 </Link>
               </div>

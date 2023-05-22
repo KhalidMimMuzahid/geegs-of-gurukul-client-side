@@ -21,7 +21,7 @@ function AddAssignmentModal({
 
   const onSubmit = (data) => {
     setLoading(true);
-    fetch(`http://localhost:5000/searchAssignment`, {
+    fetch(`https://geeks-of-gurukul-server-side.vercel.app/searchAssignment`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -61,7 +61,8 @@ function AddAssignmentModal({
           <div className='w-full mx-auto my-6'>
             <form
               className='grid grid-cols-1 md:grid-cols-2 gap-2'
-              onSubmit={handleSubmit(onSubmit)}>
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div className='relative'>
                 <input
                   type='search'
@@ -83,7 +84,8 @@ function AddAssignmentModal({
               <button
                 type='submit'
                 disabled={loading}
-                className='bg-green-400 rounded-lg text-white hover:bg-green-500 py-1'>
+                className='bg-green-400 rounded-lg text-white hover:bg-green-500 py-1'
+              >
                 Search
               </button>
             </form>

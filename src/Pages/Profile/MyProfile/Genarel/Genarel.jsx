@@ -3,15 +3,17 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 
 const Genarel = () => {
-   const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   // Fetching User info from server
-  const {data:userDetail,isLoading } = useQuery({
-    queryKey: ['userDetailse'],
-    queryFn: ()=>fetch(`http://localhost:5000/user-detailse/${user?.email}`)
-    .then((res) => res.json())
-  })
+  const { data: userDetail, isLoading } = useQuery({
+    queryKey: ["userDetailse"],
+    queryFn: () =>
+      fetch(
+        `https://geeks-of-gurukul-server-side.vercel.app/user-detailse/${user?.email}`
+      ).then((res) => res.json()),
+  });
   if (isLoading) {
-    return <div>loading...</div>
+    return <div>loading...</div>;
   }
   // console.log(userDetail)
   return (

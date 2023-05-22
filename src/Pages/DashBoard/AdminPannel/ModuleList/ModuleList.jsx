@@ -66,7 +66,7 @@ const ModuleList = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/all-program")
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -78,7 +78,7 @@ const ModuleList = () => {
     if (program?.program_id) {
       setCourses([]);
       fetch(
-        `http://localhost:5000/all-courses-by-program?_id=${program?.program_id}`
+        `https://geeks-of-gurukul-server-side.vercel.app/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -93,7 +93,7 @@ const ModuleList = () => {
     if (course?.course_id) {
       setCourses([]);
       fetch(
-        `http://localhost:5000/all-batches-by-course?_id=${course?.course_id}`
+        `https://geeks-of-gurukul-server-side.vercel.app/all-batches-by-course?_id=${course?.course_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -110,33 +110,33 @@ const ModuleList = () => {
       course,
       batch,
     };
-    fetch(`http://localhost:5000/searchModule`, {
+    fetch(`https://geeks-of-gurukul-server-side.vercel.app/searchModule`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
         data: searchData,
       },
     })
-      .then(res => res.json())
-      .then(data => console.log(data))
-      .catch(errors => {
-      console.log(errors?.message)
-    })
-      // .then((res) => res?.json())
-      // .then((result) => {
-      //   if (result?.success) {
-      //     toast?.success(result?.message);
-      //     setLoading(false);
-      //     reset(result);
-      //   } else {
-      //     toast.error(result?.message);
-      //     setLoading(false);
-      //   }
-      // })
-      // .catch((error) => {
-      //   toast.error(error.message);
-      //   setLoading(false);
-      // });
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((errors) => {
+        console.log(errors?.message);
+      });
+    // .then((res) => res?.json())
+    // .then((result) => {
+    //   if (result?.success) {
+    //     toast?.success(result?.message);
+    //     setLoading(false);
+    //     reset(result);
+    //   } else {
+    //     toast.error(result?.message);
+    //     setLoading(false);
+    //   }
+    // })
+    // .catch((error) => {
+    //   toast.error(error.message);
+    //   setLoading(false);
+    // });
     // console.log(searchData);
     reset();
   };
