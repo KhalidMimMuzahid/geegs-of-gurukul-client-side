@@ -1,10 +1,13 @@
 import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { BsXCircleFill } from "react-icons/bs";
-import React from "react";
-import Answers from "./Answers/Answers";
+import React, { useState } from "react";
+import AllAnswers from "./AllAnswers";
 
 const ReviewAnswerModal = ({ isOpen, setIsOpen, response, assessment }) => {
+  // console.log("Question 1 ID:", assessment.questions[0]._id);
+  const [ques, setQues] = useState(0);
+  // const [ques, setQues] = useState(0);
   return (
     <AnimatePresence>
       {isOpen && (
@@ -47,7 +50,7 @@ const ReviewAnswerModal = ({ isOpen, setIsOpen, response, assessment }) => {
               }}
             >
               <div
-                className="bg-white overflow-y-auto shadow-xl transform transition-all w-[100vw] h-[95vh] max-w-[1440px] p-5 rounded-lg text-left"
+                className="bg-white overflow-y-auto shadow-xl transform transition-all w-[100vw] h-[95vh] md:h-[85vh] max-w-[1300px] p-5 rounded-lg text-left"
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="modal-headline"
@@ -67,14 +70,12 @@ const ReviewAnswerModal = ({ isOpen, setIsOpen, response, assessment }) => {
                 </div>
                 <div className="">
                   {/* content goes here */}
-                  {assessment.questions.map((question, index) => (
-                    <Answers
-                      answers={response.aboutResponse.chosenAnswers}
-                      question={question}
-                      key={question._id}
-                      index={index}
-                    />
-                  ))}
+                  <AllAnswers
+                    questions={assessment.questions}
+                    response={response}
+                    ques={ques}
+                    setQues={setQues}
+                  />
                 </div>
               </div>
             </motion.div>

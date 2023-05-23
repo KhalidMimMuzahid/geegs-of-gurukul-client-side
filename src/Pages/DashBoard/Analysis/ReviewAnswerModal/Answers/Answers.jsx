@@ -64,7 +64,7 @@ function Answers({ answers, question, index }) {
             </p>
           )}
         </div>
-        <hr className="mt-3" />
+        <hr className="mt-10" />
       </div>
     </div>
   );
