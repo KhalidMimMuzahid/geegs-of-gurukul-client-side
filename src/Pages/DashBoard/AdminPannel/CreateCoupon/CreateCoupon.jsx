@@ -1,10 +1,14 @@
-import React, { useContext } from 'react'
-import { AuthContext } from '../../../../contexts/UserProvider/UserProvider';
-import { useForm } from 'react-hook-form';
-import style from './CreateCoupon.module.css'
-import moment from 'moment';
+import React, { useContext, useRef, useState } from "react";
+import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
+import { useForm } from "react-hook-form";
+import style from "./CreateCoupon.module.css";
+import moment from "moment";
+import { toast } from "react-hot-toast";
 
 const CreateCoupon = () => {
+  const [generating, setGenerating] = useState(false);
+  const [couponInfo, setCouponInfo] = useState(null);
+  const [isCopied, setIsCopied] = useState(false);
   const generateKey = (charKey) => {
     if (charKey < 10) {
       return charKey;
@@ -12,195 +16,193 @@ const CreateCoupon = () => {
       switch (charKey) {
         case 10:
           return "a";
-          
+
         case 11:
           return "b";
-          
+
         case 12:
           return "c";
-          
+
         case 13:
           return "d";
-          
+
         case 14:
           return "e";
-          
+
         case 15:
           return "f";
-          
+
         case 16:
           return "g";
-          
+
         case 17:
           return "h";
-          
+
         case 18:
           return "i";
-          
+
         case 19:
           return "j";
-          
+
         case 20:
           return "k";
-          
+
         case 21:
           return "l";
-          
+
         case 22:
           return "m";
-          
+
         case 23:
           return "n";
-          
+
         case 24:
           return "o";
-          
+
         case 25:
           return "p";
-          
+
         case 26:
           return "q";
-          
+
         case 27:
           return "r";
-          
+
         case 28:
           return "s";
-          
+
         case 29:
           return "t";
-          
+
         case 30:
           return "u";
-          
+
         case 31:
           return "v";
-          
+
         case 32:
           return "w";
-          
+
         case 33:
           return "x";
-          
+
         case 34:
           return "y";
-          
+
         case 35:
           return "z";
-          
+
         case 36:
           return "A";
-          
+
         case 37:
           return "B";
-          
+
         case 38:
           return "C";
-          
+
         case 39:
           return "D";
-          
+
         case 40:
           return "E";
-          
+
         case 41:
           return "F";
-          
+
         case 42:
           return "G";
-          
+
         case 43:
           return "H";
-          
+
         case 44:
           return "I";
-          
+
         case 45:
           return "J";
-          
+
         case 46:
           return "K";
-          
+
         case 47:
           return "L";
-          
+
         case 48:
           return "M";
-          
+
         case 49:
           return "N";
-          
+
         case 50:
           return "O";
-          
+
         case 51:
           return "P";
-          
+
         case 52:
           return "Q";
-          
+
         case 53:
           return "R";
-          
+
         case 54:
           return "S";
-          
+
         case 55:
           return "T";
-          
+
         case 56:
           return "U";
-          
+
         case 57:
           return "V";
-          
+
         case 58:
           return "W";
-          
+
         case 59:
           return "X";
-          
+
         case 60:
           return "Y";
-          
+
         case 61:
           return "Z";
-          
-        
-          
+
         case 62:
           return "@";
-          
+
         case 63:
           return "#";
-          
+
         case 64:
           return "$";
-          
+
         case 65:
           return "%";
-          
+
         case 66:
           return "^";
-          
+
         case 67:
           return "&";
-          
+
         case 68:
           return "*";
-        
+
         case 69:
           return "!";
-          
+
         default:
           return;
         // code block
       }
     }
   };
-  
-  
+
   const { user } = useContext(AuthContext);
+  // console.log(user);
 
   const {
     register,
@@ -211,18 +213,24 @@ const CreateCoupon = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    setGenerating(true);
     const justNow = moment().format();
     let id = "";
-  do {
-    const charKey = Math.floor(Math.random() * 70);
-    const char = generateKey(charKey);
-    id = id.concat(char);
-  } while (id?.length !== 20);
-  console.log("id: ", id);
+    const discountAmount = parseInt(data.discount);
+    // console.log(typeof discountAmount)
+
+    do {
+      const charKey = Math.floor(Math.random() * 70);
+      const char = generateKey(charKey);
+      id = id.concat(char);
+    } while (id?.length !== 20);
+    // console.log("id: ", id);
     const couponDetails = {
+      couponLabel: data.couponLebel,
       couponCode: id,
-      discount: data?.discount,
+      discount: discountAmount,
       expireAt: data?.expiredAt,
+
       actionsDetails: {
         isDeleted: false,
         creation: {
@@ -235,9 +243,10 @@ const CreateCoupon = () => {
         },
       },
     };
-    console.log(couponDetails);
-
-    fetch("http://localhost:5000/coupon-details", {
+    // console.log(couponDetails);
+    setCouponInfo(couponDetails);
+    console.log(couponInfo);
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/coupon-details", {
       method: "POST",
       body: JSON.stringify(couponDetails),
       headers: {
@@ -245,24 +254,63 @@ const CreateCoupon = () => {
       },
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        setGenerating(false);
+        console.log(data);
+        toast.success("Coupon Created!");
+      })
       .catch((error) => console.error(error));
     console.log(couponDetails);
     reset();
   };
-  
+
+  // copy preview text
+
+  const htmlElement = useRef(null);
+
+  const handleCopy = () => {
+    const htmlText = htmlElement.current.innerHTML;
+    navigator.clipboard.writeText(htmlText);
+    setIsCopied(true);
+    toast.success("Coppied!");
+    // setIsCopied(false)
+  };
+
   return (
-    <div className="container p-8">
+    <div className='container p-8'>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" font-poppins font-medium">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className=' font-poppins font-medium'>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+            {/* Label */}
+            <div className={style?.createCourse}>
+              <label>Coupon Label</label>
+              <input
+                type='text'
+                // required
+                name='couponLebel'
+                {...register("couponLebel", {
+                  required: "Enter Coupon Name",
+                })}
+                aria-invalid={errors.couponLebel ? "true" : "false"}
+                // onChange={handleInputChange}
+              />
+              {errors.couponLebel && (
+                <p
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'
+                >
+                  {errors.couponLebel?.message}
+                </p>
+              )}
+            </div>
+            {/* Discount */}
             {/* Discount */}
             <div className={style?.createCourse}>
               <label>Discount</label>
               <input
-                type="number"
+                type='number'
                 // required
-                name="discount"
+                name='discount'
                 {...register("discount", {
                   required: "Enter discount amount",
                 })}
@@ -271,8 +319,8 @@ const CreateCoupon = () => {
               />
               {errors.discount && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'
                 >
                   {errors.discount?.message}
                 </p>
@@ -285,8 +333,8 @@ const CreateCoupon = () => {
               <label>Expired At</label>
               <input
                 // required
-                type="datetime-local"
-                name="expiredAt"
+                type='datetime-local'
+                name='expiredAt'
                 // onChange={handleInputChange}
                 {...register("expiredAt", {
                   required: "Select an expire date",
@@ -295,8 +343,8 @@ const CreateCoupon = () => {
               />
               {errors.expiredAt && (
                 <p
-                  role="alert"
-                  className="text-red-500 font-poppins font-medium"
+                  role='alert'
+                  className='text-red-500 font-poppins font-medium'
                 >
                   {errors.expiredAt?.message}
                 </p>
@@ -304,20 +352,49 @@ const CreateCoupon = () => {
             </div>
             {/* Expired At */}
           </div>
+          {/* Preview */}
+          <div className={style?.createCourse}>
+            <div className='flex items-center justify-between p-1'>
+              <label>Preview</label>{" "}
+              <button
+                onClick={handleCopy}
+                className=' px-2 py-2 bg-green-400 text-white text-center'
+              >
+                {isCopied ? "Copied" : "Copy"}
+              </button>
+            </div>
+            <div class='w-full'>
+              <textarea
+                disabled
+                class='border border-gray-300 rounded-lg p-1 w-full h-32 resize-none col-span-12 overflow-y-auto'
+                readOnly
+                ref={htmlElement}
+                defaultValue={`
+                Coupon Info :
+                  Coupon Label : ${couponInfo?.couponLabel},
+                  Coupon Code : ${couponInfo?.couponCode},
+                  Expire At : ${couponInfo?.expireAt},
+                  Discount : ${couponInfo?.expireAt},
+                  Creator Email : ${couponInfo?.actionsDetails?.creation?.creatorEmail}
+              `}
+              ></textarea>
+            </div>
+          </div>
+          {/* Preview */}
         </div>
         {/* Submit Button */}
         <button
-          type="submit"
-          class="group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow"
+          type='submit'
+          class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow my-3'
         >
-          <div class="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-          <span class="relative text-black group-hover:text-white font-poppins font-medium">
-            Generaate Coupon
+          <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
+          <span class='relative text-black group-hover:text-white font-poppins font-medium'>
+            {generating ? `Generating` : `Generate Coupon`}
           </span>
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default CreateCoupon
+export default CreateCoupon;

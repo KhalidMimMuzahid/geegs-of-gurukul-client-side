@@ -48,7 +48,7 @@ const CSV = () => {
   //   console.log("questions: ", questions);
   // }, [questions]);
   const csvFileToObject = (string, fileName) => {
-    // console.log("xxxxxxxxxxxxxxxxxxxxxxxx");
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxx");
     let noOfRow = 1;
     let pushCount = 0;
     let isError = false;
@@ -202,10 +202,10 @@ const CSV = () => {
     });
     // console.log("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
     if (!isError) {
-      // console.log(allQuestions);
+      console.log(allQuestions);
       const withNonDuplicateQuestions = removeDuplicateQuestions(allQuestions);
       console.log("withNonDuplicateQuestions: ", withNonDuplicateQuestions);
-      return;
+      // return;
       fetch("https://geeks-of-gurukul-server-side.vercel.app/add-csv-data", {
         method: "POST",
         headers: {
@@ -242,6 +242,7 @@ const CSV = () => {
     // console.log("file: ", file);
     if (!file?.name?.endsWith(".csv")) {
       // to do: show an error. cause this is not CSV file
+      // console.log("error");
       setError({
         errorType: "invalidFile",
         message: "please provide a valid file (csv file)",
@@ -249,6 +250,7 @@ const CSV = () => {
       return;
     }
     if (file) {
+      // console.log(" not error");
       fileReader.onload = function (event) {
         const text = event.target.result;
         // console.log("text: \n" + text);

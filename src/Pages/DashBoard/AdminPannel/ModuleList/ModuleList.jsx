@@ -1,10 +1,20 @@
-import React from 'react'
-import { useForm } from 'react-hook-form';
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
-
+import style from "../AddLectures/AddLecture.module.css";
+import { toast } from "react-hot-toast";
 const ModuleList = () => {
+  const [data, setData] = useState([]);
+  const [courses, setCourses] = useState([]);
+  // const [selectedProgramId, setSelectedProgramId] = useState(null);
+  const [program, setProgram] = useState({});
+  const [course, setCourse] = useState({});
+  const [batch, setBatch] = useState({});
+  const [batches, setBatches] = useState([]);
+  const [module, setmodule] = useState([]);
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -13,188 +23,322 @@ const ModuleList = () => {
     reset,
   } = useForm();
 
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) => {
+      // console.log("value", value);
+      // console.log("\nname", name);
+      // console.log("\ntype", type);
+      if (name === "programName") {
+        data?.forEach((each) => {
+          if (each?._id === value?.programName) {
+            setProgram({
+              program_id: each?._id,
+              programName: each?.programName,
+            });
+            return;
+          }
+        });
+      }
+      if (name === "courseName") {
+        courses?.forEach((each) => {
+          if (each?._id === value?.courseName) {
+            setCourse({
+              course_id: each?._id,
+              courseName: each?.courseName,
+            });
+            return;
+          }
+        });
+      }
+      if (name === "batchName") {
+        batches?.forEach((each) => {
+          if (each?._id === value?.batchName) {
+            setBatch({
+              batch_id: each?._id,
+              batchName: each?.batchName,
+            });
+            return;
+          }
+        });
+      }
+    });
+    return () => subscription.unsubscribe();
+  });
+
+  useEffect(() => {
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/all-program")
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("data", data?.data);
+        setData(data?.data);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (program?.program_id) {
+      setCourses([]);
+      fetch(
+        `https://geeks-of-gurukul-server-side.vercel.app/all-courses-by-program?_id=${program?.program_id}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log("data", data?.data);
+          setCourses(data?.data);
+        });
+    }
+  }, [program?.program_id]);
+
+  //batch
+  useEffect(() => {
+    if (course?.course_id) {
+      setCourses([]);
+      fetch(
+        `https://geeks-of-gurukul-server-side.vercel.app/all-batches-by-course?_id=${course?.course_id}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log("data", data?.data);
+          setBatches(data?.data);
+        });
+    }
+  }, [course?.course_id]);
+
   const onSubmit = (data) => {
-    
-    const programDetails = {
-      moduleName: data?.moduleName,
-      batchName: data?.batchName,
-      
+    setLoading(true);
+    const searchData = {
+      program,
+      course,
+      batch,
     };
+    fetch(`https://geeks-of-gurukul-server-side.vercel.app/searchModule`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        data: searchData,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((errors) => {
+        console.log(errors?.message);
+      });
+    // .then((res) => res?.json())
+    // .then((result) => {
+    //   if (result?.success) {
+    //     toast?.success(result?.message);
+    //     setLoading(false);
+    //     reset(result);
+    //   } else {
+    //     toast.error(result?.message);
+    //     setLoading(false);
+    //   }
+    // })
+    // .catch((error) => {
+    //   toast.error(error.message);
+    //   setLoading(false);
+    // });
+    // console.log(searchData);
     reset();
   };
 
-  const courses = [
-    {
-      CourseName: "Introduction to JavaScript",
-      Topic: "Variables and Data Types",
-      BatchNo: 1234,
-    },
-
-    {
-      CourseName: "Machine Learning with Python",
-      Topic: "Regression Analysis",
-      BatchNo: 7890,
-    },
-    { CourseName: "iOS App Development", Topic: "UI Design", BatchNo: 1235 },
-    {
-      CourseName: "Android App Development",
-      Topic: "Intents and Activities",
-      BatchNo: 6789,
-    },
-  ];
+  // console.log("first", batches);
   return (
     <div>
-{/* Search Form */}
-<div className="container p-8">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        
+      {/* Search Form */}
+      <div className='container p-8'>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-          <div class="w-full mx-auto my-3 font-poppins">
-          <label
-            for="ModuleName"
-            class="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
-          >
-            <div className="flex items-center justify-between">
-              <p>Module Name :</p>
-            </div>
-          </label>
-          <input
-            id="moduleName"
-            name="moduleName"
-                {...register("moduleName",
-              //     {
-              // required: "Module Name is required",
-              //     }
+            {/* Program Name */}
+            <div className={style?.addLecture}>
+              <label htmlFor='programName'>Program Name</label>
+              <select
+                name='programName'
+                {...register(
+                  "programName"
+                  // {
+                  // required: "Program Name is required",
+                  // }
                 )}
-            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-            placeholder="Write program name"
-            aria-invalid={errors.moduleName ? "true" : "false"}
-          ></input>
-          {errors.moduleName && (
-            <p role="alert" className="text-red-500 font-poppins font-medium">
-              {errors.moduleName?.message}
-            </p>
-          )}
+                aria-invalid={errors.programName ? "true" : "false"}
+                className='w-full border-2 border-green-400 rounded-xl'
+              >
+                <option disabled selected value=''>
+                  Choose a Program
+                </option>
+                {data?.length > 0 &&
+                  data?.map((each) => (
+                    <option key={each?._id} value={each?._id}>
+                      {each?.programName}
+                    </option>
+                  ))}
+              </select>
+              {errors.programName && (
+                <p
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'
+                >
+                  {errors.programName?.message}
+                </p>
+              )}
             </div>
-            <div class="w-full mx-auto my-3 font-poppins">
-          <label
-            for="Batch Name"
-            class="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
-          >
-            <div className="flex items-center justify-between">
-              <p>Batch Name:</p>
+            {/* Course Name */}
+            <div className={style?.addLecture}>
+              <label htmlFor='courseName'>Course Name</label>
+              <select
+                name='courseName'
+                {...register(
+                  "courseName"
+                  //   {
+                  //   required: "Course Name is required",
+                  // }
+                )}
+                aria-invalid={errors.courseName ? "true" : "false"}
+                className='w-full border-2 border-green-400 rounded-xl'
+              >
+                <option disabled selected value=''>
+                  Choose a Course
+                </option>
+                {courses?.length > 0 &&
+                  courses?.map((each) => (
+                    <option key={each?._id} value={each?._id}>
+                      {each?.courseName}
+                    </option>
+                  ))}
+              </select>
+              {errors.courseName && (
+                <p
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'
+                >
+                  {errors.courseName?.message}
+                </p>
+              )}
             </div>
-          </label>
-          <input
-            id="batchName"
-            name="batchName"
-            {...register("batchName", {
-              required: "Batch Name is required",
-            })}
-            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-            placeholder="Write program name"
-            aria-invalid={errors.batchName ? "true" : "false"}
-          ></input>
-          {errors.batchName && (
-            <p role="alert" className="text-red-500 font-poppins font-medium">
-              {errors.batchName?.message}
-            </p>
-          )}
-        </div>
-        </div>
+            {/* Course Name */}
+            {/* batch Name */}
 
-        {/* Submit Button */}
-        <button
-          type="submit"
-          class="group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow"
-        >
-          <div class="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-          <span class="relative text-black group-hover:text-white font-poppins font-medium">
-            Search
-          </span>
-        </button>
-      </form>
-    </div>
+            <div className={style?.addLecture}>
+              <label htmlFor='batchName'>Batch Name</label>
+              <select
+                name='batchName'
+                {...register(
+                  "batchName"
+                  // {
+                  // required: "batch Name is required",
+                  // }
+                )}
+                aria-invalid={errors.batchName ? "true" : "false"}
+                className='w-full border-2 border-green-400 rounded-xl'
+              >
+                <option disabled selected value=''>
+                  Choose a Batch
+                </option>
+                {batches?.length > 0 &&
+                  batches?.map((each) => (
+                    <option key={each?._id} value={each?._id}>
+                      {each?.batchName}
+                    </option>
+                  ))}
+              </select>
+              {errors.batchName && (
+                <p
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'
+                >
+                  {errors.batchName?.message}
+                </p>
+              )}
+            </div>
+
+            {/* batch Name */}
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type='submit'
+            class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow'
+          >
+            <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
+            <span class='relative text-black group-hover:text-white font-poppins font-medium'>
+              Search
+            </span>
+          </button>
+        </form>
+      </div>
       {/* Search Form */}
 
       {/* Table */}
-      <div class="flex flex-col justify-center h-full mx-auto">
-        <div class="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
-          <header class="px-5 py-4 border-b border-gray-100">
-            <h2 class="font-semibold font-poppins text-gray-800">Programs</h2>
+      <div class='flex flex-col justify-center h-full mx-auto'>
+        <div class='w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200'>
+          <header class='px-5 py-4 border-b border-gray-100'>
+            <h2 class='font-semibold font-poppins text-gray-800'>Programs</h2>
           </header>
-          <div class="p-3">
-            <div class="max-w-[90vw] overflow-x-scroll">
-              <table class="table-auto w-full font-poppins font-medium overflow-x-auto">
-                <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+          <div class='p-3'>
+            <div class='max-w-[90vw] overflow-x-scroll'>
+              <table class='table-auto w-full font-poppins font-medium overflow-x-auto'>
+                <thead class='text-xs font-semibold uppercase text-gray-400 bg-gray-50'>
                   <tr>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">SL No:</div>
+                    <th class='p-2 whitespace-nowrap'>
+                      <div class='font-semibold text-left'>SL No:</div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">Module Name</div>
+                    <th class='p-2 whitespace-nowrap'>
+                      <div class='font-semibold text-left'>Module Name</div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">Batch Name</div>
+                    <th class='p-2 whitespace-nowrap'>
+                      <div class='font-semibold text-left'>Batch Name</div>
                     </th>
-                   
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-center">Action</div>
+
+                    <th class='p-2 whitespace-nowrap'>
+                      <div class='font-semibold text-center'>Action</div>
                     </th>
                   </tr>
                 </thead>
-                <tbody class="text-sm divide-y divide-gray-100">
+                <tbody class='text-sm divide-y divide-gray-100'>
                   {courses.map((course, i) => (
                     <tr key={i}>
-                      <td class="p-2 whitespace-nowrap">
-                        <div class="flex items-center">{i + 1}</div>
+                      <td class='p-2 whitespace-nowrap'>
+                        <div class='flex items-center'>{i + 1}</div>
                       </td>
-                      <td class="p-2 whitespace-nowrap">
+                      <td class='p-2 whitespace-nowrap'>
                         {course?.CourseName}
                       </td>
-                      <td class="p-2 whitespace-nowrap">
+                      <td class='p-2 whitespace-nowrap'>
                         {course?.CourseName}
                       </td>
-                    
-                      <td class="p-2 whitespace-nowrap flex gap-2">
-                        <div class="mx-auto flex w-[100px] gap-2">
-                          <button
-                            type="button"
-                            className="px-1 py-1 "
-                          >
+
+                      <td class='p-2 whitespace-nowrap flex gap-2'>
+                        <div class='mx-auto flex w-[100px] gap-2'>
+                          <button type='button' className='px-1 py-1 '>
                             {/* svg */}
                             <img
-                              height="15px"
-                              width="15px"
+                              height='15px'
+                              width='15px'
                               src={deleteIcon}
-                              alt=""
+                              alt=''
                             />
                           </button>
-                          <button
-                            type="button"
-                            className="px-1 py-1"
-                          >
+                          <button type='button' className='px-1 py-1'>
                             {/* svg */}
                             <img
-                              height="15px"
-                              width="15px"
+                              height='15px'
+                              width='15px'
                               src={editIcon}
-                              alt=""
+                              alt=''
                             />
                           </button>
 
                           <button
-                            data-modal-target="staticModal"
-                            data-modal-toggle="staticModal"
-                            class="px-1 py-1 "
-                            type="button"
+                            data-modal-target='staticModal'
+                            data-modal-toggle='staticModal'
+                            class='px-1 py-1 '
+                            type='button'
                           >
                             {/* svg */}
                             <img
-                              height="15px"
-                              width="15px"
+                              height='15px'
+                              width='15px'
                               src={copyIcon}
-                              alt=""
+                              alt=''
                             />
                           </button>
                         </div>
@@ -209,7 +353,7 @@ const ModuleList = () => {
       </div>
       {/* Table */}
     </div>
-  )
-}
+  );
+};
 
-export default ModuleList
+export default ModuleList;

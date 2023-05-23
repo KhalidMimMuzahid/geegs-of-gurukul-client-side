@@ -24,7 +24,7 @@ const EditProfile = () => {
     //   address1: data?.address1,
     //   address2: data?.address2,
     // }
-    // fetch(`http://localhost:5000/user-detailse/${user?.email}`, {
+    // fetch(`https://geeks-of-gurukul-server-side.vercel.app/user-detailse/${user?.email}`, {
     //   method: "PUT",
     //   body: JSON.stringify(updatedUser),
     //   headers: {
@@ -39,7 +39,7 @@ const EditProfile = () => {
     //   })
     //   .catch((error) => console.error(error));
     // console.log(updatedUser);
-    console.log(data)
+    console.log(data);
     reset();
   };
 
@@ -153,7 +153,7 @@ const EditProfile = () => {
                 </p>
               )}
             </div>
-            
+
             <input
               type='submit'
               value='Save'

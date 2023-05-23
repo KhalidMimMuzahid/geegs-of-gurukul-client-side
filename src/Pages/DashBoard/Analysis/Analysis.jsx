@@ -97,18 +97,8 @@ const Analysis = () => {
 
   return (
     <div className="p-16">
-      <ProfileInfo />
-      {/* <button className="px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins">
-        Review Answer
-      </button> */}
-      {/* <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={ open ? closeModal : openModal}
-        className='px-2 py-2 mx-4 my-8 float-right rounded-xl bg-green-300 font-medium font-poppins'
-      >
-        Review Answer open= {open? "true": "false"}
-      </motion.button> */}
+      <ProfileInfo assessment={assessment} />
+
       <OpenModal response={response} assessment={assessment} />
       <OverView aboutResponse={aboutResponse} totalMark={totalMark} />
       <div>{strength?.length > 0 && <Strength strength={strength} />}</div>

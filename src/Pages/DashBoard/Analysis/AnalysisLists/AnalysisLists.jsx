@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 import EachRes from "./EachRes/EachRes";
+import Loading from "../../../../Components/Loading/Loading";
 
 const AnalysisLists = () => {
   const [responses, setResponses] = useState([]);
   const { user } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     fetch(
       `https://geeks-of-gurukul-server-side.vercel.app/assessment-responses?email=${user?.email}`
@@ -13,8 +15,16 @@ const AnalysisLists = () => {
       .then((data) => {
         console.log("data: ", data);
         setResponses(data);
+        setIsLoading(false);
       });
   }, [user]);
+  if (isLoading) {
+    return (
+      <div className="h-full flex justify-center items-center">
+        <Loading type={"search"} />
+      </div>
+    );
+  }
   return (
     <div className="w-4/5 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-4 px-5">
       {responses?.length > 0 ? (

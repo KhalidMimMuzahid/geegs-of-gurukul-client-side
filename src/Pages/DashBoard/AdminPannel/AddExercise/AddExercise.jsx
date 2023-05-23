@@ -35,7 +35,6 @@ const AddExercise = () => {
     setLoading(true);
     const justNow = moment().format();
 
-
     if (data?.file) {
       const file = data?.file[0];
       console.log(file);
@@ -105,7 +104,7 @@ const AddExercise = () => {
 
   // fetch function
   const FetchData = (outputData, reset, result) => {
-    fetch(`http://localhost:5000/exerciseDetails`, {
+    fetch(`https://geeks-of-gurukul-server-side.vercel.app/exerciseDetails`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -113,32 +112,31 @@ const AddExercise = () => {
       body: JSON.stringify(outputData),
     })
       .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          toast.success(data.message);
+      .then((result) => {
+        if (result?.success) {
+          toast.success(result?.message);
           setLoading(false);
-          reset(result);
         } else {
-          toast.error(data.message);
+          toast.error(result?.message);
           setLoading(false);
         }
       })
       .catch((error) => {
-        toast.error(error.message);
+        toast.error(error?.message);
         setLoading(false);
       });
   };
   return (
-    <div className="container p-8">
+    <div className='container p-8'>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" font-poppins font-medium">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className=' font-poppins font-medium'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             {/* Exercise Name */}
             <div className={style?.addExercise}>
               <label>Exercise Name</label>
               <input
-                type="text"
-                name="exerciseName"
+                type='text'
+                name='exerciseName'
                 {...register("exerciseName", {
                   required: "Exercise Name is required",
                 })}
@@ -146,8 +144,8 @@ const AddExercise = () => {
               />
               {errors.exerciseName && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'
                 >
                   {errors.exerciseName?.message}
                 </p>
@@ -158,8 +156,8 @@ const AddExercise = () => {
             <div className={style?.addExercise}>
               <label>Topic</label>
               <input
-                type="text"
-                name="topic"
+                type='text'
+                name='topic'
                 {...register("topic", {
                   required: "Topic Name is required",
                 })}
@@ -167,8 +165,8 @@ const AddExercise = () => {
               />
               {errors.topic && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'
                 >
                   {errors.topic?.message}
                 </p>
@@ -179,8 +177,8 @@ const AddExercise = () => {
             <div className={style?.addExercise}>
               <label>Sub topic</label>
               <input
-                type="text"
-                name="subTopic"
+                type='text'
+                name='subTopic'
                 {...register("subTopic", {
                   required: "Sub topic Name is required",
                 })}
@@ -188,8 +186,8 @@ const AddExercise = () => {
               />
               {errors.subTopic && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'
                 >
                   {errors.subTopic?.message}
                 </p>
@@ -198,57 +196,58 @@ const AddExercise = () => {
 
             {/* Exercise type */}
             <div className={style?.addExercise}>
-              <label htmlFor="type">Exercise type</label>
+              <label htmlFor='type'>Exercise type</label>
               <select
-                name="type"
+                name='type'
                 {...register("type", {
                   required: "Exercise type is required",
                 })}
                 aria-invalid={errors.type ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
+                className='w-full border-2 border-green-400 rounded-xl'
               >
-                <option value="">Choose exercise type</option>
-                <option value="project">Project</option>
-                <option value="evaluation">Evaluation</option>
+                <option value=''>Choose exercise type</option>
+                <option value='project'>Project</option>
+                <option value='evaluation'>Evaluation</option>
+                <option value='general'>General</option>
               </select>
               {errors.type && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'
                 >
                   {errors.type?.message}
                 </p>
               )}
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-5'>
             {/* submission type */}
             <div className={style?.addExercise}>
-              <label htmlFor="submissionType">Submission type</label>
+              <label htmlFor='submissionType'>Submission type</label>
               <select
-                name="submissionType"
+                name='submissionType'
                 {...register("submissionType")}
-                className="w-full border-2 border-green-400 rounded-xl"
+                className='w-full border-2 border-green-400 rounded-xl'
               >
-                <option value="file">Upload File</option>
-                <option value="link">Provide link</option>
+                <option value='file'>Upload File</option>
+                <option value='link'>Provide link</option>
               </select>
             </div>
 
             {/* fileupload */}
 
-            <div class="w-full font-poppins">
+            <div class='w-full font-poppins'>
               <label
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                for="file_input"
+                class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                for='file_input'
               >
                 Upload file
               </label>
               <input
-                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                id="file"
-                name="file"
-                type="file"
+                class='block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
+                id='file'
+                name='file'
+                type='file'
                 {...register("file")}
                 aria-invalid={errors.file ? "true" : "false"}
               />
@@ -265,53 +264,53 @@ const AddExercise = () => {
 
         {/* notes and markdown preview */}
         {/* Text Area */}
-        <div class="w-full mx-auto my-10 font-poppins">
+        <div class='w-full mx-auto my-10 font-poppins'>
           <label
-            for="notes"
-            class="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
+            for='notes'
+            class='block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400'
           >
-            <div className="flex items-center justify-between">
+            <div className='flex items-center justify-between'>
               <p>Notes:</p>
               <p
                 onClick={() => setInstructions(true)}
-                className="hover:text-sky-500 hover:cursor-pointer"
+                className='hover:text-sky-500 hover:cursor-pointer'
               >
                 Instructions
               </p>
             </div>
           </label>
           <textarea
-            id="notes"
-            name="notes"
+            id='notes'
+            name='notes'
             {...register("notes")}
-            rows="4"
-            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-            placeholder="Your message..."
+            rows='4'
+            class='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+            placeholder='Your message...'
             value={text}
             onChange={(e) => setText(e.target.value)}
           ></textarea>
           <button
-            type="button"
+            type='button'
             onClick={() => setPreview(true)}
-            className="my-2 font-poppins font-medium text-white px-2 py-2 bg-green-400 hover:bg-green-500 rounded-md"
+            className='my-2 font-poppins font-medium text-white px-2 py-2 bg-green-400 hover:bg-green-500 rounded-md'
           >
             Preview
           </button>
           {/* For Preview only */}
           {preview && (
             <>
-              <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
-                <div className="relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
+              <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none'>
+                <div className='relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl'>
                   <button
                     onClick={() => setPreview(false)}
-                    className="absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full"
+                    className='absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full'
                   >
                     ❌
                   </button>
-                  <h3 className="text-2xl font-poppins font-medium mt-1">
+                  <h3 className='text-2xl font-poppins font-medium mt-1'>
                     Preview:
                   </h3>
-                  <div className=" mt-6 w-full h-4/5 p-4 mx-auto bg-white border border-green-400 rounded-md overflow-x-auto overflow-y-auto">
+                  <div className=' mt-6 w-full h-4/5 p-4 mx-auto bg-white border border-green-400 rounded-md overflow-x-auto overflow-y-auto'>
                     <ReactMarkdown
                       children={text}
                       remarkPlugins={[remarkGfm]}
@@ -319,44 +318,44 @@ const AddExercise = () => {
                   </div>
                 </div>
               </div>
-              <div className="opacity-25 fixed inset-0  z-[20000] bg-black"></div>
+              <div className='opacity-25 fixed inset-0  z-[20000] bg-black'></div>
             </>
           )}
           {/* For Instructions to teachers to write markdown */}
           {instructions && (
             <>
-              <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
-                <div className="relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
+              <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none'>
+                <div className='relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl'>
                   <button
                     onClick={() => setInstructions(false)}
-                    className="absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full"
+                    className='absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full'
                   >
                     ❌
                   </button>
-                  <h3 className="text-2xl font-poppins font-medium mt-1">
+                  <h3 className='text-2xl font-poppins font-medium mt-1'>
                     Instructions:
                   </h3>
                   <iframe
-                    title="markdown instructions"
-                    src="https://padomi.id.lv/PRG/par__/Markdown-Cheat-Sheet.pdf"
-                    width="100%"
-                    height="500px"
+                    title='markdown instructions'
+                    src='https://padomi.id.lv/PRG/par__/Markdown-Cheat-Sheet.pdf'
+                    width='100%'
+                    height='500px'
                   ></iframe>
                 </div>
               </div>
-              <div className="opacity-25 fixed inset-0  z-[20000] bg-black"></div>
+              <div className='opacity-25 fixed inset-0  z-[20000] bg-black'></div>
             </>
           )}
         </div>
 
         {/* Submit Button */}
         <button
-          type="submit"
+          type='submit'
           disabled={loading ? true : false}
-          class="group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow mt-10 border-2 border-green-400 hover:cursor-pointer"
+          class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow mt-10 border-2 border-green-400 hover:cursor-pointer'
         >
-          <div class="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full "></div>
-          <span class="relative text-black group-hover:text-white font-poppins font-medium">
+          <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full '></div>
+          <span class='relative text-black group-hover:text-white font-poppins font-medium'>
             {loading ? "Loading..." : "Submit"}
           </span>
         </button>

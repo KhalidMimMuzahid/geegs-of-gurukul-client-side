@@ -32,7 +32,7 @@ const AddProgram = () => {
         },
       },
     };
-    fetch("http://localhost:5000/add-program", {
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/add-program", {
       method: "POST",
       body: JSON.stringify(programDetails),
       headers: {
@@ -41,42 +41,42 @@ const AddProgram = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.success);
+        // console.log(data?.success);
         if (data.success) {
-          toast.success(data.message);
+          toast.success(data?.message);
+          reset();
         } else {
-          toast.error(data.message);
+          toast.error(data?.message);
         }
-        //reset();
       })
       .catch((error) => console.error(error));
   };
 
   return (
-    <div className="container p-8">
+    <div className='container p-8'>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Text Area */}
-        <div class="w-full mx-auto my-10 font-poppins">
+        <div class='w-full mx-auto my-10 font-poppins'>
           <label
-            for="Course"
-            class="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
+            for='Course'
+            class='block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400'
           >
-            <div className="flex items-center justify-between">
+            <div className='flex items-center justify-between'>
               <p>Program Name:</p>
             </div>
           </label>
           <input
-            id="programName"
-            name="programName"
+            id='programName'
+            name='programName'
             {...register("programName", {
               required: "Program Name is required",
             })}
-            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-            placeholder="Write program name"
+            class='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+            placeholder='Write program name'
             aria-invalid={errors.programName ? "true" : "false"}
           ></input>
           {errors.programName && (
-            <p role="alert" className="text-red-500 font-poppins font-medium">
+            <p role='alert' className='text-red-500 font-poppins font-medium'>
               {errors.programName?.message}
             </p>
           )}
@@ -84,11 +84,11 @@ const AddProgram = () => {
 
         {/* Submit Button */}
         <button
-          type="submit"
-          class="group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow"
+          type='submit'
+          class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow'
         >
-          <div class="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-          <span class="relative text-black group-hover:text-white font-poppins font-medium">
+          <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
+          <span class='relative text-black group-hover:text-white font-poppins font-medium'>
             Submit
           </span>
         </button>
