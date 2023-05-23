@@ -34,7 +34,7 @@ function Answers({ answers, question, index }) {
           </div>
         </div>
         <p className="mt-4">{question.questionName}</p>
-        {/* options */}
+        {/* Options */}
         <div className="space-y-2">
           {question.optionObject.choices?.map((option, index) => (
             <Options
@@ -47,6 +47,7 @@ function Answers({ answers, question, index }) {
             />
           ))}
         </div>
+        {/* Options */}
         <div className="mt-5 flex">
           {answered ? (
             answered.isCorrect ? (

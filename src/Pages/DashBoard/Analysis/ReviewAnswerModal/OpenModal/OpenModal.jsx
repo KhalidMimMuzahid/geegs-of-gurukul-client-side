@@ -3,7 +3,7 @@ import ReviewAnswerModal from "../ReviewAnswerModal";
 import { motion } from "framer-motion";
 const OpenModal = ({ response, assessment }) => {
   const [isOpen, setIsOpen] = useState(false);
-  return null;
+  // return null;
   return (
     <>
       <div className="">
