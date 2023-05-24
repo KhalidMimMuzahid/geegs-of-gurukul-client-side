@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Options from "./Options";
 
 function Answers({ answers, question, index }) {
-  console.log("Answers: ", answers);
-  console.log("Question: ", question);
+  // console.log("Answers: ", answers);
+  // console.log("Question: ", question);
   const answered = answers.find((answer) => answer.questionId === question._id);
   const isMultiple = question.optionObject.answers.length === 1 ? false : true;
   return (
@@ -48,23 +48,11 @@ function Answers({ answers, question, index }) {
           ))}
         </div>
         {/* Options */}
-        <div className="mt-5 flex">
-          {answered ? (
-            answered.isCorrect ? (
-              <p className="border rounded-xl py-1 px-2 text-green-400 border-green-400">
-                Correct
-              </p>
-            ) : (
-              <p className="border rounded-xl py-1 px-2 text-rose-400 border-rose-400">
-                Incorrect
-              </p>
-            )
-          ) : (
-            <p className="border rounded-xl py-1 px-2 text-gray-400 border-gray-400">
-              Not answered
-            </p>
-          )}
+        <div className="mt-4">
+          Answer:{" "}
+          {question.optionObject.answers.map((answer) => answer).join(", ")}
         </div>
+
         <hr className="mt-10" />
       </div>
     </div>

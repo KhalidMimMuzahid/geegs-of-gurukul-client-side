@@ -5,9 +5,8 @@ import React, { useState } from "react";
 import AllAnswers from "./AllAnswers";
 
 const ReviewAnswerModal = ({ isOpen, setIsOpen, response, assessment }) => {
-  // console.log("Question 1 ID:", assessment.questions[0]._id);
   const [ques, setQues] = useState(0);
-  // const [ques, setQues] = useState(0);
+  const [isInstruction, setIsInstruction] = useState(false);
   return (
     <AnimatePresence>
       {isOpen && (
@@ -50,11 +49,30 @@ const ReviewAnswerModal = ({ isOpen, setIsOpen, response, assessment }) => {
               }}
             >
               <div
-                className="bg-white overflow-y-auto shadow-xl transform transition-all w-[100vw] h-[95vh] md:h-[85vh] max-w-[1300px] p-5 rounded-lg text-left"
+                className="relative bg-white overflow-y-auto shadow-xl transform transition-all w-[100vw] h-[95vh] md:h-[85vh] max-w-[1300px] p-5 rounded-lg text-left mt-12 md:mt-0 font-poppins"
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="modal-headline"
               >
+                {/* Instructions modal */}
+                {isInstruction && (
+                  <div className="absolute z-[10000000000] w-[360px] h-[500px] sm:w-[390px] md:w-[600px] lg-[700px] p-4 mt-12 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-2xl">
+                    <button
+                      type="button"
+                      className="absolute right-4 top-4"
+                      onClick={() => setIsInstruction(!isInstruction)}
+                    >
+                      <BsXCircleFill size={20} color="red" />
+                    </button>
+                    <p className="mb-3 font-semibold text-green-400">
+                      Assessment Instructions
+                    </p>
+                    <div className="overflow-y-auto border border-green-400 rounded-lg p-3 text-left h-[90%]">
+                      {assessment.instruction}
+                    </div>
+                  </div>
+                )}
+                {/* Instructions modal */}
                 <div className="flex w-full justify-between mb-10">
                   <p className="font-semibold text-lg text-green-500">
                     Answer Review
@@ -75,6 +93,8 @@ const ReviewAnswerModal = ({ isOpen, setIsOpen, response, assessment }) => {
                     response={response}
                     ques={ques}
                     setQues={setQues}
+                    setIsInstruction={setIsInstruction}
+                    isInstruction={isInstruction}
                   />
                 </div>
               </div>
