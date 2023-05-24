@@ -1,9 +1,9 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import UnderConstruction from "../../Components/UnderConstruction/UnderConstruction";
+// import UnderConstruction from "../../Components/UnderConstruction/UnderConstruction";
 
 const Profile = () => {
-  return <UnderConstruction/>
+  // return <UnderConstruction/>
   return (
     <div>
       <Outlet />
