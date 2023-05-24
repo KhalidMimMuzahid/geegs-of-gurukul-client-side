@@ -21,7 +21,7 @@ const AssesmentList = () => {
   } = useForm();
 
   const FetchAssessment = (searchData) => {
-    // console.log(searchData)
+    setLoading(true)
     fetch("http://localhost:5000/search-assessment", {
       method: "GET",
       headers: {
