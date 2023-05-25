@@ -74,7 +74,7 @@ function AddAssignment() {
       },
     };
     console.log(assignmentDetails);
-    fetch(`http://localhost:5000/assignmentDetails`, {
+    fetch(`https://geeks-of-gurukul-server-side.vercel.app/assignmentDetails`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -113,6 +113,7 @@ function AddAssignment() {
           <label
             htmlFor="assignmentName"
             className="block text-gray-700 font-bold mb-2 "
+
           >
             Assignment Name
           </label>
@@ -158,6 +159,7 @@ function AddAssignment() {
               <p
                 onClick={() => setInstructions(true)}
                 className="hover:text-sky-500 hover:cursor-pointer"
+
               >
                 Instructions
               </p>
@@ -173,6 +175,7 @@ function AddAssignment() {
           <label
             onClick={() => setPreview(true)}
             className="font-poppins font-medium text-white px-4 py-2 bg-green-400 hover:bg-green-500 rounded-md"
+
           >
             Preview
           </label>
@@ -184,6 +187,7 @@ function AddAssignment() {
                   <button
                     onClick={() => setPreview(false)}
                     className="absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full"
+
                   >
                     :x:
                   </button>
@@ -262,6 +266,7 @@ function AddAssignment() {
             type="button"
             onClick={() => setExercisesModal(true)}
             className="font-poppins font-medium text-white px-4 py-2 bg-green-400 hover:bg-green-500 rounded-md"
+
           >
             + Add Exercises
           </button>
@@ -272,6 +277,7 @@ function AddAssignment() {
           className="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
         >
           {loading ? "LSubmitting" : "Submit"}
+
         </button>
       </form>
       {exercisesModal && (

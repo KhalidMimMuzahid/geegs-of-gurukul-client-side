@@ -11,6 +11,7 @@ import QuizChart from "../../../Components/QuizChart/QuizChart";
 import style from "./preassessment.module.css";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../../contexts/UserProvider/UserProvider";
+import UnderConstruction from "../../../Components/UnderConstruction/UnderConstruction";
 
 const Home = () => {
   const { justCreatedUser } = useContext(AuthContext);
@@ -49,6 +50,7 @@ const Home = () => {
               {/*content*/}
 
               <PreQuestionire />
+      
             </div>
           </div>
           <div className="opacity-25 fixed inset-0  z-[20000] bg-black"></div>

@@ -22,7 +22,7 @@ const Education = () => {
     //   degree: data?.yourDegree,
     //   institute: data?.institutionName
     // }
-    // fetch(`http://localhost:5000/user-detailse/${user?.email}`, {
+    // fetch(`https://geeks-of-gurukul-server-side.vercel.app/user-detailse/${user?.email}`, {
     //   method: "PUT",
     //   body: JSON.stringify(updatedUser),
     //   headers: {
@@ -37,14 +37,14 @@ const Education = () => {
     //   })
     //   .catch((error) => console.error(error));
     // console.log(updatedUser);
-    console.log(data)
+    console.log(data);
     reset();
   };
- 
+
   // Showing User info from server
   // const {data:userDetail,isLoading } = useQuery({
   //   queryKey: ['userDetailse'],
-  //   queryFn: ()=>fetch(`http://localhost:5000/user-detailse/${user?.email}`)
+  //   queryFn: ()=>fetch(`https://geeks-of-gurukul-server-side.vercel.app/user-detailse/${user?.email}`)
   //   .then((res) => res.json())
   // })
   // if (isLoading) {
@@ -69,7 +69,7 @@ const Education = () => {
               <input
                 type='text'
                 name='yourEducation'
-              // placeholder={userDetail?.degree}
+                // placeholder={userDetail?.degree}
                 {...register("yourEducation", {
                   required: "This field is required",
                 })}

@@ -24,7 +24,7 @@ const EditProfile = () => {
     //   address1: data?.address1,
     //   address2: data?.address2,
     // }
-    // fetch(`http://localhost:5000/user-detailse/${user?.email}`, {
+    // fetch(`https://geeks-of-gurukul-server-side.vercel.app/user-detailse/${user?.email}`, {
     //   method: "PUT",
     //   body: JSON.stringify(updatedUser),
     //   headers: {
@@ -39,7 +39,7 @@ const EditProfile = () => {
     //   })
     //   .catch((error) => console.error(error));
     // console.log(updatedUser);
-    console.log(data)
+    console.log(data);
     reset();
   };
 
@@ -56,104 +56,48 @@ const EditProfile = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-4'>
             <div className='flex flex-col gap-2'>
-              <label htmlFor='currentPassword'>First Name</label>
+              <label htmlFor='currentPassword'> Name</label>
               <input
                 type='text'
-                name='firstName'
-                {...register("firstName", {
-                  required: "Enter Your First Name",
+                name='name'
+                {...register("name", {
+                  required: "Enter Your  Name",
                 })}
-                aria-invalid={errors.firstName ? "true" : "false"}
+                aria-invalid={errors.name ? "true" : "false"}
                 className='rounded-lg'
               />
-              {errors.firstName && (
+              {errors.name && (
                 <p
                   className='text-red-500 font-poppins font-medium'
                   role='alert'
                 >
-                  {errors.firstName?.message}
-                </p>
-              )}
-            </div>
-            <div className='flex flex-col gap-2'>
-              <label htmlFor='newPassword'>Last Name</label>
-              <input
-                type='text'
-                name='lastName'
-                {...register("lastName", {
-                  required: "Enter Your Last Name",
-                })}
-                aria-invalid={errors.lastName ? "true" : "false"}
-                className='rounded-lg'
-              />
-              {errors.lastName && (
-                <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
-                >
-                  {errors.lastName?.message}
-                </p>
-              )}
-            </div>
-            <div className='flex flex-col gap-2'>
-              <label htmlFor='newPassword'>Email Address</label>
-              <input
-                type='email'
-                name='yourEmail'
-                {...register("yourEmail", {
-                  required: "Enter Your Email",
-                })}
-                aria-invalid={errors.yourEmail ? "true" : "false"}
-                className='rounded-lg'
-              />
-              {errors.yourEmail && (
-                <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
-                >
-                  {errors.yourEmail?.message}
-                </p>
-              )}
-            </div>
-            <div className='flex flex-col gap-2'>
-              <label htmlFor='newPassword'>Address Line 1</label>
-              <input
-                type='text'
-                name='address1'
-                {...register("address1", {
-                  required: "Enter Your Address",
-                })}
-                aria-invalid={errors.address1 ? "true" : "false"}
-                className='rounded-lg'
-              />
-              {errors.address1 && (
-                <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
-                >
-                  {errors.address1?.message}
-                </p>
-              )}
-            </div>
-            <div className='flex flex-col gap-2'>
-              <label htmlFor='address2'>Address Line 2</label>
-              <input
-                type='text'
-                name='address2'
-                {...register("address2")}
-                aria-invalid={errors.address2 ? "true" : "false"}
-                className='rounded-lg'
-              />
-              {errors.address2 && (
-                <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
-                >
-                  {errors.address2?.message}
+                  {errors.name?.message}
                 </p>
               )}
             </div>
             
+            <div className='flex flex-col gap-2'>
+              <label htmlFor='address'>Address</label>
+              <input
+                type='text'
+                name='address'
+                {...register("address", {
+                  required: "Enter Your Address",
+                })}
+                aria-invalid={errors.address ? "true" : "false"}
+                className='rounded-lg'
+              />
+              {errors.address && (
+                <p
+                  className='text-red-500 font-poppins font-medium'
+                  role='alert'
+                >
+                  {errors.address?.message}
+                </p>
+              )}
+            </div>
+            
+
             <input
               type='submit'
               value='Save'

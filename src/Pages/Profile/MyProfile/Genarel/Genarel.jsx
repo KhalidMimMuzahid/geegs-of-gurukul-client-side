@@ -3,17 +3,19 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 
 const Genarel = () => {
-   const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   // Fetching User info from server
-  const {data:userDetail,isLoading } = useQuery({
-    queryKey: ['userDetailse'],
-    queryFn: ()=>fetch(`http://localhost:5000/user-detailse/${user?.email}`)
-    .then((res) => res.json())
-  })
+  const { data: userDetail, isLoading } = useQuery({
+    queryKey: ["userDetailse"],
+    queryFn: () =>
+      fetch(
+        `https://geeks-of-gurukul-server-side.vercel.app/userinfo/${user?.email}`
+      ).then((res) => res.json()),
+  });
   if (isLoading) {
-    return <div>loading...</div>
+    return <div>loading...</div>;
   }
-  // console.log(userDetail)
+  console.log(userDetail);
   return (
     <div className='p-8 flex flex-col items-center gap-8 md:gap-16 md:flex-row md:items-center w-4/5 rounded-md shadow-lg mx-auto'>
       <div className='flex flex-col items-center gap-2'>
@@ -41,30 +43,27 @@ const Genarel = () => {
           <span>Email:</span>
           <span>{userDetail?.email}</span>
         </p>
-        {/* <p className='m-2'>
-          <span>Address:</span>
-          <span>Dinajpur, Rangpur, Bangladesh</span>
-        </p> */}
+
         <p className='m-2'>
           <span>Phone:</span>
           <span>{userDetail?.phoneNumber}</span>
         </p>
-        {/* <p className='m-2'>
-          <span>Role:</span> 
-          <span>{userDetail?.role}</span>
-        </p> */}
-        {/* <p className='m-2'>
-          <span>Degree:</span> 
-          <span>{userDetail?.degree}</span>
+        <p className='mt-2'>
+          <span>Profession:</span>
+          <span>{userDetail?.profession?.workAs}</span>
         </p>
-        <p className='m-2'>
-          <span>Education:</span> 
-          <span>{userDetail?.education}</span>
+        <p className='mt-2'>
+          <span>College Name:</span>
+          <span>{userDetail?.profession?.coLLageName}</span>
         </p>
-        <p className='m-2'>
-          <span>Institute:</span> 
-          <span>{userDetail?.institute}</span>
-        </p> */}
+        <p className='mt-2'>
+          <span>Leatest Degree:</span>
+          <span>{userDetail?.profession?.latestDegree}</span>
+        </p>
+        <p className='mt-2'>
+          <span>Graduation Year:</span>
+          <span>{userDetail?.profession?.graduationYear}</span>
+        </p>
       </div>
       {/* info side */}
     </div>

@@ -51,7 +51,7 @@ const AddBatch = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/all-program")
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -63,7 +63,7 @@ const AddBatch = () => {
     if (program?.program_id) {
       setCourses([]);
       fetch(
-        `http://localhost:5000/all-courses-by-program?_id=${program?.program_id}`
+        `https://geeks-of-gurukul-server-side.vercel.app/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -96,7 +96,7 @@ const AddBatch = () => {
       },
     };
     console.log("batchDetails: ", batch);
-    fetch("http://localhost:5000/add-batch", {
+    fetch("https://geeks-of-gurukul-server-side.vercel.app/add-batch", {
       method: "POST",
       body: JSON.stringify(batch),
       headers: {
@@ -136,7 +136,8 @@ const AddBatch = () => {
               {errors.batchName && (
                 <p
                   className='text-red-500 font-poppins font-medium'
-                  role='alert'>
+                  role='alert'
+                >
                   {errors.batchName?.message}
                 </p>
               )}
@@ -159,7 +160,8 @@ const AddBatch = () => {
               {errors.duration && (
                 <p
                   className='text-red-500 font-poppins font-medium'
-                  role='alert'>
+                  role='alert'
+                >
                   {errors.duration?.message}
                 </p>
               )}
@@ -174,7 +176,8 @@ const AddBatch = () => {
                   required: "Program Name is required",
                 })}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'>
+                className='w-full border-2 border-green-400 rounded-xl'
+              >
                 <option disabled selected value=''>
                   Choose a Program
                 </option>
@@ -188,7 +191,8 @@ const AddBatch = () => {
               {errors.programName && (
                 <p
                   className='text-red-500 font-poppins font-medium'
-                  role='alert'>
+                  role='alert'
+                >
                   {errors.programName?.message}
                 </p>
               )}
@@ -202,7 +206,8 @@ const AddBatch = () => {
                   required: "Course Name is required",
                 })}
                 aria-invalid={errors.courseName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'>
+                className='w-full border-2 border-green-400 rounded-xl'
+              >
                 <option disabled selected value=''>
                   Choose a Course
                 </option>
@@ -216,7 +221,8 @@ const AddBatch = () => {
               {errors.courseName && (
                 <p
                   className='text-red-500 font-poppins font-medium'
-                  role='alert'>
+                  role='alert'
+                >
                   {errors.courseName?.message}
                 </p>
               )}
@@ -238,7 +244,8 @@ const AddBatch = () => {
               {errors.startedAt && (
                 <p
                   role='alert'
-                  className='text-red-500 font-poppins font-medium'>
+                  className='text-red-500 font-poppins font-medium'
+                >
                   {errors.startedAt?.message}
                 </p>
               )}
@@ -249,7 +256,8 @@ const AddBatch = () => {
         {/* Submit Button */}
         <button
           type='submit'
-          class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow'>
+          class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow'
+        >
           <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
           <span class='relative text-black group-hover:text-white font-poppins font-medium'>
             Submit
