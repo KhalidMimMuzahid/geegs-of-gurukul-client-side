@@ -29,10 +29,8 @@ const Home = () => {
   //   console.log("zzzz: ", zzzz);
   // };
   return (
-    <div className=''>
-      <div className=''>
-        <UnderConstruction/>
-      </div>
+    <div className="">
+      <div className="mt-9"></div>
       {/* <div>
         <LectureScedule />
         <LectureScedule />
@@ -47,15 +45,15 @@ const Home = () => {
       {justCreatedUser && (
         <>
           {/* <h1>sddfddfvfdffdfdfd</h1> */}
-          <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none'>
-            <div className='relative w-[360px]  sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl'>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
+            <div className="relative w-[360px]  sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
               {/*content*/}
 
               <PreQuestionire />
       
             </div>
           </div>
-          <div className='opacity-25 fixed inset-0  z-[20000] bg-black'></div>
+          <div className="opacity-25 fixed inset-0  z-[20000] bg-black"></div>
         </>
       )}
     </div>
