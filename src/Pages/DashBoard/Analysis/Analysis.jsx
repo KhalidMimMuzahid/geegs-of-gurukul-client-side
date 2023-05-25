@@ -99,7 +99,7 @@ const Analysis = () => {
     <div className="p-16">
       <ProfileInfo assessment={assessment} />
 
-      <OpenModal />
+      <OpenModal response={response} assessment={assessment} />
       <OverView aboutResponse={aboutResponse} totalMark={totalMark} />
       <div>{strength?.length > 0 && <Strength strength={strength} />}</div>
       <div>{average?.length > 0 && <Average average={average} />}</div>
