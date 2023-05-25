@@ -10,7 +10,6 @@ function AllAnswers({
   setIsInstruction,
   isInstruction,
 }) {
-  // console.log(questions);
   return (
     <div className="grid grid-cols-6 gap-10 items-center">
       <div className="relative col-span-6 md:col-span-2 text-center">
@@ -26,6 +25,28 @@ function AllAnswers({
                 key={index}
               />
             ))}
+          </div>
+        </div>
+        <div className="mt-5">
+          <p className="text-left">Attempted</p>
+          <div className="flex items-center">
+            <div className="bg-gray-200 h-[10px] rounded-lg w-[100%]">
+              <div
+                className={`bg-green-300 h-[10px] rounded-lg`}
+                style={{
+                  width: `${
+                    (response.aboutResponse.attemptOn / questions.length) * 100
+                  }%`,
+                }}
+              ></div>
+            </div>
+            <p className="ml-4">
+              {(
+                (response.aboutResponse.attemptOn / questions.length) *
+                100
+              ).toFixed(2)}
+              %
+            </p>
           </div>
         </div>
         <button

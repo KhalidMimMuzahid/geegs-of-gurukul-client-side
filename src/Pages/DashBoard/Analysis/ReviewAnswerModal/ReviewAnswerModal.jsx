@@ -86,6 +86,26 @@ const ReviewAnswerModal = ({ isOpen, setIsOpen, response, assessment }) => {
                     <BsXCircleFill color="red" size={20} />
                   </button>
                 </div>
+                <div className="flex justify-end items-center text-center mb-5 text-sm">
+                  <div className="flex items-center">
+                    <div className="rounded-full bg-green-200 h-7 w-7 p-1">
+                      1
+                    </div>
+                    <p className="ml-2">Right</p>
+                  </div>
+                  <div className="flex items-center ml-4">
+                    <div className="rounded-full bg-rose-200 h-7 w-7 p-1">
+                      1
+                    </div>
+                    <p className="ml-2">Wrong</p>
+                  </div>
+                  <div className="flex items-center ml-4">
+                    <div className="rounded-full bg-gray-200 h-7 w-7 p-1">
+                      1
+                    </div>
+                    <p className="ml-2">Not answered</p>
+                  </div>
+                </div>
                 <div className="">
                   {/* content goes here */}
                   <AllAnswers
