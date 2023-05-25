@@ -1,9 +1,15 @@
 import React from "react";
-import AccordionItem from "../Accordions/AccordionItem";
-
+import EachModule from "../Accordions/EachModule";
+import { useQuery } from "@tanstack/react-query";
 const percentCompleted = 40;
 
-function ContentLists({ contents, selected, setSelected }) {
+function ContentLists({
+  modules,
+  selected,
+  setSelected,
+  setSelectedModuleLectureList,
+  changingModuleStatus,
+}) {
   return (
     <div className="p-4 bg-white rounded-lg shadow-md col-span-12 lg:col-span-4">
       {/* Course progress tracker */}
@@ -25,12 +31,15 @@ function ContentLists({ contents, selected, setSelected }) {
       {/* Accordions */}
       <div className="overflow-y-auto mt-4" style={{ height: "550px" }}>
         <div className="w-full max-w-lg mx-auto">
-          {contents.map((content) => (
-            <AccordionItem
-              content={content}
-              key={content._id}
+          {modules.map((module, contentPosition) => (
+            <EachModule
+              module={module}
+              key={module._id}
               selected={selected}
               setSelected={setSelected}
+              contentPosition={contentPosition}
+              setSelectedModuleLectureList={setSelectedModuleLectureList}
+              changingModuleStatus={changingModuleStatus}
             />
           ))}
         </div>

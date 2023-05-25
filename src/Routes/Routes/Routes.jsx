@@ -31,8 +31,6 @@ import AddAssignment from "../../Pages/DashBoard/AdminPannel/AddAssignment/AddAs
 import Courses from "../../Pages/DashBoard/MyCourses/Courses/Courses";
 import MyCourses from "../../Pages/DashBoard/MyCourses/MyCourses";
 import SpecificCourse from "../../Pages/DashBoard/MyCourses/SpecificCourse/SpecificCourse";
-import SpecificLecture from "../../Pages/DashBoard/MyCourses/SpecificLecture/SpecificLecture";
-import SpecificModule from "../../Pages/DashBoard/MyCourses/SpecificModule/SpecificModule";
 import Help from "../../Pages/Help/Help";
 import AddBatch from "../../Pages/DashBoard/AdminPannel/AddBatch/AddBatch";
 import AddCourse from "../../Pages/DashBoard/AdminPannel/AddCourse/AddCourse";
@@ -111,14 +109,6 @@ const router = createBrowserRouter([
               {
                 path: "/dashboard/courses/course",
                 element: <SpecificCourse />,
-              },
-              {
-                path: "/dashboard/courses/lecture",
-                element: <SpecificLecture />,
-              },
-              {
-                path: "/dashboard/courses/module",
-                element: <SpecificModule />,
               },
             ],
           },

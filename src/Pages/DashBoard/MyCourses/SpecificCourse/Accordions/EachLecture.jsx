@@ -5,10 +5,15 @@ import {
   BsPersonVideo3,
 } from "react-icons/bs";
 
-function InnerAccordion({ lecture, selected, setSelected }) {
+function EachLecture({
+  lecture,
+  selected,
+  setSelected,
+  module_id,
+  setSelectedModuleLectureList,
+  lecturesList,
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  console.log("selected: ", selected);
-  console.log("lecture: ", lecture);
   useEffect(() => {
     setIsOpen(
       lecture?._id === selected?._id
@@ -18,6 +23,7 @@ function InnerAccordion({ lecture, selected, setSelected }) {
         : false
     );
   }, [selected]);
+
   return (
     <div className="flex flex-col w-full px-4 py-2 my-1 text-left border border-gray-200 bg-green-50 rounded-md">
       <button
@@ -38,28 +44,37 @@ function InnerAccordion({ lecture, selected, setSelected }) {
           <button
             type="button"
             className="relative flex items-center p-2 border border-gray-200 w-full rounded-md bg-white my-2"
-            onClick={() => setSelected(lecture)}
+            onClick={() => {
+              setSelected(lecture);
+              setSelectedModuleLectureList(lecturesList);
+            }}
           >
-            {selected._id === lecture._id && (
+            {selected?._id === lecture?._id && (
               <span className="absolute left-0 top-0 bottom-0 w-1 bg-green-500 rounded-l-md"></span>
             )}
             <BsPersonVideo3 color="green" className="ml-1" />
             <p className="text-sm text-green-600 ml-3">Lecture video</p>
           </button>
-          {lecture?.assignments?.map((assignment) => (
+          {lecture?.assignment?.assignments?.map((eachAssignment) => (
             <button
               type="button"
               className="relative flex items-center p-2 border border-gray-200 w-full rounded-md bg-white my-2"
-              onClick={() =>
-                setSelected({ ...assignment, lecture_id: lecture?._id })
-              }
-              key={assignment._id} // Move the key prop here
+              onClick={() => {
+                setSelected({
+                  ...eachAssignment,
+                  lecture_id: lecture?._id,
+                  module: { module_id: module_id },
+                  deadLine: lecture?.assignment?.deadLine,
+                  sheduledAt: lecture?.assignment?.sheduledAt,
+                });
+              }}
+              key={eachAssignment._id} // Move the key prop here
             >
-              {selected._id === assignment._id && (
+              {selected?.assignment_id === eachAssignment.assignment_id && (
                 <span className="absolute left-0 top-0 bottom-0 w-1 bg-green-500 rounded-l-md"></span>
               )}
               <BsFillCheckCircleFill color="green" className="ml-1" />
-              <p className="text-sm ml-3">{assignment.assignmentName}</p>
+              <p className="text-sm ml-3">{eachAssignment.assignmentName}</p>
             </button>
           ))}
         </div>
@@ -68,4 +83,4 @@ function InnerAccordion({ lecture, selected, setSelected }) {
   );
 }
 
-export default InnerAccordion;
+export default EachLecture;

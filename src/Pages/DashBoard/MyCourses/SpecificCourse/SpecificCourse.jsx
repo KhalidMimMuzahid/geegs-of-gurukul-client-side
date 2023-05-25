@@ -1,52 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./EachModule/EachModule.module.css";
 import { Link } from "react-router-dom";
 import ContentDetails from "./ContentDetails/ContentDetails";
-import { contents, description } from "./DummyData/dummyData";
 import ContentLists from "./ContentLists/ContentLists";
+import { useQuery } from "@tanstack/react-query";
 
 const SpecificCourse = () => {
-  const [selected, setSelected] = useState(contents[0].lecturesList[0]);
+  const [selected, setSelected] = useState(null);
+  const [selectedModuleLectureList, setSelectedModuleLectureList] = useState(
+    []
+  );
+  const [changingModuleStatus, setChangingModuleStatus] = useState({});
+  const [isLoading, setisLoading] = useState(true);
+  const [modules, setModules] = useState([]);
 
-  const changeLecture = (direction) => {
-    if (direction === +1) {
-      const moduleIndex = contents.findIndex(
-        (element) => element._id === selected.module_id
-      );
-      const lectureIndex = contents[moduleIndex].lecturesList.findIndex(
-        (element) => element._id === selected._id
-      );
-      try {
-        if (lectureIndex === contents[moduleIndex].lecturesList.length - 1) {
-          setSelected(contents[moduleIndex + 1].lecturesList[0]);
-        } else {
-          setSelected(contents[moduleIndex].lecturesList[lectureIndex + 1]);
-        }
-      } catch {
-        console.log("end reached");
-      }
-    } else if (direction === -1) {
-      const moduleIndex = contents.findIndex(
-        (element) => element._id === selected.module_id
-      );
-      const lectureIndex = contents[moduleIndex].lecturesList.findIndex(
-        (element) => element._id === selected._id
-      );
-      try {
-        if (lectureIndex === 0) {
-          setSelected(
-            contents[moduleIndex - 1].lecturesList[
-              contents[moduleIndex - 1].lecturesList.length - 1
-            ]
-          );
-        } else {
-          setSelected(contents[moduleIndex].lecturesList[lectureIndex - 1]);
-        }
-      } catch {
-        console.log("start reached");
-      }
-    }
-  };
+  useEffect(() => {
+    console.log("specific useEffect called");
+    fetch(
+      `http://localhost:5000/modulesbycourseandbatch?course_id=${"6465c48a3a22da5a8518d942"}&batch_id=${"6469c5010664f5003c9be953"}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setModules(data);
+        setisLoading(false);
+      });
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div>
+        <downloading className="">downloading</downloading>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -60,16 +47,20 @@ const SpecificCourse = () => {
           <div className="p-4 bg-white rounded-lg shadow-md col-span-12 lg:col-span-8">
             <ContentDetails
               selected={selected}
-              changeLecture={changeLecture}
+              modules={modules}
               setSelected={setSelected}
+              selectedModuleLectureList={selectedModuleLectureList}
+              setChangingModuleStatus={setChangingModuleStatus}
             />
           </div>
 
           {/* course list section */}
           <ContentLists
-            contents={contents}
+            modules={modules}
             selected={selected}
             setSelected={setSelected}
+            setSelectedModuleLectureList={setSelectedModuleLectureList}
+            changingModuleStatus={changingModuleStatus}
           />
         </div>
       </div>
@@ -78,36 +69,3 @@ const SpecificCourse = () => {
 };
 
 export default SpecificCourse;
-
-{
-  /* <div className="grid grid-cols-1  gap-7 pt-4 px-5">
-          {modules?.map((module, i) => (
-            <EachModule key={i} module={module} />
-          ))}
-        </div> 
-
-<h2 className= {`${style.upcomming}`}>Upcomingggggggggggggggggggggggggggggg</h2>
-
-        <div className="grid grid-cols-1  gap-7 pt-4 px-5">
-          <div className={`${style.timeCurs}`}>
-            <div>
-              <h3>HTML : HTML Advanced Tutoriaxxxxxxxxxxxxxxxxxxxxxxxl </h3>
-              <p>Language : English</p>
-            </div>
-            <Link
-              target={"_blank"}
-              to={"https://meet.google.com/afk-iedz-jhk?authuser=0"}
-              className={`${style.activezoom}`}
-            >
-              Zoom
-            </Link>
-          </div>
-        </div> 
-
-const modules = [
-  { moduleName: "Html", Language: "English", videourl :"https://vimeo.com/tompeyrat/gaucho" },
-  { moduleName: "Html", Language: "English", videourl :"https://vimeo.com/tompeyrat/gaucho" },
-  { moduleName: "Html", Language: "English", videourl :"https://vimeo.com/tompeyrat/gaucho" },
-  { moduleName: "Html", Language: "English", videourl :"https://vimeo.com/tompeyrat/gaucho" },
-]; */
-}

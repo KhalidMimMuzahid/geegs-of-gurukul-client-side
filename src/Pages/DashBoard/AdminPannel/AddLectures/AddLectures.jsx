@@ -10,11 +10,19 @@ import { uploadFile } from "react-s3";
 import { toast } from "react-hot-toast";
 import { useSpring } from "framer-motion";
 import AddModuleModel from "./Modal/AddModuleModel";
+import Loading from "../../../../Components/Loading/Loading";
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 const config = {
   bucketName: "all-files-for-gog",
   dirName: "assets/any-types",
+  region: "ap-south-1",
+  accessKeyId: process.env.REACT_APP_S3AccessKeyId,
+  secretAccessKey: process.env.REACT_APP_S3SecretAccessKey,
+};
+const configForVideo = {
+  bucketName: "all-files-for-gog",
+  dirName: "assets/videos",
   region: "ap-south-1",
   accessKeyId: process.env.REACT_APP_S3AccessKeyId,
   secretAccessKey: process.env.REACT_APP_S3SecretAccessKey,
@@ -29,8 +37,6 @@ const AddLectures = () => {
   const [instructions, setInstructions] = useState(false);
   const [search, setSearch] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [attachment, setAttachment] = useState("");
-  const [videoUpload, setVideoUpload] = useState("");
   const [data, setData] = useState([]);
   const [courses, setCourses] = useState([]);
   // const [selectedProgramId, setSelectedProgramId] = useState(null);
@@ -42,6 +48,7 @@ const AddLectures = () => {
   const [modules, setModules] = useState([]);
   const [module, setModule] = useState([]);
   const [refreshModules, setRefreshModules] = useState(true);
+  const [fileUploadingStatus, setFileUploadingStatus] = useState({});
   const {
     register,
     handleSubmit,
@@ -150,7 +157,7 @@ const AddLectures = () => {
       fetch(`http://localhost:5000/all-modules-by-batch?_id=${batch?.batch_id}`)
         .then((response) => response.json())
         .then((data) => {
-          console.log("data", data?.data);
+          // console.log("data", data?.data);
           setModules(data?.data);
         });
     }
@@ -158,7 +165,7 @@ const AddLectures = () => {
 
   // console.log("course", course);
   // console.log("program", program);
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (data?.moduleName === "createNewModule") {
       toast.error("please select a module.");
       return;
@@ -170,12 +177,35 @@ const AddLectures = () => {
       return;
     }
     const justNow = moment().format();
-
-    if (data?.attachment) {
-      awsFileUpload(data?.attachment, setAttachment);
+    let attachment = "";
+    let videoUpload = "";
+    if (data?.attachment[0]) {
+      setFileUploadingStatus({ isLoading: true, fileType: "attachment" });
+      const file = data?.attachment[0];
+      const fileData = await uploadFile(file, config);
+      if (fileData?.location) {
+        attachment = fileData?.location;
+        setFileUploadingStatus({ isLoading: false, fileType: "" });
+      } else {
+        setLoading(false);
+        setFileUploadingStatus({ isLoading: false, fileType: "" });
+        toast.error("attachment could not be uploaded");
+        return;
+      }
     }
-    if (data?.videoInput) {
-      awsFileUpload(data?.videoInput, setVideoUpload);
+    if (data?.videoInput[0]) {
+      setFileUploadingStatus({ isLoading: true, fileType: "video" });
+      const file = data?.videoInput[0];
+      const fileData = await uploadFile(file, configForVideo);
+      if (fileData?.location) {
+        videoUpload = fileData?.location;
+        setFileUploadingStatus({ isLoading: false, fileType: "" });
+      } else {
+        setLoading(false);
+        setFileUploadingStatus({ isLoading: false, fileType: "" });
+        toast.error("attachment could not be uploaded");
+        return;
+      }
     }
 
     const lectureData = {
@@ -198,7 +228,7 @@ const AddLectures = () => {
         liveLink: data?.zoomLink,
         videoLink: {
           s3Hoster: videoUpload,
-          vimeoHoster: user?.email,
+          vimeoHoster: "",
         },
       },
       notes: data?.notes,
@@ -224,9 +254,6 @@ const AddLectures = () => {
 
     console.log(lectureData);
     setLoading(false);
-
-    return;
-
     fetch(`http://localhost:5000/lectureDetails`, {
       method: "POST",
       headers: {
@@ -239,9 +266,9 @@ const AddLectures = () => {
         if (result?.success) {
           toast?.success(result?.message);
           setLoading(false);
-          reset(result);
+          // reset();
         } else {
-          toast.error(result?.message);
+          toast.error(result?.error);
           setLoading(false);
         }
       })
@@ -254,23 +281,30 @@ const AddLectures = () => {
   };
 
   //upload file
-  const awsFileUpload = (filePath, setUploadedFilePath) => {
-    if (filePath[0]) {
-      const file = filePath[0];
-      // console.log(file);
-      uploadFile(file, config)
-        .then((fileData) => {
-          setUploadedFilePath(fileData?.location);
-          console.log("fileData", fileData);
-        })
-        .catch((err) => {
-          toast.error(err?.message);
-          setLoading(false);
-        });
-    }
-  };
+  // const awsFileUpload = async (filePath, setUploadedFilePath) => {
+  //   console.log("vvvvvvvvvvvvvvvvvv");
+  //   if (filePath[0]) {
+  //     const file = filePath[0];
+  //     console.log(file);
+  //     uploadFile(file, config)
+  //       .then((fileData) => {
+  //         setUploadedFilePath(fileData?.location);
+  //         console.log("fileData", fileData);
+  //         return true;
+  //       })
+  //       .catch((err) => {
+  //         console.log("erorrrrrrrrrrrrrrrrrrrrrrrrrr");
+  //         toast.error(err?.message);
+  //         setLoading(false);
+  //         return false;
+  //       });
+  //   } else {
+  //     console.log("elseeeeeeeeeeee");
+  //     return false;
+  //   }
+  // };
 
-  console.log("addNewModule", addNewModule);
+  // console.log("addNewModule", addNewModule);
   return (
     <div className="container p-8">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -553,7 +587,7 @@ const AddLectures = () => {
                 id="videoInput"
                 name="videoInput"
                 type="file"
-                accept=".mp4"
+                accept=".mp4,mov,avi,mkv,wmv,webm,mpeg-4,.ts"
                 {...register("videoInput")}
                 aria-invalid={errors.videoInput ? "true" : "false"}
               />
@@ -707,6 +741,13 @@ const AddLectures = () => {
             {loading ? "Submitting..." : "Submit"}
           </span>
         </button>
+
+        {fileUploadingStatus?.isLoading && (
+          <div>
+            <h1>{fileUploadingStatus?.fileType} is uploading</h1>
+            <Loading type={"progressor"} />
+          </div>
+        )}
       </form>
       {/* Add assignment modal */}
       {search && (
