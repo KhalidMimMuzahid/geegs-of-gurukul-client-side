@@ -94,7 +94,7 @@ const Users = () => {
                 type='submit'
                 disabled={loading}
                 className='font-poppins font-medium text-white px-12 py-2 rounded-lg hover:bg-green-400 bg-green-500'>
-                {loading? 'Searching':'Search'}
+                {loading ? "Searching" : "Search"}
               </button>
             </div>
           </div>
@@ -137,7 +137,7 @@ const Users = () => {
                       <td class='p-2 whitespace-nowrap'>
                         <img
                           className='w-10 rounded-full shadow-lg'
-                          src={profile?.profilePic}
+                          src={profile?.photoURL}
                           alt=''
                         />
                       </td>
