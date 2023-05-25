@@ -7,6 +7,7 @@ import { Modal } from "flowbite";
 import { AuthContext } from "./../../../../contexts/UserProvider/UserProvider";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import ReactPaginate from "react-paginate";
 
 const LecturesList = () => {
   const $targetEl = document.getElementById("staticModal");
@@ -24,6 +25,7 @@ const LecturesList = () => {
   const [modules, setModules] = useState([]);
   const [module, setModule] = useState([]);
   const [refreshModules, setRefreshModules] = useState(true);
+  const [itemOffset, setItemOffset] = useState(0);
 
   const {
     register,
@@ -185,45 +187,21 @@ const LecturesList = () => {
       });
   };
 
-  // const [windowSize, setWindowSize] = useState();
-  const options = {
-    placement: "bottom-right",
-    backdrop: "dynamic",
-    backdropClasses:
-      "bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-5 z-[4000000]",
-    closable: true,
-    onHide: () => {
-      console.log("modal is hidden");
-    },
-    onShow: () => {
-      console.log("modal is shown");
-    },
-    onToggle: () => {
-      console.log("modal has been toggled");
-    },
+  //pagination calculation
+
+  const itemsPerPage = 10;
+
+  const endOffset = itemOffset + itemsPerPage;
+
+  const currentLectures = lectures?.slice(itemOffset, endOffset);
+  const pageCount = Math?.ceil(lectures?.length / itemsPerPage);
+  const handlePageClick = (event) => {
+    const newOffset = (event?.selected * itemsPerPage) % lectures?.length;
+    console.log(
+      `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
   };
-
-  // const modal = new Modal($targetEl, options);
-
-  // const courses = [
-  //   {
-  //     CourseName: "Introduction to JavaScript",
-  //     Topic: "Variables and Data Types",
-  //     BatchNo: 1234,
-  //   },
-
-  //   {
-  //     CourseName: "Machine Learning with Python",
-  //     Topic: "Regression Analysis",
-  //     BatchNo: 7890,
-  //   },
-  //   { CourseName: "iOS App Development", Topic: "UI Design", BatchNo: 1235 },
-  //   {
-  //     CourseName: "Android App Development",
-  //     Topic: "Intents and Activities",
-  //     BatchNo: 6789,
-  //   },
-  // ];
   return (
     <div className='mt-5'>
       {/* filtering form */}
@@ -411,8 +389,8 @@ const LecturesList = () => {
                   </tr>
                 </thead>
                 <tbody class='text-sm divide-y divide-gray-100'>
-                  {lectures?.length > 0 &&
-                    lectures.map((lecture, i) => (
+                  {currentLectures?.length > 0 &&
+                    currentLectures.map((lecture, i) => (
                       <tr key={i}>
                         <td class='p-2 whitespace-nowrap'>
                           <div class='flex items-center'>{i + 1}</div>
@@ -464,6 +442,22 @@ const LecturesList = () => {
                     ))}
                 </tbody>
               </table>
+              {/* pagination */}
+
+              <div>
+                <div className='pagination'>
+                  <ReactPaginate
+                    breakLabel='...'
+                    nextLabel='>'
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    previousLabel='<'
+                    renderOnZeroPageCount={null}
+                    containerClassName='pagination-menu'
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

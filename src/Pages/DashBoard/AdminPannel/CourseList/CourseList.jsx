@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "./../../../../contexts/UserProvider/UserProvider";
+import ReactPaginate from "react-paginate";
 const CourseList = () => {
   const { user } = useContext(AuthContext);
   const [shouldDelete, setShouldDelete] = useState(false);
@@ -17,6 +18,7 @@ const CourseList = () => {
   const [course, setCourse] = useState({});
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState([]);
+  const [itemOffset, setItemOffset] = useState(0);
   const {
     register,
     handleSubmit,
@@ -160,6 +162,22 @@ const CourseList = () => {
       .catch((error) => console.error(error));
   };
 
+  //pagination calculation
+
+  const itemsPerPage = 10;
+
+  const endOffset = itemOffset + itemsPerPage;
+
+  const currentItems = items?.slice(itemOffset, endOffset);
+  const pageCount = Math?.ceil(items?.length / itemsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event?.selected * itemsPerPage) % items?.length;
+    console.log(
+      `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
   return (
     <div>
       <div className='container mt-5'>
@@ -300,12 +318,8 @@ const CourseList = () => {
                   </tr>
                 </thead>
                 <tbody class='text-sm divide-y divide-gray-100'>
-                  {items?.length === 0 ? (
-                    <p className='text-3xl text-center text-red-400'>
-                      {!loading && "Don't have any data"}
-                    </p>
-                  ) : (
-                    items?.map((item, i) => (
+                  {currentItems?.length === 0 &&
+                    currentItems?.map((item, i) => (
                       <tr key={item?._id}>
                         <td class='p-2 whitespace-nowrap text-center'>
                           <div class='flex items-center'>{i + 1}</div>
@@ -407,10 +421,25 @@ const CourseList = () => {
                           </div>
                         </td>
                       </tr>
-                    ))
-                  )}
+                    ))}
                 </tbody>
               </table>
+              {/* pagination */}
+
+              <div>
+                <div className='pagination'>
+                  <ReactPaginate
+                    breakLabel='...'
+                    nextLabel='>'
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    previousLabel='<'
+                    renderOnZeroPageCount={null}
+                    containerClassName='pagination-menu'
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

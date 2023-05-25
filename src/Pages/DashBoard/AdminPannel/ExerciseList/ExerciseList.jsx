@@ -5,10 +5,12 @@ import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
 import { toast } from "react-hot-toast";
+import ReactPaginate from "react-paginate";
 
 const ExerciseList = () => {
   const [loading, setLoading] = useState(false);
   const [exercises, setExercises] = useState([]);
+  const [itemOffset, setItemOffset] = useState(0);
   const {
     register,
     handleSubmit,
@@ -63,6 +65,21 @@ const ExerciseList = () => {
     },
   ];
 
+  // pagination calculations
+  const itemsPerPage = 10;
+
+  const endOffset = itemOffset + itemsPerPage;
+
+  const currentExercises = exercises?.slice(itemOffset, endOffset);
+  const pageCount = Math?.ceil(exercises?.length / itemsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event?.selected * itemsPerPage) % exercises?.length;
+    console.log(
+      `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
   return (
     <div className='relative'>
       {/* filtering form */}
@@ -168,8 +185,8 @@ const ExerciseList = () => {
                   </tr>
                 </thead>
                 <tbody class='text-sm divide-y divide-gray-100'>
-                  {exercises?.length > 0 &&
-                    exercises.map((exercise, i) => (
+                  {currentExercises?.length > 0 &&
+                    currentExercises.map((exercise, i) => (
                       <tr key={exercise?._id}>
                         <td class='p-2 whitespace-nowrap'>
                           <div class='flex items-center'>{i + 1}</div>
@@ -221,6 +238,22 @@ const ExerciseList = () => {
                     ))}
                 </tbody>
               </table>
+              {/* pagination */}
+
+              <div>
+                <div className='pagination'>
+                  <ReactPaginate
+                    breakLabel='...'
+                    nextLabel='>'
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    previousLabel='<'
+                    renderOnZeroPageCount={null}
+                    containerClassName='pagination-menu'
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

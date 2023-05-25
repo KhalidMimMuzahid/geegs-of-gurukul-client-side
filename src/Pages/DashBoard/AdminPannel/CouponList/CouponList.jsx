@@ -5,10 +5,12 @@ import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
 import { toast } from "react-hot-toast";
 import EditCoupon from "./EditCoupon/EditCoupon";
+import ReactPaginate from "react-paginate";
 const CouponList = () => {
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState([]);
   const [isEditable, setIsEditable] = useState(false);
+  const [itemOffset, setItemOffset] = useState(0);
 
   const {
     register,
@@ -56,6 +58,21 @@ const CouponList = () => {
     // reset();
   };
 
+  // pagenation
+  const itemsPerPage = 10;
+
+  const endOffset = itemOffset + itemsPerPage;
+
+  const currentItems = items?.slice(itemOffset, endOffset);
+  const pageCount = Math?.ceil(items.length / itemsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event?.selected * itemsPerPage) % items?.length;
+    console.log(
+      `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
   return (
     <div>
       {/* Search Form */}
@@ -66,8 +83,7 @@ const CouponList = () => {
             <div class='w-full mx-auto my-3 font-poppins'>
               <label
                 for='CouponLabel'
-                class='block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400'
-              >
+                class='block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400'>
                 <div className='flex items-center justify-between'>
                   <p>Coupon Label:</p>
                 </div>
@@ -84,13 +100,11 @@ const CouponList = () => {
                 )}
                 class='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
                 placeholder='Enter coupon label'
-                aria-invalid={errors.CouponLabel ? "true" : "false"}
-              ></input>
+                aria-invalid={errors.CouponLabel ? "true" : "false"}></input>
               {errors.CouponLabel && (
                 <p
                   role='alert'
-                  className='text-red-500 font-poppins font-medium'
-                >
+                  className='text-red-500 font-poppins font-medium'>
                   {errors.CouponLabel?.message}
                 </p>
               )}
@@ -98,8 +112,7 @@ const CouponList = () => {
             <div class='w-full mx-auto my-3 font-poppins'>
               <label
                 for='creatorNmame'
-                class='block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400'
-              >
+                class='block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400'>
                 <div className='flex items-center justify-between'>
                   <p>Creator Email:</p>
                 </div>
@@ -116,13 +129,11 @@ const CouponList = () => {
                 )}
                 class='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
                 placeholder='Write creator email'
-                aria-invalid={errors.creatorEmail ? "true" : "false"}
-              ></input>
+                aria-invalid={errors.creatorEmail ? "true" : "false"}></input>
               {errors.creatorEmail && (
                 <p
                   role='alert'
-                  className='text-red-500 font-poppins font-medium'
-                >
+                  className='text-red-500 font-poppins font-medium'>
                   {errors.creatorEmail?.message}
                 </p>
               )}
@@ -130,8 +141,7 @@ const CouponList = () => {
             <div class='w-full mx-auto my-3 font-poppins'>
               <label
                 for='updaterEmail'
-                class='block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400'
-              >
+                class='block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400'>
                 <div className='flex items-center justify-between'>
                   <p>Updater Email:</p>
                 </div>
@@ -148,13 +158,11 @@ const CouponList = () => {
                 )}
                 class='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
                 placeholder='Write Updater email'
-                aria-invalid={errors.updaterEmail ? "true" : "false"}
-              ></input>
+                aria-invalid={errors.updaterEmail ? "true" : "false"}></input>
               {errors.updaterEmail && (
                 <p
                   role='alert'
-                  className='text-red-500 font-poppins font-medium'
-                >
+                  className='text-red-500 font-poppins font-medium'>
                   {errors.updaterEmail?.message}
                 </p>
               )}
@@ -164,8 +172,7 @@ const CouponList = () => {
           {/* Submit Button */}
           <button
             type='submit'
-            class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow'
-          >
+            class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow'>
             <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
             <span class='relative text-black group-hover:text-white font-poppins font-medium'>
               {loading ? `Searching` : `Search Coupon`}
@@ -204,7 +211,7 @@ const CouponList = () => {
                   </tr>
                 </thead>
                 <tbody class='text-sm divide-y divide-gray-100'>
-                  {items.map((coupon, i) => (
+                  {currentItems.map((coupon, i) => (
                     <tr key={i}>
                       <td class='p-2 whitespace-nowrap'>
                         <div class='flex items-center'>{i + 1}</div>
@@ -229,8 +236,7 @@ const CouponList = () => {
                           <button
                             type='button'
                             className='px-1 py-1'
-                            onClick={() => setIsEditable(true)}
-                          >
+                            onClick={() => setIsEditable(true)}>
                             {/* svg */}
                             <img
                               height='15px'
@@ -251,8 +257,7 @@ const CouponList = () => {
                             data-modal-target='staticModal'
                             data-modal-toggle='staticModal'
                             class='px-1 py-1 '
-                            type='button'
-                          >
+                            type='button'>
                             {/* svg */}
                             <img
                               height='15px'
@@ -267,6 +272,23 @@ const CouponList = () => {
                   ))}
                 </tbody>
               </table>
+
+              {/* pagination */}
+
+              <div>
+                <div className='pagination'>
+                  <ReactPaginate
+                    breakLabel='...'
+                    nextLabel='>'
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    previousLabel='<'
+                    renderOnZeroPageCount={null}
+                    containerClassName='pagination-menu'
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
