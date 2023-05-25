@@ -50,17 +50,7 @@ const ProgramList = () => {
       });
   };
 
-  // Fetching Programs info from server
-  // const {data:programs,isLoading } = useQuery({
-  //   queryKey: ['userDetailse'],
-  //   queryFn: ()=>fetch(`https://geeks-of-gurukul-server-side.vercel.app/all-program`)
-  //   .then((res) => res.json())
-  // })
-  //   const Allprograms = programs?.data;
-  //   // console.log(Allprograms)
-  // if (isLoading) {
-  //   return <div>loading...</div>
-  // }
+
   return (
     <div className='relative'>
       {/* Search Form */}

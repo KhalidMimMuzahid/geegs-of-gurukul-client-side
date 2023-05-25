@@ -13,7 +13,7 @@ const ModuleList = () => {
   const [course, setCourse] = useState({});
   const [batch, setBatch] = useState({});
   const [batches, setBatches] = useState([]);
-  const [module, setmodule] = useState([]);
+  const [modules, setmodules] = useState([]);
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -76,7 +76,7 @@ const ModuleList = () => {
 
   useEffect(() => {
     if (program?.program_id) {
-      setCourses([]);
+      // setCourses([]);
       fetch(
         `https://geeks-of-gurukul-server-side.vercel.app/all-courses-by-program?_id=${program?.program_id}`
       )
@@ -91,7 +91,7 @@ const ModuleList = () => {
   //batch
   useEffect(() => {
     if (course?.course_id) {
-      setCourses([]);
+      // setCourses([]);
       fetch(
         `https://geeks-of-gurukul-server-side.vercel.app/all-batches-by-course?_id=${course?.course_id}`
       )
@@ -106,38 +106,37 @@ const ModuleList = () => {
   const onSubmit = (data) => {
     setLoading(true);
     const searchData = {
-      program,
-      course,
-      batch,
+       program_id:program?.program_id,
+       course_id:course?.course_id,
+       batch_id:batch?.batch_id,
     };
-    fetch(`https://geeks-of-gurukul-server-side.vercel.app/searchModule`, {
+    fetch(`http://localhost:5000/search-module`, {
       method: "GET",
       headers: {
-        "content-type": "application/json",
-        data: searchData,
+        "Content-Type": "application/json",
+        data: JSON.stringify(searchData),
       },
     })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((errors) => {
-        console.log(errors?.message);
+      .then((response) => response.json())
+      .then((result) => {
+        if (result?.success) {
+          setmodules(result?.data);
+          setLoading(false);
+        } else {
+          toast.error(result?.message);
+          setLoading(false);
+        }
+        console.log("Server response:", result);
+        // Handle the server response
+      })
+      .catch((error) => {
+        console.error(
+          "Error occurred while sending data to the server:",
+          error
+        );
+        // Handle the error
       });
-    // .then((res) => res?.json())
-    // .then((result) => {
-    //   if (result?.success) {
-    //     toast?.success(result?.message);
-    //     setLoading(false);
-    //     reset(result);
-    //   } else {
-    //     toast.error(result?.message);
-    //     setLoading(false);
-    //   }
-    // })
-    // .catch((error) => {
-    //   toast.error(error.message);
-    //   setLoading(false);
-    // });
-    // console.log(searchData);
+    console.log(modules);
     reset();
   };
 
@@ -256,7 +255,7 @@ const ModuleList = () => {
           {/* Submit Button */}
           <button
             type='submit'
-            class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow'
+            class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow my-3'
           >
             <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
             <span class='relative text-black group-hover:text-white font-poppins font-medium'>
@@ -271,7 +270,7 @@ const ModuleList = () => {
       <div class='flex flex-col justify-center h-full mx-auto'>
         <div class='w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200'>
           <header class='px-5 py-4 border-b border-gray-100'>
-            <h2 class='font-semibold font-poppins text-gray-800'>Programs</h2>
+            <h2 class='font-semibold font-poppins text-gray-800'>Modules</h2>
           </header>
           <div class='p-3'>
             <div class='max-w-[90vw] overflow-x-scroll'>
@@ -285,6 +284,9 @@ const ModuleList = () => {
                       <div class='font-semibold text-left'>Module Name</div>
                     </th>
                     <th class='p-2 whitespace-nowrap'>
+                      <div class='font-semibold text-left'>Course Name</div>
+                    </th>
+                    <th class='p-2 whitespace-nowrap'>
                       <div class='font-semibold text-left'>Batch Name</div>
                     </th>
 
@@ -294,16 +296,19 @@ const ModuleList = () => {
                   </tr>
                 </thead>
                 <tbody class='text-sm divide-y divide-gray-100'>
-                  {courses.map((course, i) => (
+                  {modules.map((module, i) => (
                     <tr key={i}>
                       <td class='p-2 whitespace-nowrap'>
                         <div class='flex items-center'>{i + 1}</div>
                       </td>
                       <td class='p-2 whitespace-nowrap'>
-                        {course?.CourseName}
+                        {module?.moduleName}
                       </td>
                       <td class='p-2 whitespace-nowrap'>
-                        {course?.CourseName}
+                        {module?.course?.courseName}
+                      </td>
+                      <td class='p-2 whitespace-nowrap'>
+                        {module?.batch?.batchName}
                       </td>
 
                       <td class='p-2 whitespace-nowrap flex gap-2'>
