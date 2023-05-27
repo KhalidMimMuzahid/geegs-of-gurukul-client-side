@@ -27,7 +27,7 @@ const EachExercise = ({
   const lecture = selectedModuleLectureList.find(
     (lecture) => lecture?._id === selected?.lecture_id
   );
-  // console.log("lecture: ", lecture);
+  console.log("selected lecture: ", selectedModuleLectureList);
 
   const handleClick = () => {
     const justNow = moment().format();

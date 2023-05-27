@@ -67,6 +67,7 @@ function EachLecture({
                   deadLine: lecture?.assignment?.deadLine,
                   sheduledAt: lecture?.assignment?.sheduledAt,
                 });
+                setSelectedModuleLectureList(lecturesList);
               }}
               key={eachAssignment._id} // Move the key prop here
             >
