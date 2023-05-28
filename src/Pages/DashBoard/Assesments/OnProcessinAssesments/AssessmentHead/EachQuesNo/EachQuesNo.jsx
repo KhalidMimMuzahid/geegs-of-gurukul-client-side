@@ -60,12 +60,10 @@ const EachQuesNo = ({
   return (
     <div
       onClick={() => selectTheSelectedQuestionIndexWithIndex(index)}
-      className={`border-black  block ${style?.questionNo} ${
-        style?.[quizStatus]
-      } ${
-        isSelected
-          ? `${style?.selectedBtn}  w-[45px] h-[45px] shadow-md shadow-black `
-          : " w-[50px] h-[50px] bg-gray-100 border-1"
+      className={`text-sm border-black w-[45px] h-[45px] block transition-all duration-300 ${
+        style?.questionNo
+      } ${style?.[quizStatus]} ${
+        isSelected && `shadow-md shadow-black transform translate-y-[-8px]`
       }   hover:cursor-pointer`}
       // className={`border-black block  w-[55px] h-[55px] ${style?.questionNo} ${
       //   style?.[quizStatus]

@@ -314,7 +314,7 @@ const OnProcessinAssesments = () => {
         </div>
         {/* mark-negetive */}
         <div className=" rounded-2xl shadow-slate-700">
-          <div className="grid grid-cols-12 gap-1 lg:gap-16">
+          <div className="grid grid-cols-12 gap-5 lg:gap-16 my-8">
             <div className="col-span-12 lg:col-span-4">
               <AssessmentHead
                 assessment={assessment}
@@ -334,7 +334,7 @@ const OnProcessinAssesments = () => {
               />
             </div>
 
-            <div className="col-span-12 lg:col-span-8 mt-2 ">
+            <div className="col-span-12 lg:col-span-8">
               <AssessmentBody
                 // shouldShuffle={assessment?.shouldShuffle}
                 selectedQuestion={selectedQuestion}

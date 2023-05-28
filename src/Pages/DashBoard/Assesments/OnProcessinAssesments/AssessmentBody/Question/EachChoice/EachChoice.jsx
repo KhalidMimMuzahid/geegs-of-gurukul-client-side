@@ -44,10 +44,10 @@ const EachChoice = ({
         type={isMultipleChoice ? "checkbox" : "radio"}
         name="group"
         id={`${key}`}
-        className="cursor-pointer p-0"
+        className="cursor-pointer"
         onChange={(e) => choseAnswerChange(e, key)}
       />
-      <p className="text-xl cursor-pointer">{eachChoice?.[key]}</p>
+      <p className="cursor-pointer">{eachChoice?.[key]}</p>
     </label>
   );
 };
