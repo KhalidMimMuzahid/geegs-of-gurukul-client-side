@@ -6,6 +6,7 @@ import copyIcon from "../../../../assets/icons/copy.svg";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import ReactPaginate from "react-paginate";
 const BatchList = () => {
   const [shouldDelete, setShouldDelete] = useState(false);
   const [data, setData] = useState([]);
@@ -15,6 +16,7 @@ const BatchList = () => {
   const [course, setCourse] = useState({});
   const [batches, setBatches] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [itemOffset, setItemOffset] = useState(0);
 
   const {
     register,
@@ -144,6 +146,22 @@ const BatchList = () => {
 
   console.log(batches);
 
+  //pagination calculation
+  const itemsPerPage = 10;
+
+  const endOffset = itemOffset + itemsPerPage;
+
+  const currentBatches = batches?.slice(itemOffset, endOffset);
+  const pageCount = Math?.ceil(batches?.length / itemsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event?.selected * itemsPerPage) % batches?.length;
+    console.log(
+      `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
   return (
     <div>
       {/* Search */}
@@ -256,8 +274,8 @@ const BatchList = () => {
                   </tr>
                 </thead>
                 <tbody class='text-sm divide-y divide-gray-100'>
-                  {batches?.length > 0 &&
-                    batches?.map((batch, i) => (
+                  {currentBatches?.length > 0 &&
+                    currentBatches?.map((batch, i) => (
                       <tr key={i}>
                         <td class='p-2 whitespace-nowrap'>
                           <div class='flex items-center'>{i + 1}</div>
@@ -337,6 +355,22 @@ const BatchList = () => {
                     ))}
                 </tbody>
               </table>
+              {/* pagination */}
+
+              <div>
+                <div className='pagination'>
+                  <ReactPaginate
+                    breakLabel='...'
+                    nextLabel='>'
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    previousLabel='<'
+                    renderOnZeroPageCount={null}
+                    containerClassName='pagination-menu'
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
