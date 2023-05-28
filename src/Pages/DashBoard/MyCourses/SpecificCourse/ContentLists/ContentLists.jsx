@@ -11,7 +11,7 @@ function ContentLists({
   changingModuleStatus,
 }) {
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md col-span-12 lg:col-span-4">
+    <div className="p-4 bg-white rounded-lg shadow-md col-span-12 lg:col-span-4 h-[80vh] md:h-[90vh]">
       {/* Course progress tracker */}
       <div className="mb-2 grid grid-cols-2">
         <p className="col-span-1">Course progress</p>
@@ -29,7 +29,7 @@ function ContentLists({
         className="w-full rounded-md border-2 border-green-300 focus:border-green-400 focus:ring-0"
       />
       {/* Accordions */}
-      <div className="overflow-y-auto mt-4" style={{ height: "550px" }}>
+      <div className="overflow-y-auto mt-4 h-[80%]">
         <div className="w-full max-w-lg mx-auto">
           {modules.map((module, contentPosition) => (
             <EachModule

@@ -35,6 +35,8 @@ const SpecificCourse = () => {
     );
   }
 
+  console.log("modules: ", selectedModuleLectureList);
+
   return (
     <div>
       <div className="md:m-auto md:mb-10 ml-10 font-poppins pl-10">
@@ -44,7 +46,7 @@ const SpecificCourse = () => {
             Excellency in Professional Carrer
           </div>
           {/* video section */}
-          <div className="p-4 bg-white rounded-lg shadow-md col-span-12 lg:col-span-8">
+          <div className="p-4 bg-white rounded-lg shadow-md col-span-12 lg:col-span-8 h-auto md:h-[90vh]">
             <ContentDetails
               selected={selected}
               modules={modules}
