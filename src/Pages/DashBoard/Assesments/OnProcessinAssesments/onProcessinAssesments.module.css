@@ -13,34 +13,36 @@
   /* background-color: rgb(225, 252, 219); */
   /* background-color: #f7bbbb; */
   /* border: 0.573921px solid #333333; */
+  background-color: #a5a7a5;
+  color: white;
 }
 .checkedMarked {
   /* background-color: rgb(11, 221, 4);
   border: 4px solid black; */
-  background-color: #9dddab;
-  border: 4px solid black;
+  background-color: #27dc69;
+  border: 2px solid #ff1f00;
+  color: white;
 }
 .checkedUnMarked {
   /* background-color: rgb(11, 221, 4); */
-  background-color: #9dddab;
+  background-color: #27dc69;
+  color: white;
 }
 .seenMarked {
   /* background-color: rgb(247, 247, 36); */
   /* background-color: #9dddab;
   border: 4px solid black; */
-  background-color: #f6bbbb;
-  border: 4px solid black;
+  background-color: white;
+  color: black;
+  border: 2px solid #ff1f00;
 }
 .seenUnMarked {
   /* background-color: #9dddab; */
-  background-color: #f6bbbb;
+  color: black;
+  background-color: white;
+  border: 2px solid #27dc69;
 }
-.selectedBtn {
-  /* -webkit-box-shadow: inset 0 0 30px rgb(13, 102, 1);
-  -moz-box-shadow: inset 0 0 30px rgb(13, 102, 1);
-  box-shadow: inset 0 0 30px rgb(13, 102, 1); */
-  /* background-color: rgb(197, 197, 197); */
-}
+
 /* for the action  */
 .clickBtn button {
   /* background: #f4f4f4; */
@@ -88,9 +90,7 @@
 
 .quesChoices input[type="radio"]:checked {
   background-color: #4cb08f;
-  width: 24px;
-  height: 24px;
-  border: 6px solid #4cb08f;
+  border: 3px solid #4cb08f;
 }
 
 .quesChoices input[type="radio"] {
@@ -98,17 +98,15 @@
   -moz-appearance: none;
   appearance: none;
   border: 2px solid #d9d9d9;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
+  /* border-radius: 50%; */
   /* margin-right: 38px; */
   background-color: #d9d9d9;
 }
 .quesChoices input[type="checkbox"]:checked {
   background-color: #4cb08f;
-  width: 24px;
-  height: 24px;
-  border: 6px solid #4cb08f;
+  /* width: 24px;
+  height: 24px; */
+  border: 3px solid #4cb08f;
 }
 
 .quesChoices input[type="checkbox"] {
@@ -117,12 +115,8 @@
   appearance: none;
   border: 2px solid #d9d9d9;
   /* border-radius: 50%; */
-  width: 24px;
-  height: 24px;
+  /* width: 24px;
+  height: 24px; */
   /* margin-right: 38px; */
   background-color: #d9d9d9;
-}
-.submit:hover {
-  transform: scale(1.1);
-  transition: 0.3s ease;
 }
