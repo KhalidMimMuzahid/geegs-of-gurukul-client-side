@@ -17,7 +17,7 @@ const AssessmentBody = ({
 }) => {
   // console.log("shouldShuffle: ", shouldShuffle);
   return (
-    <div className="auto">
+    <div className="auto h-[610px] bg-white shadow-2xl rounded-3xl p-10">
       {/* <h1>AssessmentBody</h1> */}
       <div className="flex flex-col justify-between h-full ">
         <div>

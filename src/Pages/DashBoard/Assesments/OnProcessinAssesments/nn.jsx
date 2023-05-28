@@ -7,7 +7,6 @@ import rightArrow from "../../../../assets/icons/arrow-right.svg";
 import { useContext } from "react";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 import { toast } from "react-hot-toast";
-import Navbar from "../../../../Shared/Navbar/Navbar";
 
 const OnProcessinAssesments = () => {
   const { user } = useContext(AuthContext);
@@ -297,9 +296,24 @@ const OnProcessinAssesments = () => {
     <div className=" max-w-[1440px] w-4/5 mx-auto py-0 lg:py-0 xl:py-0 font-poppins">
       <div className=" relative">
         {/* mark-negetive */}
-        <Navbar />
+        <div className="col-span-3 border-b border-gray-300">
+          <div className="flex justify-between items-center p-2 border border-b-2 bg-slate-100">
+            <div className="flex justify-center items-center gap-1">
+              <img className="w-6 h-5" src={rightArrow} alt="" />
+              <h1 className="font-bold">Single Correct</h1>
+            </div>
+            <div className="flex items-center">
+              <p className="text-[#4caf50] border border-gray-300 p-2 rounded-l-md">
+                + 1.00
+              </p>
+              <p className="text-[#db2020] border border-l-0 border-gray-300 p-2 rounded-r-md">
+                - 0.25
+              </p>
+            </div>
+          </div>
+        </div>
         {/* mark-negetive */}
-        <div className=" rounded-2xl shadow-slate-700 mt-5">
+        <div className=" rounded-2xl shadow-slate-700">
           <div className="grid grid-cols-12 gap-1 lg:gap-16">
             <div className="col-span-12 lg:col-span-4">
               <AssessmentHead
@@ -344,7 +358,7 @@ const OnProcessinAssesments = () => {
           <>
             {/* <h1>sddfddfvfdffdfdfd</h1> */}
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
-              <div className="relative w-[360px] h-[400px] sm:w-[400px] md:w-[500px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
+              <div className="relative w-[360px] h-[320px] sm:w-[400px] md:w-[500px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
                 {/*content*/}
                 <div className="flex flex-col px-8 gap-2   h-full ">
                   <div>
@@ -402,22 +416,22 @@ const OnProcessinAssesments = () => {
 
                   <div>
                     {/* footer */}
-                    <div className="flex justify-center items-center mb-3">
+                    <div className="flex justify-between items-center">
                       <span>Are you sure you want to submit the answers?</span>
-                    </div>
-                    <div className="flex justify-center my-3 gap-4">
-                      <span
-                        onClick={() => setSubmitModalIsOpen(false)}
-                        className="grow  font-semibold text-center text-white  border px-2 py-1 bg-gray-500  hover:cursor-pointer hover:bg-green-500 rounded-lg transition-all durations-700"
-                      >
-                        Cansale
-                      </span>
-                      <span
-                        onClick={handleQuizSubmit}
-                        className="grow font-semibold text-center px-2 py-1  bg-[#27DC69]  hover:cursor-pointer hover:bg-[#48a167] rounded-lg text-white transition-all durations-700 "
-                      >
-                        Submit
-                      </span>
+                      <div className="flex justify-end gap-4">
+                        <span
+                          onClick={() => setSubmitModalIsOpen(false)}
+                          className="grow  font-semibold text-center text-[#28282899]  border px-2 py-1  hover:cursor-pointer hover:bg-gray-200 rounded-lg "
+                        >
+                          No
+                        </span>
+                        <span
+                          onClick={handleQuizSubmit}
+                          className="grow font-semibold text-center px-2 py-1  bg-[#27DC69]  hover:cursor-pointer hover:bg-[#48a167] rounded-lg text-white "
+                        >
+                          Yes
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>

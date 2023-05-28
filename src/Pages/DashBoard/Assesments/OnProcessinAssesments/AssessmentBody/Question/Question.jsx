@@ -159,20 +159,24 @@ const Question = ({
   return (
     <div>
       <div className="  px-2 md:px-4 mb-5">
-        <h1 className="text-[22px] font-medium text-center mb-6 ">
-          Topic: {selectedQuestion?.topicName}
-        </h1>
         <div className="flex flex-col items-center md:flex-row md:justify-between">
-          <h1 className="text-lg  font-normal">
-            Question No: {selectedQuestionIndex + 1}
+          <h1 className="text-[22px] font-medium text-center mb-6 ">
+            Topic: {selectedQuestion?.topicName}
           </h1>
-          <h1 className="text-lg  font-normal">
-            Difficulty Level : {selectedQuestion?.difficultyLevel}
+          <h1 className="ext-[22px] font-medium text-center mb-6">
+            Question- {selectedQuestionIndex + 1}
+          </h1>
+          <h1 className="ext-[22px] font-medium text-center mb-6">
+            Level :{" "}
+            <span className="text-green-600 bg-green-200 px-4 py-1 rounded-3xl">
+              {" "}
+              {selectedQuestion?.difficultyLevel}
+            </span>
           </h1>
         </div>
       </div>
 
-      <h1 className="text-[18px] px-3 font-normal mt-4 mb-6">
+      <h1 className="text-[18px] px-3 font-normal mt-5 mb-6">
         {selectedQuestion?.questionName}
       </h1>
       <div className="relative left-[25px] ">

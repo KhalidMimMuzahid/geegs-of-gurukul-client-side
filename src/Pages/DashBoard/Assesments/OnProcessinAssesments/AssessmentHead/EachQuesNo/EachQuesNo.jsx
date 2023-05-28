@@ -65,7 +65,7 @@ const EachQuesNo = ({
       } ${
         isSelected
           ? `${style?.selectedBtn}  w-[45px] h-[45px] shadow-md shadow-black `
-          : " w-[50px] h-[50px] bg-gray-100 border-1"
+          : " w-[50px] h-[50px] bg-[#A5A7A5]  text-white"
       }   hover:cursor-pointer`}
       // className={`border-black block  w-[55px] h-[55px] ${style?.questionNo} ${
       //   style?.[quizStatus]

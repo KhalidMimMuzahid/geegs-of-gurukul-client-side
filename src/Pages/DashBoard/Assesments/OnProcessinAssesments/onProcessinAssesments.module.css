@@ -10,30 +10,28 @@
   cursor: pointer;
 }
 .unSeenUnMarked {
-  /* background-color: rgb(225, 252, 219); */
-  /* background-color: #f7bbbb; */
-  /* border: 0.573921px solid #333333; */
+  background: #a5a7a5;
 }
 .checkedMarked {
-  /* background-color: rgb(11, 221, 4);
-  border: 4px solid black; */
-  background-color: #9dddab;
-  border: 4px solid black;
+  background-color: #27dc69;
+  border: 4px solid #ff1f00;
 }
 .checkedUnMarked {
   /* background-color: rgb(11, 221, 4); */
-  background-color: #9dddab;
+  border: 4px solid #ff1f00;
+  background: white;
+  color: black;
 }
 .seenMarked {
   /* background-color: rgb(247, 247, 36); */
   /* background-color: #9dddab;
   border: 4px solid black; */
-  background-color: #f6bbbb;
-  border: 4px solid black;
+  background-color: #27dc69;
 }
 .seenUnMarked {
-  /* background-color: #9dddab; */
-  background-color: #f6bbbb;
+  background: white;
+  color: black;
+  border: 4px solid #27dc69;
 }
 .selectedBtn {
   /* -webkit-box-shadow: inset 0 0 30px rgb(13, 102, 1);
@@ -79,11 +77,11 @@
 
 /* for question options  */
 
-.eachChoices {
-  /* background: #f4f4f4;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  padding: 5px 10px; */
+.eachChoices input[type="radio"]:hover {
+  background-color: #4cb08f;
+  width: 24px;
+  height: 24px;
+  border: 6px solid #4cb08f;
 }
 
 .quesChoices input[type="radio"]:checked {
@@ -91,6 +89,9 @@
   width: 24px;
   height: 24px;
   border: 6px solid #4cb08f;
+}
+.quesChoices input[type="radio"]:checked ~ .quesChoices p {
+  color: #27dc69;
 }
 
 .quesChoices input[type="radio"] {

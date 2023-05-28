@@ -36,7 +36,7 @@ const EachChoice = ({
   }, [eachChoice, chosenAnswers]);
   return (
     <label
-      className={`hover:cursor-pointer text-left ml-4 gap-3 flex items-center my-3 ${style?.eachChoices}`}
+      className={`hover:cursor-pointer hover:text-green-400 text-left ml-4 gap-3 flex items-center my-3 ${style?.eachChoices}`}
       htmlFor={key}
     >
       <input

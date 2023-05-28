@@ -9,12 +9,12 @@ const Actions = ({
   setSubmitModalIsOpen,
 }) => {
   return (
-    <div className="w-full px-2 md:px-8 font-poppins font-normal text-[20px] ">
+    <div className="w-full flex justify-between px-2 md:px-8 font-poppins font-normal text-[20px] ">
       <div className={`${style.clickBtn} flex gap-4  justify-center`}>
         <span
           disabled={selectedQuestionIndex === 0}
           onClick={() => changeSelectedQuestionIndexOneByOne(-1)}
-          className={`px-12 font-normal py-2 rounded-lg flex items-center hover:cursor-pointer ${
+          className={`px-5 font-normal py-2 rounded-lg flex items-center hover:cursor-pointer ${
             selectedQuestionIndex === 0
               ? "hover:bg-[#ECECEC] active:bg-[#bbbbbb] bg-[#e6e6e6]"
               : "hover:bg-[#ECECEC] active:bg-[#bbbbbb] bg-gray-300 "
@@ -28,7 +28,7 @@ const Actions = ({
           disabled={selectedQuestionIndex + 1 === totalQuestions}
           onClick={() => changeSelectedQuestionIndexOneByOne(+1)}
           type="button"
-          className={`px-12 font-normal py-2 rounded-lg flex items-center hover:cursor-pointer ${
+          className={`px-5 font-normal py-2 rounded-lg flex items-center hover:cursor-pointer ${
             selectedQuestionIndex + 1 === totalQuestions
               ? "hover:bg-red-400 active:bg-red-500 bg-red-300"
               : "hover:bg-[#53A871] active:bg-[#58b97a] bg-[#58b97a] text-white"
@@ -38,12 +38,12 @@ const Actions = ({
           <FaAngleRight />
         </span>
       </div>
-      <div className="w-full flex justify-end">
+      <div className="">
         <span
-          className={`${style?.submit} hover:cursor-pointer py-1 text-xl font-semibold text-white px-16 bg-[#53A871] rounded-xl hover:bg-[#5ab67a] my-5`}
+          className={`${style?.submit} hover:cursor-pointer text-xl font-semibold text-white px-5 py-2 bg-[#53A871] rounded-xl hover:bg-[#5ab67a] my-5`}
           onClick={() => setSubmitModalIsOpen(true)}
         >
-          Submit
+          Finish attempt
         </span>
       </div>
     </div>
