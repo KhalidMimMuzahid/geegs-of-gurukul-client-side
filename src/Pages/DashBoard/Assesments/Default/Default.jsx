@@ -6,6 +6,7 @@ import Loading from "../../../../Components/Loading/Loading";
 import { MdOutlineLock } from "react-icons/md";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import InstructionsModal from "../InstructionsModal/InstructionsModal";
+import TestPageHeader from "../TestPageHeader/TestPageHeader";
 
 const Default = () => {
   const [assessments, setAssessments] = useState([]);
@@ -38,7 +39,8 @@ const Default = () => {
   console.log(assessments);
   return (
     <>
-      <div className="w-4/5 mx-auto grid grid-cols-1 gap-5 pt-4 px-5">
+    <TestPageHeader />
+      <div className="w-11/12 mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 pt-4 px-5">
         {assessments?.map((assessment, i) => (
           <div
             key={assessment?._id}
@@ -51,12 +53,7 @@ const Default = () => {
                     {assessment?.assessmentName} ({assessment?.categoryName})
                   </h1>
                 </div>
-                <div className="flex justify-center items-center">
-                  <p className="text-sm font-medium text-red-600 bg-red-200 px-3 py-1 rounded-3xl">
-                    Heard
-                  </p>
-                </div>
-                <div className="flex gap-2 place-items-center place-items-center">
+                <div className="flex mt-2 md:mt-0 gap-2 place-items-center">
                   <MdOutlineLock className="text-2xl" />
                   <h1 class=" text-lg tracking-tight text-gray-900 dark:text-white">
                     Available from{" "}
@@ -81,14 +78,14 @@ const Default = () => {
                   {assessment?.questions?.length}
                 </p>
               </div>
-              <div className="time mt-3 flex sm:flex-col md:flex-row justify-between items-center">
+              <div className="time mt-3 md:flex md:flex-row md:justify-between md:items-center">
                 <p class="flex gap-8 items-center mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
                   <img src={time} alt="" /> <span>Time</span>{" "}
                   {assessment?.duration}
                 </p>
                 <button
                   onClick={() => handelClick(assessment?._id)}
-                  class="inline-flex items-center font-poppins px-4 py-2 text-sm font-medium text-center text-[#28282899] bg-[#e4e4e4] rounded-lg hover:bg-[#5fb370] hover:text-white focus:ring-4 focus:outline-none focus:ring-[#75AE80] dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  class="inline-flex items-center mt-2 md:mt-0 px-4 py-2 text-sm font-medium font-poppins text-center text-[#28282899] bg-[#e4e4e4] rounded-lg hover:bg-[#5fb370] hover:text-white focus:ring-4 focus:outline-none focus:ring-[#75AE80] dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Start
                   <svg
