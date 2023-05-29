@@ -53,7 +53,7 @@ const Default = () => {
                 </div>
                 <div className="flex justify-center items-center">
                   <p className="text-sm font-medium text-red-600 bg-red-200 px-3 py-1 rounded-3xl">
-                    Heard
+                    Hard
                   </p>
                 </div>
                 <div className="flex gap-2 place-items-center place-items-center">
