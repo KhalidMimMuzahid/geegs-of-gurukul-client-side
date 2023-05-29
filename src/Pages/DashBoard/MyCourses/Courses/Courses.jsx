@@ -5,35 +5,6 @@ import style from "./course.module.css";
 import { useEffect } from "react";
 import { useState } from "react";
 const Courses = () => {
-<<<<<<< HEAD
-  return (
-    <div>
-      <div>
-        <div className={`${style.contain}`}>
-          {/* we hav to use each courses  */}
-          <div className={`${style.contain}`}>
-            {/* we hav to use each courses  */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5 pt-4 px-5">
-              <div className={`${style.singleCourse}`}>
-                <img src={courseimg} alt="" />
-                <h2>Css</h2>
-                <Link to={"/dashboard/courses/course"}>Start Learn</Link>
-              </div>
-              <div className={`${style.singleCourse}`}>
-                <img src={courseimg} alt="" />
-                <h2>Css</h2>
-                <Link to={"/dashboard/courses/course"}>Start Learn</Link>
-              </div>
-              <div className={`${style.singleCourse}`}>
-                <img src={courseimg} alt="" />
-                <h2>Css</h2>
-                <Link to={"/dashboard/courses/course"}>Start Learn</Link>
-              </div>
-              <div className={`${style.singleCourse}`}>
-                <img src={courseimg} alt="" />
-                <h2>Css</h2>
-                <Link to={"/dashboard/courses/course"}>Start Learn</Link>
-=======
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -180,7 +151,6 @@ const Courses = () => {
                 >
                   Start Learn
                 </Link>
->>>>>>> 2745ca45ce6a69541aa3411498ccdae5f5d9951a
               </div>
             </div>
           ))}
