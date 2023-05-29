@@ -5,12 +5,29 @@ import { AiFillCheckCircle } from "react-icons/ai";
 import moment from "moment/moment";
 import { AuthContext } from "../../../../../contexts/UserProvider/UserProvider";
 import { toast } from "react-hot-toast";
+import { uploadFile } from "react-s3";
+import { useForm } from "react-hook-form";
+
+window.Buffer = window.Buffer || require("buffer").Buffer;
+const config = {
+  bucketName: "all-files-for-gog",
+  dirName: "assets/any-types",
+  region: "ap-south-1",
+  accessKeyId: process.env.REACT_APP_S3AccessKeyId,
+  secretAccessKey: process.env.REACT_APP_S3SecretAccessKey,
+};
 
 const EachExercise = ({
   exercise: exerciseTemp,
   selected,
   selectedModuleLectureList,
 }) => {
+  const [loading, setLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   // console.log("selected: ", selected);
   // console.log("exercise: ", exerciseTemp);
   const { user } = useContext(AuthContext);
@@ -60,6 +77,7 @@ const EachExercise = ({
         toast.error(err.message);
       });
   }, [exerciseTemp?.exercise_id]);
+
   const handleClick = () => {
     const justNow = moment().format();
     setIsOpen(!isOpen);
@@ -122,10 +140,30 @@ const EachExercise = ({
     }
   };
 
-  const handleSubmit = () => {
+  const onSubmit = async (data) => {
     const justNow = moment().format();
-
-    // console.log(exerciseData);
+    let link = "";
+    setLoading(true);
+    if (exercise.submissionType === "link") {
+      // console.log("Link: ", data.link);
+      link = data.link;
+    } else {
+      console.log("File: ", data?.link[0]);
+      const file = data?.link[0];
+      const fileData = await uploadFile(file, config);
+      if (fileData?.location) {
+        link = fileData?.location;
+      } else {
+        toast.error("attachment could not be uploaded");
+      }
+    }
+    const responseData = {
+      isSubmitted: true,
+      status: "completed",
+      link: link,
+    };
+    console.log("responseData: ", responseData);
+    setLoading(false);
   };
 
   // console.log("exercise: ", exercise);
@@ -184,24 +222,51 @@ const EachExercise = ({
               Click here {">>"}
             </a>
           </div>
-          <div className="mt-3 w-full">
-            <p className="font-semibold mb-2">Submission:</p>
-            {exercise.submissionType === "link" ? (
-              <input
-                type="url"
-                className="rounded w-full font-xs"
-                placeholder="Enter submission file link"
-              />
-            ) : (
-              <input type="file" className="rounded w-full border" />
-            )}
-          </div>
-          <button
-            className="mt-3 w-full p-3 bg-green-300 hover:bg-green-400 rounded"
-            type="button"
-          >
-            Submit
-          </button>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="mt-3 w-full">
+              <p className="font-semibold mb-2">Submission:</p>
+              {exercise.submissionType === "link" ? (
+                <input
+                  type="url"
+                  id="link"
+                  name="link"
+                  className="rounded w-full font-xs"
+                  placeholder="Enter submission file link"
+                  {...register("link", {
+                    required: "Link is required",
+                  })}
+                  aria-invalid={errors.link ? "true" : "false"}
+                />
+              ) : (
+                <input
+                  type="file"
+                  id="link"
+                  name="link"
+                  className="rounded w-full border"
+                  {...register("link", {
+                    required: "File is required",
+                  })}
+                  aria-invalid={errors.link ? "true" : "false"}
+                />
+              )}
+              {errors.link && (
+                <p
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
+                >
+                  {errors.link?.message}
+                </p>
+              )}
+            </div>
+            <button
+              className={`mt-3 w-full p-3 ${
+                loading ? "bg-gray-300" : "bg-green-300 hover:bg-green-400"
+              } rounded ${loading && "pointer-events-none"}`}
+              type="submit"
+            >
+              {loading ? "Loading" : "Submit"}
+            </button>
+          </form>
         </div>
       )}
     </div>
