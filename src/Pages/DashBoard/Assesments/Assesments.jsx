@@ -5,7 +5,6 @@ import TestPageHeader from "./TestPageHeader/TestPageHeader";
 const Assesments = () => {
   return (
     <div className="relative ">
-      <TestPageHeader />
       <Outlet />
     </div>
   );
