@@ -72,6 +72,12 @@ const EachExercise = ({
     console.log(exerciseData);
   };
 
+  const handleSubmit = () => {
+    const justNow = moment().format();
+
+    // console.log(exerciseData);
+  };
+
   // console.log("exercise: ", exercise);
   if (isLoading) {
     return (
@@ -121,24 +127,27 @@ const EachExercise = ({
               Click here {">>"}
             </a>
           </div>
-          <div className="mt-3 w-full">
-            <p className="font-semibold mb-2">Submission:</p>
-            {exercise.submissionType === "link" ? (
-              <input
-                type="url"
-                className="rounded w-full font-xs"
-                placeholder="Enter submission file link"
-              />
-            ) : (
-              <input type="file" className="rounded w-full border" />
-            )}
-          </div>
-          <button
-            className="mt-3 w-full p-3 bg-green-300 hover:bg-green-400 rounded"
-            type="button"
-          >
-            Submit
-          </button>
+          <form onSubmit={handleSubmit}>
+            <div className="mt-3 w-full">
+              <p className="font-semibold mb-2">Submission:</p>
+              {exercise.submissionType === "link" ? (
+                <input
+                  type="url"
+                  className="rounded w-full font-xs"
+                  placeholder="Enter submission file link"
+                  required
+                />
+              ) : (
+                <input type="file" className="rounded w-full border" required />
+              )}
+            </div>
+            <button
+              className="mt-3 w-full p-3 bg-green-300 hover:bg-green-400 rounded"
+              type="submit"
+            >
+              Submit
+            </button>
+          </form>
         </div>
       )}
     </div>
