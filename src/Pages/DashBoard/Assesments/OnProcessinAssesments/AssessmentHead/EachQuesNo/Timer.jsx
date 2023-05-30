@@ -46,11 +46,11 @@ function Timer({ duration, setTakenTimeToFinish }) {
       : additionalSeconds);
 
   const progressColor =
-    progress <= 50
-      ? "#27DC69"
-      : progress > 50 && progress <= 80
+    progress >= 80
+      ? "#FF0000"
+      : progress < 80 && progress >= 50
       ? "#EED202"
-      : "#FF0000";
+      : "#27DC69";
 
   //   const children = (remainingTime) => {
   //     if (remainingTime > 0) {

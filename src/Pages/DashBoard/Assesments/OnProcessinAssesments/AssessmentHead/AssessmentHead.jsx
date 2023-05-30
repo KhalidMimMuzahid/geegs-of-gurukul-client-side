@@ -134,9 +134,13 @@ const AssessmentHead = ({
       </div>
       {/* progress bar */}
 
-      <div className="bg-[#40444C] px-5 py-6 text-white rounded-xl mb-10">
-        <h1 className="font-semibold text-md mb-1">Your Answers</h1>
-        <p className="text-sm mb-6">Please complete all the question.</p>
+      <div className="bg-[#40444C] px-5 py-4 text-white rounded-xl mb-10">
+        {/* <h1 className="font-semibold text-md mb-1">Your Attempts</h1> */}
+        <p className="text-sm mb-3">
+          {chosenAnswers?.length !== questions?.length
+            ? `You have attempted ${chosenAnswers?.length} out of ${questions?.length}.`
+            : `You have attempted all the ${questions?.length}.`}
+        </p>
         <div className="w-full flex justify-between gap-2 items-center">
           <div class="w-full bg-white rounded-full h-2 dark:bg-gray-700">
             <div
