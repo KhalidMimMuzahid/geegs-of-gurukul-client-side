@@ -15,12 +15,12 @@ function Timer({ duration, setTakenTimeToFinish }) {
   useEffect(() => {
     if (currentTime >= duration) {
       setTakenTimeToFinish((prevTime) => {
-        console.log(prevTime + 1);
+        // console.log(prevTime + 1);
         return ++prevTime;
       });
     } else {
       setTakenTimeToFinish(currentTime);
-      console.log(currentTime);
+      // console.log(currentTime);
     }
   }, [currentTime]);
 
@@ -48,7 +48,7 @@ function Timer({ duration, setTakenTimeToFinish }) {
   const progressColor =
     progress <= 50
       ? "#27DC69"
-      : progress >= 50 && progress <= 90
+      : progress > 50 && progress <= 80
       ? "#EED202"
       : "#FF0000";
 
@@ -64,14 +64,22 @@ function Timer({ duration, setTakenTimeToFinish }) {
 
   return (
     <>
-      <p className="z-20">
+      <p className="z-20 text-white">
         {progress < 100
-          ? "Total time: " + totalTime
-          : "Overtime: " + additionalTime}
+          ? "Remaining time: " + totalTime
+          : "Overtime: " +
+            Math.floor(duration) +
+            ":00" +
+            " + " +
+            additionalTime}
       </p>
       <div
-        className="absolute top-0 left-0 h-full z-10 rounded-lg transition-all duration-200 max-w-[100%]"
-        style={{ width: progressWidth, backgroundColor: progressColor }}
+        className="absolute top-0 left-0 h-full z-10 rounded-lg max-w-[100%] transition-colors"
+        style={{
+          width: progressWidth,
+          backgroundColor: progressColor,
+          transitionDuration: `${duration * 0.2 * 60}s`,
+        }}
       ></div>
     </>
   );
