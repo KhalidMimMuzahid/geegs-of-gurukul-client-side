@@ -1,0 +1,52 @@
+<form onSubmit={handleSubmit(onSubmit)}>
+  <div className="grid grid-cols-1 md:grid-cols-1 gap-5 mt-5">
+
+   
+    {workAs === "collageStudent" && institute && (
+      <>
+        
+      </>
+    )}
+
+    {workAs === "collageStudent" && degree && institute && (
+      <>
+        
+      </>
+    )}
+
+    {(
+      <>
+        
+        {currentCompany && (
+          
+        )}
+        {currentCompany && jobTitle && (
+          
+        )}
+      </>
+    )}
+
+    {jobTitle || degree || grade ? (
+      <>
+        
+
+        
+        
+      </>
+    ) : (
+      ""
+    )}
+  </div>
+
+  {city && (
+    <div className="w-full flex justify-center my-10">
+      <button
+        type="submit"
+        disabled={setLoading}
+        className="font-poppins font-medium text-white px-4 py-2 bg-green-400 hover:bg-green-500 rounded-md"
+      >
+        {loading ? "Updating..." : "Update"}
+      </button>
+    </div>
+  )}
+</form>;
