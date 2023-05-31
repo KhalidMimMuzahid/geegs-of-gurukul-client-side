@@ -1,7 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState, useContext, useEffect } from "react";
 import { BsFillCaretRightFill } from "react-icons/bs";
-import { AiFillCheckCircle } from "react-icons/ai";
+import {
+  AiFillCheckCircle,
+  AiFillEyeInvisible,
+  AiFillEye,
+  AiFillLock,
+} from "react-icons/ai";
 import moment from "moment/moment";
 import { AuthContext } from "../../../../../contexts/UserProvider/UserProvider";
 import { toast } from "react-hot-toast";
@@ -22,6 +27,10 @@ const EachExercise = ({
   selected,
   selectedModuleLectureList,
 }) => {
+  const justNow2 = moment().format("YYYY-MM-DDTHH:mm");
+  // const selectedDeadline = "2023-09-26T17:54";
+  const selectedDeadline = selected?.deadLine;
+  console.log("In Exercise deadline: ", selected);
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -32,7 +41,11 @@ const EachExercise = ({
   // console.log("exercise: ", exerciseTemp);
   const { user } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
-  const [exerciseResponse, setExerciseResponse] = useState("");
+  const [exerciseResponse, setExerciseResponse] = useState({});
+  const [shouldRefreshByToggle, setShouldRefreshByToggle] = useState(false);
+  const [shouldRefreshForStatusByToggle, setShouldRefreshForStatusByToggle] =
+    useState(false);
+  const [responseStatus, setResponseStatus] = useState({});
   const { data: exercise, isLoading } = useQuery({
     queryKey: [exerciseTemp?.exercise_id],
     queryFn: async () => {
@@ -47,7 +60,7 @@ const EachExercise = ({
   const lecture = selectedModuleLectureList.find(
     (lecture) => lecture?._id === selected?.lecture_id
   );
-  console.log("selected lecture: ", selectedModuleLectureList);
+  // console.log("selected lecture: ", selectedModuleLectureList);
 
   useEffect(() => {
     const query = {
@@ -67,8 +80,10 @@ const EachExercise = ({
       .then((result) => {
         if (result?.success) {
           const data = result?.data;
-          // console.log("Exercise Response: ", data)
+          // console.log("Exercise Response: ", data);
           setExerciseResponse(data);
+
+          setShouldRefreshForStatusByToggle((prev) => !prev);
         } else {
           setExerciseResponse({});
         }
@@ -76,14 +91,66 @@ const EachExercise = ({
       .catch((err) => {
         toast.error(err.message);
       });
-  }, [exerciseTemp?.exercise_id]);
+  }, [exerciseTemp?.exercise_id, shouldRefreshByToggle]);
+
+  useEffect(() => {
+    // setResponseStatus({
+    //   status:exerciseResponse?.status,
+    //   message: ""
+    // });
+    // GMT+0530
+    // 2023-05-31T15:11:15+05:30
+    // 2023-05-26T17:54   selected.deadline
+    const justNow = moment().format("YYYY-MM-DDTHH:mm");
+    // console.log("JustNow: ", justNow);
+    // console.log("Exercise response : ", exerciseResponse);
+    // console.log("selected assignment : ", selected);
+    if (justNow < selectedDeadline) {
+      // todo
+      if (exerciseResponse?.status === "visited") {
+        setResponseStatus({
+          element: <AiFillEye color="green" size={25} />,
+          status: "Visited and not expired",
+        });
+      } else if (exerciseResponse?.status === "completed") {
+        setResponseStatus({
+          element: <AiFillCheckCircle color="green" size={20} />,
+          status: "Completed and not expired",
+        });
+      } else {
+        // havent seen
+        setResponseStatus({
+          element: <AiFillEyeInvisible color="red" size={25} />,
+          status: "Not visited and not expired",
+        });
+      }
+    } else {
+      // todo
+      if (exerciseResponse?.status === "visited") {
+        setResponseStatus({
+          element: <AiFillLock color="red" size={25} />,
+          status: "Expired and not submitted",
+        });
+      } else if (exerciseResponse?.status === "completed") {
+        setResponseStatus({
+          element: <AiFillLock color="green" size={25} />,
+          status: "Completed and expired",
+        });
+      } else {
+        // havent seen
+        setResponseStatus({
+          element: <AiFillLock color="red" size={25} />,
+          status: "Expired and not submitted",
+        });
+      }
+    }
+  }, [exerciseResponse?._id, shouldRefreshForStatusByToggle]);
 
   const handleClick = () => {
     const justNow = moment().format();
     setIsOpen(!isOpen);
     if (!isOpen) {
       const exerciseData = {
-        isSubmitted: false,
         status: "visited",
         program: {
           program_id: lecture?.program?.program_id,
@@ -128,10 +195,13 @@ const EachExercise = ({
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("data for exercises", data);
+          // console.log("data for exercises", data);
           if (data?.success) {
             // to do
-            setExerciseResponse(exerciseData);
+            setExerciseResponse({
+              ...exerciseData,
+              _id: data?.result?.insertedId,
+            });
           } // Log the response from the server
         })
         .catch((error) => {
@@ -148,7 +218,7 @@ const EachExercise = ({
       // console.log("Link: ", data.link);
       link = data.link;
     } else {
-      console.log("File: ", data?.link[0]);
+      // console.log("File: ", data?.link[0]);
       const file = data?.link[0];
       const fileData = await uploadFile(file, config);
       if (fileData?.location) {
@@ -158,12 +228,44 @@ const EachExercise = ({
       }
     }
     const responseData = {
-      isSubmitted: true,
       status: "completed",
-      link: link,
+      submittedLink: link,
+      "submissionDetails.finishedAt": justNow,
     };
-    console.log("responseData: ", responseData);
-    setLoading(false);
+    // "program.program_id": lecture?.program?.program_id,
+    // "course.course_id": lecture?.course?.course_id,
+    // "batch.batch_id": lecture?.batch?.batch_id,
+    // "module.module_id": lecture?.module?.module_id,
+    const query = {
+      "submissionDetails.studentEmail": user?.email,
+      "lecture.lecture_id": selected?.lecture_id,
+      "assignment.assignment_id": selected?.assignment_id,
+      "exercise.exercise_id": exerciseTemp?.exercise_id,
+    };
+    // console.log("responseData: ", responseData);
+    // console.log("exerciseResponse: ", exerciseResponse);
+    const allDataForExerciseResponse = { query, responseData };
+    fetch("http://localhost:5000/exercise-response", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(allDataForExerciseResponse),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data?.success) {
+          // to do
+          setShouldRefreshByToggle((prev) => !prev);
+        } // Log the response from the server
+        else {
+          toast.error(data?.message);
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   // console.log("exercise: ", exercise);
@@ -174,7 +276,7 @@ const EachExercise = ({
       </div>
     );
   }
-  console.log(exerciseResponse);
+  // console.log(exerciseResponse);
   return (
     <div className="flex flex-col w-full px-4 py-2 my-1 text-left border border-gray-200 bg-green-50 rounded-md">
       <button
@@ -184,9 +286,10 @@ const EachExercise = ({
       >
         <p className="text-green-600 flex items-center gap-4">
           {exercise?.exerciseName}
-          {exerciseResponse?.status === "visited" && (
-            <AiFillCheckCircle></AiFillCheckCircle>
-          )}
+          <div className="hover:cursor-help" title={responseStatus?.status}>
+            {" "}
+            {responseStatus?.element}
+          </div>
         </p>
         <BsFillCaretRightFill
           className="ease-in-out duration-300"
@@ -236,6 +339,11 @@ const EachExercise = ({
                     required: "Link is required",
                   })}
                   aria-invalid={errors.link ? "true" : "false"}
+                  disabled={
+                    loading ||
+                    exerciseResponse?.status === "completed" ||
+                    !(justNow2 < selectedDeadline)
+                  }
                 />
               ) : (
                 <input
@@ -247,6 +355,11 @@ const EachExercise = ({
                     required: "File is required",
                   })}
                   aria-invalid={errors.link ? "true" : "false"}
+                  disabled={
+                    loading ||
+                    exerciseResponse?.status === "completed" ||
+                    !(justNow2 < selectedDeadline)
+                  }
                 />
               )}
               {errors.link && (
@@ -260,11 +373,31 @@ const EachExercise = ({
             </div>
             <button
               className={`mt-3 w-full p-3 ${
-                loading ? "bg-gray-300" : "bg-green-300 hover:bg-green-400"
-              } rounded ${loading && "pointer-events-none"}`}
+                loading ||
+                exerciseResponse?.status === "completed" ||
+                !(justNow2 < selectedDeadline)
+                  ? "bg-gray-300"
+                  : "bg-green-300 hover:bg-green-400"
+              } rounded ${
+                (loading ||
+                  exerciseResponse?.status === "completed" ||
+                  !(justNow2 < selectedDeadline)) &&
+                "pointer-events-none"
+              }`}
               type="submit"
+              disabled={
+                loading ||
+                exerciseResponse?.status === "completed" ||
+                !(justNow2 < selectedDeadline)
+              }
             >
-              {loading ? "Loading" : "Submit"}
+              {loading
+                ? "Submitting"
+                : exerciseResponse?.status === "completed"
+                ? "Submitted"
+                : justNow2 < selectedDeadline
+                ? "Submit"
+                : "closed"}
             </button>
           </form>
         </div>
