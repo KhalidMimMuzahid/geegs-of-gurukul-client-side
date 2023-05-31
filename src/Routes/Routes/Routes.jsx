@@ -50,6 +50,8 @@ import AddModule from "../../Pages/DashBoard/AdminPannel/AddModule/AddModule";
 import ModuleList from "../../Pages/DashBoard/AdminPannel/ModuleList/ModuleList";
 import AddProgram from "../../Pages/DashBoard/AdminPannel/AddProgram/AddProgram";
 import ProgramList from "../../Pages/DashBoard/AdminPannel/ProgramList/ProgramList";
+import Profession from "../../Pages/Profile/MyProfile/Profession/Profession";
+import MySkills from "./../../Pages/Profile/MyProfile/MySkills/MySkills";
 
 const { createBrowserRouter } = require("react-router-dom");
 const router = createBrowserRouter([
@@ -261,6 +263,14 @@ const router = createBrowserRouter([
               {
                 path: "/profile/my-profile/certification",
                 element: <Certification />,
+              },
+              {
+                path: "/profile/my-profile/profession",
+                element: <Profession />,
+              },
+              {
+                path: "/profile/my-profile/my-skills",
+                element: <MySkills />,
               },
               {
                 path: "/profile/my-profile/settings",

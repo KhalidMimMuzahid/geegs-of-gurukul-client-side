@@ -1,11 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
+import { BiEdit } from "react-icons/bi";
+import { TbEditOff } from "react-icons/tb";
+import EditingMode from "./EditingMode/EditingMode";
+import GeneralMode from "./GeneralMode/GeneralMode";
 
 const Genarel = () => {
   const { user } = useContext(AuthContext);
+  const [isEditing, setIsEditing] = useState(false);
   // Fetching User info from server
-  const { data: userDetail, isLoading } = useQuery({
+  const {
+    data: userDetail,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["userDetailse"],
     queryFn: () =>
       fetch(
@@ -17,55 +26,32 @@ const Genarel = () => {
   }
   console.log(userDetail);
   return (
-    <div className='p-8 flex flex-col items-center gap-8 md:gap-16 md:flex-row md:items-center w-4/5 rounded-md shadow-lg mx-auto'>
-      <div className='flex flex-col items-center gap-2'>
-        {/* image side */}
-        <img
-          className='w-36 rounded-full'
-          src={`${userDetail?.photoURL}`}
-          alt=''
+    <div className="relative w-4/5 md:min-h-[580px] h-[750px] mx-auto rounded-xl shadow-lg bg-white text-black p-10">
+      {isEditing ? (
+        <EditingMode
+          refetch={refetch}
+          setIsEditing={setIsEditing}
+          userDetail={userDetail}
         />
-        <button className='bg-[#2DC97E] px-2 py-2 rounded-md font-poppins font-normal text-white'>
-          Edit Photo
-        </button>
-        {/* image side */}
+      ) : (
+        <GeneralMode userDetail={userDetail} />
+      )}
+      <div
+        onClick={() => setIsEditing(!isEditing)}
+        className=" absolute top-4 right-4"
+      >
+        {isEditing ? (
+          <TbEditOff
+            title="edit user profile"
+            className="text-3xl text-black hover:text-green-500 hover:cursor-pointer transition-all duration-300"
+          />
+        ) : (
+          <BiEdit
+            title="edit user profile"
+            className="text-3xl text-black hover:text-green-500 hover:cursor-pointer transition-all duration-300"
+          />
+        )}
       </div>
-      {/* info side */}
-      <div className='font-poppins font-normal fex flex-col'>
-        <h3 className='text-xl font-mediumm-2'>
-          <span className='text-[#2DC97E]'>Student ID</span> : {userDetail?._id}
-        </h3>
-        <p className='m-2'>
-          <span>Name:</span>
-          <span>{user?.name}</span>
-        </p>
-        <p className='m-2'>
-          <span>Email:</span>
-          <span>{userDetail?.email}</span>
-        </p>
-
-        <p className='m-2'>
-          <span>Phone:</span>
-          <span>{userDetail?.phoneNumber}</span>
-        </p>
-        <p className='mt-2'>
-          <span>Profession:</span>
-          <span>{userDetail?.profession?.workAs}</span>
-        </p>
-        <p className='mt-2'>
-          <span>College Name:</span>
-          <span>{userDetail?.profession?.coLLageName}</span>
-        </p>
-        <p className='mt-2'>
-          <span>Leatest Degree:</span>
-          <span>{userDetail?.profession?.latestDegree}</span>
-        </p>
-        <p className='mt-2'>
-          <span>Graduation Year:</span>
-          <span>{userDetail?.profession?.graduationYear}</span>
-        </p>
-      </div>
-      {/* info side */}
     </div>
   );
 };
