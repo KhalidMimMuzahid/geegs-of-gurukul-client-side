@@ -39,7 +39,11 @@ const Default = () => {
   console.log(assessments);
   return (
     <>
+<<<<<<< HEAD
       <TestPageHeader setAssessments={setAssessments} />
+=======
+      <TestPageHeader />
+>>>>>>> a30dde4bbb47f811b5f4121f2ec0ef40cb074266
       <div className="w-11/12 mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 pt-4 px-5">
         {assessments?.map((assessment, i) => (
           <div

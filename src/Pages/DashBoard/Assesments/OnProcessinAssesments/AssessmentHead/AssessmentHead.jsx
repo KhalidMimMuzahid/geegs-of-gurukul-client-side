@@ -4,6 +4,7 @@ import style from "../onProcessinAssesments.module.css";
 import EachQuesNo from "./EachQuesNo/EachQuesNo";
 import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Timer from "./EachQuesNo/Timer";
 const AssessmentHead = ({
   setTakenTimeToFinish,
   assessment,
@@ -21,16 +22,16 @@ const AssessmentHead = ({
   const [isMarke, setIsMark] = useState(true);
   const [extraTime, setExtraTime] = useState(0);
   // const [remainingTime, setRemainingTime] = useState(25 * 60);
-  const handleIncrisingExtraTime = () => {};
-  const children = (remainingTime) => {
-    if (remainingTime > 0) {
-      setTakenTimeToFinish(assessment?.duration * 60 - remainingTime);
-    } else {
-      setInterval(() => {
-        setTakenTimeToFinish((prev) => ++prev);
-      }, 1000);
-    }
-  };
+  // const handleIncrisingExtraTime = () => {};
+  // const children = (remainingTime) => {
+  //   if (remainingTime > 0) {
+  //     setTakenTimeToFinish(assessment?.duration * 60 - remainingTime);
+  //   } else {
+  //     setInterval(() => {
+  //       setTakenTimeToFinish((prev) => ++prev);
+  //     }, 1000);
+  //   }
+  // };
   const handleResetQuestion = () => {
     setChosenAnswers((prev) => {
       const newchosenAnswers = prev.filter(
@@ -73,10 +74,9 @@ const AssessmentHead = ({
   return (
     <div className="p-8 rounded-xl shadow h-auto lg:min-h-[80dvh] font-poppins">
       {/* 1st portion */}
-      <div className="flex items-center justify-center gap-4">
-        <h3 className="font-semibold text-center ml-4 text-xs">Time Left</h3>
-        <div className="flex justify-center items-center font-semibold text-[#4BA25D] text-xs">
-          <CountdownCircleTimer
+      <div className="flex items-center gap-4">
+        <div className="h-[35px] bg-[#BEBCBC] w-full rounded-lg relative flex justify-center items-center">
+          {/* <CountdownCircleTimer
             isPlaying
             duration={assessment?.duration * 60}
             // duration={totalQuestions *60}
@@ -104,7 +104,11 @@ const AssessmentHead = ({
                 return "Time Over";
               }
             }}
-          </CountdownCircleTimer>
+          </CountdownCircleTimer> */}
+          <Timer
+            duration={assessment?.duration}
+            setTakenTimeToFinish={setTakenTimeToFinish}
+          />
         </div>
       </div>
       {/* <Timer /> */}
@@ -130,9 +134,13 @@ const AssessmentHead = ({
       </div>
       {/* progress bar */}
 
-      <div className="bg-[#40444C] px-5 py-6 text-white rounded-xl mb-10">
-        <h1 className="font-semibold text-md mb-1">Your Answers</h1>
-        <p className="text-sm mb-6">Please complete all the question.</p>
+      <div className="bg-[#40444C] px-5 py-4 text-white rounded-xl mb-10">
+        {/* <h1 className="font-semibold text-md mb-1">Your Attempts</h1> */}
+        <p className="text-sm mb-3">
+          {chosenAnswers?.length !== questions?.length
+            ? `You have attempted ${chosenAnswers?.length} out of ${questions?.length}.`
+            : `You have attempted all the ${questions?.length}.`}
+        </p>
         <div className="w-full flex justify-between gap-2 items-center">
           <div class="w-full bg-white rounded-full h-2 dark:bg-gray-700">
             <div

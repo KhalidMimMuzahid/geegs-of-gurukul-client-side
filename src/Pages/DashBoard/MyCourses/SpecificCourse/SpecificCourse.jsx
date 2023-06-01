@@ -11,6 +11,7 @@ const SpecificCourse = () => {
     []
   );
   const [changingModuleStatus, setChangingModuleStatus] = useState({});
+  const [changingAssignmentStatus, setChangingAssignmentStatus] = useState({});
   const [isLoading, setisLoading] = useState(true);
   const [modules, setModules] = useState([]);
 
@@ -53,6 +54,7 @@ const SpecificCourse = () => {
               setSelected={setSelected}
               selectedModuleLectureList={selectedModuleLectureList}
               setChangingModuleStatus={setChangingModuleStatus}
+              setChangingAssignmentStatus={setChangingAssignmentStatus}
             />
           </div>
 
@@ -63,6 +65,7 @@ const SpecificCourse = () => {
             setSelected={setSelected}
             setSelectedModuleLectureList={setSelectedModuleLectureList}
             changingModuleStatus={changingModuleStatus}
+            changingAssignmentStatus={changingAssignmentStatus}
           />
         </div>
       </div>

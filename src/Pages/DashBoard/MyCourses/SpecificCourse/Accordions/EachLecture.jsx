@@ -4,6 +4,13 @@ import {
   BsFillCaretRightFill,
   BsPersonVideo3,
 } from "react-icons/bs";
+import {
+  AiFillCheckCircle,
+  AiFillEyeInvisible,
+  AiFillEye,
+  AiFillLock,
+} from "react-icons/ai";
+import EachAssignment from "./EachAssignment";
 
 function EachLecture({
   lecture,
@@ -12,8 +19,10 @@ function EachLecture({
   module_id,
   setSelectedModuleLectureList,
   lecturesList,
+  changingAssignmentStatus,
 }) {
   const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     setIsOpen(
       lecture?._id === selected?._id
@@ -56,27 +65,16 @@ function EachLecture({
             <p className="text-sm text-green-600 ml-3">Lecture video</p>
           </button>
           {lecture?.assignment?.assignments?.map((eachAssignment) => (
-            <button
-              type="button"
-              className="relative flex items-center p-2 border border-gray-200 w-full rounded-md bg-white my-2"
-              onClick={() => {
-                setSelected({
-                  ...eachAssignment,
-                  lecture_id: lecture?._id,
-                  module: { module_id: module_id },
-                  deadLine: lecture?.assignment?.deadLine,
-                  sheduledAt: lecture?.assignment?.sheduledAt,
-                });
-                setSelectedModuleLectureList(lecturesList);
-              }}
-              key={eachAssignment._id} // Move the key prop here
-            >
-              {selected?.assignment_id === eachAssignment.assignment_id && (
-                <span className="absolute left-0 top-0 bottom-0 w-1 bg-green-500 rounded-l-md"></span>
-              )}
-              <BsFillCheckCircleFill color="green" className="ml-1" />
-              <p className="text-sm ml-3">{eachAssignment.assignmentName}</p>
-            </button>
+            <EachAssignment
+              eachAssignment={eachAssignment}
+              lecture={lecture}
+              module_id={module_id}
+              setSelected={setSelected}
+              selected={selected}
+              lecturesList={lecturesList}
+              setSelectedModuleLectureList={setSelectedModuleLectureList}
+              changingAssignmentStatus={changingAssignmentStatus}
+            />
           ))}
         </div>
       )}
