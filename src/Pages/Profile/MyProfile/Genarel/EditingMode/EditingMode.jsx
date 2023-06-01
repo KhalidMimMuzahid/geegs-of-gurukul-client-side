@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { City, Country, State } from "country-state-city";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { uploadFile } from "react-s3";
+import { AuthContext } from "../../../../../contexts/UserProvider/UserProvider";
 window.Buffer = window.Buffer || require("buffer").Buffer;
 const config = {
   bucketName: "all-files-for-gog",
@@ -11,9 +13,20 @@ const config = {
   secretAccessKey: process.env.REACT_APP_S3SecretAccessKey,
 };
 
-const EditingMode = ({ setIsEditing, refetch, userDetail }) => {
+const EditingMode = ({ setIsEditing }) => {
+  const { user, setShouldRefreshUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
-  const [image, setImage] = useState(userDetail?.photoURL);
+  const [image, setImage] = useState(user?.photoURL);
+  // get country
+  let countryData = Country.getAllCountries();
+  const [country, setCountry] = useState();
+  // get state
+  let stateData = State.getStatesOfCountry(country?.isoCode);
+  const [state, setState] = useState();
+
+  // get city
+  const cityData = City.getCitiesOfState(country?.isoCode, state?.isoCode);
+  const [city, setCity] = useState(user?.profession?.city);
   const {
     register,
     handleSubmit,
@@ -22,12 +35,44 @@ const EditingMode = ({ setIsEditing, refetch, userDetail }) => {
     reset,
   } = useForm();
 
+  console.log("first", user);
   useEffect(() => {
     const subscription = watch((value, { name, type }) => {
       if (value?.photoURL[0]) {
         const file = value?.photoURL[0];
         setImage(URL.createObjectURL(file));
         console.log(file);
+      }
+      // country data set
+      if (name === "country") {
+        countryData?.forEach((each) => {
+          if (each?.name === value?.country) {
+            setCountry({
+              country: each?.name,
+              isoCode: each?.isoCode,
+            });
+            return;
+          }
+        });
+      }
+
+      // state data set
+      if (name === "state") {
+        stateData?.forEach((each) => {
+          if (each?.name === value?.state) {
+            setState({
+              state: each?.name,
+              isoCode: each?.isoCode,
+            });
+            return;
+          }
+        });
+      }
+      if (name === "city") {
+        setCity(value?.city);
+      }
+      if (name === "currentlyStudy") {
+        console.log(value?.currentlyStudy);
       }
       return;
     });
@@ -42,8 +87,12 @@ const EditingMode = ({ setIsEditing, refetch, userDetail }) => {
         .then((fileData) => {
           const updatedUser = {
             name: data?.name,
-            address: data?.address,
             photoURL: fileData?.location,
+            address: {
+              country: data?.country,
+              state: data?.state,
+              city: data?.city,
+            },
           };
           setImage(fileData?.location);
           userProfileUpdate(updatedUser);
@@ -56,7 +105,11 @@ const EditingMode = ({ setIsEditing, refetch, userDetail }) => {
     } else {
       const updatedUser = {
         name: data?.name,
-        address: data?.address,
+        address: {
+          country: data?.country,
+          state: data?.state,
+          city: data?.city,
+        },
       };
       userProfileUpdate(updatedUser);
     }
@@ -64,7 +117,7 @@ const EditingMode = ({ setIsEditing, refetch, userDetail }) => {
 
   const userProfileUpdate = (updatedUser) => {
     // return;
-    fetch(`http://localhost:5000/edit-user/${userDetail?.email}`, {
+    fetch(`http://localhost:5000/edit-user/${user?.email}`, {
       method: "PUT",
       body: JSON.stringify(updatedUser),
       headers: {
@@ -76,8 +129,8 @@ const EditingMode = ({ setIsEditing, refetch, userDetail }) => {
         if (data?.success) {
           toast.success(data?.message);
           console.log(data);
-          refetch();
           setLoading(false);
+          setShouldRefreshUser((prev) => !prev);
           setIsEditing(false);
           reset();
         } else {
@@ -122,7 +175,7 @@ const EditingMode = ({ setIsEditing, refetch, userDetail }) => {
                 <input
                   type="text"
                   name="Name"
-                  defaultValue={userDetail?.name}
+                  defaultValue={user?.name}
                   {...register("name")}
                   placeholder="Write name"
                 />
@@ -132,7 +185,7 @@ const EditingMode = ({ setIsEditing, refetch, userDetail }) => {
                 <input
                   type="email"
                   name="email"
-                  value={userDetail?.email}
+                  value={user?.email}
                   readOnly
                   {...register("email")}
                   nonce=""
@@ -140,25 +193,72 @@ const EditingMode = ({ setIsEditing, refetch, userDetail }) => {
                 />
               </div>
               <div className="assesmentList">
-                <label htmlFor="address">Address</label>
-                <input
-                  type="text"
-                  name="address"
-                  defaultValue={userDetail?.address}
-                  {...register("address")}
-                  placeholder="Write Address"
-                />
-              </div>
-              <div className="assesmentList">
                 <label htmlFor="phoneNumber">Phone Number</label>
                 <input
                   type="phone"
                   name="phoneNumber"
-                  defaultValue={userDetail?.phoneNumber}
+                  defaultValue={user?.phoneNumber}
                   readOnly
                   {...register("phoneNumber")}
                   placeholder="Write Phone Number"
                 />
+              </div>
+              <div className="w-full mb-4">
+                <label htmlFor="country">Country</label>
+                <select
+                  id="country"
+                  {...register("country")}
+                  defaultValue={user?.address?.country}
+                  className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                >
+                  <option disabled selected>
+                    Select Country
+                  </option>
+                  {countryData?.length > 0 &&
+                    countryData?.map((country, index) => (
+                      <option key={index} value={country?.name}>
+                        {country?.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              <div className="w-full mb-4">
+                <label htmlFor="state">State</label>
+                <select
+                  id="state"
+                  defaultValue={user.address?.state}
+                  {...register("state")}
+                  className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                >
+                  <option disabled selected>
+                    Select State
+                  </option>
+                  {stateData.length > 0 &&
+                    stateData?.map((state, index) => (
+                      <option key={index} value={state.name}>
+                        {state?.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              <div className="w-full mb-4">
+                <label htmlFor="city">City</label>
+                <select
+                  id="city"
+                  defaultValue={user?.address?.city}
+                  {...register("city")}
+                  className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                >
+                  <option disabled selected>
+                    Select City
+                  </option>
+                  {cityData?.length > 0 &&
+                    cityData?.map((city, index) => (
+                      <option key={index} value={city?.name}>
+                        {city?.name}
+                      </option>
+                    ))}
+                </select>
               </div>
 
               <div className="flex gap-4">

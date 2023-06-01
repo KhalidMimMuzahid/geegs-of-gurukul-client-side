@@ -12,7 +12,9 @@ const Profession = () => {
 
   return (
     <div className="relative w-4/5 md:min-h-[580px] sm:h-[750px] overflow-hidden overflow-y-scroll mx-auto border border-gray-200 rounded-xl shadow-lg bg-white text-black p-10">
-      <h3 className="text-2xl font-bold">Profession </h3>
+      <h3 className="text-2xl font-bold">
+        {isEditing ? "Edit Profession" : "Profession"}
+      </h3>
       {isEditing ? (
         <ProfessionEditingMode setIsEditing={setIsEditing} />
       ) : (
