@@ -5,7 +5,7 @@ import { AuthContext } from "../../../../../contexts/UserProvider/UserProvider";
 import { City, Country, State } from "country-state-city";
 
 const ProfessionEditingMode = ({ setIsEditing }) => {
-  const { user, setJustCreatedUser } = useContext(AuthContext);
+  const { user, setShouldRefreshUser } = useContext(AuthContext);
   const [workAs, setWorkAs] = useState(user?.profession?.workAs);
   const [institute, setInstitute] = useState(user?.profession?.institutionName);
   const [grade, setGrade] = useState(user?.profession?.grade);
@@ -119,9 +119,11 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
           graduationMonth: data?.graduationMonth,
           graduationYear: data?.graduationYear,
           currentlyStudy: data?.currentlyStudy,
-          country: data?.country,
-          state: data?.state,
-          city: data?.city,
+          address: {
+            country: data?.country,
+            state: data?.state,
+            city: data?.city,
+          },
         },
       };
       updateFetch(updateData);
@@ -134,9 +136,11 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
           graduationMonth: data?.graduationMonth,
           graduationYear: data?.graduationYear,
           currentlyStudy: data?.currentlyStudy,
-          country: data?.country,
-          state: data?.state,
-          city: data?.city,
+          address: {
+            country: data?.country,
+            state: data?.state,
+            city: data?.city,
+          },
         },
       };
       updateFetch(updateData);
@@ -179,8 +183,8 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
           setGraduationYear(null);
           setExperienceYear(null);
           setCity(null);
-          setJustCreatedUser(false);
           reset();
+          setShouldRefreshUser((prev) => !prev);
           setIsEditing(false);
         } else {
           toast.error(data?.message);
@@ -499,7 +503,7 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
             <select
               id="country"
               {...register("country")}
-              defaultValue={user?.profession?.country}
+              defaultValue={user?.profession?.address?.country}
               className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             >
               <option disabled selected>
@@ -517,7 +521,7 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
             <label htmlFor="state">State</label>
             <select
               id="state"
-              defaultValue={user?.profession?.state}
+              defaultValue={user?.profession?.address?.state}
               {...register("state")}
               className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             >
@@ -536,7 +540,7 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
             <label htmlFor="city">City</label>
             <select
               id="city"
-              defaultValue={user?.profession?.city}
+              defaultValue={user?.profession?.address?.city}
               {...register("city")}
               className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             >

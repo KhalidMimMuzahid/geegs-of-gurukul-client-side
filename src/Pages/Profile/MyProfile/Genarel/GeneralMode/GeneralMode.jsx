@@ -1,22 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../../../contexts/UserProvider/UserProvider";
 
-const GeneralMode = ({ userDetail }) => {
+const GeneralMode = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="">
       <div className="flex flex-col md:flex-row items-start gap-4">
         <img
-          src={userDetail?.photoURL}
+          src={user?.photoURL}
           className="h-36 w-36 rounded-full border-2 border-green-400 shadow-lg"
           alt=""
         />
         <div className="">
           <div className="flex md:items-center gap-4">
             <h2 className="text-lg md:text-2xl lg:text-3xl font-poppins font-bold">
-              {userDetail?.name}{" "}
+              {user?.name}{" "}
             </h2>
             <div className="">
               <span className="px-3 py-2 text-sm rounded-2xl text-green-700 bg-green-200">
-                {userDetail?.role}
+                {user?.role}
               </span>
             </div>
           </div>
@@ -37,13 +39,13 @@ const GeneralMode = ({ userDetail }) => {
                 <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path>
               </svg>
               <h3 className="text-lg font-medium text-gray-600">
-                {userDetail?.profession?.workAs}
+                {user?.profession?.workAs}
               </h3>
             </div>
 
             <div className="flex gap-2 items-center">
               <svg
-                className="w-6 h-6"
+                className="w-6 h-6 text-green-400"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -55,28 +57,32 @@ const GeneralMode = ({ userDetail }) => {
                 ></path>
               </svg>
               <h3 className="text-lg font-medium text-gray-600">
-                {userDetail?.address}
+                {user?.address?.city}
               </h3>
             </div>
           </div>
         </div>
       </div>
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 dm:gap-3 md:gap-8">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 dm:gap-3 md:gap-8">
         <div className="mt-5">
-          <h3 className="text-lg md:text-2xl lg:text-3xl font-medium text-gray-600">
-            Email address:
-          </h3>
-          <h3 className="text-md md:text-xl lg:text-2xl font-medium text-black">
-            {userDetail?.email}
-          </h3>
+          <h3 className="text-lg font-bold text-green-400">Email address:</h3>
+          <h3 className="text-md text-black">{user?.email}</h3>
         </div>
         <div className="mt-5">
-          <h3 className="text-lg md:text-2xl lg:text-3xl font-medium text-gray-600">
-            Phone number:
-          </h3>
-          <h3 className="text-lg md:text-xl lg:text-2xl font-medium text-black">
-            {userDetail?.phoneNumber}
-          </h3>
+          <h3 className="text-lg font-bold text-green-400">Phone number:</h3>
+          <h3 className="text-lg text-black">{user?.phoneNumber}</h3>
+        </div>
+        <div className="mt-5">
+          <h3 className="text-lg font-bold text-green-400">Country:</h3>
+          <h3 className="text-lg text-black">{user?.address?.country}</h3>
+        </div>
+        <div className="mt-5">
+          <h3 className="text-lg font-bold text-green-400">State:</h3>
+          <h3 className="text-lg text-black">{user?.address?.state}</h3>
+        </div>
+        <div className="mt-5">
+          <h3 className="text-lg font-bold text-green-400">City:</h3>
+          <h3 className="text-lg text-black">{user?.address?.city}</h3>
         </div>
       </div>
     </div>

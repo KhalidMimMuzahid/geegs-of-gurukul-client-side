@@ -149,21 +149,25 @@ const ProfessionDetailsMode = () => {
           </div>
           <div className="">
             <h3 className="text-lg font-semibold text-green-500">Experience</h3>
-            <h4 className="text-lg ml-2">{user?.profession?.experienceYear}</h4>
+            <h4 className="text-lg ml-2">
+              {user?.profession?.experienceYear} Year
+            </h4>
           </div>
           <div className="">
             <h3 className="text-lg font-semibold text-green-500">
               Country Name
             </h3>
-            <h3 className="text-lg ml-2">{user?.profession?.country}</h3>
+            <h3 className="text-lg ml-2">
+              {user?.profession?.address?.country}
+            </h3>
           </div>
           <div className="">
             <h3 className="text-lg font-semibold text-green-500">State Name</h3>
-            <h3 className="text-lg ml-2">{user?.profession?.state}</h3>
+            <h3 className="text-lg ml-2">{user?.profession?.address?.state}</h3>
           </div>
           <div className="">
             <h3 className="text-lg font-semibold text-green-500">City Name</h3>
-            <h3 className="text-lg ml-2">{user?.profession?.city}</h3>
+            <h3 className="text-lg ml-2">{user?.profession?.address?.city}</h3>
           </div>
         </div>
       )}
