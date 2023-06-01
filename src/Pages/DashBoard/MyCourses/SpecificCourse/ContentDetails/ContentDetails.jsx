@@ -10,6 +10,7 @@ function ContentDetails({
   modules,
   selectedModuleLectureList,
   setChangingModuleStatus,
+  setChangingAssignmentStatus,
 }) {
   // console.log("selected: ", selected);
   const [DetailsComponent, setDetailsComponent] = useState(null);
@@ -30,6 +31,7 @@ function ContentDetails({
           <AssignmentDetails
             selected={selected}
             selectedModuleLectureList={selectedModuleLectureList}
+            setChangingAssignmentStatus={setChangingAssignmentStatus}
           />
         )
       );

@@ -19,6 +19,7 @@ function EachAssignment({
   selected,
   lecturesList,
   setSelectedModuleLectureList,
+  changingAssignmentStatus,
 }) {
   const justNow2 = moment().format("YYYY-MM-DDTHH:mm");
   // const selectedDeadline = "2023-09s-26T17:54";
@@ -31,6 +32,7 @@ function EachAssignment({
   const [totalCompletedRes, setTotalCompletedRes] = useState(0);
   const [totalRes, setTotalRes] = useState(0);
   const [responseStatus, setResponseStatus] = useState({});
+  const [refreshAssignmentStatus, setRefreshAssignmentStatus] = useState(false);
 
   const assignmentClick = () => {
     const justNow = moment().format();
@@ -160,23 +162,23 @@ function EachAssignment({
     eachAssignment?.assignment_id,
     totalSubmittedResponse,
     selected?.assignment_id,
+    refreshAssignmentStatus,
   ]);
-
   useEffect(() => {
-    // setResponseStatus({
-    //   status:exerciseResponse?.status,
-    //   message: ""
-    // });
-    // GMT+0530
-    // 2023-05-31T15:11:15+05:30
-    // 2023-05-26T17:54   selected.deadline
+    if (
+      changingAssignmentStatus?.assignment_id === eachAssignment?.assignment_id
+    ) {
+      setRefreshAssignmentStatus((prev) => !prev);
+    }
+  }, [changingAssignmentStatus?.toggle]);
+  useEffect(() => {
     const justNow = moment().format("YYYY-MM-DDTHH:mm");
-    // console.log("JustNow: ", justNow);
-    // console.log("Exercise response : ", exerciseResponse);
-    // console.log("selected assignment : ", selected);
     if (justNow < selectedDeadline) {
       // todo for not expired
-      if (totalCompletedRes === totalSubmittedResponse) {
+      if (
+        totalCompletedRes === totalSubmittedResponse &&
+        totalCompletedRes !== 0
+      ) {
         setResponseStatus({
           element: <AiFillCheckCircle color="green" size={25} />,
           status: "All exercises submitted and not expired",

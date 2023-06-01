@@ -19,6 +19,7 @@ function EachLecture({
   module_id,
   setSelectedModuleLectureList,
   lecturesList,
+  changingAssignmentStatus,
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -72,6 +73,7 @@ function EachLecture({
               selected={selected}
               lecturesList={lecturesList}
               setSelectedModuleLectureList={setSelectedModuleLectureList}
+              changingAssignmentStatus={changingAssignmentStatus}
             />
           ))}
         </div>

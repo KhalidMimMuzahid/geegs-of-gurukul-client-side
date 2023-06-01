@@ -26,6 +26,7 @@ const EachExercise = ({
   exercise: exerciseTemp,
   selected,
   selectedModuleLectureList,
+  setChangingAssignmentStatus,
 }) => {
   const justNow2 = moment().format("YYYY-MM-DDTHH:mm");
   // const selectedDeadline = "2023-09-26T17:54";
@@ -202,6 +203,11 @@ const EachExercise = ({
               ...exerciseData,
               _id: data?.result?.insertedId,
             });
+            setChangingAssignmentStatus((prev) => {
+              const assignment_id = selected?.assignment_id;
+              const toggle = !!!prev?.toggle;
+              return { assignment_id, toggle };
+            });
           } // Log the response from the server
         })
         .catch((error) => {
@@ -257,6 +263,11 @@ const EachExercise = ({
         if (data?.success) {
           // to do
           setShouldRefreshByToggle((prev) => !prev);
+          setChangingAssignmentStatus((prev) => {
+            const assignment_id = selected?.assignment_id;
+            const toggle = !!!prev?.toggle;
+            return { assignment_id, toggle };
+          });
         } // Log the response from the server
         else {
           toast.error(data?.message);
@@ -265,6 +276,7 @@ const EachExercise = ({
       })
       .catch((error) => {
         console.error(error);
+        setLoading(false);
       });
   };
 
