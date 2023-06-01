@@ -33,6 +33,7 @@ const EditProfile = () => {
     const updatedUser = {
       name: data?.name,
       address: data?.address,
+      photoURL: user?.photoURL,
     };
     fetch(`http://localhost:5000/edit-user/${user?.email}`, {
       method: "PUT",

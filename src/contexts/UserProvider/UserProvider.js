@@ -24,6 +24,7 @@ const auth = getAuth(app);
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [shouldRefreshUser, setShouldRefreshUser] = useState(false);
   const [updateUser, setUpdateUser] = useState(null);
   const [justCreatedUser, setJustCreatedUser] = useState(false);
   useEffect(() => {
@@ -43,7 +44,7 @@ const UserProvider = ({ children }) => {
           }
         });
     }
-  }, [updateUser]);
+  }, [updateUser, shouldRefreshUser]);
   // for the auth user verify
   const [tempUser, setTempUser] = useState(null);
 
@@ -177,6 +178,8 @@ const UserProvider = ({ children }) => {
     tempUser,
     justCreatedUser,
     setJustCreatedUser,
+    setUser,
+    setShouldRefreshUser,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

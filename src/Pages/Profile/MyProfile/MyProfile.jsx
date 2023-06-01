@@ -11,6 +11,8 @@ import certificate from "../../../assets/profileDashboard/black/certificate.svg"
 import setting from "../../../assets/profileDashboard/black/Setting.svg";
 import settingWhite from "../../../assets/profileDashboard/white/Setting.svg";
 import certificateWhite from "../../../assets/profileDashboard/white/education.svg";
+import profession from "../../../assets/profileDashboard/white/profession.svg";
+import professionWhite from "../../../assets/profileDashboard/white/profession.svg";
 
 import { Link, Outlet, useLocation } from "react-router-dom";
 import EachLink from "./EachLink/EachLink";
@@ -31,10 +33,16 @@ const MyProfile = () => {
       hover: educationWhite,
     },
     {
-      title: "Certificate",
+      title: "MySkills",
       src: certificate,
-      link: "/profile/my-profile/certification",
+      link: "/profile/my-profile/my-skills",
       hover: certificateWhite,
+    },
+    {
+      title: "Profession",
+      src: profession,
+      link: "/profile/my-profile/profession",
+      hover: professionWhite,
     },
     {
       title: "Settings",
