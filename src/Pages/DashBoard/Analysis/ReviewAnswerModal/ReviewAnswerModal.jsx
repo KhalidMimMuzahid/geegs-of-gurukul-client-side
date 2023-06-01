@@ -49,7 +49,7 @@ const ReviewAnswerModal = ({ isOpen, setIsOpen, response, assessment }) => {
               }}
             >
               <div
-                className="relative bg-white overflow-y-auto shadow-xl transform transition-all w-[100vw] h-[95vh] md:h-[85vh] max-w-[1300px] p-5 rounded-lg text-left mt-12 md:mt-0 font-poppins"
+                className="relative bg-white overflow-y-auto shadow-xl transform transition-all w-[100vw] h-[95vh] md:h-[85vh] max-w-[1300px] rounded-lg text-left mt-12 md:mt-0 font-poppins"
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="modal-headline"
@@ -73,7 +73,7 @@ const ReviewAnswerModal = ({ isOpen, setIsOpen, response, assessment }) => {
                   </div>
                 )}
                 {/* Instructions modal */}
-                <div className="flex w-full justify-between mb-10">
+                <div className="z-[1000000000] sticky top-0 flex w-full justify-between p-5 mb-5 bg-white border-b-2">
                   <p className="font-semibold text-lg text-green-500">
                     Answer Review
                   </p>
@@ -86,36 +86,38 @@ const ReviewAnswerModal = ({ isOpen, setIsOpen, response, assessment }) => {
                     <BsXCircleFill color="red" size={20} />
                   </button>
                 </div>
-                <div className="flex justify-end items-center text-center mb-5 text-sm">
-                  <div className="flex items-center">
-                    <div className="rounded-full bg-green-200 h-7 w-7 p-1">
-                      1
+                <div className="pb-5 px-5">
+                  <div className="flex justify-end items-center text-center mb-5 text-sm">
+                    <div className="flex items-center">
+                      <div className="rounded-full bg-[#AEFFCC] h-7 w-7 p-1">
+                        1
+                      </div>
+                      <p className="ml-2">Right</p>
                     </div>
-                    <p className="ml-2">Right</p>
-                  </div>
-                  <div className="flex items-center ml-4">
-                    <div className="rounded-full bg-rose-200 h-7 w-7 p-1">
-                      1
+                    <div className="flex items-center ml-4">
+                      <div className="rounded-full bg-[#FFCCCC] h-7 w-7 p-1">
+                        1
+                      </div>
+                      <p className="ml-2">Wrong</p>
                     </div>
-                    <p className="ml-2">Wrong</p>
-                  </div>
-                  <div className="flex items-center ml-4">
-                    <div className="rounded-full bg-gray-200 h-7 w-7 p-1">
-                      1
+                    <div className="flex items-center ml-4">
+                      <div className="rounded-full bg-[#C3C3C3] h-7 w-7 p-1">
+                        1
+                      </div>
+                      <p className="ml-2">Not answered</p>
                     </div>
-                    <p className="ml-2">Not answered</p>
                   </div>
-                </div>
-                <div className="">
-                  {/* content goes here */}
-                  <AllAnswers
-                    questions={assessment.questions}
-                    response={response}
-                    ques={ques}
-                    setQues={setQues}
-                    setIsInstruction={setIsInstruction}
-                    isInstruction={isInstruction}
-                  />
+                  <div className="">
+                    {/* content goes here */}
+                    <AllAnswers
+                      questions={assessment.questions}
+                      response={response}
+                      ques={ques}
+                      setQues={setQues}
+                      setIsInstruction={setIsInstruction}
+                      isInstruction={isInstruction}
+                    />
+                  </div>
                 </div>
               </div>
             </motion.div>

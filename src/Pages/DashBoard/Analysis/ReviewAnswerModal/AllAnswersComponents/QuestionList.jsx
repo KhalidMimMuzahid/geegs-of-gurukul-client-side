@@ -8,15 +8,15 @@ function QuestionList({ answers, question, index, setQues, ques }) {
       type="button"
       key={question._id}
       onClick={() => setQues(index)}
-      className={`relative border font-thin rounded-full p-3 h-12 w-12 m-2 hover:border-green-400 transition-all duration-300 ${
+      className={`relative border font-thin rounded-full p-3 h-12 w-12 m-2 hover:border-black transition-all duration-300 ${
         answered
           ? answered.isCorrect
-            ? "bg-green-200"
-            : "bg-rose-200"
-          : "bg-gray-200"
+            ? "bg-[#AEFFCC]"
+            : "bg-[#FFCCCC]"
+          : "bg-[#C3C3C3] "
       } ${
         index === ques &&
-        "shadow-md border-1 border-[#333333] bg-black transform translate-y-[-8px]"
+        "shadow-md shadow-black border-1 border-[#333333] transform translate-y-[-8px]"
       }`}
     >
       {index + 1}
