@@ -17,10 +17,16 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
   );
   // get country
   let countryData = Country.getAllCountries();
-  const [country, setCountry] = useState();
+  const [country, setCountry] = useState(
+    countryData.find(
+      (country) => country.name === user?.profession?.address?.country
+    )
+  );
   // get state
   let stateData = State.getStatesOfCountry(country?.isoCode);
-  const [state, setState] = useState();
+  const [state, setState] = useState(
+    stateData.find((ech) => ech.name === user?.profession?.address?.state)
+  );
 
   // get city
   const cityData = City.getCitiesOfState(country?.isoCode, state?.isoCode);
@@ -34,7 +40,13 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
     reset,
   } = useForm();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // console.log("countryData", countryData);
+    const mycountry = countryData.find(
+      (country) => country.name === user?.profession?.address?.country
+    );
+    console.log("mycountry", mycountry);
+  }, []);
   useEffect(() => {
     const subscription = watch((value, { name, type }) => {
       if (name === "workAs") {
@@ -102,7 +114,7 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
       const updateData = {
         profession: {
           workAs: data?.workAs,
-          institutionName: data?.institutionName,
+          schoolName: data?.institutionName,
           grade: data?.grade,
           country: data?.country,
           state: data?.state,
@@ -115,10 +127,10 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
         profession: {
           workAs: data?.workAs,
           latestDegree: data?.latestDegree,
-          institutionName: data?.institutionName,
+          coLLageName: data?.institutionName,
           graduationMonth: data?.graduationMonth,
           graduationYear: data?.graduationYear,
-          currentlyStudy: data?.currentlyStudy,
+          isStudying: data?.isStudying,
           address: {
             country: data?.country,
             state: data?.state,
@@ -132,10 +144,10 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
         profession: {
           workAs: data?.workAs,
           latestDegree: data?.latestDegree,
-          institutionName: data?.institutionName,
+          coLLageName: data?.institutionName,
           graduationMonth: data?.graduationMonth,
           graduationYear: data?.graduationYear,
-          currentlyStudy: data?.currentlyStudy,
+          isStudying: data?.isStudying,
           address: {
             country: data?.country,
             state: data?.state,
@@ -148,12 +160,14 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
       const updateData = {
         profession: {
           workAs: data?.workAs,
-          currentCompany: data?.currentCompany,
-          jobTitle: data?.jobTitle,
-          experienceYear: data?.experienceYear,
-          country: data?.country,
-          state: data?.state,
-          city: data?.city,
+          companyName: data?.currentCompany,
+          currentJobTitle: data?.jobTitle,
+          yearsOfExperience: data?.experienceYear,
+          address: {
+            country: data?.country,
+            state: data?.state,
+            city: data?.city,
+          },
         },
       };
       updateFetch(updateData);
@@ -243,7 +257,7 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
             <label htmlFor="institutionName">Name of institution</label>
             <input
               type="text"
-              defaultValue={user?.profession?.institutionName}
+              defaultValue={user?.profession?.schoolName}
               name="institutionName"
               {...register("institutionName")}
               placeholder="Enter your Institute Name"
@@ -284,10 +298,10 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
       {workAs === "collageStudent" && (
         <div className="mt-5">
           <div className="mb-4">
-            <label htmlFor="institutionName">Name of institution</label>
+            <label htmlFor="institutionName">Collage Name</label>
             <input
               type="text"
-              defaultValue={user?.profession?.institutionName}
+              defaultValue={user?.profession?.coLLageName}
               name="institutionName"
               {...register("institutionName")}
               placeholder="Enter your Institute Name"
@@ -296,21 +310,15 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
           </div>
           <div className="mb-4">
             <label htmlFor="latestDegree">Degree</label>
-            <select
+            <input
+              type="text"
               defaultValue={user?.profession?.latestDegree}
               id="latestDegree"
+              name="latestDegree"
               {...register("latestDegree")}
+              placeholder="Enter your Institute Name"
               className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-            >
-              <option disabled selected>
-                Select your latest degree
-              </option>
-              <option value="BTech">BTech</option>
-              <option value="firstYear">First Year</option>
-              <option value="secondYear">Second Year</option>
-              <option value="thirdYear">Third Year</option>
-              <option value="lastYear">Last Year</option>
-            </select>
+            />
           </div>
           <h2 className="text-lg font-medium my-2">
             Graduation date or expected graduation date
@@ -357,8 +365,8 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
           <div className="flex items-center mb-4">
             <input
               type="checkbox"
-              defaultValue={user?.profession?.currentlyStudy}
-              {...register("currentlyStudy")}
+              defaultValue={user?.profession?.isStudying}
+              {...register("isStudying")}
               id="checkbox"
               className="rounded-full appearance-none border border-green-300 bg-white h-4 w-4 flex-shrink-0 checked:bg-green-500 checked:border-transparent focus:outline-none cursor-pointer hover:text-green-400"
             />
@@ -373,10 +381,10 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
       {workAs === "jobSeeker" && (
         <div className="mt-5">
           <div className="mb-4">
-            <label htmlFor="institutionName">Name of institution</label>
+            <label htmlFor="institutionName">Collage Name</label>
             <input
               type="text"
-              defaultValue={user?.profession?.institutionName}
+              defaultValue={user?.profession?.coLLageName}
               name="institutionName"
               {...register("institutionName")}
               placeholder="Enter your Institute Name"
@@ -385,21 +393,15 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
           </div>
           <div className="mb-4">
             <label htmlFor="latestDegree">Degree</label>
-            <select
+            <input
+              type="text"
               defaultValue={user?.profession?.latestDegree}
               id="latestDegree"
+              name="latestDegree"
               {...register("latestDegree")}
+              placeholder="Enter your Institute Name"
               className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-            >
-              <option disabled selected>
-                Select your latest degree
-              </option>
-              <option value="BTech">BTech</option>
-              <option value="firstYear">First Year</option>
-              <option value="secondYear">Second Year</option>
-              <option value="thirdYear">Third Year</option>
-              <option value="lastYear">Last Year</option>
-            </select>
+            />
           </div>
           <h2 className="text-lg font-medium my-2">
             Graduation date or expected graduation date
@@ -446,8 +448,8 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
           <div className="flex items-center mb-4">
             <input
               type="checkbox"
-              defaultValue={user?.profession?.currentlyStudy}
-              {...register("currentlyStudy")}
+              defaultValue={user?.profession?.isStudying}
+              {...register("isStudying")}
               id="checkbox"
               className="rounded-full appearance-none border border-green-300 bg-white h-4 w-4 flex-shrink-0 checked:bg-green-500 checked:border-transparent focus:outline-none cursor-pointer hover:text-green-400"
             />
@@ -466,7 +468,7 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
             <input
               type="text"
               name="currentCompany"
-              defaultValue={user?.profession?.currentCompany}
+              defaultValue={user?.profession?.companyName}
               {...register("currentCompany")}
               placeholder="Enter your Company Name where you working on"
               className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
@@ -477,7 +479,7 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
             <input
               type="text"
               name="jobTitle"
-              defaultValue={user?.profession?.jobTitle}
+              defaultValue={user?.profession?.currentJobTitle}
               {...register("jobTitle")}
               placeholder="Enter your Job Title"
               className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
@@ -488,7 +490,7 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
             <input
               type="experienceYear"
               name="experienceYear"
-              defaultValue={user?.profession?.experienceYear}
+              defaultValue={user?.profession?.yearsOfExperience}
               {...register("experienceYear")}
               placeholder="Enter your experience year"
               className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
