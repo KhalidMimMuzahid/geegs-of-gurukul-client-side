@@ -51,7 +51,7 @@ const EachExercise = ({
     queryKey: [exerciseTemp?.exercise_id],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/exerciseby_id?_id=${exerciseTemp?.exercise_id}`
+        `http://localhost:5000/api/v1/exercises/exerciseby_id?_id=${exerciseTemp?.exercise_id}`
       );
       const data = await res.json();
       return data;
@@ -70,7 +70,7 @@ const EachExercise = ({
       exercise_id: exerciseTemp?.exercise_id,
       studentEmail: user?.email,
     };
-    fetch(`http://localhost:5000/exercise-response`, {
+    fetch(`http://localhost:5000/api/v1/exercise-response`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -187,7 +187,7 @@ const EachExercise = ({
           finishedAt: "",
         },
       };
-      fetch("http://localhost:5000/exercise-response", {
+      fetch("http://localhost:5000/api/v1/exercises/exercise-response", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -251,7 +251,7 @@ const EachExercise = ({
     // console.log("responseData: ", responseData);
     // console.log("exerciseResponse: ", exerciseResponse);
     const allDataForExerciseResponse = { query, responseData };
-    fetch("http://localhost:5000/exercise-response", {
+    fetch("http://localhost:5000/api/v1/exercises/exercise-response", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

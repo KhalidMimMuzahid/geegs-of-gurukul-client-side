@@ -125,7 +125,7 @@ const PreQuestionire = () => {
 
     const userDetails = { profession, email, address: "" };
     console.log("userDetails: ", userDetails);
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/user-details", {
+    fetch("http://localhost:5000/api/v1/users/user-details", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -143,7 +143,7 @@ const PreQuestionire = () => {
         }
         // if (data?.acknowledged) {
         //   fetch(
-        //     `https://geeks-of-gurukul-server-side.vercel.app/just-created-false?email=${user?.email}`,
+        //     `http://localhost:5000/api/v1/users/just-created-false?email=${user?.email}`,
         //     {
         //       method: "PUT",
         //     }
@@ -204,7 +204,7 @@ const PreQuestionire = () => {
   // console.log(workAs);
   return (
     <form
-      action=""
+      action=''
       onSubmit={handleSubmit(handleUserDetails)}
       className={`${style.assesstestA}`}
     >
@@ -212,32 +212,32 @@ const PreQuestionire = () => {
         {/* header */}
         <h1 className={`text-center md:text-left ${style.nameAss}`}>
           Welcome{" "}
-          <span className="font-bold text-2xl text-green-500">
+          <span className='font-bold text-2xl text-green-500'>
             {user?.name}
           </span>{" "}
           !
         </h1>
       </div>
 
-      <div className=" grow">
+      <div className=' grow'>
         <div>
           {/* show te user greetings  */}
 
-          <div className="w-[280px]  sm:w-[300px] md:w-[500px] lg-[600px] mx-auto">
+          <div className='w-[280px]  sm:w-[300px] md:w-[500px] lg-[600px] mx-auto'>
             {/* indepth to go the next question  */}
             <div>
               {/* get data for they are currently studying or not  */}
-              <div className="my-2">
+              <div className='my-2'>
                 <label className={`text-center mb-5 ${style.titleSub}`}>
                   Are you Currently Studying ?
                 </label>
-                <div className=" md:flex md:justify-between">
+                <div className=' md:flex md:justify-between'>
                   <div
                     className={`${
                       currentlyStuying === "true" && "shadow-md"
                     } md:flex md:items-center`}
                   >
-                    <label htmlFor="isStudying" className="ml-2">
+                    <label htmlFor='isStudying' className='ml-2'>
                       <input
                         {...register("isStudying", {
                           required: {
@@ -245,15 +245,15 @@ const PreQuestionire = () => {
                             message: "select one of them",
                           },
                         })}
-                        type="radio"
-                        id="isStudying"
-                        name="isStudying"
-                        value="true"
+                        type='radio'
+                        id='isStudying'
+                        name='isStudying'
+                        value='true'
                       />
                       <img
                         src={student}
-                        className="md:mx-0 mx-auto w-28"
-                        alt=""
+                        className='md:mx-0 mx-auto w-28'
+                        alt=''
                       />
                     </label>
                   </div>
@@ -262,7 +262,7 @@ const PreQuestionire = () => {
                       currentlyStuying === "false" && "shadow-md"
                     } md:flex md:items-center`}
                   >
-                    <label htmlFor="isNotStudying" className="ml-2">
+                    <label htmlFor='isNotStudying' className='ml-2'>
                       <input
                         {...register("isStudying", {
                           required: {
@@ -270,22 +270,22 @@ const PreQuestionire = () => {
                             message: "select one of them",
                           },
                         })}
-                        type="radio"
-                        id="isNotStudying"
-                        name="isStudying"
-                        value="false"
+                        type='radio'
+                        id='isNotStudying'
+                        name='isStudying'
+                        value='false'
                       />
                       <img
-                        className="md:mx-0 mx-auto w-28"
+                        className='md:mx-0 mx-auto w-28'
                         src={studentNo}
-                        alt=""
+                        alt=''
                       />
                     </label>
                   </div>
                 </div>
 
                 {errors?.isStudying && (
-                  <p role="alert" className="text-red-500 font-bold">
+                  <p role='alert' className='text-red-500 font-bold'>
                     {/* Name is required */}
                     {errors?.isStudying?.message}
                   </p>
@@ -299,13 +299,13 @@ const PreQuestionire = () => {
                     <label className={`${style.titleSub} text-center mb-5`}>
                       Are you currently ?
                     </label>
-                    <div className="md:flex md:justify-between">
+                    <div className='md:flex md:justify-between'>
                       <div
                         className={`md:flex md:items-center ${
                           workAs === "schoolStudent" && "shadow-md"
                         } `}
                       >
-                        <label htmlFor="schoolStudent" className="ml-2">
+                        <label htmlFor='schoolStudent' className='ml-2'>
                           <input
                             {...register("workAs", {
                               required: {
@@ -313,15 +313,15 @@ const PreQuestionire = () => {
                                 message: "select one of them",
                               },
                             })}
-                            type="radio"
-                            id="schoolStudent"
-                            name="workAs"
-                            value="schoolStudent"
+                            type='radio'
+                            id='schoolStudent'
+                            name='workAs'
+                            value='schoolStudent'
                           />
                           <img
-                            className="md:mx-0 mx-auto w-28"
+                            className='md:mx-0 mx-auto w-28'
                             src={school}
-                            alt=""
+                            alt=''
                           />
                         </label>
                       </div>
@@ -330,7 +330,7 @@ const PreQuestionire = () => {
                           workAs === "collageStudent" && "shadow-md"
                         } `}
                       >
-                        <label htmlFor="collageStudent" className="ml-2">
+                        <label htmlFor='collageStudent' className='ml-2'>
                           <input
                             {...register("workAs", {
                               required: {
@@ -338,21 +338,21 @@ const PreQuestionire = () => {
                                 message: "select one of them",
                               },
                             })}
-                            type="radio"
-                            id="collageStudent"
-                            name="workAs"
-                            value="collageStudent"
+                            type='radio'
+                            id='collageStudent'
+                            name='workAs'
+                            value='collageStudent'
                           />
                           <img
-                            className="md:mx-0 mx-auto w-28"
+                            className='md:mx-0 mx-auto w-28'
                             src={collage}
-                            alt=""
+                            alt=''
                           />
                         </label>
                       </div>
                     </div>
                     {errors?.workAs && (
-                      <p role="alert" className="text-red-500 font-bold">
+                      <p role='alert' className='text-red-500 font-bold'>
                         {/* Name is required */}
                         {errors?.workAs?.message}
                       </p>
@@ -367,13 +367,13 @@ const PreQuestionire = () => {
                       Are you currently?
                     </label>
 
-                    <div className="md:flex md:justify-between">
+                    <div className='md:flex md:justify-between'>
                       <div
                         className={`md:flex md:items-center ${
                           workAs === "jobSeeker" && "shadow-md"
                         } `}
                       >
-                        <label htmlFor="jobSeeker" className="ml-2">
+                        <label htmlFor='jobSeeker' className='ml-2'>
                           <input
                             {...register("workAs", {
                               required: {
@@ -381,15 +381,15 @@ const PreQuestionire = () => {
                                 message: "select one of them",
                               },
                             })}
-                            type="radio"
-                            id="jobSeeker"
-                            name="workAs"
-                            value="jobSeeker"
+                            type='radio'
+                            id='jobSeeker'
+                            name='workAs'
+                            value='jobSeeker'
                           />
                           <img
-                            className="md:mx-0 mx-auto w-28"
+                            className='md:mx-0 mx-auto w-28'
                             src={looking}
-                            alt=""
+                            alt=''
                           />
                         </label>
                       </div>
@@ -398,7 +398,7 @@ const PreQuestionire = () => {
                           workAs === "jobHolder" && "shadow-md"
                         } `}
                       >
-                        <label htmlFor="jobHolder" className="ml-2">
+                        <label htmlFor='jobHolder' className='ml-2'>
                           <input
                             {...register("workAs", {
                               required: {
@@ -406,21 +406,21 @@ const PreQuestionire = () => {
                                 message: "select one of them",
                               },
                             })}
-                            type="radio"
-                            id="jobHolder"
-                            name="workAs"
-                            value="jobHolder"
+                            type='radio'
+                            id='jobHolder'
+                            name='workAs'
+                            value='jobHolder'
                           />
                           <img
-                            className="md:mx-0 mx-auto w-28"
+                            className='md:mx-0 mx-auto w-28'
                             src={job}
-                            alt=""
+                            alt=''
                           />
                         </label>
                       </div>
                     </div>
                     {errors?.workAs && (
-                      <p role="alert" className="text-red-500 font-bold">
+                      <p role='alert' className='text-red-500 font-bold'>
                         {/* Name is required */}
                         {errors?.workAs?.message}
                       </p>
@@ -432,12 +432,12 @@ const PreQuestionire = () => {
               {/* if currently studying and school sudent then go for school name and grade */}
               {workAs === "schoolStudent" && currentlyStuying === "true" && (
                 <div className={` ${style.textpart} `}>
-                  <div className="my-2 mb-5 ">
-                    <label className={`${style.titleSub}`} htmlFor="schoolName">
+                  <div className='my-2 mb-5 '>
+                    <label className={`${style.titleSub}`} htmlFor='schoolName'>
                       School Name
                     </label>
                     <input
-                      className="block h-8 rounded-md md:w-full"
+                      className='block h-8 rounded-md md:w-full'
                       {...register("schoolName", {
                         required: {
                           value: true,
@@ -448,21 +448,21 @@ const PreQuestionire = () => {
                           message: "retype your school name",
                         },
                       })}
-                      name="schoolName"
-                      type="text"
-                      id="schoolName"
+                      name='schoolName'
+                      type='text'
+                      id='schoolName'
                     />
 
                     {errors?.schoolName && (
-                      <p role="alert" className="text-red-500 font-bold">
+                      <p role='alert' className='text-red-500 font-bold'>
                         {/* Name is required */}
                         {errors?.schoolName?.message}
                       </p>
                     )}
                   </div>
-                  <div className="block my-2 mb-5">
-                    <div className="">
-                      <label className={`${style.titleSub}`} htmlFor="grade">
+                  <div className='block my-2 mb-5'>
+                    <div className=''>
+                      <label className={`${style.titleSub}`} htmlFor='grade'>
                         Select your grade
                       </label>
                       <select
@@ -472,12 +472,12 @@ const PreQuestionire = () => {
                             message: "select your grade",
                           },
                         })}
-                        name="grade"
-                        id="grade"
-                        defaultValue="any"
-                        className="block md:w-full grow h-8 py-0 rounded-md ml-2"
+                        name='grade'
+                        id='grade'
+                        defaultValue='any'
+                        className='block md:w-full grow h-8 py-0 rounded-md ml-2'
                       >
-                        <option value="any" disabled>
+                        <option value='any' disabled>
                           Grade ?
                         </option>
                         <option value={6}>Six</option>
@@ -491,7 +491,7 @@ const PreQuestionire = () => {
                     </div>
 
                     {shouldShowSelectError && selectError?.grade && (
-                      <p role="alert" className="text-red-500 font-bold">
+                      <p role='alert' className='text-red-500 font-bold'>
                         {selectError?.grade}
                       </p>
                     )}
@@ -503,11 +503,11 @@ const PreQuestionire = () => {
               {((workAs === "collageStudent" && currentlyStuying === "true") ||
                 (workAs === "jobSeeker" && currentlyStuying === "false")) && (
                 <div className={`${style.textpart}`}>
-                  <div className=" relative ">
-                    <div className=" mb-5">
+                  <div className=' relative '>
+                    <div className=' mb-5'>
                       <label
                         className={`${style.titleSub}`}
-                        htmlFor="coLLageName"
+                        htmlFor='coLLageName'
                       >
                         College name
                       </label>
@@ -526,15 +526,15 @@ const PreQuestionire = () => {
                         // onChange={(e) => setSearchKey(e.target.value)}
                         onBlur={handleOnBlur}
                         onFocus={(e) => setSearchKey(e.target.value)}
-                        name="coLLageName"
-                        type="search"
-                        id="coLLageName"
-                        className="block md:w-full  h-8 rounded-md px-2 focus:ring-green-400 focus:border-green-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search"
+                        name='coLLageName'
+                        type='search'
+                        id='coLLageName'
+                        className='block md:w-full  h-8 rounded-md px-2 focus:ring-green-400 focus:border-green-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                        placeholder='Search'
                       />
 
                       {errors?.coLLageName && (
-                        <p role="alert" className="text-red-500 font-bold">
+                        <p role='alert' className='text-red-500 font-bold'>
                           {/* Name is required */}
                           {errors?.coLLageName?.message}
                         </p>
@@ -542,8 +542,8 @@ const PreQuestionire = () => {
                     </div>
 
                     {searchKeyResults?.length !== 0 && (
-                      <div className=" absolute w-full pr-2 md:max-w-md lg:max-w-lg mx-auto   max-h-80 overflow-y-auto  z-20  flex flex-col items-center">
-                        <div className="bg-white border-green-400 w-full border-4  border-t-0 ">
+                      <div className=' absolute w-full pr-2 md:max-w-md lg:max-w-lg mx-auto   max-h-80 overflow-y-auto  z-20  flex flex-col items-center'>
+                        <div className='bg-white border-green-400 w-full border-4  border-t-0 '>
                           {/* px should be zero after 450 width  */}
                           {/* ${styles.textsearchresponsive} */}
                           <ul className={`  w-full    `}>
@@ -552,7 +552,7 @@ const PreQuestionire = () => {
                                 onClick={() => handleMedicineClick(eachResult)}
                                 // onClick={() => console.log("xxxxxxxxxx")}
                                 key={i}
-                                className="block w-full bg-primary text-black font-bold px-4 py-1 hover:bg-green-300 hover:cursor-pointer"
+                                className='block w-full bg-primary text-black font-bold px-4 py-1 hover:bg-green-300 hover:cursor-pointer'
                               >
                                 {eachResult}
                               </li>
@@ -567,11 +567,11 @@ const PreQuestionire = () => {
                     <label htmlFor="latestDegree">latestDegree</label>
                     <input type="text" id="latestDegree" />
                   </div> */}
-                  <div className="my-2 mb-5">
-                    <div className="">
+                  <div className='my-2 mb-5'>
+                    <div className=''>
                       <label
                         className={`${style.titleSub}`}
-                        htmlFor="latestDegree"
+                        htmlFor='latestDegree'
                       >
                         Type your latest degree
                       </label>
@@ -582,10 +582,10 @@ const PreQuestionire = () => {
                             message: "mention your latest degree",
                           },
                         })}
-                        name="latestDegree"
-                        id="latestDegree"
+                        name='latestDegree'
+                        id='latestDegree'
                         // defaultValue="any"
-                        className="block md:w-full border-black border-2 grow h-8 rounded-md ml-2 py-0"
+                        className='block md:w-full border-black border-2 grow h-8 rounded-md ml-2 py-0'
                       >
                         {/* <option value="any" disabled>
                           Latest Degree ?
@@ -603,17 +603,17 @@ const PreQuestionire = () => {
                     {/* </p> */}
                     {/* // )} */}
                     {errors?.latestDegree && (
-                      <p role="alert" className="text-red-500 font-bold">
+                      <p role='alert' className='text-red-500 font-bold'>
                         {/* Name is required */}
                         {errors?.latestDegree.message}
                       </p>
                     )}
                   </div>
-                  <div className="my-2  mb-5">
-                    <div className="">
+                  <div className='my-2  mb-5'>
+                    <div className=''>
                       <label
                         className={`${style.titleSub}`}
-                        htmlFor="graduationYear"
+                        htmlFor='graduationYear'
                       >
                         Select your graduation year
                       </label>
@@ -624,12 +624,12 @@ const PreQuestionire = () => {
                             message: "select your graduation year",
                           },
                         })}
-                        name="graduationYear"
-                        id="graduationYear"
-                        defaultValue="any"
-                        className="block grow md:w-full h-8 rounded-md ml-2 py-0"
+                        name='graduationYear'
+                        id='graduationYear'
+                        defaultValue='any'
+                        className='block grow md:w-full h-8 rounded-md ml-2 py-0'
                       >
-                        <option value="any" disabled>
+                        <option value='any' disabled>
                           Graduation Year ?
                         </option>
                         <option value={2010}>2010</option>
@@ -678,7 +678,7 @@ const PreQuestionire = () => {
 
                     {shouldShowSelectError === true &&
                       selectError?.graduationYear !== "" && (
-                        <p role="alert" className="text-red-500 font-bold">
+                        <p role='alert' className='text-red-500 font-bold'>
                           {/* Name is required */}
                           {selectError?.graduationYear}
                         </p>
@@ -690,10 +690,10 @@ const PreQuestionire = () => {
               {/* if currently not studying and already in working then n go for ( optional ==> (collage Name , latest degree aand graduation year)) company name, works of experience, occption  */}
               {workAs === "jobHolder" && currentlyStuying === "false" && (
                 <div className={`${style.textpart} `}>
-                  <div className="my-2  mb-5">
+                  <div className='my-2  mb-5'>
                     <label
                       className={`${style.titleSub}`}
-                      htmlFor="companyName"
+                      htmlFor='companyName'
                     >
                       Company Name
                     </label>
@@ -708,23 +708,23 @@ const PreQuestionire = () => {
                           message: "retype your company name",
                         },
                       })}
-                      type="text"
-                      name="companyName"
-                      id="companyName"
-                      className="block md:w-full h-8 rounded-md "
+                      type='text'
+                      name='companyName'
+                      id='companyName'
+                      className='block md:w-full h-8 rounded-md '
                     />
                     {errors?.companyName && (
-                      <p role="alert" className="text-red-500 font-bold">
+                      <p role='alert' className='text-red-500 font-bold'>
                         {/* Name is required */}
                         {errors?.companyName?.message}
                       </p>
                     )}
                   </div>
-                  <div className="my-2 mb-5">
-                    <div className="">
+                  <div className='my-2 mb-5'>
+                    <div className=''>
                       <label
                         className={`${style.titleSub}`}
-                        htmlFor="yearsOfExperience"
+                        htmlFor='yearsOfExperience'
                       >
                         Select your experience
                       </label>
@@ -735,12 +735,12 @@ const PreQuestionire = () => {
                             message: "select your experience",
                           },
                         })}
-                        name="yearsOfExperience"
-                        id="yearsOfExperience"
-                        defaultValue="any"
-                        className="block md:w-full h-8 grow rounded-md ml-2 py-0"
+                        name='yearsOfExperience'
+                        id='yearsOfExperience'
+                        defaultValue='any'
+                        className='block md:w-full h-8 grow rounded-md ml-2 py-0'
                       >
-                        <option value="any" disabled>
+                        <option value='any' disabled>
                           Years Of Experience ?
                         </option>
                         <option value={1}>One</option>
@@ -760,13 +760,13 @@ const PreQuestionire = () => {
 
                     {shouldShowSelectError &&
                       selectError?.yearsOfExperience && (
-                        <p role="alert" className="text-red-500 font-bold">
+                        <p role='alert' className='text-red-500 font-bold'>
                           {/* Name is required */}
                           {selectError?.yearsOfExperience}
                         </p>
                       )}
                   </div>
-                  <div className="my-2 mb-5">
+                  <div className='my-2 mb-5'>
                     {/* <div className="">
                       <label
                         className={`${style.titleSub}`}
@@ -798,11 +798,11 @@ const PreQuestionire = () => {
                         <option value="AI Engineers">AI Engineers</option>
                       </select>
                     </div> */}
-                    <div className="my-2 mb-5">
-                      <div className="">
+                    <div className='my-2 mb-5'>
+                      <div className=''>
                         <label
                           className={`${style.titleSub}`}
-                          htmlFor="currentJobTitle"
+                          htmlFor='currentJobTitle'
                         >
                           Type your job title
                         </label>
@@ -813,14 +813,14 @@ const PreQuestionire = () => {
                               message: "mention your current job title",
                             },
                           })}
-                          name="currentJobTitle"
-                          id="currentJobTitle"
+                          name='currentJobTitle'
+                          id='currentJobTitle'
                           // defaultValue="any"
-                          className="block md:w-full border-black border-2 grow h-8 rounded-md ml-2 py-0"
+                          className='block md:w-full border-black border-2 grow h-8 rounded-md ml-2 py-0'
                         ></input>
                       </div>
                       {errors?.currentJobTitle && (
-                        <p role="alert" className="text-red-500 font-bold">
+                        <p role='alert' className='text-red-500 font-bold'>
                           {/* Name is required */}
                           {errors?.currentJobTitle.message}
                         </p>
@@ -828,7 +828,7 @@ const PreQuestionire = () => {
                     </div>
 
                     {shouldShowSelectError && selectError?.currentJobTitle && (
-                      <p role="alert" className="text-red-500 font-bold">
+                      <p role='alert' className='text-red-500 font-bold'>
                         {/* Name is required */}
                         {selectError?.currentJobTitle}
                       </p>
@@ -840,16 +840,16 @@ const PreQuestionire = () => {
           </div>
         </div>
       </div>
-      <div className="px-2">
-        <div className="border-slate-300 rounded-lg border-2 "></div>
+      <div className='px-2'>
+        <div className='border-slate-300 rounded-lg border-2 '></div>
       </div>
       <div>
         {/* footer */}
         {/* here is thee submit button  */}
         <button
           style={{ background: "#53A871" }}
-          className="button  hover:bg-green-400 rounded-md font-bold text-white text-xl px-4 py-2 w-full"
-          type="submit"
+          className='button  hover:bg-green-400 rounded-md font-bold text-white text-xl px-4 py-2 w-full'
+          type='submit'
           onClick={() => setShouldShowSelectError(true)}
         >
           Submit

@@ -24,7 +24,7 @@ const ProgramList = () => {
     const programDetails = {
       programName: data?.programName,
     };
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/program-list", {
+    fetch("http://localhost:5000/api/v1/programs/program-list", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +78,8 @@ const ProgramList = () => {
           <div class='w-full mx-auto my-3 font-poppins'>
             <label
               for='Course'
-              class='block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400'>
+              class='block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400'
+            >
               <div className='flex items-center justify-between'>
                 <p>Program Name:</p>
               </div>
@@ -94,7 +95,8 @@ const ProgramList = () => {
               )}
               class='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
               placeholder='Write program name'
-              aria-invalid={errors.programName ? "true" : "false"}></input>
+              aria-invalid={errors.programName ? "true" : "false"}
+            ></input>
             {errors.programName && (
               <p role='alert' className='text-red-500 font-poppins font-medium'>
                 {errors.programName?.message}
@@ -106,7 +108,8 @@ const ProgramList = () => {
           <button
             type='submit'
             disabled={loading}
-            class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow'>
+            class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow'
+          >
             <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
             <span class='relative text-black group-hover:text-white font-poppins font-medium'>
               {loading ? "Searching" : "Search"}
@@ -175,7 +178,8 @@ const ProgramList = () => {
                               data-modal-target='staticModal'
                               data-modal-toggle='staticModal'
                               class='px-1 py-1 '
-                              type='button'>
+                              type='button'
+                            >
                               {/* svg */}
                               <img
                                 height='15px'
@@ -219,7 +223,8 @@ const ProgramList = () => {
             className=' w-14 h-14 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-green-600'
             viewBox='0 0 100 101'
             fill='none'
-            xmlns='http://www.w3.org/2000/svg'>
+            xmlns='http://www.w3.org/2000/svg'
+          >
             <path
               d='M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z'
               fill='currentColor'

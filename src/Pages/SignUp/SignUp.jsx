@@ -205,7 +205,7 @@ const SignUp = () => {
   };
 
   const saveUser = (userBasicDetails) => {
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/usersbasics", {
+    fetch("http://localhost:5000/api/v1/users/usersbasics", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -225,7 +225,7 @@ const SignUp = () => {
       });
   };
   const saveUserForGoogle = (userBasicDetails) => {
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/usersbasics", {
+    fetch("http://localhost:5000/api/v1/users/usersbasics", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -247,10 +247,10 @@ const SignUp = () => {
 
   return (
     <div className={style?.singup}>
-      <div className="mt-4 mb-5 ">
+      <div className='mt-4 mb-5 '>
         <div className={style?.formclass}>
           {/* ----------------------------start resgistration from  =-----------------------------*/}
-          <div className="md:w-full">
+          <div className='md:w-full'>
             <div className={style?.newloginfrom}>
               <div className={style?.titlesing}>
                 <h2>
@@ -260,16 +260,16 @@ const SignUp = () => {
               </div>
               <div className={style.googlesingin}>
                 <div className={`${style.textcenter} ${style.googelIcon}`}>
-                <div className="font-poppins font-normal">
-                  <button
-                    className="flex py-2 justify-center  gap-4 items-center border border-black rounded-2xl my-2 bg-white text-black hover:bg-black hover:text-white"
-                    onClick={handleGoogleSignIn}
-                    style={{ width: "100%", borderRadius: "30px" }}
-                  >
-                    <FcGoogle />
-                    <span>CONTINUE WITH GOOGLE</span>
-                  </button>
-                </div>
+                  <div className='font-poppins font-normal'>
+                    <button
+                      className='flex py-2 justify-center  gap-4 items-center border border-black rounded-2xl my-2 bg-white text-black hover:bg-black hover:text-white'
+                      onClick={handleGoogleSignIn}
+                      style={{ width: "100%", borderRadius: "30px" }}
+                    >
+                      <FcGoogle />
+                      <span>CONTINUE WITH GOOGLE</span>
+                    </button>
+                  </div>
                 </div>
                 <p style={{ marginTop: "-20px", fontSize: "12px" }}>
                   Or use your Email and Mobile Number for registration{" "}
@@ -278,29 +278,29 @@ const SignUp = () => {
                   <div className={style.fromboxsing}>
                     <div className={style.fromboxinput}>
                       <input
-                        type="text"
-                        name="name"
-                        placeholder="Full Name"
+                        type='text'
+                        name='name'
+                        placeholder='Full Name'
                         {...register("name", {
                           required: "Name is Required",
                         })}
                       />
                     </div>
                     {errors.name && (
-                      <p className="text-red-500">{errors.name.message}</p>
+                      <p className='text-red-500'>{errors.name.message}</p>
                     )}
                     <div className={style.fromboxinput}>
                       <input
-                        type="email"
-                        name="email"
-                        placeholder="Email Address"
+                        type='email'
+                        name='email'
+                        placeholder='Email Address'
                         {...register("email", {
                           required: "Email is Requried",
                         })}
                       />
                     </div>
                     {errors.email && (
-                      <p className="text-red-500">{errors.email.message}</p>
+                      <p className='text-red-500'>{errors.email.message}</p>
                     )}
                     {/* <div className="from-box-input">
                       <input
@@ -323,8 +323,8 @@ const SignUp = () => {
                       <div className={style.passfild}>
                         <input
                           type={showPassword ? "text" : "password"}
-                          name="password"
-                          placeholder="Password"
+                          name='password'
+                          placeholder='Password'
                           {...register("password", {
                             required: "Password is required",
                             minLength: {
@@ -339,7 +339,7 @@ const SignUp = () => {
                           })}
                         />
                         <button
-                          type="button"
+                          type='button'
                           onClick={() => setShowPassword(!showPassword)}
                         >
                           {showPassword ? (
@@ -351,20 +351,20 @@ const SignUp = () => {
                       </div>
                     </div>
                     {errors.password && (
-                      <p className="text-red-500">{errors.password.message}</p>
+                      <p className='text-red-500'>{errors.password.message}</p>
                     )}
                     <div className={style.fromboxinput}>
                       <div className={style.passfild}>
                         <input
                           type={showPassword ? "text" : "password"}
-                          name="passwordConfirm"
-                          placeholder="Confirm Password"
+                          name='passwordConfirm'
+                          placeholder='Confirm Password'
                           {...register("passwordConfirm", {
                             required: "Confirm Password is Requried",
                           })}
                         />
                         <button
-                          type="button"
+                          type='button'
                           onClick={() => setShowPassword(!showPassword)}
                         >
                           {showPassword ? (
@@ -376,15 +376,15 @@ const SignUp = () => {
                       </div>
                     </div>
                     {errors.passwordConfirm && (
-                      <p className="text-red-500">
+                      <p className='text-red-500'>
                         {errors.passwordConfirm.message}
                       </p>
                     )}
                     <div className={style.singupsubmit}>
-                      <button type="submit">SIGN UP</button>
+                      <button type='submit'>SIGN UP</button>
                     </div>
                     {signUpError && (
-                      <p className="text-red-500-pass">{signUpError}</p>
+                      <p className='text-red-500-pass'>{signUpError}</p>
                     )}
                   </div>
                 </form>

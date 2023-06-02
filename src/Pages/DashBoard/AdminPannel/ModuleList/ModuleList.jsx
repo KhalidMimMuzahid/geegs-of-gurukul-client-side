@@ -65,7 +65,7 @@ const ModuleList = () => {
   });
 
   useEffect(() => {
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/all-program")
+    fetch("http://localhost:5000/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -77,7 +77,7 @@ const ModuleList = () => {
     if (program?.program_id) {
       // setCourses([]);
       fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/all-courses-by-program?_id=${program?.program_id}`
+        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -92,7 +92,7 @@ const ModuleList = () => {
     if (course?.course_id) {
       // setCourses([]);
       fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/all-batches-by-course?_id=${course?.course_id}`
+        `http://localhost:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -109,7 +109,7 @@ const ModuleList = () => {
       course_id: course?.course_id,
       batch_id: batch?.batch_id,
     };
-    fetch(`http://localhost:5000/search-module`, {
+    fetch(`http://localhost:5000/api/v1/modules/search-module`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -172,7 +172,8 @@ const ModuleList = () => {
                   // }
                 )}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'>
+                className='w-full border-2 border-green-400 rounded-xl'
+              >
                 <option disabled selected value=''>
                   Choose a Program
                 </option>
@@ -186,7 +187,8 @@ const ModuleList = () => {
               {errors.programName && (
                 <p
                   className='text-red-500 font-poppins font-medium'
-                  role='alert'>
+                  role='alert'
+                >
                   {errors.programName?.message}
                 </p>
               )}
@@ -203,7 +205,8 @@ const ModuleList = () => {
                   // }
                 )}
                 aria-invalid={errors.courseName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'>
+                className='w-full border-2 border-green-400 rounded-xl'
+              >
                 <option disabled selected value=''>
                   Choose a Course
                 </option>
@@ -217,7 +220,8 @@ const ModuleList = () => {
               {errors.courseName && (
                 <p
                   className='text-red-500 font-poppins font-medium'
-                  role='alert'>
+                  role='alert'
+                >
                   {errors.courseName?.message}
                 </p>
               )}
@@ -236,7 +240,8 @@ const ModuleList = () => {
                   // }
                 )}
                 aria-invalid={errors.batchName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'>
+                className='w-full border-2 border-green-400 rounded-xl'
+              >
                 <option disabled selected value=''>
                   Choose a Batch
                 </option>
@@ -250,7 +255,8 @@ const ModuleList = () => {
               {errors.batchName && (
                 <p
                   className='text-red-500 font-poppins font-medium'
-                  role='alert'>
+                  role='alert'
+                >
                   {errors.batchName?.message}
                 </p>
               )}
@@ -262,7 +268,8 @@ const ModuleList = () => {
           {/* Submit Button */}
           <button
             type='submit'
-            class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow my-3'>
+            class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow my-3'
+          >
             <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
             <span class='relative text-black group-hover:text-white font-poppins font-medium'>
               Search
@@ -342,7 +349,8 @@ const ModuleList = () => {
                             data-modal-target='staticModal'
                             data-modal-toggle='staticModal'
                             class='px-1 py-1 '
-                            type='button'>
+                            type='button'
+                          >
                             {/* svg */}
                             <img
                               height='15px'

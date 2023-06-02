@@ -90,7 +90,7 @@ const LecturesList = () => {
   });
 
   useEffect(() => {
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/all-program")
+    fetch("http://localhost:5000/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -101,7 +101,7 @@ const LecturesList = () => {
   useEffect(() => {
     if (program?.program_id) {
       fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/all-courses-by-program?_id=${program?.program_id}`
+        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -115,7 +115,7 @@ const LecturesList = () => {
   useEffect(() => {
     if (course?.course_id) {
       fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/all-batches-by-course?_id=${course?.course_id}`
+        `http://localhost:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -129,7 +129,7 @@ const LecturesList = () => {
   useEffect(() => {
     if (batch?.batch_id) {
       fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/all-modules-by-batch?_id=${batch?.batch_id}`
+        `http://localhost:5000/api/v1/modules/all-modules-by-batch?_id=${batch?.batch_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -163,7 +163,7 @@ const LecturesList = () => {
 
   const fetchLecture = (SearchData) => {
     setLectures([]);
-    fetch(`http://localhost:5000/search-lecture`, {
+    fetch(`http://localhost:5000/api/v1/lectures/search-lecture`, {
       headers: {
         "content-type": "application/json",
         data: JSON.stringify(SearchData),
@@ -225,7 +225,8 @@ const LecturesList = () => {
                 name='programName'
                 {...register("programName")}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'>
+                className='w-full border-2 border-green-400 rounded-xl'
+              >
                 <option disabled selected value=''>
                   Choose a Program
                 </option>
@@ -239,7 +240,8 @@ const LecturesList = () => {
               {errors.programName && (
                 <p
                   className='text-red-500 font-poppins font-medium'
-                  role='alert'>
+                  role='alert'
+                >
                   {errors.programName?.message}
                 </p>
               )}
@@ -251,7 +253,8 @@ const LecturesList = () => {
                 name='courseName'
                 {...register("courseName")}
                 aria-invalid={errors.courseName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'>
+                className='w-full border-2 border-green-400 rounded-xl'
+              >
                 <option disabled selected value=''>
                   Choose a Course
                 </option>
@@ -265,7 +268,8 @@ const LecturesList = () => {
               {errors.courseName && (
                 <p
                   className='text-red-500 font-poppins font-medium'
-                  role='alert'>
+                  role='alert'
+                >
                   {errors.courseName?.message}
                 </p>
               )}
@@ -279,7 +283,8 @@ const LecturesList = () => {
                 name='batchName'
                 {...register("batchName")}
                 aria-invalid={errors.batchName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'>
+                className='w-full border-2 border-green-400 rounded-xl'
+              >
                 <option disabled selected value=''>
                   Choose a Batch
                 </option>
@@ -293,7 +298,8 @@ const LecturesList = () => {
               {errors.batchName && (
                 <p
                   className='text-red-500 font-poppins font-medium'
-                  role='alert'>
+                  role='alert'
+                >
                   {errors.batchName?.message}
                 </p>
               )}
@@ -307,7 +313,8 @@ const LecturesList = () => {
                 name='moduleName'
                 {...register("moduleName")}
                 aria-invalid={errors.moduleName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'>
+                className='w-full border-2 border-green-400 rounded-xl'
+              >
                 <option disabled selected value=''>
                   Choose a Module
                 </option>
@@ -319,14 +326,16 @@ const LecturesList = () => {
                   ))}
                 <option
                   onClick={() => console.log("xxxxxx")}
-                  value='createNewModule'>
+                  value='createNewModule'
+                >
                   Create New Module
                 </option>
               </select>
               {errors.moduleName && (
                 <p
                   className='text-red-500 font-poppins font-medium'
-                  role='alert'>
+                  role='alert'
+                >
                   {errors.moduleName?.message}
                 </p>
               )}
@@ -341,7 +350,8 @@ const LecturesList = () => {
                           text-white hover:text-green-500 
                           bg-green-500 hover:bg-white 
                           border-green-500 rounded-lg border-4    
-                          transition-all duration-300'>
+                          transition-all duration-300'
+              >
                 {loading ? "Searching" : "Search"}
               </button>
             </div>
@@ -353,7 +363,8 @@ const LecturesList = () => {
                            text-green-500 hover:text-white 
                            bg-white hover:bg-green-500 
                            border-green-500 rounded-lg border-4    
-                           transition-all duration-300'>
+                           transition-all duration-300'
+              >
                 {loading ? "Searching" : "My Creation"}
               </button>
             </div>
@@ -427,7 +438,8 @@ const LecturesList = () => {
                               data-modal-target='staticModal'
                               data-modal-toggle='staticModal'
                               class='px-1 py-1 '
-                              type='button'>
+                              type='button'
+                            >
                               {/* svg */}
                               <img
                                 height='15px'
@@ -471,7 +483,8 @@ const LecturesList = () => {
         data-modal-backdrop='static'
         tabindex='-1'
         aria-hidden='true'
-        class='fixed top-0 left-0 right-0 z-[4000000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full'>
+        class='fixed top-0 left-0 right-0 z-[4000000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full'
+      >
         <div class='relative w-full max-w-2xl max-h-full'>
           {/* <!-- Modal content --> */}
           <div class='relative bg-white rounded-lg shadow dark:bg-gray-700'>
@@ -483,16 +496,19 @@ const LecturesList = () => {
               <button
                 type='button'
                 class='text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white'
-                data-modal-hide='staticModal'>
+                data-modal-hide='staticModal'
+              >
                 <svg
                   class='w-5 h-5'
                   fill='currentColor'
                   viewBox='0 0 20 20'
-                  xmlns='http://www.w3.org/2000/svg'>
+                  xmlns='http://www.w3.org/2000/svg'
+                >
                   <path
                     fill-rule='evenodd'
                     d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-                    clip-rule='evenodd'></path>
+                    clip-rule='evenodd'
+                  ></path>
                 </svg>
               </button>
             </div>
@@ -546,13 +562,15 @@ const LecturesList = () => {
               <button
                 data-modal-hide='staticModal'
                 type='button'
-                class='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
+                class='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+              >
                 I accept
               </button>
               <button
                 data-modal-hide='staticModal'
                 type='button'
-                class='text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600'>
+                class='text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600'
+              >
                 Decline
               </button>
             </div>

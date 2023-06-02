@@ -59,7 +59,7 @@ const BatchList = () => {
   });
 
   useEffect(() => {
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/all-program")
+    fetch("http://localhost:5000/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -71,7 +71,7 @@ const BatchList = () => {
     if (program?.program_id) {
       setCourses([]);
       fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/all-courses-by-program?_id=${program?.program_id}`
+        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -85,7 +85,7 @@ const BatchList = () => {
   useEffect(() => {
     if (course?.course_id) {
       fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/all-batches-by-course?_id=${course?.course_id}`
+        `http://localhost:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -96,7 +96,7 @@ const BatchList = () => {
 
   //delete a batch
   const handelDeleteBatch = (id) => {
-    fetch(`https://geeks-of-gurukul-server-side.vercel.app/batch/${id}`, {
+    fetch(`http://localhost:5000/api/v1/batches/batch/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -120,7 +120,7 @@ const BatchList = () => {
     };
 
     setLoading(true);
-    fetch(`http://localhost:5000/search-batch`, {
+    fetch(`http://localhost:5000/api/v1/batches/search-batch`, {
       headers: {
         "content-type": "application/json",
         data: JSON.stringify(searchData),
@@ -180,7 +180,8 @@ const BatchList = () => {
                   name='programName'
                   {...register("programName")}
                   aria-invalid={errors.programName ? "true" : "false"}
-                  className='w-full border-2 border-green-400 rounded-xl'>
+                  className='w-full border-2 border-green-400 rounded-xl'
+                >
                   <option disabled selected value=''>
                     Choose a Program
                   </option>
@@ -194,7 +195,8 @@ const BatchList = () => {
                 {errors.programName && (
                   <p
                     className='text-red-500 font-poppins font-medium'
-                    role='alert'>
+                    role='alert'
+                  >
                     {errors.programName?.message}
                   </p>
                 )}
@@ -206,7 +208,8 @@ const BatchList = () => {
                   name='courseName'
                   {...register("courseName")}
                   aria-invalid={errors.courseName ? "true" : "false"}
-                  className='w-full border-2 border-green-400 rounded-xl'>
+                  className='w-full border-2 border-green-400 rounded-xl'
+                >
                   <option disabled selected value=''>
                     Choose a Course
                   </option>
@@ -220,7 +223,8 @@ const BatchList = () => {
                 {errors.courseName && (
                   <p
                     className='text-red-500 font-poppins font-medium'
-                    role='alert'>
+                    role='alert'
+                  >
                     {errors.courseName?.message}
                   </p>
                 )}
@@ -233,7 +237,8 @@ const BatchList = () => {
                 <button
                   type='submit'
                   disabled={loading}
-                  className='px-16 py-3 w-full mt-7 text-white rounded-lg bg-green-500'>
+                  className='px-16 py-3 w-full mt-7 text-white rounded-lg bg-green-500'
+                >
                   {loading ? "Searching" : "Search"}
                 </button>
               </div>
@@ -295,7 +300,8 @@ const BatchList = () => {
                             <button
                               type='button'
                               className='px-1 py-1 '
-                              onClick={() => setShouldDelete(true)}>
+                              onClick={() => setShouldDelete(true)}
+                            >
                               {/* svg */}
                               <img
                                 height='15px'
@@ -318,7 +324,8 @@ const BatchList = () => {
                               data-modal-target='staticModal'
                               data-modal-toggle='staticModal'
                               class='px-1 py-1 '
-                              type='button'>
+                              type='button'
+                            >
                               {/* svg */}
                               <img
                                 height='15px'
@@ -335,7 +342,8 @@ const BatchList = () => {
                                   </h1>
                                   <button
                                     onClick={() => setShouldDelete(false)}
-                                    class='bg-red-500 px-4 py-2 rounded-md text-md text-white'>
+                                    class='bg-red-500 px-4 py-2 rounded-md text-md text-white'
+                                  >
                                     Cancel
                                   </button>
                                   <button
@@ -343,7 +351,8 @@ const BatchList = () => {
                                       handelDeleteBatch(batch?._id) &&
                                       setShouldDelete(false)
                                     }
-                                    class='bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold'>
+                                    class='bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold'
+                                  >
                                     Ok
                                   </button>
                                 </div>
@@ -386,7 +395,8 @@ const BatchList = () => {
               className=' w-14 h-14 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-green-600'
               viewBox='0 0 100 101'
               fill='none'
-              xmlns='http://www.w3.org/2000/svg'>
+              xmlns='http://www.w3.org/2000/svg'
+            >
               <path
                 d='M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z'
                 fill='currentColor'

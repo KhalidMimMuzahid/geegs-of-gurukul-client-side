@@ -53,7 +53,7 @@ const AddModuleModel = ({
       },
     };
 
-    fetch(`https://geeks-of-gurukul-server-side.vercel.app/moduleDetails`, {
+    fetch(`http://localhost:5000/api/v1/modules/moduleDetails`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -17,7 +17,7 @@ const Users = () => {
   } = useForm();
 
   const onSearch = (data) => {
-    fetch(`http://localhost:5000/search-user`, {
+    fetch(`http://localhost:5000/api/v1/users/search-user`, {
       headers: {
         "content-type": "application/json",
         data: JSON.stringify(data),
@@ -93,7 +93,8 @@ const Users = () => {
               <button
                 type='submit'
                 disabled={loading}
-                className='font-poppins font-medium text-white px-12 py-2 rounded-lg hover:bg-green-400 bg-green-500'>
+                className='font-poppins font-medium text-white px-12 py-2 rounded-lg hover:bg-green-400 bg-green-500'
+              >
                 {loading ? "Searching" : "Search"}
               </button>
             </div>
@@ -147,7 +148,8 @@ const Users = () => {
                         <div class=' w-38 mx-auto flex'>
                           <select
                             id='Roles'
-                            class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                            class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                          >
                             <option selected>Select Role</option>
                             <option value='US'>Admin</option>
                             <option value='CA'>Instructor</option>

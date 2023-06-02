@@ -95,7 +95,7 @@ const router = createBrowserRouter([
             path: "/dashboard/analysis/specific/:_id",
             loader: async ({ params }) =>
               fetch(
-                `https://geeks-of-gurukul-server-side.vercel.app/assessment-response?_id=${params?._id}`
+                `http://localhost:5000/api/v1/assessments/assessment-response?_id=${params?._id}`
               ),
             element: <Analysis />,
           },
@@ -300,16 +300,14 @@ const router = createBrowserRouter([
   {
     path: "on-processing/:_id",
     loader: async ({ params }) =>
-      fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/assessment?_id=${params?._id}`
-      ),
+      fetch(`http://localhost:5000/api/v1/assessments/assessment?_id=${params?._id}`),
     element: <OnProcessinAssesments />,
   },
   // {
   //   path: "/dashboard/analysis/specific/review/:_id",
   //   loader: async ({ params }) =>
   //     fetch(
-  //       `https://geeks-of-gurukul-server-side.vercel.app/assessment?_id=${params?._id}`
+  //       `http://localhost:5000/api/v1/assessments/assessment?_id=${params?._id}`
   //     ),
   //   element: <ReviewAnswer/>,
   // },

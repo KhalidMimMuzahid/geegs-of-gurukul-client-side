@@ -1,10 +1,9 @@
-
 import React, { useContext } from "react";
 
 const checkPhoneAlreadyInUsed = (number) => {
-    console.log("numbervavavavaaa: ",number)
+  console.log("numbervavavavaaa: ", number);
   return fetch(
-    `https://geeks-of-gurukul-server-side.vercel.app/checkphonealreadyinused/${number}`
+    `http://localhost:5000/api/v1/users/checkphonealreadyinused/${number}`
   );
 };
 

@@ -15,7 +15,7 @@ const Default = () => {
   const [selectedId, setSelectedId] = useState("");
 
   useEffect(() => {
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/assessments")
+    fetch("http://localhost:5000/api/v1/assessments/assessments")
       .then((res) => res.json())
       .then((assessments) => {
         console.log("Assessments: ", assessments);
