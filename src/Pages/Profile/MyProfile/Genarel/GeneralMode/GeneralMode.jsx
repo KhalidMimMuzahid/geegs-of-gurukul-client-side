@@ -26,7 +26,7 @@ const GeneralMode = () => {
           <div className="flex flex-col md:flex-row gap-2 md:gap-4 mt-3">
             <div className=" flex gap-2 items-center">
               <svg
-                className="w-6 h-6"
+                className="w-6 h-6 text-green-400"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"

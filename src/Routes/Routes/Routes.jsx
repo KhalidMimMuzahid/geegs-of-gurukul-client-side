@@ -52,6 +52,7 @@ import AddProgram from "../../Pages/DashBoard/AdminPannel/AddProgram/AddProgram"
 import ProgramList from "../../Pages/DashBoard/AdminPannel/ProgramList/ProgramList";
 import Profession from "../../Pages/Profile/MyProfile/Profession/Profession";
 import MySkills from "./../../Pages/Profile/MyProfile/MySkills/MySkills";
+import ExerciseResponse from "./../../Pages/DashBoard/AdminPannel/ExerciseResponse/ExerciseResponse";
 
 const { createBrowserRouter } = require("react-router-dom");
 const router = createBrowserRouter([
@@ -183,6 +184,10 @@ const router = createBrowserRouter([
                 element: <CouponList />,
               },
               {
+                path: "/dashboard/admin-pannel/others/exercise-response",
+                element: <ExerciseResponse />,
+              },
+              {
                 path: "/dashboard/admin-pannel/course/add-module",
                 element: <AddModule />,
               },
@@ -300,7 +305,9 @@ const router = createBrowserRouter([
   {
     path: "on-processing/:_id",
     loader: async ({ params }) =>
-      fetch(`http://localhost:5000/api/v1/assessments/assessment?_id=${params?._id}`),
+      fetch(
+        `http://localhost:5000/api/v1/assessments/assessment?_id=${params?._id}`
+      ),
     element: <OnProcessinAssesments />,
   },
   // {
