@@ -20,6 +20,7 @@ const ExerciseResponse = () => {
   const [assignment, setAssignment] = useState({});
   const [loading, setLoading] = useState(false);
   const [exerciseResponses, setExerciseResponses] = useState([]);
+
   const {
     register,
     handleSubmit,
@@ -116,6 +117,11 @@ const ExerciseResponse = () => {
   useEffect(() => {
     if (program?.program_id) {
       setCourses([]);
+      setBatches([]);
+      setModules([]);
+      setLectures([]);
+      setAssignments([]);
+
       fetch(
         `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
@@ -130,19 +136,10 @@ const ExerciseResponse = () => {
   //find all batch
   useEffect(() => {
     if (course?.course_id) {
-      fetch(
-        `http://localhost:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          // console.log("data", data?.data);
-        });
-    }
-  }, [course?.course_id]);
-
-  //find all batch
-  useEffect(() => {
-    if (course?.course_id) {
+      setBatches([]);
+      setModules([]);
+      setLectures([]);
+      setAssignments([]);
       fetch(
         `http://localhost:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
       )
@@ -157,6 +154,9 @@ const ExerciseResponse = () => {
   //module
   useEffect(() => {
     if (batch?.batch_id) {
+      setModules([]);
+      setLectures([]);
+      setAssignments([]);
       fetch(
         `http://localhost:5000/api/v1/modules/all-modules-by-batch?_id=${batch?.batch_id}`
       )
@@ -171,6 +171,8 @@ const ExerciseResponse = () => {
   //lecture
   useEffect(() => {
     if (module?.module_id) {
+      setLectures([]);
+      setAssignments([]);
       fetch(
         `http://localhost:5000/api/v1/lectures/lecturesbymodule?_id=${module?.module_id}`
       )
