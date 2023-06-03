@@ -203,31 +203,31 @@ const LecturesList = () => {
     setItemOffset(newOffset);
   };
   return (
-    <div className='mt-5'>
+    <div className="mt-5">
       {/* filtering form */}
-      <div className='container mt-5'>
+      <div className="container mt-5">
         <form onSubmit={handleSubmit(onSearch)}>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className={style?.lectureName}>
               <p>Lecture Name</p>
               <input
-                type='text'
+                type="text"
                 {...register("lectureName")}
-                className='w-full border-2 border-green-400 rounded-xl'
+                className="w-full border-2 border-green-400 rounded-xl"
               />
             </div>
             {/* Lecture Name */}
 
             {/* Program Name */}
             <div className={style?.addLecture}>
-              <label htmlFor='programName'>Program Name</label>
+              <label htmlFor="programName">Program Name</label>
               <select
-                name='programName'
+                name="programName"
                 {...register("programName")}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                className="w-full border-2 border-green-400 rounded-xl"
               >
-                <option disabled selected value=''>
+                <option disabled selected value="">
                   Choose a Program
                 </option>
                 {data?.length > 0 &&
@@ -239,8 +239,8 @@ const LecturesList = () => {
               </select>
               {errors.programName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.programName?.message}
                 </p>
@@ -248,14 +248,14 @@ const LecturesList = () => {
             </div>
             {/* Course Name */}
             <div className={style?.addLecture}>
-              <label htmlFor='courseName'>Course Name</label>
+              <label htmlFor="courseName">Course Name</label>
               <select
-                name='courseName'
+                name="courseName"
                 {...register("courseName")}
                 aria-invalid={errors.courseName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                className="w-full border-2 border-green-400 rounded-xl"
               >
-                <option disabled selected value=''>
+                <option disabled selected value="">
                   Choose a Course
                 </option>
                 {courses?.length > 0 &&
@@ -267,8 +267,8 @@ const LecturesList = () => {
               </select>
               {errors.courseName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.courseName?.message}
                 </p>
@@ -278,14 +278,14 @@ const LecturesList = () => {
             {/* batch Name */}
 
             <div className={style?.addLecture}>
-              <label htmlFor='batchName'>Batch Name</label>
+              <label htmlFor="batchName">Batch Name</label>
               <select
-                name='batchName'
+                name="batchName"
                 {...register("batchName")}
                 aria-invalid={errors.batchName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                className="w-full border-2 border-green-400 rounded-xl"
               >
-                <option disabled selected value=''>
+                <option disabled selected value="">
                   Choose a Batch
                 </option>
                 {batches?.length > 0 &&
@@ -297,8 +297,8 @@ const LecturesList = () => {
               </select>
               {errors.batchName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.batchName?.message}
                 </p>
@@ -308,14 +308,14 @@ const LecturesList = () => {
             {/* batch Name */}
             {/* module name */}
             <div className={style?.addLecture}>
-              <label htmlFor='moduleName'>Module Name</label>
+              <label htmlFor="moduleName">Module Name</label>
               <select
-                name='moduleName'
+                name="moduleName"
                 {...register("moduleName")}
                 aria-invalid={errors.moduleName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                className="w-full border-2 border-green-400 rounded-xl"
               >
-                <option disabled selected value=''>
+                <option disabled selected value="">
                   Choose a Module
                 </option>
                 {modules?.length > 0 &&
@@ -326,44 +326,44 @@ const LecturesList = () => {
                   ))}
                 <option
                   onClick={() => console.log("xxxxxx")}
-                  value='createNewModule'
+                  value="createNewModule"
                 >
                   Create New Module
                 </option>
               </select>
               {errors.moduleName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.moduleName?.message}
                 </p>
               )}
             </div>
           </div>
-          <div className='flex gap-4 my-5'>
-            <div className=''>
+          <div className="flex gap-4 my-5">
+            <div className="">
               <button
-                type='submit'
+                type="submit"
                 disabled={loading}
-                className='px-10 py-3
+                className="px-10 py-3
                           text-white hover:text-green-500 
                           bg-green-500 hover:bg-white 
                           border-green-500 rounded-lg border-4    
-                          transition-all duration-300'
+                          transition-all duration-300"
               >
                 {loading ? "Searching" : "Search"}
               </button>
             </div>
-            <div className=''>
+            <div className="">
               <button
                 onClick={handelToMyCreation}
                 disabled={loading}
-                className='px-10 py-3
+                className="px-10 py-3
                            text-green-500 hover:text-white 
                            bg-white hover:bg-green-500 
                            border-green-500 rounded-lg border-4    
-                           transition-all duration-300'
+                           transition-all duration-300"
               >
                 {loading ? "Searching" : "My Creation"}
               </button>
@@ -372,80 +372,80 @@ const LecturesList = () => {
         </form>
       </div>
       {/* Table */}
-      <div class='flex flex-col justify-center h-full mx-auto'>
-        <div class='w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200'>
-          <header class='px-5 py-4 border-b border-gray-100'>
-            <h2 class='font-semibold font-poppins text-gray-800'>Lectures</h2>
+      <div class="flex flex-col justify-center h-full mx-auto">
+        <div class="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+          <header class="px-5 py-4 border-b border-gray-100">
+            <h2 class="font-semibold font-poppins text-gray-800">Lectures</h2>
           </header>
-          <div class='p-3'>
-            <div class='max-w-[90vw] overflow-x-scroll'>
-              <table class='table-auto w-full font-poppins font-medium overflow-x-auto'>
-                <thead class='text-xs font-semibold uppercase text-gray-400 bg-gray-50'>
+          <div class="p-3">
+            <div class="max-w-[90vw] overflow-x-scroll">
+              <table class="table-auto w-full font-poppins font-medium overflow-x-auto">
+                <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                   <tr>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>SL No:</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-left">SL No:</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>Lecture Name</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-left">Lecture Name</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>Topic</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-left">Topic</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-center'>Batch No</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-center">Batch No</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-center'>Action</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-center">Action</div>
                     </th>
                   </tr>
                 </thead>
-                <tbody class='text-sm divide-y divide-gray-100'>
+                <tbody class="text-sm divide-y divide-gray-100">
                   {currentLectures?.length > 0 &&
                     currentLectures.map((lecture, i) => (
                       <tr key={i}>
-                        <td class='p-2 whitespace-nowrap'>
-                          <div class='flex items-center'>{i + 1}</div>
+                        <td class="p-2 whitespace-nowrap">
+                          <div class="flex items-center">{i + 1}</div>
                         </td>
-                        <td class='p-2 whitespace-nowrap'>
+                        <td class="p-2 whitespace-nowrap">
                           {lecture?.lectureName}
                         </td>
-                        <td class='p-2 whitespace-nowrap'>{lecture?.topic}</td>
-                        <td class='p-2 whitespace-nowrap'>
+                        <td class="p-2 whitespace-nowrap">{lecture?.topic}</td>
+                        <td class="p-2 whitespace-nowrap">
                           {lecture?.batch?.batchName}
                         </td>
-                        <td class='p-2 whitespace-nowrap flex gap-2'>
-                          <div class='mx-auto flex w-[100px] gap-2'>
-                            <button type='button' className='px-1 py-1 '>
+                        <td class="p-2 whitespace-nowrap flex gap-2">
+                          <div class="mx-auto flex w-[100px] gap-2">
+                            <button type="button" className="px-1 py-1 ">
                               {/* svg */}
                               <img
-                                height='15px'
-                                width='15px'
+                                height="15px"
+                                width="15px"
                                 src={deleteIcon}
-                                alt=''
+                                alt=""
                               />
                             </button>
-                            <button type='button' className='px-1 py-1'>
+                            <button type="button" className="px-1 py-1">
                               {/* svg */}
                               <img
-                                height='15px'
-                                width='15px'
+                                height="15px"
+                                width="15px"
                                 src={editIcon}
-                                alt=''
+                                alt=""
                               />
                             </button>
 
                             <button
-                              data-modal-target='staticModal'
-                              data-modal-toggle='staticModal'
-                              class='px-1 py-1 '
-                              type='button'
+                              data-modal-target="staticModal"
+                              data-modal-toggle="staticModal"
+                              class="px-1 py-1 "
+                              type="button"
                             >
                               {/* svg */}
                               <img
-                                height='15px'
-                                width='15px'
+                                height="15px"
+                                width="15px"
                                 src={copyIcon}
-                                alt=''
+                                alt=""
                               />
                             </button>
                           </div>
@@ -457,16 +457,16 @@ const LecturesList = () => {
               {/* pagination */}
 
               <div>
-                <div className='pagination'>
+                <div className="pagination">
                   <ReactPaginate
-                    breakLabel='...'
-                    nextLabel='>'
+                    breakLabel="..."
+                    nextLabel=">"
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={5}
                     pageCount={pageCount}
-                    previousLabel='<'
+                    previousLabel="<"
                     renderOnZeroPageCount={null}
-                    containerClassName='pagination-menu'
+                    containerClassName="pagination-menu"
                   />
                 </div>
               </div>
@@ -479,97 +479,97 @@ const LecturesList = () => {
 
       {/* <!-- Main modal --> */}
       <div
-        id='staticModal'
-        data-modal-backdrop='static'
-        tabindex='-1'
-        aria-hidden='true'
-        class='fixed top-0 left-0 right-0 z-[4000000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full'
+        id="staticModal"
+        data-modal-backdrop="static"
+        tabindex="-1"
+        aria-hidden="true"
+        class="fixed top-0 left-0 right-0 z-[4000000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
       >
-        <div class='relative w-full max-w-2xl max-h-full'>
+        <div class="relative w-full max-w-2xl max-h-full">
           {/* <!-- Modal content --> */}
-          <div class='relative bg-white rounded-lg shadow dark:bg-gray-700'>
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             {/* <!-- Modal header --> */}
-            <div class='flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600'>
-              <h3 class='text-xl font-semibold text-gray-900 dark:text-white'>
+            <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                 Lecture Info
               </h3>
               <button
-                type='button'
-                class='text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white'
-                data-modal-hide='staticModal'
+                type="button"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-hide="staticModal"
               >
                 <svg
-                  class='w-5 h-5'
-                  fill='currentColor'
-                  viewBox='0 0 20 20'
-                  xmlns='http://www.w3.org/2000/svg'
+                  class="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule='evenodd'
-                    d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-                    clip-rule='evenodd'
+                    fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
                   ></path>
                 </svg>
               </button>
             </div>
             {/* <!-- Modal body --> */}
-            <form class='p-6 space-y-6'>
-              <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                <div className=''>
+            <form class="p-6 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="">
                   <input
-                    type='text'
-                    className='form-control w-full rounded-lg'
-                    placeholder='Lecture name'
-                    aria-label='Lecture name'
+                    type="text"
+                    className="form-control w-full rounded-lg"
+                    placeholder="Lecture name"
+                    aria-label="Lecture name"
                   />
                 </div>
-                <div className=''>
+                <div className="">
                   <input
-                    type='text'
-                    className='form-control w-full rounded-lg'
-                    placeholder='Lecture Topic'
-                    aria-label='Lecture Topic'
+                    type="text"
+                    className="form-control w-full rounded-lg"
+                    placeholder="Lecture Topic"
+                    aria-label="Lecture Topic"
                   />
                 </div>
-                <div className=''>
+                <div className="">
                   <input
-                    type='text'
-                    className='form-control w-full rounded-lg'
-                    placeholder='Lecture ID'
-                    aria-label='Lecture ID'
+                    type="text"
+                    className="form-control w-full rounded-lg"
+                    placeholder="Lecture ID"
+                    aria-label="Lecture ID"
                   />
                 </div>
-                <div className=''>
+                <div className="">
                   <input
-                    type='text'
-                    className='form-control w-full rounded-lg'
-                    placeholder='Schedule at'
-                    aria-label='Schedule at'
+                    type="text"
+                    className="form-control w-full rounded-lg"
+                    placeholder="Schedule at"
+                    aria-label="Schedule at"
                   />
                 </div>
-                <div className=''>
+                <div className="">
                   <input
-                    type='text'
-                    className='form-control w-full rounded-lg'
-                    placeholder='Duration'
-                    aria-label='Duration'
+                    type="text"
+                    className="form-control w-full rounded-lg"
+                    placeholder="Duration"
+                    aria-label="Duration"
                   />
                 </div>
               </div>
             </form>
             {/* <!-- Modal footer --> */}
-            <div class='flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600'>
+            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
               <button
-                data-modal-hide='staticModal'
-                type='button'
-                class='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                data-modal-hide="staticModal"
+                type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 I accept
               </button>
               <button
-                data-modal-hide='staticModal'
-                type='button'
-                class='text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600'
+                data-modal-hide="staticModal"
+                type="button"
+                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
               >
                 Decline
               </button>

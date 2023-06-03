@@ -152,6 +152,11 @@ const navigation = [
         link: "/dashboard/admin-pannel/others/coupon-list",
         current: false,
       },
+      {
+        name: "Exercise Response",
+        link: "/dashboard/admin-pannel/others/exercise-response",
+        current: false,
+      },
     ],
   },
 ];
