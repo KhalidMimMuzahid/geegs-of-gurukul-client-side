@@ -246,7 +246,7 @@ const CreateCoupon = () => {
     // console.log(couponDetails);
     setCouponInfo(couponDetails);
     console.log(couponInfo);
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/coupon-details", {
+    fetch("http://localhost:5000/api/v1/coupons/coupon-details", {
       method: "POST",
       body: JSON.stringify(couponDetails),
       headers: {

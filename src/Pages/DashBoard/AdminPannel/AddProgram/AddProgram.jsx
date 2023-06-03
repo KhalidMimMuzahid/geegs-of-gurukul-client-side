@@ -32,7 +32,7 @@ const AddProgram = () => {
         },
       },
     };
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/add-program", {
+    fetch("http://localhost:5000/api/v1/programs/add-program", {
       method: "POST",
       body: JSON.stringify(programDetails),
       headers: {

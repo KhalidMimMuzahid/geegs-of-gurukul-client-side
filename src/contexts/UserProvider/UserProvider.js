@@ -30,7 +30,7 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     if (updateUser?.email) {
       fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/userinfo/${updateUser?.email}`
+        `http://localhost:5000/api/v1/users/userinfo/${updateUser?.email}`
       )
         .then((res) => res.json())
         .then((user) => {

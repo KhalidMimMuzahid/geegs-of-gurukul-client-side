@@ -24,7 +24,7 @@ const AssesmentList = () => {
 
   const FetchAssessment = (searchData) => {
     setLoading(true);
-    fetch("http://localhost:5000/search-assessment", {
+    fetch("http://localhost:5000/api/v1/assessments/search-assessment", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -127,7 +127,8 @@ const AssesmentList = () => {
                 {errors.assessmentName && (
                   <p
                     role='alert'
-                    className='text-red-500 font-poppins font-medium'>
+                    className='text-red-500 font-poppins font-medium'
+                  >
                     {errors.assessmentName?.message}
                   </p>
                 )}
@@ -144,7 +145,8 @@ const AssesmentList = () => {
                 {errors.batchName && (
                   <p
                     role='alert'
-                    className='text-red-500 font-poppins font-medium'>
+                    className='text-red-500 font-poppins font-medium'
+                  >
                     {errors.batchName?.message}
                   </p>
                 )}
@@ -161,7 +163,8 @@ const AssesmentList = () => {
                 {errors.creatorEmail && (
                   <p
                     role='alert'
-                    className='text-red-500 font-poppins font-medium'>
+                    className='text-red-500 font-poppins font-medium'
+                  >
                     {errors.creatorEmail?.message}
                   </p>
                 )}
@@ -178,7 +181,8 @@ const AssesmentList = () => {
                 {errors.updaterEmail && (
                   <p
                     role='alert'
-                    className='text-red-500 font-poppins font-medium'>
+                    className='text-red-500 font-poppins font-medium'
+                  >
                     {errors.updaterEmail?.message}
                   </p>
                 )}
@@ -194,7 +198,8 @@ const AssesmentList = () => {
                           text-white hover:text-green-500
                           bg-green-500 hover:bg-white
                           border-green-500 rounded-lg border-4
-                          transition-all duration-300'>
+                          transition-all duration-300'
+                >
                   {loading ? "Searching" : "Search"}
                 </button>
               </div>
@@ -207,7 +212,8 @@ const AssesmentList = () => {
                            text-green-500 hover:text-white
                            bg-white hover:bg-green-500
                            border-green-500 rounded-lg border-4
-                           transition-all duration-300'>
+                           transition-all duration-300'
+                >
                   {loading ? "Searching" : "My Creation"}
                 </button>
               </div>
@@ -283,7 +289,8 @@ const AssesmentList = () => {
                             data-modal-target='staticModal'
                             data-modal-toggle='staticModal'
                             class='px-1 py-1'
-                            type='button'>
+                            type='button'
+                          >
                             {/* svg */}
                             <img
                               height='15px'
@@ -328,7 +335,8 @@ const AssesmentList = () => {
         data-modal-backdrop='static'
         tabindex='-1'
         aria-hidden='true'
-        class='fixed top-0 left-0 right-0 z-[4000000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full'>
+        class='fixed top-0 left-0 right-0 z-[4000000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full'
+      >
         <div class='relative w-full max-w-2xl max-h-full'>
           {/* <!-- Modal content --> */}
           <div class='relative bg-white rounded-lg shadow dark:bg-gray-700'>
@@ -340,16 +348,19 @@ const AssesmentList = () => {
               <button
                 type='button'
                 class='text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white'
-                data-modal-hide='staticModal'>
+                data-modal-hide='staticModal'
+              >
                 <svg
                   class='w-5 h-5'
                   fill='currentColor'
                   viewBox='0 0 20 20'
-                  xmlns='http://www.w3.org/2000/svg'>
+                  xmlns='http://www.w3.org/2000/svg'
+                >
                   <path
                     fill-rule='evenodd'
                     d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-                    clip-rule='evenodd'></path>
+                    clip-rule='evenodd'
+                  ></path>
                 </svg>
               </button>
             </div>
@@ -403,13 +414,15 @@ const AssesmentList = () => {
               <button
                 data-modal-hide='staticModal'
                 type='button'
-                class='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
+                class='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+              >
                 I accept
               </button>
               <button
                 data-modal-hide='staticModal'
                 type='button'
-                class='text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600'>
+                class='text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600'
+              >
                 Decline
               </button>
             </div>

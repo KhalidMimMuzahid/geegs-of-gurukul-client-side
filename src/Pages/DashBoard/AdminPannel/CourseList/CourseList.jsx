@@ -56,7 +56,7 @@ const CourseList = () => {
   });
 
   useEffect(() => {
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/all-program")
+    fetch("http://localhost:5000/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -68,7 +68,7 @@ const CourseList = () => {
     if (program?.program_id) {
       setCourses([]);
       fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/all-courses-by-program?_id=${program?.program_id}`
+        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -104,7 +104,7 @@ const CourseList = () => {
 
   const fetchCourses = (SearchData) => {
     setItems([]);
-    fetch(`http://localhost:5000/search-course`, {
+    fetch(`http://localhost:5000/api/v1/courses/search-course`, {
       headers: {
         "content-type": "application/json",
         data: JSON.stringify(SearchData),
@@ -130,7 +130,7 @@ const CourseList = () => {
 
   //delete a course
   const handelDeleteCourse = (id) => {
-    fetch(`https://geeks-of-gurukul-server-side.vercel.app/course/${id}`, {
+    fetch(`http://localhost:5000/api/v1/courses/course/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -147,7 +147,7 @@ const CourseList = () => {
   };
   //update a course
   const handelUpdateCourse = (id) => {
-    fetch(`https://geeks-of-gurukul-server-side.vercel.app/course/${id}`, {
+    fetch(`http://localhost:5000/api/v1/courses/course/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -189,7 +189,8 @@ const CourseList = () => {
                 name='programName'
                 {...register("programName")}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'>
+                className='w-full border-2 border-green-400 rounded-xl'
+              >
                 <option disabled selected value=''>
                   Choose a Program
                 </option>
@@ -203,7 +204,8 @@ const CourseList = () => {
               {errors.programName && (
                 <p
                   className='text-red-500 font-poppins font-medium'
-                  role='alert'>
+                  role='alert'
+                >
                   {errors.programName?.message}
                 </p>
               )}
@@ -215,7 +217,8 @@ const CourseList = () => {
                 name='courseName'
                 {...register("courseName")}
                 aria-invalid={errors.courseName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'>
+                className='w-full border-2 border-green-400 rounded-xl'
+              >
                 <option disabled selected value=''>
                   Choose a Course
                 </option>
@@ -229,7 +232,8 @@ const CourseList = () => {
               {errors.courseName && (
                 <p
                   className='text-red-500 font-poppins font-medium'
-                  role='alert'>
+                  role='alert'
+                >
                   {errors.courseName?.message}
                 </p>
               )}
@@ -259,7 +263,8 @@ const CourseList = () => {
                           text-white hover:text-green-500 
                           bg-green-500 hover:bg-white 
                           border-green-500 rounded-lg border-4    
-                          transition-all duration-300'>
+                          transition-all duration-300'
+                >
                   {loading ? "Searching" : "Search"}
                 </button>
               </div>
@@ -271,7 +276,8 @@ const CourseList = () => {
                            text-green-500 hover:text-white 
                            bg-white hover:bg-green-500 
                            border-green-500 rounded-lg border-4    
-                           transition-all duration-300'>
+                           transition-all duration-300'
+                >
                   {loading ? "Searching" : "My Creation"}
                 </button>
               </div>
@@ -344,7 +350,8 @@ const CourseList = () => {
                           <div className={style?.addBatch}>
                             <label
                               for='isActive'
-                              class='flex items-center cursor-pointer relative mb-4'>
+                              class='flex items-center cursor-pointer relative mb-4'
+                            >
                               <input
                                 type='checkbox'
                                 id='isActive'
@@ -364,7 +371,8 @@ const CourseList = () => {
                             <button
                               type='button'
                               className='px-1 py-1 '
-                              onClick={() => setShouldDelete(true)}>
+                              onClick={() => setShouldDelete(true)}
+                            >
                               {/* svg */}
                               <img
                                 height='15px'
@@ -387,7 +395,8 @@ const CourseList = () => {
                               data-modal-target='staticModal'
                               data-modal-toggle='staticModal'
                               class='px-1 py-1 '
-                              type='button'>
+                              type='button'
+                            >
                               {/* svg */}
                               <img
                                 height='15px'
@@ -404,7 +413,8 @@ const CourseList = () => {
                                   </h1>
                                   <button
                                     onClick={() => setShouldDelete(false)}
-                                    class='bg-red-500 px-4 py-2 rounded-md text-md text-white'>
+                                    class='bg-red-500 px-4 py-2 rounded-md text-md text-white'
+                                  >
                                     Cancel
                                   </button>
                                   <button
@@ -412,7 +422,8 @@ const CourseList = () => {
                                       handelDeleteCourse(course?._id) &&
                                       setShouldDelete(false)
                                     }
-                                    class='bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold'>
+                                    class='bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold'
+                                  >
                                     Ok
                                   </button>
                                 </div>

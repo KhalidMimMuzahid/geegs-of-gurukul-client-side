@@ -10,7 +10,7 @@ const AddCourse = () => {
   const [program, setProgram] = useState({});
   const { user } = useContext(AuthContext);
   useEffect(() => {
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/all-program")
+    fetch("http://localhost:5000/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -66,7 +66,7 @@ const AddCourse = () => {
       },
     };
     console.log(course);
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/add-course", {
+    fetch("http://localhost:5000/api/v1/courses/add-course", {
       method: "POST",
       body: JSON.stringify(course),
       headers: {

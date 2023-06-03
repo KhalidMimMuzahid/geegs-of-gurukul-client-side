@@ -17,7 +17,7 @@ const TestPageHeader = ({ setAssessments }) => {
 
   const onSearch = (data) => {
     setLoading(true);
-    fetch("http://localhost:5000/search-assessment", {
+    fetch("http://localhost:5000/api/v1/assessments/search-assessment", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -45,34 +45,34 @@ const TestPageHeader = ({ setAssessments }) => {
       });
   };
   return (
-    <div className="w-4/5 mx-auto my-3">
+    <div className='w-4/5 mx-auto my-3'>
       <form onSubmit={handleSubmit(onSearch)}>
-        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-3">
-          <div className="relative">
+        <div className='grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-3'>
+          <div className='relative'>
             <input
-              type="search"
-              placeholder="search by assessment name"
+              type='search'
+              placeholder='search by assessment name'
               {...register("assessmentName")}
-              name="assessmentName"
-              className=" w-full rounded-3xl border-2 z-[998]"
+              name='assessmentName'
+              className=' w-full rounded-3xl border-2 z-[998]'
             />
-            <FaSearch className="text-[18px] absolute top-3 right-4 z-[999]" />
+            <FaSearch className='text-[18px] absolute top-3 right-4 z-[999]' />
           </div>
-          <div className="relative">
+          <div className='relative'>
             <input
-              type="search"
+              type='search'
               {...register("categoryName")}
-              placeholder="search by category"
-              name="categoryName"
-              className=" w-full rounded-3xl border-2 z-[998]"
+              placeholder='search by category'
+              name='categoryName'
+              className=' w-full rounded-3xl border-2 z-[998]'
             />
-            <FaSearch className="text-[18px] absolute top-3 right-4 z-[999]" />
+            <FaSearch className='text-[18px] absolute top-3 right-4 z-[999]' />
           </div>
-          <div className="relative">
+          <div className='relative'>
             <button
-              type="submit"
+              type='submit'
               disabled={loading}
-              className="w-36 h-full rounded-3xl border-2 z-[998] border-black hover:bg-black hover:text-white transition-all duration-700"
+              className='w-36 h-full rounded-3xl border-2 z-[998] border-black hover:bg-black hover:text-white transition-all duration-700'
             >
               {loading ? "searching..." : "Search"}
             </button>

@@ -31,7 +31,7 @@ const EditSkillModal = ({ editSkill, setEditSkill }) => {
     };
     console.log("skills data is: ", skillsData);
 
-    fetch("http://localhost:5000/update-skill", {
+    fetch("http://localhost:5000/api/v1/users/update-skill", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
