@@ -31,7 +31,7 @@ const EachExercise = ({
   const justNow2 = moment().format("YYYY-MM-DDTHH:mm");
   // const selectedDeadline = "2023-09-26T17:54";
   const selectedDeadline = selected?.deadLine;
-  console.log("In Exercise deadline: ", selected);
+  // console.log("In Exercise deadline: ", selected);
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -70,7 +70,7 @@ const EachExercise = ({
       exercise_id: exerciseTemp?.exercise_id,
       studentEmail: user?.email,
     };
-    fetch(`http://localhost:5000/api/v1/exercise-response`, {
+    fetch(`http://localhost:5000/api/v1/exercises/exercise-response`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -110,18 +110,18 @@ const EachExercise = ({
       // todo
       if (exerciseResponse?.status === "visited") {
         setResponseStatus({
-          element: <AiFillEye color='green' size={25} />,
+          element: <AiFillEye color="green" size={25} />,
           status: "Visited and not expired",
         });
       } else if (exerciseResponse?.status === "completed") {
         setResponseStatus({
-          element: <AiFillCheckCircle color='green' size={20} />,
+          element: <AiFillCheckCircle color="green" size={20} />,
           status: "Completed and not expired",
         });
       } else {
         // havent seen
         setResponseStatus({
-          element: <AiFillEyeInvisible color='red' size={25} />,
+          element: <AiFillEyeInvisible color="red" size={25} />,
           status: "Not visited and not expired",
         });
       }
@@ -129,18 +129,18 @@ const EachExercise = ({
       // todo
       if (exerciseResponse?.status === "visited") {
         setResponseStatus({
-          element: <AiFillLock color='red' size={25} />,
+          element: <AiFillLock color="red" size={25} />,
           status: "Expired and not submitted",
         });
       } else if (exerciseResponse?.status === "completed") {
         setResponseStatus({
-          element: <AiFillLock color='green' size={25} />,
+          element: <AiFillLock color="green" size={25} />,
           status: "Completed and expired",
         });
       } else {
         // havent seen
         setResponseStatus({
-          element: <AiFillLock color='red' size={25} />,
+          element: <AiFillLock color="red" size={25} />,
           status: "Expired and not submitted",
         });
       }
@@ -199,10 +199,11 @@ const EachExercise = ({
           // console.log("data for exercises", data);
           if (data?.success) {
             // to do
-            setExerciseResponse({
-              ...exerciseData,
-              _id: data?.result?.insertedId,
-            });
+            // setExerciseResponse({
+            //   ...exerciseData,
+            //   _id: data?.result?.insertedId,
+            // });
+            setShouldRefreshByToggle((prev) => !prev);
             setChangingAssignmentStatus((prev) => {
               const assignment_id = selected?.assignment_id;
               const toggle = !!!prev?.toggle;
@@ -284,69 +285,69 @@ const EachExercise = ({
   if (isLoading) {
     return (
       <div>
-        <downloading className=''>downloading</downloading>
+        <downloading className="">downloading</downloading>
       </div>
     );
   }
   // console.log(exerciseResponse);
   return (
-    <div className='flex flex-col w-full px-4 py-2 my-1 text-left border border-gray-200 bg-green-50 rounded-md'>
+    <div className="flex flex-col w-full px-4 py-2 my-1 text-left border border-gray-200 bg-green-50 rounded-md">
       <button
-        type='button'
+        type="button"
         onClick={handleClick}
-        className='flex items-center justify-between w-full'
+        className="flex items-center justify-between w-full"
       >
-        <p className='text-green-600 flex items-center gap-4'>
+        <p className="text-green-600 flex items-center gap-4">
           {exercise?.exerciseName}
-          <div className='hover:cursor-help' title={responseStatus?.status}>
+          <div className="hover:cursor-help" title={responseStatus?.status}>
             {" "}
             {responseStatus?.element}
           </div>
         </p>
         <BsFillCaretRightFill
-          className='ease-in-out duration-300'
+          className="ease-in-out duration-300"
           style={isOpen && { color: "green", transform: "rotate(90deg)" }}
         />
       </button>
 
       {isOpen && (
-        <div className='bg-white p-3 mt-2 rounded-md text-sm'>
-          <p className='w-full'>
-            <span className='font-semibold'>Topic: </span>
+        <div className="bg-white p-3 mt-2 rounded-md text-sm">
+          <p className="w-full">
+            <span className="font-semibold">Topic: </span>
             {exercise.topic}
           </p>
-          <p className='mt-3 w-full'>
-            <span className='font-semibold'>Sub topic: </span>
+          <p className="mt-3 w-full">
+            <span className="font-semibold">Sub topic: </span>
             {exercise.subTopic}
           </p>
-          <p className='mt-3 w-full'>
-            <span className='font-semibold'>Exercise type: </span>
+          <p className="mt-3 w-full">
+            <span className="font-semibold">Exercise type: </span>
             {exercise.type}
           </p>
-          <div className='mt-3 w-full'>
-            <p className='font-semibold'>Instructions: </p>
+          <div className="mt-3 w-full">
+            <p className="font-semibold">Instructions: </p>
             <p>{exercise.additionals.instructions}</p>
           </div>
-          <div className='mt-3 w-full'>
-            <p className='font-semibold'>Files:</p>
+          <div className="mt-3 w-full">
+            <p className="font-semibold">Files:</p>
             <a
-              target='_blank'
+              target="_blank"
               href={exercise.additionals.files}
-              className='text-green-400 hover:text-green-500'
+              className="text-green-400 hover:text-green-500"
             >
               Click here {">>"}
             </a>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='mt-3 w-full'>
-              <p className='font-semibold mb-2'>Submission:</p>
+            <div className="mt-3 w-full">
+              <p className="font-semibold mb-2">Submission:</p>
               {exercise.submissionType === "link" ? (
                 <input
-                  type='url'
-                  id='link'
-                  name='link'
-                  className='rounded w-full font-xs'
-                  placeholder='Enter submission file link'
+                  type="url"
+                  id="link"
+                  name="link"
+                  className="rounded w-full font-xs"
+                  placeholder="Enter submission file link"
                   {...register("link", {
                     required: "Link is required",
                   })}
@@ -359,10 +360,10 @@ const EachExercise = ({
                 />
               ) : (
                 <input
-                  type='file'
-                  id='link'
-                  name='link'
-                  className='rounded w-full border'
+                  type="file"
+                  id="link"
+                  name="link"
+                  className="rounded w-full border"
                   {...register("link", {
                     required: "File is required",
                   })}
@@ -376,8 +377,8 @@ const EachExercise = ({
               )}
               {errors.link && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.link?.message}
                 </p>
@@ -396,7 +397,7 @@ const EachExercise = ({
                   !(justNow2 < selectedDeadline)) &&
                 "pointer-events-none"
               }`}
-              type='submit'
+              type="submit"
               disabled={
                 loading ||
                 exerciseResponse?.status === "completed" ||
