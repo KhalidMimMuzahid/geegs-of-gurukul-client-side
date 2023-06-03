@@ -141,7 +141,7 @@ const AddLectures = () => {
   useEffect(() => {
     if (course?.course_id) {
       fetch(
-        `http://localhost:5000/api/v1/all-batches-by-course?_id=${course?.course_id}`
+        `http://localhost:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
       )
         .then((response) => response.json())
         .then((data) => {

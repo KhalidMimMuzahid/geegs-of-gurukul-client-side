@@ -60,8 +60,8 @@ function EachAssignment({
         moduleName: lecture?.module?.moduleName,
       },
       assignment: {
-        assignment_id: selected?.assignment_id,
-        assignmentName: selected?.assignmentName,
+        assignment_id: eachAssignment?.assignment_id,
+        assignmentName: eachAssignment?.assignmentName,
       },
       submissionDetails: {
         studentEmail: user?.email,
@@ -79,7 +79,7 @@ function EachAssignment({
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log("data for exercises", data);
+        console.log("data for exercises", data);
         if (data?.success) {
           // to do
           setAssignmentResponse({
@@ -122,6 +122,7 @@ function EachAssignment({
     })
       .then((res) => res.json())
       .then((result) => {
+        console.log("result in each assi: ", result);
         if (result?.success) {
           const data = result?.data;
           console.log("Assignment Response: ", data);
@@ -131,13 +132,16 @@ function EachAssignment({
             assignment_id: eachAssignment?.assignment_id,
             studentEmail: user?.email,
           };
-          fetch(`http://localhost:5000/api/v1/assignments/assignment-exercises-response`, {
-            method: "GET",
-            headers: {
-              "content-type": "application/json",
-              query: JSON.stringify(query),
-            },
-          })
+          fetch(
+            `http://localhost:5000/api/v1/assignments/assignment-exercises-response`,
+            {
+              method: "GET",
+              headers: {
+                "content-type": "application/json",
+                query: JSON.stringify(query),
+              },
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               console.log("exercisesssss data: ", data);
@@ -169,6 +173,10 @@ function EachAssignment({
     if (
       changingAssignmentStatus?.assignment_id === eachAssignment?.assignment_id
     ) {
+      console.log("oooooooooo");
+      console.log("changingAssignmentStatus: ", changingAssignmentStatus);
+      console.log("eachAssignment: ", eachAssignment);
+      console.log("oooooooooo");
       setRefreshAssignmentStatus((prev) => !prev);
     }
   }, [changingAssignmentStatus?.toggle]);
@@ -181,22 +189,22 @@ function EachAssignment({
         totalCompletedRes !== 0
       ) {
         setResponseStatus({
-          element: <AiFillCheckCircle color='green' size={25} />,
+          element: <AiFillCheckCircle color="green" size={25} />,
           status: "All exercises submitted and not expired",
         });
       } else if (totalCompletedRes > 0) {
         setResponseStatus({
-          element: <AiFillCheckCircle color='yellow' size={25} />,
+          element: <AiFillCheckCircle color="yellow" size={25} />,
           status: "Partially submitted and not expired",
         });
       } else if (totalRes > 0) {
         setResponseStatus({
-          element: <AiFillEye color='green' size={25} />,
+          element: <AiFillEye color="green" size={25} />,
           status: "Visited and not expired",
         });
       } else {
         setResponseStatus({
-          element: <AiFillEyeInvisible color='red' size={25} />,
+          element: <AiFillEyeInvisible color="red" size={25} />,
           status: "Not visited and not expired",
         });
       }
@@ -207,17 +215,17 @@ function EachAssignment({
         totalCompletedRes !== 0
       ) {
         setResponseStatus({
-          element: <AiFillLock color='green' size={25} />,
+          element: <AiFillLock color="green" size={25} />,
           status: "All exercises submitted and expired",
         });
       } else if (totalCompletedRes > 0) {
         setResponseStatus({
-          element: <AiFillLock color='yellow' size={25} />,
+          element: <AiFillLock color="yellow" size={25} />,
           status: "Partially submitted and expired",
         });
       } else {
         setResponseStatus({
-          element: <AiFillLock color='red' size={25} />,
+          element: <AiFillLock color="red" size={25} />,
           status: "Not submitted any exercise and expired",
         });
       }
@@ -226,8 +234,8 @@ function EachAssignment({
 
   return (
     <button
-      type='button'
-      className='relative flex items-center p-2 border border-gray-200 w-full rounded-md bg-white my-2'
+      type="button"
+      className="relative flex items-center p-2 border border-gray-200 w-full rounded-md bg-white my-2"
       onClick={() => {
         setSelected({
           ...eachAssignment,
@@ -242,10 +250,10 @@ function EachAssignment({
       key={eachAssignment._id} // Move the key prop here
     >
       {selected?.assignment_id === eachAssignment.assignment_id && (
-        <span className='absolute left-0 top-0 bottom-0 w-1 bg-green-500 rounded-l-md'></span>
+        <span className="absolute left-0 top-0 bottom-0 w-1 bg-green-500 rounded-l-md"></span>
       )}
       <div title={responseStatus?.status}>{responseStatus?.element}</div>
-      <p className='text-sm ml-3'>{eachAssignment.assignmentName}</p>
+      <p className="text-sm ml-3">{eachAssignment.assignmentName}</p>
     </button>
   );
 }
