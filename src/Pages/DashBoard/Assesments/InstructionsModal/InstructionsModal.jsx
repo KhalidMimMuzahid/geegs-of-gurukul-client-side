@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const InstructionsModal = ({ setShowInstructions, selectedId }) => {
   return (
     <>
-      <div className="justify-center items-center flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-[20010] outline-none focus:outline-none h-100 mx-4">
-        <div className="relative w-full h-[800px] sm:w-[500px] md:w-[750px] lg:w-[900px]  py-5 sm:py-5 lg:py-5 px-5 sm:px-5 md:px-6 mx-4 bg-white rounded-lg shadow-2xl overflow-y-hidden overflow-y-scroll">
+      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed z-[20010] inset-0 h-[93dvh] m-4">
+        <div className="relative w-full h-full sm:w-[500px] md:w-[750px] lg:w-[900px]  py-5 sm:py-5 lg:py-5 px-5 sm:px-5 md:px-6 mx-4 bg-white rounded-lg overflow-y-scroll">
           <h3 className="text-2xl bold font-poppins font-medium my-5 text-center z-[20020]">
             Instructions
           </h3>
