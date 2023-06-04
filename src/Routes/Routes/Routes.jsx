@@ -53,6 +53,7 @@ import ProgramList from "../../Pages/DashBoard/AdminPannel/ProgramList/ProgramLi
 import Profession from "../../Pages/Profile/MyProfile/Profession/Profession";
 import MySkills from "./../../Pages/Profile/MyProfile/MySkills/MySkills";
 import ExerciseResponse from "./../../Pages/DashBoard/AdminPannel/ExerciseResponse/ExerciseResponse";
+import AddStudent from "../../Pages/DashBoard/AdminPannel/AddStudent/AddStudent";
 
 const { createBrowserRouter } = require("react-router-dom");
 const router = createBrowserRouter([
@@ -186,6 +187,10 @@ const router = createBrowserRouter([
               {
                 path: "/dashboard/admin-pannel/others/exercise-response",
                 element: <ExerciseResponse />,
+              },
+              {
+                path: "/dashboard/admin-pannel/others/add-student",
+                element: <AddStudent />,
               },
               {
                 path: "/dashboard/admin-pannel/course/add-module",
