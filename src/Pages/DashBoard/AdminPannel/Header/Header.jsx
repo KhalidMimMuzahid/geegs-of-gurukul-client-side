@@ -157,6 +157,11 @@ const navigation = [
         link: "/dashboard/admin-pannel/others/exercise-response",
         current: false,
       },
+      {
+        name: "Add Student",
+        link: "/dashboard/admin-pannel/others/add-student",
+        current: false,
+      },
     ],
   },
 ];

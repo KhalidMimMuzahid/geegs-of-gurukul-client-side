@@ -14,7 +14,7 @@ function EachAssessment({ assessment, handleClick }) {
   useEffect(() => {
     const justNow = moment().format("YYYY-MM-DDTHH:mm");
     if (justNow >= assessment?.scheduledAt) {
-      setAvailable(false);
+      setAvailable(true);
     }
   }, []);
   return (
