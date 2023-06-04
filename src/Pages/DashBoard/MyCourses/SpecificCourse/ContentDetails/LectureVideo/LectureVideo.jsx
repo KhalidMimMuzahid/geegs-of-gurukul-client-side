@@ -1,4 +1,6 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 function LectureVideo({
   selected,
   setSelected,
@@ -72,8 +74,13 @@ function LectureVideo({
         </div>
         <hr className="my-3" />
         <div className="overflow-y-auto h-40">
-          <p className="text-lg font-medium text-green-500 mb-4">Description</p>
-          <p className="text-sm">{selected?.notes}</p>
+          <p className="text-lg font-medium text-green-500 mb-2">Description</p>
+          <ReactMarkdown
+            children={selected?.notes}
+            remarkPlugins={[remarkGfm]}
+            className="text-sm"
+          ></ReactMarkdown>
+          {/* <p className="text-sm">{selected?.notes}</p> */}
         </div>
       </div>
     </div>
