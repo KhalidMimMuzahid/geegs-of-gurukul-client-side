@@ -60,7 +60,7 @@ const BatchList = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/programs/all-program")
+    fetch("http://3.84.19.169:5000/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -72,7 +72,7 @@ const BatchList = () => {
     if (program?.program_id) {
       setCourses([]);
       fetch(
-        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
+        `http://3.84.19.169:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -86,7 +86,7 @@ const BatchList = () => {
   useEffect(() => {
     if (course?.course_id) {
       fetch(
-        `http://localhost:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
+        `http://3.84.19.169:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -97,7 +97,7 @@ const BatchList = () => {
 
   //delete a batch
   const handelDeleteBatch = (id) => {
-    fetch(`http://localhost:5000/api/v1/batches/batch/${id}`, {
+    fetch(`http://3.84.19.169:5000/api/v1/batches/batch/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -121,7 +121,7 @@ const BatchList = () => {
     };
 
     setLoading(true);
-    fetch(`http://localhost:5000/api/v1/batches/search-batch`, {
+    fetch(`http://3.84.19.169:5000/api/v1/batches/search-batch`, {
       headers: {
         "content-type": "application/json",
         data: JSON.stringify(searchData),

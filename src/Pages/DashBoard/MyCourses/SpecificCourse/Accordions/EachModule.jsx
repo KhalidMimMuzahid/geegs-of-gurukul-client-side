@@ -17,7 +17,7 @@ function EachModule({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/lectures/lecturesbymodule?_id=${_id}`)
+    fetch(`http://3.84.19.169:5000/api/v1/lectures/lecturesbymodule?_id=${_id}`)
       .then((res) => res.json())
       .then((data) => {
         setLecturesList(data);

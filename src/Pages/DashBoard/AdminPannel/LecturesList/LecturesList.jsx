@@ -90,7 +90,7 @@ const LecturesList = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/programs/all-program")
+    fetch("http://3.84.19.169:5000/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -101,7 +101,7 @@ const LecturesList = () => {
   useEffect(() => {
     if (program?.program_id) {
       fetch(
-        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
+        `http://3.84.19.169:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -115,7 +115,7 @@ const LecturesList = () => {
   useEffect(() => {
     if (course?.course_id) {
       fetch(
-        `http://localhost:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
+        `http://3.84.19.169:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -129,7 +129,7 @@ const LecturesList = () => {
   useEffect(() => {
     if (batch?.batch_id) {
       fetch(
-        `http://localhost:5000/api/v1/modules/all-modules-by-batch?_id=${batch?.batch_id}`
+        `http://3.84.19.169:5000/api/v1/modules/all-modules-by-batch?_id=${batch?.batch_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -163,7 +163,7 @@ const LecturesList = () => {
 
   const fetchLecture = (SearchData) => {
     setLectures([]);
-    fetch(`http://localhost:5000/api/v1/lectures/search-lecture`, {
+    fetch(`http://3.84.19.169:5000/api/v1/lectures/search-lecture`, {
       headers: {
         "content-type": "application/json",
         data: JSON.stringify(SearchData),

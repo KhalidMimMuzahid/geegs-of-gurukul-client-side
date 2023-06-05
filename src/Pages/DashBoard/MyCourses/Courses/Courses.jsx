@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import courseimg from "../../../../assets/imga/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-gra-130247647.jpg";
 import style from "./course.module.css";
 import { useEffect } from "react";
 import { useState } from "react";
+import UnderConstruction from "../../../../Components/UnderConstruction/UnderConstruction";
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -97,7 +97,7 @@ const Courses = () => {
   useEffect(() => setCourses(dummyData), []);
   // useEffect(() => {
   // setLoading(true);
-  // fetch(`http://localhost:5000/api/v1/courses/allCourses`)
+  // fetch(`http://3.84.19.169:5000/api/v1/courses/allCourses`)
   //   .then((res) => res.json())
   //   .then((result) => {
   //     // console.log("result", result);
@@ -141,7 +141,7 @@ const Courses = () => {
       </div>
     );
   }
-  // return <UnderConstruction/>
+  return <UnderConstruction />;
 
   return (
     <div className="w-full font-poppins pb-10">

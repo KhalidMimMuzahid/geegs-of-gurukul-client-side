@@ -246,7 +246,7 @@ const CreateCoupon = () => {
     // console.log(couponDetails);
     setCouponInfo(couponDetails);
     console.log(couponInfo);
-    fetch("http://localhost:5000/api/v1/coupons/coupon-details", {
+    fetch("http://3.84.19.169:5000/api/v1/coupons/coupon-details", {
       method: "POST",
       body: JSON.stringify(couponDetails),
       headers: {
@@ -277,17 +277,17 @@ const CreateCoupon = () => {
   };
 
   return (
-    <div className='container p-8'>
+    <div className="container p-8">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=' font-poppins font-medium'>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+        <div className=" font-poppins font-medium">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Label */}
             <div className={style?.createCourse}>
               <label>Coupon Label</label>
               <input
-                type='text'
+                type="text"
                 // required
-                name='couponLebel'
+                name="couponLebel"
                 {...register("couponLebel", {
                   required: "Enter Coupon Name",
                 })}
@@ -296,8 +296,8 @@ const CreateCoupon = () => {
               />
               {errors.couponLebel && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.couponLebel?.message}
                 </p>
@@ -308,9 +308,9 @@ const CreateCoupon = () => {
             <div className={style?.createCourse}>
               <label>Discount</label>
               <input
-                type='number'
+                type="number"
                 // required
-                name='discount'
+                name="discount"
                 {...register("discount", {
                   required: "Enter discount amount",
                 })}
@@ -319,8 +319,8 @@ const CreateCoupon = () => {
               />
               {errors.discount && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.discount?.message}
                 </p>
@@ -333,8 +333,8 @@ const CreateCoupon = () => {
               <label>Expired At</label>
               <input
                 // required
-                type='datetime-local'
-                name='expiredAt'
+                type="datetime-local"
+                name="expiredAt"
                 // onChange={handleInputChange}
                 {...register("expiredAt", {
                   required: "Select an expire date",
@@ -343,8 +343,8 @@ const CreateCoupon = () => {
               />
               {errors.expiredAt && (
                 <p
-                  role='alert'
-                  className='text-red-500 font-poppins font-medium'
+                  role="alert"
+                  className="text-red-500 font-poppins font-medium"
                 >
                   {errors.expiredAt?.message}
                 </p>
@@ -354,19 +354,19 @@ const CreateCoupon = () => {
           </div>
           {/* Preview */}
           <div className={style?.createCourse}>
-            <div className='flex items-center justify-between p-1'>
+            <div className="flex items-center justify-between p-1">
               <label>Preview</label>{" "}
               <button
                 onClick={handleCopy}
-                className=' px-2 py-2 bg-green-400 text-white text-center'
+                className=" px-2 py-2 bg-green-400 text-white text-center"
               >
                 {isCopied ? "Copied" : "Copy"}
               </button>
             </div>
-            <div class='w-full'>
+            <div class="w-full">
               <textarea
                 disabled
-                class='border border-gray-300 rounded-lg p-1 w-full h-32 resize-none col-span-12 overflow-y-auto'
+                class="border border-gray-300 rounded-lg p-1 w-full h-32 resize-none col-span-12 overflow-y-auto"
                 readOnly
                 ref={htmlElement}
                 defaultValue={`
@@ -384,11 +384,11 @@ const CreateCoupon = () => {
         </div>
         {/* Submit Button */}
         <button
-          type='submit'
-          class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow my-3'
+          type="submit"
+          class="group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow my-3"
         >
-          <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
-          <span class='relative text-black group-hover:text-white font-poppins font-medium'>
+          <div class="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
+          <span class="relative text-black group-hover:text-white font-poppins font-medium">
             {generating ? `Generating` : `Generate Coupon`}
           </span>
         </button>

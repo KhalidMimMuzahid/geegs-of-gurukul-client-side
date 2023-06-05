@@ -178,7 +178,7 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
 
   const updateFetch = (updateData) => {
     // return;
-    fetch(`http://localhost:5000/api/v1/users/edit-user/${user?.email}`, {
+    fetch(`http://3.84.19.169:5000/api/v1/users/edit-user/${user?.email}`, {
       method: "PUT",
       body: JSON.stringify(updateData),
       headers: {
@@ -233,61 +233,61 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
     years.push({ value: i.toString() });
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='mt-5'>
-      <div className='mb-4'>
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-5">
+      <div className="mb-4">
         <label>Profession description</label>
         <select
-          id='workAs'
+          id="workAs"
           defaultValue={user?.profession?.workAs}
           {...register("workAs")}
-          className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+          className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
         >
           <option disabled select>
             Select your Profession
           </option>
-          <option value='schoolStudent'>School Student</option>
-          <option value='collageStudent'>Collage Student</option>
-          <option value='jobSeeker'>Job Seeker</option>
-          <option value='employee'>Employee</option>
+          <option value="schoolStudent">School Student</option>
+          <option value="collageStudent">Collage Student</option>
+          <option value="jobSeeker">Job Seeker</option>
+          <option value="employee">Employee</option>
         </select>
       </div>
       {workAs === "schoolStudent" && (
-        <div className=''>
-          <div className='mb-4'>
-            <label htmlFor='institutionName'>Name of institution</label>
+        <div className="">
+          <div className="mb-4">
+            <label htmlFor="institutionName">Name of institution</label>
             <input
-              type='text'
+              type="text"
               defaultValue={user?.profession?.schoolName}
-              name='institutionName'
+              name="institutionName"
               {...register("institutionName")}
-              placeholder='Enter your Institute Name'
-              className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+              placeholder="Enter your Institute Name"
+              className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             />
           </div>
           {institute && (
-            <div className=''>
+            <div className="">
               <label>Grade</label>
               <select
-                id='grade'
+                id="grade"
                 defaultValue={user?.profession?.grade}
                 {...register("grade")}
-                className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+                className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
               >
                 <option disabled select>
                   Select your Grade
                 </option>
-                <option value='1'>Grade 1</option>
-                <option value='2'>Grade 2</option>
-                <option value='3'>Grade 3</option>
-                <option value='4'>Grade 4</option>
-                <option value='5'>Grade 5</option>
-                <option value='6'>Grade 6</option>
-                <option value='7'>Grade 7</option>
-                <option value='8'>Grade 8</option>
-                <option value='9'>Grade 9</option>
-                <option value='10'>Grade 10</option>
-                <option value='11'>Grade 11</option>
-                <option value='12'>Grade 12</option>
+                <option value="1">Grade 1</option>
+                <option value="2">Grade 2</option>
+                <option value="3">Grade 3</option>
+                <option value="4">Grade 4</option>
+                <option value="5">Grade 5</option>
+                <option value="6">Grade 6</option>
+                <option value="7">Grade 7</option>
+                <option value="8">Grade 8</option>
+                <option value="9">Grade 9</option>
+                <option value="10">Grade 10</option>
+                <option value="11">Grade 11</option>
+                <option value="12">Grade 12</option>
               </select>
             </div>
           )}
@@ -296,41 +296,41 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
 
       {/* collage students */}
       {workAs === "collageStudent" && (
-        <div className='mt-5'>
-          <div className='mb-4'>
-            <label htmlFor='institutionName'>Collage Name</label>
+        <div className="mt-5">
+          <div className="mb-4">
+            <label htmlFor="institutionName">Collage Name</label>
             <input
-              type='text'
+              type="text"
               defaultValue={user?.profession?.coLLageName}
-              name='institutionName'
+              name="institutionName"
               {...register("institutionName")}
-              placeholder='Enter your Institute Name'
-              className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+              placeholder="Enter your Institute Name"
+              className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             />
           </div>
-          <div className='mb-4'>
-            <label htmlFor='latestDegree'>Degree</label>
+          <div className="mb-4">
+            <label htmlFor="latestDegree">Degree</label>
             <input
-              type='text'
+              type="text"
               defaultValue={user?.profession?.latestDegree}
-              id='latestDegree'
-              name='latestDegree'
+              id="latestDegree"
+              name="latestDegree"
               {...register("latestDegree")}
-              placeholder='Enter your Institute Name'
-              className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+              placeholder="Enter your Institute Name"
+              className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             />
           </div>
-          <h2 className='text-lg font-medium my-2'>
+          <h2 className="text-lg font-medium my-2">
             Graduation date or expected graduation date
           </h2>
-          <div className='flex gap-4'>
-            <div className='w-full'>
-              <label htmlFor='graduationMonth'>Month</label>
+          <div className="flex gap-4">
+            <div className="w-full">
+              <label htmlFor="graduationMonth">Month</label>
               <select
                 defaultValue={user?.profession?.graduationMonth}
-                id='graduationMonth'
+                id="graduationMonth"
                 {...register("graduationMonth")}
-                className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+                className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
               >
                 <option disabled selected>
                   Select Month
@@ -342,13 +342,13 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
                 ))}
               </select>
             </div>
-            <div className='w-full'>
-              <label htmlFor='graduationYear'>Year</label>
+            <div className="w-full">
+              <label htmlFor="graduationYear">Year</label>
               <select
-                id='graduationYear'
+                id="graduationYear"
                 defaultValue={user?.profession?.graduationYear}
                 {...register("graduationYear")}
-                className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+                className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
               >
                 <option disabled selected>
                   Select Year
@@ -362,15 +362,15 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
             </div>
           </div>
 
-          <div className='flex items-center mb-4'>
+          <div className="flex items-center mb-4">
             <input
-              type='checkbox'
+              type="checkbox"
               defaultValue={user?.profession?.isStudying}
               {...register("isStudying")}
-              id='checkbox'
-              className='rounded-full appearance-none border border-green-300 bg-white h-4 w-4 flex-shrink-0 checked:bg-green-500 checked:border-transparent focus:outline-none cursor-pointer hover:text-green-400'
+              id="checkbox"
+              className="rounded-full appearance-none border border-green-300 bg-white h-4 w-4 flex-shrink-0 checked:bg-green-500 checked:border-transparent focus:outline-none cursor-pointer hover:text-green-400"
             />
-            <label for='checkbox' className='ml-2 text-gray-700'>
+            <label for="checkbox" className="ml-2 text-gray-700">
               I currently study here
             </label>
           </div>
@@ -379,41 +379,41 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
 
       {/* Job Seeker*/}
       {workAs === "jobSeeker" && (
-        <div className='mt-5'>
-          <div className='mb-4'>
-            <label htmlFor='institutionName'>Collage Name</label>
+        <div className="mt-5">
+          <div className="mb-4">
+            <label htmlFor="institutionName">Collage Name</label>
             <input
-              type='text'
+              type="text"
               defaultValue={user?.profession?.coLLageName}
-              name='institutionName'
+              name="institutionName"
               {...register("institutionName")}
-              placeholder='Enter your Institute Name'
-              className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+              placeholder="Enter your Institute Name"
+              className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             />
           </div>
-          <div className='mb-4'>
-            <label htmlFor='latestDegree'>Degree</label>
+          <div className="mb-4">
+            <label htmlFor="latestDegree">Degree</label>
             <input
-              type='text'
+              type="text"
               defaultValue={user?.profession?.latestDegree}
-              id='latestDegree'
-              name='latestDegree'
+              id="latestDegree"
+              name="latestDegree"
               {...register("latestDegree")}
-              placeholder='Enter your Institute Name'
-              className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+              placeholder="Enter your Institute Name"
+              className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             />
           </div>
-          <h2 className='text-lg font-medium my-2'>
+          <h2 className="text-lg font-medium my-2">
             Graduation date or expected graduation date
           </h2>
-          <div className='flex gap-4'>
-            <div className='w-full'>
-              <label htmlFor='graduationMonth'>Month</label>
+          <div className="flex gap-4">
+            <div className="w-full">
+              <label htmlFor="graduationMonth">Month</label>
               <select
                 defaultValue={user?.profession?.graduationMonth}
-                id='graduationMonth'
+                id="graduationMonth"
                 {...register("graduationMonth")}
-                className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+                className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
               >
                 <option disabled selected>
                   Select Month
@@ -425,13 +425,13 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
                 ))}
               </select>
             </div>
-            <div className='w-full'>
-              <label htmlFor='graduationYear'>Year</label>
+            <div className="w-full">
+              <label htmlFor="graduationYear">Year</label>
               <select
-                id='graduationYear'
+                id="graduationYear"
                 defaultValue={user?.profession?.graduationYear}
                 {...register("graduationYear")}
-                className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+                className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
               >
                 <option disabled selected>
                   Select Year
@@ -445,15 +445,15 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
             </div>
           </div>
 
-          <div className='flex items-center mb-4'>
+          <div className="flex items-center mb-4">
             <input
-              type='checkbox'
+              type="checkbox"
               defaultValue={user?.profession?.isStudying}
               {...register("isStudying")}
-              id='checkbox'
-              className='rounded-full appearance-none border border-green-300 bg-white h-4 w-4 flex-shrink-0 checked:bg-green-500 checked:border-transparent focus:outline-none cursor-pointer hover:text-green-400'
+              id="checkbox"
+              className="rounded-full appearance-none border border-green-300 bg-white h-4 w-4 flex-shrink-0 checked:bg-green-500 checked:border-transparent focus:outline-none cursor-pointer hover:text-green-400"
             />
-            <label for='checkbox' className='ml-2 text-gray-700'>
+            <label for="checkbox" className="ml-2 text-gray-700">
               I currently study here
             </label>
           </div>
@@ -462,51 +462,51 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
 
       {/* employee */}
       {workAs === "employee" && (
-        <div className='mt-5'>
-          <div className='nb-4'>
-            <label htmlFor='currentCompany'>Current Company Name</label>
+        <div className="mt-5">
+          <div className="nb-4">
+            <label htmlFor="currentCompany">Current Company Name</label>
             <input
-              type='text'
-              name='currentCompany'
+              type="text"
+              name="currentCompany"
               defaultValue={user?.profession?.companyName}
               {...register("currentCompany")}
-              placeholder='Enter your Company Name where you working on'
-              className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+              placeholder="Enter your Company Name where you working on"
+              className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             />
           </div>
-          <div className='mb-4'>
-            <label htmlFor='jobTitle'>Current Job Title</label>
+          <div className="mb-4">
+            <label htmlFor="jobTitle">Current Job Title</label>
             <input
-              type='text'
-              name='jobTitle'
+              type="text"
+              name="jobTitle"
               defaultValue={user?.profession?.currentJobTitle}
               {...register("jobTitle")}
-              placeholder='Enter your Job Title'
-              className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+              placeholder="Enter your Job Title"
+              className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             />
           </div>
-          <div className='mb-4'>
-            <label htmlFor='jobTitle'>Experience</label>
+          <div className="mb-4">
+            <label htmlFor="jobTitle">Experience</label>
             <input
-              type='experienceYear'
-              name='experienceYear'
+              type="experienceYear"
+              name="experienceYear"
               defaultValue={user?.profession?.yearsOfExperience}
               {...register("experienceYear")}
-              placeholder='Enter your experience year'
-              className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+              placeholder="Enter your experience year"
+              className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             />
           </div>
         </div>
       )}
       {(grade || graduationYear || experienceYear) && (
-        <div className=''>
-          <div className='w-full mb-4'>
-            <label htmlFor='country'>Country</label>
+        <div className="">
+          <div className="w-full mb-4">
+            <label htmlFor="country">Country</label>
             <select
-              id='country'
+              id="country"
               {...register("country")}
               defaultValue={user?.profession?.address?.country}
-              className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+              className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             >
               <option disabled selected>
                 Select Country
@@ -519,13 +519,13 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
                 ))}
             </select>
           </div>
-          <div className='w-full mb-4'>
-            <label htmlFor='state'>State</label>
+          <div className="w-full mb-4">
+            <label htmlFor="state">State</label>
             <select
-              id='state'
+              id="state"
               defaultValue={user?.profession?.address?.state}
               {...register("state")}
-              className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+              className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             >
               <option disabled selected>
                 Select State
@@ -538,13 +538,13 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
                 ))}
             </select>
           </div>
-          <div className='w-full mb-4'>
-            <label htmlFor='city'>City</label>
+          <div className="w-full mb-4">
+            <label htmlFor="city">City</label>
             <select
-              id='city'
+              id="city"
               defaultValue={user?.profession?.address?.city}
               {...register("city")}
-              className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+              className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             >
               <option disabled selected>
                 Select City
@@ -560,11 +560,11 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
         </div>
       )}
       {city && (
-        <div className='w-full flex justify-center my-10'>
+        <div className="w-full flex justify-center my-10">
           <button
-            type='submit'
+            type="submit"
             disabled={setLoading}
-            className='font-poppins font-medium text-white px-4 py-2 bg-green-400 hover:bg-green-500 rounded-md'
+            className="font-poppins font-medium text-white px-4 py-2 bg-green-400 hover:bg-green-500 rounded-md"
           >
             {loading ? "Updating..." : "Update"}
           </button>

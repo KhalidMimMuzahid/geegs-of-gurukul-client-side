@@ -65,7 +65,7 @@ const ModuleList = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/programs/all-program")
+    fetch("http://3.84.19.169:5000/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -77,7 +77,7 @@ const ModuleList = () => {
     if (program?.program_id) {
       // setCourses([]);
       fetch(
-        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
+        `http://3.84.19.169:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -92,7 +92,7 @@ const ModuleList = () => {
     if (course?.course_id) {
       // setCourses([]);
       fetch(
-        `http://localhost:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
+        `http://3.84.19.169:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -109,7 +109,7 @@ const ModuleList = () => {
       course_id: course?.course_id,
       batch_id: batch?.batch_id,
     };
-    fetch(`http://localhost:5000/api/v1/modules/search-module`, {
+    fetch(`http://3.84.19.169:5000/api/v1/modules/search-module`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -157,14 +157,14 @@ const ModuleList = () => {
   return (
     <div>
       {/* Search Form */}
-      <div className='container p-8'>
+      <div className="container p-8">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Program Name */}
             <div className={style?.addLecture}>
-              <label htmlFor='programName'>Program Name</label>
+              <label htmlFor="programName">Program Name</label>
               <select
-                name='programName'
+                name="programName"
                 {...register(
                   "programName"
                   // {
@@ -172,9 +172,9 @@ const ModuleList = () => {
                   // }
                 )}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                className="w-full border-2 border-green-400 rounded-xl"
               >
-                <option disabled selected value=''>
+                <option disabled selected value="">
                   Choose a Program
                 </option>
                 {data?.length > 0 &&
@@ -186,8 +186,8 @@ const ModuleList = () => {
               </select>
               {errors.programName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.programName?.message}
                 </p>
@@ -195,9 +195,9 @@ const ModuleList = () => {
             </div>
             {/* Course Name */}
             <div className={style?.addLecture}>
-              <label htmlFor='courseName'>Course Name</label>
+              <label htmlFor="courseName">Course Name</label>
               <select
-                name='courseName'
+                name="courseName"
                 {...register(
                   "courseName"
                   //   {
@@ -205,9 +205,9 @@ const ModuleList = () => {
                   // }
                 )}
                 aria-invalid={errors.courseName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                className="w-full border-2 border-green-400 rounded-xl"
               >
-                <option disabled selected value=''>
+                <option disabled selected value="">
                   Choose a Course
                 </option>
                 {courses?.length > 0 &&
@@ -219,8 +219,8 @@ const ModuleList = () => {
               </select>
               {errors.courseName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.courseName?.message}
                 </p>
@@ -230,9 +230,9 @@ const ModuleList = () => {
             {/* batch Name */}
 
             <div className={style?.addLecture}>
-              <label htmlFor='batchName'>Batch Name</label>
+              <label htmlFor="batchName">Batch Name</label>
               <select
-                name='batchName'
+                name="batchName"
                 {...register(
                   "batchName"
                   // {
@@ -240,9 +240,9 @@ const ModuleList = () => {
                   // }
                 )}
                 aria-invalid={errors.batchName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                className="w-full border-2 border-green-400 rounded-xl"
               >
-                <option disabled selected value=''>
+                <option disabled selected value="">
                   Choose a Batch
                 </option>
                 {batches?.length > 0 &&
@@ -254,8 +254,8 @@ const ModuleList = () => {
               </select>
               {errors.batchName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.batchName?.message}
                 </p>
@@ -267,11 +267,11 @@ const ModuleList = () => {
 
           {/* Submit Button */}
           <button
-            type='submit'
-            class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow my-3'
+            type="submit"
+            class="group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow my-3"
           >
-            <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
-            <span class='relative text-black group-hover:text-white font-poppins font-medium'>
+            <div class="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
+            <span class="relative text-black group-hover:text-white font-poppins font-medium">
               Search
             </span>
           </button>
@@ -280,83 +280,83 @@ const ModuleList = () => {
       {/* Search Form */}
 
       {/* Table */}
-      <div class='flex flex-col justify-center h-full mx-auto'>
-        <div class='w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200'>
-          <header class='px-5 py-4 border-b border-gray-100'>
-            <h2 class='font-semibold font-poppins text-gray-800'>Modules</h2>
+      <div class="flex flex-col justify-center h-full mx-auto">
+        <div class="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+          <header class="px-5 py-4 border-b border-gray-100">
+            <h2 class="font-semibold font-poppins text-gray-800">Modules</h2>
           </header>
-          <div class='p-3'>
-            <div class='max-w-[90vw] overflow-x-scroll'>
-              <table class='table-auto w-full font-poppins font-medium overflow-x-auto'>
-                <thead class='text-xs font-semibold uppercase text-gray-400 bg-gray-50'>
+          <div class="p-3">
+            <div class="max-w-[90vw] overflow-x-scroll">
+              <table class="table-auto w-full font-poppins font-medium overflow-x-auto">
+                <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                   <tr>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>SL No:</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-left">SL No:</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>Module Name</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-left">Module Name</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>Course Name</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-left">Course Name</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>Batch Name</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-left">Batch Name</div>
                     </th>
 
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-center'>Action</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-center">Action</div>
                     </th>
                   </tr>
                 </thead>
-                <tbody class='text-sm divide-y divide-gray-100'>
+                <tbody class="text-sm divide-y divide-gray-100">
                   {currentModules?.map((module, i) => (
                     <tr key={i}>
-                      <td class='p-2 whitespace-nowrap'>
-                        <div class='flex items-center'>{i + 1}</div>
+                      <td class="p-2 whitespace-nowrap">
+                        <div class="flex items-center">{i + 1}</div>
                       </td>
-                      <td class='p-2 whitespace-nowrap'>
+                      <td class="p-2 whitespace-nowrap">
                         {module?.moduleName}
                       </td>
-                      <td class='p-2 whitespace-nowrap'>
+                      <td class="p-2 whitespace-nowrap">
                         {module?.course?.courseName}
                       </td>
-                      <td class='p-2 whitespace-nowrap'>
+                      <td class="p-2 whitespace-nowrap">
                         {module?.batch?.batchName}
                       </td>
 
-                      <td class='p-2 whitespace-nowrap flex gap-2'>
-                        <div class='mx-auto flex w-[100px] gap-2'>
-                          <button type='button' className='px-1 py-1 '>
+                      <td class="p-2 whitespace-nowrap flex gap-2">
+                        <div class="mx-auto flex w-[100px] gap-2">
+                          <button type="button" className="px-1 py-1 ">
                             {/* svg */}
                             <img
-                              height='15px'
-                              width='15px'
+                              height="15px"
+                              width="15px"
                               src={deleteIcon}
-                              alt=''
+                              alt=""
                             />
                           </button>
-                          <button type='button' className='px-1 py-1'>
+                          <button type="button" className="px-1 py-1">
                             {/* svg */}
                             <img
-                              height='15px'
-                              width='15px'
+                              height="15px"
+                              width="15px"
                               src={editIcon}
-                              alt=''
+                              alt=""
                             />
                           </button>
 
                           <button
-                            data-modal-target='staticModal'
-                            data-modal-toggle='staticModal'
-                            class='px-1 py-1 '
-                            type='button'
+                            data-modal-target="staticModal"
+                            data-modal-toggle="staticModal"
+                            class="px-1 py-1 "
+                            type="button"
                           >
                             {/* svg */}
                             <img
-                              height='15px'
-                              width='15px'
+                              height="15px"
+                              width="15px"
                               src={copyIcon}
-                              alt=''
+                              alt=""
                             />
                           </button>
                         </div>
@@ -369,16 +369,16 @@ const ModuleList = () => {
               {/* pagination */}
 
               <div>
-                <div className='pagination'>
+                <div className="pagination">
                   <ReactPaginate
-                    breakLabel='...'
-                    nextLabel='>'
+                    breakLabel="..."
+                    nextLabel=">"
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={5}
                     pageCount={pageCount}
-                    previousLabel='<'
+                    previousLabel="<"
                     renderOnZeroPageCount={null}
-                    containerClassName='pagination-menu'
+                    containerClassName="pagination-menu"
                   />
                 </div>
               </div>

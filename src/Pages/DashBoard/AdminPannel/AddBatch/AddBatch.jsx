@@ -51,7 +51,7 @@ const AddBatch = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/programs/all-program")
+    fetch("http://3.84.19.169:5000/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -63,7 +63,7 @@ const AddBatch = () => {
     if (program?.program_id) {
       setCourses([]);
       fetch(
-        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
+        `http://3.84.19.169:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -96,7 +96,7 @@ const AddBatch = () => {
       },
     };
     console.log("batchDetails: ", batch);
-    fetch("http://localhost:5000/api/v1/batches/add-batch", {
+    fetch("http://3.84.19.169:5000/api/v1/batches/add-batch", {
       method: "POST",
       body: JSON.stringify(batch),
       headers: {
@@ -116,17 +116,17 @@ const AddBatch = () => {
       .catch((error) => console.error(error));
   };
   return (
-    <div className='container p-8'>
+    <div className="container p-8">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=' font-poppins font-medium'>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+        <div className=" font-poppins font-medium">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Batch Name */}
             <div className={style?.addBatch}>
               <label>Batch Name</label>
               <input
-                type='text'
+                type="text"
                 // required
-                name='batchName'
+                name="batchName"
                 {...register("batchName", {
                   required: "Batc hName is required",
                 })}
@@ -135,8 +135,8 @@ const AddBatch = () => {
               />
               {errors.batchName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.batchName?.message}
                 </p>
@@ -146,21 +146,21 @@ const AddBatch = () => {
 
             {/* Duration */}
             <div className={style?.addBatch}>
-              <label htmlFor='duration'>Duration</label>
+              <label htmlFor="duration">Duration</label>
               <input
-                name='duration'
-                type='number'
-                placeholder='Duration in days'
+                name="duration"
+                type="number"
+                placeholder="Duration in days"
                 {...register("duration", {
                   required: "Duration is required",
                 })}
                 aria-invalid={errors.duration ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                className="w-full border-2 border-green-400 rounded-xl"
               />
               {errors.duration && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.duration?.message}
                 </p>
@@ -169,16 +169,16 @@ const AddBatch = () => {
             {/* Duration */}
             {/* Program Name */}
             <div className={style?.addLecture}>
-              <label htmlFor='programName'>Program Name</label>
+              <label htmlFor="programName">Program Name</label>
               <select
-                name='programName'
+                name="programName"
                 {...register("programName", {
                   required: "Program Name is required",
                 })}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                className="w-full border-2 border-green-400 rounded-xl"
               >
-                <option disabled selected value=''>
+                <option disabled selected value="">
                   Choose a Program
                 </option>
                 {data?.length > 0 &&
@@ -190,8 +190,8 @@ const AddBatch = () => {
               </select>
               {errors.programName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.programName?.message}
                 </p>
@@ -199,16 +199,16 @@ const AddBatch = () => {
             </div>
             {/* Course Name */}
             <div className={style?.addLecture}>
-              <label htmlFor='courseName'>Course Name</label>
+              <label htmlFor="courseName">Course Name</label>
               <select
-                name='courseName'
+                name="courseName"
                 {...register("courseName", {
                   required: "Course Name is required",
                 })}
                 aria-invalid={errors.courseName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                className="w-full border-2 border-green-400 rounded-xl"
               >
-                <option disabled selected value=''>
+                <option disabled selected value="">
                   Choose a Course
                 </option>
                 {courses?.length > 0 &&
@@ -220,8 +220,8 @@ const AddBatch = () => {
               </select>
               {errors.courseName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.courseName?.message}
                 </p>
@@ -233,8 +233,8 @@ const AddBatch = () => {
               <label>Started At</label>
               <input
                 // required
-                type='datetime-local'
-                name='startedAt'
+                type="datetime-local"
+                name="startedAt"
                 // onChange={handleInputChange}
                 {...register("startedAt", {
                   required: "Select A Date",
@@ -243,8 +243,8 @@ const AddBatch = () => {
               />
               {errors.startedAt && (
                 <p
-                  role='alert'
-                  className='text-red-500 font-poppins font-medium'
+                  role="alert"
+                  className="text-red-500 font-poppins font-medium"
                 >
                   {errors.startedAt?.message}
                 </p>
@@ -255,11 +255,11 @@ const AddBatch = () => {
         </div>
         {/* Submit Button */}
         <button
-          type='submit'
-          class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow'
+          type="submit"
+          class="group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow"
         >
-          <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
-          <span class='relative text-black group-hover:text-white font-poppins font-medium'>
+          <div class="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
+          <span class="relative text-black group-hover:text-white font-poppins font-medium">
             Submit
           </span>
         </button>

@@ -56,7 +56,7 @@ const CourseList = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/programs/all-program")
+    fetch("http://3.84.19.169:5000/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -68,7 +68,7 @@ const CourseList = () => {
     if (program?.program_id) {
       setCourses([]);
       fetch(
-        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
+        `http://3.84.19.169:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -104,7 +104,7 @@ const CourseList = () => {
 
   const fetchCourses = (SearchData) => {
     setItems([]);
-    fetch(`http://localhost:5000/api/v1/courses/search-course`, {
+    fetch(`http://3.84.19.169:5000/api/v1/courses/search-course`, {
       headers: {
         "content-type": "application/json",
         data: JSON.stringify(SearchData),
@@ -130,7 +130,7 @@ const CourseList = () => {
 
   //delete a course
   const handelDeleteCourse = (id) => {
-    fetch(`http://localhost:5000/api/v1/courses/course/${id}`, {
+    fetch(`http://3.84.19.169:5000/api/v1/courses/course/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -147,7 +147,7 @@ const CourseList = () => {
   };
   //update a course
   const handelUpdateCourse = (id) => {
-    fetch(`http://localhost:5000/api/v1/courses/course/${id}`, {
+    fetch(`http://3.84.19.169:5000/api/v1/courses/course/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -180,18 +180,18 @@ const CourseList = () => {
   };
   return (
     <div>
-      <div className='container mt-5'>
+      <div className="container mt-5">
         <form onSubmit={handleSubmit(onSearch)}>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 font-poppins font-medium p-5'>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-poppins font-medium p-5">
             <div className={style?.addLecture}>
-              <label htmlFor='programName'>Program Name</label>
+              <label htmlFor="programName">Program Name</label>
               <select
-                name='programName'
+                name="programName"
                 {...register("programName")}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                className="w-full border-2 border-green-400 rounded-xl"
               >
-                <option disabled selected value=''>
+                <option disabled selected value="">
                   Choose a Program
                 </option>
                 {data?.length > 0 &&
@@ -203,8 +203,8 @@ const CourseList = () => {
               </select>
               {errors.programName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.programName?.message}
                 </p>
@@ -212,14 +212,14 @@ const CourseList = () => {
             </div>
             {/* Course Name */}
             <div className={style?.addLecture}>
-              <label htmlFor='courseName'>Course Name</label>
+              <label htmlFor="courseName">Course Name</label>
               <select
-                name='courseName'
+                name="courseName"
                 {...register("courseName")}
                 aria-invalid={errors.courseName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                className="w-full border-2 border-green-400 rounded-xl"
               >
-                <option disabled selected value=''>
+                <option disabled selected value="">
                   Choose a Course
                 </option>
                 {courses?.length > 0 &&
@@ -231,8 +231,8 @@ const CourseList = () => {
               </select>
               {errors.courseName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.courseName?.message}
                 </p>
@@ -242,41 +242,41 @@ const CourseList = () => {
 
             <div className={style?.courseList}>
               <p>Creator Email</p>
-              <input type='email' {...register("creatorEmail")} />
+              <input type="email" {...register("creatorEmail")} />
             </div>
 
             <div className={style?.courseList}>
               <p>Updater Email:</p>
               <input
-                id='updaterEmail'
-                name='updaterEmail'
-                type='email'
+                id="updaterEmail"
+                name="updaterEmail"
+                type="email"
                 {...register("updaterEmail")}
               />
             </div>
-            <div className='flex gap-4'>
-              <div className=''>
+            <div className="flex gap-4">
+              <div className="">
                 <button
-                  type='submit'
+                  type="submit"
                   disabled={loading}
-                  className='px-10 py-3
+                  className="px-10 py-3
                           text-white hover:text-green-500 
                           bg-green-500 hover:bg-white 
                           border-green-500 rounded-lg border-4    
-                          transition-all duration-300'
+                          transition-all duration-300"
                 >
                   {loading ? "Searching" : "Search"}
                 </button>
               </div>
-              <div className=''>
+              <div className="">
                 <button
                   onClick={() => handelToMyCreation}
                   disabled={loading}
-                  className='px-10 py-3
+                  className="px-10 py-3
                            text-green-500 hover:text-white 
                            bg-white hover:bg-green-500 
                            border-green-500 rounded-lg border-4    
-                           transition-all duration-300'
+                           transition-all duration-300"
                 >
                   {loading ? "Searching" : "My Creation"}
                 </button>
@@ -287,133 +287,133 @@ const CourseList = () => {
       </div>
 
       {/* Table */}
-      <div class='flex flex-col justify-center h-full mx-auto text-center'>
-        <div class='w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200'>
-          <header class='px-5 py-4 border-b border-gray-100'>
-            <h2 class='font-semibold font-poppins text-gray-800'>Courses</h2>
+      <div class="flex flex-col justify-center h-full mx-auto text-center">
+        <div class="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+          <header class="px-5 py-4 border-b border-gray-100">
+            <h2 class="font-semibold font-poppins text-gray-800">Courses</h2>
           </header>
-          <div class='p-3'>
-            <div class='max-w-[90vw] overflow-x-scroll'>
-              <table class='table-auto w-full font-poppins font-medium overflow-x-auto'>
-                <thead class='text-xs font-semibold uppercase text-gray-400 bg-gray-50'>
+          <div class="p-3">
+            <div class="max-w-[90vw] overflow-x-scroll">
+              <table class="table-auto w-full font-poppins font-medium overflow-x-auto">
+                <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                   <tr>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>SL No:</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-left">SL No:</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>Course Name </div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-left">Course Name </div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>Course ID</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-left">Course ID</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-center'>Duration</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-center">Duration</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-center'>Program Name</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-center">Program Name</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-center'>Price</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-center">Price</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-center'>Status</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-center">Status</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-center'>Action</div>
+                    <th class="p-2 whitespace-nowrap">
+                      <div class="font-semibold text-center">Action</div>
                     </th>
                   </tr>
                 </thead>
-                <tbody class='text-sm divide-y divide-gray-100'>
+                <tbody class="text-sm divide-y divide-gray-100">
                   {currentItems?.length === 0 &&
                     currentItems?.map((item, i) => (
                       <tr key={item?._id}>
-                        <td class='p-2 whitespace-nowrap text-center'>
-                          <div class='flex items-center'>{i + 1}</div>
+                        <td class="p-2 whitespace-nowrap text-center">
+                          <div class="flex items-center">{i + 1}</div>
                         </td>
-                        <td class='p-2 whitespace-nowrap text-center'>
+                        <td class="p-2 whitespace-nowrap text-center">
                           {item?.courseName}
                         </td>
-                        <td class='p-2 whitespace-nowrap text-center'>
+                        <td class="p-2 whitespace-nowrap text-center">
                           {item?.courseId}
                         </td>
-                        <td class='p-2 whitespace-nowrap text-center'>
+                        <td class="p-2 whitespace-nowrap text-center">
                           {item?.duration}
                         </td>
-                        <td class='p-2 whitespace-nowrap text-center'>
+                        <td class="p-2 whitespace-nowrap text-center">
                           {item?.programName}
                         </td>
-                        <td class='p-2 whitespace-nowrap text-center'>
+                        <td class="p-2 whitespace-nowrap text-center">
                           {item?.regularPrice}
                         </td>
-                        <td class='p-2 whitespace-nowrap text-center'>
+                        <td class="p-2 whitespace-nowrap text-center">
                           {/* isActive */}
                           <div className={style?.addBatch}>
                             <label
-                              for='isActive'
-                              class='flex items-center cursor-pointer relative mb-4'
+                              for="isActive"
+                              class="flex items-center cursor-pointer relative mb-4"
                             >
                               <input
-                                type='checkbox'
-                                id='isActive'
-                                name='isActive'
-                                class='sr-only'
+                                type="checkbox"
+                                id="isActive"
+                                name="isActive"
+                                class="sr-only"
                               />
-                              <div class='toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full'></div>
-                              <span class='ml-3 text-gray-900 text-sm font-medium'>
+                              <div class="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
+                              <span class="ml-3 text-gray-900 text-sm font-medium">
                                 isActive
                               </span>
                             </label>
                           </div>
                           {/* isActive */}
                         </td>
-                        <td class='p-2 whitespace-nowrap flex gap-2'>
-                          <div class='mx-auto flex w-[100px] gap-2'>
+                        <td class="p-2 whitespace-nowrap flex gap-2">
+                          <div class="mx-auto flex w-[100px] gap-2">
                             <button
-                              type='button'
-                              className='px-1 py-1 '
+                              type="button"
+                              className="px-1 py-1 "
                               onClick={() => setShouldDelete(true)}
                             >
                               {/* svg */}
                               <img
-                                height='15px'
-                                width='15px'
+                                height="15px"
+                                width="15px"
                                 src={deleteIcon}
-                                alt=''
+                                alt=""
                               />
                             </button>
-                            <button type='button' className='px-1 py-1'>
+                            <button type="button" className="px-1 py-1">
                               {/* svg */}
                               <img
-                                height='15px'
-                                width='15px'
+                                height="15px"
+                                width="15px"
                                 src={editIcon}
-                                alt=''
+                                alt=""
                               />
                             </button>
 
                             <button
-                              data-modal-target='staticModal'
-                              data-modal-toggle='staticModal'
-                              class='px-1 py-1 '
-                              type='button'
+                              data-modal-target="staticModal"
+                              data-modal-toggle="staticModal"
+                              class="px-1 py-1 "
+                              type="button"
                             >
                               {/* svg */}
                               <img
-                                height='15px'
-                                width='15px'
+                                height="15px"
+                                width="15px"
                                 src={copyIcon}
-                                alt=''
+                                alt=""
                               />
                             </button>
                             {shouldDelete && (
-                              <div class='bg-slate-800 bg-opacity-50 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0 z-1000'>
-                                <div class='bg-white px-16 py-14 rounded-md text-center'>
-                                  <h1 class='text-xl mb-4 font-bold text-slate-500'>
+                              <div class="bg-slate-800 bg-opacity-50 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0 z-1000">
+                                <div class="bg-white px-16 py-14 rounded-md text-center">
+                                  <h1 class="text-xl mb-4 font-bold text-slate-500">
                                     Do you Want Delete
                                   </h1>
                                   <button
                                     onClick={() => setShouldDelete(false)}
-                                    class='bg-red-500 px-4 py-2 rounded-md text-md text-white'
+                                    class="bg-red-500 px-4 py-2 rounded-md text-md text-white"
                                   >
                                     Cancel
                                   </button>
@@ -422,7 +422,7 @@ const CourseList = () => {
                                       handelDeleteCourse(course?._id) &&
                                       setShouldDelete(false)
                                     }
-                                    class='bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold'
+                                    class="bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold"
                                   >
                                     Ok
                                   </button>
@@ -438,16 +438,16 @@ const CourseList = () => {
               {/* pagination */}
 
               <div>
-                <div className='pagination'>
+                <div className="pagination">
                   <ReactPaginate
-                    breakLabel='...'
-                    nextLabel='>'
+                    breakLabel="..."
+                    nextLabel=">"
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={5}
                     pageCount={pageCount}
-                    previousLabel='<'
+                    previousLabel="<"
                     renderOnZeroPageCount={null}
-                    containerClassName='pagination-menu'
+                    containerClassName="pagination-menu"
                   />
                 </div>
               </div>

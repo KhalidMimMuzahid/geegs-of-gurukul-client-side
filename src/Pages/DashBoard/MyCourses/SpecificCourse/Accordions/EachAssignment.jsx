@@ -70,7 +70,7 @@ function EachAssignment({
       },
     };
     console.log("assignmentData: ", assignmentData);
-    fetch("http://localhost:5000/api/v1/assignments/assignment-response", {
+    fetch("http://3.84.19.169:5000/api/v1/assignments/assignment-response", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -96,7 +96,7 @@ function EachAssignment({
   //   console.log("lecture: ", lecture);
   useEffect(() => {
     fetch(
-      `http://localhost:5000/api/v1/assignments/assignmentby_id?_id=${eachAssignment?.assignment_id}`
+      `http://3.84.19.169:5000/api/v1/assignments/assignmentby_id?_id=${eachAssignment?.assignment_id}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -113,7 +113,7 @@ function EachAssignment({
       assignment_id: eachAssignment?.assignment_id,
       studentEmail: user?.email,
     };
-    fetch(`http://localhost:5000/api/v1/assignments/assignment-response`, {
+    fetch(`http://3.84.19.169:5000/api/v1/assignments/assignment-response`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -133,7 +133,7 @@ function EachAssignment({
             studentEmail: user?.email,
           };
           fetch(
-            `http://localhost:5000/api/v1/assignments/assignment-exercises-response`,
+            `http://3.84.19.169:5000/api/v1/assignments/assignment-exercises-response`,
             {
               method: "GET",
               headers: {

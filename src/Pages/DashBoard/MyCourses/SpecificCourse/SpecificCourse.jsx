@@ -18,7 +18,7 @@ const SpecificCourse = () => {
   useEffect(() => {
     console.log("specific useEffect called");
     fetch(
-      `http://localhost:5000/api/v1/modules/modulesbycourseandbatch?course_id=${"6465c48a3a22da5a8518d942"}&batch_id=${"6469c5010664f5003c9be953"}`
+      `http://3.84.19.169:5000/api/v1/modules/modulesbycourseandbatch?course_id=${"6465c48a3a22da5a8518d942"}&batch_id=${"6469c5010664f5003c9be953"}`
     )
       .then((res) => res.json())
       .then((data) => {

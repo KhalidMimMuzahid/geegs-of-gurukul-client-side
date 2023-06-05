@@ -17,7 +17,7 @@ const TestPageHeader = ({ setAssessments }) => {
 
   const onSearch = (data) => {
     setLoading(true);
-    fetch("http://localhost:5000/api/v1/assessments/search-assessment", {
+    fetch("http://3.84.19.169:5000/api/v1/assessments/search-assessment", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

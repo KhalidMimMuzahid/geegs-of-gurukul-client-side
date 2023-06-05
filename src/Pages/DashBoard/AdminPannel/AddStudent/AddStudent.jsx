@@ -28,7 +28,7 @@ const AddStudent = () => {
 
   // find program
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/programs/all-program")
+    fetch("http://3.84.19.169:5000/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         console.log("program data", data?.data);
@@ -39,7 +39,7 @@ const AddStudent = () => {
   // find course
   useEffect(() => {
     if (selectedProgram) {
-      fetch(`http://localhost:5000/api/v1/courses/search-course`, {
+      fetch(`http://3.84.19.169:5000/api/v1/courses/search-course`, {
         headers: {
           "content-type": "application/json",
           data: JSON.stringify({ program_id: selectedProgram }),
@@ -78,7 +78,7 @@ const AddStudent = () => {
   // search student
   const searchStudent = () => {
     setSearching(true);
-    fetch(`http://localhost:5000/api/v1/users/search-user`, {
+    fetch(`http://3.84.19.169:5000/api/v1/users/search-user`, {
       headers: {
         "content-type": "application/json",
         data: JSON.stringify({ email: selectedEmail }),

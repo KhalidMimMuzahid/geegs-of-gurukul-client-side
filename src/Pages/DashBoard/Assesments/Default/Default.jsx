@@ -11,7 +11,7 @@ const Default = () => {
   const [selectedId, setSelectedId] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/assessments/assessments")
+    fetch("http://3.84.19.169:5000/api/v1/assessments/assessments")
       .then((res) => res.json())
       .then((assessments) => {
         console.log("Assessments: ", assessments);

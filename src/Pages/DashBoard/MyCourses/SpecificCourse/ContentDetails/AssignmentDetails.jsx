@@ -12,7 +12,7 @@ function AssignmentDetails({
     queryKey: [selected?.assignment_id],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/api/v1/assignments/assignmentby_id?_id=${selected?.assignment_id}`
+        `http://3.84.19.169:5000/api/v1/assignments/assignmentby_id?_id=${selected?.assignment_id}`
       );
       const data = await res.json();
       return data;

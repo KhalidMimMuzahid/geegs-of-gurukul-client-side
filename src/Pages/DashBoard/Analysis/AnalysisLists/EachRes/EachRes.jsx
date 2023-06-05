@@ -9,7 +9,7 @@ const EachRes = ({ response }) => {
   const [assessment, setAssessment] = useState(null);
   useEffect(() => {
     fetch(
-      `http://localhost:5000/api/v1/assessments/assessmentlabel?_id=${response?.assessmentId}`
+      `http://3.84.19.169:5000/api/v1/assessments/assessmentlabel?_id=${response?.assessmentId}`
     )
       .then((res) => res.json())
       .then((data) => {

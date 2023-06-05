@@ -104,7 +104,7 @@ const AddExercise = () => {
 
   // fetch function
   const FetchData = (outputData, reset, result) => {
-    fetch(`http://localhost:5000/api/v1/exercises/exerciseDetails`, {
+    fetch(`http://3.84.19.169:5000/api/v1/exercises/exerciseDetails`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
