@@ -13,6 +13,9 @@ import { Link, useLocation } from "react-router-dom";
 import { UIContext } from "../../contexts/UIProvider/UIProvider";
 import { AuthContext } from "../../contexts/UserProvider/UserProvider";
 import { toast } from "react-hot-toast";
+
+import { BsBookmarks, BsQuestionCircle, BsMegaphone } from "react-icons/bs";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -65,11 +68,11 @@ const Navbar = () => {
               type="button"
               className={`${
                 user?.email ? "flex" : "hidden"
-              } mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600`}
+              } mr-3 text-sm bg-gray-800 rounded-full md:mr-0`}
               id="user-profile-header"
               onClick={() => setIsOpen(!isOpen)}
             >
-              <span className="sr-only">Openx user menu</span>
+              <span className="sr-only">Open user menu</span>
               <img
                 className="w-[40px] h-[40px] rounded-full"
                 src={
@@ -167,37 +170,37 @@ const Navbar = () => {
             <li className="font-poppins">
               <Link
                 to="/announcement"
-                className={`text-black border-2 p-1 rounded-xl ${
-                  currentPath.startsWith("/announcement")
-                    ? "bg-white shadow-lg  shadow-slate-500"
-                    : "bg-white"
-                } block     `}
+                className="text-black p-1 block bg-white"
               >
-                <img src={anouncement} alt="" className="w-[25px]  h-[25px]" />
+                <BsMegaphone
+                  className={`w-[25px] h-[25px] hover:text-[#4BA25D] duration-200 ${
+                    currentPath.startsWith("/announcement") && "text-[#4BA25D]"
+                  }`}
+                />
+                {/* <img src={anouncement} alt="" className="w-[25px]  h-[25px]" /> */}
               </Link>
             </li>
             <li className="font-poppins">
-              <Link
-                to="/bookmark"
-                className={`text-black border-2 p-1 rounded-xl ${
-                  currentPath.startsWith("/bookmark")
-                    ? "bg-white shadow-lg  shadow-slate-500"
-                    : "bg-white "
-                } block  `}
-              >
-                <img src={bookmark} alt="" className="w-[25px]  h-[25px]" />
+              <Link to="/bookmark" className="text-black py-1 block bg-white">
+                <BsBookmarks
+                  className={`w-[25px]  h-[25px] hover:text-[#4BA25D] duration-200 ${
+                    currentPath.startsWith("/bookmark") && "text-[#4BA25D]"
+                  }`}
+                />
+                {/* <img src={bookmark} alt="" className="w-[25px]  h-[25px]" /> */}
               </Link>
             </li>
             <li className="font-poppins">
               <Link
                 to="/help"
-                className={`text-black border-2 p-1 rounded-xl ${
-                  currentPath.startsWith("/help")
-                    ? "bg-white shadow-lg  shadow-slate-500"
-                    : "bg-white "
-                } block  md:mr-4 mr-0   `}
+                className="text-black py-1 block md:mr-10 mr-0 bg-white"
               >
-                <img src={help} alt="" className="w-[25px]  h-[25px]" />
+                <BsQuestionCircle
+                  className={`w-[25px] h-[25px] hover:text-[#4BA25D] duration-200 ${
+                    currentPath.startsWith("/help") && "text-[#4BA25D]"
+                  }`}
+                />
+                {/* <img src={help} alt="" className="w-[25px]  h-[25px]" /> */}
               </Link>
             </li>
           </ul>

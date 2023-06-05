@@ -31,7 +31,6 @@ const ProgressbarCir = ({ percentage, circleColor, textColor }) => {
           backgroundColor: "#cd0000",
         })}
       />
-      ;
     </div>
   );
 };

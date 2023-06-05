@@ -59,13 +59,13 @@ function LectureVideo({
           <p>{selected?.lectureName}</p>
           <div className="flex justify-between">
             <button
-              className="bg-green-300 hover:bg-green-400 text-white py-2 px-4 rounded text-sm"
+              className="bg-[#4BA25D] hover:bg-[#5fb370] text-white py-2 px-4 rounded text-sm"
               onClick={() => changeLecture(-1)}
             >
               Prev
             </button>
             <button
-              className="bg-green-300 hover:bg-green-400 text-white py-2 px-4 rounded text-sm ml-4"
+              className="bg-[#4BA25D] hover:bg-[#5fb370] text-white py-2 px-4 rounded text-sm ml-4"
               onClick={() => changeLecture(+1)}
             >
               Next
@@ -74,7 +74,7 @@ function LectureVideo({
         </div>
         <hr className="my-3" />
         <div className="overflow-y-auto h-40">
-          <p className="text-lg font-medium text-green-500 mb-2">Description</p>
+          <p className="text-lg font-medium text-[#4BA25D] mb-2">Description</p>
           <ReactMarkdown
             children={selected?.notes}
             remarkPlugins={[remarkGfm]}

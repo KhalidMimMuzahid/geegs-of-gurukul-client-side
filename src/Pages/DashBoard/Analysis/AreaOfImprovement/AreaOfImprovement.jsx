@@ -3,8 +3,10 @@ import ProgressbarCir from "../../../../Components/ProgressbarCir/ProgressbarCir
 
 const AreaOfImprovement = ({ haveToImprove }) => {
   return (
-    <div className="block my-8">
-      <h4 className="font-poppins text-xl font-bold ">Areas of Improvement :</h4>
+    <div className="block my-20">
+      <h4 className="font-poppins text-xl font-medium mb-8">
+        Areas of Improvement :
+      </h4>
       <div className="container">
         <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 gap-4 justify-center items-center w-full">
           {haveToImprove?.map((eachHaveToImprove, i) => (

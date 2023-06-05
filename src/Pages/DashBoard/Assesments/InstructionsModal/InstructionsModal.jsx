@@ -149,13 +149,13 @@ const InstructionsModal = ({ setShowInstructions, selectedId }) => {
             <div className="flex justify-center gap-4 ">
               <button
                 onClick={() => setShowInstructions(false)}
-                className="text-white bg-gray-600 px-5 py-2 hover:bg-gray-600/90 rounded-lg"
+                className="text-white bg-[#8A8F98] px-5 py-2 hover:bg-gray-600/90 rounded-lg"
               >
                 Cancel
               </button>
               <Link
                 to={`/on-processing/${selectedId}`}
-                className="text-white bg-green-500 px-5 py-2 hover:bg-green-500/90 rounded-lg"
+                className="text-white px-5 py-2 bg-[#4BA25D] hover:bg-[#5fb370] rounded-lg"
               >
                 Start
               </Link>

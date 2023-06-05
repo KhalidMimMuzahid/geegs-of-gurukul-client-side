@@ -31,7 +31,7 @@ const SpecificCourse = () => {
   if (isLoading) {
     return (
       <div>
-        <downloading className=''>downloading</downloading>
+        <downloading className="">downloading</downloading>
       </div>
     );
   }
@@ -40,14 +40,14 @@ const SpecificCourse = () => {
 
   return (
     <div>
-      <div className='md:m-auto md:mb-10 ml-10 font-poppins pl-10'>
-        <div className='grid grid-cols-1 md:grid-cols-12 gap-5 p-1'>
+      <div className="md:m-auto md:mb-10 ml-10 font-poppins pl-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-5 p-1">
           {/* heading */}
-          <div className='bg-white col-span-12 text-green-400 text-2xl font-medium'>
+          <div className="bg-white col-span-12 text-[#4BA25D] text-2xl font-medium">
             Excellency in Professional Carrer
           </div>
           {/* video section */}
-          <div className='p-4 bg-white rounded-lg shadow-md col-span-12 lg:col-span-8 h-auto md:h-[90vh]'>
+          <div className="p-4 bg-white rounded-lg shadow-md col-span-12 lg:col-span-8 h-auto md:h-[90vh]">
             <ContentDetails
               selected={selected}
               modules={modules}
