@@ -61,9 +61,9 @@ function EachAssessment({ assessment, handleClick }) {
             onClick={() => handleClick(assessment?._id)}
             className={`inline-flex items-center mt-2 md:mt-0 px-4 py-2 text-sm font-medium font-poppins text-center ${
               available
-                ? "bg-[#7cba89] text-white hover:bg-[#5fb370]"
+                ? "bg-[#4BA25D] text-white hover:bg-[#5fb370]"
                 : "bg-[#e4e4e4] text-[#28282899]"
-            } rounded-lg focus:ring-4 focus:outline-none focus:ring-[#75AE80] dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
+            } rounded-lg focus:ring-4 focus:outline-none focus:ring-[#75AE80]`}
             disabled={!available}
           >
             Start

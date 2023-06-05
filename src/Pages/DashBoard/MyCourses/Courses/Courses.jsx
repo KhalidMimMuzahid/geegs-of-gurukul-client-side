@@ -154,20 +154,20 @@ const Courses = () => {
               className="w-full border border-gray-200 shadow rounded-lg flex flex-col"
             >
               <div className="px-5 py-8">
-                <h2 className="text-xl text-green-400 font-semibold mb-3">
+                <h2 className="text-xl text-[#4BA25D] font-semibold mb-3">
                   {course?.courseName}
                 </h2>
-                <p className="font-medium mb-2">
+                <p className="mb-2">
                   <span>Program Name: </span>
                   {course?.program?.programName}
                 </p>
-                <p className="font-medium mb-6">
+                <p className="mb-6">
                   <span>Batch Name: </span>
                   {course?.currentBatch}
                 </p>
                 <Link
                   to={"/dashboard/courses/course"}
-                  className="py-2 px-4 rounded bg-green-400 text-white hover:bg-green-400/90"
+                  className="text-sm py-2 px-4 rounded bg-[#4BA25D] text-white hover:bg-[#6fc581]"
                 >
                   Start Learn
                 </Link>

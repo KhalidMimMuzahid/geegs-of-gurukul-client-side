@@ -33,14 +33,14 @@ const Actions = ({
             className={`px-8 font-normal py-2 rounded-lg flex items-center hover:cursor-pointer ${
               selectedQuestionIndex + 1 === totalQuestions
                 ? "hover:bg-red-400 active:bg-red-500 bg-red-300"
-                : "hover:bg-[#58b97a] active:bg-[#58b97a] bg-[#27DC69] text-white"
+                : "active:bg-[#58b97a] bg-[#4BA25D] hover:bg-[#5fb370] text-white"
             }`}
           >
             Next
           </span>
         </div>
         <span
-          className="hover:cursor-pointer rounded-lg py-2 md:w-auto w-full text-center text-white px-8 bg-[#27DC69] hover:bg-[#58b97a]"
+          className="hover:cursor-pointer rounded-lg py-2 md:w-auto w-full text-center text-white px-8 bg-[#4BA25D] hover:bg-[#5fb370]"
           onClick={() => setSubmitModalIsOpen(true)}
         >
           Submit

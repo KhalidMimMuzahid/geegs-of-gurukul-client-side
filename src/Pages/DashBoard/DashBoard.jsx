@@ -4,45 +4,40 @@ import { useEffect, useState } from "react";
 import control from "../../assets/dashBoardIcon/control.png";
 import logo from "../../assets/dashBoardIcon/logo.png";
 
-import home from "../../assets/dashBoardIcon/home.svg";
-import course from "../../assets/dashBoardIcon/course.svg";
-import Test from "../../assets/dashBoardIcon/test.svg";
-import analysis from "../../assets/dashBoardIcon/Analysis .svg";
-import Practice from "../../assets/dashBoardIcon/Practice.svg";
-import Admin from "../../assets/dashBoardIcon/Admin.svg";
-
-import home1 from "../../assets/dashBoardIcon/g1.svg";
-import course2 from "../../assets/dashBoardIcon/g2.svg";
-import analysis4 from "../../assets/dashBoardIcon/g4.svg";
-import Test3 from "../../assets/dashBoardIcon/g3.svg";
-import Practice5 from "../../assets/dashBoardIcon/g5.svg";
-import Admin6 from "../../assets/dashBoardIcon/g6.svg";
+import {
+  BsHouse,
+  BsClipboardData,
+  BsGraphUp,
+  BsFillJournalBookmarkFill,
+  BsPerson,
+} from "react-icons/bs";
 
 import { Link, Outlet, useLocation } from "react-router-dom";
 import EachLink from "./EachLink";
 const DashBoard = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
-    { title: "Home", src: home, link: "/", hover: home1 },
-    { title: "Test", src: Test, link: "/dashboard/assessment", hover: Test3 },
+    { title: "Home", src: <BsHouse />, link: "/" },
+    {
+      title: "Test",
+      src: <BsClipboardData />,
+      link: "/dashboard/assessment",
+    },
     {
       title: "Analysis",
-      src: analysis,
+      src: <BsGraphUp />,
       link: "/dashboard/analysis",
-      hover: analysis4,
     },
 
     {
       title: "Courses",
-      src: course,
+      src: <BsFillJournalBookmarkFill />,
       link: "/dashboard/courses",
-      hover: course2,
     },
     {
       title: "Admin",
-      src: Admin,
+      src: <BsPerson />,
       link: "/dashboard/admin-pannel/assessment/add-assessment",
-      hover: Admin6,
     },
   ];
   const [currentPath, setCurrrentPath] = useState("");
@@ -66,7 +61,7 @@ const DashBoard = () => {
   }, [currentPath]);
 
   return (
-    <div className='flex  gap-4 w-full h-screen'>
+    <div className="flex  gap-4 w-full h-screen">
       <div
         style={{
           display: `${shouldHiddenNav ? "none" : "block"}`,
@@ -86,24 +81,24 @@ const DashBoard = () => {
           onClick={() => setOpen(!open)}
           alt=""
         /> */}
-        <div className='flex gap-x-4 items-center '>
+        <div className="flex gap-x-3 items-center ">
           <img
             style={{ width: "40px", height: "40px" }}
             src={logo}
             className={`cursor-pointer   duration-500 ${
               open && "rotate-[360deg]"
             }`}
-            alt=''
+            alt=""
           />
           <h1
-            className={`text-gray-700 font-poppins origin-left font-medium text-xl duration-200 ${
+            className={`text-gray-700 font-poppins origin-left font-medium text-lg duration-200 ${
               !open && "scale-0"
             }`}
           >
             Dashboard
           </h1>
         </div>
-        <ul className='pt-6 font-poppins'>
+        <ul className="pt-6 font-poppins">
           {Menus.map((Menu, index) => (
             <EachLink
               key={index}
@@ -115,7 +110,7 @@ const DashBoard = () => {
         </ul>
       </div>
       {/* h-screen  */}
-      <div className='grow    relative h-full'>
+      <div className="grow    relative h-full">
         <div style={{ display: `${shouldHiddenNav ? "none" : "block"}` }}>
           <img
             src={control}
@@ -124,7 +119,7 @@ const DashBoard = () => {
             } md:left-[-35px] top-[-3px] w-[35px] border-dark-purple
            border-2 rounded-full  ${!open && "rotate-180"} z-[1001]`}
             onClick={() => setOpen(!open)}
-            alt=''
+            alt=""
           />
         </div>
         <div

@@ -18,7 +18,7 @@ function ContentLists({
         <p className="col-span-1">Course progress</p>
         <div className="w-full h-2 col-span-1 my-auto rounded-md border">
           <div
-            className="bg-green-400 h-full rounded-md"
+            className="bg-[#4BA25D] h-full rounded-md"
             style={{ width: `${percentCompleted}%` }}
           ></div>
         </div>
@@ -27,7 +27,7 @@ function ContentLists({
       <input
         type="text"
         placeholder="search lesson"
-        className="w-full rounded-md border-2 border-green-300 focus:border-green-400 focus:ring-0"
+        className="w-full rounded-md border-2 border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200"
       />
       {/* Accordions */}
       <div className="overflow-y-auto mt-4 h-[80%]">
