@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import ExerciseResponseModal from "../ExerciseResponseModal/ExerciseResponseModal";
 
-const ExerciseResponseTable = ({ exerciseResponses }) => {
+const ExerciseResponseTable = ({ exerciseResponses,dwonloadAsCsv }) => {
   const [openModal, setOpenModal] = useState(false);
   const [data, setData] = useState(null);
   const [itemOffset, setItemOffset] = useState(0);
@@ -30,7 +30,7 @@ const ExerciseResponseTable = ({ exerciseResponses }) => {
           <h2 className="font-semibold font-poppins text-gray-800">
             ExerciseResponse
           </h2>
-          <button className="px-4 py-2 bg-green-500 hover:bg-green-500/90 text-white">
+          <button onClick={dwonloadAsCsv} className="px-4 py-2 bg-green-500 hover:bg-green-500/90 text-white">
             Download as CSV
           </button>
         </header>
@@ -74,7 +74,7 @@ const ExerciseResponseTable = ({ exerciseResponses }) => {
               <tbody className="text-sm divide-y divide-gray-100">
                 {currentItems?.length > 0 &&
                   currentItems?.map((each, i) => (
-                    <tr>
+                    <tr key={each?._id}>
                       <td className="p-2 whitespace-nowrap">
                         <div className="flex items-center">{i + 1}</div>
                       </td>

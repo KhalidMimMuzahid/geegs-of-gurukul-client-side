@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import style from "./ExerciseResponse.module.css";
 import ExerciseResponseTable from "./ExerciseResponseTable/ExerciseResponseTable";
 import { toast } from "react-hot-toast";
+import Papa from 'papaparse';
 
 const ExerciseResponse = () => {
   const [data, setData] = useState([]);
@@ -255,6 +256,48 @@ const ExerciseResponse = () => {
         setLoading(false);
       });
   };
+
+// function for download as CSV
+  
+  const dwonloadAsCsv = () => {
+    if (!!!exerciseResponses?.length) {
+      toast.error("No data is available in this table!") 
+      return
+    }
+    const fields = [
+      "response_id",
+      "exerciseName",
+      "submittedLink",
+      "studentEmail",
+      "mark",
+    ];
+    const data = exerciseResponses?.map((eachResponse) => {
+      const targetRes = [
+         eachResponse?._id,
+         eachResponse?.exercise?.exerciseName,
+         eachResponse?.submittedLink,
+         eachResponse?.submissionDetails?.studentEmail,
+         eachResponse?.mark ? eachResponse?.mark : ""
+      ];
+      return targetRes;
+    });
+    const tableData = {
+      fields, data
+    }
+    console.log("table data", tableData);
+    const tabledataString = JSON.stringify(tableData);
+    console.log(tabledataString)
+    const csv = Papa.unparse(tabledataString);
+    console.log("csv", csv);
+    const element = document.createElement("a")
+    element.setAttribute("href", `data:text/csv;charset=utf-8,${csv}`)
+    element.setAttribute("download", "exercise-response.csv")
+    element.style.display = "none";
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  }
+
   return (
     <div>
       {/* Search */}
@@ -491,7 +534,7 @@ const ExerciseResponse = () => {
       </div>
       {/* Search */}
 
-      <ExerciseResponseTable exerciseResponses={exerciseResponses} />
+      <ExerciseResponseTable dwonloadAsCsv={dwonloadAsCsv} exerciseResponses={exerciseResponses} />
 
       {/* Table */}
 
