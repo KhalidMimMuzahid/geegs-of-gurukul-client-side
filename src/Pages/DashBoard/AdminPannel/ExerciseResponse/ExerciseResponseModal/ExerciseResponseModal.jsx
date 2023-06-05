@@ -1,8 +1,59 @@
 import moment from "moment";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { BsXCircleFill } from "react-icons/bs";
+import style from "./exerciseResponseModal.module.css";
+import { toast } from "react-hot-toast";
+import ExerciseList from "./../../ExerciseList/ExerciseList";
 
 const ExerciseResponseModal = ({ setOpenModal, data }) => {
+  const [loading, setLoading] = useState(false);
+  const [updateButton, setUpdateButton] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+
+    formState: { errors },
+  } = useForm();
+
+  const onUpdate = (d) => {
+    setLoading(true);
+    const updatedData = {
+      mark: parseInt(d?.marks),
+    };
+    console.log(updatedData);
+    fetch(
+      `http://localhost:5000/api/v1/exercises/exercise-response-update/${data?._id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(updatedData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data?.success) {
+          toast.success(data?.message);
+          console.log(data);
+          setLoading(false);
+          setUpdateButton(false);
+          reset();
+        } else {
+          toast.error(data?.message);
+          setLoading(false);
+        }
+      })
+      .catch((error) => console.error(error));
+    // console.log(updatedUser);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    data?.mark ? setUpdateButton(false) : setUpdateButton(true);
+  }, [data?.mark]);
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
@@ -89,6 +140,14 @@ const ExerciseResponseModal = ({ setOpenModal, data }) => {
                 </a>
               </h4>
             </div>
+            {data?.mark && (
+              <div className="">
+                <h3 className="text-lg font-semibold text-green-500">
+                  Exercise Marks
+                </h3>
+                <h4 className="text-lg ml-2">{data?.mark} Mark</h4>
+              </div>
+            )}
             <div className="">
               <h3 className="text-lg font-semibold text-green-500">
                 Student Email
@@ -98,6 +157,63 @@ const ExerciseResponseModal = ({ setOpenModal, data }) => {
               </h4>
             </div>
           </div>
+          {updateButton ? (
+            <form onSubmit={handleSubmit(onUpdate)}>
+              <div className="flex justify-center items-center flex-col mt-10 gap-3">
+                <div className={style?.Exercise}>
+                  <label>Mark</label>
+                  <input
+                    type="text"
+                    placeholder="Enter marksMark"
+                    name="marks"
+                    defaultValue={data?.mark}
+                    {...register("marks", {
+                      required: "marks field is required",
+                      max: {
+                        value: 10,
+                        message: "maximum marks is 10",
+                      },
+                      min: {
+                        value: 0,
+                        message: "Minimum marks is 0",
+                      },
+                    })}
+                    aria-invalid={errors.marks ? "true" : "false"}
+                  />
+                  {errors.marks && (
+                    <p
+                      className="text-red-500 font-poppins font-medium"
+                      role="alert"
+                    >
+                      {errors.marks?.message}
+                    </p>
+                  )}
+                </div>
+                <div className="">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="px-4 py-1 bg-green-500 hover:bg-green-500/90 text-white"
+                  >
+                    {data?.mark ? (
+                      <>{loading ? "Updating" : "Update"}</>
+                    ) : (
+                      <>{loading ? "Saving" : "Save"}</>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </form>
+          ) : (
+            <div className="flex justify-center items-center mt-10">
+              <button
+                onClick={() => setUpdateButton(true)}
+                className="px-4 py-1 bg-green-500 hover:bg-green-500/90 text-white"
+              >
+                Update Mark
+              </button>
+            </div>
+          )}
         </div>
       </div>
       <div

@@ -26,10 +26,13 @@ const ExerciseResponseTable = ({ exerciseResponses }) => {
   return (
     <div className="flex flex-col justify-center h-full mx-auto">
       <div className="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
-        <header className="px-5 py-4 border-b border-gray-100">
+        <header className=" flex justify-between items-center px-5 py-4 border-b border-gray-100">
           <h2 className="font-semibold font-poppins text-gray-800">
             ExerciseResponse
           </h2>
+          <button className="px-4 py-2 bg-green-500 hover:bg-green-500/90 text-white">
+            Download as CSV
+          </button>
         </header>
         <div className="p-3">
           <div className="max-w-[90vw] overflow-x-scroll">
@@ -52,9 +55,11 @@ const ExerciseResponseTable = ({ exerciseResponses }) => {
                   </th>
                   <th className="p-2 whitespace-nowrap">
                     <div className="font-semibold text-center">
-                      {" "}
-                      Submit Link
+                      Exercise Mark
                     </div>
+                  </th>
+                  <th className="p-2 whitespace-nowrap">
+                    <div className="font-semibold text-center">Submit Link</div>
                   </th>
                   <th className="p-2 whitespace-nowrap">
                     <div className="font-semibold text-center">
@@ -82,6 +87,7 @@ const ExerciseResponseTable = ({ exerciseResponses }) => {
                       <td className="p-2 whitespace-nowrap">
                         {each?.lecture?.lectureName}
                       </td>
+                      <td className="p-2 whitespace-nowrap">{each?.mark}</td>
                       <td className="p-2 whitespace-nowrap">
                         <a
                           href={each?.submittedLink}
@@ -99,7 +105,7 @@ const ExerciseResponseTable = ({ exerciseResponses }) => {
                           onClick={() => {
                             return setOpenModal(true), setData(each);
                           }}
-                          className="btn btn-sm px-4 py-2 bg-green-400 text-white hover:bg-white hover:text-green-400 border-2 border-green-400 rounded transition-all duration-500"
+                          className="px-2 py-1 bg-green-400 text-white hover:bg-white hover:text-green-400 border-2 border-green-400 rounded transition-all duration-500"
                         >
                           See Details
                         </button>
