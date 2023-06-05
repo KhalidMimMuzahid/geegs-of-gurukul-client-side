@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import style from "./ExerciseResponse.module.css";
 import ExerciseResponseTable from "./ExerciseResponseTable/ExerciseResponseTable";
 import { toast } from "react-hot-toast";
+import Papa from 'papaparse';
 
 const ExerciseResponse = () => {
   const [data, setData] = useState([]);
@@ -286,7 +287,15 @@ const ExerciseResponse = () => {
     console.log("table data", tableData);
     const tabledataString = JSON.stringify(tableData);
     console.log(tabledataString)
-    
+    const csv = Papa.unparse(tabledataString);
+    console.log("csv", csv);
+    const element = document.createElement("a")
+    element.setAttribute("href", `data:text/csv;charset=utf-8,${csv}`)
+    element.setAttribute("download", "exercise-response.csv")
+    element.style.display = "none";
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   }
 
   return (
