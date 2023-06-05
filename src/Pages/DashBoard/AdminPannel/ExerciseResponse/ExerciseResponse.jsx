@@ -18,8 +18,11 @@ const ExerciseResponse = () => {
   const [lecture, setLecture] = useState({});
   const [assignments, setAssignments] = useState([]);
   const [assignment, setAssignment] = useState({});
+  const [exercises, setExercises] = useState([]);
+  const [exercise, setExercise] = useState({});
   const [loading, setLoading] = useState(false);
   const [exerciseResponses, setExerciseResponses] = useState([]);
+  const [rerender, setRerender] = useState(false);
 
   const {
     register,
@@ -90,11 +93,20 @@ const ExerciseResponse = () => {
           }
         });
       }
-      if (name === "assignment") {
+      if (name === "assignmentName") {
         assignments?.forEach((each) => {
-          if (each?._id === value?.assignmentName) {
-            console.log("each", each);
+          if (each?.assignment_id === value?.assignmentName) {
             setAssignment(each);
+            return;
+          }
+        });
+      }
+      if (name === "exerciseName") {
+        console.log("value", value);
+        exercises?.forEach((each) => {
+          if (each?._id === value?.exerciseName) {
+            console.log("exerciseName", value?.exerciseName);
+            setExercise(each);
             return;
           }
         });
@@ -121,6 +133,7 @@ const ExerciseResponse = () => {
       setModules([]);
       setLectures([]);
       setAssignments([]);
+      setExercises([]);
 
       fetch(
         `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
@@ -140,6 +153,7 @@ const ExerciseResponse = () => {
       setModules([]);
       setLectures([]);
       setAssignments([]);
+      setExercises([]);
       fetch(
         `http://localhost:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
       )
@@ -157,6 +171,7 @@ const ExerciseResponse = () => {
       setModules([]);
       setLectures([]);
       setAssignments([]);
+      setExercises([]);
       fetch(
         `http://localhost:5000/api/v1/modules/all-modules-by-batch?_id=${batch?.batch_id}`
       )
@@ -171,6 +186,7 @@ const ExerciseResponse = () => {
   //lecture
   useEffect(() => {
     if (module?.module_id) {
+      setExercises([]);
       setLectures([]);
       setAssignments([]);
       fetch(
@@ -184,6 +200,22 @@ const ExerciseResponse = () => {
     }
   }, [module?.module_id]);
 
+  //exercise by assignment
+  useEffect(() => {
+    setExercises([]);
+    if (assignment?.assignment_id) {
+      fetch(
+        `http://localhost:5000/api/v1/assignments/assignmentby_id?_id=${assignment?.assignment_id}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setExercises(data?.exercises);
+        });
+    }
+  }, [assignment?.assignment_id]);
+
+  // console.log("exercise")
+
   const onSearch = (data) => {
     const searchData = {
       program_id: program?.program_id,
@@ -192,8 +224,10 @@ const ExerciseResponse = () => {
       module_id: module?.module_id,
       lecture_id: lecture?.lecture_id,
       assignment_id: assignment?.assignment_id,
+      exercise_id: exercise?._id,
     };
     fetchExerciseResponse(searchData);
+    console.log("searchData", searchData);
   };
   // console.log("assignment", assignment);
   // exe
@@ -221,7 +255,6 @@ const ExerciseResponse = () => {
         setLoading(false);
       });
   };
-
   return (
     <div>
       {/* Search */}
@@ -383,9 +416,9 @@ const ExerciseResponse = () => {
               <div className={style?.addLecture}>
                 <label htmlFor="lectureName">Assignment Name</label>
                 <select
-                  name="assignment"
-                  {...register("assignment")}
-                  aria-invalid={errors?.assignment ? "true" : "false"}
+                  name="assignmentName"
+                  {...register("assignmentName")}
+                  aria-invalid={errors?.assignmentName ? "true" : "false"}
                   className="w-full border-2 border-green-400 rounded-xl"
                 >
                   <option disabled selected value="">
@@ -393,21 +426,53 @@ const ExerciseResponse = () => {
                   </option>
                   {assignments?.length > 0 &&
                     assignments?.map((each) => (
-                      <option key={each?.assignment_id} value={each?._id}>
+                      <option
+                        key={each?.assignment_id}
+                        value={each?.assignment_id}
+                      >
                         {each?.assignmentName}
                       </option>
                     ))}
                 </select>
-                {errors.assignment && (
+                {errors.assignmentName && (
                   <p
                     className="text-red-500 font-poppins font-medium"
                     role="alert"
                   >
-                    {errors.assignment?.message}
+                    {errors?.assignmentName?.message}
                   </p>
                 )}
               </div>
               {/* lecture name */}
+              {/* exercises name */}
+              <div className={style?.addLecture}>
+                <label htmlFor="exerciseName">Exercise Name</label>
+                <select
+                  name="exerciseName"
+                  {...register("exerciseName")}
+                  aria-invalid={errors?.exerciseName ? "true" : "false"}
+                  className="w-full border-2 border-green-400 rounded-xl"
+                >
+                  <option disabled selected value="">
+                    Choose a exercise
+                  </option>
+                  {exercises?.length > 0 &&
+                    exercises?.map((each) => (
+                      <option key={each?.exercise_id} value={each?.exercise_id}>
+                        {each?.exerciseName}
+                      </option>
+                    ))}
+                </select>
+                {errors.exerciseName && (
+                  <p
+                    className="text-red-500 font-poppins font-medium"
+                    role="alert"
+                  >
+                    {errors.exerciseName?.message}
+                  </p>
+                )}
+              </div>
+              {/* exercises name */}
             </div>
 
             <div className="grid grid-cols-1 gap-4">
