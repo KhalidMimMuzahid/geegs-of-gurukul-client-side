@@ -121,7 +121,7 @@ const MyProfile = () => {
         </ul>
       </div>
       {/* h-screen  */}
-      <div className="grow    relative h-full">
+      <div className="grow relative h-full">
         <div style={{ display: `${shouldHiddenNav ? "none" : "block"}` }}>
           <img
             src={control}
