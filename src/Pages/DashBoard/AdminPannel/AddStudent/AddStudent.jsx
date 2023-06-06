@@ -7,10 +7,8 @@ import moment from "moment";
 const AddStudent = () => {
   const [programs, setPrograms] = useState([]);
   const [courses, setCourses] = useState([]);
-  const [batch, setBatch] = useState("");
-  const [searching, setSearching] = useState(false);
+  const [batch, setBatch] = useState({});
   const [addAllowed, setAddAllowed] = useState(false);
-  const [userData, setUserData] = useState({});
 
   const { user } = useContext(AuthContext);
 
@@ -50,8 +48,7 @@ const AddStudent = () => {
           console.log("course data", data?.data);
           setCourses(data?.data);
           setValue("course", "");
-          setValue("email", "");
-          setBatch("");
+          setBatch({});
           setAddAllowed(false);
         });
     }
@@ -66,85 +63,111 @@ const AddStudent = () => {
       // console.log("tempCourse: ", tempCourse);
       if (!tempCourse?.currentBatch) {
         toast.error("No batch associated with this course");
-        setBatch("");
-        setValue("email", "");
+        setBatch({});
         setAddAllowed(false);
       } else {
-        setBatch(tempCourse.currentBatch);
+        try {
+          (async () => {
+            const resBatch = await fetch(
+              `http://localhost:5000/api/v1/batches/batch?batchName=${tempCourse?.currentBatch}`
+            );
+            const resultBatch = await resBatch.json();
+            if (resultBatch?._id) {
+              setBatch(resultBatch);
+              setAddAllowed(true);
+            } else {
+              setBatch({});
+              setAddAllowed(false);
+              toast.error("Something went wrong, please try again later");
+            }
+          })();
+        } catch (err) {
+          setBatch({});
+          setAddAllowed(false);
+          toast.error(err.message);
+        }
       }
     }
   }, [selectedCourse]);
 
-  // search student
-  const searchStudent = () => {
-    setSearching(true);
-    fetch(`http://localhost:5000/api/v1/users/search-user`, {
-      headers: {
-        "content-type": "application/json",
-        data: JSON.stringify({ email: selectedEmail }),
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result?.success) {
-          const data = result?.data;
-          console.log("email data: ", data);
-          setUserData(data);
-          setAddAllowed(true);
-          toast.success("Student email successfully found");
-          setSearching(false);
-        } else {
-          toast.error("Email not found");
-          setAddAllowed(false);
-          setSearching(false);
-        }
-      })
-      .catch((err) => {
-        toast.error(err.message);
-        setAddAllowed(false);
-        setSearching(false);
-      });
-  };
-
   // on submit
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const justNow = moment().format();
     // console.log("data: ", data);
-    const courseObject = courses?.find(
-      (course) => course?._id === selectedCourse
-    );
-    const insertuserData = {
-      program: {
-        program_id: selectedProgram,
-        programName: courseObject?.program?.program_id,
-      },
-      course: {
-        course_id: selectedCourse,
-        courseName: courseObject?.courseName,
-      },
-      batch: {
-        batch_id: "",
-        batchName: batch,
-      },
-      isPaid: true,
-      regularPrice: 60000,
-      discount: 100,
-      appliedPrice: 0,
-      couponCode: "",
-      paymentId: "",
-      purchaseInfo: {
-        purchaseByEmail: selectedEmail,
-        purchaseByName: userData[0]?.name,
-        enrolledAt: justNow,
-        paidAt: justNow,
-      },
-      addedBy: {
-        adderName: user?.name,
-        addderEmail: user?.email,
-        addedAt: justNow,
-      },
-    };
-    console.log("data: ", insertuserData);
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/v1/users/search-user`,
+        {
+          headers: {
+            "content-type": "application/json",
+            data: JSON.stringify({ email: selectedEmail }),
+          },
+        }
+      );
+      const result = await res.json();
+      if (result?.success) {
+        const data = result?.data;
+        console.log("email data: ", data);
+        const courseObject = courses?.find(
+          (course) => course?._id === selectedCourse
+        );
+        const coursePurchaseDetails = {
+          program: {
+            program_id: selectedProgram,
+            programName: courseObject?.program?.program_id,
+          },
+          course: {
+            course_id: selectedCourse,
+            courseName: courseObject?.courseName,
+          },
+          batch: {
+            batch_id: batch?._id,
+            batchName: batch?.batchName,
+          },
+          isPaid: true,
+          regularPrice: courseObject?.regularPrice,
+          discount: 100,
+          appliedPrice: 0,
+          couponCode: "",
+          paymentId: "",
+          purchaseInfo: {
+            purchaseByEmail: selectedEmail,
+            purchaseByName: data[0]?.name,
+            enrolledAt: justNow,
+            paidAt: justNow,
+          },
+          addedBy: {
+            adderName: user?.name,
+            adderEmail: user?.email,
+            addedAt: justNow,
+          },
+        };
+        console.log("data: ", coursePurchaseDetails);
+        fetch(
+          `http://localhost:5000/api/v1/purchasesCourse/add-student-to-course`,
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(coursePurchaseDetails),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("data :", data);
+            if (data?.success) {
+              toast.success(data?.message);
+            } else {
+              toast.error(data?.error);
+            }
+          });
+      } else {
+        toast.error("Email not found");
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   return (
@@ -213,17 +236,16 @@ const AddStudent = () => {
                   </p>
                 )}
               </div>
-              {batch && (
+              {batch?._id && (
                 <>
                   <div>
                     <label htmlFor="batch">Batch Name</label>
                     <input
-                      placeholder={batch}
                       disabled
                       name="batch"
                       {...register("batch")}
                       className="w-full border-2 border-gray-400 rounded-xl p-2"
-                      value={batch ? batch : ""}
+                      value={batch?.batchName ? batch?.batchName : ""}
                     />
                   </div>
                   <div>
@@ -251,28 +273,15 @@ const AddStudent = () => {
             </div>
 
             {/* Submit and search button */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <div>
-                <button
-                  type="button"
-                  disabled={searching || !selectedEmail}
-                  className={`px-16 py-3 w-full mt-7 text-white rounded-lg ${
-                    selectedEmail ? "bg-green-500" : "bg-gray-400"
-                  }`}
-                  onClick={searchStudent}
-                >
-                  {searching ? "Searching" : "Search student"}
-                </button>
-              </div>
+            <div className="grid grid-cols-1 gap-4">
               <div>
                 <button
                   type="submit"
-                  disabled={!addAllowed || isLoading}
                   className={`px-16 py-3 w-full mt-7 text-white rounded-lg ${
                     addAllowed ? "bg-green-500" : "bg-gray-400"
                   }`}
                 >
-                  {isLoading ? "Adding" : "Add student"}
+                  Add student
                 </button>
               </div>
             </div>
