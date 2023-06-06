@@ -182,14 +182,14 @@ const Header = () => {
 
   // console.log("location: ", location);
   return (
-    <Disclosure as="nav" className="">
+    <Disclosure as="nav" className="md:my-5 lg:my-0">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 font-poppins">
-            <div className="relative flex h-16 items-center justify-end sm:justify-between ">
-              <div className="hidden  sm:flex grow items-center justify-end sm:items-stretch ">
-                <div className="hidden sm:ml-6 sm:block justify-end">
-                  <div className="flex space-x-4">
+            <div className="relative flex h-16 items-center justify-end sm:justify-between w-full">
+              <div className="hidden  sm:flex grow items-center justify-end sm:items-stretch w-full">
+                <div className="hidden sm:ml-6 sm:block justify-end w-full">
+                  <div className="flex w-full gap-4 lg:justify-between md:justify-center flex-wrap">
                     {navigation.map((item, i) => (
                       // dropdwon
                       <DropDown key={i} item={item} currentPath={currentPath} />
