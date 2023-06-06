@@ -173,11 +173,11 @@ const AddAssesment = () => {
   //     });
   // };
   return (
-    <div>
-      <div className="assessment-area">
+    <div className="pb-10">
+      <div className="assessment-area font-poppins">
         <div className="container">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="font-poppins text-sm">
+            <div className="text-sm">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="addAssessment mb-4">
                   <label>Assessment Name</label>
@@ -376,8 +376,8 @@ const AddAssesment = () => {
               </div>
             </div>
             {/* Text Area */}
-            <div className="w-full mx-auto my-10 font-poppins">
-              <label htmlFor="instruction" className="block mb-2 font-poppins">
+            <div className="w-full mx-auto my-10">
+              <label htmlFor="instruction" className="block mb-2">
                 Instructions :
               </label>
               <textarea
@@ -400,27 +400,21 @@ const AddAssesment = () => {
             {/* <button type='submit'>submit</button> */}
             <button
               type="submit"
-              className="group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow"
+              className="text-white p-2.5 w-full rounded-lg bg-[#4BA25D] hover:bg-[#5fb370]"
             >
-              <div className="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-              <span className="relative text-black group-hover:text-white font-poppins font-medium">
-                Submit
-              </span>
+              Submit
             </button>
           </form>
-          <h4
-            style={{ textAlign: "center" }}
-            className=" text-black font-poppins font-medium mt-5 text-xl"
-          >
+          <h4 style={{ textAlign: "center" }} className="font-medium mt-8">
             {addedQuestion?.length === 0
-              ? "You have no question added"
-              : `you have added ${addedQuestion?.length} ${
+              ? "No questions added yet"
+              : `You have added ${addedQuestion?.length} ${
                   addedQuestion?.length > 1 ? "questions" : "question"
                 }`}
           </h4>
 
           <form onSubmit={handleSearchQueryFormSubmit} id="search-parameteres">
-            <div className="font-poppins font-medium">
+            <div className="font-medium">
               <div className="col-md-5">
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 items-center">
                   <div className="col-md-6">
@@ -477,7 +471,7 @@ const AddAssesment = () => {
                   <div className="col-md-4">
                     <button
                       type="submit"
-                      className="font-poppins flex bg-green-500 px-4 py-3 text-white rounded-lg hover:bg-green-400 transition-[500ms]"
+                      className="flex bg-green-500 px-4 py-3 text-white rounded-lg hover:bg-green-400 transition-[500ms]"
                     >
                       <BiSearch size={24}></BiSearch>
                       <span>Search</span>
@@ -492,13 +486,11 @@ const AddAssesment = () => {
           <div className="flex flex-col justify-center h-full mx-auto">
             <div className="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
               <header className="px-5 py-4 border-b border-gray-100">
-                <h2 className="font-semibold font-poppins text-gray-800">
-                  Lectures
-                </h2>
+                <h2 className="font-semibold text-gray-800">Lectures</h2>
               </header>
               <div className="p-3">
                 <div className="max-w-[90vw] overflow-x-scroll">
-                  <table className="table-auto w-full font-poppins font-medium overflow-x-auto">
+                  <table className="table-auto w-full font-medium overflow-x-auto">
                     <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                       <tr>
                         <th className="p-2 whitespace-nowrap">

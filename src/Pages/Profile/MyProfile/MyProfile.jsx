@@ -3,16 +3,13 @@ import style from "./profile.module.css";
 import { useEffect, useState } from "react";
 import control from "../../../assets/dashBoardIcon/control.png";
 import logo from "../../../assets/dashBoardIcon/logo.png";
-import profile from "../../../assets/profileDashboard/black/profile.svg";
-import profileWhite from "../../../assets/profileDashboard/white/profile.svg";
-import education from "../../../assets/profileDashboard/black/education.svg";
-import educationWhite from "../../../assets/profileDashboard/white/education.svg";
-import certificate from "../../../assets/profileDashboard/black/certificate.svg";
-import setting from "../../../assets/profileDashboard/black/Setting.svg";
-import settingWhite from "../../../assets/profileDashboard/white/Setting.svg";
-import certificateWhite from "../../../assets/profileDashboard/white/education.svg";
-import profession from "../../../assets/profileDashboard/white/profession.svg";
-import professionWhite from "../../../assets/profileDashboard/white/profession.svg";
+import {
+  BsLayers,
+  BsBook,
+  BsJournalCode,
+  BsBriefcase,
+  BsGear,
+} from "react-icons/bs";
 
 import { Link, Outlet, useLocation } from "react-router-dom";
 import EachLink from "./EachLink/EachLink";
@@ -22,33 +19,28 @@ const MyProfile = () => {
   const Menus = [
     {
       title: "General",
-      src: profile,
+      src: <BsLayers />,
       link: "/profile/my-profile",
-      hover: profileWhite,
     },
     {
       title: "Education",
-      src: education,
+      src: <BsBook />,
       link: "/profile/my-profile/education",
-      hover: educationWhite,
     },
     {
       title: "MySkills",
-      src: certificate,
+      src: <BsJournalCode />,
       link: "/profile/my-profile/my-skills",
-      hover: certificateWhite,
     },
     {
       title: "Profession",
-      src: profession,
+      src: <BsBriefcase />,
       link: "/profile/my-profile/profession",
-      hover: professionWhite,
     },
     {
       title: "Settings",
-      src: setting,
+      src: <BsGear />,
       link: "/profile/my-profile/settings",
-      hover: settingWhite,
     },
   ];
   const [currentPath, setCurrrentPath] = useState("");
