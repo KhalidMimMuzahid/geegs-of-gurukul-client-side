@@ -324,12 +324,6 @@ const LecturesList = () => {
                       {each?.moduleName}
                     </option>
                   ))}
-                <option
-                  onClick={() => console.log("xxxxxx")}
-                  value="createNewModule"
-                >
-                  Create New Module
-                </option>
               </select>
               {errors.moduleName && (
                 <p

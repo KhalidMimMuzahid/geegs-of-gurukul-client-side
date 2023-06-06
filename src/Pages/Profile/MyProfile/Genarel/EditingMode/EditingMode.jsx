@@ -19,10 +19,16 @@ const EditingMode = ({ setIsEditing }) => {
   const [image, setImage] = useState(user?.photoURL);
   // get country
   let countryData = Country.getAllCountries();
-  const [country, setCountry] = useState();
+  const [country, setCountry] = useState(
+    countryData.find(
+      (country) => country.name === user?.profession?.address?.country
+    )
+  );
   // get state
   let stateData = State.getStatesOfCountry(country?.isoCode);
-  const [state, setState] = useState();
+  const [state, setState] = useState(
+    stateData.find((ech) => ech.name === user?.profession?.address?.state)
+  );
 
   // get city
   const cityData = City.getCitiesOfState(country?.isoCode, state?.isoCode);
@@ -147,69 +153,69 @@ const EditingMode = ({ setIsEditing }) => {
 
   return (
     <>
-      <div className='container'>
+      <div className="container">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='font-poppins font-medium'>
-            <div className='flex flex-col justify-center mb-5'>
+          <div className="font-poppins font-medium">
+            <div className="flex flex-col justify-center mb-5">
               <img
                 src={image}
-                className='h-36 w-36 rounded-full border-2 border-green-400 shadow-lg'
-                alt=''
+                className="h-36 w-36 rounded-full border-2 border-green-400 shadow-lg"
+                alt=""
               />
-              <div className='relative my-4'>
-                <button className='px-4 py-2 bg-green-500 text-white'>
+              <div className="relative my-4">
+                <button className="px-4 py-2 bg-green-500 text-white">
                   Upload Image
                 </button>
                 <input
-                  type='file'
-                  name='photoURL'
+                  type="file"
+                  name="photoURL"
                   {...register("photoURL")}
-                  id=''
-                  className='absolute top-0 left-0 opacity-0'
+                  id=""
+                  className="absolute top-0 left-0 opacity-0"
                 />
               </div>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-              <div className='assesmentList'>
-                <label htmlFor='name'>Name</label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="assesmentList">
+                <label htmlFor="name">Name</label>
                 <input
-                  type='text'
-                  name='Name'
+                  type="text"
+                  name="Name"
                   defaultValue={user?.name}
                   {...register("name")}
-                  placeholder='Write name'
+                  placeholder="Write name"
                 />
               </div>
-              <div className='assesmentList'>
-                <label htmlFor='email'>Email</label>
+              <div className="assesmentList">
+                <label htmlFor="email">Email</label>
                 <input
-                  type='email'
-                  name='email'
+                  type="email"
+                  name="email"
                   value={user?.email}
                   readOnly
                   {...register("email")}
-                  nonce=''
-                  placeholder='Email address in required'
+                  nonce=""
+                  placeholder="Email address in required"
                 />
               </div>
-              <div className='assesmentList'>
-                <label htmlFor='phoneNumber'>Phone Number</label>
+              <div className="assesmentList">
+                <label htmlFor="phoneNumber">Phone Number</label>
                 <input
-                  type='phone'
-                  name='phoneNumber'
+                  type="phone"
+                  name="phoneNumber"
                   defaultValue={user?.phoneNumber}
                   readOnly
                   {...register("phoneNumber")}
-                  placeholder='Write Phone Number'
+                  placeholder="Write Phone Number"
                 />
               </div>
-              <div className='w-full mb-4'>
-                <label htmlFor='country'>Country</label>
+              <div className="w-full mb-4">
+                <label htmlFor="country">Country</label>
                 <select
-                  id='country'
+                  id="country"
                   {...register("country")}
                   defaultValue={user?.address?.country}
-                  className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+                  className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                 >
                   <option disabled selected>
                     Select Country
@@ -222,13 +228,13 @@ const EditingMode = ({ setIsEditing }) => {
                     ))}
                 </select>
               </div>
-              <div className='w-full mb-4'>
-                <label htmlFor='state'>State</label>
+              <div className="w-full mb-4">
+                <label htmlFor="state">State</label>
                 <select
-                  id='state'
+                  id="state"
                   defaultValue={user.address?.state}
                   {...register("state")}
-                  className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+                  className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                 >
                   <option disabled selected>
                     Select State
@@ -241,13 +247,13 @@ const EditingMode = ({ setIsEditing }) => {
                     ))}
                 </select>
               </div>
-              <div className='w-full mb-4'>
-                <label htmlFor='city'>City</label>
+              <div className="w-full mb-4">
+                <label htmlFor="city">City</label>
                 <select
-                  id='city'
+                  id="city"
                   defaultValue={user?.address?.city}
                   {...register("city")}
-                  className='p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
+                  className="p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                 >
                   <option disabled selected>
                     Select City
@@ -261,16 +267,16 @@ const EditingMode = ({ setIsEditing }) => {
                 </select>
               </div>
 
-              <div className='flex gap-4'>
-                <div className=''>
+              <div className="flex gap-4">
+                <div className="">
                   <button
-                    type='submit'
+                    type="submit"
                     disabled={loading}
-                    className='px-10 py-3
+                    className="px-10 py-3
                 text-white hover:text-green-500
                 bg-green-500 hover:bg-white
                 border-green-500 rounded-lg border-4
-                transition-all duration-300'
+                transition-all duration-300"
                   >
                     {loading ? "Saving..." : "Save"}
                   </button>

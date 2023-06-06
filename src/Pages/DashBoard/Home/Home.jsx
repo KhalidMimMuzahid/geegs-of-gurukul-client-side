@@ -12,6 +12,8 @@ import style from "./preassessment.module.css";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../../contexts/UserProvider/UserProvider";
 import UnderConstruction from "../../../Components/UnderConstruction/UnderConstruction";
+import HomePageLeftSiteCard from "./HomePageLeftSiteCard/HomePageLeftSiteCard";
+import HomePageRightSiteCard from "./HomePageRightSiteCard/HomePageRightSiteCard";
 
 const Home = () => {
   const { justCreatedUser } = useContext(AuthContext);
@@ -30,7 +32,10 @@ const Home = () => {
   // };
   return (
     <div className="">
-      <div className="mt-9"></div>
+      <div className="w-11/12 mx-auto flex flex-col md:flex-row gap-4 mt-6">
+        <HomePageLeftSiteCard />
+        <HomePageRightSiteCard />
+      </div>
       {/* <div>
         <LectureScedule />
         <LectureScedule />
@@ -50,7 +55,6 @@ const Home = () => {
               {/*content*/}
 
               <PreQuestionire />
-      
             </div>
           </div>
           <div className="opacity-25 fixed inset-0  z-[20000] bg-black"></div>
