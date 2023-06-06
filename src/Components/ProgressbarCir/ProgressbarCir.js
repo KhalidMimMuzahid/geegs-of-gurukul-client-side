@@ -2,12 +2,13 @@ import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-const ProgressbarCir = ({ percentage, circleColor, textColor }) => {
+const ProgressbarCir = ({ percentage, circleColor, textColor, centerText }) => {
   return (
     <div className="progess-bare" style={{ width: "120px", height: "120px" }}>
       <CircularProgressbar
         value={percentage}
-        text={`${percentage}%`}
+        text={`${centerText}
+         ${percentage}%`}
         styles={buildStyles({
           // Rotation of path and trail, in number of turns (0-1)
           rotation: 0.25,
