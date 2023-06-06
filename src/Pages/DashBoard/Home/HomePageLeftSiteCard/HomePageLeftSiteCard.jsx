@@ -30,7 +30,7 @@ const HomePageLeftSiteCard = () => {
   return (
     <div className="w-full md:w-3/5 lg:w-3/5">
       {/* Performance card  start */}
-      <div className="w-full rounded-xl bg-[#FFC1DB] p-5 mt-6 font-poppins">
+      <div className="w-full rounded-xl bg-[#FFC1DB] p-5 font-poppins">
         <div className="flex justify-between">
           <h3 className="text-lg font-bold">Performance</h3>
           <div className="flex items-center">
@@ -38,7 +38,7 @@ const HomePageLeftSiteCard = () => {
             <h3 className="text-lg">Week 1</h3>
           </div>
           <div className="">
-            <select>
+            <select className=" border-2 border-black bg-transparent">
               <option value="2017">2017</option>
               <option value="2018">2018</option>
               <option value="2019">2019</option>
