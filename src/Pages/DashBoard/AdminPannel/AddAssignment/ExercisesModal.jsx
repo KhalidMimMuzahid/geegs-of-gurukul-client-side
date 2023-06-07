@@ -7,18 +7,21 @@ import { MdAdd } from "react-icons/md";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import TableLoader from "./Loader/TableLoader";
 import AddExercise from "./../AddExercise/AddExercise";
+import ReactPaginate from "react-paginate";
 
 const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
   const { register, handleSubmit, reset } = useForm();
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState([]);
 
+  const [itemOffset, setItemOffset] = useState(0);
+
   // console.log(items);
 
   const onSubmit = (data) => {
     console.log("data :", data);
     // setLoading(true);
-    fetch(`https://geeks-of-gurukul-server-side.vercel.app/exerciseSearch`, {
+    fetch(`http://localhost:5000/api/v1/exercises/exerciseSearch`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -60,6 +63,23 @@ const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
   };
   // console.log(exercisesId.map(exerciseId=>exerciseId.includes("64646de70789ee45aedfbee0")));
   console.log(exercises);
+
+  //pagination calculation
+  const itemsPerPage = 10;
+
+  const endOffset = itemOffset + itemsPerPage;
+
+  const currentItems = items?.slice(itemOffset, endOffset);
+  const pageCount = Math?.ceil(items?.length / itemsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event?.selected * itemsPerPage) % items?.length;
+    console.log(
+      `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
   return (
     <>
       <div className='justify-center items-center flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-[20010] outline-none focus:outline-none h-100 mx-4'>
@@ -168,7 +188,7 @@ const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
                         {loading ? (
                           <TableLoader />
                         ) : (
-                          items?.map((item, index) => (
+                          currentItems?.map((item, index) => (
                             <tr key={index}>
                               <td
                                 scope='row'
@@ -245,6 +265,23 @@ const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
                         )}
                       </tbody>
                     </table>
+                    {/* table close */}
+                    {/* pagination start */}
+                    <div>
+                      <div className='pagination'>
+                        <ReactPaginate
+                          breakLabel='...'
+                          nextLabel='>'
+                          onPageChange={handlePageClick}
+                          pageRangeDisplayed={5}
+                          pageCount={pageCount}
+                          previousLabel='<'
+                          renderOnZeroPageCount={null}
+                          containerClassName='pagination-menu'
+                        />
+                      </div>
+                    </div>
+                    {/* pagination close */}
                   </div>
                 </div>
               </div>

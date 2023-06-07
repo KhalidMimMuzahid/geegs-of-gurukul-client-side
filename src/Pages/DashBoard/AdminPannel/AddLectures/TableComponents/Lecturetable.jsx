@@ -2,6 +2,7 @@ import React from "react";
 import Row from "./Row";
 
 function Lecturetable({
+  currentItems,
   assignments,
   setAssignments,
   selectedAssignment,
@@ -38,7 +39,7 @@ function Lecturetable({
                 </tr>
               </thead>
               <tbody className='bg-white divide-y divide-gray-200'>
-                {assignments.map((assignment) => (
+                {currentItems.map((assignment) => (
                   <Row
                     assignments={assignments}
                     setAssignments={setAssignments}

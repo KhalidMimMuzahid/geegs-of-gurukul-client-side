@@ -5,10 +5,12 @@ import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
 import { toast } from "react-hot-toast";
 import EditCoupon from "./EditCoupon/EditCoupon";
+import ReactPaginate from "react-paginate";
 const CouponList = () => {
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState([]);
   const [isEditable, setIsEditable] = useState(false);
+  const [itemOffset, setItemOffset] = useState(0);
 
   const {
     register,
@@ -26,7 +28,7 @@ const CouponList = () => {
       updaterEmail: data?.updaterEmail,
     };
 
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/all-coupons", {
+    fetch("http://localhost:5000/api/v1/coupons/all-coupons", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -56,6 +58,21 @@ const CouponList = () => {
     // reset();
   };
 
+  // pagenation
+  const itemsPerPage = 10;
+
+  const endOffset = itemOffset + itemsPerPage;
+
+  const currentItems = items?.slice(itemOffset, endOffset);
+  const pageCount = Math?.ceil(items.length / itemsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event?.selected * itemsPerPage) % items?.length;
+    console.log(
+      `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
   return (
     <div>
       {/* Search Form */}
@@ -204,7 +221,7 @@ const CouponList = () => {
                   </tr>
                 </thead>
                 <tbody class='text-sm divide-y divide-gray-100'>
-                  {items.map((coupon, i) => (
+                  {currentItems.map((coupon, i) => (
                     <tr key={i}>
                       <td class='p-2 whitespace-nowrap'>
                         <div class='flex items-center'>{i + 1}</div>
@@ -267,6 +284,23 @@ const CouponList = () => {
                   ))}
                 </tbody>
               </table>
+
+              {/* pagination */}
+
+              <div>
+                <div className='pagination'>
+                  <ReactPaginate
+                    breakLabel='...'
+                    nextLabel='>'
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    previousLabel='<'
+                    renderOnZeroPageCount={null}
+                    containerClassName='pagination-menu'
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

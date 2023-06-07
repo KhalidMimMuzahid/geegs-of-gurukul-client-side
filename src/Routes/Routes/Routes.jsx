@@ -50,6 +50,10 @@ import AddModule from "../../Pages/DashBoard/AdminPannel/AddModule/AddModule";
 import ModuleList from "../../Pages/DashBoard/AdminPannel/ModuleList/ModuleList";
 import AddProgram from "../../Pages/DashBoard/AdminPannel/AddProgram/AddProgram";
 import ProgramList from "../../Pages/DashBoard/AdminPannel/ProgramList/ProgramList";
+import Profession from "../../Pages/Profile/MyProfile/Profession/Profession";
+import MySkills from "./../../Pages/Profile/MyProfile/MySkills/MySkills";
+import ExerciseResponse from "./../../Pages/DashBoard/AdminPannel/ExerciseResponse/ExerciseResponse";
+import AddStudent from "../../Pages/DashBoard/AdminPannel/AddStudent/AddStudent";
 
 const { createBrowserRouter } = require("react-router-dom");
 const router = createBrowserRouter([
@@ -93,7 +97,7 @@ const router = createBrowserRouter([
             path: "/dashboard/analysis/specific/:_id",
             loader: async ({ params }) =>
               fetch(
-                `https://geeks-of-gurukul-server-side.vercel.app/assessment-response?_id=${params?._id}`
+                `http://localhost:5000/api/v1/assessments/assessment-response?_id=${params?._id}`
               ),
             element: <Analysis />,
           },
@@ -181,6 +185,14 @@ const router = createBrowserRouter([
                 element: <CouponList />,
               },
               {
+                path: "/dashboard/admin-pannel/others/exercise-response",
+                element: <ExerciseResponse />,
+              },
+              {
+                path: "/dashboard/admin-pannel/others/add-student",
+                element: <AddStudent />,
+              },
+              {
                 path: "/dashboard/admin-pannel/course/add-module",
                 element: <AddModule />,
               },
@@ -263,6 +275,14 @@ const router = createBrowserRouter([
                 element: <Certification />,
               },
               {
+                path: "/profile/my-profile/profession",
+                element: <Profession />,
+              },
+              {
+                path: "/profile/my-profile/my-skills",
+                element: <MySkills />,
+              },
+              {
                 path: "/profile/my-profile/settings",
                 element: <Settings />,
                 children: [
@@ -291,7 +311,7 @@ const router = createBrowserRouter([
     path: "on-processing/:_id",
     loader: async ({ params }) =>
       fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/assessment?_id=${params?._id}`
+        `http://localhost:5000/api/v1/assessments/assessment?_id=${params?._id}`
       ),
     element: <OnProcessinAssesments />,
   },
@@ -299,7 +319,7 @@ const router = createBrowserRouter([
   //   path: "/dashboard/analysis/specific/review/:_id",
   //   loader: async ({ params }) =>
   //     fetch(
-  //       `https://geeks-of-gurukul-server-side.vercel.app/assessment?_id=${params?._id}`
+  //       `http://localhost:5000/api/v1/assessments/assessment?_id=${params?._id}`
   //     ),
   //   element: <ReviewAnswer/>,
   // },

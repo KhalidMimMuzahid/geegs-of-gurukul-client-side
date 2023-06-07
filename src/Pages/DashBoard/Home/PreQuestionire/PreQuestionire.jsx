@@ -125,7 +125,7 @@ const PreQuestionire = () => {
 
     const userDetails = { profession, email, address: "" };
     console.log("userDetails: ", userDetails);
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/user-details", {
+    fetch("http://localhost:5000/api/v1/users/user-details", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -143,7 +143,7 @@ const PreQuestionire = () => {
         }
         // if (data?.acknowledged) {
         //   fetch(
-        //     `https://geeks-of-gurukul-server-side.vercel.app/just-created-false?email=${user?.email}`,
+        //     `http://localhost:5000/api/v1/users/just-created-false?email=${user?.email}`,
         //     {
         //       method: "PUT",
         //     }

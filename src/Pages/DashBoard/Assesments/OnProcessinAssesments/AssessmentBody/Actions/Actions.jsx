@@ -9,38 +9,38 @@ const Actions = ({
   setSubmitModalIsOpen,
 }) => {
   return (
-    <div className="w-full px-2 md:px-8 font-poppins font-normal text-[20px] ">
-      <div className={`${style.clickBtn} flex gap-4  justify-center`}>
+    <div className="w-full px-2 md:px-5 font-poppins font-normal mt-10">
+      <div
+        className={`${style.clickBtn} flex justify-between flex-wrap lg:gap-0 gap-5`}
+      >
+        <div className="flex gap-4">
+          <span
+            disabled={selectedQuestionIndex === 0}
+            onClick={() => changeSelectedQuestionIndexOneByOne(-1)}
+            className={`px-8 font-normal py-2 rounded-lg flex items-center hover:cursor-pointer ${
+              selectedQuestionIndex === 0
+                ? "hover:bg-[#ECECEC] active:bg-[#bbbbbb] bg-[#e6e6e6]"
+                : "hover:bg-[#ECECEC] active:bg-[#bbbbbb] bg-gray-300 "
+            }`}
+            type="button"
+          >
+            Back
+          </span>
+          <span
+            disabled={selectedQuestionIndex + 1 === totalQuestions}
+            onClick={() => changeSelectedQuestionIndexOneByOne(+1)}
+            type="button"
+            className={`px-8 font-normal py-2 rounded-lg flex items-center hover:cursor-pointer ${
+              selectedQuestionIndex + 1 === totalQuestions
+                ? "hover:bg-red-400 active:bg-red-500 bg-red-300"
+                : "active:bg-[#58b97a] bg-[#4BA25D] hover:bg-[#5fb370] text-white"
+            }`}
+          >
+            Next
+          </span>
+        </div>
         <span
-          disabled={selectedQuestionIndex === 0}
-          onClick={() => changeSelectedQuestionIndexOneByOne(-1)}
-          className={`px-12 font-normal py-2 rounded-lg flex items-center hover:cursor-pointer ${
-            selectedQuestionIndex === 0
-              ? "hover:bg-[#ECECEC] active:bg-[#bbbbbb] bg-[#e6e6e6]"
-              : "hover:bg-[#ECECEC] active:bg-[#bbbbbb] bg-gray-300 "
-          }`}
-          type="button"
-        >
-          <FaAngleLeft />
-          Back
-        </span>
-        <span
-          disabled={selectedQuestionIndex + 1 === totalQuestions}
-          onClick={() => changeSelectedQuestionIndexOneByOne(+1)}
-          type="button"
-          className={`px-12 font-normal py-2 rounded-lg flex items-center hover:cursor-pointer ${
-            selectedQuestionIndex + 1 === totalQuestions
-              ? "hover:bg-red-400 active:bg-red-500 bg-red-300"
-              : "hover:bg-[#53A871] active:bg-[#58b97a] bg-[#58b97a] text-white"
-          }`}
-        >
-          Next
-          <FaAngleRight />
-        </span>
-      </div>
-      <div className="w-full flex justify-end">
-        <span
-          className={`${style?.submit} hover:cursor-pointer py-1 text-xl font-semibold text-white px-16 bg-[#53A871] rounded-xl hover:bg-[#5ab67a] my-5`}
+          className="hover:cursor-pointer rounded-lg py-2 md:w-auto w-full text-center text-white px-8 bg-[#4BA25D] hover:bg-[#5fb370]"
           onClick={() => setSubmitModalIsOpen(true)}
         >
           Submit

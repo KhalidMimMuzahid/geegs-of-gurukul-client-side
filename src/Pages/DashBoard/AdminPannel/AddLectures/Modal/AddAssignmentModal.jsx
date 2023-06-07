@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { BsXCircleFill } from "react-icons/bs";
 import Lecturetable from "../TableComponents/Lecturetable";
 import { toast } from "react-hot-toast";
+import ReactPaginate from "react-paginate";
 
 function AddAssignmentModal({
   setSearch,
@@ -12,6 +13,7 @@ function AddAssignmentModal({
   setSelectedAssignment,
 }) {
   const [loading, setLoading] = useState(false);
+  const [itemOffset, setItemOffset] = useState(0);
   const {
     register,
     handleSubmit,
@@ -21,7 +23,7 @@ function AddAssignmentModal({
 
   const onSubmit = (data) => {
     setLoading(true);
-    fetch(`https://geeks-of-gurukul-server-side.vercel.app/searchAssignment`, {
+    fetch(`http://localhost:5000/api/v1/assignments/searchAssignment`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -32,7 +34,7 @@ function AddAssignmentModal({
       .then((result) => {
         if (result?.success) {
           const data = result?.data;
-          console.log("first", data);
+          // console.log("first", data);
           setAssignments(data);
           reset();
           setLoading(false);
@@ -45,6 +47,23 @@ function AddAssignmentModal({
         toast.error(err.message);
         setLoading(false);
       });
+  };
+
+  //pagination functions
+
+  const itemsPerPage = 10;
+
+  const endOffset = itemOffset + itemsPerPage;
+
+  const currentItems = assignments?.slice(itemOffset, endOffset);
+  const pageCount = Math?.ceil(assignments?.length / itemsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event?.selected * itemsPerPage) % assignments?.length;
+    console.log(
+      `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
   };
 
   return (
@@ -94,11 +113,28 @@ function AddAssignmentModal({
           <p className='text-sm'>Selected: {selectedAssignment?.length}</p>
           {/* Table */}
           <Lecturetable
+            currentItems={currentItems}
             assignments={assignments}
             setAssignments={setAssignments}
             selectedAssignment={selectedAssignment}
             setSelectedAssignment={setSelectedAssignment}
           />
+          {/* pagination */}
+
+          <div>
+            <div className='pagination'>
+              <ReactPaginate
+                breakLabel='...'
+                nextLabel='>'
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel='<'
+                renderOnZeroPageCount={null}
+                containerClassName='pagination-menu'
+              />
+            </div>
+          </div>
         </div>
       </div>
       <div className='opacity-25 fixed inset-0  z-[20000] bg-black'></div>

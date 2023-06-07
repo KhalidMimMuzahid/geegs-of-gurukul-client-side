@@ -5,10 +5,12 @@ import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
 import { toast } from "react-hot-toast";
+import ReactPaginate from "react-paginate";
 
 const AssignmentList = () => {
   const [loading, setLoading] = useState(false);
   const [assignments, setAssignments] = useState([]);
+  const [itemOffset, setItemOffset] = useState(0);
   const {
     register,
     handleSubmit,
@@ -19,7 +21,7 @@ const AssignmentList = () => {
 
   const onSearch = (data) => {
     setLoading(true);
-    fetch(`https://geeks-of-gurukul-server-side.vercel.app/searchAssignment`, {
+    fetch(`http://localhost:5000/api/v1/assignments/searchAssignment`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -42,6 +44,23 @@ const AssignmentList = () => {
         toast.error(err.message);
         setLoading(false);
       });
+  };
+
+  //pagination calculation
+
+  const itemsPerPage = 10;
+
+  const endOffset = itemOffset + itemsPerPage;
+
+  const currentAssignments = assignments?.slice(itemOffset, endOffset);
+  const pageCount = Math?.ceil(assignments?.length / itemsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event?.selected * itemsPerPage) % assignments?.length;
+    console.log(
+      `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
   };
 
   return (
@@ -83,7 +102,8 @@ const AssignmentList = () => {
                 {errors.topic && (
                   <p
                     className='text-red-500 font-poppins font-medium'
-                    role='alert'>
+                    role='alert'
+                  >
                     {errors.topic?.message}
                   </p>
                 )}
@@ -96,7 +116,8 @@ const AssignmentList = () => {
                 <button
                   type='submit'
                   disabled={loading}
-                  className='px-16 py-3 mt-7 text-white rounded-lg bg-green-500'>
+                  className='px-16 py-3 mt-7 text-white rounded-lg bg-green-500'
+                >
                   {loading ? "Searching" : "Search"}
                 </button>
               </div>
@@ -134,8 +155,8 @@ const AssignmentList = () => {
                   </tr>
                 </thead>
                 <tbody class='text-sm divide-y divide-gray-100'>
-                  {assignments?.length > 0 &&
-                    assignments?.map((assignment, i) => (
+                  {currentAssignments?.length > 0 &&
+                    currentAssignments?.map((assignment, i) => (
                       <tr key={i}>
                         <td class='p-2 whitespace-nowrap'>
                           <div class='flex items-center'>{i + 1}</div>
@@ -171,7 +192,8 @@ const AssignmentList = () => {
                               data-modal-target='staticModal'
                               data-modal-toggle='staticModal'
                               class='px-1 py-1 '
-                              type='button'>
+                              type='button'
+                            >
                               {/* svg */}
                               <img
                                 height='15px'
@@ -186,6 +208,23 @@ const AssignmentList = () => {
                     ))}
                 </tbody>
               </table>
+
+              {/* pagination */}
+
+              <div>
+                <div className='pagination'>
+                  <ReactPaginate
+                    breakLabel='...'
+                    nextLabel='>'
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    previousLabel='<'
+                    renderOnZeroPageCount={null}
+                    containerClassName='pagination-menu'
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -198,7 +237,8 @@ const AssignmentList = () => {
             className=' w-14 h-14 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-green-600'
             viewBox='0 0 100 101'
             fill='none'
-            xmlns='http://www.w3.org/2000/svg'>
+            xmlns='http://www.w3.org/2000/svg'
+          >
             <path
               d='M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z'
               fill='currentColor'

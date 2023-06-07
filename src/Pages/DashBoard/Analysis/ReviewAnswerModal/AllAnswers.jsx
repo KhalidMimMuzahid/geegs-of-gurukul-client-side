@@ -32,7 +32,7 @@ function AllAnswers({
           <div className="flex items-center">
             <div className="bg-gray-200 h-[10px] rounded-lg w-[100%]">
               <div
-                className={`bg-green-300 h-[10px] rounded-lg`}
+                className={`bg-[#AEFFCC] h-[10px] rounded-lg`}
                 style={{
                   width: `${
                     (response.aboutResponse.attemptOn / questions.length) * 100

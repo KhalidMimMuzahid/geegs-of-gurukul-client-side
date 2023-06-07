@@ -10,8 +10,9 @@ function ContentDetails({
   modules,
   selectedModuleLectureList,
   setChangingModuleStatus,
+  setChangingAssignmentStatus,
 }) {
-  console.log("selected: ", selected);
+  // console.log("selected: ", selected);
   const [DetailsComponent, setDetailsComponent] = useState(null);
   useEffect(() => {
     if (!selected) {
@@ -27,7 +28,11 @@ function ContentDetails({
             setChangingModuleStatus={setChangingModuleStatus}
           />
         ) : (
-          <AssignmentDetails selected={selected} />
+          <AssignmentDetails
+            selected={selected}
+            selectedModuleLectureList={selectedModuleLectureList}
+            setChangingAssignmentStatus={setChangingAssignmentStatus}
+          />
         )
       );
     }

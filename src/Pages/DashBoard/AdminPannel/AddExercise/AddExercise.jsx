@@ -104,7 +104,7 @@ const AddExercise = () => {
 
   // fetch function
   const FetchData = (outputData, reset, result) => {
-    fetch(`https://geeks-of-gurukul-server-side.vercel.app/exerciseDetails`, {
+    fetch(`http://localhost:5000/api/v1/exercises/exerciseDetails`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -147,7 +147,6 @@ const AddExercise = () => {
                 <p
                   className="text-red-500 font-poppins font-medium"
                   role="alert"
-
                 >
                   {errors.exerciseName?.message}
                 </p>

@@ -6,8 +6,8 @@ const OverView = ({ aboutResponse, totalMark }) => {
   const { attemptOn, correct, wrong } = aboutResponse;
   return (
     // parent
-    <div className="mt-24">
-      <h4 className="font-poppins text-xl font-bold my-3 ">Overview :</h4>
+    <div className="mt-10">
+      <h4 className="font-poppins text-xl font-medium my-3 ">Overview :</h4>
       <div className="flex flex-col md:flex-row justify-around border border-1 border-[#D4D4D4] rounded-lg">
         <div className="flex flex-col items-center justify-center px-4 py-12 ">
           <h4 className="text-md lg:text-2xl font-poppins">{totalMark}</h4>

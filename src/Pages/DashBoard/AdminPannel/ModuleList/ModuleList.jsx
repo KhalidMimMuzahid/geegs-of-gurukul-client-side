@@ -5,6 +5,7 @@ import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
 import style from "../AddLectures/AddLecture.module.css";
 import { toast } from "react-hot-toast";
+import ReactPaginate from "react-paginate";
 const ModuleList = () => {
   const [data, setData] = useState([]);
   const [courses, setCourses] = useState([]);
@@ -15,6 +16,7 @@ const ModuleList = () => {
   const [batches, setBatches] = useState([]);
   const [modules, setmodules] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [itemOffset, setItemOffset] = useState(0);
   const {
     register,
     handleSubmit,
@@ -25,9 +27,6 @@ const ModuleList = () => {
 
   useEffect(() => {
     const subscription = watch((value, { name, type }) => {
-      // console.log("value", value);
-      // console.log("\nname", name);
-      // console.log("\ntype", type);
       if (name === "programName") {
         data?.forEach((each) => {
           if (each?._id === value?.programName) {
@@ -66,7 +65,7 @@ const ModuleList = () => {
   });
 
   useEffect(() => {
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/all-program")
+    fetch("http://localhost:5000/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -78,7 +77,7 @@ const ModuleList = () => {
     if (program?.program_id) {
       // setCourses([]);
       fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/all-courses-by-program?_id=${program?.program_id}`
+        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -93,7 +92,7 @@ const ModuleList = () => {
     if (course?.course_id) {
       // setCourses([]);
       fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/all-batches-by-course?_id=${course?.course_id}`
+        `http://localhost:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -106,11 +105,11 @@ const ModuleList = () => {
   const onSubmit = (data) => {
     setLoading(true);
     const searchData = {
-       program_id:program?.program_id,
-       course_id:course?.course_id,
-       batch_id:batch?.batch_id,
+      program_id: program?.program_id,
+      course_id: course?.course_id,
+      batch_id: batch?.batch_id,
     };
-    fetch(`http://localhost:5000/search-module`, {
+    fetch(`http://localhost:5000/api/v1/modules/search-module`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -140,7 +139,21 @@ const ModuleList = () => {
     reset();
   };
 
-  // console.log("first", batches);
+  //pagination calculations
+  const itemsPerPage = 6;
+
+  const endOffset = itemOffset + itemsPerPage;
+
+  const currentModules = modules?.slice(itemOffset, endOffset);
+  const pageCount = Math?.ceil(modules?.length / itemsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event?.selected * itemsPerPage) % modules?.length;
+    console.log(
+      `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
   return (
     <div>
       {/* Search Form */}
@@ -296,7 +309,7 @@ const ModuleList = () => {
                   </tr>
                 </thead>
                 <tbody class='text-sm divide-y divide-gray-100'>
-                  {modules.map((module, i) => (
+                  {currentModules?.map((module, i) => (
                     <tr key={i}>
                       <td class='p-2 whitespace-nowrap'>
                         <div class='flex items-center'>{i + 1}</div>
@@ -352,6 +365,23 @@ const ModuleList = () => {
                   ))}
                 </tbody>
               </table>
+
+              {/* pagination */}
+
+              <div>
+                <div className='pagination'>
+                  <ReactPaginate
+                    breakLabel='...'
+                    nextLabel='>'
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    previousLabel='<'
+                    renderOnZeroPageCount={null}
+                    containerClassName='pagination-menu'
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

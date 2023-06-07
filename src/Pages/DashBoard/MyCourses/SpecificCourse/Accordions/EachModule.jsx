@@ -9,6 +9,7 @@ function EachModule({
   contentPosition,
   setSelectedModuleLectureList,
   changingModuleStatus,
+  changingAssignmentStatus,
 }) {
   const [isOutterOpen, setIsOutterOpen] = useState(false);
   const { moduleName, _id } = module;
@@ -16,7 +17,7 @@ function EachModule({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/lecturesbymodule?_id=${_id}`)
+    fetch(`http://localhost:5000/api/v1/lectures/lecturesbymodule?_id=${_id}`)
       .then((res) => res.json())
       .then((data) => {
         setLecturesList(data);
@@ -28,7 +29,7 @@ function EachModule({
 
         setIsLoading(false);
       });
-  }, []);
+  }, [_id]);
   useEffect(() => {
     // changingModuleStatus
 
@@ -86,6 +87,7 @@ function EachModule({
                 module_id={_id}
                 setSelectedModuleLectureList={setSelectedModuleLectureList}
                 lecturesList={lecturesList}
+                changingAssignmentStatus={changingAssignmentStatus}
               />
             ))}
           </>

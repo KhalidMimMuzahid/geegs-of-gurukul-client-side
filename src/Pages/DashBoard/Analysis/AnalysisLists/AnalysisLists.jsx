@@ -9,7 +9,7 @@ const AnalysisLists = () => {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     fetch(
-      `https://geeks-of-gurukul-server-side.vercel.app/assessment-responses?email=${user?.email}`
+      `http://localhost:5000/api/v1/assessments/assessment-responses?email=${user?.email}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -20,20 +20,20 @@ const AnalysisLists = () => {
   }, [user]);
   if (isLoading) {
     return (
-      <div className="h-full flex justify-center items-center">
+      <div className='h-full flex justify-center items-center'>
         <Loading type={"search"} />
       </div>
     );
   }
   return (
-    <div className="w-4/5 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-4 px-5">
+    <div className='w-4/5 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-4 px-5'>
       {responses?.length > 0 ? (
         responses?.map((response) => (
           <EachRes key={response?._id} response={response} />
         ))
       ) : (
-        <div className="w-full h-full justify-center items-center text-2xl font-bold">
-          <h1 className="">you have not attempted any assessment </h1>
+        <div className='w-full h-full justify-center items-center text-2xl font-bold'>
+          <h1 className=''>you have not attempted any assessment </h1>
         </div>
       )}
     </div>

@@ -11,7 +11,7 @@ const ProfileInfo = ({ assessment }) => {
       <div className="flex items-center gap-4">
         <div className="">
           <img
-            className="rounded-full w-20"
+            className="rounded-full w-20 border-2 border-[#4BA25D]"
             src={
               user?.photoURL
                 ? user?.photoURL
@@ -23,18 +23,20 @@ const ProfileInfo = ({ assessment }) => {
         <div className="">
           <h5 className="font-poppins text-2xl font-bold">{user?.name}</h5>
           <p className="font-poppins fw-bold">
-            Work As{" "}
-            <span className="font-bold">{user?.profession?.workAs}</span>
+            Works as{" "}
+            <span className="text-[#4BA25D]">{user?.profession?.workAs}</span>
           </p>
         </div>
       </div>
       {/* Right */}
       <div className="flex flex-col items-start justify-center gap-2 text-lg">
-        <h6 className="font-poppins font-semibold">
-          assessmentName: {assessment?.assessmentName}
+        <h6 className="font-poppins">
+          Assessment name:{" "}
+          <span className="text-[#4BA25D]">{assessment?.assessmentName}</span>
         </h6>
-        <h6 className="font-poppins font-semibold">
-          duration: {assessment?.duration} min
+        <h6 className="font-poppins">
+          Duration:{" "}
+          <span className="text-[#4BA25D]">{assessment?.duration} min</span>
         </h6>
       </div>
     </div>

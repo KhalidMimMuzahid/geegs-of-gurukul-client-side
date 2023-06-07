@@ -24,13 +24,12 @@ const auth = getAuth(app);
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [shouldRefreshUser, setShouldRefreshUser] = useState(false);
   const [updateUser, setUpdateUser] = useState(null);
   const [justCreatedUser, setJustCreatedUser] = useState(false);
   useEffect(() => {
     if (updateUser?.email) {
-      fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/userinfo/${updateUser?.email}`
-      )
+      fetch(`http://localhost:5000/api/v1/users/userinfo/${updateUser?.email}`)
         .then((res) => res.json())
         .then((user) => {
           if (user?.email) {
@@ -43,7 +42,7 @@ const UserProvider = ({ children }) => {
           }
         });
     }
-  }, [updateUser]);
+  }, [updateUser, shouldRefreshUser]);
   // for the auth user verify
   const [tempUser, setTempUser] = useState(null);
 
@@ -177,6 +176,8 @@ const UserProvider = ({ children }) => {
     tempUser,
     justCreatedUser,
     setJustCreatedUser,
+    setUser,
+    setShouldRefreshUser,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

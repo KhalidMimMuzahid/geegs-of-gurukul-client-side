@@ -158,24 +158,34 @@ const Question = ({
   }, [selectedQuestion]);
   return (
     <div>
-      <div className="  px-2 md:px-4 mb-5">
-        <h1 className="text-[22px] font-medium text-center mb-6 ">
-          Topic: {selectedQuestion?.topicName}
-        </h1>
+      <div className="px-2 md:px-4 mb-5">
         <div className="flex flex-col items-center md:flex-row md:justify-between">
-          <h1 className="text-lg  font-normal">
+          <h1 className="font-normal">Topic: {selectedQuestion?.topicName}</h1>
+          <h1 className="font-normal">
             Question No: {selectedQuestionIndex + 1}
           </h1>
-          <h1 className="text-lg  font-normal">
-            Difficulty Level : {selectedQuestion?.difficultyLevel}
+          <h1 className="font-normal">
+            Level :{" "}
+            <span
+              className={`py-1 px-2 rounded-xl text-sm ml-3 ${
+                selectedQuestion?.difficultyLevel === "Hard"
+                  ? "bg-[#FEF3F2] text-[#B42318]"
+                  : selectedQuestion?.difficultyLevel === "Medium"
+                  ? "bg-[#FFFAEB] text-[#B54708]"
+                  : selectedQuestion?.difficultyLevel === "Easy" &&
+                    "bg-[#ECFDF3] text-[#027A48]"
+              }`}
+            >
+              {selectedQuestion?.difficultyLevel}
+            </span>
           </h1>
         </div>
       </div>
 
-      <h1 className="text-[18px] px-3 font-normal mt-4 mb-6">
+      <h1 className="px-3 font-normal mt-12 mb-6">
         {selectedQuestion?.questionName}
       </h1>
-      <div className="relative left-[25px] ">
+      <div className="relative">
         <form className={` ${style?.quesChoices}`}>
           {choices?.map((eachChoice, i) => (
             <EachChoice

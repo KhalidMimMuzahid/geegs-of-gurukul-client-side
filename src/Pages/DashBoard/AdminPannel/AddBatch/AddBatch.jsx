@@ -51,7 +51,7 @@ const AddBatch = () => {
   });
 
   useEffect(() => {
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/all-program")
+    fetch("http://localhost:5000/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -63,7 +63,7 @@ const AddBatch = () => {
     if (program?.program_id) {
       setCourses([]);
       fetch(
-        `https://geeks-of-gurukul-server-side.vercel.app/all-courses-by-program?_id=${program?.program_id}`
+        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -96,7 +96,7 @@ const AddBatch = () => {
       },
     };
     console.log("batchDetails: ", batch);
-    fetch("https://geeks-of-gurukul-server-side.vercel.app/add-batch", {
+    fetch("http://localhost:5000/api/v1/batches/add-batch", {
       method: "POST",
       body: JSON.stringify(batch),
       headers: {

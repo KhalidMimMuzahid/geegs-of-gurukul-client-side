@@ -3,14 +3,13 @@ import style from "./profile.module.css";
 import { useEffect, useState } from "react";
 import control from "../../../assets/dashBoardIcon/control.png";
 import logo from "../../../assets/dashBoardIcon/logo.png";
-import profile from "../../../assets/profileDashboard/black/profile.svg";
-import profileWhite from "../../../assets/profileDashboard/white/profile.svg";
-import education from "../../../assets/profileDashboard/black/education.svg";
-import educationWhite from "../../../assets/profileDashboard/white/education.svg";
-import certificate from "../../../assets/profileDashboard/black/certificate.svg";
-import setting from "../../../assets/profileDashboard/black/Setting.svg";
-import settingWhite from "../../../assets/profileDashboard/white/Setting.svg";
-import certificateWhite from "../../../assets/profileDashboard/white/education.svg";
+import {
+  BsLayers,
+  BsBook,
+  BsJournalCode,
+  BsBriefcase,
+  BsGear,
+} from "react-icons/bs";
 
 import { Link, Outlet, useLocation } from "react-router-dom";
 import EachLink from "./EachLink/EachLink";
@@ -20,27 +19,28 @@ const MyProfile = () => {
   const Menus = [
     {
       title: "General",
-      src: profile,
+      src: <BsLayers />,
       link: "/profile/my-profile",
-      hover: profileWhite,
     },
     {
       title: "Education",
-      src: education,
+      src: <BsBook />,
       link: "/profile/my-profile/education",
-      hover: educationWhite,
     },
     {
-      title: "Certificate",
-      src: certificate,
-      link: "/profile/my-profile/certification",
-      hover: certificateWhite,
+      title: "MySkills",
+      src: <BsJournalCode />,
+      link: "/profile/my-profile/my-skills",
+    },
+    {
+      title: "Profession",
+      src: <BsBriefcase />,
+      link: "/profile/my-profile/profession",
     },
     {
       title: "Settings",
-      src: setting,
+      src: <BsGear />,
       link: "/profile/my-profile/settings",
-      hover: settingWhite,
     },
   ];
   const [currentPath, setCurrrentPath] = useState("");
@@ -64,7 +64,7 @@ const MyProfile = () => {
   }, [currentPath]);
 
   return (
-    <div className='flex  gap-4 w-full h-screen'>
+    <div className="flex  gap-4 w-full h-screen">
       <div
         style={{
           display: `${shouldHiddenNav ? "none" : "block"}`,
@@ -84,14 +84,14 @@ const MyProfile = () => {
           onClick={() => setOpen(!open)}
           alt=""
         /> */}
-        <div className='flex gap-x-4 items-center '>
+        <div className="flex gap-x-4 items-center">
           <img
             style={{ width: "40px", height: "40px" }}
             src={logo}
             className={`cursor-pointer   duration-500 ${
               open && "rotate-[360deg]"
             }`}
-            alt=''
+            alt=""
           />
           <h1
             className={`text-gray-700 font-poppins origin-left font-medium text-xl duration-200 ${
@@ -101,7 +101,7 @@ const MyProfile = () => {
             Profile
           </h1>
         </div>
-        <ul className='pt-6 font-poppins'>
+        <ul className="pt-6 font-poppins">
           {Menus.map((Menu, index) => (
             <EachLink
               key={index}
@@ -113,7 +113,7 @@ const MyProfile = () => {
         </ul>
       </div>
       {/* h-screen  */}
-      <div className='grow    relative h-full'>
+      <div className="grow relative h-full">
         <div style={{ display: `${shouldHiddenNav ? "none" : "block"}` }}>
           <img
             src={control}
@@ -122,7 +122,7 @@ const MyProfile = () => {
             } md:left-[-35px] top-[-3px] w-[35px] border-dark-purple
            border-2 rounded-full  ${!open && "rotate-180"} z-[1001]`}
             onClick={() => setOpen(!open)}
-            alt=''
+            alt=""
           />
         </div>
         <div

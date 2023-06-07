@@ -1,0 +1,12 @@
+.exerciseResponse button {
+  margin-top: 40px;
+}
+.exerciseResponse input {
+  width: 100%;
+  border: 1px solid #cecece;
+  border-radius: 5px;
+  font-size: 17px;
+  padding: 10px 20px;
+  margin-bottom: 16px;
+  outline: none;
+}

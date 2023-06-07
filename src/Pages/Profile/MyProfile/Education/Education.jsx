@@ -22,7 +22,7 @@ const Education = () => {
     //   degree: data?.yourDegree,
     //   institute: data?.institutionName
     // }
-    // fetch(`https://geeks-of-gurukul-server-side.vercel.app/user-detailse/${user?.email}`, {
+    // fetch(`http://localhost:5000/api/v1/users/user-detailse/${user?.email}`, {
     //   method: "PUT",
     //   body: JSON.stringify(updatedUser),
     //   headers: {
@@ -44,7 +44,7 @@ const Education = () => {
   // Showing User info from server
   // const {data:userDetail,isLoading } = useQuery({
   //   queryKey: ['userDetailse'],
-  //   queryFn: ()=>fetch(`https://geeks-of-gurukul-server-side.vercel.app/user-detailse/${user?.email}`)
+  //   queryFn: ()=>fetch(`http://localhost:5000/api/v1/users/user-detailse/${user?.email}`)
   //   .then((res) => res.json())
   // })
   // if (isLoading) {

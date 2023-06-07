@@ -48,7 +48,7 @@ const Analysis = () => {
     setAboutResponse(responseTemp?.aboutResponse);
     //
     fetch(
-      `https://geeks-of-gurukul-server-side.vercel.app/assessment?_id=${responseTemp?.assessmentId}`
+      `http://localhost:5000/api/v1/assessments/assessment?_id=${responseTemp?.assessmentId}`
     ).then((res) =>
       res.json().then((data) => {
         setAssessment(data);
@@ -115,7 +115,7 @@ const Analysis = () => {
             <div ref={ref}>
               <div>
                 <button
-                  className="px-2 py-2 bg-green-400 float-right font-poppins text-white"
+                  className="px-4 py-2 bg-[#4BA25D] hover:bg-[#5fb370] float-right rounded font-poppins text-white"
                   onClick={toPdf}
                 >
                   Download Report

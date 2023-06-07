@@ -116,7 +116,7 @@ const AddLectures = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/all-program")
+    fetch("http://localhost:5000/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -127,7 +127,7 @@ const AddLectures = () => {
   useEffect(() => {
     if (program?.program_id) {
       fetch(
-        `http://localhost:5000/all-courses-by-program?_id=${program?.program_id}`
+        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -141,7 +141,7 @@ const AddLectures = () => {
   useEffect(() => {
     if (course?.course_id) {
       fetch(
-        `http://localhost:5000/all-batches-by-course?_id=${course?.course_id}`
+        `http://localhost:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -154,7 +154,9 @@ const AddLectures = () => {
   //module
   useEffect(() => {
     if (batch?.batch_id) {
-      fetch(`http://localhost:5000/all-modules-by-batch?_id=${batch?.batch_id}`)
+      fetch(
+        `http://localhost:5000/api/v1/modules/all-modules-by-batch?_id=${batch?.batch_id}`
+      )
         .then((response) => response.json())
         .then((data) => {
           // console.log("data", data?.data);
@@ -254,7 +256,7 @@ const AddLectures = () => {
 
     console.log(lectureData);
     setLoading(false);
-    fetch(`http://localhost:5000/lectureDetails`, {
+    fetch(`http://localhost:5000/api/v1/lectures/lectureDetails`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
