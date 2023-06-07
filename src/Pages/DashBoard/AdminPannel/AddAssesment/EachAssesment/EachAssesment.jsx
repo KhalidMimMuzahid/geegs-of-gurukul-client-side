@@ -30,26 +30,18 @@ const EachAssesment = ({ eachQues, i, addedQuestion, setAddedQuestion }) => {
   return (
     <tr>
       <td class="p-2 whitespace-nowrap">
-        <div class="flex items-center">{i + 1}</div>
+        <div class="flex justify-center">{i + 1}</div>
       </td>
       <td class="p-2 whitespace-nowrap">{eachQues?.questionName}</td>
       <td class="p-2 whitespace-nowrap">{eachQues?.topicName}</td>
       <td class="p-2 whitespace-nowrap">{eachQues?.difficultyLevel}</td>
-      <td class="p-2 whitespace-nowrap flex gap-2">
-        <div class="mx-auto flex w-[100px] gap-2">
+      <td class="p-2 whitespace-nowrap">
+        <div class="mx-auto flex justify-center">
           <span className="">
             {isAdded ? (
-              <AiFillMinusSquare
-                className="fs-6"
-                size={36}
-                onClick={handleRemove}
-              />
+              <AiFillMinusSquare size={36} onClick={handleRemove} />
             ) : (
-              <AiFillPlusSquare
-                className="fs-6"
-                size={36}
-                onClick={handleAdd}
-              />
+              <AiFillPlusSquare size={36} onClick={handleAdd} />
             )}
           </span>
         </div>
