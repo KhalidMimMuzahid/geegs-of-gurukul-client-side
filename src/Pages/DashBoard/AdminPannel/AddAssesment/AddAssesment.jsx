@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./AddAssesment.css";
-import { BiSearch } from "react-icons/bi";
 import { useForm } from "react-hook-form";
-import EachAssesment from "./EachAssesment/EachAssesment";
 import moment from "moment/moment";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 import { toast } from "react-hot-toast";
+import AddQuestions from "./AddQuestions/AddQuestions";
 
 // import EachAssesment from "./EachAssesment/EachAssesment";
 const AddAssesment = () => {
@@ -397,7 +396,16 @@ const AddAssesment = () => {
                 </p>
               )}
             </div>
-            {/* <button type='submit'>submit</button> */}
+            {/* Add questions */}
+            <AddQuestions
+              addedQuestion={addedQuestion}
+              handleSearchQueryInputChange={handleSearchQueryInputChange}
+              handleSearchQueryFormSubmit={handleSearchQueryFormSubmit}
+              setSearchParameteres={setSearchParameteres}
+              setAddedQuestion={setAddedQuestion}
+              question={question}
+            />
+            {/* Add questions */}
             <button
               type="submit"
               className="text-white p-2.5 w-full rounded-lg bg-[#4BA25D] hover:bg-[#5fb370]"
@@ -405,134 +413,6 @@ const AddAssesment = () => {
               Submit
             </button>
           </form>
-          <h4 style={{ textAlign: "center" }} className="font-medium mt-8">
-            {addedQuestion?.length === 0
-              ? "No questions added yet"
-              : `You have added ${addedQuestion?.length} ${
-                  addedQuestion?.length > 1 ? "questions" : "question"
-                }`}
-          </h4>
-
-          <form onSubmit={handleSearchQueryFormSubmit} id="search-parameteres">
-            <div className="font-medium">
-              <div className="col-md-5">
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 items-center">
-                  <div className="col-md-6">
-                    <div className="search-area">
-                      <input
-                        type="text"
-                        name="questionName"
-                        placeholder="question"
-                        onChange={handleSearchQueryInputChange}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="search-area">
-                      <input
-                        type="text"
-                        placeholder="Topic"
-                        name="topicName"
-                        onChange={handleSearchQueryInputChange}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-4">
-                    <div className="search-area">
-                      <select
-                        name="difficultyLevel"
-                        id=""
-                        defaultValue="any"
-                        onChange={handleSearchQueryInputChange}
-                      >
-                        <option value="any" disabled>
-                          Difficulty
-                        </option>
-                        <option value="Easy">Easy</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Hard">Hard</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-md-4">
-                    <div className="search-area">
-                      <button
-                        type="reset"
-                        onClick={() => setSearchParameteres({})}
-                        className="group relative h-12 w-32 overflow-hidden rounded-lg bg-white text-lg shadow"
-                      >
-                        <div className="absolute inset-0 w-3 bg-red-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-                        <span className="relative text-black group-hover:text-white">
-                          Clear
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                  <div className="col-md-4">
-                    <button
-                      type="submit"
-                      className="flex bg-green-500 px-4 py-3 text-white rounded-lg hover:bg-green-400 transition-[500ms]"
-                    >
-                      <BiSearch size={24}></BiSearch>
-                      <span>Search</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-
-          {/* Table */}
-          <div className="flex flex-col justify-center h-full mx-auto">
-            <div className="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
-              <header className="px-5 py-4 border-b border-gray-100">
-                <h2 className="font-semibold text-gray-800">Lectures</h2>
-              </header>
-              <div className="p-3">
-                <div className="max-w-[90vw] overflow-x-scroll">
-                  <table className="table-auto w-full font-medium overflow-x-auto">
-                    <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                      <tr>
-                        <th className="p-2 whitespace-nowrap">
-                          <div className="font-semibold text-left">SL No:</div>
-                        </th>
-                        <th className="p-2 whitespace-nowrap">
-                          <div className="font-semibold text-left">
-                            Question
-                          </div>
-                        </th>
-                        <th className="p-2 whitespace-nowrap">
-                          <div className="font-semibold text-left">Topic</div>
-                        </th>
-                        <th className="p-2 whitespace-nowrap">
-                          <div className="font-semibold text-center">
-                            Difficulty
-                          </div>
-                        </th>
-                        <th className="p-2 whitespace-nowrap">
-                          <div className="font-semibold text-center">
-                            Action
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="text-sm divide-y divide-gray-100">
-                      {question?.length > 0 &&
-                        question?.map((eachQues, i) => (
-                          <EachAssesment
-                            eachQues={eachQues}
-                            key={eachQues?._id}
-                            i={i}
-                            addedQuestion={addedQuestion}
-                            setAddedQuestion={setAddedQuestion}
-                          />
-                        ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
 
           {/* Table */}
         </div>
