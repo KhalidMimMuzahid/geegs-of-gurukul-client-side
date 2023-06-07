@@ -4,6 +4,9 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import ProgressbarCir from "../../../../Components/ProgressbarCir/ProgressbarCir";
 import PerformanceChart from "./PerformanceChart/PerformanceChart";
+import AttendanceImg from "../../../../assets/dashBoardIcon/HomePageIcon/Attendance.png";
+import AssignmentImg from "../../../../assets/dashBoardIcon/HomePageIcon/Assignment.png";
+import PerformanceImg from "../../../../assets/dashBoardIcon/HomePageIcon/Performance.png";
 
 const HomePageLeftSiteCard = () => {
   const courses = [
@@ -27,10 +30,48 @@ const HomePageLeftSiteCard = () => {
     },
   ];
 
+  const dummyData = [
+    {
+      title: "Attendance",
+      percentage: 80,
+      img: AttendanceImg,
+    },
+    {
+      title: "Assignment",
+      percentage: 50,
+      img: AssignmentImg,
+    },
+    {
+      title: "Performance",
+      percentage: 40,
+      img: PerformanceImg,
+    },
+  ];
   return (
     <div className="w-full md:w-3/5 lg:w-3/5">
       {/* Performance card  start */}
-      <div className="w-full rounded-xl bg-[#FFC1DB] p-5 font-poppins">
+      <div className="w-full p-5">
+        <div className="grid sm:grid-cols-1 md:grid=cols=2 lg:grid-cols-3 gap-5">
+          {dummyData?.length > 0 &&
+            dummyData?.map((each, i) => (
+              <div
+                className="w-full flex justify-center flex-col bg-[#F2F2F2] p-7 rounded-2xl"
+                key={i}
+              >
+                <h3 className="text-lg font-bold text-center">{each?.title}</h3>
+                <h3 className="text-3xl font-bold my-3 text-center">
+                  {each?.percentage} %
+                </h3>
+                <img
+                  src={each?.img}
+                  className=" h-28 w-28 flex items-end mx-auto"
+                  alt=""
+                />
+              </div>
+            ))}
+        </div>
+      </div>
+      {/* <div className="w-full rounded-xl bg-[#FFC1DB] p-5 font-poppins">
         <div className="flex justify-between">
           <h3 className="text-lg font-bold">Performance</h3>
           <div className="flex items-center">
@@ -47,15 +88,15 @@ const HomePageLeftSiteCard = () => {
           </div>
         </div>
         <PerformanceChart />
-      </div>
+      </div> */}
       {/* Performance card end */}
       {/* Popular course  start */}
-      <div className="w-full rounded-xl bg-[#81FBB8] p-5 mt-6 font-poppins">
+      <div className="w-full rounded-xl bg-[#FFFFFF] p-5 mt-6 font-poppins border-4 border-gray-300 shadow-lg">
         <h3 className="text-lg font-bold">Popular course</h3>
         <div className=" mt-4 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {courses.length > 0 &&
             courses?.map((course, i) => (
-              <div key={i} className="w-full p-4 bg-[#CFFFE5] rounded-2xl">
+              <div key={i} className="w-full p-4 bg-[#F2F2F2] rounded-2xl">
                 <h2 className="text-lg font-semibold">{course?.courseName}</h2>
                 <h3 className="text-md my-4">
                   <svg
@@ -126,32 +167,32 @@ const HomePageLeftSiteCard = () => {
       </div>
       {/* Popular course Card End */}
       {/* Test Card start */}
-      <div className="w-full rounded-xl bg-[#D9A8FF] p-5 mt-6 font-poppins">
+      <div className="w-full rounded-xl bg-[#FFFFFF] p-5 mt-6 font-poppins shadow-lg border-4 border-gray-300">
         <h3 className="text-lg font-bold">Test</h3>
         <div className="flex items-center gap-3 flex-col md:flex-row">
           <div className="flex justify-center items-center gap-3 flex-col lg:flex-row">
             <ProgressbarCir
               percentage={90}
               centerText={`Test-1`}
-              circleColor="#8F00FF"
+              circleColor="#424D46"
               textColor="#282828"
             ></ProgressbarCir>
 
             <ProgressbarCir
               percentage={60}
               centerText={`Test-2`}
-              circleColor="#8F00FF"
+              circleColor="#424D46"
               textColor="#282828"
             ></ProgressbarCir>
 
             <ProgressbarCir
               percentage={70}
               centerText={`Test-3`}
-              circleColor="#8F00FF"
+              circleColor="#424D46"
               textColor="#282828"
             ></ProgressbarCir>
           </div>
-          <div className="rounded-2xl bg-[#EAD4FC] p-3">
+          <div className="rounded-2xl bg-[#F2F2F2] p-3">
             <h2 className="text-lg font-medium text-center">Start new test</h2>
             <p className="text-md text-center">
               Embrace the challenge of a new test. Let your potential shine.
