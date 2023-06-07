@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import ExerciseResponseModal from "../ExerciseResponseModal/ExerciseResponseModal";
+import UploadCsvFile from "./UploadCsvFile";
 
-const ExerciseResponseTable = ({ exerciseResponses,dwonloadAsCsv }) => {
+const ExerciseResponseTable = ({
+  exerciseResponses,
+  dwonloadAsCsv: downloadAsCsv,
+}) => {
   const [openModal, setOpenModal] = useState(false);
   const [data, setData] = useState(null);
   const [itemOffset, setItemOffset] = useState(0);
+  const [uploadCsv, setUploadCsv] = useState(false);
 
   // pagination calculation
   const itemsPerPage = 10;
@@ -30,9 +35,25 @@ const ExerciseResponseTable = ({ exerciseResponses,dwonloadAsCsv }) => {
           <h2 className="font-semibold font-poppins text-gray-800">
             ExerciseResponse
           </h2>
-          <button onClick={dwonloadAsCsv} className="px-4 py-2 bg-green-500 hover:bg-green-500/90 text-white">
-            Download as CSV
-          </button>
+
+          <div className="flex gap-3">
+            {!uploadCsv && (
+              <button
+                onClick={() => setUploadCsv(true)}
+                className="px-4 py-2 hover:bg-white hover:text-green-500 border-2 border-green-500 bg-green-500/90 text-white rounded-md transition-all duration-500"
+              >
+                Upload CSV
+              </button>
+            )}
+            {uploadCsv && <UploadCsvFile />}
+
+            <button
+              onClick={downloadAsCsv}
+              className="px-4 py-2 bg-white text-green-500 border-2 border-green-500 hover:bg-green-500/90 hover:text-white rounded-md transition-all duration-500"
+            >
+              Download as CSV
+            </button>
+          </div>
         </header>
         <div className="p-3">
           <div className="max-w-[90vw] overflow-x-scroll">
