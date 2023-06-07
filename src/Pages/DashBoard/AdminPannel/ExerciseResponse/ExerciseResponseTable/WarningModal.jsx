@@ -22,7 +22,7 @@ const WarningModal = ({ greaterThanTen, lessThanZero, setOpenModal }) => {
                 <h1 key={i} className="text-lg mb-2 ">
                   <strong className="text-2xl font-semibold mr-2">*</strong>
                   line Number <span className="text-red-500">{each}</span> mark
-                  is less-than zero.
+                  is less-than <span className="text-red-500">0</span>.
                 </h1>
               ))}
             {greaterThanTen?.length > 0 &&
@@ -30,7 +30,7 @@ const WarningModal = ({ greaterThanTen, lessThanZero, setOpenModal }) => {
                 <h1 key={i} className="text-lg mb-2">
                   <strong className="text-2xl font-semibold mr-2">*</strong>
                   line Number <span className="text-red-500">{each}</span> mark
-                  is greater-than ten.
+                  is greater-than <span className="text-red-500">10</span>.
                 </h1>
               ))}
           </div>
