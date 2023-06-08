@@ -123,48 +123,50 @@ const AssignmentList = () => {
       </div>
       {/* filtering form */}
       {/* Tables */}
-      <div class="flex flex-col justify-center h-full mx-auto">
-        <div class="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
-          <header class="px-5 py-4 border-b border-gray-100">
-            <h2 class="font-semibold font-poppins text-gray-800">
+      <div className="flex flex-col justify-center h-full mx-auto">
+        <div className="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+          <header className="px-5 py-4 border-b border-gray-100">
+            <h2 className="font-semibold font-poppins text-gray-800">
               Assignments
             </h2>
           </header>
-          <div class="p-3">
-            <div class="max-w-[90vw] overflow-x-scroll">
-              <table class="table-auto w-full font-poppins font-medium overflow-x-auto">
-                <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+          <div className="p-3">
+            <div className="max-w-[90vw] overflow-x-scroll">
+              <table className="table-auto w-full font-poppins font-medium overflow-x-auto">
+                <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                   <tr>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">SL No:</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-left">SL No:</div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">Assignment Name</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-left">
+                        Assignment Name
+                      </div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">Topic</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-left">Topic</div>
                     </th>
 
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-center">Action</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-center">Action</div>
                     </th>
                   </tr>
                 </thead>
-                <tbody class="text-sm divide-y divide-gray-100">
+                <tbody className="text-sm divide-y divide-gray-100">
                   {currentAssignments?.length > 0 &&
                     currentAssignments?.map((assignment, i) => (
                       <tr key={i}>
-                        <td class="p-2 whitespace-nowrap">
-                          <div class="flex items-center">{i + 1}</div>
+                        <td className="p-2 whitespace-nowrap">
+                          <div className="flex items-center">{i + 1}</div>
                         </td>
-                        <td class="p-2 whitespace-nowrap">
+                        <td className="p-2 whitespace-nowrap">
                           {assignment?.assignmentName}
                         </td>
-                        <td class="p-2 whitespace-nowrap">
+                        <td className="p-2 whitespace-nowrap">
                           {assignment?.topic}
                         </td>
-                        <td class="p-2 whitespace-nowrap flex gap-2">
-                          <div class="mx-auto flex w-[100px] gap-2">
+                        <td className="p-2 whitespace-nowrap flex gap-2">
+                          <div className="mx-auto flex w-[100px] gap-2">
                             <button type="button" className="px-1 py-1 ">
                               {/* svg */}
                               <img
@@ -187,7 +189,7 @@ const AssignmentList = () => {
                             <button
                               data-modal-target="staticModal"
                               data-modal-toggle="staticModal"
-                              class="px-1 py-1 "
+                              className="px-1 py-1 "
                               type="button"
                             >
                               {/* svg */}
