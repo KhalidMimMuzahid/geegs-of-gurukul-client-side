@@ -32,7 +32,10 @@ const UploadCsvFile = () => {
       skipEmptyLines: true,
       complete: function (result) {
         const exercises = result?.data;
-        const exerciseWithMarks = exercises.filter((exercise) => exercise.mark);
+        const exerciseWithMarks = exercises?.filter(
+          (exercise) =>
+            parseInt(exercise?.mark) >= 0 && parseInt(exercise?.mark) <= 10
+        );
         console.log(exerciseWithMarks);
 
         for (let i = 0; i < DummyData.length; i++) {
