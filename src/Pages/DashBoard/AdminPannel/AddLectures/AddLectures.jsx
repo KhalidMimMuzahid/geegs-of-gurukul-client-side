@@ -2,15 +2,17 @@ import React, { useState, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import style from "./AddLecture.module.css";
 import AddAssignmentModal from "./Modal/AddAssignmentModal";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 import moment from "moment";
 import { uploadFile } from "react-s3";
 import { toast } from "react-hot-toast";
-import { useSpring } from "framer-motion";
 import AddModuleModel from "./Modal/AddModuleModel";
 import Loading from "../../../../Components/Loading/Loading";
+import { BsXCircleFill } from "react-icons/bs";
+
+const inputStyle =
+  "border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg w-full mt-1";
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 const config = {
@@ -254,7 +256,7 @@ const AddLectures = () => {
       },
     };
 
-    console.log(lectureData);
+    // console.log(lectureData);
     setLoading(false);
     fetch(`http://localhost:5000/api/v1/lectures/lectureDetails`, {
       method: "POST",
@@ -282,38 +284,13 @@ const AddLectures = () => {
     setLoading(false);
   };
 
-  //upload file
-  // const awsFileUpload = async (filePath, setUploadedFilePath) => {
-  //   console.log("vvvvvvvvvvvvvvvvvv");
-  //   if (filePath[0]) {
-  //     const file = filePath[0];
-  //     console.log(file);
-  //     uploadFile(file, config)
-  //       .then((fileData) => {
-  //         setUploadedFilePath(fileData?.location);
-  //         console.log("fileData", fileData);
-  //         return true;
-  //       })
-  //       .catch((err) => {
-  //         console.log("erorrrrrrrrrrrrrrrrrrrrrrrrrr");
-  //         toast.error(err?.message);
-  //         setLoading(false);
-  //         return false;
-  //       });
-  //   } else {
-  //     console.log("elseeeeeeeeeeee");
-  //     return false;
-  //   }
-  // };
-
-  // console.log("addNewModule", addNewModule);
   return (
-    <div className="container p-8">
+    <div className="container p-8 font-poppins">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" font-poppins font-medium">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             {/* Lecture Name */}
-            <div className={style?.addLecture}>
+            <div>
               <label>Lecture Name</label>
               <input
                 type="text"
@@ -322,6 +299,8 @@ const AddLectures = () => {
                   required: "Lecture Name is required",
                 })}
                 aria-invalid={errors.lectureName ? "true" : "false"}
+                className={inputStyle}
+                placeholder="Enter lecture name"
               />
               {errors.lectureName && (
                 <p
@@ -334,7 +313,7 @@ const AddLectures = () => {
             </div>
             {/* Lecture Name */}
             {/* Topic Name */}
-            <div className={style?.addLecture}>
+            <div>
               <label>Topic Name</label>
               <input
                 type="text"
@@ -343,6 +322,8 @@ const AddLectures = () => {
                   required: "Topic Name is required",
                 })}
                 aria-invalid={errors.topicName ? "true" : "false"}
+                className={inputStyle}
+                placeholder="Enter topic name"
               />
               {errors.topicName && (
                 <p
@@ -356,7 +337,7 @@ const AddLectures = () => {
             {/* Topic Name */}
             {/* Batch Name */}
             {/* Program Name */}
-            <div className={style?.addLecture}>
+            <div>
               <label htmlFor="programName">Program Name</label>
               <select
                 name="programName"
@@ -364,9 +345,10 @@ const AddLectures = () => {
                   required: "Program Name is required",
                 })}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
+                className={inputStyle}
+                defaultValue=""
               >
-                <option disabled selected value="">
+                <option disabled value="">
                   Choose a Program
                 </option>
                 {data?.length > 0 &&
@@ -386,7 +368,7 @@ const AddLectures = () => {
               )}
             </div>
             {/* Course Name */}
-            <div className={style?.addLecture}>
+            <div>
               <label htmlFor="courseName">Course Name</label>
               <select
                 name="courseName"
@@ -394,9 +376,10 @@ const AddLectures = () => {
                   required: "Course Name is required",
                 })}
                 aria-invalid={errors.courseName ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
+                className={inputStyle}
+                defaultValue=""
               >
-                <option disabled selected value="">
+                <option disabled value="">
                   Choose a Course
                 </option>
                 {courses?.length > 0 &&
@@ -418,17 +401,18 @@ const AddLectures = () => {
             {/* Course Name */}
             {/* batch Name */}
 
-            <div className={style?.addLecture}>
+            <div>
               <label htmlFor="batchName">Batch Name</label>
               <select
                 name="batchName"
                 {...register("batchName", {
-                  required: "batch Name is required",
+                  required: "Batch Name is required",
                 })}
                 aria-invalid={errors.batchName ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
+                className={inputStyle}
+                defaultValue=""
               >
-                <option disabled selected value="">
+                <option disabled value="">
                   Choose a Batch
                 </option>
                 {batches?.length > 0 &&
@@ -450,7 +434,7 @@ const AddLectures = () => {
 
             {/* batch Name */}
             {/* module name */}
-            <div className={style?.addLecture}>
+            <div>
               <label htmlFor="moduleName">Module Name</label>
               <select
                 name="moduleName"
@@ -458,9 +442,10 @@ const AddLectures = () => {
                   required: "Module Name is required",
                 })}
                 aria-invalid={errors.moduleName ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
+                className={inputStyle}
+                defaultValue=""
               >
-                <option disabled selected value="">
+                <option disabled value="">
                   Choose a Module
                 </option>
                 {modules?.length > 0 &&
@@ -470,7 +455,7 @@ const AddLectures = () => {
                     </option>
                   ))}
                 <option
-                  onClick={() => console.log("xxxxxx")}
+                  // onClick={() => console.log("xxxxxx")}
                   value="createNewModule"
                 >
                   Create New Module
@@ -487,7 +472,7 @@ const AddLectures = () => {
             </div>
             {/* module name */}
             {/* Sceduled At */}
-            <div className={style?.addLecture}>
+            <div>
               <label>Sceduled At</label>
               <input
                 type="datetime-local"
@@ -496,6 +481,7 @@ const AddLectures = () => {
                   required: "Select A Date",
                 })}
                 aria-invalid={errors.scheduledAt ? "true" : "false"}
+                className={inputStyle}
               />
               {errors.scheduledAt && (
                 <p
@@ -508,7 +494,7 @@ const AddLectures = () => {
             </div>
             {/* Sceduled At */}
             {/* Ends At */}
-            <div className={style?.addLecture}>
+            <div>
               <label>Ends At</label>
               <input
                 type="datetime-local"
@@ -517,6 +503,7 @@ const AddLectures = () => {
                   required: "Select A Date",
                 })}
                 aria-invalid={errors.endsAt ? "true" : "false"}
+                className={inputStyle}
               />
               {errors.endsAt && (
                 <p
@@ -529,7 +516,7 @@ const AddLectures = () => {
             </div>
             {/* Ends At */}
             {/* Zoom Link */}
-            <div className={style?.addLecture}>
+            <div>
               <label>Zoom Link</label>
               <input
                 type="url"
@@ -538,6 +525,8 @@ const AddLectures = () => {
                   required: "Provide Zoom Link",
                 })}
                 aria-invalid={errors.zoomLink ? "true" : "false"}
+                className={inputStyle}
+                placeholder="Enter zoom link"
               />
               {errors.zoomLink && (
                 <p
@@ -552,13 +541,13 @@ const AddLectures = () => {
             {/* Attachment File */}
             <div className="w-full font-poppins">
               <label
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="text-sm text-gray-900 dark:text-gray-300"
                 htmlFor="Attachment"
               >
                 Attachment
               </label>
               <input
-                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                className="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                 id="Attachment"
                 name="Attachment"
                 type="file"
@@ -579,13 +568,13 @@ const AddLectures = () => {
             {/* Upload Video */}
             <div className="w-full font-poppins">
               <label
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="text-sm text-gray-900 dark:text-gray-300"
                 htmlFor="file_input"
               >
                 Upload Video
               </label>
               <input
-                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                className="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                 id="videoInput"
                 name="videoInput"
                 type="file"
@@ -610,7 +599,7 @@ const AddLectures = () => {
         <div className="w-full mx-auto mt-10 mb-5 font-poppins">
           <label
             htmlFor="notes"
-            className="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
+            className="text-sm font-poppins text-gray-900 dark:text-gray-400"
           >
             <div className="flex items-center justify-between">
               <p>Notes:</p>
@@ -627,14 +616,12 @@ const AddLectures = () => {
                   className="sr-only"
                 />
                 <div className="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
-                <span className="ml-3 text-gray-900 text-sm font-medium">
-                  Optional
-                </span>
+                <span className="ml-3 text-gray-900">Optional</span>
               </label>
 
               <p
                 onClick={() => setInstructions(true)}
-                className="hover:text-sky-500 hover:cursor-pointer"
+                className="font-semibold text-[#4BA25D] hover:cursor-pointer"
               >
                 Instructions
               </p>
@@ -645,7 +632,7 @@ const AddLectures = () => {
             name="notes"
             {...register("notes")}
             rows="4"
-            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+            className={inputStyle}
             placeholder="Your message..."
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -656,13 +643,15 @@ const AddLectures = () => {
               {errors.notes?.message}
             </p>
           )}
-          <button
-            type="button"
-            onClick={() => setPreview(true)}
-            className="my-2 font-poppins font-medium text-white px-2 py-2 bg-green-400 hover:bg-green-500 rounded-md"
-          >
-            Preview
-          </button>
+          <div className="w-full flex justify-center">
+            <button
+              type="button"
+              onClick={() => setPreview(true)}
+              className="mt-4 mb-3 font-poppins font-medium px-10 py-2 hover:text-white border border-[#747880] hover:bg-[#8A8F98] rounded-lg duration-150"
+            >
+              Preview
+            </button>
+          </div>
           {/* For Preview only */}
           {preview && (
             <>
@@ -670,13 +659,11 @@ const AddLectures = () => {
                 <div className="relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
                   <button
                     onClick={() => setPreview(false)}
-                    className="absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full"
+                    className="absolute right-5 top-5 mx-1 my-1"
                   >
-                    ❌
+                    <BsXCircleFill size={20} className="text-rose-500" />
                   </button>
-                  <h3 className="text-2xl font-poppins font-medium mt-1">
-                    Preview:
-                  </h3>
+                  <h3 className="text-lg font-medium mt-1">Preview</h3>
                   <div className=" mt-6 w-full h-4/5 p-4 mx-auto bg-white border border-green-400 rounded-md overflow-x-auto overflow-y-auto">
                     <ReactMarkdown
                       children={text}
@@ -695,18 +682,19 @@ const AddLectures = () => {
                 <div className="relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
                   <button
                     onClick={() => setInstructions(false)}
-                    className="absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full"
+                    className="absolute right-5 top-5 mx-1 my-1"
                   >
-                    ❌
+                    <BsXCircleFill size={20} className="text-rose-500" />
                   </button>
-                  <h3 className="text-2xl font-poppins font-medium mt-1">
-                    Instructions:
+                  <h3 className="text-lg font-medium mt-1 mb-5">
+                    Instructions
                   </h3>
                   <iframe
                     title="markdown instructions"
                     src="https://padomi.id.lv/PRG/par__/Markdown-Cheat-Sheet.pdf"
                     width="100%"
                     height="500px"
+                    className="rounded-lg"
                   ></iframe>
                 </div>
               </div>
@@ -714,17 +702,17 @@ const AddLectures = () => {
             </>
           )}
         </div>
-
+        <hr />
         {/* add assignment button */}
-        <div className="flex justify-between align-center">
+        <div className="my-4 flex flex-wrap justify-center items-center gap-6">
           <button
             type="button"
             onClick={() => setSearch(true)}
-            className="px-2 py-2 bg-green-500 text-white font-poppins font-medium rounded-lg mb-3"
+            className="px-6 py-2 bg-[#4BA25D] hover:bg-[#5fb370] text-white rounded-lg"
           >
             + Add Assignments
           </button>
-          <p className="font-bold text-green-500">
+          <p className="text-[#4BA25D]">
             Assignments selected: {selectedAssignment?.length}
           </p>
         </div>
@@ -734,14 +722,9 @@ const AddLectures = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`${
-            loading ? "" : ""
-          } group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow`}
+          className="text-white w-full rounded-lg bg-[#4BA25D] hover:bg-[#5fb370] px-10 py-2 mt-6"
         >
-          <div className="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-          <span className="relative text-black group-hover:text-white font-poppins font-medium">
-            {loading ? "Submitting..." : "Submit"}
-          </span>
+          {loading ? "Submitting..." : "Submit"}
         </button>
 
         {fileUploadingStatus?.isLoading && (

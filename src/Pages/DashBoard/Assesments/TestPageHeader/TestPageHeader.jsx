@@ -54,7 +54,7 @@ const TestPageHeader = ({ setAssessments }) => {
               placeholder="search by assessment name"
               {...register("assessmentName")}
               name="assessmentName"
-              className="w-full rounded-lg z-[998] border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200"
+              className="w-full rounded-full z-[998] border-black hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200"
             />
             <BsSearch className="text-[18px] absolute top-3 right-4 z-[999]" />
           </div>
@@ -64,7 +64,7 @@ const TestPageHeader = ({ setAssessments }) => {
               {...register("categoryName")}
               placeholder="search by category"
               name="categoryName"
-              className="w-full rounded-lg z-[998] border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200"
+              className="w-full rounded-full z-[998] border-black hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200"
             />
             <BsSearch className="text-[18px] absolute top-3 right-4 z-[999]" />
           </div>
@@ -72,7 +72,7 @@ const TestPageHeader = ({ setAssessments }) => {
             <button
               type="submit"
               disabled={loading}
-              className="lg:w-36 w-full sm:w-full h-full rounded-lg bg-[#4BA25D] hover:bg-[#5fb370] text-white z-[998] duration-200 py-2"
+              className="lg:w-36 w-full sm:w-full h-full rounded-full border border-black hover:border-[#5fb370] hover:bg-[#5fb370] text-black hover:text-[white] z-[998] duration-200 py-2"
             >
               {loading ? "searching..." : "Search"}
             </button>

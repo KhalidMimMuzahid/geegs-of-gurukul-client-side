@@ -9,6 +9,9 @@ import { toast } from "react-hot-toast";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 import ReactPaginate from "react-paginate";
 
+const inputStyle =
+  "border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg w-full mt-1";
+
 const AssesmentList = () => {
   const { user } = useContext(AuthContext);
   const [assessments, setAssessments] = useState([]);
@@ -109,20 +112,21 @@ const AssesmentList = () => {
     setItemOffset(newOffset);
   };
   return (
-    <div className="mt-5">
+    <div className="mt-5 mb-10">
       {/* filtering form */}
       <div className="container mt-5">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="font-poppins font-medium p-5">
+          <div className="font-poppins text-sm p-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="assesmentList">
+              <div>
                 <label htmlFor="assessmentName">Assessment Name</label>
                 <input
                   type="text"
                   name="assessmentName"
                   {...register("assessmentName")}
-                  placeholder="Write assessment name"
+                  placeholder="Enter assessment name"
                   aria-invalid={errors.assessmentName ? "true" : "false"}
+                  className={inputStyle}
                 />
                 {errors.assessmentName && (
                   <p
@@ -133,14 +137,15 @@ const AssesmentList = () => {
                   </p>
                 )}
               </div>
-              <div className="assesmentList">
+              <div>
                 <label htmlFor="batchName">Batch Name</label>
                 <input
                   type="text"
                   name="batchName"
                   {...register("batchName")}
-                  placeholder="Write batch name"
+                  placeholder="Enter batch name"
                   aria-invalid={errors.batchName ? "true" : "false"}
+                  className={inputStyle}
                 />
                 {errors.batchName && (
                   <p
@@ -151,14 +156,15 @@ const AssesmentList = () => {
                   </p>
                 )}
               </div>
-              <div className="assesmentList">
+              <div>
                 <label htmlFor="creatorEmail">Creator </label>
                 <input
                   type="email"
                   name="creatorEmail"
                   {...register("creatorEmail")}
-                  placeholder="Write creator name"
+                  placeholder="Enter creator name"
                   aria-invalid={errors.creatorEmail ? "true" : "false"}
+                  className={inputStyle}
                 />
                 {errors.creatorEmail && (
                   <p
@@ -169,14 +175,15 @@ const AssesmentList = () => {
                   </p>
                 )}
               </div>
-              <div className="assesmentList">
+              <div>
                 <label htmlFor="updaterEmail">Updater Email</label>
                 <input
                   type="email"
                   name="updaterEmail"
                   {...register("updaterEmail")}
-                  placeholder="Write updater name"
+                  placeholder="Enter updater name"
                   aria-invalid={errors.updaterEmail ? "true" : "false"}
+                  className={inputStyle}
                 />
                 {errors.updaterEmail && (
                   <p
@@ -189,16 +196,12 @@ const AssesmentList = () => {
               </div>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex gap-4 my-10 items-center justify-center">
               <div className="">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-10 py-3
-                          text-white hover:text-green-500
-                          bg-green-500 hover:bg-white
-                          border-green-500 rounded-lg border-4
-                          transition-all duration-300"
+                  className="px-10 py-3 text-white border border-[#4BA25D] bg-[#4BA25D] hover:bg-[#5fb370] rounded-lg transition-all duration-200"
                 >
                   {loading ? "Searching" : "Search"}
                 </button>
@@ -208,11 +211,7 @@ const AssesmentList = () => {
                   type="button"
                   onClick={handelToMyCreation}
                   disabled={loading}
-                  className="px-10 py-3
-                           text-green-500 hover:text-white
-                           bg-white hover:bg-green-500
-                           border-green-500 rounded-lg border-4
-                           transition-all duration-300"
+                  className="px-10 py-3 hover:text-white border border-[#747880] hover:bg-[#8A8F98] rounded-lg transition-all duration-200"
                 >
                   {loading ? "Searching" : "My Creation"}
                 </button>
@@ -223,14 +222,16 @@ const AssesmentList = () => {
       </div>
       {/* Table */}
       <div class="flex flex-col justify-center h-full mx-auto">
-        <div class="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+        <div class="w-full mx-auto bg-white rounded-lg border border-gray-300">
           <header class="px-5 py-4 border-b border-gray-100">
-            <h2 class="font-semibold font-poppins text-gray-800">Assesments</h2>
+            <h2 class="font-medium font-poppins text-center text-gray-800">
+              Assesments
+            </h2>
           </header>
           <div class="p-3">
             <div class="max-w-[90vw] overflow-x-scroll">
               <table class="table-auto w-full font-poppins font-medium overflow-x-auto">
-                <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                <thead class="text-xs font-medium uppercase bg-gray-50">
                   <tr>
                     <th class="p-2 whitespace-nowrap">
                       <div class="font-semibold text-left">SL No:</div>
@@ -249,7 +250,7 @@ const AssesmentList = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody class="text-sm divide-y divide-gray-100">
+                <tbody class="text-sm divide-y font-normal divide-gray-100">
                   {currentAssessments.map((assesment, i) => (
                     <tr key={i}>
                       <td class="p-2 whitespace-nowrap">
@@ -333,7 +334,7 @@ const AssesmentList = () => {
       <div
         id="staticModal"
         data-modal-backdrop="static"
-        tabindex="-1"
+        tabIndex="-1"
         aria-hidden="true"
         class="fixed top-0 left-0 right-0 z-[4000000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
       >
@@ -357,7 +358,7 @@ const AssesmentList = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                     clipRule="evenodd"
                   ></path>
