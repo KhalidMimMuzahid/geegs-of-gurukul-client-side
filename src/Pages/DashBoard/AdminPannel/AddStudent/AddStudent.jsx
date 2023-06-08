@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 import moment from "moment";
+import UserCSVUpload from "./UserCSVUpload/UserCSVUpload";
 
 const AddStudent = () => {
   const [programs, setPrograms] = useState([]);
   const [courses, setCourses] = useState([]);
   const [batch, setBatch] = useState({});
   const [addAllowed, setAddAllowed] = useState(false);
+  const [CoursesObject, setCoursesObject] = useState();
 
   const { user } = useContext(AuthContext);
 
@@ -111,6 +113,7 @@ const AddStudent = () => {
         const courseObject = courses?.find(
           (course) => course?._id === selectedCourse
         );
+        setCoursesObject(courseObject);
         const coursePurchaseDetails = {
           program: {
             program_id: selectedProgram,
@@ -288,6 +291,14 @@ const AddStudent = () => {
             {/* Submit and search button */}
           </div>
         </form>
+      </div>
+      <div className="flex gap-3 mx-auto">
+        <UserCSVUpload
+          batch={batch}
+          courses={courses}
+          programs={programs}
+          CoursesObject={CoursesObject}
+        />
       </div>
     </div>
   );

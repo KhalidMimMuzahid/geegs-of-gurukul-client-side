@@ -9,6 +9,9 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import ReactPaginate from "react-paginate";
 
+const inputStyle =
+  "border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg w-full mt-1";
+
 const LecturesList = () => {
   const $targetEl = document.getElementById("staticModal");
   const { user } = useContext(AuthContext);
@@ -203,31 +206,33 @@ const LecturesList = () => {
     setItemOffset(newOffset);
   };
   return (
-    <div className="mt-5">
+    <div className="mt-5 font-poppins">
       {/* filtering form */}
       <div className="container mt-5">
         <form onSubmit={handleSubmit(onSearch)}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className={style?.lectureName}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div>
               <p>Lecture Name</p>
               <input
                 type="text"
                 {...register("lectureName")}
-                className="w-full border-2 border-green-400 rounded-xl"
+                className={inputStyle}
+                placeholder="Enter lecture name"
               />
             </div>
             {/* Lecture Name */}
 
             {/* Program Name */}
-            <div className={style?.addLecture}>
+            <div>
               <label htmlFor="programName">Program Name</label>
               <select
                 name="programName"
                 {...register("programName")}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
+                className={inputStyle}
+                defaultValue=""
               >
-                <option disabled selected value="">
+                <option disabled value="">
                   Choose a Program
                 </option>
                 {data?.length > 0 &&
@@ -247,15 +252,16 @@ const LecturesList = () => {
               )}
             </div>
             {/* Course Name */}
-            <div className={style?.addLecture}>
+            <div>
               <label htmlFor="courseName">Course Name</label>
               <select
                 name="courseName"
                 {...register("courseName")}
                 aria-invalid={errors.courseName ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
+                className={inputStyle}
+                defaultValue=""
               >
-                <option disabled selected value="">
+                <option disabled value="">
                   Choose a Course
                 </option>
                 {courses?.length > 0 &&
@@ -277,15 +283,16 @@ const LecturesList = () => {
             {/* Course Name */}
             {/* batch Name */}
 
-            <div className={style?.addLecture}>
+            <div>
               <label htmlFor="batchName">Batch Name</label>
               <select
                 name="batchName"
                 {...register("batchName")}
                 aria-invalid={errors.batchName ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
+                className={inputStyle}
+                defaultValue=""
               >
-                <option disabled selected value="">
+                <option disabled value="">
                   Choose a Batch
                 </option>
                 {batches?.length > 0 &&
@@ -307,15 +314,16 @@ const LecturesList = () => {
 
             {/* batch Name */}
             {/* module name */}
-            <div className={style?.addLecture}>
+            <div>
               <label htmlFor="moduleName">Module Name</label>
               <select
                 name="moduleName"
                 {...register("moduleName")}
                 aria-invalid={errors.moduleName ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
+                className={inputStyle}
+                defaultValue=""
               >
-                <option disabled selected value="">
+                <option disabled value="">
                   Choose a Module
                 </option>
                 {modules?.length > 0 &&
@@ -335,29 +343,22 @@ const LecturesList = () => {
               )}
             </div>
           </div>
-          <div className="flex gap-4 my-5">
+          <div className="flex gap-4 my-10 items-center justify-center text-sm">
             <div className="">
               <button
                 type="submit"
                 disabled={loading}
-                className="px-10 py-3
-                          text-white hover:text-green-500 
-                          bg-green-500 hover:bg-white 
-                          border-green-500 rounded-lg border-4    
-                          transition-all duration-300"
+                className="px-10 py-3 text-white border border-[#4BA25D] bg-[#4BA25D] hover:bg-[#5fb370] rounded-lg transition-all duration-200"
               >
                 {loading ? "Searching" : "Search"}
               </button>
             </div>
             <div className="">
               <button
+                type="button"
                 onClick={handelToMyCreation}
                 disabled={loading}
-                className="px-10 py-3
-                           text-green-500 hover:text-white 
-                           bg-white hover:bg-green-500 
-                           border-green-500 rounded-lg border-4    
-                           transition-all duration-300"
+                className="px-10 py-3 hover:text-white border border-[#747880] hover:bg-[#8A8F98] rounded-lg transition-all duration-200"
               >
                 {loading ? "Searching" : "My Creation"}
               </button>
@@ -499,9 +500,9 @@ const LecturesList = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
               </button>
