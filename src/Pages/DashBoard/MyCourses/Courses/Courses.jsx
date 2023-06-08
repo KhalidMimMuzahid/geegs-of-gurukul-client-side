@@ -2,43 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import courseimg from "../../../../assets/imga/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-gra-130247647.jpg";
 import style from "./course.module.css";
-<<<<<<< HEAD
-
-const Courses = () => {
-  return (
-    <div>
-      <div>
-        <div className={`${style.contain}`}>
-          {/* we hav to use each courses  */}
-          <div className={`${style.contain}`}>
-            {/* we hav to use each courses  */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5 pt-4 px-5">
-              <div className={`${style.singleCourse}`}>
-                <img src={courseimg} alt="" />
-                <h2>Css</h2>
-                <Link to={"/dashboard/courses/course"}>Start Learn</Link>
-              </div>
-              <div className={`${style.singleCourse}`}>
-                <img src={courseimg} alt="" />
-                <h2>Css</h2>
-                <Link to={"/dashboard/courses/course"}>Start Learn</Link>
-              </div>
-              <div className={`${style.singleCourse}`}>
-                <img src={courseimg} alt="" />
-                <h2>Css</h2>
-                <Link to={"/dashboard/courses/course"}>Start Learn</Link>
-              </div>
-              <div className={`${style.singleCourse}`}>
-                <img src={courseimg} alt="" />
-                <h2>Css</h2>
-                <Link to={"/dashboard/courses/course"}>Start Learn</Link>
-=======
 import { useEffect } from "react";
 import { useState } from "react";
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const dummyData = [
     {
       courseName: "Full Stack Development",
@@ -146,10 +114,8 @@ const Courses = () => {
   //     toast.error(err.message);
   //     setLoading(false);
   //   });
-
   // setLoading(false);
   // }, [dummyData]);
-
   if (loading) {
     return (
       <div className="h-screen w-full flex justify-center items-center bg-[#ffffff6b]">
@@ -173,7 +139,6 @@ const Courses = () => {
     );
   }
   // return <UnderConstruction/>
-
   return (
     <div className="w-full font-poppins pb-10">
       {/* we hav to use each courses  */}
@@ -198,15 +163,13 @@ const Courses = () => {
                 </p>
                 <Link
                   to={"/dashboard/courses/course"}
-                  className="text-sm py-2 px-4 rounded bg-[#4BA25D] text-white hover:bg-[#6fc581]"
+                  className="text-sm py-2 px-4 rounded bg-[#4BA25D] text-white hover:bg-[#6FC581]"
                 >
                   Start Learn
                 </Link>
->>>>>>> cc3d01634bde6865d6ab19d0dd97f8a1c830d48d
               </div>
             </div>
-          </div>
-        </div>
+          ))}
       </div>
     </div>
   );
