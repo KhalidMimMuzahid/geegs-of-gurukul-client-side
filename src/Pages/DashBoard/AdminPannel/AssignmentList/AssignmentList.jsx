@@ -34,7 +34,7 @@ const AssignmentList = () => {
       .then((result) => {
         if (result?.success) {
           const data = result?.data;
-          console.log("first", data);
+          // console.log("first", data);
           setAssignments(data);
           setLoading(false);
         } else {
@@ -59,9 +59,9 @@ const AssignmentList = () => {
 
   const handlePageClick = (event) => {
     const newOffset = (event?.selected * itemsPerPage) % assignments?.length;
-    console.log(
-      `User requested page number ${event?.selected}, which is offset ${newOffset}`
-    );
+    // console.log(
+    //   `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    // );
     setItemOffset(newOffset);
   };
 

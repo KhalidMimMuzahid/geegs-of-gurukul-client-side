@@ -136,7 +136,7 @@ const LecturesList = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log("data", data?.data);
+          // console.log("data", data?.data);
           setModules(data?.data);
         });
     }
@@ -176,7 +176,7 @@ const LecturesList = () => {
       .then((result) => {
         if (result?.success) {
           const data = result?.data;
-          console.log("firstX", data);
+          // console.log("firstX", data);
           setLectures(data);
           setLoading(false);
         } else {
@@ -200,9 +200,9 @@ const LecturesList = () => {
   const pageCount = Math?.ceil(lectures?.length / itemsPerPage);
   const handlePageClick = (event) => {
     const newOffset = (event?.selected * itemsPerPage) % lectures?.length;
-    console.log(
-      `User requested page number ${event?.selected}, which is offset ${newOffset}`
-    );
+    // console.log(
+    //   `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    // );
     setItemOffset(newOffset);
   };
   return (
