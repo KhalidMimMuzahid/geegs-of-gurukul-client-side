@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import style from "./ExerciseResponse.module.css";
 import ExerciseResponseTable from "./ExerciseResponseTable/ExerciseResponseTable";
 import { toast } from "react-hot-toast";
-import Papa from 'papaparse';
+import Papa from "papaparse";
 
 const ExerciseResponse = () => {
   const [data, setData] = useState([]);
@@ -24,7 +24,8 @@ const ExerciseResponse = () => {
   const [loading, setLoading] = useState(false);
   const [exerciseResponses, setExerciseResponses] = useState([]);
   const [rerender, setRerender] = useState(false);
-
+  const [refreshExcerciseResponse, setRefreshExcerciseResponse] =
+    useState(false);
   const {
     register,
     handleSubmit,
@@ -103,10 +104,10 @@ const ExerciseResponse = () => {
         });
       }
       if (name === "exerciseName") {
-        console.log("value", value);
+        // console.log("value", value);
         exercises?.forEach((each) => {
           if (each?._id === value?.exerciseName) {
-            console.log("exerciseName", value?.exerciseName);
+            // console.log("exerciseName", value?.exerciseName);
             setExercise(each);
             return;
           }
@@ -216,7 +217,18 @@ const ExerciseResponse = () => {
   }, [assignment?.assignment_id]);
 
   // console.log("exercise")
-
+  useEffect(() => {
+    const searchData = {
+      program_id: program?.program_id,
+      course_id: course?.course_id,
+      batch_id: batch?.batch_id,
+      module_id: module?.module_id,
+      lecture_id: lecture?.lecture_id,
+      assignment_id: assignment?.assignment_id,
+      exercise_id: exercise?._id,
+    };
+    fetchExerciseResponse(searchData);
+  }, [refreshExcerciseResponse]);
   const onSearch = (data) => {
     const searchData = {
       program_id: program?.program_id,
@@ -228,7 +240,7 @@ const ExerciseResponse = () => {
       exercise_id: exercise?._id,
     };
     fetchExerciseResponse(searchData);
-    console.log("searchData", searchData);
+    // console.log("searchData", searchData);
   };
   // console.log("assignment", assignment);
   // exe
@@ -244,7 +256,7 @@ const ExerciseResponse = () => {
         if (result?.success) {
           const data = result?.data;
           setExerciseResponses(data);
-          console.log("firstX", data);
+          // console.log("firstX", data);
           setLoading(false);
         } else {
           toast.error(result?.message);
@@ -257,12 +269,12 @@ const ExerciseResponse = () => {
       });
   };
 
-// function for download as CSV
-  
+  // function for download as CSV
+
   const dwonloadAsCsv = () => {
     if (!!!exerciseResponses?.length) {
-      toast.error("No data is available in this table!") 
-      return
+      toast.error("No data is available in this table!");
+      return;
     }
     const fields = [
       "response_id",
@@ -273,30 +285,31 @@ const ExerciseResponse = () => {
     ];
     const data = exerciseResponses?.map((eachResponse) => {
       const targetRes = [
-         eachResponse?._id,
-         eachResponse?.exercise?.exerciseName,
-         eachResponse?.submittedLink,
-         eachResponse?.submissionDetails?.studentEmail,
-         eachResponse?.mark ? eachResponse?.mark : ""
+        eachResponse?._id,
+        eachResponse?.exercise?.exerciseName,
+        eachResponse?.submittedLink,
+        eachResponse?.submissionDetails?.studentEmail,
+        eachResponse?.mark ? eachResponse?.mark : "",
       ];
       return targetRes;
     });
     const tableData = {
-      fields, data
-    }
-    console.log("table data", tableData);
+      fields,
+      data,
+    };
+    // console.log("table data", tableData);
     const tabledataString = JSON.stringify(tableData);
-    console.log(tabledataString)
+    console.log(tabledataString);
     const csv = Papa.unparse(tabledataString);
-    console.log("csv", csv);
-    const element = document.createElement("a")
-    element.setAttribute("href", `data:text/csv;charset=utf-8,${csv}`)
-    element.setAttribute("download", "exercise-response.csv")
+    // console.log("csv", csv);
+    const element = document.createElement("a");
+    element.setAttribute("href", `data:text/csv;charset=utf-8,${csv}`);
+    element.setAttribute("download", "exercise-response.csv");
     element.style.display = "none";
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
-  }
+  };
 
   return (
     <div>
@@ -534,7 +547,11 @@ const ExerciseResponse = () => {
       </div>
       {/* Search */}
 
-      <ExerciseResponseTable dwonloadAsCsv={dwonloadAsCsv} exerciseResponses={exerciseResponses} />
+      <ExerciseResponseTable
+        setRefreshExcerciseResponse={setRefreshExcerciseResponse}
+        dwonloadAsCsv={dwonloadAsCsv}
+        exerciseResponses={exerciseResponses}
+      />
 
       {/* Table */}
 
