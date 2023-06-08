@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { useContext } from "react";
+import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 
-const TestPageHeader = ({ setResponses }) => {
+const AnalysisPageHeader = ({ setResponses }) => {
+  const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -15,23 +18,28 @@ const TestPageHeader = ({ setResponses }) => {
 
   const onSearch = (data) => {
     setLoading(true);
-    fetch("http://localhost:5000/api/v1/assessments/search-assessment", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        data: JSON.stringify(data),
-      },
-    })
+    fetch(
+      `http://localhost:5000/api/v1/assessments/assessment-responses-search?email=${user?.email}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          data: JSON.stringify(data),
+        },
+      }
+    )
       .then((response) => response.json())
       .then((result) => {
+        console.log(result);
         if (result?.success) {
-          setResponses(result?.data);
+          const data = result?.data;
+          setResponses(data);
           setLoading(false);
         } else {
           toast.error(result?.message);
           setLoading(false);
         }
-        console.log("Server response:", result);
+        // console.log("Server response:", result);
         // Handle the server response
       })
       .catch((error) => {
@@ -39,11 +47,12 @@ const TestPageHeader = ({ setResponses }) => {
           "Error occurred while sending data to the server:",
           error
         );
+        setLoading(false);
         // Handle the error
       });
   };
   return (
-    <div className="w-[88%] mx-auto my-3">
+    <div className="w-4/5 mx-auto my-3">
       <form onSubmit={handleSubmit(onSearch)}>
         <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-3 ">
           <div className="relative">
@@ -81,4 +90,4 @@ const TestPageHeader = ({ setResponses }) => {
   );
 };
 
-export default TestPageHeader;
+export default AnalysisPageHeader;

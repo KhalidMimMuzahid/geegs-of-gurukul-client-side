@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 import moment from "moment";
+import UserCSVUpload from "./UserCSVUpload/UserCSVUpload";
 
 const AddStudent = () => {
   const [programs, setPrograms] = useState([]);
@@ -288,6 +289,9 @@ const AddStudent = () => {
             {/* Submit and search button */}
           </div>
         </form>
+      </div>
+      <div className="flex gap-3 mx-auto">
+        <UserCSVUpload />
       </div>
     </div>
   );
