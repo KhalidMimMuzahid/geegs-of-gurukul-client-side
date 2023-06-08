@@ -104,34 +104,34 @@ const InstructionsModal = ({ setShowInstructions, selectedId }) => {
             </div>
             <div className="mb-4 text-left flex gap-3 text-lg">
               <h1>11.</h1>
-              <div className="flex gap-4">
+              <div className="w-full flex flex-col gap-4">
                 <strong>Color scheme: </strong>
-                <div className="grid grid-cols-2 gap-3 justify-start">
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div className="flex gap-2 items-center">
                     <button className="px-3 py-2 shadow-lg rounded-full bg-[#A5A7A5] text-white">
                       01
                     </button>
                     <h3>Not Attempted and unseen</h3>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 items-center">
                     <button className="px-3 py-2 shadow-lg rounded-full bg-[#27DC69] text-white border-2 border-red-400">
                       02
                     </button>
                     <h3>Marked and Attempted</h3>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 items-center">
                     <button className="px-3 py-2 shadow-lg rounded-full border-2 border-green-400">
                       03
                     </button>
                     <h3>Not Attempted and seen</h3>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 items-center">
                     <button className="px-3 py-2 shadow-lg rounded-full border-2 border-red-400">
                       04
                     </button>
                     <h3>Marked and Not Attempted</h3>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 items-center">
                     <button className="px-3 py-2 shadow-lg rounded-full bg-[#27DC69] text-white">
                       05
                     </button>

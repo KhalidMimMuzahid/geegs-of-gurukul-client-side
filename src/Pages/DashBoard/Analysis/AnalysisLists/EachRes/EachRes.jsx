@@ -21,17 +21,17 @@ const EachRes = ({ response }) => {
     return null;
   }
   return (
-    <div class="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <div class="p-5">
+    <div className="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className="p-5">
         <a href="#">
-          <h5 class="mb-2 text-lg font-medium tracking-tight text-gray-900 dark:text-white">
+          <h5 className="mb-2 text-lg font-medium tracking-tight text-gray-900 dark:text-white">
             {assessment?.assessmentName} ({assessment?.categoryName})
           </h5>
         </a>
-        <p class="flex gap-2 items-center mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
+        <p className="flex gap-2 items-center mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
           you got {response?.totalMark} out of {total}
         </p>
-        <p class="flex gap-2 items-center mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
+        <p className="flex gap-2 items-center mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
           {/* <img src={time} alt="" />  */}
           {assessment?.duration}
           Mins
@@ -39,12 +39,12 @@ const EachRes = ({ response }) => {
 
         <Link
           to={`/dashboard/analysis/specific/${response?._id}`}
-          class="inline-flex items-center font-poppins px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-[#4BA25D] hover:bg-[#5fb370]"
+          className="inline-flex items-center font-poppins px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-[#4BA25D] hover:bg-[#5fb370]"
         >
           Show Report
           <svg
             aria-hidden="true"
-            class="w-4 h-4 ml-2 -mr-1"
+            className="w-4 h-4 ml-2 -mr-1"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"

@@ -37,11 +37,12 @@ const Default = () => {
     <>
       <TestPageHeader setAssessments={setAssessments} />
       <div className="w-11/12 mx-auto grid md:grid-cols-1 lg:grid-cols-2 gap-5 pt-4 px-5 mb-10 font-poppins">
-        {assessments?.map((assessment) => (
+        {assessments?.map((assessment, index) => (
           <EachAssessment
             key={assessment?._id}
             handleClick={handleClick}
             assessment={assessment}
+            index={index + 1}
           />
         ))}
         {showInstructions && (
