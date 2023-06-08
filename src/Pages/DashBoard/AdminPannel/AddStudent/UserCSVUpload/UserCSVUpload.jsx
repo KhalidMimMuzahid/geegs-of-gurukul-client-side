@@ -4,7 +4,10 @@ import Papa from "papaparse";
 import { AuthContext } from "../../../../../contexts/UserProvider/UserProvider";
 import moment from "moment";
 
-const UserCSVUpload = () => {
+const UserCSVUpload = ({ programs, courses, batch, CoursesObject }) => {
+  console.log("programs", programs);
+  console.log("courses", courses);
+  console.log("batch", batch);
   const { user } = useContext(AuthContext);
   const [inputIsVisible, setInputIsVisible] = useState(false);
   const {
@@ -16,51 +19,92 @@ const UserCSVUpload = () => {
     reset,
   } = useForm();
 
+  function StudentData(
+    program,
+    course,
+    batch,
+    isPaid,
+    discount,
+    regularPrice,
+    appliedPrice,
+    couponCode,
+    paymentId,
+    purchaseInfo,
+    addedBy
+  ) {
+    this.program = {
+      program_id: program?.program_id,
+      programName: program?.programName,
+    };
+    this.course = {
+      course_id: course?.course_id,
+      courseName: course?.courseName,
+    };
+    this.batch = {
+      batch_id: batch?.batch_id,
+      batchName: batch?.batchName,
+    };
+    this.isPaid = isPaid;
+    this.regularPrice = regularPrice;
+    this.discount = discount;
+    this.appliedPrice = appliedPrice;
+    this.couponCode = couponCode;
+    this.paymentId = paymentId;
+    this.purchaseInfo = {
+      purchaseByEmail: purchaseInfo?.purchaseByEmail,
+      purchaseByName: "data[0]?.name",
+      enrolledAt: purchaseInfo?.justNow,
+      paidAt: purchaseInfo?.justNow,
+    };
+    this.addedBy = {
+      adderName: addedBy?.name,
+      adderEmail: addedBy?.email,
+      addedAt: addedBy?.justNow,
+    };
+  }
+
   const onUpload = (data) => {
     Papa.parse(data?.fileInput[0], {
       header: true,
       skipEmptyLines: true,
       complete: function (result) {
         const students = result?.data;
-
-        students?.map((student) => {
-          const justNow = moment().format();
-          const userData = {
-            program: {
-              program_id: "",
-              programName: "",
-            },
-            course: {
-              course_id: "",
-              courseName: "",
-            },
-            batch: {
-              batch_id: "",
-              batchName: "",
-            },
-            isPaid: true,
-            regularPrice: "",
-            discount: 100,
-            appliedPrice: 0,
-            couponCode: "",
-            paymentId: "",
-            purchaseInfo: {
-              purchaseByEmail: "",
-              purchaseByName: "data[0]?.name",
-              enrolledAt: justNow,
-              paidAt: justNow,
-            },
-            addedBy: {
-              adderName: user?.name,
-              adderEmail: user?.email,
-              addedAt: justNow,
-            },
-          };
-        });
         console.log(students);
+
+        const justNow = moment().format();
+        students?.map((student) => {
+          const addedBy = {
+            adderName: user?.name,
+            adderEmail: user?.email,
+            addedAt: justNow,
+          };
+          const purchaseInfo = {
+            purchaseByEmail: student?.email,
+            purchaseByName: "data[0]?.name",
+            enrolledAt: justNow,
+            paidAt: justNow,
+          };
+
+          const studentData = new StudentData(
+            programs,
+            courses,
+            batch,
+            true,
+            100,
+            "regularPrice",
+            0,
+            "couponCode",
+            "paymentId",
+            purchaseInfo,
+            addedBy
+          );
+
+          console.log(studentData);
+        });
       },
     });
   };
+
   return (
     <div>
       {inputIsVisible ? (

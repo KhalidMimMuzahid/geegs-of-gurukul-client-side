@@ -10,6 +10,7 @@ const AddStudent = () => {
   const [courses, setCourses] = useState([]);
   const [batch, setBatch] = useState({});
   const [addAllowed, setAddAllowed] = useState(false);
+  const [CoursesObject, setCoursesObject] = useState();
 
   const { user } = useContext(AuthContext);
 
@@ -112,6 +113,7 @@ const AddStudent = () => {
         const courseObject = courses?.find(
           (course) => course?._id === selectedCourse
         );
+        setCoursesObject(courseObject);
         const coursePurchaseDetails = {
           program: {
             program_id: selectedProgram,
@@ -291,7 +293,12 @@ const AddStudent = () => {
         </form>
       </div>
       <div className="flex gap-3 mx-auto">
-        <UserCSVUpload />
+        <UserCSVUpload
+          batch={batch}
+          courses={courses}
+          programs={programs}
+          CoursesObject={CoursesObject}
+        />
       </div>
     </div>
   );
