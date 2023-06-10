@@ -7,7 +7,6 @@ import { useState } from "react";
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const dummyData = [
     {
       courseName: "Full Stack Development",
@@ -115,10 +114,8 @@ const Courses = () => {
   //     toast.error(err.message);
   //     setLoading(false);
   //   });
-
   // setLoading(false);
   // }, [dummyData]);
-
   if (loading) {
     return (
       <div className="h-screen w-full flex justify-center items-center bg-[#ffffff6b]">
@@ -142,7 +139,6 @@ const Courses = () => {
     );
   }
   // return <UnderConstruction/>
-
   return (
     <div className="w-full font-poppins pb-10">
       {/* we hav to use each courses  */}
@@ -167,7 +163,7 @@ const Courses = () => {
                 </p>
                 <Link
                   to={"/dashboard/courses/course"}
-                  className="text-sm py-2 px-4 rounded bg-[#4BA25D] text-white hover:bg-[#6fc581]"
+                  className="text-sm py-2 px-4 rounded bg-[#4BA25D] text-white hover:bg-[#6FC581]"
                 >
                   Start Learn
                 </Link>
