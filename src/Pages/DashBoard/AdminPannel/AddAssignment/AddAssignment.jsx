@@ -7,6 +7,7 @@ import { AuthContext } from "./../../../../contexts/UserProvider/UserProvider";
 import moment from "moment/moment";
 import { uploadFile } from "react-s3";
 import ExercisesModal from "./ExercisesModal";
+import { BsXCircleFill } from "react-icons/bs";
 
 const inputStyle =
   "border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg w-full mt-1";
@@ -101,23 +102,15 @@ function AddAssignment() {
         setLoading(false);
       });
   };
-  // if (isLoading && exercises?.length === 0) {
-  //   return (
-  //     <div style={{ marginTop: "800px" }} className='text-center '>
-  //       <div className='spinner-grow text-center ' role='status'>
-  //         <span className='visually-hidden'>Loading...</span>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+
   return (
-    <div className=" px-8 py-8 rounded-xl font-poppins">
+    <div className="px-8 py-8 font-poppins">
       <form onSubmit={handleSubmit(onSubmit)} className=" ">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
           <div className="mb-4">
             <label
               htmlFor="assignmentName"
-              className="block text-gray-700 font-bold mb-2 "
+              className="block text-gray-700 mb-1"
             >
               Assignment Name
             </label>
@@ -125,9 +118,10 @@ function AddAssignment() {
               type="text"
               id="assignmentName"
               {...register("assignmentName", {
-                required: "Assignment name in is required",
+                required: "Assignment name is required",
               })}
               className={inputStyle}
+              placeholder="Enter assignment name"
             />
             {errors.assignmentName && (
               <p role="alert" className="text-red-500 font-poppins font-medium">
@@ -136,10 +130,7 @@ function AddAssignment() {
             )}
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="topic"
-              className="block text-gray-700 font-bold mb-2"
-            >
+            <label htmlFor="topic" className="block text-gray-700 mb-1">
               Topic
             </label>
             <input
@@ -149,6 +140,7 @@ function AddAssignment() {
                 required: "Topic is required",
               })}
               className={inputStyle}
+              placeholder="Enter topic name"
             />
             {errors.topic && (
               <p role="alert" className="text-red-500 font-poppins font-medium">
@@ -159,10 +151,7 @@ function AddAssignment() {
         </div>
 
         <div className="mb-4">
-          <label
-            htmlFor="textArea"
-            className="block text-gray-700 font-bold mb-2"
-          >
+          <label htmlFor="textArea" className="block text-gray-700 mb-1">
             <div className="flex items-center justify-between">
               <p>Notes:</p>
               <p
@@ -179,13 +168,16 @@ function AddAssignment() {
             className={`${inputStyle} h-32 mb-4`}
             value={text}
             onChange={(e) => setText(e.target.value)}
+            placeholder="Your notes...."
           ></textarea>
-          <label
-            onClick={() => setPreview(true)}
-            className="font-poppins font-medium text-white px-4 py-2 bg-[#4BA25D] hover:bg-[#5fb370] rounded-md"
-          >
-            Preview
-          </label>
+          <div className="flex justify-center">
+            <button
+              onClick={() => setPreview(true)}
+              className="mt-4 mb-3 font-poppins font-medium px-10 py-2 hover:text-white border border-[#747880] hover:bg-[#8A8F98] rounded-lg duration-150"
+            >
+              Preview
+            </button>
+          </div>
           {/* For Preview only */}
           {preview && (
             <>
@@ -193,12 +185,12 @@ function AddAssignment() {
                 <div className="relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
                   <button
                     onClick={() => setPreview(false)}
-                    className="absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full"
+                    className="absolute right-5 top-5 mx-1 my-1"
                   >
-                    :x:
+                    <BsXCircleFill size={20} className="text-rose-500" />
                   </button>
-                  <h3 className="text-2xl font-poppins font-medium mt-1">
-                    Preview:
+                  <h3 className="text-lg font-poppins font-medium mt-1">
+                    Preview
                   </h3>
                   <div className=" mt-6 w-full h-4/5 p-4 mx-auto bg-white border border-green-400 rounded-md overflow-x-auto overflow-y-auto">
                     <ReactMarkdown
@@ -246,40 +238,28 @@ function AddAssignment() {
               Upload file
             </label>
             <input
-              className="block w-full text-sm text-[#4BA25D] border border-gray-300 rounded-lg cursor-pointer bg-green-50 focus:outline-none"
+              className="block w-full text-sm border border-gray-300 rounded-lg cursor-pointer bg-green-50 focus:outline-none"
               id="file_input"
               {...register("fileInput")}
               type="file"
             />
           </div>
         </div>
-        {/* <div className="mb-4">
-          <label htmlFor="type" className="block text-gray-700 font-bold mb-2">
-            Type
-          </label>
-          <select
-            id="type"
-            {...register("type")}
-            className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          >
-            <option value="project">project</option>
-            <option value="evaluation">evaluation</option>
-            <option value="assignments">Assignments</option>
-          </select>
-        </div> */}
-        <div className="mb-4 flex justify-between items-center">
+        <div className="my-4 flex flex-wrap justify-center items-center gap-6">
           <button
             type="button"
             onClick={() => setExercisesModal(true)}
-            className="font-poppins font-medium text-white px-4 py-2 bg-[#4BA25D] hover:bg-[#5fb370] rounded-md"
+            className="px-6 py-2 bg-[#4BA25D] hover:bg-[#5fb370] text-white rounded-lg"
           >
             + Add Exercises
           </button>
-          <p>Selected exercises: {exercises.length}</p>
+          <p className="text-[#4BA25D]">
+            Exercises selected: {exercises?.length}
+          </p>
         </div>
         <button
           type="submit"
-          className="w-full bg-[#4BA25D] hover:bg-[#5fb370] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
+          className="w-full bg-[#4BA25D] hover:bg-[#5fb370] text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
         >
           {loading ? "LSubmitting" : "Submit"}
         </button>

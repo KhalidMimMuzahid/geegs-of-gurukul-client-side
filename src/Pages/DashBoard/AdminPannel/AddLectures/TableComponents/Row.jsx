@@ -28,25 +28,21 @@ function Row({
 
   return (
     <tr>
-      <td className='px-6 py-3 whitespace-nowrap'>
-        <div className='text-sm font-medium text-gray-900'>
-          {assignment._id}
-        </div>
+      <td className="px-6 py-3 whitespace-nowrap">
+        <div className="text-sm text-gray-900">{assignment._id}</div>
       </td>
-      <td className='px-6 py-3 whitespace-nowrap'>
-        <div className='text-sm font-medium text-gray-900'>
-          {assignment.assignmentName}
-        </div>
+      <td className="px-6 py-3 whitespace-nowrap">
+        <div className="text-sm text-gray-900">{assignment.assignmentName}</div>
       </td>
-      <td className='px-6 py-3 whitespace-nowrap'>
-        <div className='text-sm text-gray-900'>{assignment.topic}</div>
+      <td className="px-6 py-3 whitespace-nowrap">
+        <div className="text-sm text-gray-900">{assignment.topic}</div>
       </td>
-      <td className='px-6 py-3 whitespace-nowrap text-sm text-gray-500 flex align-center justify-center'>
+      <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-500 flex align-center justify-center">
         {selectedAssignment?.some(
           (selectedAssignments) =>
             selectedAssignments?.assignment_id === assignment?._id
         ) ? (
-          <button type='button'>
+          <button type="button">
             <BsFillPlusCircleFill
               color={"red"}
               className={`rotate-45 duration-200`}
@@ -55,7 +51,7 @@ function Row({
             />{" "}
           </button>
         ) : (
-          <button type='button'>
+          <button type="button">
             <BsFillPlusCircleFill
               color={"#22c55e"}
               size={20}

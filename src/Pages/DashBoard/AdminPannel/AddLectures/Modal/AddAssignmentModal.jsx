@@ -5,6 +5,9 @@ import Lecturetable from "../TableComponents/Lecturetable";
 import { toast } from "react-hot-toast";
 import ReactPaginate from "react-paginate";
 
+const inputStyle =
+  "border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg w-full mt-1 text-sm";
+
 function AddAssignmentModal({
   setSearch,
   assignments,
@@ -68,49 +71,50 @@ function AddAssignmentModal({
 
   return (
     <>
-      <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none'>
-        <div className='relative w-full h-[600px] sm:w-[500px] md:w-[750px] lg:w-[900px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-4 bg-white rounded-lg shadow-2xl'>
-          <div className='px-2 pt-2 flex w-full justify-between'>
-            <h4 className='font-semibold'>Add assignments</h4>
+      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[20010] outline-none focus:outline-none">
+        <div className="relative w-full h-[650px] sm:w-[500px] md:w-[750px] lg:w-[900px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-4 bg-white rounded-lg shadow-2xl">
+          <div className="px-2 pt-2 flex w-full justify-between">
+            <h4 className="font-semibold">Add assignments</h4>
             <button onClick={() => setSearch(false)}>
-              <BsXCircleFill size={25} color='red' />
+              <BsXCircleFill size={25} color="red" />
             </button>
           </div>
           {/* Contents */}
-          <div className='w-full mx-auto my-6'>
-            <form
-              className='grid grid-cols-1 md:grid-cols-2 gap-2'
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <div className='relative'>
-                <input
-                  type='search'
-                  className='p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
-                  placeholder='Search by name'
-                  name='assignmentName'
-                  {...register("assignmentName")}
-                />
+          <div className="w-full mx-auto my-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="text-sm">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                <div className="relative">
+                  <input
+                    type="search"
+                    className={inputStyle}
+                    placeholder="Search by name"
+                    name="assignmentName"
+                    {...register("assignmentName")}
+                  />
+                </div>
+                <div className="relative">
+                  <input
+                    type="search"
+                    className={inputStyle}
+                    placeholder="Search by topic"
+                    name="topic"
+                    {...register("topic")}
+                  />
+                </div>
               </div>
-              <div className='relative'>
-                <input
-                  type='search'
-                  className='p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500'
-                  placeholder='Search by topic'
-                  name='topic'
-                  {...register("topic")}
-                />
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-[#4BA25D] hover:bg-[#5fb370] rounded-lg text-white py-2 px-10 my-5"
+                >
+                  Search
+                </button>
               </div>
-              <button
-                type='submit'
-                disabled={loading}
-                className='bg-green-400 rounded-lg text-white hover:bg-green-500 py-1'
-              >
-                Search
-              </button>
             </form>
           </div>
           {/* Contents */}
-          <p className='text-sm'>Selected: {selectedAssignment?.length}</p>
+          <p className="text-sm">Selected: {selectedAssignment?.length}</p>
           {/* Table */}
           <Lecturetable
             currentItems={currentItems}
@@ -122,22 +126,22 @@ function AddAssignmentModal({
           {/* pagination */}
 
           <div>
-            <div className='pagination'>
+            <div className="pagination">
               <ReactPaginate
-                breakLabel='...'
-                nextLabel='>'
+                breakLabel="..."
+                nextLabel=">"
                 onPageChange={handlePageClick}
                 pageRangeDisplayed={5}
                 pageCount={pageCount}
-                previousLabel='<'
+                previousLabel="<"
                 renderOnZeroPageCount={null}
-                containerClassName='pagination-menu'
+                containerClassName="pagination-menu"
               />
             </div>
           </div>
         </div>
       </div>
-      <div className='opacity-25 fixed inset-0  z-[20000] bg-black'></div>
+      <div className="opacity-25 fixed inset-0  z-[20000] bg-black"></div>
     </>
   );
 }
