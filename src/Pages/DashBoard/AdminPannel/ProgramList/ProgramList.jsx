@@ -118,11 +118,11 @@ const ProgramList = () => {
       <div className="flex flex-col justify-center h-full mx-auto font-poppins ">
         <div className="w-full mx-auto bg-white rounded-lg border border-gray-300">
           <header className="px-5 py-4 border-b border-gray-100">
-            <h2 className="font-medium text-centertext-gray-800">Programs</h2>
+            <h2 className="font-medium text-center text-gray-800">Programs</h2>
           </header>
           <div className="p-3">
             <div className="max-w-[90vw] overflow-x-auto">
-              <table className="table-auto w-full font-poppins font-medium overflow-x-auto">
+              <table className="table-auto w-full overflow-x-auto">
                 <thead className="text-xs font-semibold uppercase bg-gray-50">
                   <tr>
                     <th className="p-2 whitespace-nowrap">

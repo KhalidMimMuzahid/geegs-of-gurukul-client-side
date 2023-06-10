@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import style from "./batchList.module.css";
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
@@ -7,6 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import ReactPaginate from "react-paginate";
+
+const inputStyle =
+  "border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg w-full mt-1";
 
 const BatchList = () => {
   const [shouldDelete, setShouldDelete] = useState(false);
@@ -168,22 +170,28 @@ const BatchList = () => {
       {/* Search */}
       <div className="container mt-5 relative">
         <form onSubmit={handleSubmit(onSearch)}>
-          <div className="font-poppins font-medium p-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className={style?.batchList}>
+          <div className="font-poppins p-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div>
                 <p>Batch Name</p>
-                <input type="text" {...register("batchName")} />
+                <input
+                  type="text"
+                  {...register("batchName")}
+                  className={inputStyle}
+                  placeholder="Enter batch name"
+                />
               </div>
 
-              <div className={style?.addLecture}>
+              <div>
                 <label htmlFor="programName">Program Name</label>
                 <select
                   name="programName"
                   {...register("programName")}
                   aria-invalid={errors.programName ? "true" : "false"}
-                  className="w-full border-2 border-green-400 rounded-xl"
+                  className={inputStyle}
+                  defaultValue=""
                 >
-                  <option disabled selected value="">
+                  <option disabled value="">
                     Choose a Program
                   </option>
                   {data?.length > 0 &&
@@ -203,15 +211,16 @@ const BatchList = () => {
                 )}
               </div>
               {/* Course Name */}
-              <div className={style?.addLecture}>
+              <div>
                 <label htmlFor="courseName">Course Name</label>
                 <select
                   name="courseName"
                   {...register("courseName")}
                   aria-invalid={errors.courseName ? "true" : "false"}
-                  className="w-full border-2 border-green-400 rounded-xl"
+                  className={inputStyle}
+                  defaultValue=""
                 >
-                  <option disabled selected value="">
+                  <option disabled value="">
                     Choose a Course
                   </option>
                   {courses?.length > 0 &&
@@ -238,7 +247,7 @@ const BatchList = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-16 py-3 w-full mt-7 text-white rounded-lg bg-green-500"
+                  className="py-3 w-full my-10 text-white rounded-lg bg-[#4BA25D] hover:bg-[#5fb370]"
                 >
                   {loading ? "Searching" : "Search"}
                 </button>
@@ -249,55 +258,61 @@ const BatchList = () => {
       </div>
       {/* Search */}
       {/* Table */}
-      <div class="flex flex-col justify-center h-full mx-auto">
-        <div class="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
-          <header class="px-5 py-4 border-b border-gray-100">
-            <h2 class="font-semibold font-poppins text-gray-800">Batches</h2>
+      <div className="flex flex-col justify-center h-full mx-auto">
+        <div className="w-full mx-auto bg-white rounded-lg border border-gray-300">
+          <header className="px-5 py-4 border-b border-gray-100">
+            <h2 className="font-medium text-center font-poppins text-gray-800">
+              Batches
+            </h2>
           </header>
-          <div class="p-3">
-            <div class="max-w-[90vw] overflow-x-scroll">
-              <table class="table-auto w-full font-poppins font-medium overflow-x-auto">
-                <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+          <div className="p-3">
+            <div className="max-w-[90vw] overflow-x-auto">
+              <table className="table-auto w-full font-poppins overflow-x-auto">
+                <thead className="text-xs font-semibold uppercase bg-gray-50">
                   <tr>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">SL No:</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-left">SL No:</div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">Course ID</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-left">Course ID</div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">Batch ID </div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-left">Batch ID </div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-center">Duration</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-center">Duration</div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-center">Start Date</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-center">
+                        Start Date
+                      </div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-center">Action</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-center">Action</div>
                     </th>
                   </tr>
                 </thead>
-                <tbody class="text-sm divide-y divide-gray-100">
+                <tbody className="text-sm divide-y divide-gray-100">
                   {currentBatches?.length > 0 &&
                     currentBatches?.map((batch, i) => (
                       <tr key={i}>
-                        <td class="p-2 whitespace-nowrap">
-                          <div class="flex items-center">{i + 1}</div>
+                        <td className="p-2 whitespace-nowrap">
+                          <div className="flex items-center">{i + 1}</div>
                         </td>
-                        <td class="p-2 whitespace-nowrap">
+                        <td className="p-2 whitespace-nowrap">
                           {batch?.course?.courseName}
                         </td>
-                        <td class="p-2 whitespace-nowrap">
+                        <td className="p-2 whitespace-nowrap">
                           {batch?.batchName}
                         </td>
-                        <td class="p-2 whitespace-nowrap">{batch?.duration}</td>
-                        <td class="p-2 whitespace-nowrap">
+                        <td className="p-2 whitespace-nowrap">
+                          {batch?.duration}
+                        </td>
+                        <td className="p-2 whitespace-nowrap">
                           {batch?.startedAt?.slice(0, 10)}
                         </td>
-                        <td class="p-2 whitespace-nowrap flex gap-2">
-                          <div class="mx-auto flex w-[100px] gap-2">
+                        <td className="p-2 whitespace-nowrap flex gap-2">
+                          <div className="mx-auto flex w-[100px] gap-2">
                             <button
                               type="button"
                               className="px-1 py-1 "
@@ -324,7 +339,7 @@ const BatchList = () => {
                             <button
                               data-modal-target="staticModal"
                               data-modal-toggle="staticModal"
-                              class="px-1 py-1 "
+                              className="px-1 py-1 "
                               type="button"
                             >
                               {/* svg */}
@@ -336,14 +351,14 @@ const BatchList = () => {
                               />
                             </button>
                             {shouldDelete && (
-                              <div class="bg-slate-800 bg-opacity-50 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0">
-                                <div class="bg-white px-16 py-14 rounded-md text-center">
-                                  <h1 class="text-xl mb-4 font-bold text-slate-500">
+                              <div className="bg-slate-800 bg-opacity-50 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0">
+                                <div className="bg-white px-16 py-14 rounded-md text-center">
+                                  <h1 className="text-xl mb-4 font-bold text-slate-500">
                                     Do you Want Delete
                                   </h1>
                                   <button
                                     onClick={() => setShouldDelete(false)}
-                                    class="bg-red-500 px-4 py-2 rounded-md text-md text-white"
+                                    className="bg-red-500 px-4 py-2 rounded-md text-md text-white"
                                   >
                                     Cancel
                                   </button>
@@ -352,7 +367,7 @@ const BatchList = () => {
                                       handelDeleteBatch(batch?._id) &&
                                       setShouldDelete(false)
                                     }
-                                    class="bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold"
+                                    className="bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold"
                                   >
                                     Ok
                                   </button>

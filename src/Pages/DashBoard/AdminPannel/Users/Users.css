@@ -1,10 +1,6 @@
-/* pagination button */
-
 .pagination a {
   font-size: 13px;
   margin: 0 10px;
-  /* width: 21px;
-  height: 21px; */
   display: inline-block;
   padding: 8px;
 }
