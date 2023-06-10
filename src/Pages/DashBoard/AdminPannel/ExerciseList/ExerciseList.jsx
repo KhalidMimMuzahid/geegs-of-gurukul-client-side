@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import style from "./ExerciseList.module.css";
 import { useForm } from "react-hook-form";
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
 import { toast } from "react-hot-toast";
 import ReactPaginate from "react-paginate";
+
+const inputStyle =
+  "border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg w-full mt-1";
 
 const ExerciseList = () => {
   const [loading, setLoading] = useState(false);
@@ -81,40 +83,32 @@ const ExerciseList = () => {
     setItemOffset(newOffset);
   };
   return (
-    <div className="relative">
+    <div className="relative mb-10">
       {/* filtering form */}
       <div className="container mt-5">
         <form onSubmit={handleSubmit(onSearch)}>
-          <div className="font-poppins font-medium p-5">
+          <div className="font-poppins text-sm p-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className={style?.exerciseList}>
+              <div className="mb-2">
                 <label htmlFor="exerciseName">Exercise Name</label>
                 <input
                   type="text"
                   name="exerciseName"
-                  {...register(
-                    "exerciseName"
-                    // {
-                    // required: "Enter Exercise Name",
-                    // }
-                  )}
+                  {...register("exerciseName")}
                   aria-invalid={errors.exerciseName ? "true" : "false"}
+                  placeholder="Enter exercise name"
+                  className={inputStyle}
                 />
               </div>
-
-              {/* Batch Name */}
-              <div className={style?.exerciseList}>
+              <div className="mb-2">
                 <label htmlFor="topic">Topic</label>
                 <input
                   type="text"
                   name="topic"
-                  {...register(
-                    "topic"
-                    //   {
-                    // required: "Sub topic",
-                    //   }
-                  )}
+                  {...register("topic")}
                   aria-invalid={errors.subTopic ? "true" : "false"}
+                  placeholder="Enter topic name"
+                  className={inputStyle}
                 />
                 {errors.topic && (
                   <p
@@ -125,30 +119,25 @@ const ExerciseList = () => {
                   </p>
                 )}
               </div>
-              {/* Batch Name */}
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className={style?.exerciseList}>
+              <div className="mb-2">
                 <p>Sub-Topic</p>
                 <input
                   type="text"
                   name="subTopic"
-                  {...register(
-                    "subTopic"
-                    //   {
-                    // required: "Sub topic",
-                    //   }
-                  )}
+                  {...register("subTopic")}
                   aria-invalid={errors.subTopic ? "true" : "false"}
+                  placeholder="Enter subtopic name"
+                  className={inputStyle}
                 />
               </div>
+            </div>
 
+            <div className="flex justify-center">
               <div className="">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-16 py-3 mt-7 text-white rounded-lg bg-green-500"
+                  className="px-16 py-3 my-5 text-white rounded-lg bg-[#4BA25D] hover:bg-[#5fb370]"
                 >
                   {loading ? "Searching" : "Search"}
                 </button>
@@ -159,17 +148,15 @@ const ExerciseList = () => {
       </div>
       {/* filtering form */}
       {/* Tables */}
-      <div className="flex flex-col justify-center h-full mx-auto">
-        <div className="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+      <div className="font-poppins flex flex-col justify-center h-full mx-auto">
+        <div className="w-full mx-auto bg-white rounded-lg border border-gray-200">
           <header className="px-5 py-4 border-b border-gray-100">
-            <h2 className="font-semibold font-poppins text-gray-800">
-              Exercises
-            </h2>
+            <h2 className="text-center font-medium text-gray-800">Exercises</h2>
           </header>
           <div className="p-3">
-            <div className="max-w-[90vw] overflow-x-scroll">
-              <table className="table-auto w-full font-poppins font-medium overflow-x-auto">
-                <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+            <div className="max-w-[90vw] overflow-x-auto">
+              <table className="table-auto w-full font-poppins overflow-x-auto">
+                <thead className="text-xs font-semibold uppercase bg-gray-50">
                   <tr>
                     <th className="p-2 whitespace-nowrap">
                       <div className="font-semibold text-left">SL No:</div>

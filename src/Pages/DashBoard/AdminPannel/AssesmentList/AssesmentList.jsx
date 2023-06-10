@@ -229,7 +229,7 @@ const AssesmentList = () => {
             </h2>
           </header>
           <div className="p-3">
-            <div className="max-w-[90vw] overflow-x-scroll">
+            <div className="max-w-[90vw] overflow-x-auto">
               <table className="table-auto w-full font-poppins font-medium overflow-x-auto">
                 <thead className="text-xs font-medium uppercase bg-gray-50">
                   <tr>

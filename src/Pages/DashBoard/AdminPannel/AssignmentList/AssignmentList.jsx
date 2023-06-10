@@ -68,14 +68,12 @@ const AssignmentList = () => {
   return (
     <div>
       {/* filtering form */}
-      <div className="container mt-5">
+      <div className="container mt-5 font-poppins">
         <form onSubmit={handleSubmit(onSearch)}>
-          <div className="font-poppins p-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="p-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
-                <label htmlFor="assignmentName" className="text-sm">
-                  Assignment Name
-                </label>
+                <label htmlFor="assignmentName">Assignment Name</label>
                 <input
                   type="text"
                   name="assignmentName"
@@ -113,7 +111,7 @@ const AssignmentList = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-16 py-2 my-7 text-white rounded-lg bg-[#4BA25D] hover:bg-[#5fb370]"
+                className="px-16 py-3 my-7 text-white rounded-lg bg-[#4BA25D] hover:bg-[#5fb370] text-sm"
               >
                 {loading ? "Searching" : "Search"}
               </button>
@@ -123,17 +121,17 @@ const AssignmentList = () => {
       </div>
       {/* filtering form */}
       {/* Tables */}
-      <div className="flex flex-col justify-center h-full mx-auto">
-        <div className="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+      <div className="flex flex-col justify-center h-full mx-auto font-poppins">
+        <div className="w-full mx-auto bg-white rounded-lg border border-gray-300">
           <header className="px-5 py-4 border-b border-gray-100">
-            <h2 className="font-semibold font-poppins text-gray-800">
+            <h2 className="text-center font-medium text-gray-800">
               Assignments
             </h2>
           </header>
           <div className="p-3">
-            <div className="max-w-[90vw] overflow-x-scroll">
-              <table className="table-auto w-full font-poppins font-medium overflow-x-auto">
-                <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+            <div className="max-w-[90vw] overflow-x-auto">
+              <table className="table-auto w-full font-poppins overflow-x-auto">
+                <thead className="text-xs font-semibold uppercase  bg-gray-50">
                   <tr>
                     <th className="p-2 whitespace-nowrap">
                       <div className="font-semibold text-left">SL No:</div>

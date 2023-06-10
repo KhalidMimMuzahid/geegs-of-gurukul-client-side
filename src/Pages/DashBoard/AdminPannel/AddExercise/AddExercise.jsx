@@ -364,7 +364,7 @@ const AddExercise = () => {
         <button
           type="submit"
           disabled={loading ? true : false}
-          className="font-poppins w-full rounded-lg bg-[#4BA25D] hover:bg-[#5fb370] text-white py-2"
+          className="font-poppins w-full rounded-lg bg-[#4BA25D] hover:bg-[#5fb370] text-white py-3"
         >
           {loading ? "Submitting..." : "Submit"}
         </button>

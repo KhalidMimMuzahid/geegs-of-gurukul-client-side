@@ -370,14 +370,14 @@ const LecturesList = () => {
       <div className="flex flex-col justify-center h-full mx-auto">
         <div className="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
           <header className="px-5 py-4 border-b border-gray-100">
-            <h2 className="font-semibold font-poppins text-gray-800">
+            <h2 className="font-medium text-center font-poppins text-gray-800">
               Lectures
             </h2>
           </header>
           <div className="p-3">
-            <div className="max-w-[90vw] overflow-x-scroll">
-              <table className="table-auto w-full font-poppins font-medium overflow-x-auto">
-                <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+            <div className="max-w-[90vw] overflow-x-auto">
+              <table className="table-auto w-full font-poppins overflow-x-auto">
+                <thead className="text-xs font-semibold uppercase bg-gray-50">
                   <tr>
                     <th className="p-2 whitespace-nowrap">
                       <div className="font-semibold text-left">SL No:</div>

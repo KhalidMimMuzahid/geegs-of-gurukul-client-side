@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
-import style from "./AddModule.module.css";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 import { useForm } from "react-hook-form";
 import moment from "moment";
+
+const inputStyle =
+  "border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg w-full mt-1";
 
 const AddModule = () => {
   const { user } = useContext(AuthContext);
@@ -37,22 +39,22 @@ const AddModule = () => {
   };
 
   return (
-    <div className="container p-8">
+    <div className="container p-8 font-poppins">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-10 font-poppins font-medium">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             {/* Course Name */}
-            <div className={style?.addCourse}>
+            <div>
               <label htmlFor="moduleName">Module Name</label>
               <input
                 type="text"
-                // required
                 name="moduleName"
                 {...register("moduleName", {
                   required: "Module Name is required",
                 })}
                 aria-invalid={errors.moduleName ? "true" : "false"}
-                // onChange={handleInputChange}
+                placeholder="Enter module name"
+                className={inputStyle}
               />
               {errors.moduleName && (
                 <p
@@ -64,7 +66,7 @@ const AddModule = () => {
               )}
             </div>
 
-            <div className={style?.addLecture}>
+            <div>
               <label htmlFor="programName">Program Name</label>
               <select
                 name="programName"
@@ -72,7 +74,8 @@ const AddModule = () => {
                   required: "Program Name is required",
                 })}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
+                defaultValue=""
+                className={inputStyle}
               >
                 <option value="">Choose a Program</option>
                 <option value="School-Champs">School-Champs</option>
@@ -89,7 +92,7 @@ const AddModule = () => {
                 </p>
               )}
             </div>
-            <div className={style?.addLecture}>
+            <div>
               <label htmlFor="courseName">Course Name</label>
               <select
                 name="courseName"
@@ -97,7 +100,8 @@ const AddModule = () => {
                   required: "Course Name is required",
                 })}
                 aria-invalid={errors.courseName ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
+                defaultValue=""
+                className={inputStyle}
               >
                 <option value="">Choose a Program</option>
                 <option value="School-Champs">School-Champs</option>
@@ -114,7 +118,7 @@ const AddModule = () => {
                 </p>
               )}
             </div>
-            <div className={style?.addLecture}>
+            <div>
               <label htmlFor="batchName">Batch Name</label>
               <select
                 name="batchName"
@@ -122,7 +126,8 @@ const AddModule = () => {
                   required: "Batch Name is required",
                 })}
                 aria-invalid={errors.batchName ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
+                defaultValue=""
+                className={inputStyle}
               >
                 <option value="">Choose a Program</option>
                 <option value="School-Champs">School-Champs</option>
@@ -144,12 +149,9 @@ const AddModule = () => {
 
         <button
           type="submit"
-          class="group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow"
+          className="w-full text-white py-3 bg-[#4BA25D] hover:bg-[#5fb370] rounded-lg"
         >
-          <div class="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-          <span class="relative text-black group-hover:text-white font-poppins font-medium">
-            Submit
-          </span>
+          Submit
         </button>
       </form>
     </div>
