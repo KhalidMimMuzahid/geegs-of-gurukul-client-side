@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import style from "./courseList.module.css";
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
@@ -8,6 +7,10 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "./../../../../contexts/UserProvider/UserProvider";
 import ReactPaginate from "react-paginate";
+
+const inputStyle =
+  "border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg w-full mt-1";
+
 const CourseList = () => {
   const { user } = useContext(AuthContext);
   const [shouldDelete, setShouldDelete] = useState(false);
@@ -114,7 +117,7 @@ const CourseList = () => {
       .then((result) => {
         if (result?.success) {
           const data = result?.data;
-          console.log("first", data);
+          // console.log("first", data);
           setItems(data);
           setLoading(false);
         } else {
@@ -180,18 +183,19 @@ const CourseList = () => {
   };
   return (
     <div>
-      <div className='container mt-5'>
+      <div className="container mt-5">
         <form onSubmit={handleSubmit(onSearch)}>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 font-poppins font-medium p-5'>
-            <div className={style?.addLecture}>
-              <label htmlFor='programName'>Program Name</label>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-poppins text-sm p-5 mb-5">
+            <div>
+              <label htmlFor="programName">Program Name</label>
               <select
-                name='programName'
+                name="programName"
                 {...register("programName")}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                defaultValue=""
+                className={inputStyle}
               >
-                <option disabled selected value=''>
+                <option disabled value="">
                   Choose a Program
                 </option>
                 {data?.length > 0 &&
@@ -203,23 +207,24 @@ const CourseList = () => {
               </select>
               {errors.programName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.programName?.message}
                 </p>
               )}
             </div>
             {/* Course Name */}
-            <div className={style?.addLecture}>
-              <label htmlFor='courseName'>Course Name</label>
+            <div>
+              <label htmlFor="courseName">Course Name</label>
               <select
-                name='courseName'
+                name="courseName"
                 {...register("courseName")}
                 aria-invalid={errors.courseName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                defaultValue=""
+                className={inputStyle}
               >
-                <option disabled selected value=''>
+                <option disabled value="">
                   Choose a Course
                 </option>
                 {courses?.length > 0 &&
@@ -231,8 +236,8 @@ const CourseList = () => {
               </select>
               {errors.courseName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.courseName?.message}
                 </p>
@@ -240,180 +245,183 @@ const CourseList = () => {
             </div>
             {/* Course Name */}
 
-            <div className={style?.courseList}>
+            <div>
               <p>Creator Email</p>
-              <input type='email' {...register("creatorEmail")} />
-            </div>
-
-            <div className={style?.courseList}>
-              <p>Updater Email:</p>
               <input
-                id='updaterEmail'
-                name='updaterEmail'
-                type='email'
-                {...register("updaterEmail")}
+                type="email"
+                {...register("creatorEmail")}
+                placeholder="Enter creator email"
+                className={inputStyle}
               />
             </div>
-            <div className='flex gap-4'>
-              <div className=''>
-                <button
-                  type='submit'
-                  disabled={loading}
-                  className='px-10 py-3
-                          text-white hover:text-green-500 
-                          bg-green-500 hover:bg-white 
-                          border-green-500 rounded-lg border-4    
-                          transition-all duration-300'
-                >
-                  {loading ? "Searching" : "Search"}
-                </button>
-              </div>
-              <div className=''>
-                <button
-                  onClick={() => handelToMyCreation}
-                  disabled={loading}
-                  className='px-10 py-3
-                           text-green-500 hover:text-white 
-                           bg-white hover:bg-green-500 
-                           border-green-500 rounded-lg border-4    
-                           transition-all duration-300'
-                >
-                  {loading ? "Searching" : "My Creation"}
-                </button>
-              </div>
+
+            <div>
+              <p>Updater Email:</p>
+              <input
+                id="updaterEmail"
+                name="updaterEmail"
+                type="email"
+                {...register("updaterEmail")}
+                placeholder="Enter updator email"
+                className={inputStyle}
+              />
+            </div>
+          </div>
+          <div className="flex justify-center gap-4 px-5 mb-8 font-poppins text-sm">
+            <div className="">
+              <button
+                type="submit"
+                disabled={loading}
+                className="px-10 py-3 text-white border border-[#4BA25D] bg-[#4BA25D] hover:bg-[#5fb370] rounded-lg transition-all duration-200"
+              >
+                {loading ? "Searching" : "Search"}
+              </button>
+            </div>
+            <div className="">
+              <button
+                onClick={() => handelToMyCreation}
+                disabled={loading}
+                className="px-10 py-3 hover:text-white border border-[#747880] hover:bg-[#8A8F98] rounded-lg transition-all duration-200"
+              >
+                {loading ? "Searching" : "My Creation"}
+              </button>
             </div>
           </div>
         </form>
       </div>
 
       {/* Table */}
-      <div class='flex flex-col justify-center h-full mx-auto text-center'>
-        <div class='w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200'>
-          <header class='px-5 py-4 border-b border-gray-100'>
-            <h2 class='font-semibold font-poppins text-gray-800'>Courses</h2>
+      <div className="flex flex-col justify-center h-full mx-auto text-center">
+        <div className="w-full mx-auto bg-white rounded-lg border border-gray-300">
+          <header className="px-5 py-4 border-b border-gray-100">
+            <h2 className="font-medium font-poppins text-gray-800">Courses</h2>
           </header>
-          <div class='p-3'>
-            <div class='max-w-[90vw] overflow-x-scroll'>
-              <table class='table-auto w-full font-poppins font-medium overflow-x-auto'>
-                <thead class='text-xs font-semibold uppercase text-gray-400 bg-gray-50'>
+          <div className="p-3">
+            <div className="max-w-[90vw] overflow-x-auto">
+              <table className="table-auto w-full font-poppins overflow-x-auto">
+                <thead className="text-xs font-semibold uppercase bg-gray-50">
                   <tr>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>SL No:</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-left">SL No:</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>Course Name </div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-left">
+                        Course Name{" "}
+                      </div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-left'>Course ID</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-left">Course ID</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-center'>Duration</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-center">Duration</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-center'>Program Name</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-center">
+                        Program Name
+                      </div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-center'>Price</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-center">Price</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-center'>Status</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-center">Status</div>
                     </th>
-                    <th class='p-2 whitespace-nowrap'>
-                      <div class='font-semibold text-center'>Action</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-center">Action</div>
                     </th>
                   </tr>
                 </thead>
-                <tbody class='text-sm divide-y divide-gray-100'>
+                <tbody className="text-sm divide-y divide-gray-100">
                   {currentItems?.length === 0 &&
                     currentItems?.map((item, i) => (
                       <tr key={item?._id}>
-                        <td class='p-2 whitespace-nowrap text-center'>
-                          <div class='flex items-center'>{i + 1}</div>
+                        <td className="p-2 whitespace-nowrap text-center">
+                          <div className="flex items-center">{i + 1}</div>
                         </td>
-                        <td class='p-2 whitespace-nowrap text-center'>
+                        <td className="p-2 whitespace-nowrap text-center">
                           {item?.courseName}
                         </td>
-                        <td class='p-2 whitespace-nowrap text-center'>
+                        <td className="p-2 whitespace-nowrap text-center">
                           {item?.courseId}
                         </td>
-                        <td class='p-2 whitespace-nowrap text-center'>
+                        <td className="p-2 whitespace-nowrap text-center">
                           {item?.duration}
                         </td>
-                        <td class='p-2 whitespace-nowrap text-center'>
+                        <td className="p-2 whitespace-nowrap text-center">
                           {item?.programName}
                         </td>
-                        <td class='p-2 whitespace-nowrap text-center'>
+                        <td className="p-2 whitespace-nowrap text-center">
                           {item?.regularPrice}
                         </td>
-                        <td class='p-2 whitespace-nowrap text-center'>
+                        <td className="p-2 whitespace-nowrap text-center">
                           {/* isActive */}
-                          <div className={style?.addBatch}>
+                          <div>
                             <label
-                              for='isActive'
-                              class='flex items-center cursor-pointer relative mb-4'
+                              htmlFor="isActive"
+                              className="flex items-center cursor-pointer relative mb-4"
                             >
                               <input
-                                type='checkbox'
-                                id='isActive'
-                                name='isActive'
-                                class='sr-only'
+                                type="checkbox"
+                                id="isActive"
+                                name="isActive"
+                                className="sr-only"
                               />
-                              <div class='toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full'></div>
-                              <span class='ml-3 text-gray-900 text-sm font-medium'>
+                              <div className="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
+                              <span className="ml-3 text-gray-900 text-sm font-medium">
                                 isActive
                               </span>
                             </label>
                           </div>
                           {/* isActive */}
                         </td>
-                        <td class='p-2 whitespace-nowrap flex gap-2'>
-                          <div class='mx-auto flex w-[100px] gap-2'>
+                        <td className="p-2 whitespace-nowrap flex gap-2">
+                          <div className="mx-auto flex w-[100px] gap-2">
                             <button
-                              type='button'
-                              className='px-1 py-1 '
+                              type="button"
+                              className="px-1 py-1 "
                               onClick={() => setShouldDelete(true)}
                             >
                               {/* svg */}
                               <img
-                                height='15px'
-                                width='15px'
+                                height="15px"
+                                width="15px"
                                 src={deleteIcon}
-                                alt=''
+                                alt=""
                               />
                             </button>
-                            <button type='button' className='px-1 py-1'>
+                            <button type="button" className="px-1 py-1">
                               {/* svg */}
                               <img
-                                height='15px'
-                                width='15px'
+                                height="15px"
+                                width="15px"
                                 src={editIcon}
-                                alt=''
+                                alt=""
                               />
                             </button>
 
                             <button
-                              data-modal-target='staticModal'
-                              data-modal-toggle='staticModal'
-                              class='px-1 py-1 '
-                              type='button'
+                              data-modal-target="staticModal"
+                              data-modal-toggle="staticModal"
+                              className="px-1 py-1 "
+                              type="button"
                             >
                               {/* svg */}
                               <img
-                                height='15px'
-                                width='15px'
+                                height="15px"
+                                width="15px"
                                 src={copyIcon}
-                                alt=''
+                                alt=""
                               />
                             </button>
                             {shouldDelete && (
-                              <div class='bg-slate-800 bg-opacity-50 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0 z-1000'>
-                                <div class='bg-white px-16 py-14 rounded-md text-center'>
-                                  <h1 class='text-xl mb-4 font-bold text-slate-500'>
+                              <div className="bg-slate-800 bg-opacity-50 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0 z-1000">
+                                <div className="bg-white px-16 py-14 rounded-md text-center">
+                                  <h1 className="text-xl mb-4 font-bold text-slate-500">
                                     Do you Want Delete
                                   </h1>
                                   <button
                                     onClick={() => setShouldDelete(false)}
-                                    class='bg-red-500 px-4 py-2 rounded-md text-md text-white'
+                                    className="bg-red-500 px-4 py-2 rounded-md text-md text-white"
                                   >
                                     Cancel
                                   </button>
@@ -422,7 +430,7 @@ const CourseList = () => {
                                       handelDeleteCourse(course?._id) &&
                                       setShouldDelete(false)
                                     }
-                                    class='bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold'
+                                    className="bg-green-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold"
                                   >
                                     Ok
                                   </button>
@@ -438,16 +446,16 @@ const CourseList = () => {
               {/* pagination */}
 
               <div>
-                <div className='pagination'>
+                <div className="pagination">
                   <ReactPaginate
-                    breakLabel='...'
-                    nextLabel='>'
+                    breakLabel="..."
+                    nextLabel=">"
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={5}
                     pageCount={pageCount}
-                    previousLabel='<'
+                    previousLabel="<"
                     renderOnZeroPageCount={null}
-                    containerClassName='pagination-menu'
+                    containerClassName="pagination-menu"
                   />
                 </div>
               </div>

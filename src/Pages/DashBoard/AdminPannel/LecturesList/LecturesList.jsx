@@ -136,7 +136,7 @@ const LecturesList = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log("data", data?.data);
+          // console.log("data", data?.data);
           setModules(data?.data);
         });
     }
@@ -176,7 +176,7 @@ const LecturesList = () => {
       .then((result) => {
         if (result?.success) {
           const data = result?.data;
-          console.log("firstX", data);
+          // console.log("firstX", data);
           setLectures(data);
           setLoading(false);
         } else {
@@ -200,9 +200,9 @@ const LecturesList = () => {
   const pageCount = Math?.ceil(lectures?.length / itemsPerPage);
   const handlePageClick = (event) => {
     const newOffset = (event?.selected * itemsPerPage) % lectures?.length;
-    console.log(
-      `User requested page number ${event?.selected}, which is offset ${newOffset}`
-    );
+    // console.log(
+    //   `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    // );
     setItemOffset(newOffset);
   };
   return (
@@ -367,49 +367,55 @@ const LecturesList = () => {
         </form>
       </div>
       {/* Table */}
-      <div class="flex flex-col justify-center h-full mx-auto">
-        <div class="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
-          <header class="px-5 py-4 border-b border-gray-100">
-            <h2 class="font-semibold font-poppins text-gray-800">Lectures</h2>
+      <div className="flex flex-col justify-center h-full mx-auto">
+        <div className="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+          <header className="px-5 py-4 border-b border-gray-100">
+            <h2 className="font-medium text-center font-poppins text-gray-800">
+              Lectures
+            </h2>
           </header>
-          <div class="p-3">
-            <div class="max-w-[90vw] overflow-x-scroll">
-              <table class="table-auto w-full font-poppins font-medium overflow-x-auto">
-                <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+          <div className="p-3">
+            <div className="max-w-[90vw] overflow-x-auto">
+              <table className="table-auto w-full font-poppins overflow-x-auto">
+                <thead className="text-xs font-semibold uppercase bg-gray-50">
                   <tr>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">SL No:</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-left">SL No:</div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">Lecture Name</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-left">
+                        Lecture Name
+                      </div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">Topic</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-left">Topic</div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-center">Batch No</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-center">Batch No</div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-center">Action</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-center">Action</div>
                     </th>
                   </tr>
                 </thead>
-                <tbody class="text-sm divide-y divide-gray-100">
+                <tbody className="text-sm divide-y divide-gray-100">
                   {currentLectures?.length > 0 &&
                     currentLectures.map((lecture, i) => (
                       <tr key={i}>
-                        <td class="p-2 whitespace-nowrap">
-                          <div class="flex items-center">{i + 1}</div>
+                        <td className="p-2 whitespace-nowrap">
+                          <div className="flex items-center">{i + 1}</div>
                         </td>
-                        <td class="p-2 whitespace-nowrap">
+                        <td className="p-2 whitespace-nowrap">
                           {lecture?.lectureName}
                         </td>
-                        <td class="p-2 whitespace-nowrap">{lecture?.topic}</td>
-                        <td class="p-2 whitespace-nowrap">
+                        <td className="p-2 whitespace-nowrap">
+                          {lecture?.topic}
+                        </td>
+                        <td className="p-2 whitespace-nowrap">
                           {lecture?.batch?.batchName}
                         </td>
-                        <td class="p-2 whitespace-nowrap flex gap-2">
-                          <div class="mx-auto flex w-[100px] gap-2">
+                        <td className="p-2 whitespace-nowrap flex gap-2">
+                          <div className="mx-auto flex w-[100px] gap-2">
                             <button type="button" className="px-1 py-1 ">
                               {/* svg */}
                               <img
@@ -432,7 +438,7 @@ const LecturesList = () => {
                             <button
                               data-modal-target="staticModal"
                               data-modal-toggle="staticModal"
-                              class="px-1 py-1 "
+                              className="px-1 py-1 "
                               type="button"
                             >
                               {/* svg */}
@@ -476,25 +482,25 @@ const LecturesList = () => {
       <div
         id="staticModal"
         data-modal-backdrop="static"
-        tabindex="-1"
+        tabIndex="-1"
         aria-hidden="true"
-        class="fixed top-0 left-0 right-0 z-[4000000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+        className="fixed top-0 left-0 right-0 z-[4000000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
       >
-        <div class="relative w-full max-w-2xl max-h-full">
+        <div className="relative w-full max-w-2xl max-h-full">
           {/* <!-- Modal content --> */}
-          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
             {/* <!-- Modal header --> */}
-            <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                 Lecture Info
               </h3>
               <button
                 type="button"
-                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 data-modal-hide="staticModal"
               >
                 <svg
-                  class="w-5 h-5"
+                  className="w-5 h-5"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -508,7 +514,7 @@ const LecturesList = () => {
               </button>
             </div>
             {/* <!-- Modal body --> */}
-            <form class="p-6 space-y-6">
+            <form className="p-6 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="">
                   <input
@@ -553,18 +559,18 @@ const LecturesList = () => {
               </div>
             </form>
             {/* <!-- Modal footer --> */}
-            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+            <div className="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
               <button
                 data-modal-hide="staticModal"
                 type="button"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 I accept
               </button>
               <button
                 data-modal-hide="staticModal"
                 type="button"
-                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
               >
                 Decline
               </button>

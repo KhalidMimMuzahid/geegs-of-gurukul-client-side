@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useForm } from "react-hook-form";
-import style from "./AddExercise.module.css";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 import moment from "moment";
 import { uploadFile } from "react-s3";
 import { toast } from "react-hot-toast";
+import { BsXCircleFill } from "react-icons/bs";
 window.Buffer = window.Buffer || require("buffer").Buffer;
 const config = {
   bucketName: "all-files-for-gog",
@@ -15,6 +15,10 @@ const config = {
   accessKeyId: process.env.REACT_APP_S3AccessKeyId,
   secretAccessKey: process.env.REACT_APP_S3SecretAccessKey,
 };
+
+const inputStyle =
+  "border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg w-full";
+
 const AddExercise = () => {
   const { user } = useContext(AuthContext);
 
@@ -130,10 +134,10 @@ const AddExercise = () => {
   return (
     <div className="container p-8">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" font-poppins font-medium">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="font-poppins">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             {/* Exercise Name */}
-            <div className={style?.addExercise}>
+            <div>
               <label>Exercise Name</label>
               <input
                 type="text"
@@ -142,6 +146,8 @@ const AddExercise = () => {
                   required: "Exercise Name is required",
                 })}
                 aria-invalid={errors.exerciseName ? "true" : "false"}
+                placeholder="Enter assignment name"
+                className={inputStyle}
               />
               {errors.exerciseName && (
                 <p
@@ -154,7 +160,7 @@ const AddExercise = () => {
             </div>
 
             {/* Topic Name */}
-            <div className={style?.addExercise}>
+            <div>
               <label>Topic</label>
               <input
                 type="text"
@@ -163,6 +169,8 @@ const AddExercise = () => {
                   required: "Topic Name is required",
                 })}
                 aria-invalid={errors.exerciseName ? "true" : "false"}
+                placeholder="Enter topic name"
+                className={inputStyle}
               />
               {errors.topic && (
                 <p
@@ -175,7 +183,7 @@ const AddExercise = () => {
             </div>
 
             {/* Sub-topic Name */}
-            <div className={style?.addExercise}>
+            <div>
               <label>Sub topic</label>
               <input
                 type="text"
@@ -184,6 +192,8 @@ const AddExercise = () => {
                   required: "Sub topic Name is required",
                 })}
                 aria-invalid={errors.subTopic ? "true" : "false"}
+                placeholder="Enter subtopic name"
+                className={inputStyle}
               />
               {errors.subTopic && (
                 <p
@@ -196,7 +206,7 @@ const AddExercise = () => {
             </div>
 
             {/* Exercise type */}
-            <div className={style?.addExercise}>
+            <div>
               <label htmlFor="type">Exercise type</label>
               <select
                 name="type"
@@ -204,7 +214,8 @@ const AddExercise = () => {
                   required: "Exercise type is required",
                 })}
                 aria-invalid={errors.type ? "true" : "false"}
-                className="w-full border-2 border-green-400 rounded-xl"
+                defaultValue=""
+                className={inputStyle}
               >
                 <option value="">Choose exercise type</option>
                 <option value="project">Project</option>
@@ -223,12 +234,12 @@ const AddExercise = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
             {/* submission type */}
-            <div className={style?.addExercise}>
+            <div>
               <label htmlFor="submissionType">Submission type</label>
               <select
                 name="submissionType"
                 {...register("submissionType")}
-                className="w-full border-2 border-green-400 rounded-xl"
+                className={inputStyle}
               >
                 <option value="file">Upload File</option>
                 <option value="link">Provide link</option>
@@ -237,15 +248,15 @@ const AddExercise = () => {
 
             {/* fileupload */}
 
-            <div class="w-full font-poppins">
+            <div className="w-full font-poppins">
               <label
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                for="file_input"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                htmlFor="file_input"
               >
                 Upload file
               </label>
               <input
-                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                 id="file"
                 name="file"
                 type="file"
@@ -265,16 +276,16 @@ const AddExercise = () => {
 
         {/* notes and markdown preview */}
         {/* Text Area */}
-        <div class="w-full mx-auto my-10 font-poppins">
+        <div className="w-full mx-auto my-10 font-poppins">
           <label
-            for="notes"
-            class="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
+            htmlFor="notes"
+            className="block mb-2 text-md font-poppins font-medium text-gray-900 dark:text-gray-400"
           >
             <div className="flex items-center justify-between">
               <p>Notes:</p>
               <p
                 onClick={() => setInstructions(true)}
-                className="hover:text-sky-500 hover:cursor-pointer"
+                className="font-semibold text-[#4BA25D] hover:cursor-pointer"
               >
                 Instructions
               </p>
@@ -285,18 +296,20 @@ const AddExercise = () => {
             name="notes"
             {...register("notes")}
             rows="4"
-            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+            className={inputStyle}
             placeholder="Your message..."
             value={text}
             onChange={(e) => setText(e.target.value)}
           ></textarea>
-          <button
-            type="button"
-            onClick={() => setPreview(true)}
-            className="my-2 font-poppins font-medium text-white px-2 py-2 bg-green-400 hover:bg-green-500 rounded-md"
-          >
-            Preview
-          </button>
+          <div className="flex justify-center">
+            <button
+              type="button"
+              onClick={() => setPreview(true)}
+              className="my-4 px-8 py-2 hover:text-white border border-[#747880] hover:bg-[#8A8F98] rounded-lg duration-150"
+            >
+              Preview
+            </button>
+          </div>
           {/* For Preview only */}
           {preview && (
             <>
@@ -304,13 +317,11 @@ const AddExercise = () => {
                 <div className="relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
                   <button
                     onClick={() => setPreview(false)}
-                    className="absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full"
+                    className="absolute right-5 top-5 mx-1 my-1"
                   >
-                    ❌
+                    <BsXCircleFill size={20} className="text-rose-500" />
                   </button>
-                  <h3 className="text-2xl font-poppins font-medium mt-1">
-                    Preview:
-                  </h3>
+                  <h3 className="text-lg font-medium mt-1">Preview</h3>
                   <div className=" mt-6 w-full h-4/5 p-4 mx-auto bg-white border border-green-400 rounded-md overflow-x-auto overflow-y-auto">
                     <ReactMarkdown
                       children={text}
@@ -329,12 +340,12 @@ const AddExercise = () => {
                 <div className="relative w-[360px] h-[600px] sm:w-[400px] md:w-[600px] lg-[700px]  py-2 sm:py-4 lg:py-4 px-2 sm:px-4 md:px-6 mx-auto max-w-3xl  bg-white rounded-lg shadow-2xl">
                   <button
                     onClick={() => setInstructions(false)}
-                    className="absolute right-5 top-5 px-2 py-2 bg-red-400 rounded-full"
+                    className="absolute right-5 top-5 mx-1 my-1"
                   >
-                    ❌
+                    <BsXCircleFill size={20} className="text-rose-500" />
                   </button>
-                  <h3 className="text-2xl font-poppins font-medium mt-1">
-                    Instructions:
+                  <h3 className="text-lg font-medium mt-1 mb-5">
+                    Instructions
                   </h3>
                   <iframe
                     title="markdown instructions"
@@ -353,12 +364,9 @@ const AddExercise = () => {
         <button
           type="submit"
           disabled={loading ? true : false}
-          class="group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow mt-10 border-2 border-green-400 hover:cursor-pointer"
+          className="font-poppins w-full rounded-lg bg-[#4BA25D] hover:bg-[#5fb370] text-white py-3"
         >
-          <div class="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full "></div>
-          <span class="relative text-black group-hover:text-white font-poppins font-medium">
-            {loading ? "Submitting..." : "Submit"}
-          </span>
+          {loading ? "Submitting..." : "Submit"}
         </button>
       </form>
     </div>

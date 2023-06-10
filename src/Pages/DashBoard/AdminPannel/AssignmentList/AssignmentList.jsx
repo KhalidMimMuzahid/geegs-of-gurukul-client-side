@@ -34,7 +34,7 @@ const AssignmentList = () => {
       .then((result) => {
         if (result?.success) {
           const data = result?.data;
-          console.log("first", data);
+          // console.log("first", data);
           setAssignments(data);
           setLoading(false);
         } else {
@@ -59,23 +59,21 @@ const AssignmentList = () => {
 
   const handlePageClick = (event) => {
     const newOffset = (event?.selected * itemsPerPage) % assignments?.length;
-    console.log(
-      `User requested page number ${event?.selected}, which is offset ${newOffset}`
-    );
+    // console.log(
+    //   `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    // );
     setItemOffset(newOffset);
   };
 
   return (
     <div>
       {/* filtering form */}
-      <div className="container mt-5">
+      <div className="container mt-5 font-poppins">
         <form onSubmit={handleSubmit(onSearch)}>
-          <div className="font-poppins p-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="p-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
-                <label htmlFor="assignmentName" className="text-sm">
-                  Assignment Name
-                </label>
+                <label htmlFor="assignmentName">Assignment Name</label>
                 <input
                   type="text"
                   name="assignmentName"
@@ -113,7 +111,7 @@ const AssignmentList = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-16 py-2 my-7 text-white rounded-lg bg-[#4BA25D] hover:bg-[#5fb370]"
+                className="px-16 py-3 my-7 text-white rounded-lg bg-[#4BA25D] hover:bg-[#5fb370] text-sm"
               >
                 {loading ? "Searching" : "Search"}
               </button>
@@ -123,48 +121,50 @@ const AssignmentList = () => {
       </div>
       {/* filtering form */}
       {/* Tables */}
-      <div class="flex flex-col justify-center h-full mx-auto">
-        <div class="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
-          <header class="px-5 py-4 border-b border-gray-100">
-            <h2 class="font-semibold font-poppins text-gray-800">
+      <div className="flex flex-col justify-center h-full mx-auto font-poppins">
+        <div className="w-full mx-auto bg-white rounded-lg border border-gray-300">
+          <header className="px-5 py-4 border-b border-gray-100">
+            <h2 className="text-center font-medium text-gray-800">
               Assignments
             </h2>
           </header>
-          <div class="p-3">
-            <div class="max-w-[90vw] overflow-x-scroll">
-              <table class="table-auto w-full font-poppins font-medium overflow-x-auto">
-                <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+          <div className="p-3">
+            <div className="max-w-[90vw] overflow-x-auto">
+              <table className="table-auto w-full font-poppins overflow-x-auto">
+                <thead className="text-xs font-semibold uppercase  bg-gray-50">
                   <tr>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">SL No:</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-left">SL No:</div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">Assignment Name</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-left">
+                        Assignment Name
+                      </div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-left">Topic</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-left">Topic</div>
                     </th>
 
-                    <th class="p-2 whitespace-nowrap">
-                      <div class="font-semibold text-center">Action</div>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-center">Action</div>
                     </th>
                   </tr>
                 </thead>
-                <tbody class="text-sm divide-y divide-gray-100">
+                <tbody className="text-sm divide-y divide-gray-100">
                   {currentAssignments?.length > 0 &&
                     currentAssignments?.map((assignment, i) => (
                       <tr key={i}>
-                        <td class="p-2 whitespace-nowrap">
-                          <div class="flex items-center">{i + 1}</div>
+                        <td className="p-2 whitespace-nowrap">
+                          <div className="flex items-center">{i + 1}</div>
                         </td>
-                        <td class="p-2 whitespace-nowrap">
+                        <td className="p-2 whitespace-nowrap">
                           {assignment?.assignmentName}
                         </td>
-                        <td class="p-2 whitespace-nowrap">
+                        <td className="p-2 whitespace-nowrap">
                           {assignment?.topic}
                         </td>
-                        <td class="p-2 whitespace-nowrap flex gap-2">
-                          <div class="mx-auto flex w-[100px] gap-2">
+                        <td className="p-2 whitespace-nowrap flex gap-2">
+                          <div className="mx-auto flex w-[100px] gap-2">
                             <button type="button" className="px-1 py-1 ">
                               {/* svg */}
                               <img
@@ -187,7 +187,7 @@ const AssignmentList = () => {
                             <button
                               data-modal-target="staticModal"
                               data-modal-toggle="staticModal"
-                              class="px-1 py-1 "
+                              className="px-1 py-1 "
                               type="button"
                             >
                               {/* svg */}

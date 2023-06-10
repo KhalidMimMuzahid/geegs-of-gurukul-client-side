@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import style from "./AddCourse.module.css";
 import moment from "moment";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 import { toast } from "react-hot-toast";
+
+const inputStyle =
+  "border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg w-full mt-1";
 
 const AddCourse = () => {
   const [data, setData] = useState([]);
@@ -65,7 +67,7 @@ const AddCourse = () => {
         },
       },
     };
-    console.log(course);
+    // console.log(course);
     fetch("http://localhost:5000/api/v1/courses/add-course", {
       method: "POST",
       body: JSON.stringify(course),
@@ -85,27 +87,27 @@ const AddCourse = () => {
       .catch((error) => console.error(error));
   };
   return (
-    <div className='container p-8'>
+    <div className="container p-8 font-poppins">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=' font-poppins font-medium'>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+        <div className="text-sm">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
             {/* Course Name */}
-            <div className={style?.addCourse}>
-              <label htmlFor='courseName'>Course Name</label>
+            <div>
+              <label htmlFor="courseName">Course Name</label>
               <input
-                type='text'
-                // required
-                name='courseName'
+                type="text"
+                name="courseName"
                 {...register("courseName", {
                   required: "Course Name is required",
                 })}
                 aria-invalid={errors.courseName ? "true" : "false"}
-                // onChange={handleInputChange}
+                placeholder="Enter course name"
+                className={inputStyle}
               />
               {errors.courseName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.courseName?.message}
                 </p>
@@ -113,22 +115,22 @@ const AddCourse = () => {
             </div>
             {/*course Name */}
             {/* Duration */}
-            <div className={style?.addCourse}>
-              <label htmlFor='duration'>Duration in weeks</label>
+            <div>
+              <label htmlFor="duration">Duration in weeks</label>
               <input
-                type='number'
-                // required
-                name='duration'
+                type="number"
+                name="duration"
                 {...register("duration", {
                   required: "Duration is required",
                 })}
                 aria-invalid={errors.duration ? "true" : "false"}
-                // onChange={handleInputChange}
+                placeholder="Enter duration"
+                className={inputStyle}
               />
               {errors.duration && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.duration?.message}
                 </p>
@@ -137,17 +139,18 @@ const AddCourse = () => {
             {/* Duration */}
 
             {/* Program Name */}
-            <div className={style?.addLecture}>
-              <label htmlFor='programName'>Program Name</label>
+            <div>
+              <label htmlFor="programName">Program Name</label>
               <select
-                name='programName'
+                name="programName"
                 {...register("programName", {
                   required: "Program Name is required",
                 })}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                defaultValue=""
+                className={inputStyle}
               >
-                <option disabled selected value=''>
+                <option disabled value="">
                   Choose a Program
                 </option>
                 {data?.length > 0 &&
@@ -159,8 +162,8 @@ const AddCourse = () => {
               </select>
               {errors.programName && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.programName?.message}
                 </p>
@@ -168,21 +171,22 @@ const AddCourse = () => {
             </div>
             {/* Program Name */}
             {/* Regular Price */}
-            <div className={style?.addCourse}>
-              <label htmlFor='regularPrice'>Regular Price(In Rupee)</label>
+            <div>
+              <label htmlFor="regularPrice">Regular Price(In Rupee)</label>
               <input
-                type='number'
-                name='regularPrice'
+                type="number"
+                name="regularPrice"
                 {...register("regularPrice", {
                   required: "Regular Price is required",
                 })}
                 aria-invalid={errors.regularPrice ? "true" : "false"}
-                className='w-full border-2 border-green-400 rounded-xl'
+                placeholder="Enter regular price"
+                className={inputStyle}
               />
               {errors.regularPrice && (
                 <p
-                  className='text-red-500 font-poppins font-medium'
-                  role='alert'
+                  className="text-red-500 font-poppins font-medium"
+                  role="alert"
                 >
                   {errors.regularPrice?.message}
                 </p>
@@ -194,13 +198,10 @@ const AddCourse = () => {
 
         {/* Submit Button */}
         <button
-          type='submit'
-          class='group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow'
+          type="submit"
+          className="bg-[#4BA25D] hover:bg-[#5fb370] py-3 text-white w-full rounded-lg"
         >
-          <div class='absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full'></div>
-          <span class='relative text-black group-hover:text-white font-poppins font-medium'>
-            Submit
-          </span>
+          Submit
         </button>
       </form>
     </div>
