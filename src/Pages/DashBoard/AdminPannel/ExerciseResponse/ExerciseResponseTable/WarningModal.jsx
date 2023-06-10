@@ -1,7 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsXCircleFill } from "react-icons/bs";
 
-const WarningModal = ({ greaterThanTen, lessThanZero, setOpenModal }) => {
+const WarningModal = ({
+  errorInResponse,
+  setOpenModal,
+  exercisesResponses,
+  setRefreshExcerciseResponse,
+}) => {
+  const [successfullyUpdatedStatus, setSuccessfullyUpdatedStatus] = useState({
+    shouldShow: false,
+    totalSuccessfullyUpdated: 0,
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const uploadMarkAsCSV = async () => {
+    setIsLoading(true);
+    setSuccessfullyUpdatedStatus({
+      shouldShow: false,
+      totalSuccessfullyUpdated: 0,
+    });
+    // console.log(" exercisesResponses: ", exercisesResponses);
+    const res = await Promise.all(
+      exercisesResponses?.map((eachRes) => {
+        return fetch(
+          `http://localhost:5000/api/v1/exercises/exercise-response-update/${eachRes?.response_id}`,
+          {
+            method: "PUT",
+            body: JSON.stringify({
+              mark: eachRes?.mark,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+      })
+    );
+
+    const resParse = await Promise.allSettled(res?.map((each) => each.json()));
+    setRefreshExcerciseResponse((prev) => !prev);
+    // console.log("resParse : ", resParse);
+    const successfullyHittedRes = resParse.filter(
+      (eachRes) => eachRes?.status === "fulfilled"
+    );
+    // console.log("successfullyHittedRes: ", successfullyHittedRes);
+    const successfullyUpdatedRes = successfullyHittedRes?.filter(
+      (each) => each?.value?.success
+    );
+    // console.log("successfullyUpdatedRes: ", successfullyUpdatedRes);
+    setIsLoading(false);
+    setSuccessfullyUpdatedStatus({
+      shouldShow: true,
+      totalSuccessfullyUpdated: successfullyUpdatedRes?.length,
+    });
+  };
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-[20010] outline-none focus:outline-none h-100 mx-4">
@@ -17,22 +68,55 @@ const WarningModal = ({ greaterThanTen, lessThanZero, setOpenModal }) => {
           </div>
 
           <div className="mt-5 ml-4">
-            {lessThanZero?.length > 0 &&
-              lessThanZero?.map((each, i) => (
-                <h1 key={i} className="text-lg mb-2 ">
-                  <strong className="text-2xl font-semibold mr-2">*</strong>
-                  line Number <span className="text-red-500">{each}</span> mark
-                  is less-than <span className="text-red-500">0</span>.
-                </h1>
-              ))}
-            {greaterThanTen?.length > 0 &&
-              greaterThanTen?.map((each, i) => (
-                <h1 key={i} className="text-lg mb-2">
-                  <strong className="text-2xl font-semibold mr-2">*</strong>
-                  line Number <span className="text-red-500">{each}</span> mark
-                  is greater-than <span className="text-red-500">10</span>.
-                </h1>
-              ))}
+            {errorInResponse?.length > 0 ? (
+              <div>
+                {errorInResponse?.map((each, i) => (
+                  <h1 key={i} className="text-lg mb-2 ">
+                    <strong className="text-2xl font-semibold mr-2">*</strong>
+                    Row:{" "}
+                    <span className="text-red-500">
+                      {each?.line} {"==>"}
+                    </span>
+                    <span className="text-red-500 "> error: {each?.error}</span>
+                  </h1>
+                ))}
+              </div>
+            ) : (
+              <div>
+                <h1>Every Exercise data is fine.</h1>
+              </div>
+            )}
+
+            <div>
+              <h1>
+                Are you want to update the mark for the remaining responses
+              </h1>
+              <button
+                className="px-12 py-4 bg-black text-white font-bold text-lg"
+                onClick={uploadMarkAsCSV}
+              >
+                {isLoading
+                  ? "Updating"
+                  : successfullyUpdatedStatus?.shouldShow
+                  ? "Updated"
+                  : "Update"}
+              </button>
+            </div>
+
+            <div>
+              {successfullyUpdatedStatus?.shouldShow && (
+                <div>
+                  {successfullyUpdatedStatus?.totalSuccessfullyUpdated ? (
+                    <div>
+                      {successfullyUpdatedStatus?.totalSuccessfullyUpdated}{" "}
+                      exercise response data has updated successfully
+                    </div>
+                  ) : (
+                    <div>no exercise response data updated successfully</div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

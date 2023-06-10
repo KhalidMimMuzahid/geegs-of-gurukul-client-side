@@ -4,6 +4,7 @@ import ExerciseResponseModal from "../ExerciseResponseModal/ExerciseResponseModa
 import UploadCsvFile from "./UploadCsvFile";
 
 const ExerciseResponseTable = ({
+  setRefreshExcerciseResponse,
   exerciseResponses,
   dwonloadAsCsv: downloadAsCsv,
 }) => {
@@ -23,9 +24,9 @@ const ExerciseResponseTable = ({
   const handlePageClick = (event) => {
     const newOffset =
       (event?.selected * itemsPerPage) % exerciseResponses?.length;
-    console.log(
-      `User requested page number ${event?.selected}, which is offset ${newOffset}`
-    );
+    // console.log(
+    //   `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    // );
     setItemOffset(newOffset);
   };
   return (
@@ -35,7 +36,6 @@ const ExerciseResponseTable = ({
           <h2 className="font-semibold font-poppins text-gray-800">
             ExerciseResponse
           </h2>
-
           <div className="flex gap-3">
             {!uploadCsv && (
               <button
@@ -45,8 +45,11 @@ const ExerciseResponseTable = ({
                 Upload CSV
               </button>
             )}
-            {uploadCsv && <UploadCsvFile />}
-
+            {uploadCsv && (
+              <UploadCsvFile
+                setRefreshExcerciseResponse={setRefreshExcerciseResponse}
+              />
+            )}
             <button
               onClick={downloadAsCsv}
               className="px-4 py-2 bg-white text-green-500 border-2 border-green-500 hover:bg-green-500/90 hover:text-white rounded-md transition-all duration-500"
@@ -124,7 +127,8 @@ const ExerciseResponseTable = ({
                       <td className="p-2 whitespace-nowrap">
                         <button
                           onClick={() => {
-                            return setOpenModal(true), setData(each);
+                            setOpenModal(true);
+                            setData(each);
                           }}
                           className="px-2 py-1 bg-green-400 text-white hover:bg-white hover:text-green-400 border-2 border-green-400 rounded transition-all duration-500"
                         >
@@ -155,7 +159,11 @@ const ExerciseResponseTable = ({
         </div>
       </div>
       {openModal && data && (
-        <ExerciseResponseModal setOpenModal={setOpenModal} data={data} />
+        <ExerciseResponseModal
+          setRefreshExcerciseResponse={setRefreshExcerciseResponse}
+          setOpenModal={setOpenModal}
+          data={data}
+        />
       )}
     </div>
   );

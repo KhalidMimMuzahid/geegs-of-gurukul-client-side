@@ -6,9 +6,14 @@ import style from "./exerciseResponseModal.module.css";
 import { toast } from "react-hot-toast";
 import ExerciseList from "./../../ExerciseList/ExerciseList";
 
-const ExerciseResponseModal = ({ setOpenModal, data }) => {
+const ExerciseResponseModal = ({
+  setOpenModal,
+  data,
+  setRefreshExcerciseResponse,
+}) => {
   const [loading, setLoading] = useState(false);
   const [updateButton, setUpdateButton] = useState(false);
+  const [mark, setMark] = useState(data?.mark);
   const {
     register,
     handleSubmit,
@@ -37,7 +42,9 @@ const ExerciseResponseModal = ({ setOpenModal, data }) => {
       .then((data) => {
         if (data?.success) {
           toast.success(data?.message);
-          console.log(data);
+          // console.log(data);
+          setRefreshExcerciseResponse((prev) => !prev);
+          setMark(parseInt(d?.marks));
           setLoading(false);
           setUpdateButton(false);
           reset();
@@ -140,12 +147,12 @@ const ExerciseResponseModal = ({ setOpenModal, data }) => {
                 </a>
               </h4>
             </div>
-            {data?.mark && (
+            {mark && (
               <div className="">
                 <h3 className="text-lg font-semibold text-green-500">
                   Exercise Marks
                 </h3>
-                <h4 className="text-lg ml-2">{data?.mark} Mark</h4>
+                <h4 className="text-lg ml-2">{mark} Mark</h4>
               </div>
             )}
             <div className="">
@@ -166,7 +173,7 @@ const ExerciseResponseModal = ({ setOpenModal, data }) => {
                     type="text"
                     placeholder="Enter marksMark"
                     name="marks"
-                    defaultValue={data?.mark}
+                    defaultValue={mark}
                     {...register("marks", {
                       required: "marks field is required",
                       max: {

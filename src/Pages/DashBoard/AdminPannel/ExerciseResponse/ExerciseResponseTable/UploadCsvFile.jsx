@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import Papa from "papaparse";
 import WarningModal from "./WarningModal";
 
-const UploadCsvFile = () => {
-  const [lessThanZero, setLessThanZero] = useState([]);
-  const [greaterThanTen, setGreaterThanTen] = useState([]);
+const UploadCsvFile = ({ setRefreshExcerciseResponse }) => {
   const [openModal, setOpenModal] = useState(false);
+  const [errorInResponse, setErrorInResponse] = useState([]);
+  const [exercisesResponses, setExercisesResponses] = useState([]);
   const {
     register,
     handleSubmit,
@@ -16,44 +16,86 @@ const UploadCsvFile = () => {
     reset,
   } = useForm();
 
-  const DummyData = [
-    { mark: 25 },
-    { mark: 25 },
-    { mark: 8 },
-    { mark: -25 },
-    { mark: 10 },
-    { mark: -22 },
-  ];
-
   const onUpload = (data) => {
+    setOpenModal(false);
+    setErrorInResponse([]);
+    setExercisesResponses([]);
     // console.log(data?.fileInput[0]);
     Papa.parse(data?.fileInput[0], {
       header: true,
       skipEmptyLines: true,
       complete: function (result) {
-        const exercises = result?.data;
-        const exerciseWithMarks = exercises?.filter(
-          (exercise) =>
-            parseInt(exercise?.mark) >= 0 && parseInt(exercise?.mark) <= 10
-        );
-        console.log(exerciseWithMarks);
+        const exercisesResponsesTemp = result?.data;
+        // console.log("exercisesResponses:   ", exercisesResponses);
+        const exerciseWithMarks = exercisesResponsesTemp?.filter(
+          (eachRes, i) => {
+            if (
+              parseInt(eachRes?.mark) >= 0 &&
+              parseInt(eachRes?.mark) <= 10 &&
+              eachRes?.mark &&
+              eachRes?.response_id
+            ) {
+              return true;
+            } else {
+              // to do :   throw the error here
+              if (!eachRes?.response_id) {
+                setErrorInResponse((prev) => [
+                  ...prev,
+                  {
+                    line: i + 2,
+                    error: "response_id is missing",
+                  },
+                ]);
+              } else if (!eachRes?.mark) {
+                setErrorInResponse((prev) => [
+                  ...prev,
+                  {
+                    line: i + 2,
+                    error: "mark  is missing",
+                  },
+                ]);
+              } else if (isNaN(parseInt(eachRes?.mark))) {
+                setErrorInResponse((prev) => [
+                  ...prev,
+                  {
+                    line: i + 2,
+                    error: "mark must be the number",
+                  },
+                ]);
+              } else if (parseInt(eachRes?.mark) < 0) {
+                setErrorInResponse((prev) => [
+                  ...prev,
+                  {
+                    line: i + 2,
+                    error: "mark can't be negative",
+                  },
+                ]);
+              } else if (!parseInt(eachRes?.mark) > 10) {
+                setErrorInResponse((prev) => [
+                  ...prev,
+                  {
+                    line: i + 2,
+                    error: "mark can't be more than 10",
+                  },
+                ]);
+              }
 
-        for (let i = 0; i < DummyData.length; i++) {
-          if (DummyData[i].mark > 10) {
-            const sum = i + 1;
-            // console.log(sum);
-            greaterThanTen.push(sum);
+              return false;
+            }
           }
-          if (DummyData[i].mark < 0) {
-            const sum = i + 1;
-            // console.log("sum", sum);
-            lessThanZero.push(sum);
-          }
-        }
+        );
+        // console.log("exerciseWithMarks: ", exerciseWithMarks);
+        const exercisesRes = exerciseWithMarks?.map((exerciseRes) => {
+          return {
+            response_id: exerciseRes?.response_id,
+            mark: parseInt(exerciseRes?.mark),
+          };
+        });
+        // console.log("exercisesResponses: ", exercisesRes);
+        setExercisesResponses(exercisesRes);
+        setOpenModal(true);
       },
     });
-
-    setOpenModal(true);
   };
   return (
     <div>
@@ -84,11 +126,12 @@ const UploadCsvFile = () => {
           </button>
         </div>
       </form>
-      {openModal && (lessThanZero.length > 0 || greaterThanTen.length > 0) && (
+      {openModal && (
         <WarningModal
+          exercisesResponses={exercisesResponses}
+          errorInResponse={errorInResponse}
           setOpenModal={setOpenModal}
-          lessThanZero={lessThanZero}
-          greaterThanTen={greaterThanTen}
+          setRefreshExcerciseResponse={setRefreshExcerciseResponse}
         />
       )}
     </div>
