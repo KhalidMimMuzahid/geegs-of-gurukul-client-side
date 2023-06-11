@@ -1,12 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import courseimg from "../../../../assets/imga/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-gra-130247647.jpg";
-import style from "./course.module.css";
+import { BsFillJournalBookmarkFill, BsClock } from "react-icons/bs";
 import { useEffect } from "react";
 import { useState } from "react";
+import Coursesheader from "./CoursesHeader/CoursesHeader";
+import ReactPaginate from "react-paginate";
+
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [itemOffset, setItemOffset] = useState(0);
+
   const dummyData = [
     {
       courseName: "Full Stack Development",
@@ -116,6 +120,22 @@ const Courses = () => {
   //   });
   // setLoading(false);
   // }, [dummyData]);
+
+  // pagination calculation
+  const itemsPerPage = 4;
+
+  const endOffset = itemOffset + itemsPerPage;
+
+  const currentCourses = courses?.slice(itemOffset, endOffset);
+  const pageCount = Math?.ceil(courses?.length / itemsPerPage);
+  const handlePageClick = (event) => {
+    const newOffset = (event?.selected * itemsPerPage) % courses?.length;
+    // console.log(
+    //   `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    // );
+    setItemOffset(newOffset);
+  };
+
   if (loading) {
     return (
       <div className="h-screen w-full flex justify-center items-center bg-[#ffffff6b]">
@@ -141,35 +161,58 @@ const Courses = () => {
   // return <UnderConstruction/>
   return (
     <div className="w-full font-poppins pb-10">
+      <Coursesheader />
       {/* we hav to use each courses  */}
-      <div className="grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 gap-7 pt-4 px-5 text-center">
-        {courses?.length > 0 &&
-          courses?.map((course) => (
-            <div
-              key={course?._id}
-              className="w-full border border-gray-200 shadow rounded-lg flex flex-col"
-            >
-              <div className="px-5 py-8">
-                <h2 className="text-xl text-[#4BA25D] font-semibold mb-3">
-                  {course?.courseName}
-                </h2>
-                <p className="mb-2">
-                  <span>Program Name: </span>
-                  {course?.program?.programName}
-                </p>
-                <p className="mb-6">
-                  <span>Batch Name: </span>
-                  {course?.currentBatch}
-                </p>
-                <Link
-                  to={"/dashboard/courses/course"}
-                  className="text-sm py-2 px-4 rounded bg-[#4BA25D] text-white hover:bg-[#6FC581]"
-                >
-                  Start Learn
-                </Link>
+      <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-7 pt-4 px-5">
+        {currentCourses?.length > 0 &&
+          currentCourses?.map((course) => (
+            <Link to={"/dashboard/courses/course"} key={course?._id}>
+              <div className="w-full border border-gray-200 rounded-xl grid grid-cols-2 hover:shadow-md">
+                <div
+                  style={{
+                    backgroundImage:
+                      'url("https://cdn.pixabay.com/photo/2021/08/04/13/06/software-developer-6521720_640.jpg")',
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                  }}
+                  className="rounded-l-xl"
+                ></div>
+                <div className="lg:p-8 p-6">
+                  <p className="md:text-md text-sm">
+                    {course?.program?.programName}
+                  </p>
+                  <p className="font-semibold text-lg md:text-xl md:mb-11 md:mt-7 mb-6 mt-4">
+                    {course?.courseName}
+                  </p>
+                  <div className="flex flex-col gap-2.5">
+                    <div className="flex items-center gap-3">
+                      <BsFillJournalBookmarkFill size={20} />
+                      <p className="md:text-md text-sm">24 lessons</p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <BsClock size={20} />
+                      <p className="md:text-md text-sm">20 weeks</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
+      </div>
+      <div>
+        <div className="pagination">
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={pageCount}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+            containerClassName="pagination-menu"
+          />
+        </div>
       </div>
     </div>
   );

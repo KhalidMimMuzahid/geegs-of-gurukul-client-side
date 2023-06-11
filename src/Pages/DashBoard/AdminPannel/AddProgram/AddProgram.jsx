@@ -58,7 +58,7 @@ const AddProgram = () => {
     <div className="container p-8">
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Text Area */}
-        <div className="w-full mx-auto my-10 font-poppins text-sm">
+        <div className="w-full mx-auto mb-10 font-poppins text-sm">
           <label
             htmlFor="programName"
             className="text-gray-900 dark:text-gray-400"

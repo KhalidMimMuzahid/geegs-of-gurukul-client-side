@@ -5,7 +5,7 @@ const EachRes = ({ response }) => {
   const { aboutResponse } = response;
   const { correct, wrong, skipped } = aboutResponse;
   const total = correct + wrong + skipped;
-  console.log("response", response);
+  // console.log("response", response);
   const [assessment, setAssessment] = useState(null);
   useEffect(() => {
     fetch(
@@ -13,7 +13,7 @@ const EachRes = ({ response }) => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log("data: ", data);
+        // console.log("data: ", data);
         setAssessment(data);
       });
   }, [response]);
@@ -24,12 +24,15 @@ const EachRes = ({ response }) => {
     <div className="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <div className="p-5">
         <a href="#">
-          <h5 className="mb-2 text-lg font-medium tracking-tight text-gray-900 dark:text-white">
-            {assessment?.assessmentName} ({assessment?.categoryName})
+          <h5 className="text-lg font-medium tracking-tight text-gray-900 dark:text-white capitalize">
+            {assessment?.assessmentName}
+          </h5>
+          <h5 className="mb-3 text-[#4BA25D] font-medium tracking-tight dark:text-white capitalize">
+            {assessment?.categoryName}
           </h5>
         </a>
         <p className="flex gap-2 items-center mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
-          you got {response?.totalMark} out of {total}
+          You got {response?.totalMark} out of {total}
         </p>
         <p className="flex gap-2 items-center mb-3 font-normal font-poppins leading-normal text-gray-700 dark:text-gray-400">
           {/* <img src={time} alt="" />  */}
@@ -50,9 +53,9 @@ const EachRes = ({ response }) => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             ></path>
           </svg>
         </Link>

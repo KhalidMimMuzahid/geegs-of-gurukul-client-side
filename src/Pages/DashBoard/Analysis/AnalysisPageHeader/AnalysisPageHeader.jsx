@@ -52,34 +52,34 @@ const AnalysisPageHeader = ({ setResponses }) => {
       });
   };
   return (
-    <div className="w-4/5 mx-auto my-3">
+    <div className="w-10/12 mx-auto mt-3 mb-8">
       <form onSubmit={handleSubmit(onSearch)}>
-        <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-3 ">
-          <div className="relative">
+        <div className="flex w-full justify-center items-center gap-5 flex-wrap">
+          <div className="relative flex-grow">
             <input
               type="text"
-              placeholder="search by assessment name"
+              placeholder="Enter assessment name"
               {...register("assessmentName")}
               name="assessmentName"
-              className="w-full rounded-lg z-[998] border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200"
+              className="w-full rounded-full z-[998] border-black hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 text-sm"
             />
-            <BsSearch className="text-[18px] absolute top-3 right-4 z-[999]" />
+            <BsSearch className="text-[18px] absolute top-2.5 right-4 z-[999]" />
           </div>
-          <div className="relative">
+          <div className="relative flex-grow">
             <input
               type="text"
               {...register("categoryName")}
-              placeholder="search by category"
+              placeholder="Enter category"
               name="categoryName"
-              className="w-full rounded-lg z-[998] border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200"
+              className="w-full rounded-full z-[998] border-black hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 text-sm"
             />
-            <BsSearch className="text-[18px] absolute top-3 right-4 z-[999]" />
+            <BsSearch className="text-[18px] absolute top-2.5 right-4 z-[999]" />
           </div>
-          <div className="relative flex justify-end">
+          <div className="relative">
             <button
               type="submit"
               disabled={loading}
-              className="lg:w-36 w-full sm:w-full h-full rounded-lg bg-[#4BA25D] hover:bg-[#5fb370] text-white z-[998] duration-200 py-2"
+              className="w-36 h-full rounded-full border border-black hover:bg-[#4BA25D] hover:border-[#4BA25D] hover:text-white z-[998] duration-200 py-2 text-sm"
             >
               {loading ? "searching..." : "Search"}
             </button>

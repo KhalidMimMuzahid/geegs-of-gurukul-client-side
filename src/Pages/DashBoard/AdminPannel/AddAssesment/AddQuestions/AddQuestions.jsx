@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import EachAssesment from "../EachAssesment/EachAssesment";
 import { BiSearch } from "react-icons/bi";
+import ReactPaginate from "react-paginate";
 
 const inputStyle =
   "border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg w-full";
@@ -13,6 +14,23 @@ function AddQuestions({
   setAddedQuestion,
   question,
 }) {
+  const [itemOffset, setItemOffset] = useState(0);
+
+  // pagination calculation
+  const itemsPerPage = 10;
+
+  const endOffset = itemOffset + itemsPerPage;
+
+  const currentQuestions = question?.slice(itemOffset, endOffset);
+  const pageCount = Math?.ceil(question?.length / itemsPerPage);
+  const handlePageClick = (event) => {
+    const newOffset = (event?.selected * itemsPerPage) % question?.length;
+    // console.log(
+    //   `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    // );
+    setItemOffset(newOffset);
+  };
+
   return (
     <>
       <hr />
@@ -118,8 +136,8 @@ function AddQuestions({
                   </tr>
                 </thead>
                 <tbody className="text-sm divide-y divide-gray-100">
-                  {question?.length > 0 &&
-                    question?.map((eachQues, i) => (
+                  {currentQuestions?.length > 0 &&
+                    currentQuestions?.map((eachQues, i) => (
                       <EachAssesment
                         eachQues={eachQues}
                         key={eachQues?._id}
@@ -130,6 +148,20 @@ function AddQuestions({
                     ))}
                 </tbody>
               </table>
+              <div>
+                <div className="pagination">
+                  <ReactPaginate
+                    breakLabel="..."
+                    nextLabel=">"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    previousLabel="<"
+                    renderOnZeroPageCount={null}
+                    containerClassName="pagination-menu"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
