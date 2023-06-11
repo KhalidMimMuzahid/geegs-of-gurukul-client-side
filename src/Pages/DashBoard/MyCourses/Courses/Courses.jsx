@@ -3,9 +3,14 @@ import { Link } from "react-router-dom";
 import { BsFillJournalBookmarkFill, BsClock } from "react-icons/bs";
 import { useEffect } from "react";
 import { useState } from "react";
+import Coursesheader from "./CoursesHeader/CoursesHeader";
+import ReactPaginate from "react-paginate";
+
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [itemOffset, setItemOffset] = useState(0);
+
   const dummyData = [
     {
       courseName: "Full Stack Development",
@@ -115,6 +120,22 @@ const Courses = () => {
   //   });
   // setLoading(false);
   // }, [dummyData]);
+
+  // pagination calculation
+  const itemsPerPage = 4;
+
+  const endOffset = itemOffset + itemsPerPage;
+
+  const currentCourses = courses?.slice(itemOffset, endOffset);
+  const pageCount = Math?.ceil(courses?.length / itemsPerPage);
+  const handlePageClick = (event) => {
+    const newOffset = (event?.selected * itemsPerPage) % courses?.length;
+    // console.log(
+    //   `User requested page number ${event?.selected}, which is offset ${newOffset}`
+    // );
+    setItemOffset(newOffset);
+  };
+
   if (loading) {
     return (
       <div className="h-screen w-full flex justify-center items-center bg-[#ffffff6b]">
@@ -140,10 +161,11 @@ const Courses = () => {
   // return <UnderConstruction/>
   return (
     <div className="w-full font-poppins pb-10">
+      <Coursesheader />
       {/* we hav to use each courses  */}
       <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-7 pt-4 px-5">
-        {courses?.length > 0 &&
-          courses?.map((course) => (
+        {currentCourses?.length > 0 &&
+          currentCourses?.map((course) => (
             <Link to={"/dashboard/courses/course"} key={course?._id}>
               <div className="w-full border border-gray-200 rounded-xl grid grid-cols-2 hover:shadow-md">
                 <div
@@ -177,6 +199,20 @@ const Courses = () => {
               </div>
             </Link>
           ))}
+      </div>
+      <div>
+        <div className="pagination">
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={pageCount}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+            containerClassName="pagination-menu"
+          />
+        </div>
       </div>
     </div>
   );

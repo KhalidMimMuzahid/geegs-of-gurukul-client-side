@@ -32,7 +32,7 @@ const AnalysisLists = () => {
   // console.log("responses", responses);
 
   // pagination calculation
-  const itemsPerPage = 9;
+  const itemsPerPage = 6;
 
   const endOffset = itemOffset + itemsPerPage;
 
