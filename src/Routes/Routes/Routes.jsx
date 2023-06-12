@@ -83,10 +83,7 @@ const router = createBrowserRouter([
                 path: "/dashboard/assessment",
                 element: <Default />,
               },
-              // {
-              //   path: "/dashboard/assessment/on-processing",
-              //   element: <OnProcessinAssesments />,
-              // },
+           
             ],
           },
           {
@@ -237,22 +234,11 @@ const router = createBrowserRouter([
         element: <PhoneSignUp />,
       },
 
-      // {
-      //   path: "/my-courses",
-      //   element: <MyCourses />,
-      //   children: [
-      //     { path: "/my-courses", element: <AllCourses /> },
-      //     { path: "/my-courses/specific-course", element: <SpecificCourse /> },
-      //   ],
-      // },
       {
         path: "/career",
         element: <Career />,
       },
-      // {
-      //   path: "/learn",
-      //   element: <Learn />,
-      // },
+  
 
       {
         path: "/profile",
@@ -315,14 +301,6 @@ const router = createBrowserRouter([
       ),
     element: <OnProcessinAssesments />,
   },
-  // {
-  //   path: "/dashboard/analysis/specific/review/:_id",
-  //   loader: async ({ params }) =>
-  //     fetch(
-  //       `http://localhost:5000/api/v1/assessments/assessment?_id=${params?._id}`
-  //     ),
-  //   element: <ReviewAnswer/>,
-  // },
 ]);
 
 export default router;
