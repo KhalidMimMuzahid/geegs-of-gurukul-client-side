@@ -38,6 +38,7 @@ const UploadCsvFile = ({ setRefreshExcerciseResponse }) => {
               return true;
             } else {
               // to do :   throw the error here
+              console.log("mark: ", parseInt(eachRes?.mark));
               if (!eachRes?.response_id) {
                 setErrorInResponse((prev) => [
                   ...prev,
@@ -70,7 +71,7 @@ const UploadCsvFile = ({ setRefreshExcerciseResponse }) => {
                     error: "mark can't be negative",
                   },
                 ]);
-              } else if (!parseInt(eachRes?.mark) > 10) {
+              } else if (parseInt(eachRes?.mark) > 10) {
                 setErrorInResponse((prev) => [
                   ...prev,
                   {

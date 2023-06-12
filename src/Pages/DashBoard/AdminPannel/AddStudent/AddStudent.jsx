@@ -10,8 +10,7 @@ const AddStudent = () => {
   const [courses, setCourses] = useState([]);
   const [batch, setBatch] = useState({});
   const [addAllowed, setAddAllowed] = useState(false);
-  const [CoursesObject, setCoursesObject] = useState();
-
+  const [courseObject, setCourseObject] = useState({});
   const { user } = useContext(AuthContext);
 
   const {
@@ -35,6 +34,13 @@ const AddStudent = () => {
         setPrograms(data?.data);
       });
   }, []);
+  useEffect(() => {
+    const courseObjectTemp = courses?.find(
+      (course) => course?._id === selectedCourse
+    );
+    console.log("courseObjectTemp : ", courseObjectTemp);
+    setCourseObject(courseObjectTemp?._id ? courseObjectTemp : {});
+  }, [selectedCourse]);
 
   // find course
   useEffect(() => {
@@ -97,77 +103,60 @@ const AddStudent = () => {
     const justNow = moment().format();
     // console.log("data: ", data);
     try {
-      const res = await fetch(
-        `http://localhost:5000/api/v1/users/search-user`,
+      const courseObject = courses?.find(
+        (course) => course?._id === selectedCourse
+      );
+
+      const coursePurchaseDetails = {
+        program: {
+          program_id: selectedProgram,
+          programName: courseObject?.program?.program_id,
+        },
+        course: {
+          course_id: selectedCourse,
+          courseName: courseObject?.courseName,
+        },
+        batch: {
+          batch_id: batch?._id,
+          batchName: batch?.batchName,
+        },
+        isPaid: true,
+        regularPrice: courseObject?.regularPrice,
+        discount: 100,
+        appliedPrice: 0,
+        couponCode: "",
+        paymentId: "",
+        purchaseInfo: {
+          purchaseByEmail: selectedEmail,
+          enrolledAt: justNow,
+          paidAt: justNow,
+        },
+        addedBy: {
+          adderName: user?.name,
+          adderEmail: user?.email,
+          addedAt: justNow,
+        },
+      };
+      console.log("data: ", coursePurchaseDetails);
+      fetch(
+        `http://localhost:5000/api/v1/purchasesCourse/add-student-to-course`,
         {
+          method: "POST",
           headers: {
             "content-type": "application/json",
-            data: JSON.stringify({ email: selectedEmail }),
           },
+          body: JSON.stringify(coursePurchaseDetails),
         }
-      );
-      const result = await res.json();
-      if (result?.success) {
-        const data = result?.data;
-        console.log("email data: ", data);
-        const courseObject = courses?.find(
-          (course) => course?._id === selectedCourse
-        );
-        setCoursesObject(courseObject);
-        const coursePurchaseDetails = {
-          program: {
-            program_id: selectedProgram,
-            programName: courseObject?.program?.program_id,
-          },
-          course: {
-            course_id: selectedCourse,
-            courseName: courseObject?.courseName,
-          },
-          batch: {
-            batch_id: batch?._id,
-            batchName: batch?.batchName,
-          },
-          isPaid: true,
-          regularPrice: courseObject?.regularPrice,
-          discount: 100,
-          appliedPrice: 0,
-          couponCode: "",
-          paymentId: "",
-          purchaseInfo: {
-            purchaseByEmail: selectedEmail,
-            purchaseByName: data[0]?.name,
-            enrolledAt: justNow,
-            paidAt: justNow,
-          },
-          addedBy: {
-            adderName: user?.name,
-            adderEmail: user?.email,
-            addedAt: justNow,
-          },
-        };
-        console.log("data: ", coursePurchaseDetails);
-        fetch(
-          `http://localhost:5000/api/v1/purchasesCourse/add-student-to-course`,
-          {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(coursePurchaseDetails),
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("data :", data);
+          if (data?.success) {
+            toast.success(data?.message);
+          } else {
+            toast.error(data?.error);
           }
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            console.log("data :", data);
-            if (data?.success) {
-              toast.success(data?.message);
-            } else {
-              toast.error(data?.error);
-            }
-          });
-      } else {
-        toast.error("Email not found");
-      }
+        });
     } catch (err) {
       toast.error(err.message);
     }
@@ -248,7 +237,7 @@ const AddStudent = () => {
                       name="batch"
                       {...register("batch")}
                       className="w-full border-2 border-gray-400 rounded-xl p-2"
-                      value={batch?.batchName ? batch?.batchName : ""}
+                      value={courseObject?.currentBatch}
                     />
                   </div>
                   <div>
@@ -293,12 +282,7 @@ const AddStudent = () => {
         </form>
       </div>
       <div className="flex gap-3 mx-auto">
-        <UserCSVUpload
-          batch={batch}
-          courses={courses}
-          programs={programs}
-          CoursesObject={CoursesObject}
-        />
+        <UserCSVUpload batch={batch} courseObject={courseObject} />
       </div>
     </div>
   );
