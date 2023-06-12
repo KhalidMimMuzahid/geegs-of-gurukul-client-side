@@ -110,7 +110,7 @@ const AddStudent = () => {
       const coursePurchaseDetails = {
         program: {
           program_id: selectedProgram,
-          programName: courseObject?.program?.program_id,
+          programName: courseObject?.program?.programName,
         },
         course: {
           course_id: selectedCourse,

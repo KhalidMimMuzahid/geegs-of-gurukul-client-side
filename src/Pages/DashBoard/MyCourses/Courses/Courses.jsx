@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { BsFillJournalBookmarkFill, BsClock } from "react-icons/bs";
 import { useEffect } from "react";
 import { useState } from "react";
 import Coursesheader from "./CoursesHeader/CoursesHeader";
 import ReactPaginate from "react-paginate";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 import { toast } from "react-hot-toast";
+import EachCourse from "./EachCourse/EachCourse";
 
 const Courses = () => {
   const { user } = useContext(AuthContext);
@@ -24,7 +23,7 @@ const Courses = () => {
         // console.log("result", result);
         if (result?.success) {
           const data = result?.data;
-          // console.log("first", data);
+          console.log("courses data:", data);
           setCourses(data);
           setLoading(false);
         } else {
@@ -86,38 +85,7 @@ const Courses = () => {
         {currentCourses?.length > 0 ? (
           <>
             {currentCourses?.map((course) => (
-              <Link to={"/dashboard/courses/course"} key={course?._id}>
-                <div className="w-full border border-gray-200 rounded-2xl grid grid-cols-2 hover:shadow-md">
-                  <div
-                    style={{
-                      backgroundImage:
-                        'url("https://cdn.pixabay.com/photo/2021/08/04/13/06/software-developer-6521720_640.jpg")',
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "center",
-                    }}
-                    className="rounded-l-2xl"
-                  ></div>
-                  <div className="lg:p-6 lg:px-8 p-6">
-                    <p className="md:text-md text-sm">
-                      {course?.program?.programName}
-                    </p>
-                    <p className="font-semibold text-lg md:text-xl md:my-6 my-4">
-                      {course?.courseName}
-                    </p>
-                    <div className="flex flex-col gap-2.5">
-                      <div className="flex items-center gap-3">
-                        <BsFillJournalBookmarkFill size={20} />
-                        <p className="md:text-md text-sm">24 lessons</p>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <BsClock size={20} />
-                        <p className="md:text-md text-sm">20 weeks</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+              <EachCourse course={course} key={course?._id} />
             ))}
           </>
         ) : (
