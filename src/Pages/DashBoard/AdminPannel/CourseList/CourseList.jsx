@@ -117,7 +117,7 @@ const CourseList = () => {
       .then((result) => {
         if (result?.success) {
           const data = result?.data;
-          // console.log("first", data);
+          console.log("first", data);
           setItems(data);
           setLoading(false);
         } else {
@@ -332,7 +332,7 @@ const CourseList = () => {
                   </tr>
                 </thead>
                 <tbody className="text-sm divide-y divide-gray-100">
-                  {currentItems?.length === 0 &&
+                  {currentItems?.length > 0 &&
                     currentItems?.map((item, i) => (
                       <tr key={item?._id}>
                         <td className="p-2 whitespace-nowrap text-center">
