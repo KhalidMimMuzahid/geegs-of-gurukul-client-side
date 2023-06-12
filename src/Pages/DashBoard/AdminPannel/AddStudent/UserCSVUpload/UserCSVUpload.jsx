@@ -1,15 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Papa from "papaparse";
 import { AuthContext } from "../../../../../contexts/UserProvider/UserProvider";
 import moment from "moment";
+import { toast } from "react-hot-toast";
 
-const UserCSVUpload = ({ programs, courses, batch, CoursesObject }) => {
-  console.log("programs", programs);
-  console.log("courses", courses);
-  console.log("batch", batch);
+const UserCSVUpload = ({ batch, courseObject }) => {
+  // console.log("programs", programs);
+  // console.log("courses", courses);
+  // console.log("batch", batchTemp);
   const { user } = useContext(AuthContext);
   const [inputIsVisible, setInputIsVisible] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -19,88 +21,90 @@ const UserCSVUpload = ({ programs, courses, batch, CoursesObject }) => {
     reset,
   } = useForm();
 
-  function StudentData(
-    program,
-    course,
-    batch,
-    isPaid,
-    discount,
-    regularPrice,
-    appliedPrice,
-    couponCode,
-    paymentId,
-    purchaseInfo,
-    addedBy
-  ) {
-    this.program = {
-      program_id: program?.program_id,
-      programName: program?.programName,
-    };
+  const StudentData = function (purchaseInfo, justNow) {
+    this.program = courseObject?.program;
+
     this.course = {
-      course_id: course?.course_id,
-      courseName: course?.courseName,
+      course_id: courseObject?._id,
+      courseName: courseObject?.courseName,
     };
     this.batch = {
-      batch_id: batch?.batch_id,
+      batch_id: batch?._id,
       batchName: batch?.batchName,
     };
-    this.isPaid = isPaid;
-    this.regularPrice = regularPrice;
-    this.discount = discount;
-    this.appliedPrice = appliedPrice;
-    this.couponCode = couponCode;
-    this.paymentId = paymentId;
-    this.purchaseInfo = {
-      purchaseByEmail: purchaseInfo?.purchaseByEmail,
-      purchaseByName: "data[0]?.name",
-      enrolledAt: purchaseInfo?.justNow,
-      paidAt: purchaseInfo?.justNow,
-    };
+    this.isPaid = true;
+    this.regularPrice = courseObject?.regularPrice;
+    this.discount = 100;
+    this.appliedPrice = "";
+    this.couponCode = "";
+    this.paymentId = "";
     this.addedBy = {
-      adderName: addedBy?.name,
-      adderEmail: addedBy?.email,
-      addedAt: addedBy?.justNow,
+      adderName: user?.name,
+      adderEmail: user?.email,
+      addedAt: justNow,
     };
-  }
+    this.purchaseInfo = purchaseInfo;
+  };
 
   const onUpload = (data) => {
+    if (!courseObject?._id || !batch?._id) {
+      toast.error("please select a course first");
+      return;
+    }
     Papa.parse(data?.fileInput[0], {
       header: true,
       skipEmptyLines: true,
       complete: function (result) {
         const students = result?.data;
-        console.log(students);
+        console.log("students: ", students);
 
         const justNow = moment().format();
-        students?.map((student) => {
-          const addedBy = {
-            adderName: user?.name,
-            adderEmail: user?.email,
-            addedAt: justNow,
-          };
+        const studentsForCourse = students?.map((student) => {
           const purchaseInfo = {
-            purchaseByEmail: student?.email,
-            purchaseByName: "data[0]?.name",
+            purchaseByEmail: student?.studentEmail,
             enrolledAt: justNow,
             paidAt: justNow,
           };
-
-          const studentData = new StudentData(
-            programs,
-            courses,
-            batch,
-            true,
-            100,
-            "regularPrice",
-            0,
-            "couponCode",
-            "paymentId",
-            purchaseInfo,
-            addedBy
+          const studentData = new StudentData(purchaseInfo, justNow);
+          return studentData;
+        });
+        console.log("studentsForCourse: ", studentsForCourse);
+        (async () => {
+          const res = await Promise.all(
+            studentsForCourse?.map((coursePurchaseDetails) => {
+              return fetch(
+                `http://localhost:5000/api/v1/purchasesCourse/add-student-to-course`,
+                {
+                  method: "POST",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify(coursePurchaseDetails),
+                }
+              );
+            })
+          );
+          const resParse = await Promise.allSettled(
+            res?.map((each) => each.json())
           );
 
-          console.log(studentData);
-        });
+          // console.log("resParse : ", resParse);
+          const successfullyHittedRes = resParse.filter(
+            (eachRes) => eachRes?.status === "fulfilled"
+          );
+          console.log("successfullyHittedRes: ", successfullyHittedRes);
+          const successfullyUpdatedRes = successfullyHittedRes?.filter(
+            (each) => each?.value?.success
+          );
+          console.log("successfullyUpdatedRes: ", successfullyUpdatedRes);
+          if (successfullyUpdatedRes?.length) {
+            toast.success(
+              `${successfullyUpdatedRes?.length} student successfully added to ${courseObject?.courseName}`
+            );
+          } else {
+            toast.error(`no student added to ${courseObject?.courseName}`);
+          }
+        })();
       },
     });
   };
