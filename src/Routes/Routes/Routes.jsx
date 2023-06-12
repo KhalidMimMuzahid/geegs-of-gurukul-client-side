@@ -83,7 +83,6 @@ const router = createBrowserRouter([
                 path: "/dashboard/assessment",
                 element: <Default />,
               },
-           
             ],
           },
           {
@@ -108,7 +107,14 @@ const router = createBrowserRouter([
             children: [
               { path: "/dashboard/courses", element: <Courses /> },
               {
-                path: "/dashboard/courses/course",
+                path: "/dashboard/courses/course/:queries",
+                loader: async ({ params }) => {
+                  // console.log("queries: ", params?.queries);
+                  // return params?.queries;
+                  return fetch(
+                    `http://localhost:5000/api/v1/modules/modulesbycourseandbatch?${params?.queries}`
+                  );
+                },
                 element: <SpecificCourse />,
               },
             ],
@@ -238,7 +244,6 @@ const router = createBrowserRouter([
         path: "/career",
         element: <Career />,
       },
-  
 
       {
         path: "/profile",
