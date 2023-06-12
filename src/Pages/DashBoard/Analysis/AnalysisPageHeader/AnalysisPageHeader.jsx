@@ -79,7 +79,7 @@ const AnalysisPageHeader = ({ setResponses }) => {
             <button
               type="submit"
               disabled={loading}
-              className="w-36 h-full rounded-full border border-black hover:bg-[#4BA25D] hover:border-[#4BA25D] hover:text-white z-[998] duration-200 py-2 text-sm"
+              className="w-36 h-full rounded-full bg-[#37ED81] hover:bg-[#5fb370] text-black hover:text-[white] z-[998] duration-200 py-2 text-sm"
             >
               {loading ? "searching..." : "Search"}
             </button>

@@ -160,14 +160,14 @@ const Courses = () => {
   }
   // return <UnderConstruction/>
   return (
-    <div className="w-full font-poppins pb-10">
+    <div className="w-full font-poppins">
       <Coursesheader />
       {/* we hav to use each courses  */}
-      <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-7 pt-4 px-5">
+      <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-7 pt-2 px-5">
         {currentCourses?.length > 0 &&
           currentCourses?.map((course) => (
             <Link to={"/dashboard/courses/course"} key={course?._id}>
-              <div className="w-full border border-gray-200 rounded-xl grid grid-cols-2 hover:shadow-md">
+              <div className="w-full border border-gray-200 rounded-2xl grid grid-cols-2 hover:shadow-md">
                 <div
                   style={{
                     backgroundImage:
@@ -176,13 +176,13 @@ const Courses = () => {
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
                   }}
-                  className="rounded-l-xl"
+                  className="rounded-l-2xl"
                 ></div>
-                <div className="lg:p-8 p-6">
+                <div className="lg:p-6 lg:px-8 p-6">
                   <p className="md:text-md text-sm">
                     {course?.program?.programName}
                   </p>
-                  <p className="font-semibold text-lg md:text-xl md:mb-11 md:mt-7 mb-6 mt-4">
+                  <p className="font-semibold text-lg md:text-xl md:my-6 my-4">
                     {course?.courseName}
                   </p>
                   <div className="flex flex-col gap-2.5">
