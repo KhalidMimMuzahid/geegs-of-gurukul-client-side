@@ -19,9 +19,9 @@ const Coursesheader = ({}) => {
   };
 
   return (
-    <div className="w-full mx-auto my-3 font-poppins px-5 mt-5">
+    <div className="w-full mx-auto my-3 font-poppins px-3 mt-5">
       <form onSubmit={handleSubmit(onSearch)}>
-        <div className="flex justify-center gap-4 items-center flex-wrap">
+        <div className="flex justify-center md:gap-8 gap-5 items-center flex-wrap">
           <div className="relative flex-grow">
             <input
               type="text"
@@ -46,7 +46,7 @@ const Coursesheader = ({}) => {
             <button
               type="submit"
               disabled={loading}
-              className="w-36 h-full rounded-full border border-black hover:border-[#5fb370] hover:bg-[#5fb370] text-black hover:text-[white] z-[998] duration-200 py-2 text-sm"
+              className="w-36 h-full rounded-full bg-[#37ED81] hover:bg-[#5fb370] text-black hover:text-[white] z-[998] duration-200 py-2 text-sm"
             >
               {loading ? "searching..." : "Search"}
             </button>
