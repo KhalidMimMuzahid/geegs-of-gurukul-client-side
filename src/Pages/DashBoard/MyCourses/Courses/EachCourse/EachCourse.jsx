@@ -7,7 +7,7 @@ const EachCourse = ({ course }) => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/api/v1/courses/course/${course?.course?.course_id}`
+      `https://api.geeksofgurukul.com/api/v1/courses/course/${course?.course?.course_id}`
     )
       .then((res) => res.json())
       .then((data) => {

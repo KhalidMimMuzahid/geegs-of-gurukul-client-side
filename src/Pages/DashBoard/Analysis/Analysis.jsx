@@ -48,7 +48,7 @@ const Analysis = () => {
     setAboutResponse(responseTemp?.aboutResponse);
     //
     fetch(
-      `http://localhost:5000/api/v1/assessments/assessment?_id=${responseTemp?.assessmentId}`
+      `https://api.geeksofgurukul.com/api/v1/assessments/assessment?_id=${responseTemp?.assessmentId}`
     ).then((res) =>
       res.json().then((data) => {
         setAssessment(data);

@@ -12,7 +12,7 @@ const AddCourse = () => {
   const [program, setProgram] = useState({});
   const { user } = useContext(AuthContext);
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/programs/all-program")
+    fetch("https://api.geeksofgurukul.com/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -68,7 +68,7 @@ const AddCourse = () => {
       },
     };
     // console.log(course);
-    fetch("http://localhost:5000/api/v1/courses/add-course", {
+    fetch("https://api.geeksofgurukul.com/api/v1/courses/add-course", {
       method: "POST",
       body: JSON.stringify(course),
       headers: {

@@ -16,7 +16,7 @@ const Courses = () => {
   useEffect(() => {
     setLoading(true);
     fetch(
-      `http://localhost:5000/api/v1/purchasesCourse/my-courses?email=${user?.email}`
+      `https://api.geeksofgurukul.com/api/v1/purchasesCourse/my-courses?email=${user?.email}`
     )
       .then((res) => res.json())
       .then((result) => {

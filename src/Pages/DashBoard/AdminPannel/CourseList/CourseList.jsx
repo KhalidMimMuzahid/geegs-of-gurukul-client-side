@@ -59,7 +59,7 @@ const CourseList = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/programs/all-program")
+    fetch("https://api.geeksofgurukul.com/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -71,7 +71,7 @@ const CourseList = () => {
     if (program?.program_id) {
       setCourses([]);
       fetch(
-        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
+        `https://api.geeksofgurukul.com/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -107,7 +107,7 @@ const CourseList = () => {
 
   const fetchCourses = (SearchData) => {
     setItems([]);
-    fetch(`http://localhost:5000/api/v1/courses/search-course`, {
+    fetch(`https://api.geeksofgurukul.com/api/v1/courses/search-course`, {
       headers: {
         "content-type": "application/json",
         data: JSON.stringify(SearchData),
@@ -133,7 +133,7 @@ const CourseList = () => {
 
   //delete a course
   const handelDeleteCourse = (id) => {
-    fetch(`http://localhost:5000/api/v1/courses/course/${id}`, {
+    fetch(`https://api.geeksofgurukul.com/api/v1/courses/course/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -150,7 +150,7 @@ const CourseList = () => {
   };
   //update a course
   const handelUpdateCourse = (id) => {
-    fetch(`http://localhost:5000/api/v1/courses/course/${id}`, {
+    fetch(`https://api.geeksofgurukul.com/api/v1/courses/course/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -29,7 +29,7 @@ const ExerciseResponseModal = ({
     };
     console.log(updatedData);
     fetch(
-      `http://localhost:5000/api/v1/exercises/exercise-response-update/${data?._id}`,
+      `https://api.geeksofgurukul.com/api/v1/exercises/exercise-response-update/${data?._id}`,
       {
         method: "PUT",
         body: JSON.stringify(updatedData),

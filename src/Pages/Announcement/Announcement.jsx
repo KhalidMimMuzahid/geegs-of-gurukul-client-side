@@ -56,14 +56,14 @@ const Announcement = () => {
 
   // for setting the status of announcements
   const [status, setStatus] = useState("All");
-  // return <UnderConstruction/>,
+  return <UnderConstruction />;
   return (
-    <div className='font-poppins'>
-      <div className='relative bg-white w-[90vw] h-4/5 mx-auto my-8 rounded-xl'>
-        <div className='flex items-center justify-between'>
-          <h3 className='p-2 font-medium'>Announcement</h3>
+    <div className="font-poppins">
+      <div className="relative bg-white w-[90vw] h-4/5 mx-auto my-8 rounded-xl">
+        <div className="flex items-center justify-between">
+          <h3 className="p-2 font-medium">Announcement</h3>
           <button onClick={() => setIsOpen(true)}>
-            <img src={hamburger} alt='menu-icon' className='w-[5px]' />
+            <img src={hamburger} alt="menu-icon" className="w-[5px]" />
           </button>
           {isOpen && (
             <AnouncementDropdwon
@@ -80,19 +80,19 @@ const Announcement = () => {
               announcements?.map((announcement, i) => (
                 <div
                   key={i}
-                  className='font-poppins p-7 my-4 flex flex-col gap-4 shadow-lg rounded-[16px]'
+                  className="font-poppins p-7 my-4 flex flex-col gap-4 shadow-lg rounded-[16px]"
                 >
-                  <div className=''>
-                    <div className='flex items-center justify-between'>
-                      <h3 className='font-medium text-[20px]'>
+                  <div className="">
+                    <div className="flex items-center justify-between">
+                      <h3 className="font-medium text-[20px]">
                         {announcement?.anouncementTitle}
                       </h3>
-                      <div className='flex items-center gap-7'>
+                      <div className="flex items-center gap-7">
                         <span>
                           {announcement?.details?.scheduledAt ||
                             announcement?.details?.startAt}
                         </span>
-                        <img src={save} alt='bookmark-announcement' />
+                        <img src={save} alt="bookmark-announcement" />
                       </div>
                     </div>
                     <div>
@@ -107,19 +107,19 @@ const Announcement = () => {
                 ?.map((announcement, i) => (
                   <div
                     key={i}
-                    className='font-poppins p-7 my-4 flex flex-col gap-4 shadow-lg rounded-[16px]'
+                    className="font-poppins p-7 my-4 flex flex-col gap-4 shadow-lg rounded-[16px]"
                   >
-                    <div className=''>
-                      <div className='flex items-center justify-between'>
-                        <h3 className='font-medium text-[20px]'>
+                    <div className="">
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-medium text-[20px]">
                           {announcement?.anouncementTitle}
                         </h3>
-                        <div className='flex items-center gap-7'>
+                        <div className="flex items-center gap-7">
                           <span>
                             {announcement?.details?.scheduledAt ||
                               announcement?.details?.startAt}
                           </span>
-                          <img src={save} alt='bookmark-announcement' />
+                          <img src={save} alt="bookmark-announcement" />
                         </div>
                       </div>
                       <div>
@@ -134,19 +134,19 @@ const Announcement = () => {
                 ?.map((announcement, i) => (
                   <div
                     key={i}
-                    className='font-poppins p-7 my-4 flex flex-col gap-4 shadow-lg rounded-[16px]'
+                    className="font-poppins p-7 my-4 flex flex-col gap-4 shadow-lg rounded-[16px]"
                   >
-                    <div className=''>
-                      <div className='flex items-center justify-between'>
-                        <h3 className='font-medium text-[20px]'>
+                    <div className="">
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-medium text-[20px]">
                           {announcement?.anouncementTitle}
                         </h3>
-                        <div className='flex items-center gap-7'>
+                        <div className="flex items-center gap-7">
                           <span>
                             {announcement?.details?.scheduledAt ||
                               announcement?.details?.startAt}
                           </span>
-                          <img src={save} alt='bookmark-announcement' />
+                          <img src={save} alt="bookmark-announcement" />
                         </div>
                       </div>
                       <div>
@@ -157,11 +157,11 @@ const Announcement = () => {
                 ))}
           </div>
         ) : (
-          <div className='flex flex-col items-center justify-center'>
-            <p className='font-poppins font-normal'>
+          <div className="flex flex-col items-center justify-center">
+            <p className="font-poppins font-normal">
               You dont receive any Announcement{" "}
             </p>
-            <img src={anouncement} alt='announcement-icon' />
+            <img src={anouncement} alt="announcement-icon" />
           </div>
         )}
       </div>

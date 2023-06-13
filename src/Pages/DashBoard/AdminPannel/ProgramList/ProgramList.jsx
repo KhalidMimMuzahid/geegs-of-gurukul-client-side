@@ -27,7 +27,7 @@ const ProgramList = () => {
     const programDetails = {
       programName: data?.programName,
     };
-    fetch("http://localhost:5000/api/v1/programs/program-list", {
+    fetch("https://api.geeksofgurukul.com/api/v1/programs/program-list", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

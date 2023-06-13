@@ -17,16 +17,16 @@ const Genarel = () => {
   } = useQuery({
     queryKey: ["userDetailse"],
     queryFn: () =>
-      fetch(`http://localhost:5000/api/v1/users/userinfo/${user?.email}`).then(
-        (res) => res.json()
-      ),
+      fetch(
+        `https://api.geeksofgurukul.com/api/v1/users/userinfo/${user?.email}`
+      ).then((res) => res.json()),
   });
   if (isLoading) {
     return <div>loading...</div>;
   }
   console.log(userDetail);
   return (
-    <div className='relative w-4/5 md:min-h-[580px] h-[750px] mx-auto rounded-xl shadow-lg bg-white text-black p-10'>
+    <div className="relative w-4/5 md:min-h-[580px] h-[750px] mx-auto rounded-xl shadow-lg bg-white text-black p-10">
       {isEditing ? (
         <EditingMode
           refetch={refetch}
@@ -38,17 +38,17 @@ const Genarel = () => {
       )}
       <div
         onClick={() => setIsEditing(!isEditing)}
-        className=' absolute top-4 right-4'
+        className=" absolute top-4 right-4"
       >
         {isEditing ? (
           <TbEditOff
-            title='edit user profile'
-            className='text-3xl text-black hover:text-green-500 hover:cursor-pointer transition-all duration-300'
+            title="edit user profile"
+            className="text-3xl text-black hover:text-green-500 hover:cursor-pointer transition-all duration-300"
           />
         ) : (
           <BiEdit
-            title='edit user profile'
-            className='text-3xl text-black hover:text-green-500 hover:cursor-pointer transition-all duration-300'
+            title="edit user profile"
+            className="text-3xl text-black hover:text-green-500 hover:cursor-pointer transition-all duration-300"
           />
         )}
       </div>

@@ -22,7 +22,7 @@ const WarningModal = ({
     const res = await Promise.all(
       exercisesResponses?.map((eachRes) => {
         return fetch(
-          `http://localhost:5000/api/v1/exercises/exercise-response-update/${eachRes?.response_id}`,
+          `https://api.geeksofgurukul.com/api/v1/exercises/exercise-response-update/${eachRes?.response_id}`,
           {
             method: "PUT",
             body: JSON.stringify({

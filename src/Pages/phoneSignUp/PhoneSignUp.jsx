@@ -121,7 +121,7 @@ const PhoneSignUp = () => {
 
     if (email && phoneNumber) {
       // xxxxxxxxxxxxxxxxxxxxxxx
-      fetch("http://localhost:5000/api/v1/users/update-phone", {
+      fetch("https://api.geeksofgurukul.com/api/v1/users/update-phone", {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -166,7 +166,7 @@ const PhoneSignUp = () => {
   const saveUser = (name, email, phone) => {
     const user = { name, email, phone };
 
-    fetch("http://localhost:5000/api/v1/users/users", {
+    fetch("https://api.geeksofgurukul.com/api/v1/users/users", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -192,38 +192,38 @@ const PhoneSignUp = () => {
   }
   return (
     <>
-      <div className='col-md-12  mb-5 custom-mergin'>
-        <div className='box  new-login-from-phone'>
+      <div className="col-md-12  mb-5 custom-mergin">
+        <div className="box  new-login-from-phone">
           {error && (
-            <div className=' border border-red-600 bg-red-300 px-4 py-8'>
+            <div className=" border border-red-600 bg-red-300 px-4 py-8">
               {error}
             </div>
           )}
           <form onSubmit={getOtp} style={{ display: !flag ? "block" : "none" }}>
-            <div className='single-from-admissionPhone ma-btt'>
-              <h5 className='mb-3'>Full Name</h5>
+            <div className="single-from-admissionPhone ma-btt">
+              <h5 className="mb-3">Full Name</h5>
               <input
-                type='text'
+                type="text"
                 required
-                name='name'
+                name="name"
                 defaultValue={tempUser?.displayName}
               />
             </div>
-            <h5 className='mb-3'>Phone number</h5>
-            <div className='mb-3' controlId='formBasicEmail'>
+            <h5 className="mb-3">Phone number</h5>
+            <div className="mb-3" controlId="formBasicEmail">
               <PhoneInput
-                defaultCountry='IN'
+                defaultCountry="IN"
                 value={number}
                 onChange={setNumber}
-                placeholder='Enter Phone Number'
+                placeholder="Enter Phone Number"
               />
-              <div id='recaptcha-container'></div>
+              <div id="recaptcha-container"></div>
             </div>
-            <div className='button-right'>
+            <div className="button-right">
               &nbsp;
               <button
-                type='submit'
-                className='border rounded-lg px-4 py-1 bg-green-300 hover:cursor-pointer hover:bg-green-400'
+                type="submit"
+                className="border rounded-lg px-4 py-1 bg-green-300 hover:cursor-pointer hover:bg-green-400"
               >
                 Continue
               </button>
@@ -234,21 +234,21 @@ const PhoneSignUp = () => {
             onSubmit={verifyOtp}
             style={{ display: flag ? "block" : "none" }}
           >
-            <h2 className='mb-3'>Enter your OTP</h2>
-            <div className='mb-3' controlId='formBasicOtp'>
+            <h2 className="mb-3">Enter your OTP</h2>
+            <div className="mb-3" controlId="formBasicOtp">
               <input
-                type='otp'
-                className='border-2'
-                placeholder='Enter OTP'
+                type="otp"
+                className="border-2"
+                placeholder="Enter OTP"
                 onChange={(e) => setOtp(e.target.value)}
               />
             </div>
-            <div className='flex gap-4'>
-              <Link to='/' className='px-4 py-2 border'>
-                <button className='text-black'>Cancel</button>
+            <div className="flex gap-4">
+              <Link to="/" className="px-4 py-2 border">
+                <button className="text-black">Cancel</button>
               </Link>
               &nbsp;
-              <button type='submit' className='px-4 text-black py-2 border'>
+              <button type="submit" className="px-4 text-black py-2 border">
                 Verify
               </button>
             </div>

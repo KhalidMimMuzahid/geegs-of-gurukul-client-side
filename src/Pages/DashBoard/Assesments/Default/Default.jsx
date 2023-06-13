@@ -13,7 +13,7 @@ const Default = () => {
   const [itemOffset, setItemOffset] = useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/assessments/assessments")
+    fetch("https://api.geeksofgurukul.com/api/v1/assessments/assessments")
       .then((res) => res.json())
       .then((assessments) => {
         console.log("Assessments: ", assessments);

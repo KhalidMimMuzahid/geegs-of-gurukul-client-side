@@ -68,7 +68,7 @@ const ModuleList = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/programs/all-program")
+    fetch("https://api.geeksofgurukul.com/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -80,7 +80,7 @@ const ModuleList = () => {
     if (program?.program_id) {
       // setCourses([]);
       fetch(
-        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
+        `https://api.geeksofgurukul.com/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -95,7 +95,7 @@ const ModuleList = () => {
     if (course?.course_id) {
       // setCourses([]);
       fetch(
-        `http://localhost:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
+        `https://api.geeksofgurukul.com/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -112,7 +112,7 @@ const ModuleList = () => {
       course_id: course?.course_id,
       batch_id: batch?.batch_id,
     };
-    fetch(`http://localhost:5000/api/v1/modules/search-module`, {
+    fetch(`https://api.geeksofgurukul.com/api/v1/modules/search-module`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
