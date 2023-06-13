@@ -178,13 +178,16 @@ const ProfessionEditingMode = ({ setIsEditing }) => {
 
   const updateFetch = (updateData) => {
     // return;
-    fetch(`http://localhost:5000/api/v1/users/edit-user/${user?.email}`, {
-      method: "PUT",
-      body: JSON.stringify(updateData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `https://api.geeksofgurukul.com/api/v1/users/edit-user/${user?.email}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(updateData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data?.success) {

@@ -29,7 +29,9 @@ const UserProvider = ({ children }) => {
   const [justCreatedUser, setJustCreatedUser] = useState(false);
   useEffect(() => {
     if (updateUser?.email) {
-      fetch(`http://localhost:5000/api/v1/users/userinfo/${updateUser?.email}`)
+      fetch(
+        `https://api.geeksofgurukul.com/api/v1/users/userinfo/${updateUser?.email}`
+      )
         .then((res) => res.json())
         .then((user) => {
           if (user?.email) {

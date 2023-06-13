@@ -31,7 +31,7 @@ const EditSkillModal = ({ editSkill, setEditSkill }) => {
     };
     console.log("skills data is: ", skillsData);
 
-    fetch("http://localhost:5000/api/v1/users/update-skill", {
+    fetch("https://api.geeksofgurukul.com/api/v1/users/update-skill", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -52,45 +52,45 @@ const EditSkillModal = ({ editSkill, setEditSkill }) => {
   };
 
   return (
-    <div className='fixed inset-0 flex items-center justify-center z-50'>
+    <div className="fixed inset-0 flex items-center justify-center z-50">
       <Transition
         show={editSkill}
-        enter='transition-opacity duration-300'
-        enterFrom='opacity-0'
-        enterTo='opacity-100'
-        leave='transition-opacity duration-300'
-        leaveFrom='opacity-100'
-        leaveTo='opacity-0'
-        className='bg-green-300 p-16 rounded-lg'
+        enter="transition-opacity duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity duration-300"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+        className="bg-green-300 p-16 rounded-lg"
       >
-        <h1 className='text-2xl font-bold mb-4'>Update User Skills</h1>
+        <h1 className="text-2xl font-bold mb-4">Update User Skills</h1>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='flex mb-4'>
+          <div className="flex mb-4">
             <input
-              type='text'
-              className='w-full rounded-l py-2 px-4 focus:outline-none'
-              placeholder='Enter a skill'
+              type="text"
+              className="w-full rounded-l py-2 px-4 focus:outline-none"
+              placeholder="Enter a skill"
               {...register("skill")}
             />
             <button
-              type='submit'
-              className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-r'
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-r"
             >
               Add
             </button>
           </div>
         </form>
 
-        <div className='flex flex-wrap mb-4'>
+        <div className="flex flex-wrap mb-4">
           {skills.map((skill, index) => (
             <div
               key={index}
-              className='bg-gray-200 rounded py-1 px-2 mr-2 mb-2 flex items-center'
+              className="bg-gray-200 rounded py-1 px-2 mr-2 mb-2 flex items-center"
             >
-              <span className='mr-1'>{skill}</span>
+              <span className="mr-1">{skill}</span>
               <button
-                className='text-red-500 hover:text-red-700'
+                className="text-red-500 hover:text-red-700"
                 onClick={() => removeSkill(skill)}
               >
                 X
@@ -99,15 +99,15 @@ const EditSkillModal = ({ editSkill, setEditSkill }) => {
           ))}
         </div>
 
-        <div className='flex gap-8'>
+        <div className="flex gap-8">
           <button
-            className='bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded'
+            className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
             onClick={() => updateSkills(skills, user)}
           >
             Update
           </button>
           <button
-            className='bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded'
+            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
             onClick={() => setEditSkill(false)}
           >
             Cancel

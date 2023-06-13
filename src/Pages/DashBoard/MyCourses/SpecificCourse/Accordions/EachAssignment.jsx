@@ -70,13 +70,16 @@ function EachAssignment({
       },
     };
     console.log("assignmentData: ", assignmentData);
-    fetch("http://localhost:5000/api/v1/assignments/assignment-response", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(assignmentData),
-    })
+    fetch(
+      "https://api.geeksofgurukul.com/api/v1/assignments/assignment-response",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(assignmentData),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         console.log("data for exercises", data);
@@ -96,7 +99,7 @@ function EachAssignment({
   //   console.log("lecture: ", lecture);
   useEffect(() => {
     fetch(
-      `http://localhost:5000/api/v1/assignments/assignmentby_id?_id=${eachAssignment?.assignment_id}`
+      `https://api.geeksofgurukul.com/api/v1/assignments/assignmentby_id?_id=${eachAssignment?.assignment_id}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -113,13 +116,16 @@ function EachAssignment({
       assignment_id: eachAssignment?.assignment_id,
       studentEmail: user?.email,
     };
-    fetch(`http://localhost:5000/api/v1/assignments/assignment-response`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        query: JSON.stringify(query),
-      },
-    })
+    fetch(
+      `https://api.geeksofgurukul.com/api/v1/assignments/assignment-response`,
+      {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          query: JSON.stringify(query),
+        },
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         console.log("result in each assi: ", result);
@@ -133,7 +139,7 @@ function EachAssignment({
             studentEmail: user?.email,
           };
           fetch(
-            `http://localhost:5000/api/v1/assignments/assignment-exercises-response`,
+            `https://api.geeksofgurukul.com/api/v1/assignments/assignment-exercises-response`,
             {
               method: "GET",
               headers: {

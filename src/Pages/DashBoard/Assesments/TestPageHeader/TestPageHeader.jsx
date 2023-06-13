@@ -15,13 +15,16 @@ const TestPageHeader = ({ setAssessments }) => {
 
   const onSearch = (data) => {
     setLoading(true);
-    fetch("http://localhost:5000/api/v1/assessments/search-assessment", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        data: JSON.stringify(data),
-      },
-    })
+    fetch(
+      "https://api.geeksofgurukul.com/api/v1/assessments/search-assessment",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          data: JSON.stringify(data),
+        },
+      }
+    )
       .then((response) => response.json())
       .then((result) => {
         if (result?.success) {

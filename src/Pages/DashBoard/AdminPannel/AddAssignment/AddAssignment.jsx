@@ -79,13 +79,16 @@ function AddAssignment() {
       },
     };
     //console.log(assignmentDetails);
-    fetch(`http://localhost:5000/api/v1/assignments/assignmentDetails`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(assignmentDetails),
-    })
+    fetch(
+      `https://api.geeksofgurukul.com/api/v1/assignments/assignmentDetails`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(assignmentDetails),
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         if (result.success) {

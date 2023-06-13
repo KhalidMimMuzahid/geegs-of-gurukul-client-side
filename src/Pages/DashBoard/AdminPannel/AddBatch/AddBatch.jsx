@@ -54,7 +54,7 @@ const AddBatch = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/programs/all-program")
+    fetch("https://api.geeksofgurukul.com/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -66,7 +66,7 @@ const AddBatch = () => {
     if (program?.program_id) {
       setCourses([]);
       fetch(
-        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
+        `https://api.geeksofgurukul.com/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -99,7 +99,7 @@ const AddBatch = () => {
       },
     };
     console.log("batchDetails: ", batch);
-    fetch("http://localhost:5000/api/v1/batches/add-batch", {
+    fetch("https://api.geeksofgurukul.com/api/v1/batches/add-batch", {
       method: "POST",
       body: JSON.stringify(batch),
       headers: {

@@ -123,13 +123,16 @@ const EditingMode = ({ setIsEditing }) => {
 
   const userProfileUpdate = (updatedUser) => {
     // return;
-    fetch(`http://localhost:5000/api/v1/users/edit-user/${user?.email}`, {
-      method: "PUT",
-      body: JSON.stringify(updatedUser),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `https://api.geeksofgurukul.com/api/v1/users/edit-user/${user?.email}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(updatedUser),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data?.success) {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "react-tabs/style/react-tabs.css";
 import ticket from "../../assets/ticket/ticket.svg";
 import { useForm } from "react-hook-form";
-//import UnderConstruction from "../../Components/UnderConstruction/UnderConstruction";
+import UnderConstruction from "../../Components/UnderConstruction/UnderConstruction";
 
 const Help = () => {
   const [attachmentStatus, setAttchmentStaus] = useState({});
@@ -39,7 +39,7 @@ const Help = () => {
     reset();
   };
   const [ticketStatus, setTicketStatus] = useState("Create new ticket");
-  //return <UnderConstruction/>
+  return <UnderConstruction />;
   return (
     <div className=" bg-[#C4F0CE] h-screen overflow-auto">
       <div

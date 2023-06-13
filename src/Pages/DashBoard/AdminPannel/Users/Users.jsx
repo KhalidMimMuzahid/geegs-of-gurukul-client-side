@@ -21,7 +21,7 @@ const Users = () => {
   } = useForm();
 
   const onSearch = (data) => {
-    fetch(`http://localhost:5000/api/v1/users/search-user`, {
+    fetch(`https://api.geeksofgurukul.com/api/v1/users/search-user`, {
       headers: {
         "content-type": "application/json",
         data: JSON.stringify(data),

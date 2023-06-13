@@ -27,7 +27,7 @@ const AddStudent = () => {
 
   // find program
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/programs/all-program")
+    fetch("https://api.geeksofgurukul.com/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         console.log("program data", data?.data);
@@ -45,7 +45,7 @@ const AddStudent = () => {
   // find course
   useEffect(() => {
     if (selectedProgram) {
-      fetch(`http://localhost:5000/api/v1/courses/search-course`, {
+      fetch(`https://api.geeksofgurukul.com/api/v1/courses/search-course`, {
         headers: {
           "content-type": "application/json",
           data: JSON.stringify({ program_id: selectedProgram }),
@@ -77,7 +77,7 @@ const AddStudent = () => {
         try {
           (async () => {
             const resBatch = await fetch(
-              `http://localhost:5000/api/v1/batches/batch?batchName=${tempCourse?.currentBatch}`
+              `https://api.geeksofgurukul.com/api/v1/batches/batch?batchName=${tempCourse?.currentBatch}`
             );
             const resultBatch = await resBatch.json();
             if (resultBatch?._id) {
@@ -139,7 +139,7 @@ const AddStudent = () => {
       };
       console.log("data: ", coursePurchaseDetails);
       fetch(
-        `http://localhost:5000/api/v1/purchasesCourse/add-student-to-course`,
+        `https://api.geeksofgurukul.com/api/v1/purchasesCourse/add-student-to-course`,
         {
           method: "POST",
           headers: {

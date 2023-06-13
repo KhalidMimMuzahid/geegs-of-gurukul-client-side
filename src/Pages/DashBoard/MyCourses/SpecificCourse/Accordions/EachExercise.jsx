@@ -51,7 +51,7 @@ const EachExercise = ({
     queryKey: [exerciseTemp?.exercise_id],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/api/v1/exercises/exerciseby_id?_id=${exerciseTemp?.exercise_id}`
+        `https://api.geeksofgurukul.com/api/v1/exercises/exerciseby_id?_id=${exerciseTemp?.exercise_id}`
       );
       const data = await res.json();
       return data;
@@ -70,7 +70,7 @@ const EachExercise = ({
       exercise_id: exerciseTemp?.exercise_id,
       studentEmail: user?.email,
     };
-    fetch(`http://localhost:5000/api/v1/exercises/exercise-response`, {
+    fetch(`https://api.geeksofgurukul.com/api/v1/exercises/exercise-response`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -187,13 +187,16 @@ const EachExercise = ({
           finishedAt: "",
         },
       };
-      fetch("http://localhost:5000/api/v1/exercises/exercise-response", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(exerciseData),
-      })
+      fetch(
+        "https://api.geeksofgurukul.com/api/v1/exercises/exercise-response",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(exerciseData),
+        }
+      )
         .then((response) => response.json())
         .then((data) => {
           // console.log("data for exercises", data);
@@ -252,7 +255,7 @@ const EachExercise = ({
     // console.log("responseData: ", responseData);
     // console.log("exerciseResponse: ", exerciseResponse);
     const allDataForExerciseResponse = { query, responseData };
-    fetch("http://localhost:5000/api/v1/exercises/exercise-response", {
+    fetch("https://api.geeksofgurukul.com/api/v1/exercises/exercise-response", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

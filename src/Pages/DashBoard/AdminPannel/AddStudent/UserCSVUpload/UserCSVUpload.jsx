@@ -73,7 +73,7 @@ const UserCSVUpload = ({ batch, courseObject }) => {
           const res = await Promise.all(
             studentsForCourse?.map((coursePurchaseDetails) => {
               return fetch(
-                `http://localhost:5000/api/v1/purchasesCourse/add-student-to-course`,
+                `https://api.geeksofgurukul.com/api/v1/purchasesCourse/add-student-to-course`,
                 {
                   method: "POST",
                   headers: {

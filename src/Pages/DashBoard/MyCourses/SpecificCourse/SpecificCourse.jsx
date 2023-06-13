@@ -19,7 +19,7 @@ const SpecificCourse = () => {
   // useEffect(() => {
   //   console.log("specific useEffect called");
   //   fetch(
-  //     `http://localhost:5000/api/v1/modules/modulesbycourseandbatch?course_id=${"6465c48a3a22da5a8518d942"}&batch_id=${"6469c5010664f5003c9be953"}`
+  //     `https://api.geeksofgurukul.com/api/v1/modules/modulesbycourseandbatch?course_id=${"6465c48a3a22da5a8518d942"}&batch_id=${"6469c5010664f5003c9be953"}`
   //   )
   //     .then((res) => res.json())
   //     .then((data) => {
@@ -34,7 +34,7 @@ const SpecificCourse = () => {
     setModules(modulesTemp);
     const course_id = modulesTemp[0]?.course?.course_id;
     console.log("course_id: ", course_id);
-    fetch(`http://localhost:5000/api/v1/courses/course/${course_id}`)
+    fetch(`https://api.geeksofgurukul.com/api/v1/courses/course/${course_id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log("Course data: ", data);

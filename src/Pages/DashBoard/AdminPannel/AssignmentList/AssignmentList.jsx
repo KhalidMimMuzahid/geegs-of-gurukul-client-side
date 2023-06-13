@@ -23,13 +23,16 @@ const AssignmentList = () => {
 
   const onSearch = (data) => {
     setLoading(true);
-    fetch(`http://localhost:5000/api/v1/assignments/searchAssignment`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        data: JSON.stringify(data),
-      },
-    })
+    fetch(
+      `https://api.geeksofgurukul.com/api/v1/assignments/searchAssignment`,
+      {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          data: JSON.stringify(data),
+        },
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         if (result?.success) {

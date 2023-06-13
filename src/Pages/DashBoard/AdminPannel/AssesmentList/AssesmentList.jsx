@@ -27,13 +27,16 @@ const AssesmentList = () => {
 
   const FetchAssessment = (searchData) => {
     setLoading(true);
-    fetch("http://localhost:5000/api/v1/assessments/search-assessment", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        data: JSON.stringify(searchData),
-      },
-    })
+    fetch(
+      "https://api.geeksofgurukul.com/api/v1/assessments/search-assessment",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          data: JSON.stringify(searchData),
+        },
+      }
+    )
       .then((response) => response.json())
       .then((result) => {
         if (result?.success) {

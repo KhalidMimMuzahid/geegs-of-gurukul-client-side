@@ -34,7 +34,7 @@ const AddProgram = () => {
         },
       },
     };
-    fetch("http://localhost:5000/api/v1/programs/add-program", {
+    fetch("https://api.geeksofgurukul.com/api/v1/programs/add-program", {
       method: "POST",
       body: JSON.stringify(programDetails),
       headers: {

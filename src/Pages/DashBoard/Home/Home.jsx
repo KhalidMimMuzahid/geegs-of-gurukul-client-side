@@ -32,10 +32,11 @@ const Home = () => {
   // };
   return (
     <div className="">
-      <div className="w-11/12 mx-auto flex flex-col md:flex-row gap-4 mt-6">
+      <UnderConstruction />
+      {/* <div className="w-11/12 mx-auto flex flex-col md:flex-row gap-4 mt-6">
         <HomePageLeftSiteCard />
         <HomePageRightSiteCard />
-      </div>
+      </div> */}
       {/* <div>
         <LectureScedule />
         <LectureScedule />

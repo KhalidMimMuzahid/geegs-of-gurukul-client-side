@@ -93,7 +93,7 @@ const router = createBrowserRouter([
             path: "/dashboard/analysis/specific/:_id",
             loader: async ({ params }) =>
               fetch(
-                `http://localhost:5000/api/v1/assessments/assessment-response?_id=${params?._id}`
+                `https://api.geeksofgurukul.com/api/v1/assessments/assessment-response?_id=${params?._id}`
               ),
             element: <Analysis />,
           },
@@ -112,7 +112,7 @@ const router = createBrowserRouter([
                   // console.log("queries: ", params?.queries);
                   // return params?.queries;
                   return fetch(
-                    `http://localhost:5000/api/v1/modules/modulesbycourseandbatch?${params?.queries}`
+                    `https://api.geeksofgurukul.com/api/v1/modules/modulesbycourseandbatch?${params?.queries}`
                   );
                 },
                 element: <SpecificCourse />,
@@ -302,7 +302,7 @@ const router = createBrowserRouter([
     path: "on-processing/:_id",
     loader: async ({ params }) =>
       fetch(
-        `http://localhost:5000/api/v1/assessments/assessment?_id=${params?._id}`
+        `https://api.geeksofgurukul.com/api/v1/assessments/assessment?_id=${params?._id}`
       ),
     element: <OnProcessinAssesments />,
   },
