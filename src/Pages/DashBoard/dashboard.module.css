@@ -23,29 +23,29 @@
   /* height: calc(100vh- 5rem); */
   height: 90vh;
 }
+@media only screen and (min-width: 767.5px) {
+  .menuHover:hover span {
+    color: white;
+  }
 
-.menuHover:hover span {
-  color: white;
-}
+  .menuHover:hover {
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    background-color: #4ba25d;
+  }
 
-.menuHover:hover {
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15);
-  border-radius: 5px;
-  background-color: #4ba25d;
-}
+  .menuHover:hover .icon {
+    color: white !important;
+  }
 
-.menuHover:hover .icon {
-  color: white !important;
-}
-
-.menuHover {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 300;
-  font-size: 17px;
-  line-height: 30px;
-
-  color: #282828;
+  .menuHover {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 30px;
+    color: #282828;
+  }
 }
 
 .actives span {
