@@ -182,7 +182,7 @@ const Header = () => {
 
   // console.log("location: ", location);
   return (
-    <Disclosure as="nav" className="md:my-5 lg:my-0">
+    <Disclosure as="nav" className="md:my-5 lg:my-0 ">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 font-poppins">

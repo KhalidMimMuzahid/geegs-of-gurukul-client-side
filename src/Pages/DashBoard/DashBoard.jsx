@@ -62,7 +62,8 @@ const DashBoard = () => {
   // }, [currentPath]);
 
   return (
-    <div className="flex  gap-4 w-full h-screen">
+    <div className="flex flex-col-reverse md:flex-row   md:gap-4 w-full h-screen">
+      {/* this is for tablet and desktop view  */}
       <div
         style={{
           // display: `${shouldHiddenNav ? "none" : "block"}`,
@@ -101,8 +102,31 @@ const DashBoard = () => {
           ))}
         </ul>
       </div>
+      {/* this is for mobile biew  */}
+      <div
+        style={{
+          width: "100vw",
+          height: "7vh",
+          border: "1px solid gray",
+          borderRadius: "15px 15px 0 0",
+        }}
+        className="block md:hidden fixed  z-[99999999] bottom-0 left-[0px] right-[0px]  bg-white  border-gray-600"
+      >
+        {
+          <ul className=" flex justify-around font-poppins">
+            {Menus.map((Menu, index) => (
+              <EachLink
+                key={index}
+                currentPath={currentPath}
+                Menu={Menu}
+                open={open}
+              />
+            ))}
+          </ul>
+        }
+      </div>
       {/* h-screen  */}
-      <div className="grow    relative h-full">
+      <div className="grow  relative h-full">
         <div className="hidden md:block">
           <img
             src={control}
@@ -115,8 +139,8 @@ const DashBoard = () => {
           />
         </div>
         <div
-          className={`relative  top-[50px] rounded-2xl px-1 sm:px-2 md:px-4 lg:px-8
-              ${style.dashboardHeight}  bg-white  overflow-y-auto `}
+          className={`relative  md:top-[-30px] rounded-2xl px-1 sm:px-2 md:px-4 lg:px-8
+             h-[80vh] md:h-[90vh]  bg-white  overflow-y-auto `}
         >
           <Outlet />
         </div>
