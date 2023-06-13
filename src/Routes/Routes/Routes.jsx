@@ -54,6 +54,7 @@ import Profession from "../../Pages/Profile/MyProfile/Profession/Profession";
 import MySkills from "./../../Pages/Profile/MyProfile/MySkills/MySkills";
 import ExerciseResponse from "./../../Pages/DashBoard/AdminPannel/ExerciseResponse/ExerciseResponse";
 import AddStudent from "../../Pages/DashBoard/AdminPannel/AddStudent/AddStudent";
+import SystemSettings from "../../Pages/Profile/MyProfile/Settings/SystemSettings/SystemSettings";
 
 const { createBrowserRouter } = require("react-router-dom");
 const router = createBrowserRouter([
@@ -284,6 +285,10 @@ const router = createBrowserRouter([
                   {
                     path: "/profile/my-profile/settings/edit-profile",
                     element: <EditProfile />,
+                  },
+                  {
+                    path: "/profile/my-profile/settings//system-settings",
+                    element: <SystemSettings />,
                   },
                 ],
               },
