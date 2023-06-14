@@ -21,7 +21,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-goglmsclient-dev-102437-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
         "logicalId": "hostingamplifyhosting"
       },
-      "lastPushTimeStamp": "2023-06-13T10:05:45.324Z",
+      "lastPushTimeStamp": "2023-06-14T02:38:53.069Z",
       "output": {},
       "lastPushDirHash": "6v8XKeeXZRkLek62F9GtulkV+ps="
     }
