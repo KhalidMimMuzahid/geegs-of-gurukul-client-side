@@ -20,7 +20,6 @@ const DashBoard = () => {
   const [open, setOpen] = useState(true);
   const [currentPath, setCurrrentPath] = useState("");
   const { sideNavLayoutForMobile } = useContext(UIContext);
-  // const [shouldHiddenNav, setShouldHiddenNav] = useState(false);
 
   const Menus = [
     { title: "Home", src: <BsHouse />, link: "/" },
@@ -55,14 +54,6 @@ const DashBoard = () => {
     return handleLocationChange();
   });
 
-  // useEffect(() => {
-  //   // console.log("currentPath: ", currentPath);
-  //   if (currentPath.startsWith("/dashboard/assessment/on-processing")) {
-  //     setShouldHiddenNav(true);
-  //   } else {
-  //     setShouldHiddenNav(false);
-  //   }
-  // }, [currentPath]);
   const forBottomLayout = (
     <div className="flex flex-col-reverse md:flex-row   md:gap-4 w-full h-screen">
       {/* this is for tablet and desktop view  */}
@@ -162,13 +153,6 @@ const DashBoard = () => {
           style.dashboardHeight
         } h-screen  border-0 md:border-2 p-5  pt-8 md:relative absolute duration-300 z-[1000] `}
       >
-        {/* <img
-          src={control}
-          className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
-           border-2 rounded-full  ${!open && "rotate-180"}`}
-          onClick={() => setOpen(!open)}
-          alt=""
-        /> */}
         <div className="flex gap-x-3 items-center ">
           <img
             style={{ width: "40px", height: "40px" }}
@@ -211,8 +195,7 @@ const DashBoard = () => {
           />
         </div>
         <div
-          className={`relative top-[-35px] rounded-lg
-            ${style.dashboardHeight}  bg-white  overflow-y-auto `}
+          className={`relative top-[-35px] rounded-lg ${style.dashboardHeight}  bg-white  overflow-y-auto `}
         >
           <Outlet />
         </div>
