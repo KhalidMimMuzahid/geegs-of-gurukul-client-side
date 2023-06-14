@@ -1,5 +1,4 @@
 import Main from "../../Layouts/Main/Main";
-import Career from "../../Pages/Career/Career";
 import AddAssesment from "../../Pages/DashBoard/AdminPannel/AddAssesment/AddAssesment";
 import AdminPannel from "../../Pages/DashBoard/AdminPannel/AdminPannel";
 import AssesmentList from "../../Pages/DashBoard/AdminPannel/AssesmentList/AssesmentList";
@@ -12,8 +11,6 @@ import OnProcessinAssesments from "../../Pages/DashBoard/Assesments/OnProcessinA
 import DashBoard from "../../Pages/DashBoard/DashBoard";
 import Practice from "../../Pages/DashBoard/Practice/Practice";
 import Error from "../../Pages/Error/Error";
-// import Learn from "../../Pages/Learn/Learn";
-import LeaderBoard from "../../Pages/Profile/LeaderBoard/LeaderBoard";
 import Certification from "../../Pages/Profile/MyProfile/Certification/Certification";
 import Education from "../../Pages/Profile/MyProfile/Education/Education";
 import Genarel from "../../Pages/Profile/MyProfile/Genarel/Genarel";
@@ -242,11 +239,6 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/career",
-        element: <Career />,
-      },
-
-      {
         path: "/profile",
         element: <Profile />,
         children: [
@@ -293,11 +285,6 @@ const router = createBrowserRouter([
                 ],
               },
             ],
-          },
-
-          {
-            path: "/profile/leaderboard",
-            element: <LeaderBoard />,
           },
         ],
       },

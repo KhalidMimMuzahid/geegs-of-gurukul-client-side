@@ -1,16 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import style from "../../../DashBoard/dashboard.module.css";
-import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
-const EachLink = ({ currentPath, Menu, open }) => {
-  const { user } = useContext(AuthContext);
 
+const EachLinkForLeft = ({ currentPath, Menu, open }) => {
   const isActive =
     Menu?.link === "/profile/my-profile"
       ? currentPath === "/profile/my-profile"
       : currentPath.startsWith(Menu?.link);
 
-  return user?.role === "student" && Menu?.title === "Admin" ? null : (
+  return (
     <li>
       <Link
         to={Menu?.link}
@@ -34,4 +32,4 @@ const EachLink = ({ currentPath, Menu, open }) => {
   );
 };
 
-export default EachLink;
+export default EachLinkForLeft;
