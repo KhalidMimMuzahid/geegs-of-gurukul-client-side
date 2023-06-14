@@ -64,7 +64,7 @@ const AddAssesment = () => {
       return;
     }
     // console.log(" assesment : ", assesment);
-    fetch("http://localhost:5000/api/v1/assessments/add-assesment", {
+    fetch("https://api.geeksofgurukul.com/api/v1/assessments/add-assesment", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -98,7 +98,7 @@ const AddAssesment = () => {
       // it should be not going to nex step
       // return
     }
-    fetch("http://localhost:5000/api/v1/questions/get-questions", {
+    fetch("https://api.geeksofgurukul.com/api/v1/questions/get-questions", {
       headers: {
         "content-type": "application/json",
         searchparameteresforqueries: JSON.stringify(
@@ -150,7 +150,7 @@ const AddAssesment = () => {
   //     return;
   //   }
   //   // console.log(" assesment : ", assesment);
-  //   fetch("http://localhost:5000/api/v1/questions/add-assesment", {
+  //   fetch("https://api.geeksofgurukul.com/api/v1/questions/add-assesment", {
   //     method: "POST",
   //     headers: {
   //       "content-type": "application/json",

@@ -206,7 +206,7 @@ const CSV = () => {
       const withNonDuplicateQuestions = removeDuplicateQuestions(allQuestions);
       console.log("withNonDuplicateQuestions: ", withNonDuplicateQuestions);
       // return;
-      fetch("http://localhost:5000/api/v1/questions/add-csv-data", {
+      fetch("https://api.geeksofgurukul.com/api/v1/questions/add-csv-data", {
         method: "POST",
         headers: {
           "content-type": "application/json",

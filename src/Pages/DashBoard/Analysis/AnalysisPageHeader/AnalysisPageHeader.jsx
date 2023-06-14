@@ -19,7 +19,7 @@ const AnalysisPageHeader = ({ setResponses }) => {
   const onSearch = (data) => {
     setLoading(true);
     fetch(
-      `http://localhost:5000/api/v1/assessments/assessment-responses-search?email=${user?.email}`,
+      `https://api.geeksofgurukul.com/api/v1/assessments/assessment-responses-search?email=${user?.email}`,
       {
         method: "GET",
         headers: {

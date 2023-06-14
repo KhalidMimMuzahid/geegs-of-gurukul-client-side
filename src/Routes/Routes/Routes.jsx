@@ -54,6 +54,7 @@ import Profession from "../../Pages/Profile/MyProfile/Profession/Profession";
 import MySkills from "./../../Pages/Profile/MyProfile/MySkills/MySkills";
 import ExerciseResponse from "./../../Pages/DashBoard/AdminPannel/ExerciseResponse/ExerciseResponse";
 import AddStudent from "../../Pages/DashBoard/AdminPannel/AddStudent/AddStudent";
+import SystemSettings from "../../Pages/Profile/MyProfile/Settings/SystemSettings/SystemSettings";
 
 const { createBrowserRouter } = require("react-router-dom");
 const router = createBrowserRouter([
@@ -93,7 +94,7 @@ const router = createBrowserRouter([
             path: "/dashboard/analysis/specific/:_id",
             loader: async ({ params }) =>
               fetch(
-                `http://localhost:5000/api/v1/assessments/assessment-response?_id=${params?._id}`
+                `https://api.geeksofgurukul.com/api/v1/assessments/assessment-response?_id=${params?._id}`
               ),
             element: <Analysis />,
           },
@@ -112,7 +113,7 @@ const router = createBrowserRouter([
                   // console.log("queries: ", params?.queries);
                   // return params?.queries;
                   return fetch(
-                    `http://localhost:5000/api/v1/modules/modulesbycourseandbatch?${params?.queries}`
+                    `https://api.geeksofgurukul.com/api/v1/modules/modulesbycourseandbatch?${params?.queries}`
                   );
                 },
                 element: <SpecificCourse />,
@@ -285,6 +286,10 @@ const router = createBrowserRouter([
                     path: "/profile/my-profile/settings/edit-profile",
                     element: <EditProfile />,
                   },
+                  {
+                    path: "/profile/my-profile/settings//system-settings",
+                    element: <SystemSettings />,
+                  },
                 ],
               },
             ],
@@ -302,7 +307,7 @@ const router = createBrowserRouter([
     path: "on-processing/:_id",
     loader: async ({ params }) =>
       fetch(
-        `http://localhost:5000/api/v1/assessments/assessment?_id=${params?._id}`
+        `https://api.geeksofgurukul.com/api/v1/assessments/assessment?_id=${params?._id}`
       ),
     element: <OnProcessinAssesments />,
   },

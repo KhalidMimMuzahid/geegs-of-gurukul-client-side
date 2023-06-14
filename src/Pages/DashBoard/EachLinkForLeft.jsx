@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import style from "./dashboard.module.css";
 import { AuthContext } from "../../contexts/UserProvider/UserProvider";
 
-const EachLink = ({ currentPath, Menu, open }) => {
+const EachLinkForLeft = ({ currentPath, Menu, open }) => {
   const { user } = useContext(AuthContext);
 
   const isActive =
@@ -42,4 +42,4 @@ const EachLink = ({ currentPath, Menu, open }) => {
     : link;
 };
 
-export default EachLink;
+export default EachLinkForLeft;

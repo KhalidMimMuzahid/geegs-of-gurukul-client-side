@@ -9,7 +9,7 @@ const EachRes = ({ response }) => {
   const [assessment, setAssessment] = useState(null);
   useEffect(() => {
     fetch(
-      `http://localhost:5000/api/v1/assessments/assessmentlabel?_id=${response?.assessmentId}`
+      `https://api.geeksofgurukul.com/api/v1/assessments/assessmentlabel?_id=${response?.assessmentId}`
     )
       .then((res) => res.json())
       .then((data) => {

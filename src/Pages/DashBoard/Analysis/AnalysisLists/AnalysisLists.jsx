@@ -13,7 +13,7 @@ const AnalysisLists = () => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/api/v1/assessments/assessment-responses?email=${user?.email}`
+      `https://api.geeksofgurukul.com/api/v1/assessments/assessment-responses?email=${user?.email}`
     )
       .then((res) => res.json())
       .then((data) => {

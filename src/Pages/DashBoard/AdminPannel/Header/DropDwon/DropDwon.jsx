@@ -26,7 +26,7 @@ function DropDown({ item, currentPath }) {
           currentPath?.startsWith(item?.parrentLink)
             ? "bg-[#4BA25D] hover:bg-[#5fb370] text-white"
             : "bg-gray-50 hover:bg-[#5fb370] hover:text-white text-gray-700"
-        } flex flex-col w-full md:flex-row md:inline-flex justify-center items-center space-x-2 border border-gray-300 rounded-md px-4 py-2 text-sm font-medium duration-200`}
+        } flex w-full md:inline-flex justify-center items-center space-x-2 border border-gray-300 rounded-md px-4 py-2 text-sm font-medium duration-200`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className={``}>{item?.name}</span>

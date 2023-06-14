@@ -119,7 +119,7 @@ const ExerciseResponse = () => {
 
   // find program
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/programs/all-program")
+    fetch("https://api.geeksofgurukul.com/api/v1/programs/all-program")
       .then((response) => response.json())
       .then((data) => {
         // console.log("data", data?.data);
@@ -138,7 +138,7 @@ const ExerciseResponse = () => {
       setExercises([]);
 
       fetch(
-        `http://localhost:5000/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
+        `https://api.geeksofgurukul.com/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -157,7 +157,7 @@ const ExerciseResponse = () => {
       setAssignments([]);
       setExercises([]);
       fetch(
-        `http://localhost:5000/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
+        `https://api.geeksofgurukul.com/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -175,7 +175,7 @@ const ExerciseResponse = () => {
       setAssignments([]);
       setExercises([]);
       fetch(
-        `http://localhost:5000/api/v1/modules/all-modules-by-batch?_id=${batch?.batch_id}`
+        `https://api.geeksofgurukul.com/api/v1/modules/all-modules-by-batch?_id=${batch?.batch_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -192,7 +192,7 @@ const ExerciseResponse = () => {
       setLectures([]);
       setAssignments([]);
       fetch(
-        `http://localhost:5000/api/v1/lectures/lecturesbymodule?_id=${module?.module_id}`
+        `https://api.geeksofgurukul.com/api/v1/lectures/lecturesbymodule?_id=${module?.module_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -207,7 +207,7 @@ const ExerciseResponse = () => {
     setExercises([]);
     if (assignment?.assignment_id) {
       fetch(
-        `http://localhost:5000/api/v1/assignments/assignmentby_id?_id=${assignment?.assignment_id}`
+        `https://api.geeksofgurukul.com/api/v1/assignments/assignmentby_id?_id=${assignment?.assignment_id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -245,12 +245,15 @@ const ExerciseResponse = () => {
   // console.log("assignment", assignment);
   // exe
   const fetchExerciseResponse = (SearchData) => {
-    fetch(`http://localhost:5000/api/v1/exercises/search-exercise-response`, {
-      headers: {
-        "content-type": "application/json",
-        data: JSON.stringify(SearchData),
-      },
-    })
+    fetch(
+      `https://api.geeksofgurukul.com/api/v1/exercises/search-exercise-response`,
+      {
+        headers: {
+          "content-type": "application/json",
+          data: JSON.stringify(SearchData),
+        },
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         if (result?.success) {

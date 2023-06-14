@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-goglmsclient-dev-102437-authRole",
+      "UnauthRoleArn": "arn:aws:iam::951647433679:role/amplify-goglmsclient-dev-102437-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::951647433679:role/amplify-goglmsclient-dev-102437-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-goglmsclient-dev-102437-deployment",
+      "UnauthRoleName": "amplify-goglmsclient-dev-102437-unauthRole",
+      "StackName": "amplify-goglmsclient-dev-102437",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:951647433679:stack/amplify-goglmsclient-dev-102437/bb41ebd0-f921-11ed-88a0-06e2d340af64",
+      "AmplifyAppId": "d2cyozf2zxilfw"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2cyozf2zxilfw",
+          "type": "manual"
+        }
+      }
+    }
+  }
+}

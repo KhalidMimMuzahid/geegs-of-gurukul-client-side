@@ -185,7 +185,7 @@ const Login = () => {
   };
 
   const saveUser = (userBasicDetails) => {
-    fetch("http://localhost:5000/api/v1/users/usersbasics", {
+    fetch("https://api.geeksofgurukul.com/api/v1/users/usersbasics", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -204,9 +204,9 @@ const Login = () => {
 
   return (
     <div className={style.singup}>
-      <div className='mt-4 mb-5 '>
+      <div className="mt-4 mb-5 ">
         <div className={style.formclass}>
-          <div className='md:w-full'>
+          <div className="md:w-full">
             <div className={style.newloginfrom}>
               <div className={style.titlesing}>
                 <Link to={`/signup?targetPath=${from}`}>Sign Up</Link>
@@ -214,10 +214,10 @@ const Login = () => {
                   <Link to={`/login?targetPath=${from}`}>Sign in</Link>
                 </h2>
               </div>
-              <div className='google-sing-in'>
-                <div className=''>
+              <div className="google-sing-in">
+                <div className="">
                   <button
-                    className='flex py-2 justify-center  gap-4 items-center border border-black rounded-2xl my-2 bg-white hover:bg-black hover:text-white'
+                    className="flex py-2 justify-center  gap-4 items-center border border-black rounded-2xl my-2 bg-white hover:bg-black hover:text-white"
                     onClick={handleGoogleSignIn}
                     style={{ width: "100%", borderRadius: "30px" }}
                   >
@@ -235,30 +235,30 @@ const Login = () => {
                   <div className={style?.formBoxSing}>
                     <div className={style.fromboxinput}>
                       <input
-                        type='email'
-                        name='email'
+                        type="email"
+                        name="email"
                         //onChange={(e) => setUser(e.target.value)}
-                        placeholder='Email Address'
+                        placeholder="Email Address"
                         {...register("email", {})}
                       />
                     </div>
                     {errors.email && (
-                      <p className='text-red-500'>{errors.email.message}</p>
+                      <p className="text-red-500">{errors.email.message}</p>
                     )}
 
                     <div className={style.fromboxinput}>
                       <input
-                        type='password'
-                        name='password'
-                        placeholder='Password'
+                        type="password"
+                        name="password"
+                        placeholder="Password"
                         {...register("password", {})}
                       />
                     </div>
                     {errors.password && (
-                      <p className='text-red-500'>{errors.password.message}</p>
+                      <p className="text-red-500">{errors.password.message}</p>
                     )}
 
-                    <Link to='/forget-pass'>
+                    <Link to="/forget-pass">
                       <p
                         className={`${style?.formText} font-poppins font-normal text-center`}
                       >
@@ -267,10 +267,10 @@ const Login = () => {
                     </Link>
 
                     <div className={style.singupsubmit}>
-                      <button type='submit'>SIGN IN</button>
+                      <button type="submit">SIGN IN</button>
                     </div>
                     {signUpError && (
-                      <p className='text-red-500-pass'>{signUpError}</p>
+                      <p className="text-red-500-pass">{signUpError}</p>
                     )}
                   </div>
                 </form>
