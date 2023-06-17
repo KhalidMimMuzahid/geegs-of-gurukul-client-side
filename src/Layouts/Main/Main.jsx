@@ -8,26 +8,6 @@ const Main = () => {
   const { user, loading, justCreatedUser } = useContext(AuthContext);
   const location = useLocation();
   console.log("location from main", location);
-  // const [shouldHiddenNav, setShouldHiddenNav] = useState(false);
-  // const [currentPath, setCurrrentPath] = useState("");
-
-  // useLocation();
-  // useEffect(() => {
-  //   const handleLocationChange = () => {
-  //     setCurrrentPath(window.location.pathname);
-  //   };
-  //   return handleLocationChange();
-  // });
-
-  // useEffect(() => {
-  //   // console.log("currentPath: ", currentPath);
-  //   if (currentPath.startsWith("/dashboard/assessment/on-processing")) {
-  //     setShouldHiddenNav(true);
-  //   } else {
-  //     setShouldHiddenNav(false);
-  //   }
-  // }, [currentPath]);
-
   if (loading) {
     return (
       <div>
