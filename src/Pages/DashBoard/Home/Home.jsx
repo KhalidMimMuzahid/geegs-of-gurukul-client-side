@@ -193,7 +193,7 @@ const Home = () => {
           </div>
           <div className='row-span-4 bg-[#EDFFF4] rounded-[20px] p-5 my-4'>
             <p className="font-semibold">Test</p>
-            <div className="my-2 flex flex-col items-center justify-center gap-4 overflow-x-auto">
+            <div className="my-8 flex flex-col items-center justify-center gap-4 overflow-x-auto">
               <div className="flex flex-col items-center">
               <ProgressbarCir />
               <p>Test-1</p>
