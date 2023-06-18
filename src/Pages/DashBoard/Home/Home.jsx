@@ -33,7 +33,7 @@ const Home = () => {
           <div className='w-full bg-[#EDFFF4] rounded-[20px] p-5'>
             <div>
               <p className='text-[16px] font-semibold'>Overall</p>
-              <div className='mt-4 flex flex-col md:flex-row gap-[27px]'>
+              <div className='mt-4 flex flex-col md:flex-row items-center justify-center gap-[27px]'>
                 <div className=' relative w-[180px] h-[188px] bg-[#B8FFD5] rounded-[20px]'>
                   <img className='absolute bottom-0' src={green} alt='bg' />
                   <div className='p-6 text-center'>
