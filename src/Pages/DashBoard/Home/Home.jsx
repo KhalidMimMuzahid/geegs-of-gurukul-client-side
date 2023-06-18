@@ -18,11 +18,11 @@ const Home = () => {
       <div className='col-span-12 md:col-span-6 lg:col-span-7'>
         <div className='flex flex-col gap-6'>
           <div className='w-full bg-[#B1FFFA] grid grid-cols-12 rounded-[20px]'>
-            <div className='col-span-12 md:col-span-3 p-5'>
+            <div className='col-span-12 md:col-span-3 p-5 w-full flex justify-center'>
               <img className='w-[121px]' src={robot} alt='robot' />
             </div>
-            <div className='col-span-12 md:col-span-9'>
-              <div className='w-full flex flex-col my-20'>
+            <div className='col-span-12 md:col-span-9 w-full flex justify-center'>
+              <div className='w-full flex flex-col items-center my-20'>
                 <div>
                   <h3 className='text-[24px] font-semibold'>“Hii Akash”</h3>
                   <h5 className='text-[16px] font-semibold'>Welcome back</h5>
