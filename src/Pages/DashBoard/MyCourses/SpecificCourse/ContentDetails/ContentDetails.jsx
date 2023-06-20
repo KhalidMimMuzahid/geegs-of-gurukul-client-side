@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import LectureVideo from "./LectureVideo/LectureVideo";
 import AssignmentDetails from "./AssignmentDetails";
 import Loading from "../../../../../Components/Loading/Loading";
+import EvaluationDetails from "./EvaluationDetails/EvaluationDetails";
 
 function ContentDetails({
   selected,
@@ -11,8 +12,9 @@ function ContentDetails({
   selectedModuleLectureList,
   setChangingModuleStatus,
   setChangingAssignmentStatus,
+  setChangingEvaluationStatus,
 }) {
-  // console.log("selected: ", selected);
+  console.log("selected: ", selected);
   const [DetailsComponent, setDetailsComponent] = useState(null);
   useEffect(() => {
     if (!selected) {
@@ -26,6 +28,11 @@ function ContentDetails({
             modules={modules}
             selectedModuleLectureList={selectedModuleLectureList}
             setChangingModuleStatus={setChangingModuleStatus}
+          />
+        ) : selected?.type === "evaluation" ? (
+          <EvaluationDetails
+            selected={selected}
+            setChangingEvaluationStatus={setChangingEvaluationStatus}
           />
         ) : (
           <AssignmentDetails

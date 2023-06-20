@@ -10,6 +10,7 @@ function ContentLists({
   setSelectedModuleLectureList,
   changingModuleStatus,
   changingAssignmentStatus,
+  changingEvaluationStatus,
 }) {
   return (
     <div className="p-4 bg-white rounded-lg shadow-md col-span-12 lg:col-span-4 h-[80vh] md:h-[90vh]">
@@ -42,6 +43,7 @@ function ContentLists({
               setSelectedModuleLectureList={setSelectedModuleLectureList}
               changingModuleStatus={changingModuleStatus}
               changingAssignmentStatus={changingAssignmentStatus}
+              changingEvaluationStatus={changingEvaluationStatus}
             />
           ))}
         </div>

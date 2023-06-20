@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { BsFillCheckCircleFill } from "react-icons/bs";
 import { toast } from "react-hot-toast";
 import {
   AiFillCheckCircle,
@@ -21,14 +20,13 @@ function EachAssignment({
   setSelectedModuleLectureList,
   changingAssignmentStatus,
 }) {
-  const justNow2 = moment().format("YYYY-MM-DDTHH:mm");
   // const selectedDeadline = "2023-09s-26T17:54";
   const selectedDeadline = lecture?.assignment?.deadLine;
   const { user } = useContext(AuthContext);
   const [assignmentResponse, setAssignmentResponse] = useState({});
   const [shouldRefreshForStatusByToggle, setShouldRefreshForStatusByToggle] =
     useState(false);
-  const [totalSubmittedResponse, setTotalSubmittedResponse] = useState(0);
+  const [totalExercises, setTotalExercises] = useState(0);
   const [totalCompletedRes, setTotalCompletedRes] = useState(0);
   const [totalRes, setTotalRes] = useState(0);
   const [responseStatus, setResponseStatus] = useState({});
@@ -104,7 +102,7 @@ function EachAssignment({
       .then((res) => res.json())
       .then((data) => {
         // console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ", data);
-        setTotalSubmittedResponse(
+        setTotalExercises(
           data?.exercises?.length ? data?.exercises?.length : 0
         );
       });
@@ -171,7 +169,7 @@ function EachAssignment({
   }, [
     lecture?._id,
     eachAssignment?.assignment_id,
-    totalSubmittedResponse,
+    totalExercises,
     selected?.assignment_id,
     refreshAssignmentStatus,
   ]);
@@ -190,10 +188,7 @@ function EachAssignment({
     const justNow = moment().format("YYYY-MM-DDTHH:mm");
     if (justNow < selectedDeadline) {
       // todo for not expired
-      if (
-        totalCompletedRes === totalSubmittedResponse &&
-        totalCompletedRes !== 0
-      ) {
+      if (totalCompletedRes === totalExercises && totalCompletedRes !== 0) {
         setResponseStatus({
           element: <AiFillCheckCircle color="green" size={25} />,
           status: "All exercises submitted and not expired",
@@ -216,10 +211,7 @@ function EachAssignment({
       }
     } else {
       // todo  for  expired
-      if (
-        totalCompletedRes === totalSubmittedResponse &&
-        totalCompletedRes !== 0
-      ) {
+      if (totalCompletedRes === totalExercises && totalCompletedRes !== 0) {
         setResponseStatus({
           element: <AiFillLock color="green" size={25} />,
           status: "All exercises submitted and expired",
@@ -253,7 +245,6 @@ function EachAssignment({
         setSelectedModuleLectureList(lecturesList);
         assignmentClick();
       }}
-      key={eachAssignment._id} // Move the key prop here
     >
       {selected?.assignment_id === eachAssignment.assignment_id && (
         <span className="absolute left-0 top-0 bottom-0 w-1 bg-green-500 rounded-l-md"></span>
