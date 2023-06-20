@@ -10,6 +10,7 @@ function EachModule({
   setSelectedModuleLectureList,
   changingModuleStatus,
   changingAssignmentStatus,
+  changingEvaluationStatus,
 }) {
   const [isOutterOpen, setIsOutterOpen] = useState(false);
   const { moduleName, _id } = module;
@@ -90,6 +91,7 @@ function EachModule({
                 setSelectedModuleLectureList={setSelectedModuleLectureList}
                 lecturesList={lecturesList}
                 changingAssignmentStatus={changingAssignmentStatus}
+                changingEvaluationStatus={changingEvaluationStatus}
               />
             ))}
           </>

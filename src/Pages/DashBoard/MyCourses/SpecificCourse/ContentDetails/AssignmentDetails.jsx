@@ -14,7 +14,9 @@ function AssignmentDetails({
       const res = await fetch(
         `https://api.geeksofgurukul.com/api/v1/assignments/assignmentby_id?_id=${selected?.assignment_id}`
       );
+
       const data = await res.json();
+      console.log("assignmentXXXXXXXXXXXXX: ", data);
       return data;
     },
   });

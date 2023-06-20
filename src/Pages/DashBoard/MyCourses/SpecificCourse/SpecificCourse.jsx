@@ -12,23 +12,10 @@ const SpecificCourse = () => {
   );
   const [changingModuleStatus, setChangingModuleStatus] = useState({});
   const [changingAssignmentStatus, setChangingAssignmentStatus] = useState({});
+  const [changingEvaluationStatus, setChangingEvaluationStatus] = useState({});
   // const [isLoading, setisLoading] = useState(true);
   const [modules, setModules] = useState([]);
   const [course, setCourse] = useState({});
-
-  // useEffect(() => {
-  //   console.log("specific useEffect called");
-  //   fetch(
-  //     `https://api.geeksofgurukul.com/api/v1/modules/modulesbycourseandbatch?course_id=${"6465c48a3a22da5a8518d942"}&batch_id=${"6469c5010664f5003c9be953"}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setModules(data);
-  //       setisLoading(false);
-  //     });
-  // }, []);
-
   const modulesTemp = useLoaderData();
   useEffect(() => {
     setModules(modulesTemp);
@@ -71,6 +58,7 @@ const SpecificCourse = () => {
               selectedModuleLectureList={selectedModuleLectureList}
               setChangingModuleStatus={setChangingModuleStatus}
               setChangingAssignmentStatus={setChangingAssignmentStatus}
+              setChangingEvaluationStatus={setChangingEvaluationStatus}
             />
           </div>
 
@@ -82,6 +70,7 @@ const SpecificCourse = () => {
             setSelectedModuleLectureList={setSelectedModuleLectureList}
             changingModuleStatus={changingModuleStatus}
             changingAssignmentStatus={changingAssignmentStatus}
+            changingEvaluationStatus={changingEvaluationStatus}
           />
         </div>
       </div>
