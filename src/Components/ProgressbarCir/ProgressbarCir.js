@@ -4,7 +4,7 @@ import "react-circular-progressbar/dist/styles.css";
 
 const ProgressbarCir = ({ percentage, circleColor, textColor, centerText }) => {
   return (
-    <div className="progess-bare" style={{ width: "120px", height: "120px" }}>
+    <div className="progess-bare" style={{ width: "90px", height: "80px" }}>
       <CircularProgressbar
         value={percentage}
         text={`${centerText}
