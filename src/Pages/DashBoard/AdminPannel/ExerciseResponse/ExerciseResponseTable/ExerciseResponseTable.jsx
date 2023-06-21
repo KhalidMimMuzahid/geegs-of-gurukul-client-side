@@ -109,7 +109,8 @@ const ExerciseResponseTable = ({
                         {each?.batch?.batchName}
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        {each?.lecture?.lectureName}
+                        {each?.lecture?.lectureName ||
+                          each?.evaluation?.evaluationName}
                       </td>
                       <td className="p-2 whitespace-nowrap">{each?.mark}</td>
                       <td className="p-2 whitespace-nowrap">

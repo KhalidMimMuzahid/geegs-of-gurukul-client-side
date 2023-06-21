@@ -137,6 +137,13 @@ const ExerciseResponse = () => {
       setAssignments([]);
       setExercises([]);
 
+      setCourse({});
+      setBatch({});
+      setModule({});
+      setLecture({});
+      setAssignment({});
+      setExercise({});
+
       fetch(
         `https://api.geeksofgurukul.com/api/v1/courses/all-courses-by-program?_id=${program?.program_id}`
       )
@@ -156,6 +163,12 @@ const ExerciseResponse = () => {
       setLectures([]);
       setAssignments([]);
       setExercises([]);
+
+      setBatch({});
+      setModule({});
+      setLecture({});
+      setAssignment({});
+      setExercise({});
       fetch(
         `https://api.geeksofgurukul.com/api/v1/batches/all-batches-by-course?_id=${course?.course_id}`
       )
@@ -174,6 +187,11 @@ const ExerciseResponse = () => {
       setLectures([]);
       setAssignments([]);
       setExercises([]);
+
+      setModule({});
+      setLecture({});
+      setAssignment({});
+      setExercise({});
       fetch(
         `https://api.geeksofgurukul.com/api/v1/modules/all-modules-by-batch?_id=${batch?.batch_id}`
       )
@@ -191,6 +209,10 @@ const ExerciseResponse = () => {
       setExercises([]);
       setLectures([]);
       setAssignments([]);
+
+      setLecture({});
+      setAssignment({});
+      setExercise({});
       fetch(
         `https://api.geeksofgurukul.com/api/v1/lectures/lecturesbymodule?_id=${module?.module_id}`
       )
@@ -205,6 +227,8 @@ const ExerciseResponse = () => {
   //exercise by assignment
   useEffect(() => {
     setExercises([]);
+
+    setExercise({});
     if (assignment?.assignment_id) {
       fetch(
         `https://api.geeksofgurukul.com/api/v1/assignments/assignmentby_id?_id=${assignment?.assignment_id}`
@@ -245,6 +269,7 @@ const ExerciseResponse = () => {
   // console.log("assignment", assignment);
   // exe
   const fetchExerciseResponse = (SearchData) => {
+    console.log("searchData: ", SearchData);
     fetch(
       `https://api.geeksofgurukul.com/api/v1/exercises/search-exercise-response`,
       {
@@ -457,7 +482,7 @@ const ExerciseResponse = () => {
                   {lectures?.length > 0 &&
                     lectures?.map((each) => (
                       <option key={each?._id} value={each?._id}>
-                        {each?.lectureName}
+                        {each?.lectureName || each?.evaluationName}
                       </option>
                     ))}
                 </select>
