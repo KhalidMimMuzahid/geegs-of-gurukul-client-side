@@ -8,7 +8,6 @@ import Papa from "papaparse";
 const ExerciseResponse = () => {
   const [data, setData] = useState([]);
   const [courses, setCourses] = useState([]);
-  // const [selectedProgramId, setSelectedProgramId] = useState(null);
   const [program, setProgram] = useState({});
   const [course, setCourse] = useState({});
   const [batch, setBatch] = useState({});
@@ -16,16 +15,18 @@ const ExerciseResponse = () => {
   const [modules, setModules] = useState([]);
   const [module, setModule] = useState({});
   const [lectures, setLectures] = useState([]);
+  const [type, setType] = useState("lecture");
   const [lecture, setLecture] = useState({});
+  const [evaluation, setEvaluation] = useState({});
   const [assignments, setAssignments] = useState([]);
   const [assignment, setAssignment] = useState({});
   const [exercises, setExercises] = useState([]);
   const [exercise, setExercise] = useState({});
   const [loading, setLoading] = useState(false);
   const [exerciseResponses, setExerciseResponses] = useState([]);
-  const [rerender, setRerender] = useState(false);
   const [refreshExcerciseResponse, setRefreshExcerciseResponse] =
     useState(false);
+
   const {
     register,
     handleSubmit,
@@ -86,10 +87,21 @@ const ExerciseResponse = () => {
       if (name === "lectureName") {
         lectures?.forEach((each) => {
           if (each?._id === value?.lectureName) {
-            setLecture({
-              lecture_id: each?._id,
-              lectureName: each?.lectureName,
-            });
+            console.log("each: xxxxxxxxxxxxxxxxxxxxxxxxxxxxx", each);
+            if (each?.type === "evaluation") {
+              setType("evaluation");
+              setEvaluation({
+                evaluation_id: each?._id,
+                evaluationName: each?.evaluationName,
+              });
+            } else {
+              setType("lecture");
+              setLecture({
+                lecture_id: each?._id,
+                lectureName: each?.lectureName,
+              });
+            }
+
             setAssignments(each?.assignment?.assignments);
             return;
           }
@@ -104,9 +116,9 @@ const ExerciseResponse = () => {
         });
       }
       if (name === "exerciseName") {
-        // console.log("value", value);
+        console.log("exercises", exercises);
         exercises?.forEach((each) => {
-          if (each?._id === value?.exerciseName) {
+          if (each?.exercise_id === value?.exerciseName) {
             // console.log("exerciseName", value?.exerciseName);
             setExercise(each);
             return;
@@ -229,56 +241,94 @@ const ExerciseResponse = () => {
     setExercises([]);
 
     setExercise({});
-    if (assignment?.assignment_id) {
-      fetch(
-        `https://api.geeksofgurukul.com/api/v1/assignments/assignmentby_id?_id=${assignment?.assignment_id}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setExercises(data?.exercises);
-        });
+    console.log("type: ", type);
+    if (type === "lecture") {
+      if (assignment?.assignment_id) {
+        fetch(
+          `https://api.geeksofgurukul.com/api/v1/assignments/assignmentby_id?_id=${assignment?.assignment_id}`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            setExercises(data?.exercises);
+          });
+      }
+    } else if (type === "evaluation") {
+      if (evaluation?.evaluation_id) {
+        // console.log("lecturesxxxxxxxxxxxxxxxxxxxxxxxxx: ", lectures);
+        const evaluationForExercise = lectures.find(
+          (each) => each?._id === evaluation?.evaluation_id
+        );
+        // console.log("evaluation", evaluationForExercise);
+        setExercises(evaluationForExercise?.evaluation?.exercises);
+      }
     }
-  }, [assignment?.assignment_id]);
+  }, [assignment?.assignment_id, evaluation?.evaluation_id, type]);
 
   // console.log("exercise")
   useEffect(() => {
-    const searchData = {
-      program_id: program?.program_id,
-      course_id: course?.course_id,
-      batch_id: batch?.batch_id,
-      module_id: module?.module_id,
-      lecture_id: lecture?.lecture_id,
-      assignment_id: assignment?.assignment_id,
-      exercise_id: exercise?._id,
-    };
+    let searchData = {};
+    if (type === "lecture") {
+      searchData = {
+        program_id: program?.program_id,
+        course_id: course?.course_id,
+        batch_id: batch?.batch_id,
+        module_id: module?.module_id,
+        lecture_id: lecture?.lecture_id,
+        assignment_id: assignment?.assignment_id,
+        exercise_id: exercise?.exercise_id,
+      };
+    } else if (type === "evaluation") {
+      searchData = {
+        program_id: program?.program_id,
+        course_id: course?.course_id,
+        batch_id: batch?.batch_id,
+        module_id: module?.module_id,
+        evaluation_id: evaluation?.evaluation_id,
+        exercise_id: exercise?.exercise_id,
+      };
+    }
+
+    // console.log("searchData", searchData);
     fetchExerciseResponse(searchData);
   }, [refreshExcerciseResponse]);
+
   const onSearch = (data) => {
-    const searchData = {
-      program_id: program?.program_id,
-      course_id: course?.course_id,
-      batch_id: batch?.batch_id,
-      module_id: module?.module_id,
-      lecture_id: lecture?.lecture_id,
-      assignment_id: assignment?.assignment_id,
-      exercise_id: exercise?._id,
-    };
-    fetchExerciseResponse(searchData);
+    // console.log("type: ", type);
+    let searchData = {};
+    if (type === "lecture") {
+      searchData = {
+        program_id: program?.program_id,
+        course_id: course?.course_id,
+        batch_id: batch?.batch_id,
+        module_id: module?.module_id,
+        lecture_id: lecture?.lecture_id,
+        assignment_id: assignment?.assignment_id,
+        exercise_id: exercise?.exercise_id,
+      };
+    } else if (type === "evaluation") {
+      searchData = {
+        program_id: program?.program_id,
+        course_id: course?.course_id,
+        batch_id: batch?.batch_id,
+        module_id: module?.module_id,
+        evaluation_id: evaluation?.evaluation_id,
+        exercise_id: exercise?.exercise_id,
+      };
+    }
+
     // console.log("searchData", searchData);
+    fetchExerciseResponse(searchData);
   };
   // console.log("assignment", assignment);
   // exe
   const fetchExerciseResponse = (SearchData) => {
     console.log("searchData: ", SearchData);
-    fetch(
-      `https://api.geeksofgurukul.com/api/v1/exercises/search-exercise-response`,
-      {
-        headers: {
-          "content-type": "application/json",
-          data: JSON.stringify(SearchData),
-        },
-      }
-    )
+    fetch(`http://localhost:5000/api/v1/exercises/search-exercise-response`, {
+      headers: {
+        "content-type": "application/json",
+        data: JSON.stringify(SearchData),
+      },
+    })
       .then((res) => res.json())
       .then((result) => {
         if (result?.success) {
@@ -469,7 +519,7 @@ const ExerciseResponse = () => {
               </div>
               {/* lecture name */}
               <div className={style?.addLecture}>
-                <label htmlFor="lectureName">Lecture Name</label>
+                <label htmlFor="lectureName">Lecture/Evaluation Name</label>
                 <select
                   name="lectureName"
                   {...register("lectureName")}
@@ -477,12 +527,13 @@ const ExerciseResponse = () => {
                   className="w-full border-2 border-green-400 rounded-xl"
                 >
                   <option disabled selected value="">
-                    Choose a Lecture
+                    Choose a Lecture/Evaluation
                   </option>
                   {lectures?.length > 0 &&
                     lectures?.map((each) => (
                       <option key={each?._id} value={each?._id}>
-                        {each?.lectureName || each?.evaluationName}
+                        {each?.lectureName || each?.evaluationName}{" "}
+                        <span>{each?.lectureName ? " (lec.)" : " (eva.)"}</span>
                       </option>
                     ))}
                 </select>
@@ -497,37 +548,40 @@ const ExerciseResponse = () => {
               </div>
               {/* lecture name */}
               {/* assignment name */}
-              <div className={style?.addLecture}>
-                <label htmlFor="lectureName">Assignment Name</label>
-                <select
-                  name="assignmentName"
-                  {...register("assignmentName")}
-                  aria-invalid={errors?.assignmentName ? "true" : "false"}
-                  className="w-full border-2 border-green-400 rounded-xl"
-                >
-                  <option disabled selected value="">
-                    Choose a assignment
-                  </option>
-                  {assignments?.length > 0 &&
-                    assignments?.map((each) => (
-                      <option
-                        key={each?.assignment_id}
-                        value={each?.assignment_id}
-                      >
-                        {each?.assignmentName}
-                      </option>
-                    ))}
-                </select>
-                {errors.assignmentName && (
-                  <p
-                    className="text-red-500 font-poppins font-medium"
-                    role="alert"
+              {type === "lecture" && (
+                <div className={style?.addLecture}>
+                  <label htmlFor="lectureName">Assignment Name</label>
+                  <select
+                    name="assignmentName"
+                    {...register("assignmentName")}
+                    aria-invalid={errors?.assignmentName ? "true" : "false"}
+                    className="w-full border-2 border-green-400 rounded-xl"
                   >
-                    {errors?.assignmentName?.message}
-                  </p>
-                )}
-              </div>
-              {/* lecture name */}
+                    <option disabled selected value="">
+                      Choose a assignment
+                    </option>
+                    {assignments?.length > 0 &&
+                      assignments?.map((each) => (
+                        <option
+                          key={each?.assignment_id}
+                          value={each?.assignment_id}
+                        >
+                          {each?.assignmentName}
+                        </option>
+                      ))}
+                  </select>
+                  {errors.assignmentName && (
+                    <p
+                      className="text-red-500 font-poppins font-medium"
+                      role="alert"
+                    >
+                      {errors?.assignmentName?.message}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {/* assignment name */}
               {/* exercises name */}
               <div className={style?.addLecture}>
                 <label htmlFor="exerciseName">Exercise Name</label>
