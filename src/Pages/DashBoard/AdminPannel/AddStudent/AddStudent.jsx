@@ -191,7 +191,7 @@ const AddStudent = () => {
                 </select>
                 {errors.program && (
                   <p
-                    className="text-red-500 font-poppins font-medium"
+                    className="text-red-500 text-sm font-poppins font-normal"
                     role="alert"
                   >
                     {errors.program?.message}
@@ -221,7 +221,7 @@ const AddStudent = () => {
                 </select>
                 {errors.course && (
                   <p
-                    className="text-red-500 font-poppins font-medium"
+                    className="text-red-500 text-sm font-poppins font-normal"
                     role="alert"
                   >
                     {errors.course?.message}

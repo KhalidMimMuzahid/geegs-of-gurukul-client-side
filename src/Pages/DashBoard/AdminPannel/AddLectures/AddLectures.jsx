@@ -428,7 +428,7 @@ const AddLectures = () => {
                   />
                   {errors.lectureName && (
                     <p
-                      className="text-red-500 font-poppins font-medium"
+                      className="text-red-500 text-[14px] font-poppins font-normal"
                       role="alert"
                     >
                       {errors.lectureName?.message}
@@ -451,7 +451,7 @@ const AddLectures = () => {
                   />
                   {errors.topicName && (
                     <p
-                      className="text-red-500 font-poppins font-medium"
+                      className="text-red-500 text-[14px] font-poppins font-normal"
                       role="alert"
                     >
                       {errors.topicName?.message}
@@ -484,7 +484,7 @@ const AddLectures = () => {
                   </select>
                   {errors.programName && (
                     <p
-                      className="text-red-500 font-poppins font-medium"
+                      className="text-red-500 text-[14px] font-poppins font-normal"
                       role="alert"
                     >
                       {errors.programName?.message}
@@ -515,7 +515,7 @@ const AddLectures = () => {
                   </select>
                   {errors.courseName && (
                     <p
-                      className="text-red-500 font-poppins font-medium"
+                      className="text-red-500 text-[14px] font-poppins font-normal"
                       role="alert"
                     >
                       {errors.courseName?.message}
@@ -548,7 +548,7 @@ const AddLectures = () => {
                   </select>
                   {errors.batchName && (
                     <p
-                      className="text-red-500 font-poppins font-medium"
+                      className="text-red-500 text-[14px] font-poppins font-normal"
                       role="alert"
                     >
                       {errors.batchName?.message}
@@ -587,7 +587,7 @@ const AddLectures = () => {
                   </select>
                   {errors.moduleName && (
                     <p
-                      className="text-red-500 font-poppins font-medium"
+                      className="text-red-500 text-[14px] font-poppins font-normal"
                       role="alert"
                     >
                       {errors.moduleName?.message}
@@ -764,9 +764,9 @@ const AddLectures = () => {
               ></textarea>
               {errors.notes && (
                 <p
-                  role="alert"
-                  className="text-red-500 font-poppins font-medium"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.notes?.message}
                 </p>
               )}
@@ -846,13 +846,15 @@ const AddLectures = () => {
             {/* add assignment button */}
 
             {/* Submit Button */}
+            <div className="flex items-center justify-center">
             <button
               type="submit"
               disabled={loading}
-              className="text-white w-full rounded-lg bg-[#4BA25D] hover:bg-[#5fb370] px-10 py-2 mt-6"
+              className="text-white w-full md:w-28 rounded-lg bg-[#4BA25D] hover:bg-[#5fb370] px-10 py-2 mt-6"
             >
               {loading ? "Submitting..." : "Submit"}
             </button>
+            </div>
 
             {fileUploadingStatus?.isLoading && (
               <div>
@@ -881,7 +883,7 @@ const AddLectures = () => {
                   />
                   {errors.evaluationName && (
                     <p
-                      className="text-red-500 font-poppins font-medium"
+                      className="text-red-500 text-[14px] font-poppins font-normal"
                       role="alert"
                     >
                       {errors.evaluationName?.message}
@@ -904,7 +906,7 @@ const AddLectures = () => {
                   />
                   {errors.topicName && (
                     <p
-                      className="text-red-500 font-poppins font-medium"
+                      className="text-red-500 text-[14px] font-poppins font-normal"
                       role="alert"
                     >
                       {errors.topicName?.message}
@@ -937,7 +939,7 @@ const AddLectures = () => {
                   </select>
                   {errors.programName && (
                     <p
-                      className="text-red-500 font-poppins font-medium"
+                      className="text-red-500 text-[14px] font-poppins font-normal"
                       role="alert"
                     >
                       {errors.programName?.message}
@@ -968,7 +970,7 @@ const AddLectures = () => {
                   </select>
                   {errors.courseName && (
                     <p
-                      className="text-red-500 font-poppins font-medium"
+                      className="text-red-500 text-[14px] font-poppins font-normal"
                       role="alert"
                     >
                       {errors.courseName?.message}
@@ -1001,7 +1003,7 @@ const AddLectures = () => {
                   </select>
                   {errors.batchName && (
                     <p
-                      className="text-red-500 font-poppins font-medium"
+                      className="text-red-500 text-[14px] font-poppins font-normal"
                       role="alert"
                     >
                       {errors.batchName?.message}
@@ -1040,7 +1042,7 @@ const AddLectures = () => {
                   </select>
                   {errors.moduleName && (
                     <p
-                      className="text-red-500 font-poppins font-medium"
+                      className="text-red-500 text-[14px] font-poppins font-normal"
                       role="alert"
                     >
                       {errors.moduleName?.message}
@@ -1166,9 +1168,9 @@ const AddLectures = () => {
               ></textarea>
               {errors.notes && (
                 <p
-                  role="alert"
-                  className="text-red-500 font-poppins font-medium"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.notes?.message}
                 </p>
               )}
@@ -1249,13 +1251,15 @@ const AddLectures = () => {
             {/* add assignment button */}
 
             {/* Submit Button */}
-            <button
+              <div className="w-full flex items-center justify-center">
+              <button
               type="submit"
               disabled={loading}
-              className="text-white w-full rounded-lg bg-[#4BA25D] hover:bg-[#5fb370] px-10 py-2 mt-6"
+              className="text-white text-center w-full md:w-28 px-10 py-2 rounded-lg bg-[#4BA25D] hover:bg-[#5fb370] mt-6"
             >
               {loading ? "Submitting..." : "Submit"}
             </button>
+            </div>
 
             {fileUploadingStatus?.isLoading && (
               <div>
