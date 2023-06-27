@@ -72,7 +72,7 @@ const Users = () => {
                 type="text"
                 id="name"
                 name="name"
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
                 aria-label="Name"
                 {...register("name")}
                 placeholder="Enter user name"
@@ -84,7 +84,7 @@ const Users = () => {
                 type="text"
                 id="email"
                 name="email"
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
                 placeholder="Enter user email"
                 aria-label="Email"
                 {...register("email")}
@@ -96,7 +96,7 @@ const Users = () => {
                 type="text"
                 id="phno"
                 name="phno"
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
                 placeholder="Enter user phone number"
                 aria-label="Phone Number"
                 {...register("phoneNumber")}

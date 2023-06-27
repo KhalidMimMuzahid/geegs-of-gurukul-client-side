@@ -123,7 +123,7 @@ function AddAssignment() {
               {...register("assignmentName", {
                 required: "Assignment name is required",
               })}
-              className={inputStyle}
+              className={`${inputStyle} input border-[#5FB370]`}
               placeholder="Enter assignment name"
             />
             {errors.assignmentName && (
@@ -145,7 +145,7 @@ function AddAssignment() {
               {...register("topic", {
                 required: "Topic is required",
               })}
-              className={inputStyle}
+              className={`${inputStyle} input border-[#5FB370]`}
               placeholder="Enter topic name"
             />
             {errors.topic && (
@@ -174,7 +174,8 @@ function AddAssignment() {
           <textarea
             id="textArea"
             {...register("textArea")}
-            className={`${inputStyle} h-32 mb-4`}
+            // className={`${inputStyle} h-32 mb-4`}
+            className={`${inputStyle} textarea border-[#5FB370] h-32 mb-4`}
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Your notes...."
@@ -247,7 +248,7 @@ function AddAssignment() {
               Upload file
             </label>
             <input
-              className="block w-full text-sm border border-gray-300 rounded-lg cursor-pointer bg-green-50 focus:outline-none"
+              className="block file-input w-full text-sm border border-gray-300 rounded-lg cursor-pointer bg-green-50 focus:outline-none"
               id="file_input"
               {...register("fileInput")}
               type="file"

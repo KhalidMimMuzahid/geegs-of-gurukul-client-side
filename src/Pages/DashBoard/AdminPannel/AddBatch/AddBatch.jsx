@@ -133,7 +133,7 @@ const AddBatch = () => {
                   required: "Batch Name is required",
                 })}
                 aria-invalid={errors.batchName ? "true" : "false"}
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
                 placeholder="Enter batch name"
               />
               {errors.batchName && (
@@ -158,7 +158,7 @@ const AddBatch = () => {
                   required: "Duration is required",
                 })}
                 aria-invalid={errors.duration ? "true" : "false"}
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
               {errors.duration && (
                 <p
@@ -179,7 +179,7 @@ const AddBatch = () => {
                   required: "Program Name is required",
                 })}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
                 defaultValue=""
               >
                 <option disabled value="">
@@ -210,7 +210,7 @@ const AddBatch = () => {
                   required: "Course Name is required",
                 })}
                 aria-invalid={errors.courseName ? "true" : "false"}
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
                 defaultValue=""
               >
                 <option disabled value="">
@@ -243,7 +243,7 @@ const AddBatch = () => {
                   required: "Select A Date",
                 })}
                 aria-invalid={errors.startedAt ? "true" : "false"}
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
               {errors.startedAt && (
                 <p

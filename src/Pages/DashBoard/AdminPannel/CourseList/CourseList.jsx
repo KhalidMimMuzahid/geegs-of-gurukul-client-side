@@ -193,7 +193,7 @@ const CourseList = () => {
                 {...register("programName")}
                 aria-invalid={errors.programName ? "true" : "false"}
                 defaultValue=""
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               >
                 <option disabled value="">
                   Choose a Program
@@ -222,7 +222,7 @@ const CourseList = () => {
                 {...register("courseName")}
                 aria-invalid={errors.courseName ? "true" : "false"}
                 defaultValue=""
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               >
                 <option disabled value="">
                   Choose a Course
@@ -251,7 +251,7 @@ const CourseList = () => {
                 type="email"
                 {...register("creatorEmail")}
                 placeholder="Enter creator email"
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
             </div>
 
@@ -263,7 +263,7 @@ const CourseList = () => {
                 type="email"
                 {...register("updaterEmail")}
                 placeholder="Enter updator email"
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
             </div>
           </div>

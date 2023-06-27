@@ -97,7 +97,7 @@ const ExerciseList = () => {
                   {...register("exerciseName")}
                   aria-invalid={errors.exerciseName ? "true" : "false"}
                   placeholder="Enter exercise name"
-                  className={inputStyle}
+                  className={`${inputStyle} input border-[#5FB370]`}
                 />
               </div>
               <div className="mb-2">
@@ -108,7 +108,7 @@ const ExerciseList = () => {
                   {...register("topic")}
                   aria-invalid={errors.subTopic ? "true" : "false"}
                   placeholder="Enter topic name"
-                  className={inputStyle}
+                  className={`${inputStyle} input border-[#5FB370]`}
                 />
                 {errors.topic && (
                   <p
@@ -127,7 +127,7 @@ const ExerciseList = () => {
                   {...register("subTopic")}
                   aria-invalid={errors.subTopic ? "true" : "false"}
                   placeholder="Enter subtopic name"
-                  className={inputStyle}
+                  className={`${inputStyle} input border-[#5FB370]`}
                 />
               </div>
             </div>

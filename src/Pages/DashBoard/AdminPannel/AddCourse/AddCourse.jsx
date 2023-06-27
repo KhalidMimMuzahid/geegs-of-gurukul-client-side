@@ -102,7 +102,7 @@ const AddCourse = () => {
                 })}
                 aria-invalid={errors.courseName ? "true" : "false"}
                 placeholder="Enter course name"
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
               {errors.courseName && (
                 <p
@@ -125,7 +125,7 @@ const AddCourse = () => {
                 })}
                 aria-invalid={errors.duration ? "true" : "false"}
                 placeholder="Enter duration"
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
               {errors.duration && (
                 <p
@@ -148,7 +148,7 @@ const AddCourse = () => {
                 })}
                 aria-invalid={errors.programName ? "true" : "false"}
                 defaultValue=""
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               >
                 <option disabled value="">
                   Choose a Program
@@ -181,7 +181,7 @@ const AddCourse = () => {
                 })}
                 aria-invalid={errors.regularPrice ? "true" : "false"}
                 placeholder="Enter regular price"
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
               {errors.regularPrice && (
                 <p

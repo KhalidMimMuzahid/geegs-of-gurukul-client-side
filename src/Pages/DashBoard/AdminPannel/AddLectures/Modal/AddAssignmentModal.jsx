@@ -89,7 +89,7 @@ function AddAssignmentModal({
                 <div className="relative">
                   <input
                     type="search"
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                     placeholder="Search by name"
                     name="assignmentName"
                     {...register("assignmentName")}
@@ -98,7 +98,7 @@ function AddAssignmentModal({
                 <div className="relative">
                   <input
                     type="search"
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                     placeholder="Search by topic"
                     name="topic"
                     {...register("topic")}

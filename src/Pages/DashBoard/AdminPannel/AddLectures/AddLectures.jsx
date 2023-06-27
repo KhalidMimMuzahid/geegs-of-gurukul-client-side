@@ -395,14 +395,14 @@ const AddLectures = () => {
               type="checkbox"
               id="type"
               name="type"
-              className="sr-only"
+              className="toggle bg-[#5FB370]"
               onChange={() =>
                 setType((prev) =>
                   prev === "lecture" ? "evaluation" : "lecture"
                 )
               }
             />
-            <div className="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
+            
             <span className="ml-3 text-gray-900">for {type}</span>
           </label>
         </div>
@@ -423,7 +423,7 @@ const AddLectures = () => {
                       required: "Lecture Name is required",
                     })}
                     aria-invalid={errors.lectureName ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input`}
                     placeholder="Enter lecture name"
                   />
                   {errors.lectureName && (
@@ -446,7 +446,7 @@ const AddLectures = () => {
                       required: "Topic Name is required",
                     })}
                     aria-invalid={errors.topicName ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input`}
                     placeholder="Enter topic name"
                   />
                   {errors.topicName && (
@@ -469,7 +469,7 @@ const AddLectures = () => {
                       required: "Program Name is required",
                     })}
                     aria-invalid={errors.programName ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                     defaultValue=""
                   >
                     <option disabled value="">
@@ -500,7 +500,7 @@ const AddLectures = () => {
                       required: "Course Name is required",
                     })}
                     aria-invalid={errors.courseName ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                     defaultValue=""
                   >
                     <option disabled value="">
@@ -533,7 +533,7 @@ const AddLectures = () => {
                       required: "Batch Name is required",
                     })}
                     aria-invalid={errors.batchName ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                     defaultValue=""
                   >
                     <option disabled value="">
@@ -566,7 +566,7 @@ const AddLectures = () => {
                       required: "Module Name is required",
                     })}
                     aria-invalid={errors.moduleName ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                     defaultValue=""
                   >
                     <option disabled value="">
@@ -605,7 +605,7 @@ const AddLectures = () => {
                       required: "Select A Date",
                     })}
                     aria-invalid={errors.scheduledAt ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                   />
                   {errors.scheduledAt && (
                     <p
@@ -627,7 +627,7 @@ const AddLectures = () => {
                       required: "Select A Date",
                     })}
                     aria-invalid={errors.endsAt ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                   />
                   {errors.endsAt && (
                     <p
@@ -649,7 +649,7 @@ const AddLectures = () => {
                       required: "Provide Zoom Link",
                     })}
                     aria-invalid={errors.zoomLink ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                     placeholder="Enter zoom link"
                   />
                   {errors.zoomLink && (
@@ -671,7 +671,7 @@ const AddLectures = () => {
                     Attachment
                   </label>
                   <input
-                    className="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                    className="mt-1 file-input block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                     id="Attachment"
                     name="Attachment"
                     type="file"
@@ -698,7 +698,7 @@ const AddLectures = () => {
                     Upload Video
                   </label>
                   <input
-                    className="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                    className="mt-1 file-input block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                     id="videoInput"
                     name="videoInput"
                     type="file"
@@ -737,9 +737,9 @@ const AddLectures = () => {
                       id="optional"
                       name="optional"
                       {...register("optional")}
-                      className="sr-only"
+                      className="toggle bg-[#5FB370]"
                     />
-                    <div className="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
+                    
                     <span className="ml-3 text-gray-900">Optional</span>
                   </label>
 
@@ -756,7 +756,7 @@ const AddLectures = () => {
                 name="notes"
                 {...register("notes")}
                 rows="4"
-                className={inputStyle}
+                className={`${inputStyle} textarea border-[#5FB370]`}
                 placeholder="Your message..."
                 value={text}
                 onChange={(e) => setText(e.target.value)}
@@ -878,7 +878,7 @@ const AddLectures = () => {
                       required: "Evaluation Name is required",
                     })}
                     aria-invalid={errors.evaluationName ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                     placeholder="Enter evaluation name"
                   />
                   {errors.evaluationName && (
@@ -901,7 +901,7 @@ const AddLectures = () => {
                       required: "Topic Name is required",
                     })}
                     aria-invalid={errors.topicName ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                     placeholder="Enter topic name"
                   />
                   {errors.topicName && (
@@ -924,7 +924,7 @@ const AddLectures = () => {
                       required: "Program Name is required",
                     })}
                     aria-invalid={errors.programName ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                     defaultValue=""
                   >
                     <option disabled value="">
@@ -955,7 +955,7 @@ const AddLectures = () => {
                       required: "Course Name is required",
                     })}
                     aria-invalid={errors.courseName ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                     defaultValue=""
                   >
                     <option disabled value="">
@@ -988,7 +988,7 @@ const AddLectures = () => {
                       required: "Batch Name is required",
                     })}
                     aria-invalid={errors.batchName ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                     defaultValue=""
                   >
                     <option disabled value="">
@@ -1021,7 +1021,7 @@ const AddLectures = () => {
                       required: "Module Name is required",
                     })}
                     aria-invalid={errors.moduleName ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                     defaultValue=""
                   >
                     <option disabled value="">
@@ -1060,7 +1060,7 @@ const AddLectures = () => {
                       required: "Select A Date",
                     })}
                     aria-invalid={errors.scheduledAt ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                   />
                   {errors.scheduledAt && (
                     <p
@@ -1082,7 +1082,7 @@ const AddLectures = () => {
                       required: "Select A Date",
                     })}
                     aria-invalid={errors.endsAt ? "true" : "false"}
-                    className={inputStyle}
+                    className={`${inputStyle} input border-[#5FB370]`}
                   />
                   {errors.endsAt && (
                     <p
@@ -1103,7 +1103,7 @@ const AddLectures = () => {
                     Attachment
                   </label>
                   <input
-                    className="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                    className="mt-1 file-input border-[#5FB370] block w-full text-sm text-gray-900 border  rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                     id="Attachment"
                     name="Attachment"
                     type="file"
@@ -1141,9 +1141,9 @@ const AddLectures = () => {
                       id="optional"
                       name="optional"
                       {...register("optional")}
-                      className="sr-only"
+                      className="toggle bg-[#5FB370]"
                     />
-                    <div className="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
+                    
                     <span className="ml-3 text-gray-900">Optional</span>
                   </label>
 
@@ -1160,7 +1160,7 @@ const AddLectures = () => {
                 name="notes"
                 {...register("notes")}
                 rows="4"
-                className={inputStyle}
+                className={`${inputStyle} textarea border-[#5FB370]`}
                 placeholder="Your message..."
                 value={text}
                 onChange={(e) => setText(e.target.value)}

@@ -6,6 +6,8 @@ import moment from "moment";
 import { toast } from "react-hot-toast";
 
 const CreateCoupon = () => {
+  const inputStyle =
+  "border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg w-full mt-1";
   const [generating, setGenerating] = useState(false);
   const [couponInfo, setCouponInfo] = useState(null);
   const [isCopied, setIsCopied] = useState(false);
@@ -282,7 +284,7 @@ const CreateCoupon = () => {
         <div className=" font-poppins font-medium">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Label */}
-            <div className={style?.createCourse}>
+            <div>
               <label>Coupon Label</label>
               <input
                 type="text"
@@ -292,6 +294,7 @@ const CreateCoupon = () => {
                   required: "Enter Coupon Name",
                 })}
                 aria-invalid={errors.couponLebel ? "true" : "false"}
+                className={`${inputStyle} input border-[#5FB370]`}
                 // onChange={handleInputChange}
               />
               {errors.couponLebel && (
@@ -305,7 +308,7 @@ const CreateCoupon = () => {
             </div>
             {/* Discount */}
             {/* Discount */}
-            <div className={style?.createCourse}>
+            <div>
               <label>Discount</label>
               <input
                 type="number"
@@ -316,6 +319,7 @@ const CreateCoupon = () => {
                 })}
                 aria-invalid={errors.discount ? "true" : "false"}
                 // onChange={handleInputChange}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
               {errors.discount && (
                 <p style={{color:'red', fontSize:'14px'}}
@@ -329,7 +333,7 @@ const CreateCoupon = () => {
             {/* Discount */}
 
             {/* Expired At */}
-            <div className={style?.createCourse}>
+            <div>
               <label>Expired At</label>
               <input
                 // required
@@ -340,6 +344,7 @@ const CreateCoupon = () => {
                   required: "Select an expire date",
                 })}
                 aria-invalid={errors.expiredAt ? "true" : "false"}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
               {errors.expiredAt && (
                 <p style={{color:'red', fontSize:'14px'}}
@@ -366,7 +371,7 @@ const CreateCoupon = () => {
             <div class="w-full">
               <textarea
                 disabled
-                class="border border-gray-300 rounded-lg p-1 w-full h-32 resize-none col-span-12 overflow-y-auto"
+                class={`border textarea border-gray-300 rounded-lg p-1 w-full h-32 resize-none col-span-12 overflow-y-auto`}
                 readOnly
                 ref={htmlElement}
                 defaultValue={`

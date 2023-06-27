@@ -129,7 +129,7 @@ const AssesmentList = () => {
                   {...register("assessmentName")}
                   placeholder="Enter assessment name"
                   aria-invalid={errors.assessmentName ? "true" : "false"}
-                  className={inputStyle}
+                  className={`${inputStyle} input`}
                 />
                 {errors.assessmentName && (
                   <p
@@ -148,7 +148,7 @@ const AssesmentList = () => {
                   {...register("batchName")}
                   placeholder="Enter batch name"
                   aria-invalid={errors.batchName ? "true" : "false"}
-                  className={inputStyle}
+                  className={`${inputStyle} input`}
                 />
                 {errors.batchName && (
                   <p
@@ -167,7 +167,7 @@ const AssesmentList = () => {
                   {...register("creatorEmail")}
                   placeholder="Enter creator name"
                   aria-invalid={errors.creatorEmail ? "true" : "false"}
-                  className={inputStyle}
+                  className={`${inputStyle} input`}
                 />
                 {errors.creatorEmail && (
                   <p
@@ -186,7 +186,7 @@ const AssesmentList = () => {
                   {...register("updaterEmail")}
                   placeholder="Enter updater name"
                   aria-invalid={errors.updaterEmail ? "true" : "false"}
-                  className={inputStyle}
+                  className={`${inputStyle} input`}
                 />
                 {errors.updaterEmail && (
                   <p
