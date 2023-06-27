@@ -187,7 +187,7 @@ const AddAssesment = () => {
                       required: "Assesment Name is required",
                     })}
                     aria-invalid={errors.assessmentName ? "true" : "false"}
-                    className="w-full border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg mt-2"
+                    className="input w-full border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg mt-2"
                     placeholder="Enter the assessment name"
                   />
                   {errors.assessmentName && (
@@ -209,7 +209,7 @@ const AddAssesment = () => {
                       required: "Category Name is required",
                     })}
                     aria-invalid={errors.categoryName ? "true" : "false"}
-                    className="w-full border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg mt-2"
+                    className="w-full input border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg mt-2"
                     placeholder="Enter the Category"
                   />
                   {errors.categoryName && (
@@ -231,7 +231,7 @@ const AddAssesment = () => {
                       required: "Batch Id is required",
                     })}
                     aria-invalid={errors.batchId ? "true" : "false"}
-                    className="w-full border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg mt-2"
+                    className="w-full input border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg mt-2"
                     placeholder="Enter the Batch Id"
                   />
                   {errors.batchId && (
@@ -254,7 +254,7 @@ const AddAssesment = () => {
                         required: "Schedule Date and Time required",
                       })}
                       aria-invalid={errors.scheduledAt ? "true" : "false"}
-                      className="w-full border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg mt-2"
+                      className="w-full input border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg mt-2"
                     />
                     {errors.scheduledAt && (
                       <p
@@ -277,7 +277,7 @@ const AddAssesment = () => {
                         required: "Duration is required",
                       })}
                       aria-invalid={errors.duration ? "true" : "false"}
-                      className="w-full border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg mt-2"
+                      className="w-full input border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg mt-2"
                       placeholder="Enter the duration"
                     />
                     {errors.duration && (
@@ -306,9 +306,9 @@ const AddAssesment = () => {
                     id="enabledNegativeMarking"
                     name="enabledNegativeMarking"
                     {...register("enabledNegativeMarking")}
-                    className="sr-only bg-green-500"
+                    className="toggle bg-[#4BA25D]"
                   />
-                  <div className="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
+                  
                   <span className="ml-3 text-gray-900 text-sm font-medium">
                     Enable Negative Marking
                   </span>
@@ -324,9 +324,9 @@ const AddAssesment = () => {
                     id="shouldShuffle"
                     name="shouldShuffle"
                     {...register("shouldShuffle")}
-                    className="sr-only"
+                    className="toggle bg-[#4BA25D]"
                   />
-                  <div className="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
+                  
                   <span className="ml-3 text-gray-900 text-sm font-medium">
                     Shuffle Questions/Options
                   </span>
@@ -342,9 +342,9 @@ const AddAssesment = () => {
                     id="shouldShowAnswer"
                     name="shouldShowAnswer"
                     {...register("shouldShowAnswer")}
-                    className="sr-only"
+                    className="toggle bg-[#4BA25D]"
                   />
-                  <div className="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
+                  
                   <span className="ml-3 text-gray-900 text-sm font-medium">
                     Show Answers
                   </span>
@@ -360,9 +360,9 @@ const AddAssesment = () => {
                     id="isOptional"
                     name="isOptional"
                     {...register("isOptional")}
-                    className="sr-only"
+                    className="toggle bg-[#4BA25D]"
                   />
-                  <div className="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
+                  
                   <span className="ml-3 text-gray-900 text-sm font-medium">
                     Optional
                   </span>
@@ -371,7 +371,7 @@ const AddAssesment = () => {
             </div>
             {/* Text Area */}
             <div className="w-full mx-auto my-10">
-              <label htmlFor="instruction" className="block mb-2">
+              <label htmlFor="instruction" className="block mb-2 label cursor-pointer">
                 Instructions :
               </label>
               <textarea
@@ -381,7 +381,7 @@ const AddAssesment = () => {
                   required: "Instruction must have to give",
                 })}
                 rows="4"
-                className="w-full text-sm border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg"
+                className="w-full textarea text-sm border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 rounded-lg"
                 placeholder="Your message..."
                 aria-invalid={errors.instructions ? "true" : "false"}
               ></textarea>

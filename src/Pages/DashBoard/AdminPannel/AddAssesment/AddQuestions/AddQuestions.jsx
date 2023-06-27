@@ -54,7 +54,7 @@ function AddQuestions({
                 name="questionName"
                 placeholder="Enter question name"
                 onChange={handleSearchQueryInputChange}
-                className={inputStyle}
+                className={`${inputStyle} input`}
               />
             </div>
             <div className="col-span-1">
@@ -63,7 +63,7 @@ function AddQuestions({
                 placeholder="Enter topic name"
                 name="topicName"
                 onChange={handleSearchQueryInputChange}
-                className={inputStyle}
+                className={`${inputStyle} input`}
               />
             </div>
             <div className="col-span-1">
@@ -72,7 +72,7 @@ function AddQuestions({
                 id=""
                 defaultValue="any"
                 onChange={handleSearchQueryInputChange}
-                className={inputStyle}
+                className={`${inputStyle} input`}
               >
                 <option value="any" disabled>
                   Difficulty

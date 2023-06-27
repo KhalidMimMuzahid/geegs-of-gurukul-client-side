@@ -3,7 +3,7 @@ import style from "./LecturesList.module.css";
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
-import { Modal } from "flowbite";
+// import { Modal } from "flowbite";
 import { AuthContext } from "./../../../../contexts/UserProvider/UserProvider";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
