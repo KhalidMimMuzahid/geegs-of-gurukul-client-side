@@ -106,9 +106,9 @@ const AddCourse = () => {
               />
               {errors.courseName && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.courseName?.message}
                 </p>
               )}
@@ -129,9 +129,9 @@ const AddCourse = () => {
               />
               {errors.duration && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.duration?.message}
                 </p>
               )}
@@ -162,9 +162,9 @@ const AddCourse = () => {
               </select>
               {errors.programName && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.programName?.message}
                 </p>
               )}
@@ -185,9 +185,9 @@ const AddCourse = () => {
               />
               {errors.regularPrice && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.regularPrice?.message}
                 </p>
               )}
@@ -197,12 +197,14 @@ const AddCourse = () => {
         </div>
 
         {/* Submit Button */}
+        <div className="w-full flex items-center justify-center">
         <button
           type="submit"
-          className="bg-[#4BA25D] hover:bg-[#5fb370] py-3 text-white w-full rounded-lg"
+          className="bg-[#4BA25D] hover:bg-[#5fb370] py-3 text-white w-full md:w-28 rounded-lg"
         >
           Submit
         </button>
+       </div>
       </form>
     </div>
   );

@@ -58,9 +58,9 @@ const AddModule = () => {
               />
               {errors.moduleName && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.moduleName?.message}
                 </p>
               )}
@@ -85,9 +85,9 @@ const AddModule = () => {
               </select>
               {errors.programName && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.programName?.message}
                 </p>
               )}
@@ -111,9 +111,9 @@ const AddModule = () => {
               </select>
               {errors.courseName && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.courseName?.message}
                 </p>
               )}
@@ -137,9 +137,9 @@ const AddModule = () => {
               </select>
               {errors.batchName && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.batchName?.message}
                 </p>
               )}
@@ -147,12 +147,14 @@ const AddModule = () => {
           </div>
         </div>
 
+        <div className="w-full flex items-center justify-center">
         <button
           type="submit"
-          className="w-full text-white py-3 bg-[#4BA25D] hover:bg-[#5fb370] rounded-lg"
+          className="w-full md:w-28 text-white py-3 bg-[#4BA25D] hover:bg-[#5fb370] rounded-lg"
         >
           Submit
         </button>
+        </div>
       </form>
     </div>
   );

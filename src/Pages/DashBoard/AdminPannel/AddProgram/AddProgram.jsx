@@ -76,19 +76,24 @@ const AddProgram = () => {
             aria-invalid={errors.programName ? "true" : "false"}
           />
           {errors.programName && (
-            <p role="alert" className="text-red-500 font-poppins font-medium">
+            <p
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
               {errors.programName?.message}
             </p>
           )}
         </div>
 
         {/* Submit Button */}
+        <div className="w-full flex items-center justify-center">
         <button
           type="submit"
-          className="py-3 w-full font-poppins text-white rounded-lg bg-[#4BA25D] hover:bg-[#5fb370]"
+          className="py-3 w-full md:w-28 font-poppins text-white rounded-lg bg-[#4BA25D] hover:bg-[#5fb370]"
         >
           Submit
         </button>
+        </div>
       </form>
     </div>
   );

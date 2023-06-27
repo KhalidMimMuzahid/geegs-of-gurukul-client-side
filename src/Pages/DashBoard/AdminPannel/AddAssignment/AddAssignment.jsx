@@ -127,7 +127,10 @@ function AddAssignment() {
               placeholder="Enter assignment name"
             />
             {errors.assignmentName && (
-              <p role="alert" className="text-red-500 font-poppins font-medium">
+              <p
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                 {errors.assignmentName?.message}
               </p>
             )}
@@ -146,7 +149,10 @@ function AddAssignment() {
               placeholder="Enter topic name"
             />
             {errors.topic && (
-              <p role="alert" className="text-red-500 font-poppins font-medium">
+              <p
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                 {errors.topic?.message}
               </p>
             )}
@@ -260,12 +266,14 @@ function AddAssignment() {
             Exercises selected: {exercises?.length}
           </p>
         </div>
+        <div className="flex items-center justify-center">
         <button
           type="submit"
-          className="w-full bg-[#4BA25D] hover:bg-[#5fb370] text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
+          className="w-full md:w-28 bg-[#4BA25D] hover:bg-[#5fb370] text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
         >
-          {loading ? "LSubmitting" : "Submit"}
+          {loading ? "Submitting" : "Submit"}
         </button>
+        </div>
       </form>
       {exercisesModal && (
         <ExercisesModal

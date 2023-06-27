@@ -194,7 +194,7 @@ const AddAssesment = () => {
                     <p
                       role="alert"
                       className="text-sm"
-                      style={{ color: "red" }}
+                      style={{ color: "red", fontSize:'14px' }}
                     >
                       {errors.assessmentName?.message}
                     </p>
@@ -216,15 +216,12 @@ const AddAssesment = () => {
                     <p
                       role="alert"
                       className="text-sm"
-                      style={{ color: "red" }}
+                      style={{ color: "red", fontSize:'14px' }}
                     >
                       {errors.categoryName?.message}
                     </p>
                   )}
                 </div>
-              </div>
-
-              <div className="col-span-12 md:col-span-6">
                 <div className="addAssessment mb-4">
                   <label>Batch Id</label>
                   <input
@@ -241,14 +238,12 @@ const AddAssesment = () => {
                     <p
                       role="alert"
                       className="text-sm"
-                      style={{ color: "red" }}
+                      style={{ color: "red", fontSize:'14px' }}
                     >
                       {errors.batchId?.message}
                     </p>
                   )}
                 </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="mb-4">
                   <div className="addAssessment">
                     <label htmlFor="scheduledAt">Scheduled At</label>
@@ -265,7 +260,7 @@ const AddAssesment = () => {
                       <p
                         role="alert"
                         className="text-sm"
-                        style={{ color: "red" }}
+                        style={{ color: "red", fontSize:'14px' }}
                       >
                         {errors.scheduledAt?.message}
                       </p>
@@ -289,7 +284,7 @@ const AddAssesment = () => {
                       <p
                         role="alert"
                         className="text-sm"
-                        style={{ color: "red" }}
+                        style={{ color: "red", fontSize:'14px' }}
                       >
                         {errors.duration?.message}
                       </p>
@@ -391,7 +386,7 @@ const AddAssesment = () => {
                 aria-invalid={errors.instructions ? "true" : "false"}
               ></textarea>
               {errors.instructions && (
-                <p role="alert" className="text-sm" style={{ color: "red" }}>
+                <p role="alert" className="text-sm" style={{ color: "red", fontSize:'14px' }}>
                   {errors.instructions?.message}
                 </p>
               )}
@@ -406,12 +401,14 @@ const AddAssesment = () => {
               question={question}
             />
             {/* Add questions */}
+            <div className="w-full flex items-center justify-center">
             <button
               type="submit"
-              className="text-white p-2.5 w-full rounded-lg bg-[#4BA25D] hover:bg-[#5fb370]"
+              className="text-white p-2.5 w-full md:w-28 rounded-lg bg-[#4BA25D] hover:bg-[#5fb370]"
             >
               Submit
             </button>
+            </div>
           </form>
 
           {/* Table */}

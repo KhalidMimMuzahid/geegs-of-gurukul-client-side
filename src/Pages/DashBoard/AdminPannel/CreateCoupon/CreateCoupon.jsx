@@ -295,7 +295,7 @@ const CreateCoupon = () => {
                 // onChange={handleInputChange}
               />
               {errors.couponLebel && (
-                <p
+                <p style={{color:'red', fontSize:'14px'}}
                   className="text-red-500 font-poppins font-medium"
                   role="alert"
                 >
@@ -318,10 +318,10 @@ const CreateCoupon = () => {
                 // onChange={handleInputChange}
               />
               {errors.discount && (
-                <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                <p style={{color:'red', fontSize:'14px'}}
+                className="text-red-500 font-poppins font-medium"
+                role="alert"
+              >
                   {errors.discount?.message}
                 </p>
               )}
@@ -342,10 +342,10 @@ const CreateCoupon = () => {
                 aria-invalid={errors.expiredAt ? "true" : "false"}
               />
               {errors.expiredAt && (
-                <p
-                  role="alert"
-                  className="text-red-500 font-poppins font-medium"
-                >
+                <p style={{color:'red', fontSize:'14px'}}
+                className="text-red-500 font-poppins font-medium"
+                role="alert"
+              >
                   {errors.expiredAt?.message}
                 </p>
               )}
@@ -383,15 +383,17 @@ const CreateCoupon = () => {
           {/* Preview */}
         </div>
         {/* Submit Button */}
+        <div className="w-full flex items-center justify-center">
         <button
           type="submit"
-          class="group relative h-12 w-full overflow-hidden rounded-lg bg-white text-lg shadow my-3"
+          class="group relative h-12 w-full md:w-60 overflow-hidden rounded-lg bg-white text-lg shadow my-3"
         >
           <div class="absolute inset-0 w-3 bg-green-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
           <span class="relative text-black group-hover:text-white font-poppins font-medium">
             {generating ? `Generating` : `Generate Coupon`}
           </span>
         </button>
+        </div>
       </form>
     </div>
   );

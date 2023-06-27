@@ -151,9 +151,9 @@ const AddExercise = () => {
               />
               {errors.exerciseName && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.exerciseName?.message}
                 </p>
               )}
@@ -174,9 +174,9 @@ const AddExercise = () => {
               />
               {errors.topic && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.topic?.message}
                 </p>
               )}
@@ -197,9 +197,9 @@ const AddExercise = () => {
               />
               {errors.subTopic && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.subTopic?.message}
                 </p>
               )}
@@ -224,9 +224,9 @@ const AddExercise = () => {
               </select>
               {errors.type && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.type?.message}
                 </p>
               )}
@@ -361,13 +361,14 @@ const AddExercise = () => {
         </div>
 
         {/* Submit Button */}
+        <div className="flex items-center justify-center">
         <button
           type="submit"
-          disabled={loading ? true : false}
-          className="font-poppins w-full rounded-lg bg-[#4BA25D] hover:bg-[#5fb370] text-white py-3"
+          className="w-full md:w-28 bg-[#4BA25D] hover:bg-[#5fb370] text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
         >
-          {loading ? "Submitting..." : "Submit"}
+          {loading ? "Submitting" : "Submit"}
         </button>
+        </div>
       </form>
     </div>
   );

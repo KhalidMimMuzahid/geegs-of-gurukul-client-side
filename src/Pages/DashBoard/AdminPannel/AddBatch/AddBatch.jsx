@@ -138,9 +138,9 @@ const AddBatch = () => {
               />
               {errors.batchName && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.batchName?.message}
                 </p>
               )}
@@ -162,9 +162,9 @@ const AddBatch = () => {
               />
               {errors.duration && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.duration?.message}
                 </p>
               )}
@@ -194,9 +194,9 @@ const AddBatch = () => {
               </select>
               {errors.programName && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.programName?.message}
                 </p>
               )}
@@ -225,9 +225,9 @@ const AddBatch = () => {
               </select>
               {errors.courseName && (
                 <p
-                  className="text-red-500 font-poppins font-medium"
-                  role="alert"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.courseName?.message}
                 </p>
               )}
@@ -247,9 +247,9 @@ const AddBatch = () => {
               />
               {errors.startedAt && (
                 <p
-                  role="alert"
-                  className="text-red-500 font-poppins font-medium"
-                >
+                      className="text-red-500 text-[14px] font-poppins font-normal"
+                      role="alert"
+                    >
                   {errors.startedAt?.message}
                 </p>
               )}
@@ -258,12 +258,14 @@ const AddBatch = () => {
           </div>
         </div>
         {/* Submit Button */}
+        <div className="w-full flex items-center justify-center">
         <button
           type="submit"
-          className="font-poppins text-white w-full py-3 rounded-lg bg-[#4BA25D] hover:bg-[#5fb370]"
+          className="font-poppins text-white w-full md:w-28 py-3 rounded-lg bg-[#4BA25D] hover:bg-[#5fb370]"
         >
           Submit
         </button>
+        </div>
       </form>
     </div>
   );
