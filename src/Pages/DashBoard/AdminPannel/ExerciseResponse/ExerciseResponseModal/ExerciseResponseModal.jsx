@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { BsXCircleFill } from "react-icons/bs";
 import style from "./exerciseResponseModal.module.css";
 import { toast } from "react-hot-toast";
-import ExerciseList from "./../../ExerciseList/ExerciseList";
 
 const ExerciseResponseModal = ({
   setOpenModal,
@@ -27,9 +26,9 @@ const ExerciseResponseModal = ({
     const updatedData = {
       mark: parseInt(d?.marks),
     };
-    console.log(updatedData);
+    // console.log(updatedData);
     fetch(
-      `https://api.geeksofgurukul.com/api/v1/exercises/exercise-response-update/${data?._id}`,
+      `http://localhost:5000/api/v1/exercises/exercise-response-update/${data?._id}`,
       {
         method: "PUT",
         body: JSON.stringify(updatedData),
