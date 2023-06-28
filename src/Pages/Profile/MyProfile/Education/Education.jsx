@@ -74,7 +74,7 @@ const Education = () => {
                   required: "This field is required",
                 })}
                 aria-invalid={errors.yourEducation ? "true" : "false"}
-                className="rounded-lg"
+                className="input input-bordered rounded-lg"
               />
               {errors.yourEducation && (
                 <p
@@ -95,7 +95,7 @@ const Education = () => {
                   required: "This field is required",
                 })}
                 aria-invalid={errors.yourDegree ? "true" : "false"}
-                className="rounded-lg"
+                className="input input-bordered rounded-lg"
               />
               {errors.yourDegree && (
                 <p
@@ -116,7 +116,7 @@ const Education = () => {
                   required: "This field is required",
                 })}
                 aria-invalid={errors.institutionName ? "true" : "false"}
-                className="w-full rounded-lg my-4"
+                className="w-full input input-bordered rounded-lg my-4"
               />
               {errors.institutionName && (
                 <p

@@ -35,7 +35,7 @@ const ChangePassword = () => {
                   required: "Enter your Current Password",
                 })}
                 aria-invalid={errors.currentPassword ? "true" : "false"}
-                className='rounded-lg'
+                className='input input-success rounded-lg'
               />
               {errors.currentPassword && (
                 <p
@@ -55,7 +55,7 @@ const ChangePassword = () => {
                   required: "Enter new password",
                 })}
                 aria-invalid={errors.newPassword ? "true" : "false"}
-                className='rounded-lg'
+                className='input input-success rounded-lg'
               />
               {errors.newPassword && (
                 <p
@@ -75,7 +75,7 @@ const ChangePassword = () => {
                   required: "Confirm password",
                 })}
                 aria-invalid={errors.confirmPassword ? "true" : "false"}
-                className='w-full rounded-lg my-4'
+                className='w-full input input-success rounded-lg my-4'
               />
               {errors.confirmPassword && (
                 <p

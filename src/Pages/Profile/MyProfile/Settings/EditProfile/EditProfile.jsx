@@ -85,7 +85,7 @@ const EditProfile = () => {
                   required: "Enter Your  Name",
                 })}
                 aria-invalid={errors.name ? "true" : "false"}
-                className="rounded-lg"
+                className="input input-success rounded-lg"
               />
               {errors.name && (
                 <p
@@ -106,7 +106,7 @@ const EditProfile = () => {
                   required: "Enter Your Address",
                 })}
                 aria-invalid={errors.address ? "true" : "false"}
-                className="rounded-lg"
+                className="input input-success rounded-lg"
               />
               {errors.address && (
                 <p
