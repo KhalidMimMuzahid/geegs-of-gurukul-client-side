@@ -118,7 +118,7 @@ const UserCSVUpload = ({ batch, courseObject }) => {
         >
           <div className="">
             <input
-              className="block w-full text-sm text-green-400 border border-gray-300 rounded-lg cursor-pointer bg-green-50 focus:outline-none"
+              className="block w-full file-input text-sm text-green-400 border border-gray-300 rounded-lg cursor-pointer bg-green-50 focus:outline-none"
               id="file_input"
               {...register("fileInput", {
                 required: "Input is required",
