@@ -28,7 +28,7 @@ function ContentLists({
       <input
         type="text"
         placeholder="search lesson"
-        className="w-full rounded-md border-2 border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200"
+        className="w-full input rounded-md border-2 border-[#D0D5DD] hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200"
       />
       {/* Accordions */}
       <div className="overflow-y-auto mt-4 h-[80%]">
