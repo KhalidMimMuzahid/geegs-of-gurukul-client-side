@@ -28,7 +28,7 @@ const Coursesheader = ({}) => {
               placeholder="Enter Course name"
               {...register("courseName")}
               name="courseName"
-              className="w-full rounded-full z-[998] border-black hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 text-sm"
+              className="w-full input rounded-full z-[998] border-black hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 text-sm"
             />
             <BsSearch className="text-[18px] absolute top-2.5 right-4 z-[999]" />
           </div>
@@ -38,7 +38,7 @@ const Coursesheader = ({}) => {
               {...register("programName")}
               placeholder="Enter program name"
               name="programName"
-              className="w-full rounded-full z-[998] border-black hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 text-sm"
+              className="w-full input rounded-full z-[998] border-black hover:border-[#4BA25D] hover:shadow hover:shadow-[#4BA25D] focus:border-[#4BA25D] focus:shadow focus:shadow-[#4BA25D] focus:ring-0 duration-200 text-sm"
             />
             <BsSearch className="text-[18px] absolute top-2.5 right-4 z-[999]" />
           </div>
