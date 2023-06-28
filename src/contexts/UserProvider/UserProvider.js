@@ -27,6 +27,7 @@ const UserProvider = ({ children }) => {
   const [shouldRefreshUser, setShouldRefreshUser] = useState(false);
   const [updateUser, setUpdateUser] = useState(null);
   const [justCreatedUser, setJustCreatedUser] = useState(false);
+
   useEffect(() => {
     if (updateUser?.email) {
       fetch(
@@ -121,10 +122,10 @@ const UserProvider = ({ children }) => {
     // setLoading(true)
     // console.log("auth.currentUser: ", auth.currentUser)
     // console.log("temp usr: ", tempUser); // not phone
-    console.log(
-      "profileeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-      profile
-    ); // not eamil
+    // console.log(
+    //   "profileeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    //   profile
+    // ); // not eamil
     return updateProfile(auth.currentUser, profile);
   };
 

@@ -265,7 +265,7 @@ const AddLectures = () => {
 
     // console.log(lectureData);
     setLoading(false);
-    fetch(`https://api.geeksofgurukul.com/api/v1/lectures/lectureDetails`, {
+    fetch(`http://localhost:5000/api/v1/lectures/lectureDetails`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

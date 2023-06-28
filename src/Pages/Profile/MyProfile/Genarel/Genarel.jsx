@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../contexts/UserProvider/UserProvider";
 import { BiEdit } from "react-icons/bi";
 import { TbEditOff } from "react-icons/tb";
@@ -9,7 +9,7 @@ import GeneralMode from "./GeneralMode/GeneralMode";
 const Genarel = () => {
   const { user } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
-  // Fetching User info from server
+
   const {
     data: userDetail,
     isLoading,
@@ -25,6 +25,8 @@ const Genarel = () => {
     return <div>loading...</div>;
   }
   console.log(userDetail);
+  // let socket = {};
+
   return (
     <div className="relative w-4/5 md:min-h-[580px] h-[750px] mx-auto rounded-xl shadow-lg bg-white text-black p-10">
       {isEditing ? (

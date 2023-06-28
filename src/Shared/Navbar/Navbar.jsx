@@ -40,6 +40,7 @@ const Navbar = () => {
       })
       .catch((err) => console.log(err));
   };
+
   return (
     <nav className="bg-white  shadow-md border-gray-900 dark:bg-green-900 rounded-lg">
       <div className=" flex flex-wrap items-center justify-between mx-auto p-4">
