@@ -139,7 +139,7 @@ const AddStudent = () => {
       };
       console.log("data: ", coursePurchaseDetails);
       fetch(
-        `https://api.geeksofgurukul.com/api/v1/purchasesCourse/add-student-to-course`,
+        `http://localhost:5000/api/v1/purchasesCourse/add-student-to-course`,
         {
           method: "POST",
           headers: {
