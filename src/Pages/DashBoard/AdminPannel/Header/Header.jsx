@@ -20,19 +20,14 @@ const navigation = [
         link: "/dashboard/admin-pannel/assessment/assesment-list",
         current: false,
       },
-    ],
-  },
-  {
-    name: "Questions",
-    parrentLink: "/dashboard/admin-pannel/question",
-    submenu: [
       {
         name: "Add Question",
-        link: "/dashboard/admin-pannel/question/upload-csv",
+        link: "/dashboard/admin-pannel/assessment/upload-csv",
         current: false,
       },
     ],
   },
+  
   {
     name: "Lectures",
     parrentLink: "/dashboard/admin-pannel/lecture",
@@ -47,34 +42,35 @@ const navigation = [
         link: "/dashboard/admin-pannel/lecture/lectures-list",
         current: false,
       },
-    ],
-  },
-  {
-    name: "Assignments",
-    parrentLink: "/dashboard/admin-pannel/assignment",
-    submenu: [
+
+      {
+        name: "Module List",
+        link: "/dashboard/admin-pannel/lecture/module-list",
+        current: false,
+      },
       {
         name: "Add Assignment",
-        link: "/dashboard/admin-pannel/assignment/add-assignment",
+        link: "/dashboard/admin-pannel/lecture/add-assignment",
         current: false,
       },
       {
         name: "Assignment List",
-        link: "/dashboard/admin-pannel/assignment/assignment-list",
+        link: "/dashboard/admin-pannel/lecture/assignment-list",
         current: false,
       },
       {
         name: "Add Exercise",
-        link: "/dashboard/admin-pannel/assignment/add-exercise",
+        link: "/dashboard/admin-pannel/lecture/add-exercise",
         current: false,
       },
       {
         name: "Exercise List",
-        link: "/dashboard/admin-pannel/assignment/exercise-list",
+        link: "/dashboard/admin-pannel/lecture/exercise-list",
         current: false,
       },
     ],
   },
+ 
   {
     name: "Course",
     parrentLink: "/dashboard/admin-pannel/course",
@@ -89,16 +85,7 @@ const navigation = [
         link: "/dashboard/admin-pannel/course/course-list",
         current: false,
       },
-      {
-        name: "Add Module",
-        link: "/dashboard/admin-pannel/course/add-module",
-        current: false,
-      },
-      {
-        name: "Module List",
-        link: "/dashboard/admin-pannel/course/module-list",
-        current: false,
-      },
+      
       {
         name: "Add Program",
         link: "/dashboard/admin-pannel/course/add-program",
@@ -109,39 +96,28 @@ const navigation = [
         link: "/dashboard/admin-pannel/course/program-list",
         current: false,
       },
-    ],
-  },
-  {
-    name: "Batch",
-    parrentLink: "/dashboard/admin-pannel/batch",
-    submenu: [
       {
         name: "Add Batch",
-        link: "/dashboard/admin-pannel/batch/add-batch",
+        link: "/dashboard/admin-pannel/course/add-batch",
         current: false,
       },
       {
         name: "Batch List",
-        link: "/dashboard/admin-pannel/batch/batch-list",
+        link: "/dashboard/admin-pannel/course/batch-list",
         current: false,
       },
     ],
   },
-  {
-    name: "User",
-    parrentLink: "/dashboard/admin-pannel/user",
-    submenu: [
-      {
-        name: "Users",
-        link: "/dashboard/admin-pannel/user/users",
-        current: false,
-      },
-    ],
-  },
+  
   {
     name: "Others",
     parrentLink: "/dashboard/admin-pannel/others",
     submenu: [
+      {
+        name: "Users",
+        link: "/dashboard/admin-pannel/others/users",
+        current: false,
+      },
       {
         name: "Create Coupon",
         link: "/dashboard/admin-pannel/others/create-coupon",
@@ -189,7 +165,7 @@ const Header = () => {
             <div className="relative flex h-16 items-center justify-end sm:justify-between w-full">
               <div className="hidden  sm:flex grow items-center justify-end sm:items-stretch w-full">
                 <div className="hidden sm:ml-6 sm:block justify-end w-full">
-                  <div className="flex w-full gap-4 lg:justify-between md:justify-center flex-wrap">
+                  <div className="flex w-full gap-4 lg:justify-end md:justify-center">
                     {navigation.map((item, i) => (
                       // dropdwon
                       <DropDown key={i} item={item} currentPath={currentPath} />

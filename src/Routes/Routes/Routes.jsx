@@ -134,11 +134,11 @@ const router = createBrowserRouter([
                 element: <AddLectures />,
               },
               {
-                path: "/dashboard/admin-pannel/question/upload-csv",
+                path: "/dashboard/admin-pannel/assessment/upload-csv",
                 element: <CSV />,
               },
               {
-                path: "/dashboard/admin-pannel/user/users",
+                path: "/dashboard/admin-pannel/others/users",
                 element: <Users />,
               },
               {
@@ -146,11 +146,11 @@ const router = createBrowserRouter([
                 element: <LecturesList />,
               },
               {
-                path: "/dashboard/admin-pannel/assignment/add-assignment",
+                path: "/dashboard/admin-pannel/lecture/add-assignment",
                 element: <AddAssignment />,
               },
               {
-                path: "/dashboard/admin-pannel/assignment/add-exercise",
+                path: "/dashboard/admin-pannel/lecture/add-exercise",
                 element: <AddExercise />,
               },
               {
@@ -158,11 +158,11 @@ const router = createBrowserRouter([
                 element: <AddCourse />,
               },
               {
-                path: "/dashboard/admin-pannel/batch/add-batch",
+                path: "/dashboard/admin-pannel/course/add-batch",
                 element: <AddBatch />,
               },
               {
-                path: "/dashboard/admin-pannel/batch/batch-list",
+                path: "/dashboard/admin-pannel/course/batch-list",
                 element: <BatchList />,
               },
               {
@@ -170,11 +170,11 @@ const router = createBrowserRouter([
                 element: <CourseList />,
               },
               {
-                path: "/dashboard/admin-pannel/assignment/assignment-list",
+                path: "/dashboard/admin-pannel/lecture/assignment-list",
                 element: <AssignmentList />,
               },
               {
-                path: "/dashboard/admin-pannel/assignment/exercise-list",
+                path: "/dashboard/admin-pannel/lecture/exercise-list",
                 element: <ExerciseList />,
               },
               {
@@ -194,11 +194,11 @@ const router = createBrowserRouter([
                 element: <AddStudent />,
               },
               {
-                path: "/dashboard/admin-pannel/course/add-module",
+                path: "/dashboard/admin-pannel/lecture/add-module",
                 element: <AddModule />,
               },
               {
-                path: "/dashboard/admin-pannel/course/module-list",
+                path: "/dashboard/admin-pannel/lecture/module-list",
                 element: <ModuleList />,
               },
               {
