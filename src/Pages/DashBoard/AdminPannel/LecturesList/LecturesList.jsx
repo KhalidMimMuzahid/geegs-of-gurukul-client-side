@@ -3,7 +3,7 @@ import style from "./LecturesList.module.css";
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import editIcon from "../../../../assets/icons/edit.svg";
 import copyIcon from "../../../../assets/icons/copy.svg";
-import { Modal } from "flowbite";
+// import { Modal } from "flowbite";
 import { AuthContext } from "./../../../../contexts/UserProvider/UserProvider";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -216,7 +216,7 @@ const LecturesList = () => {
               <input
                 type="text"
                 {...register("lectureName")}
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
                 placeholder="Enter lecture name"
               />
             </div>
@@ -229,7 +229,7 @@ const LecturesList = () => {
                 name="programName"
                 {...register("programName")}
                 aria-invalid={errors.programName ? "true" : "false"}
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
                 defaultValue=""
               >
                 <option disabled value="">
@@ -258,7 +258,7 @@ const LecturesList = () => {
                 name="courseName"
                 {...register("courseName")}
                 aria-invalid={errors.courseName ? "true" : "false"}
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
                 defaultValue=""
               >
                 <option disabled value="">
@@ -289,7 +289,7 @@ const LecturesList = () => {
                 name="batchName"
                 {...register("batchName")}
                 aria-invalid={errors.batchName ? "true" : "false"}
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
                 defaultValue=""
               >
                 <option disabled value="">
@@ -320,7 +320,7 @@ const LecturesList = () => {
                 name="moduleName"
                 {...register("moduleName")}
                 aria-invalid={errors.moduleName ? "true" : "false"}
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
                 defaultValue=""
               >
                 <option disabled value="">

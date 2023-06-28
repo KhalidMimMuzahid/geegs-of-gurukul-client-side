@@ -91,7 +91,7 @@ const ProgramList = () => {
               id="programName"
               name="programName"
               {...register("programName")}
-              className={inputStyle}
+              className={`${inputStyle} input border-[#5FB370]`}
               placeholder="Write program name"
               aria-invalid={errors.programName ? "true" : "false"}
             ></input>

@@ -408,7 +408,7 @@ const ExerciseResponse = () => {
                   name="programName"
                   {...register("programName")}
                   aria-invalid={errors.programName ? "true" : "false"}
-                  className="w-full border-2 border-green-400 rounded-xl"
+                  className="w-full input border-2 border-green-400 rounded-xl"
                 >
                   <option disabled selected value="">
                     Choose a Program
@@ -436,7 +436,7 @@ const ExerciseResponse = () => {
                   name="courseName"
                   {...register("courseName")}
                   aria-invalid={errors.courseName ? "true" : "false"}
-                  className="w-full border-2 border-green-400 rounded-xl"
+                  className="w-full input border-2 border-green-400 rounded-xl"
                 >
                   <option disabled selected value="">
                     Choose a Course
@@ -466,7 +466,7 @@ const ExerciseResponse = () => {
                   name="batchName"
                   {...register("batchName")}
                   aria-invalid={errors.batchName ? "true" : "false"}
-                  className="w-full border-2 border-green-400 rounded-xl"
+                  className="w-full input border-2 border-green-400 rounded-xl"
                 >
                   <option disabled selected value="">
                     Choose a Batch
@@ -496,7 +496,7 @@ const ExerciseResponse = () => {
                   name="moduleName"
                   {...register("moduleName")}
                   aria-invalid={errors.moduleName ? "true" : "false"}
-                  className="w-full border-2 border-green-400 rounded-xl"
+                  className="w-full input border-2 border-green-400 rounded-xl"
                 >
                   <option disabled selected value="">
                     Choose a Module
@@ -524,7 +524,7 @@ const ExerciseResponse = () => {
                   name="lectureName"
                   {...register("lectureName")}
                   aria-invalid={errors?.lectureName ? "true" : "false"}
-                  className="w-full border-2 border-green-400 rounded-xl"
+                  className="w-full input border-2 border-green-400 rounded-xl"
                 >
                   <option disabled selected value="">
                     Choose a Lecture/Evaluation
@@ -555,7 +555,7 @@ const ExerciseResponse = () => {
                     name="assignmentName"
                     {...register("assignmentName")}
                     aria-invalid={errors?.assignmentName ? "true" : "false"}
-                    className="w-full border-2 border-green-400 rounded-xl"
+                    className="w-full input border-2 border-green-400 rounded-xl"
                   >
                     <option disabled selected value="">
                       Choose a assignment
@@ -589,7 +589,7 @@ const ExerciseResponse = () => {
                   name="exerciseName"
                   {...register("exerciseName")}
                   aria-invalid={errors?.exerciseName ? "true" : "false"}
-                  className="w-full border-2 border-green-400 rounded-xl"
+                  className="w-full input border-2 border-green-400 rounded-xl"
                 >
                   <option disabled selected value="">
                     Choose a exercise

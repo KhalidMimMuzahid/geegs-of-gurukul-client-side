@@ -54,7 +54,7 @@ const AddModule = () => {
                 })}
                 aria-invalid={errors.moduleName ? "true" : "false"}
                 placeholder="Enter module name"
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
               {errors.moduleName && (
                 <p
@@ -75,7 +75,7 @@ const AddModule = () => {
                 })}
                 aria-invalid={errors.programName ? "true" : "false"}
                 defaultValue=""
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               >
                 <option value="">Choose a Program</option>
                 <option value="School-Champs">School-Champs</option>
@@ -101,7 +101,7 @@ const AddModule = () => {
                 })}
                 aria-invalid={errors.courseName ? "true" : "false"}
                 defaultValue=""
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               >
                 <option value="">Choose a Program</option>
                 <option value="School-Champs">School-Champs</option>
@@ -127,7 +127,7 @@ const AddModule = () => {
                 })}
                 aria-invalid={errors.batchName ? "true" : "false"}
                 defaultValue=""
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               >
                 <option value="">Choose a Program</option>
                 <option value="School-Champs">School-Champs</option>

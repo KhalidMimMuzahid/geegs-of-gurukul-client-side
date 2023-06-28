@@ -83,7 +83,7 @@ const AssignmentList = () => {
                   placeholder="Enter assignment name"
                   {...register("assignmentName")}
                   aria-invalid={errors.assignmentName ? "true" : "false"}
-                  className={inputStyle}
+                  className={`${inputStyle} input border-[#5FB370]`}
                 />
               </div>
 
@@ -96,7 +96,7 @@ const AssignmentList = () => {
                   placeholder="Enter topic name"
                   {...register("topic")}
                   aria-invalid={errors.topic ? "true" : "false"}
-                  className={inputStyle}
+                  className={`${inputStyle} input border-[#5FB370]`}
                 />
                 {errors.topic && (
                   <p

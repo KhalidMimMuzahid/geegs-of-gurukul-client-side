@@ -105,7 +105,7 @@ const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
                 {...register("exerciseName")}
                 id="search"
                 placeholder="Exercise name"
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
 
               <input
@@ -113,7 +113,7 @@ const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
                 id="topic"
                 {...register("topic")}
                 placeholder="Topic "
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
 
               <input
@@ -121,7 +121,7 @@ const ExercisesModal = ({ setExercisesModal, setExercises, exercises }) => {
                 id="subTopic"
                 {...register("subTopic")}
                 placeholder="Sub Topic "
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
 
               <select id="type" {...register("type")} className={inputStyle}>

@@ -177,7 +177,7 @@ const BatchList = () => {
                 <input
                   type="text"
                   {...register("batchName")}
-                  className={inputStyle}
+                  className={`${inputStyle} input border-[#5FB370]`}
                   placeholder="Enter batch name"
                 />
               </div>
@@ -188,7 +188,7 @@ const BatchList = () => {
                   name="programName"
                   {...register("programName")}
                   aria-invalid={errors.programName ? "true" : "false"}
-                  className={inputStyle}
+                  className={`${inputStyle} input border-[#5FB370]`}
                   defaultValue=""
                 >
                   <option disabled value="">
@@ -217,7 +217,7 @@ const BatchList = () => {
                   name="courseName"
                   {...register("courseName")}
                   aria-invalid={errors.courseName ? "true" : "false"}
-                  className={inputStyle}
+                  className={`${inputStyle} input border-[#5FB370]`}
                   defaultValue=""
                 >
                   <option disabled value="">

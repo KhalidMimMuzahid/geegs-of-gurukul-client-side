@@ -171,7 +171,7 @@ const ModuleList = () => {
                 {...register("programName")}
                 aria-invalid={errors.programName ? "true" : "false"}
                 defaultValue=""
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               >
                 <option disabled value="">
                   Choose a Program
@@ -200,7 +200,7 @@ const ModuleList = () => {
                 {...register("courseName")}
                 aria-invalid={errors.courseName ? "true" : "false"}
                 defaultValue=""
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               >
                 <option disabled value="">
                   Choose a Course
@@ -231,7 +231,7 @@ const ModuleList = () => {
                 {...register("batchName")}
                 aria-invalid={errors.batchName ? "true" : "false"}
                 defaultValue=""
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               >
                 <option disabled value="">
                   Choose a Batch

@@ -71,7 +71,7 @@ const AddProgram = () => {
             {...register("programName", {
               required: "Program Name is required",
             })}
-            className={inputStyle}
+            className={`${inputStyle} input border-[#5FB370]`}
             placeholder="Write program name"
             aria-invalid={errors.programName ? "true" : "false"}
           />

@@ -147,7 +147,7 @@ const AddExercise = () => {
                 })}
                 aria-invalid={errors.exerciseName ? "true" : "false"}
                 placeholder="Enter assignment name"
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
               {errors.exerciseName && (
                 <p
@@ -170,7 +170,7 @@ const AddExercise = () => {
                 })}
                 aria-invalid={errors.exerciseName ? "true" : "false"}
                 placeholder="Enter topic name"
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
               {errors.topic && (
                 <p
@@ -193,7 +193,7 @@ const AddExercise = () => {
                 })}
                 aria-invalid={errors.subTopic ? "true" : "false"}
                 placeholder="Enter subtopic name"
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               />
               {errors.subTopic && (
                 <p
@@ -215,7 +215,7 @@ const AddExercise = () => {
                 })}
                 aria-invalid={errors.type ? "true" : "false"}
                 defaultValue=""
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               >
                 <option value="">Choose exercise type</option>
                 <option value="project">Project</option>
@@ -239,7 +239,7 @@ const AddExercise = () => {
               <select
                 name="submissionType"
                 {...register("submissionType")}
-                className={inputStyle}
+                className={`${inputStyle} input border-[#5FB370]`}
               >
                 <option value="file">Upload File</option>
                 <option value="link">Provide link</option>
@@ -256,7 +256,7 @@ const AddExercise = () => {
                 Upload file
               </label>
               <input
-                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                className="block file-input w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                 id="file"
                 name="file"
                 type="file"
@@ -296,7 +296,7 @@ const AddExercise = () => {
             name="notes"
             {...register("notes")}
             rows="4"
-            className={inputStyle}
+            className={`${inputStyle} textarea border-[#5FB370]`}
             placeholder="Your message..."
             value={text}
             onChange={(e) => setText(e.target.value)}

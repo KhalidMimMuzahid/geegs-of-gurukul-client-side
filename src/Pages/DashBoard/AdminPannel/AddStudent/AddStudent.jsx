@@ -177,7 +177,7 @@ const AddStudent = () => {
                     required: "Program is required",
                   })}
                   aria-invalid={errors.program ? "true" : "false"}
-                  className="w-full border-2 border-green-400 rounded-xl"
+                  className="w-full input border-2 border-green-400 rounded-xl"
                 >
                   <option disabled selected value="">
                     Choose a Program
@@ -207,7 +207,7 @@ const AddStudent = () => {
                     required: "Course is required",
                   })}
                   aria-invalid={errors.course ? "true" : "false"}
-                  className="w-full border-2 border-green-400 rounded-xl"
+                  className="w-full input border-2 border-green-400 rounded-xl"
                 >
                   <option disabled selected value="">
                     Choose a Course
