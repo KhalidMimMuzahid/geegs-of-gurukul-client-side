@@ -187,9 +187,9 @@ const Header = () => {
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 font-poppins">
             <div className="relative flex h-16 items-center justify-end sm:justify-between w-full">
-              <div className="hidden  sm:flex grow items-center justify-end sm:items-stretch w-full">
-                <div className="hidden sm:ml-6 sm:block justify-end w-full">
-                  <div className="flex w-full gap-4 lg:justify-between md:justify-center flex-wrap">
+              <div className="hidden  sm:flex grow items-center justify-end sm:items-stretch w-full ">
+                <div className="hidden sm:ml-6 sm:block justify-end w-full ">
+                  <div className="flex w-full gap-4 lg:justify-between md:justify-center">
                     {navigation.map((item, i) => (
                       // dropdwon
                       <DropDown key={i} item={item} currentPath={currentPath} />
