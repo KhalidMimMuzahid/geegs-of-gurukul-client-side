@@ -23,6 +23,7 @@ const Main = () => {
     <div
       className="h-screen overflow-y-hidden"
       style={{ backgroundColor: "#FFF" }}
+      data-theme="light"
     >
       <div className="flex flex-col gap-2 container max-w-[1440px] mx-auto">
         <div
